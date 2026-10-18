@@ -3,54 +3,37 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Dropbox Data Source
- */
+/** Dropbox Data Source */
 data class ApiDropboxDataSource(
-    /**
-     * Optional `string` value serialized in the `folder` wire field.
-     */
+    /** Optional `string` value serialized in the `folder` wire field. */
     val folder: String? = null,
     /**
-     * Refresh token. you can obrain a refresh token by following the oauth2 flow. see /v2/gen-ai/oauth2/dropbox/tokens for reference.
+     * Refresh token. you can obrain a refresh token by following the oauth2 flow. see
+     * /v2/gen-ai/oauth2/dropbox/tokens for reference.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token") val refreshToken: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token")
+    val refreshToken: String? = null,
 )
 
-/**
- * Dropbox Data Source for Display
- */
+/** Dropbox Data Source for Display */
 data class ApiDropboxDataSourceDisplay(
-    /**
-     * Optional `string` value serialized in the `folder` wire field.
-     */
+    /** Optional `string` value serialized in the `folder` wire field. */
     val folder: String? = null
 )
 
-/**
- * The oauth2 code from google
- */
+/** The oauth2 code from google */
 data class ApiDropboxOauth2GetTokensInput(
-    /**
-     * The oauth2 code from google
-     */
+    /** The oauth2 code from google */
     val code: String? = null,
-    /**
-     * Redirect url
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("redirect_url") val redirectUrl: String? = null
+    /** Redirect url */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_url") val redirectUrl: String? = null,
 )
 
-/**
- * The dropbox oauth2 token and refresh token
- */
+/** The dropbox oauth2 token and refresh token */
 data class ApiDropboxOauth2GetTokensOutput(
-    /**
-     * The refresh token
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token") val refreshToken: String? = null,
-    /**
-     * The access token
-     */
-    val token: String? = null
+    /** The refresh token */
+    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token")
+    val refreshToken: String? = null,
+    /** The access token */
+    val token: String? = null,
 )

@@ -3,34 +3,70 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class ProjectResourcesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all your resources in a project, send a GET request to `/v2/projects/$PROJECT_ID/resources`. This endpoint will only return resources that you are authorized to see. For example, to see Droplets in a project, include the `droplet:read` scope.
+     * To list all your resources in a project, send a GET request to
+     * `/v2/projects/$PROJECT_ID/resources`. This endpoint will only return resources that you are
+     * authorized to see. For example, to see Droplets in a project, include the `droplet:read`
+     * scope.
      */
-    fun projectsListResources(projectId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ResourcesList {
-        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsListResources(clientConfig, projectId, perPage, page, options)
+    fun projectsListResources(
+        projectId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): ResourcesList {
+        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsListResources(
+            clientConfig,
+            projectId,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`. You must have both `project:assign_resource` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:assign_resource` and `droplet:read` scopes. The `project:update` scope also grants `project:assign_resource`.
+     * To assign resources to a project, send a POST request to
+     * `/v2/projects/$PROJECT_ID/resources`. You must have both `project:assign_resource` and
+     * `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a
+     * project, include both the `project:assign_resource` and `droplet:read` scopes. The
+     * `project:update` scope also grants `project:assign_resource`.
      */
-    fun projectsAssignResources(projectId: String, resources: List<Urn>? = null, options: RequestOptions? = null): AssignedResourcesList {
-        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsAssignResources(clientConfig, projectId, resources, options)
+    fun projectsAssignResources(
+        projectId: String,
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): AssignedResourcesList {
+        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsAssignResources(
+            clientConfig,
+            projectId,
+            resources,
+            options,
+        )
     }
 
     /**
-     * To list all your resources in your default project, send a GET request to `/v2/projects/default/resources`. Only resources that you are authorized to see will be returned. For example, to see Droplets in a project, include the `droplet:read` scope.
+     * To list all your resources in your default project, send a GET request to
+     * `/v2/projects/default/resources`. Only resources that you are authorized to see will be
+     * returned. For example, to see Droplets in a project, include the `droplet:read` scope.
      */
     fun projectsListResourcesDefault(options: RequestOptions? = null): ResourcesList {
-        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsListResourcesDefault(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.ProjectResources
+            .projectsListResourcesDefault(clientConfig, options)
     }
 
     /**
-     * To assign resources to your default project, send a POST request to `/v2/projects/default/resources`. You must have both `project:assign_resource` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to the default project, include both the `project:assign_resource` and `droplet:read` scopes. The `project:update` scope also grants `project:assign_resource`.
+     * To assign resources to your default project, send a POST request to
+     * `/v2/projects/default/resources`. You must have both `project:assign_resource` and
+     * `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to the
+     * default project, include both the `project:assign_resource` and `droplet:read` scopes. The
+     * `project:update` scope also grants `project:assign_resource`.
      */
-    fun projectsAssignResourcesDefault(resources: List<Urn>? = null, options: RequestOptions? = null): AssignedResourcesList {
-        return dev.octri.showcase.digitalocean.methods.ProjectResources.projectsAssignResourcesDefault(clientConfig, resources, options)
+    fun projectsAssignResourcesDefault(
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): AssignedResourcesList {
+        return dev.octri.showcase.digitalocean.methods.ProjectResources
+            .projectsAssignResourcesDefault(clientConfig, resources, options)
     }
-
 }

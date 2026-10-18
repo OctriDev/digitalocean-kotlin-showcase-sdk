@@ -4,29 +4,28 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * Slack notification channel configuration for create and update requests. `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the existing secret.
+ * Slack notification channel configuration for create and update requests. `webhook_url` is
+ * write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the
+ * existing secret.
  */
 data class SlackNotificationConfigRequest(
-    /**
-     * The Slack channel name to notify.
-     */
+    /** The Slack channel name to notify. */
     val channel: String,
     /**
-     * Slack incoming webhook URL. Write-only secret — send the full value on create or update. Omit on update to retain the existing value. Never returned in responses.
+     * Slack incoming webhook URL. Write-only secret — send the full value on create or update. Omit
+     * on update to retain the existing value. Never returned in responses.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url") val webhookUrl: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url") val webhookUrl: String? = null,
 )
 
 /**
- * Slack notification channel configuration as returned in API responses. The webhook URL is never returned; `webhook_url_status` indicates whether it is configured.
+ * Slack notification channel configuration as returned in API responses. The webhook URL is never
+ * returned; `webhook_url_status` indicates whether it is configured.
  */
 data class SlackNotificationConfigResponse(
-    /**
-     * The Slack channel name to notify.
-     */
+    /** The Slack channel name to notify. */
     val channel: String,
-    /**
-     * Present when a Slack webhook URL is configured. Omitted when not configured.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url_status") val webhookUrlStatus: SecretStatus? = null
+    /** Present when a Slack webhook URL is configured. Omitted when not configured. */
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url_status")
+    val webhookUrlStatus: SecretStatus? = null,
 )

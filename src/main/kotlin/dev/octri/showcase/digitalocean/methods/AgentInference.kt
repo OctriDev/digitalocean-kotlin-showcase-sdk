@@ -17,16 +17,16 @@ import dev.octri.showcase.digitalocean.Validation
 
 object AgentInference {
 
-/**
- * Options for streaming response. Only set this when you set stream to true.
- */
-data class ChatCompletionRequestStreamOptions(
-    /**
-     * If set, an additional chunk will be streamed before the data [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_usage") val includeUsage: Boolean? = null
-)
-
+    /** Options for streaming response. Only set this when you set stream to true. */
+    data class ChatCompletionRequestStreamOptions(
+        /**
+         * If set, an additional chunk will be streamed before the data [DONE] message. The usage
+         * field on this chunk shows the token usage statistics for the entire request, and the
+         * choices field will always be an empty array.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("include_usage")
+        val includeUsage: Boolean? = null
+    )
 
     /** Parameters for [agentInferenceCreateChatCompletion]. */
     data class AgentInferenceCreateChatCompletionRequest(
@@ -46,193 +46,227 @@ data class ChatCompletionRequestStreamOptions(
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
         val streamOptions: SdkClient.SdkOptional<ChatCompletionRequestStreamOptions?>? = null,
-        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? =
+            null,
         val seed: SdkClient.SdkOptional<Long?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val user: String? = null
+        val user: String? = null,
     )
 
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      *
      * @param agent Must be set to true for agent-based completion behavior.
      * @param messages A list of messages comprising the conversation so far.
      * @param model Model ID used to generate the response.
-     * @param maxTokens The maximum number of tokens that can be generated in the
-     *   completion. The token count of your prompt plus max_tokens cannot exceed the
-     *   model's context length.
-     * @param maxCompletionTokens The maximum number of completion tokens that may be
-     *   used over the course of the run. The run will make a best effort to use only
-     *   the number of completion tokens specified, across multiple turns of the run.
-     * @param frequencyPenalty Number between -2.0 and 2.0. Positive values penalize
-     *   new tokens based on their existing frequency in the text so far, decreasing
-     *   the model's likelihood to repeat the same line verbatim.
-     * @param presencePenalty Number between -2.0 and 2.0. Positive values penalize
-     *   new tokens based on whether they appear in the text so far, increasing the
-     *   model's likelihood to talk about new topics.
-     * @param topLogprobs An integer between 0 and 20 specifying the number of most
-     *   likely tokens to return at each token position, each with an associated log
-     *   probability. logprobs must be set to true if this parameter is used.
-     * @param tools A list of tools the model may call. Currently, only functions are
-     *   supported as a tool.
-     * @param toolChoice Controls which (if any) tool is called by the model. none
-     *   means the model will not call any tool and instead generates a message. auto
-     *   means the model can pick between generating a message or calling one or more
-     *   tools. required means the model must call one or more tools. Specifying a
-     *   particular tool via {"type": "function", "function": {"name": "my_function"}}
-     *   forces the model to call that tool. none is the default when no tools are
-     *   present. auto is the default if tools are…
-     * @param stream If set to true, the model response data will be streamed to the
-     *   client as it is generated using server-sent events.
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens. The returned text will not contain the stop sequence.
-     * @param logitBias Modify the likelihood of specified tokens appearing in the
-     *   completion. Accepts a JSON object that maps tokens (specified by their token
-     *   ID in the tokenizer) to an associated bias value from -100 to 100.
-     *   Mathematically, the bias is added to the logits generated by the model prior
-     *   to sampling. The exact effect will vary per model, but values between -1 and 1
-     *   should decrease or increase likelihood of selection; values like -100 or 100
-     *   should result in a ban or exclusive…
-     * @param logprobs Whether to return log probabilities of the output tokens or
-     *   not. If true, returns the log probabilities of each output token returned in
-     *   the content of message.
-     * @param n How many chat completion choices to generate for each input message.
-     *   Note that you will be charged based on the number of generated tokens across
-     *   all of the choices. Keep n as 1 to minimize costs.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
-     * @param reasoningEffort Constrains effort on reasoning for reasoning models.
-     *   Reducing reasoning effort can result in faster responses and fewer tokens used
-     *   on reasoning in a response.
-     * @param seed If specified, the system will make a best effort to sample
-     *   deterministically, such that repeated requests with the same seed and
-     *   parameters should return the same result. Determinism is not guaranteed.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object.
-     *   This can be useful for storing additional information about the object in a
-     *   structured format. Keys are strings with a maximum length of 64 characters.
-     *   Values are strings with a maximum length of 512 characters.
-     * @param temperature What sampling temperature to use, between 0 and 2. Higher
-     *   values like 0.8 will make the output more random, while lower values like 0.2
-     *   will make it more focused and deterministic. We generally recommend altering
-     *   this or top_p but not both.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass. So 0.1 means only the tokens comprising the top 10%
-     *   probability mass are considered. We generally recommend altering this or
-     *   temperature but not both.
-     * @param user A unique identifier representing your end-user, which can help
-     *   DigitalOcean to monitor and detect abuse.
+     * @param maxTokens The maximum number of tokens that can be generated in the completion. The
+     *   token count of your prompt plus max_tokens cannot exceed the model's context length.
+     * @param maxCompletionTokens The maximum number of completion tokens that may be used over the
+     *   course of the run. The run will make a best effort to use only the number of completion
+     *   tokens specified, across multiple turns of the run.
+     * @param frequencyPenalty Number between -2.0 and 2.0. Positive values penalize new tokens
+     *   based on their existing frequency in the text so far, decreasing the model's likelihood to
+     *   repeat the same line verbatim.
+     * @param presencePenalty Number between -2.0 and 2.0. Positive values penalize new tokens based
+     *   on whether they appear in the text so far, increasing the model's likelihood to talk about
+     *   new topics.
+     * @param topLogprobs An integer between 0 and 20 specifying the number of most likely tokens to
+     *   return at each token position, each with an associated log probability. logprobs must be
+     *   set to true if this parameter is used.
+     * @param tools A list of tools the model may call. Currently, only functions are supported as a
+     *   tool.
+     * @param toolChoice Controls which (if any) tool is called by the model. none means the model
+     *   will not call any tool and instead generates a message. auto means the model can pick
+     *   between generating a message or calling one or more tools. required means the model must
+     *   call one or more tools. Specifying a particular tool via {"type": "function", "function":
+     *   {"name": "my_function"}} forces the model to call that tool. none is the default when no
+     *   tools are present. auto is the default if tools are…
+     * @param stream If set to true, the model response data will be streamed to the client as it is
+     *   generated using server-sent events.
+     * @param stop Up to 4 sequences where the API will stop generating further tokens. The returned
+     *   text will not contain the stop sequence.
+     * @param logitBias Modify the likelihood of specified tokens appearing in the completion.
+     *   Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an
+     *   associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+     *   generated by the model prior to sampling. The exact effect will vary per model, but values
+     *   between -1 and 1 should decrease or increase likelihood of selection; values like -100 or
+     *   100 should result in a ban or exclusive…
+     * @param logprobs Whether to return log probabilities of the output tokens or not. If true,
+     *   returns the log probabilities of each output token returned in the content of message.
+     * @param n How many chat completion choices to generate for each input message. Note that you
+     *   will be charged based on the number of generated tokens across all of the choices. Keep n
+     *   as 1 to minimize costs.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
+     * @param reasoningEffort Constrains effort on reasoning for reasoning models. Reducing
+     *   reasoning effort can result in faster responses and fewer tokens used on reasoning in a
+     *   response.
+     * @param seed If specified, the system will make a best effort to sample deterministically,
+     *   such that repeated requests with the same seed and parameters should return the same
+     *   result. Determinism is not guaranteed.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
+     *   useful for storing additional information about the object in a structured format. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a maximum length of
+     *   512 characters.
+     * @param temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8
+     *   will make the output more random, while lower values like 0.2 will make it more focused and
+     *   deterministic. We generally recommend altering this or top_p but not both.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass. So 0.1 means only
+     *   the tokens comprising the top 10% probability mass are considered. We generally recommend
+     *   altering this or temperature but not both.
+     * @param user A unique identifier representing your end-user, which can help DigitalOcean to
+     *   monitor and detect abuse.
      */
-    fun agentInferenceCreateChatCompletion(clientConfig: ClientConfig, request: AgentInferenceCreateChatCompletionRequest, options: RequestOptions? = null): ChatCompletionResponse {
+    fun agentInferenceCreateChatCompletion(
+        clientConfig: ClientConfig,
+        request: AgentInferenceCreateChatCompletionRequest,
+        options: RequestOptions? = null,
+    ): ChatCompletionResponse {
         validateAgentInferenceCreateChatCompletionRequest(request)
 
-        return SdkClient.request<ChatCompletionResponse>(SdkClient.RequestSpec("POST", "/api/v1/chat/completions", config = clientConfig, query = mapOf("agent" to SdkClient.queryValue(request.agent, "form", true)), body = buildAgentInferenceCreateChatCompletionBody(request), operationId = "agentInferenceCreateChatCompletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ChatCompletionResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/api/v1/chat/completions",
+                    config = clientConfig,
+                    query = mapOf("agent" to SdkClient.queryValue(request.agent, "form", true)),
+                    body = buildAgentInferenceCreateChatCompletionBody(request),
+                    operationId = "agentInferenceCreateChatCompletion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateAgentInferenceCreateChatCompletionRequest(request: AgentInferenceCreateChatCompletionRequest) {
+    private fun validateAgentInferenceCreateChatCompletionRequest(
+        request: AgentInferenceCreateChatCompletionRequest
+    ) {
         validateAgentInferenceCreateChatCompletionRequestPart1(request)
         validateAgentInferenceCreateChatCompletionRequestPart2(request)
     }
 
-    private fun validateAgentInferenceCreateChatCompletionRequestPart1(request: AgentInferenceCreateChatCompletionRequest) {
+    private fun validateAgentInferenceCreateChatCompletionRequestPart1(
+        request: AgentInferenceCreateChatCompletionRequest
+    ) {
         Validation.validateItems("messages", request.messages, Validation.LengthOpts(min = 1))
 
         val maxTokensValue = request.maxTokens?.getOrNull()
-if (maxTokensValue != null) {
+        if (maxTokensValue != null) {
             Validation.validateRange("max_tokens", maxTokensValue, Validation.RangeOpts(min = 0.0))
-}
-
-        val maxCompletionTokensValue = request.maxCompletionTokens?.getOrNull()
-if (maxCompletionTokensValue != null) {
-            Validation.validateRange("max_completion_tokens", maxCompletionTokensValue, Validation.RangeOpts(min = 256.0))
-}
-
-        val frequencyPenaltyValue = request.frequencyPenalty?.getOrNull()
-if (frequencyPenaltyValue != null) {
-            Validation.validateRange("frequency_penalty", frequencyPenaltyValue, Validation.RangeOpts(min = -2.0, max = 2.0))
-}
-
-        val presencePenaltyValue = request.presencePenalty?.getOrNull()
-if (presencePenaltyValue != null) {
-            Validation.validateRange("presence_penalty", presencePenaltyValue, Validation.RangeOpts(min = -2.0, max = 2.0))
-}
-    }
-
-    private fun validateAgentInferenceCreateChatCompletionRequestPart2(request: AgentInferenceCreateChatCompletionRequest) {
-        val topLogprobsValue = request.topLogprobs?.getOrNull()
-if (topLogprobsValue != null) {
-            Validation.validateRange("top_logprobs", topLogprobsValue, Validation.RangeOpts(min = 0.0, max = 20.0))
-}
-
-        val nValue = request.n?.getOrNull()
-if (nValue != null) {
-            Validation.validateRange("n", nValue, Validation.RangeOpts(min = 1.0, max = 128.0))
-}
-
-        val temperatureValue = request.temperature?.getOrNull()
-if (temperatureValue != null) {
-            Validation.validateRange("temperature", temperatureValue, Validation.RangeOpts(min = 0.0, max = 2.0))
-}
-
-        val topPValue = request.topP?.getOrNull()
-if (topPValue != null) {
-            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
-}
-    }
-
-
-
-    private fun buildAgentInferenceCreateChatCompletionBody(request: AgentInferenceCreateChatCompletionRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildAgentInferenceCreateChatCompletionBodyPart1(request))
-            putAll(buildAgentInferenceCreateChatCompletionBodyPart2(request))
         }
 
-    private fun buildAgentInferenceCreateChatCompletionBodyPart1(request: AgentInferenceCreateChatCompletionRequest): Map<String, Any?> =
+        val maxCompletionTokensValue = request.maxCompletionTokens?.getOrNull()
+        if (maxCompletionTokensValue != null) {
+            Validation.validateRange(
+                "max_completion_tokens",
+                maxCompletionTokensValue,
+                Validation.RangeOpts(min = 256.0),
+            )
+        }
+
+        val frequencyPenaltyValue = request.frequencyPenalty?.getOrNull()
+        if (frequencyPenaltyValue != null) {
+            Validation.validateRange(
+                "frequency_penalty",
+                frequencyPenaltyValue,
+                Validation.RangeOpts(min = -2.0, max = 2.0),
+            )
+        }
+
+        val presencePenaltyValue = request.presencePenalty?.getOrNull()
+        if (presencePenaltyValue != null) {
+            Validation.validateRange(
+                "presence_penalty",
+                presencePenaltyValue,
+                Validation.RangeOpts(min = -2.0, max = 2.0),
+            )
+        }
+    }
+
+    private fun validateAgentInferenceCreateChatCompletionRequestPart2(
+        request: AgentInferenceCreateChatCompletionRequest
+    ) {
+        val topLogprobsValue = request.topLogprobs?.getOrNull()
+        if (topLogprobsValue != null) {
+            Validation.validateRange(
+                "top_logprobs",
+                topLogprobsValue,
+                Validation.RangeOpts(min = 0.0, max = 20.0),
+            )
+        }
+
+        val nValue = request.n?.getOrNull()
+        if (nValue != null) {
+            Validation.validateRange("n", nValue, Validation.RangeOpts(min = 1.0, max = 128.0))
+        }
+
+        val temperatureValue = request.temperature?.getOrNull()
+        if (temperatureValue != null) {
+            Validation.validateRange(
+                "temperature",
+                temperatureValue,
+                Validation.RangeOpts(min = 0.0, max = 2.0),
+            )
+        }
+
+        val topPValue = request.topP?.getOrNull()
+        if (topPValue != null) {
+            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
+        }
+    }
+
+    private fun buildAgentInferenceCreateChatCompletionBody(
+        request: AgentInferenceCreateChatCompletionRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildAgentInferenceCreateChatCompletionBodyPart1(request))
+        putAll(buildAgentInferenceCreateChatCompletionBodyPart2(request))
+    }
+
+    private fun buildAgentInferenceCreateChatCompletionBodyPart1(
+        request: AgentInferenceCreateChatCompletionRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "messages" to (request.messages),
             "model" to (request.model),
-            "max_tokens" to
-    (request.maxTokens ?: SdkClient.SdkOptional.Omitted),
+            "max_tokens" to (request.maxTokens ?: SdkClient.SdkOptional.Omitted),
             "max_completion_tokens" to
-    (request.maxCompletionTokens ?: SdkClient.SdkOptional.Omitted),
-            "frequency_penalty" to
-    (request.frequencyPenalty ?: SdkClient.SdkOptional.Omitted),
-            "presence_penalty" to
-    (request.presencePenalty ?: SdkClient.SdkOptional.Omitted),
-            "top_logprobs" to
-    (request.topLogprobs ?: SdkClient.SdkOptional.Omitted),
+                (request.maxCompletionTokens ?: SdkClient.SdkOptional.Omitted),
+            "frequency_penalty" to (request.frequencyPenalty ?: SdkClient.SdkOptional.Omitted),
+            "presence_penalty" to (request.presencePenalty ?: SdkClient.SdkOptional.Omitted),
+            "top_logprobs" to (request.topLogprobs ?: SdkClient.SdkOptional.Omitted),
             "tools" to (SdkClient.omitIfNull(request.tools)),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
-            "stream" to
-    (request.stream ?: SdkClient.SdkOptional.Omitted),
+            "stream" to (request.stream ?: SdkClient.SdkOptional.Omitted),
             "stop" to (SdkClient.omitIfNull(request.stop)),
-            "logit_bias" to
-    (request.logitBias ?: SdkClient.SdkOptional.Omitted),
+            "logit_bias" to (request.logitBias ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildAgentInferenceCreateChatCompletionBodyPart2(request: AgentInferenceCreateChatCompletionRequest): Map<String, Any?> =
+    private fun buildAgentInferenceCreateChatCompletionBodyPart2(
+        request: AgentInferenceCreateChatCompletionRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "logprobs" to
-    (request.logprobs ?: SdkClient.SdkOptional.Omitted),
+            "logprobs" to (request.logprobs ?: SdkClient.SdkOptional.Omitted),
             "n" to (request.n ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
-            "reasoning_effort" to
-    (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "reasoning_effort" to (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
             "seed" to (request.seed ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
             "user" to (SdkClient.omitIfNull(request.user)),
         )
-
-
 
     data class AgentInferenceCreateChatCompletionStreamRequest(
         val agent: Boolean,
@@ -251,161 +285,159 @@ if (topPValue != null) {
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
         val streamOptions: SdkClient.SdkOptional<ChatCompletionRequestStreamOptions?>? = null,
-        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? =
+            null,
         val seed: SdkClient.SdkOptional<Long?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val user: String? = null
+        val user: String? = null,
     )
 
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      *
      * @param agent Must be set to true for agent-based completion behavior.
      * @param messages A list of messages comprising the conversation so far.
      * @param model Model ID used to generate the response.
-     * @param stream If set to true, the model response data will be streamed to the
-     *   client as it is generated using server-sent events.
-     * @param maxTokens The maximum number of tokens that can be generated in the
-     *   completion. The token count of your prompt plus max_tokens cannot exceed the
-     *   model's context length.
-     * @param maxCompletionTokens The maximum number of completion tokens that may be
-     *   used over the course of the run. The run will make a best effort to use only
-     *   the number of completion tokens specified, across multiple turns of the run.
-     * @param frequencyPenalty Number between -2.0 and 2.0. Positive values penalize
-     *   new tokens based on their existing frequency in the text so far, decreasing
-     *   the model's likelihood to repeat the same line verbatim.
-     * @param presencePenalty Number between -2.0 and 2.0. Positive values penalize
-     *   new tokens based on whether they appear in the text so far, increasing the
-     *   model's likelihood to talk about new topics.
-     * @param topLogprobs An integer between 0 and 20 specifying the number of most
-     *   likely tokens to return at each token position, each with an associated log
-     *   probability. logprobs must be set to true if this parameter is used.
-     * @param tools A list of tools the model may call. Currently, only functions are
-     *   supported as a tool.
-     * @param toolChoice Controls which (if any) tool is called by the model. none
-     *   means the model will not call any tool and instead generates a message. auto
-     *   means the model can pick between generating a message or calling one or more
-     *   tools. required means the model must call one or more tools. Specifying a
-     *   particular tool via {"type": "function", "function": {"name": "my_function"}}
-     *   forces the model to call that tool. none is the default when no tools are
-     *   present. auto is the default if tools are…
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens. The returned text will not contain the stop sequence.
-     * @param logitBias Modify the likelihood of specified tokens appearing in the
-     *   completion. Accepts a JSON object that maps tokens (specified by their token
-     *   ID in the tokenizer) to an associated bias value from -100 to 100.
-     *   Mathematically, the bias is added to the logits generated by the model prior
-     *   to sampling. The exact effect will vary per model, but values between -1 and 1
-     *   should decrease or increase likelihood of selection; values like -100 or 100
-     *   should result in a ban or exclusive…
-     * @param logprobs Whether to return log probabilities of the output tokens or
-     *   not. If true, returns the log probabilities of each output token returned in
-     *   the content of message.
-     * @param n How many chat completion choices to generate for each input message.
-     *   Note that you will be charged based on the number of generated tokens across
-     *   all of the choices. Keep n as 1 to minimize costs.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
-     * @param reasoningEffort Constrains effort on reasoning for reasoning models.
-     *   Reducing reasoning effort can result in faster responses and fewer tokens used
-     *   on reasoning in a response.
-     * @param seed If specified, the system will make a best effort to sample
-     *   deterministically, such that repeated requests with the same seed and
-     *   parameters should return the same result. Determinism is not guaranteed.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object.
-     *   This can be useful for storing additional information about the object in a
-     *   structured format. Keys are strings with a maximum length of 64 characters.
-     *   Values are strings with a maximum length of 512 characters.
-     * @param temperature What sampling temperature to use, between 0 and 2. Higher
-     *   values like 0.8 will make the output more random, while lower values like 0.2
-     *   will make it more focused and deterministic. We generally recommend altering
-     *   this or top_p but not both.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass. So 0.1 means only the tokens comprising the top 10%
-     *   probability mass are considered. We generally recommend altering this or
-     *   temperature but not both.
-     * @param user A unique identifier representing your end-user, which can help
-     *   DigitalOcean to monitor and detect abuse.
+     * @param stream If set to true, the model response data will be streamed to the client as it is
+     *   generated using server-sent events.
+     * @param maxTokens The maximum number of tokens that can be generated in the completion. The
+     *   token count of your prompt plus max_tokens cannot exceed the model's context length.
+     * @param maxCompletionTokens The maximum number of completion tokens that may be used over the
+     *   course of the run. The run will make a best effort to use only the number of completion
+     *   tokens specified, across multiple turns of the run.
+     * @param frequencyPenalty Number between -2.0 and 2.0. Positive values penalize new tokens
+     *   based on their existing frequency in the text so far, decreasing the model's likelihood to
+     *   repeat the same line verbatim.
+     * @param presencePenalty Number between -2.0 and 2.0. Positive values penalize new tokens based
+     *   on whether they appear in the text so far, increasing the model's likelihood to talk about
+     *   new topics.
+     * @param topLogprobs An integer between 0 and 20 specifying the number of most likely tokens to
+     *   return at each token position, each with an associated log probability. logprobs must be
+     *   set to true if this parameter is used.
+     * @param tools A list of tools the model may call. Currently, only functions are supported as a
+     *   tool.
+     * @param toolChoice Controls which (if any) tool is called by the model. none means the model
+     *   will not call any tool and instead generates a message. auto means the model can pick
+     *   between generating a message or calling one or more tools. required means the model must
+     *   call one or more tools. Specifying a particular tool via {"type": "function", "function":
+     *   {"name": "my_function"}} forces the model to call that tool. none is the default when no
+     *   tools are present. auto is the default if tools are…
+     * @param stop Up to 4 sequences where the API will stop generating further tokens. The returned
+     *   text will not contain the stop sequence.
+     * @param logitBias Modify the likelihood of specified tokens appearing in the completion.
+     *   Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an
+     *   associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+     *   generated by the model prior to sampling. The exact effect will vary per model, but values
+     *   between -1 and 1 should decrease or increase likelihood of selection; values like -100 or
+     *   100 should result in a ban or exclusive…
+     * @param logprobs Whether to return log probabilities of the output tokens or not. If true,
+     *   returns the log probabilities of each output token returned in the content of message.
+     * @param n How many chat completion choices to generate for each input message. Note that you
+     *   will be charged based on the number of generated tokens across all of the choices. Keep n
+     *   as 1 to minimize costs.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
+     * @param reasoningEffort Constrains effort on reasoning for reasoning models. Reducing
+     *   reasoning effort can result in faster responses and fewer tokens used on reasoning in a
+     *   response.
+     * @param seed If specified, the system will make a best effort to sample deterministically,
+     *   such that repeated requests with the same seed and parameters should return the same
+     *   result. Determinism is not guaranteed.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
+     *   useful for storing additional information about the object in a structured format. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a maximum length of
+     *   512 characters.
+     * @param temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8
+     *   will make the output more random, while lower values like 0.2 will make it more focused and
+     *   deterministic. We generally recommend altering this or top_p but not both.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass. So 0.1 means only
+     *   the tokens comprising the top 10% probability mass are considered. We generally recommend
+     *   altering this or temperature but not both.
+     * @param user A unique identifier representing your end-user, which can help DigitalOcean to
+     *   monitor and detect abuse.
      */
-    fun agentInferenceCreateChatCompletionStream(clientConfig: ClientConfig, request: AgentInferenceCreateChatCompletionStreamRequest, options: RequestOptions? = null): Sequence<ChatCompletionChunk> {
+    fun agentInferenceCreateChatCompletionStream(
+        clientConfig: ClientConfig,
+        request: AgentInferenceCreateChatCompletionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ChatCompletionChunk> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/api/v1/chat/completions",
-                config = clientConfig,
-                query = mapOf(
-            "agent" to SdkClient.queryValue(request.agent, "form", true)
-        ),
-                body = buildAgentInferenceCreateChatCompletionStreamBody(request),
-                contentType = "application/json",
-                operationId = "agentInferenceCreateChatCompletionStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/api/v1/chat/completions",
+                        config = clientConfig,
+                        query = mapOf("agent" to SdkClient.queryValue(request.agent, "form", true)),
+                        body = buildAgentInferenceCreateChatCompletionStreamBody(request),
+                        contentType = "application/json",
+                        operationId = "agentInferenceCreateChatCompletionStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "401" to Error2::class.java,
+                                "429" to Error2::class.java,
+                                "500" to Error2::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, ChatCompletionChunk::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(_ev.data, ChatCompletionChunk::class.java)
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
 
+    private fun buildAgentInferenceCreateChatCompletionStreamBody(
+        request: AgentInferenceCreateChatCompletionStreamRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildAgentInferenceCreateChatCompletionStreamBodyPart1(request))
+        putAll(buildAgentInferenceCreateChatCompletionStreamBodyPart2(request))
+    }
 
-    private fun buildAgentInferenceCreateChatCompletionStreamBody(request: AgentInferenceCreateChatCompletionStreamRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildAgentInferenceCreateChatCompletionStreamBodyPart1(request))
-            putAll(buildAgentInferenceCreateChatCompletionStreamBodyPart2(request))
-        }
-
-    private fun buildAgentInferenceCreateChatCompletionStreamBodyPart1(request: AgentInferenceCreateChatCompletionStreamRequest): Map<String, Any?> =
+    private fun buildAgentInferenceCreateChatCompletionStreamBodyPart1(
+        request: AgentInferenceCreateChatCompletionStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "messages" to (request.messages),
             "model" to (request.model),
             "stream" to (request.stream),
-            "max_tokens" to
-    (request.maxTokens ?: SdkClient.SdkOptional.Omitted),
+            "max_tokens" to (request.maxTokens ?: SdkClient.SdkOptional.Omitted),
             "max_completion_tokens" to
-    (request.maxCompletionTokens ?: SdkClient.SdkOptional.Omitted),
-            "frequency_penalty" to
-    (request.frequencyPenalty ?: SdkClient.SdkOptional.Omitted),
-            "presence_penalty" to
-    (request.presencePenalty ?: SdkClient.SdkOptional.Omitted),
-            "top_logprobs" to
-    (request.topLogprobs ?: SdkClient.SdkOptional.Omitted),
+                (request.maxCompletionTokens ?: SdkClient.SdkOptional.Omitted),
+            "frequency_penalty" to (request.frequencyPenalty ?: SdkClient.SdkOptional.Omitted),
+            "presence_penalty" to (request.presencePenalty ?: SdkClient.SdkOptional.Omitted),
+            "top_logprobs" to (request.topLogprobs ?: SdkClient.SdkOptional.Omitted),
             "tools" to (SdkClient.omitIfNull(request.tools)),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
             "stop" to (SdkClient.omitIfNull(request.stop)),
-            "logit_bias" to
-    (request.logitBias ?: SdkClient.SdkOptional.Omitted),
+            "logit_bias" to (request.logitBias ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildAgentInferenceCreateChatCompletionStreamBodyPart2(request: AgentInferenceCreateChatCompletionStreamRequest): Map<String, Any?> =
+    private fun buildAgentInferenceCreateChatCompletionStreamBodyPart2(
+        request: AgentInferenceCreateChatCompletionStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "logprobs" to
-    (request.logprobs ?: SdkClient.SdkOptional.Omitted),
+            "logprobs" to (request.logprobs ?: SdkClient.SdkOptional.Omitted),
             "n" to (request.n ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
-            "reasoning_effort" to
-    (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "reasoning_effort" to (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
             "seed" to (request.seed ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
             "user" to (SdkClient.omitIfNull(request.user)),
         )
-
-
 }

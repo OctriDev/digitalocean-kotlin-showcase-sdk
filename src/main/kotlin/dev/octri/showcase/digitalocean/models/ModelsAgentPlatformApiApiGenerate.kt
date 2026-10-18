@@ -3,44 +3,29 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * The url for the oauth2 flow
- */
+/** The url for the oauth2 flow */
 data class ApiGenerateOauth2URLOutput(
-    /**
-     * The oauth2 url
-     */
+    /** The oauth2 url */
     val url: String? = null
 )
 
-/**
- * Public parameters for dispatching goal-driven scenario generation.
- */
+/** Public parameters for dispatching goal-driven scenario generation. */
 data class ApiGenerateScenarioSetInputPublic(
-    /**
-     * Optional model to use for generation. Platform default when unset.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("generator_model_uuid") val generatorModelUuid: String? = null,
-    /**
-     * The goal that drives scenario generation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("goal_description") val goalDescription: String? = null,
-    /**
-     * The name of the scenario set to create.
-     */
+    /** Optional model to use for generation. Platform default when unset. */
+    @com.fasterxml.jackson.annotation.JsonProperty("generator_model_uuid")
+    val generatorModelUuid: String? = null,
+    /** The goal that drives scenario generation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("goal_description")
+    val goalDescription: String? = null,
+    /** The name of the scenario set to create. */
     val name: String? = null,
-    /**
-     * Number of scenarios to generate. Defaults to 1 if unset.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_scenarios") val numScenarios: Long? = null
+    /** Number of scenarios to generate. Defaults to 1 if unset. */
+    @com.fasterxml.jackson.annotation.JsonProperty("num_scenarios") val numScenarios: Long? = null,
 )
 
-/**
- * Output for dispatching goal-driven scenario generation.
- */
+/** Output for dispatching goal-driven scenario generation. */
 data class ApiGenerateScenarioSetOutput(
-    /**
-     * A team-owned collection of scenarios.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set") val scenarioSet: ApiScenarioSet? = null
+    /** A team-owned collection of scenarios. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set")
+    val scenarioSet: ApiScenarioSet? = null
 )

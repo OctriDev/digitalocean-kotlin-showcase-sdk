@@ -5,56 +5,37 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `GarbageCollection` API schema.
- */
+/** Typed representation of the `GarbageCollection` API schema. */
 data class GarbageCollection(
-    /**
-     * A string specifying the UUID of the garbage collection.
-     */
+    /** A string specifying the UUID of the garbage collection. */
     val uuid: String? = null,
-    /**
-     * The name of the container registry.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("registry_name") val registryName: String? = null,
-    /**
-     * The current status of this garbage collection.
-     */
+    /** The name of the container registry. */
+    @com.fasterxml.jackson.annotation.JsonProperty("registry_name")
+    val registryName: String? = null,
+    /** The current status of this garbage collection. */
     val status: GarbageCollectionStatusEnum? = null,
-    /**
-     * The time the garbage collection was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * The time the garbage collection was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * The number of blobs deleted as a result of this garbage collection.
-     */
+    /** The time the garbage collection was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** The time the garbage collection was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** The number of blobs deleted as a result of this garbage collection. */
     @com.fasterxml.jackson.annotation.JsonProperty("blobs_deleted") val blobsDeleted: Long? = null,
-    /**
-     * The number of bytes freed as a result of this garbage collection.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("freed_bytes") val freedBytes: Long? = null
+    /** The number of bytes freed as a result of this garbage collection. */
+    @com.fasterxml.jackson.annotation.JsonProperty("freed_bytes") val freedBytes: Long? = null,
 )
 
-/**
- * Typed representation of the `GarbageCollectionResponse` API schema.
- */
+/** Typed representation of the `GarbageCollectionResponse` API schema. */
 data class GarbageCollectionResponse(
-    /**
-     * Optional object value serialized in the `garbage_collection` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("garbage_collection") val garbageCollection: GarbageCollection? = null
+    /** Optional object value serialized in the `garbage_collection` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("garbage_collection")
+    val garbageCollection: GarbageCollection? = null
 )
 
-/**
- * Typed representation of the `GarbageCollections` API schema.
- */
+/** Typed representation of the `GarbageCollections` API schema. */
 data class GarbageCollections(
-    /**
-     * Optional array value serialized in the `garbage_collections` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("garbage_collections") val garbageCollections: List<GarbageCollection>? = null
+    /** Optional array value serialized in the `garbage_collections` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("garbage_collections")
+    val garbageCollections: List<GarbageCollection>? = null
 )

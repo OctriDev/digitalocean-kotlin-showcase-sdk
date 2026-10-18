@@ -3,55 +3,158 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class ActionGatewayDataPlaneNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the catalog tools that a session can call, ordered by name. The list applies the session's `tools` selection and omits tools that its policy always denies. Each page includes an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is unchanged.
+     * Lists the catalog tools that a session can call, ordered by name. The list applies the
+     * session's `tools` selection and omits tools that its policy always denies. Each page includes
+     * an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is
+     * unchanged.
      */
-    fun gatewayToolsList(xSessionId: String, pageSize: Long? = null, pageToken: String? = null, ifNoneMatch: String? = null, options: RequestOptions? = null): ListSessionToolsResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsList(clientConfig, xSessionId, pageSize, pageToken, ifNoneMatch, options)
+    fun gatewayToolsList(
+        xSessionId: String,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        ifNoneMatch: String? = null,
+        options: RequestOptions? = null,
+    ): ListSessionToolsResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsList(
+            clientConfig,
+            xSessionId,
+            pageSize,
+            pageToken,
+            ifNoneMatch,
+            options,
+        )
     }
 
     /**
-     * Lists the catalog tools that a session can call, ordered by name. The list applies the session's `tools` selection and omits tools that its policy always denies. Each page includes an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is unchanged.
+     * Lists the catalog tools that a session can call, ordered by name. The list applies the
+     * session's `tools` selection and omits tools that its policy always denies. Each page includes
+     * an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is
+     * unchanged.
      */
-    fun gatewayToolsListPaginated(xSessionId: String, pageSize: Long? = null, pageToken: String? = null, ifNoneMatch: String? = null, options: RequestOptions? = null, yieldFn: (SessionTool) -> Boolean) {
-        dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsListPaginated(clientConfig, xSessionId, pageSize, pageToken, ifNoneMatch, options, yieldFn)
+    fun gatewayToolsListPaginated(
+        xSessionId: String,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        ifNoneMatch: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTool) -> Boolean,
+    ) {
+        dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsListPaginated(
+            clientConfig,
+            xSessionId,
+            pageSize,
+            pageToken,
+            ifNoneMatch,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Finds the catalog tools that fit one or more use cases. This is the REST form of the `action_search` MCP tool. Each query is searched independently and returns its own result group, so you can see which tools serve which goal. Results include each tool's `inputSchema`, so you can call a tool with `POST /tools/invoke` without another lookup. Results include only tools that the session can call. If the session policy requires approval for `action_search`, the response is a…
+     * Finds the catalog tools that fit one or more use cases. This is the REST form of the
+     * `action_search` MCP tool. Each query is searched independently and returns its own result
+     * group, so you can see which tools serve which goal. Results include each tool's
+     * `inputSchema`, so you can call a tool with `POST /tools/invoke` without another lookup.
+     * Results include only tools that the session can call. If the session policy requires approval
+     * for `action_search`, the response is a…
      */
-    fun gatewayToolsListSearch(xSessionId: String, queries: List<SearchQuery>, providers: List<String>? = null, tags: List<String>? = null, limit: Long? = null, options: RequestOptions? = null): DataPlaneSearchToolsResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsListSearch(clientConfig, xSessionId, queries, providers, tags, limit, options)
+    fun gatewayToolsListSearch(
+        xSessionId: String,
+        queries: List<SearchQuery>,
+        providers: List<String>? = null,
+        tags: List<String>? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+    ): DataPlaneSearchToolsResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane
+            .gatewayToolsListSearch(
+                clientConfig,
+                xSessionId,
+                queries,
+                providers,
+                tags,
+                limit,
+                options,
+            )
     }
 
     /**
-     * Runs 1 to 10 tool calls in parallel and returns one result per call, in request order. This is the REST form of the `action_invoke` MCP tool. Each call is checked against the session's tool selection and policy, uses the session actor's connections, and applies any output view bound to the tool in the session. A well-formed request returns `200` even when some calls fail. Check each item's `result.status`, and use `success_count` and `error_count` to branch without scanning…
+     * Runs 1 to 10 tool calls in parallel and returns one result per call, in request order. This
+     * is the REST form of the `action_invoke` MCP tool. Each call is checked against the session's
+     * tool selection and policy, uses the session actor's connections, and applies any output view
+     * bound to the tool in the session. A well-formed request returns `200` even when some calls
+     * fail. Check each item's `result.status`, and use `success_count` and `error_count` to branch
+     * without scanning…
      */
-    fun gatewayToolsRun(xSessionId: String, tools: List<ToolCall>, rationale: String? = null, options: RequestOptions? = null): InvokeToolsResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsRun(clientConfig, xSessionId, tools, rationale, options)
+    fun gatewayToolsRun(
+        xSessionId: String,
+        tools: List<ToolCall>,
+        rationale: String? = null,
+        options: RequestOptions? = null,
+    ): InvokeToolsResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayToolsRun(
+            clientConfig,
+            xSessionId,
+            tools,
+            rationale,
+            options,
+        )
     }
 
     /**
-     * Runs Python code in an ephemeral sandbox and returns its `stdout`, `stderr`, and `exit_code`. This is the REST form of the `action_code` MCP tool. Use it for computation, parsing, and data processing, or to chain several catalog tools in one request. The sandbox provides `invoke_digitalocean_tool(name, arguments)`, which calls a catalog tool and returns a tool result. Those calls follow the session's tool selection and policy. Each request runs in a fresh sandbox, so state…
+     * Runs Python code in an ephemeral sandbox and returns its `stdout`, `stderr`, and `exit_code`.
+     * This is the REST form of the `action_code` MCP tool. Use it for computation, parsing, and
+     * data processing, or to chain several catalog tools in one request. The sandbox provides
+     * `invoke_digitalocean_tool(name, arguments)`, which calls a catalog tool and returns a tool
+     * result. Those calls follow the session's tool selection and policy. Each request runs in a
+     * fresh sandbox, so state…
      */
-    fun gatewayCodeRun(xSessionId: String, code: String, options: RequestOptions? = null): ExecuteCodeResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayCodeRun(clientConfig, xSessionId, code, options)
+    fun gatewayCodeRun(
+        xSessionId: String,
+        code: String,
+        options: RequestOptions? = null,
+    ): ExecuteCodeResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayCodeRun(
+            clientConfig,
+            xSessionId,
+            code,
+            options,
+        )
     }
 
     /**
-     * Approves or denies a tool call that is waiting for approval. A tool result returns `_meta.status` set to `requires_approval` when the session policy sets `ask` for the call, and its `_meta.decide` gives this request's path. Send the decision with the session owner's token. Approval is a separate control request, not a tool, so an agent cannot approve its own calls. After approving, repeat the original call with the same arguments before `expires_at`. An approval applies only…
+     * Approves or denies a tool call that is waiting for approval. A tool result returns
+     * `_meta.status` set to `requires_approval` when the session policy sets `ask` for the call,
+     * and its `_meta.decide` gives this request's path. Send the decision with the session owner's
+     * token. Approval is a separate control request, not a tool, so an agent cannot approve its own
+     * calls. After approving, repeat the original call with the same arguments before `expires_at`.
+     * An approval applies only…
      */
-    fun gatewaySessionApprovalsUpdate(sessionId: String, approvalId: String, decision: ApprovalDecisionDecisionEnum, options: RequestOptions? = null): ApprovalDecisionResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewaySessionApprovalsUpdate(clientConfig, sessionId, approvalId, decision, options)
+    fun gatewaySessionApprovalsUpdate(
+        sessionId: String,
+        approvalId: String,
+        decision: ApprovalDecisionDecisionEnum,
+        options: RequestOptions? = null,
+    ): ApprovalDecisionResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane
+            .gatewaySessionApprovalsUpdate(clientConfig, sessionId, approvalId, decision, options)
     }
 
     /**
-     * Approves or denies a tool call that is waiting for approval, identifying the session with the `X-Session-Id` header. It behaves the same as `POST /approvals/session/{session_id}/{approval_id}`, which is the path returned in a result's `_meta.decide`.
+     * Approves or denies a tool call that is waiting for approval, identifying the session with the
+     * `X-Session-Id` header. It behaves the same as `POST
+     * /approvals/session/{session_id}/{approval_id}`, which is the path returned in a result's
+     * `_meta.decide`.
      */
-    fun gatewayApprovalsUpdate(approvalId: String, xSessionId: String, decision: ApprovalDecisionDecisionEnum, options: RequestOptions? = null): ApprovalDecisionResponse {
-        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane.gatewayApprovalsUpdate(clientConfig, approvalId, xSessionId, decision, options)
+    fun gatewayApprovalsUpdate(
+        approvalId: String,
+        xSessionId: String,
+        decision: ApprovalDecisionDecisionEnum,
+        options: RequestOptions? = null,
+    ): ApprovalDecisionResponse {
+        return dev.octri.showcase.digitalocean.methods.ActionGatewayDataPlane
+            .gatewayApprovalsUpdate(clientConfig, approvalId, xSessionId, decision, options)
     }
-
 }

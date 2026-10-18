@@ -3,41 +3,25 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `GetImageActionsResponse` API schema.
- */
+/** Typed representation of the `GetImageActionsResponse` API schema. */
 data class GetImageActionsResponse(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val actions: List<Action>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `ImageActionBase` API schema.
- */
+/** Typed representation of the `ImageActionBase` API schema. */
 data class ImageActionBase(
-    /**
-     * The action to be taken on the image. Can be either `convert` or `transfer`.
-     */
+    /** The action to be taken on the image. Can be either `convert` or `transfer`. */
     val type: ImageActionBaseTypeEnum
 )
 
-/**
- * Typed representation of the `ImageActionTransfer` API schema.
- */
+/** Typed representation of the `ImageActionTransfer` API schema. */
 data class ImageActionTransfer(
-    /**
-     * The action to be taken on the image. Can be either `convert` or `transfer`.
-     */
+    /** The action to be taken on the image. Can be either `convert` or `transfer`. */
     val type: ImageActionBaseTypeEnum,
-    /**
-     * The slug identifier for the region where the resource will initially be available.
-     */
-    val region: RegionSlug
+    /** The slug identifier for the region where the resource will initially be available. */
+    val region: RegionSlug,
 )

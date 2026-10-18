@@ -3,20 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `AppsDedicatedEgressIp` API schema.
- */
+/** Typed representation of the `AppsDedicatedEgressIp` API schema. */
 data class AppsDedicatedEgressIp(
-    /**
-     * Optional `string` value serialized in the `ip` wire field.
-     */
+    /** Optional `string` value serialized in the `ip` wire field. */
     val ip: String? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional enumerated value serialized in the `status` wire field.
-     */
-    val status: AppsDedicatedEgressIpStatus? = null
+    /** Optional enumerated value serialized in the `status` wire field. */
+    val status: AppsDedicatedEgressIpStatus? = null,
 )

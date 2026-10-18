@@ -5,72 +5,57 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AssignedResourcesList` API schema.
- */
+/** Typed representation of the `AssignedResourcesList` API schema. */
 data class AssignedResourcesList(
     /**
-     * All resources, including the ones added in the request, that are assigned to the project. Only resources that you are authorized to see will be returned.
+     * All resources, including the ones added in the request, that are assigned to the project.
+     * Only resources that you are authorized to see will be returned.
      */
     val resources: List<Resource>? = null
 )
 
-/**
- * Typed representation of the `ProjectAssignment` API schema.
- */
+/** Typed representation of the `ProjectAssignment` API schema. */
 data class ProjectAssignment(
     /**
-     * A list of uniform resource names (URNs) to be added to a project. Only resources that you are authorized to see will be returned.
+     * A list of uniform resource names (URNs) to be added to a project. Only resources that you are
+     * authorized to see will be returned.
      */
     val resources: List<Urn>? = null
 )
 
-/**
- * The links object contains the `self` object, which contains the resource relationship.
- */
+/** The links object contains the `self` object, which contains the resource relationship. */
 data class ResourceLinks(
-    /**
-     * A URI that can be used to retrieve the resource.
-     */
+    /** A URI that can be used to retrieve the resource. */
     val self: String? = null
 )
 
-/**
- * Typed representation of the `Resource` API schema.
- */
+/** Typed representation of the `Resource` API schema. */
 data class Resource(
     /**
      * The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
      */
     val urn: Urn? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the project was created.
+     * A time value given in ISO8601 combined date and time format that represents when the project
+     * was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("assigned_at") val assignedAt: OffsetDateTime? = null,
-    /**
-     * The links object contains the `self` object, which contains the resource relationship.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("assigned_at")
+    val assignedAt: OffsetDateTime? = null,
+    /** The links object contains the `self` object, which contains the resource relationship. */
     val links: ResourceLinks? = null,
-    /**
-     * The status of assigning and fetching the resources.
-     */
-    val status: ResourceStatusEnum? = null
+    /** The status of assigning and fetching the resources. */
+    val status: ResourceStatusEnum? = null,
 )
 
-/**
- * Typed representation of the `ResourcesList` API schema.
- */
+/** Typed representation of the `ResourcesList` API schema. */
 data class ResourcesList(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     /**
-     * The resources that are assigned to this project. Only resources that you are authorized to see will be returned.
+     * The resources that are assigned to this project. Only resources that you are authorized to
+     * see will be returned.
      */
     val resources: List<Resource>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )

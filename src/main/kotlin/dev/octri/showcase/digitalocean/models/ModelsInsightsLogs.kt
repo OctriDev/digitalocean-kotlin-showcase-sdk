@@ -5,288 +5,188 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * A reference to a logical field for filters, ordering, grouping, or facets.
- */
+/** A reference to a logical field for filters, ordering, grouping, or facets. */
 data class LogsFieldRef(
     /**
-     * The field name. Intrinsic columns include `timestamp`, `severity_text`, `severity_number`, `body`, `trace_id`, `span_id`, and `trace_flags`. The dotted shorthands `service.name`, `resource.type`, and `resource.urn` are also supported. Arbitrary resource or log attributes can be accessed with `ResourceAttributes['key']` or `LogAttributes['key']`.
+     * The field name. Intrinsic columns include `timestamp`, `severity_text`, `severity_number`,
+     * `body`, `trace_id`, `span_id`, and `trace_flags`. The dotted shorthands `service.name`,
+     * `resource.type`, and `resource.urn` are also supported. Arbitrary resource or log attributes
+     * can be accessed with `ResourceAttributes['key']` or `LogAttributes['key']`.
      */
     val name: String,
     /**
-     * The attribute scope to resolve the field against. Omit to let the server apply its default mapping for the field name.
+     * The attribute scope to resolve the field against. Omit to let the server apply its default
+     * mapping for the field name.
      */
-    val scope: LogsFieldRefScopeEnum? = null
+    val scope: LogsFieldRefScopeEnum? = null,
 )
 
-/**
- * A single field comparison in a logs filter expression.
- */
+/** A single field comparison in a logs filter expression. */
 data class LogsFilterCondition(
-    /**
-     * A reference to a logical field for filters, ordering, grouping, or facets.
-     */
+    /** A reference to a logical field for filters, ordering, grouping, or facets. */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: LogsFieldRef,
-    /**
-     * The comparison operator.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("operator") val `operator`: LogsFilterConditionOperatorEnum,
+    /** The comparison operator. */
+    @com.fasterxml.jackson.annotation.JsonProperty("operator")
+    val `operator`: LogsFilterConditionOperatorEnum,
     /**
      * A typed literal or list value for a filter condition. Exactly one kind is set per message.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: LogsFilterValue? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: LogsFilterValue? = null,
 )
 
-/**
- * Optional object value serialized in the `and` wire field.
- */
+/** Optional object value serialized in the `and` wire field. */
 data class LogsFilterExpressionAnd(
-    /**
-     * Required array value serialized in the `expressions` wire field.
-     */
+    /** Required array value serialized in the `expressions` wire field. */
     val expressions: List<LogsFilterExpression>
 )
 
-/**
- * Optional object value serialized in the `or` wire field.
- */
+/** Optional object value serialized in the `or` wire field. */
 data class LogsFilterExpressionOr(
-    /**
-     * Required array value serialized in the `expressions` wire field.
-     */
+    /** Required array value serialized in the `expressions` wire field. */
     val expressions: List<LogsFilterExpression>
 )
 
-/**
- * A substring search across the log body, service name, and resource URN.
- */
+/** A substring search across the log body, service name, and resource URN. */
 data class LogsFilterExpressionTextSearch(
-    /**
-     * The search string.
-     */
+    /** The search string. */
     val query: String
 )
 
-/**
- * A boolean filter tree for logs queries. Exactly one node is set per message.
- */
+/** A boolean filter tree for logs queries. Exactly one node is set per message. */
 data class LogsFilterExpression(
-    /**
-     * A single field comparison in a logs filter expression.
-     */
+    /** A single field comparison in a logs filter expression. */
     val condition: LogsFilterCondition? = null,
-    /**
-     * Optional object value serialized in the `and` wire field.
-     */
+    /** Optional object value serialized in the `and` wire field. */
     val and: LogsFilterExpressionAnd? = null,
-    /**
-     * Optional object value serialized in the `or` wire field.
-     */
+    /** Optional object value serialized in the `or` wire field. */
     val or: LogsFilterExpressionOr? = null,
-    /**
-     * A boolean filter tree for logs queries. Exactly one node is set per message.
-     */
+    /** A boolean filter tree for logs queries. Exactly one node is set per message. */
     val not: LogsFilterExpression? = null,
-    /**
-     * A substring search across the log body, service name, and resource URN.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_search") val textSearch: LogsFilterExpressionTextSearch? = null
+    /** A substring search across the log body, service name, and resource URN. */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_search")
+    val textSearch: LogsFilterExpressionTextSearch? = null,
 )
 
-/**
- * Optional object value serialized in the `string_array_value` wire field.
- */
+/** Optional object value serialized in the `string_array_value` wire field. */
 data class LogsFilterValueStringArrayValue(
-    /**
-     * Required array value serialized in the `values` wire field.
-     */
+    /** Required array value serialized in the `values` wire field. */
     val values: List<String>
 )
 
-/**
- * Optional object value serialized in the `number_array_value` wire field.
- */
+/** Optional object value serialized in the `number_array_value` wire field. */
 data class LogsFilterValueNumberArrayValue(
-    /**
-     * Required array value serialized in the `values` wire field.
-     */
+    /** Required array value serialized in the `values` wire field. */
     val values: List<Double>
 )
 
-/**
- * A typed literal or list value for a filter condition. Exactly one kind is set per message.
- */
+/** A typed literal or list value for a filter condition. Exactly one kind is set per message. */
 data class LogsFilterValue(
-    /**
-     * Optional `string` value serialized in the `string_value` wire field.
-     */
+    /** Optional `string` value serialized in the `string_value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("string_value") val stringValue: String? = null,
-    /**
-     * Optional `number` value serialized in the `number_value` wire field.
-     */
+    /** Optional `number` value serialized in the `number_value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("number_value") val numberValue: Double? = null,
-    /**
-     * Optional `boolean` value serialized in the `bool_value` wire field.
-     */
+    /** Optional `boolean` value serialized in the `bool_value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("bool_value") val boolValue: Boolean? = null,
-    /**
-     * Optional object value serialized in the `string_array_value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("string_array_value") val stringArrayValue: LogsFilterValueStringArrayValue? = null,
-    /**
-     * Optional object value serialized in the `number_array_value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("number_array_value") val numberArrayValue: LogsFilterValueNumberArrayValue? = null
+    /** Optional object value serialized in the `string_array_value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("string_array_value")
+    val stringArrayValue: LogsFilterValueStringArrayValue? = null,
+    /** Optional object value serialized in the `number_array_value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("number_array_value")
+    val numberArrayValue: LogsFilterValueNumberArrayValue? = null,
 )
 
-/**
- * A single log record returned by a logs search.
- */
+/** A single log record returned by a logs search. */
 data class LogsLogRecord(
-    /**
-     * The log record timestamp.
-     */
+    /** The log record timestamp. */
     val timestamp: OffsetDateTime,
-    /**
-     * The numeric severity level.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("severity_number") val severityNumber: Int? = null,
-    /**
-     * The textual severity level.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("severity_text") val severityText: String? = null,
-    /**
-     * The log message body. Omitted when empty.
-     */
+    /** The numeric severity level. */
+    @com.fasterxml.jackson.annotation.JsonProperty("severity_number")
+    val severityNumber: Int? = null,
+    /** The textual severity level. */
+    @com.fasterxml.jackson.annotation.JsonProperty("severity_text")
+    val severityText: String? = null,
+    /** The log message body. Omitted when empty. */
     val body: String? = null,
-    /**
-     * The trace ID if present.
-     */
+    /** The trace ID if present. */
     @com.fasterxml.jackson.annotation.JsonProperty("trace_id") val traceId: String? = null,
-    /**
-     * The span ID if present.
-     */
+    /** The span ID if present. */
     @com.fasterxml.jackson.annotation.JsonProperty("span_id") val spanId: String? = null,
-    /**
-     * The service name that emitted the log.
-     */
+    /** The service name that emitted the log. */
     @com.fasterxml.jackson.annotation.JsonProperty("service_name") val serviceName: String? = null,
-    /**
-     * Resource attributes associated with the log.
-     */
+    /** Resource attributes associated with the log. */
     val resource: Map<String, String>? = null,
-    /**
-     * Log attributes.
-     */
-    val attributes: Map<String, String>? = null
+    /** Log attributes. */
+    val attributes: Map<String, String>? = null,
 )
 
-/**
- * A sort clause for logs search results.
- */
+/** A sort clause for logs search results. */
 data class LogsOrderBy(
-    /**
-     * A reference to a logical field for filters, ordering, grouping, or facets.
-     */
+    /** A reference to a logical field for filters, ordering, grouping, or facets. */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: LogsFieldRef,
-    /**
-     * The sort direction. Omit to use the server default.
-     */
-    val direction: LogsOrderByDirectionEnum? = null
+    /** The sort direction. Omit to use the server default. */
+    val direction: LogsOrderByDirectionEnum? = null,
 )
 
-/**
- * Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone.
- */
+/** Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone. */
 data class LogsPaginationRequest(
-    /**
-     * Maximum number of results to return. Defaults to 100 and is clamped to 1000.
-     */
+    /** Maximum number of results to return. Defaults to 100 and is clamped to 1000. */
     val limit: Int? = null,
-    /**
-     * Opaque cursor from a previous response.
-     */
-    val cursor: String? = null
+    /** Opaque cursor from a previous response. */
+    val cursor: String? = null,
 )
 
-/**
- * Pagination response.
- */
+/** Pagination response. */
 data class LogsPaginationResponse(
-    /**
-     * Whether more results are available.
-     */
+    /** Whether more results are available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /**
-     * Opaque cursor to fetch the next page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_cursor") val nextCursor: String? = null
+    /** Opaque cursor to fetch the next page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_cursor") val nextCursor: String? = null,
 )
 
-/**
- * Request body for searching logs.
- */
+/** Request body for searching logs. */
 data class LogsSearchRequest(
-    /**
-     * An inclusive query time window.
-     */
+    /** An inclusive query time window. */
     @com.fasterxml.jackson.annotation.JsonProperty("time_range") val timeRange: LogsTimeRange,
-    /**
-     * A boolean filter tree for logs queries. Exactly one node is set per message.
-     */
+    /** A boolean filter tree for logs queries. Exactly one node is set per message. */
     val filter: LogsFilterExpression? = null,
-    /**
-     * Sort clauses applied to the result set.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("order_by") val orderBy: List<LogsOrderBy>? = null,
+    /** Sort clauses applied to the result set. */
+    @com.fasterxml.jackson.annotation.JsonProperty("order_by")
+    val orderBy: List<LogsOrderBy>? = null,
     /**
      * Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone.
      */
-    val pagination: LogsPaginationRequest? = null
+    val pagination: LogsPaginationRequest? = null,
 )
 
-/**
- * Response body for a logs search.
- */
+/** Response body for a logs search. */
 data class LogsSearchResponse(
-    /**
-     * Matching log records. Omitted when no records match.
-     */
+    /** Matching log records. Omitted when no records match. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<LogsLogRecord>? = null,
-    /**
-     * Pagination response.
-     */
-    val pagination: LogsPaginationResponse? = null
+    /** Pagination response. */
+    val pagination: LogsPaginationResponse? = null,
 )
 
-/**
- * A single point in time. Exactly one value form is set per message.
- */
+/** A single point in time. Exactly one value form is set per message. */
 data class LogsTimeInstant(
     /**
-     * An absolute timestamp. Accepts RFC3339/RFC3339Nano strings or Unix seconds/nanoseconds as decimal strings.
+     * An absolute timestamp. Accepts RFC3339/RFC3339Nano strings or Unix seconds/nanoseconds as
+     * decimal strings.
      */
     val absolute: OffsetDateTime? = null,
     /**
-     * A relative time. Use `now` for the current time, a bare duration such as `1h` or `7d` to look back from now, or an offset such as `now-1h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`.
+     * A relative time. Use `now` for the current time, a bare duration such as `1h` or `7d` to look
+     * back from now, or an offset such as `now-1h` or `now+30m`. Supported units are `s`, `m`, `h`,
+     * `d`, and `w`.
      */
     val relative: String? = null,
-    /**
-     * A Unix nanosecond timestamp, encoded as a string to preserve 64-bit precision.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("unix_nano") val unixNano: String? = null
+    /** A Unix nanosecond timestamp, encoded as a string to preserve 64-bit precision. */
+    @com.fasterxml.jackson.annotation.JsonProperty("unix_nano") val unixNano: String? = null,
 )
 
-/**
- * An inclusive query time window.
- */
+/** An inclusive query time window. */
 data class LogsTimeRange(
-    /**
-     * A single point in time. Exactly one value form is set per message.
-     */
+    /** A single point in time. Exactly one value form is set per message. */
     val from: LogsTimeInstant,
-    /**
-     * A single point in time. Exactly one value form is set per message.
-     */
-    val to: LogsTimeInstant
+    /** A single point in time. Exactly one value form is set per message. */
+    val to: LogsTimeInstant,
 )

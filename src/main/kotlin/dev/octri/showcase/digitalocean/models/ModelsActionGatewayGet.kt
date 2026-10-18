@@ -5,108 +5,77 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Reports an actor's limits.
- */
+/** Reports an actor's limits. */
 data class GetActorLimitsResponse(
+    /** Overrides set for the actor; categories without one are omitted. */
+    @com.fasterxml.jackson.annotation.JsonProperty("configured_limits")
+    val configuredLimits: List<LimitOverride>? = null,
     /**
-     * Overrides set for the actor; categories without one are omitted.
+     * Limits in effect for the actor in every category: the lower of your team's limit and the
+     * actor's override.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("configured_limits") val configuredLimits: List<LimitOverride>? = null,
-    /**
-     * Limits in effect for the actor in every category: the lower of your team's limit and the actor's override.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("effective_limits") val effectiveLimits: ToolQuotas? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("effective_limits")
+    val effectiveLimits: ToolQuotas? = null,
 )
 
-/**
- * Returns the connection and any authorization still needed.
- */
+/** Returns the connection and any authorization still needed. */
 data class GetConnectionResponse(
-    /**
-     * The connection.
-     */
+    /** The connection. */
     val connection: Connection? = null,
-    /**
-     * Present only while the connection is pending and you created it.
-     */
-    val authorization: ConnectionAuthorization? = null
+    /** Present only while the connection is pending and you created it. */
+    val authorization: ConnectionAuthorization? = null,
 )
 
-/**
- * Returns one toolbelt version and a page of member details.
- */
+/** Returns one toolbelt version and a page of member details. */
 data class GetToolbeltResponse(
-    /**
-     * The requested toolbelt version.
-     */
+    /** The requested toolbelt version. */
     val toolbelt: Toolbelt? = null,
     /**
-     * The requested page of resolved catalog metadata for the members named in toolbelt.tools. It is a page, so it is not the membership of the toolbelt: read toolbelt.tools for that, and toolbelt.tool_count for the total. Ordering matches toolbelt.tools.
+     * The requested page of resolved catalog metadata for the members named in toolbelt.tools. It
+     * is a page, so it is not the membership of the toolbelt: read toolbelt.tools for that, and
+     * toolbelt.tool_count for the total. Ordering matches toolbelt.tools.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_details") val toolDetails: List<ToolbeltToolDetail>? = null,
-    /**
-     * Token for the next page of `tool_details`; empty on the last page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_details")
+    val toolDetails: List<ToolbeltToolDetail>? = null,
+    /** Token for the next page of `tool_details`; empty on the last page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
 
-/**
- * Required object value serialized in the `points[]` wire field.
- */
+/** Required object value serialized in the `points[]` wire field. */
 data class GetToolHealthResponseHistoryPointsItem(
-    /**
-     * Start of the slot.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bucket_start") val bucketStart: OffsetDateTime? = null,
-    /**
-     * Metrics over the slot.
-     */
-    val health: HealthMetrics? = null
+    /** Start of the slot. */
+    @com.fasterxml.jackson.annotation.JsonProperty("bucket_start")
+    val bucketStart: OffsetDateTime? = null,
+    /** Metrics over the slot. */
+    val health: HealthMetrics? = null,
 )
 
-/**
- * Present only when the request set `include_history`.
- */
+/** Present only when the request set `include_history`. */
 data class GetToolHealthResponseHistory(
-    /**
-     * Length of each point.
-     */
+    /** Length of each point. */
     val resolution: String? = null,
     /**
-     * Means the same as HealthSnapshot.stale, for the history series. The series is refreshed independently, so a fresh snapshot can accompany an older history and vice versa.
+     * Means the same as HealthSnapshot.stale, for the history series. The series is refreshed
+     * independently, so a fresh snapshot can accompany an older history and vice versa.
      */
     val stale: Boolean? = null,
-    /**
-     * Points oldest first, ending with the slot in progress.
-     */
-    val points: List<GetToolHealthResponseHistoryPointsItem>? = null
+    /** Points oldest first, ending with the slot in progress. */
+    val points: List<GetToolHealthResponseHistoryPointsItem>? = null,
 )
 
-/**
- * Health of one tool.
- */
+/** Health of one tool. */
 data class GetToolHealthResponse(
-    /**
-     * When the metrics were computed and the window they cover.
-     */
+    /** When the metrics were computed and the window they cover. */
     val snapshot: HealthSnapshot? = null,
-    /**
-     * The tool's metrics over the window.
-     */
+    /** The tool's metrics over the window. */
     val tool: ToolHealth? = null,
-    /**
-     * Present only when the request set `include_history`.
-     */
-    val history: GetToolHealthResponseHistory? = null
+    /** Present only when the request set `include_history`. */
+    val history: GetToolHealthResponseHistory? = null,
 )
 
-/**
- * Returns one user.
- */
+/** Returns one user. */
 data class GetUserResponse(
-    /**
-     * The user.
-     */
+    /** The user. */
     val user: User? = null
 )

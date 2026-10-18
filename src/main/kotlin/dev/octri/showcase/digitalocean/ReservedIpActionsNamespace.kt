@@ -3,29 +3,42 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class ReservedIpActionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.
+     * To retrieve all actions that have been executed on a reserved IP, send a GET request to
+     * `/v2/reserved_ips/$RESERVED_IP/actions`.
      */
     fun list(reservedIp: String, options: RequestOptions? = null): ReservedIpActions {
-        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods.reservedIpsActionsList(clientConfig, reservedIp, options)
+        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods
+            .reservedIpsActionsList(clientConfig, reservedIp, options)
     }
 
     /**
-     * Submits an action to assign or unassign a reserved IP. Set `type` to `assign` or `unassign`, and include `droplet_id` when assigning the address to a Droplet. The response contains the action object for the requested operation.
+     * Submits an action to assign or unassign a reserved IP. Set `type` to `assign` or `unassign`,
+     * and include `droplet_id` when assigning the address to a Droplet. The response contains the
+     * action object for the requested operation.
      *
-     * To initiate an action on a reserved IP send a POST request to `/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request, set the `type` attribute to on of the supported action types: | Action | Details |------------|-------- | `assign` | Assigns a reserved IP to a Droplet | `unassign` | Unassign a reserved IP from a Droplet
+     * To initiate an action on a reserved IP send a POST request to
+     * `/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request, set the `type`
+     * attribute to on of the supported action types: | Action | Details |------------|-------- |
+     * `assign` | Assigns a reserved IP to a Droplet | `unassign` | Unassign a reserved IP from a
+     * Droplet
      */
-    fun post(reservedIp: String, body: Any? = null, options: RequestOptions? = null): ReservedIpAction {
-        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods.reservedIpsActionsPost(clientConfig, reservedIp, body, options)
+    fun post(
+        reservedIp: String,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): ReservedIpAction {
+        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods
+            .reservedIpsActionsPost(clientConfig, reservedIp, body, options)
     }
 
     /**
-     * To retrieve the status of a reserved IP action, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.
+     * To retrieve the status of a reserved IP action, send a GET request to
+     * `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.
      */
     fun get(reservedIp: String, actionId: Long, options: RequestOptions? = null): ReservedIpAction {
-        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods.reservedIpsActionsGet(clientConfig, reservedIp, actionId, options)
+        return dev.octri.showcase.digitalocean.methods.ReservedIpActionsMethods
+            .reservedIpsActionsGet(clientConfig, reservedIp, actionId, options)
     }
-
 }

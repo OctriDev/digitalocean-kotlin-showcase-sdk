@@ -3,94 +3,75 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Configuration for Datadog integration **applicable only to MongoDB clusters**.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Configuration for Datadog integration **applicable only to MongoDB clusters**. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DatadogLogsink(
-    /**
-     * Datadog connection URL
-     */
+    /** Datadog connection URL */
     val site: String,
-    /**
-     * Datadog API key
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("datadog_api_key") val datadogApiKey: String
+    /** Datadog API key */
+    @com.fasterxml.jackson.annotation.JsonProperty("datadog_api_key") val datadogApiKey: String,
 ) : LogsinkUpdateConfig
 
-/**
- * Typed representation of the `ElasticsearchLogsink` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `ElasticsearchLogsink` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ElasticsearchLogsink(
-    /**
-     * Elasticsearch connection URL
-     */
+    /** Elasticsearch connection URL */
     val url: String,
-    /**
-     * Elasticsearch index prefix
-     */
+    /** Elasticsearch index prefix */
     @com.fasterxml.jackson.annotation.JsonProperty("index_prefix") val indexPrefix: String,
-    /**
-     * Maximum number of days of logs to keep
-     */
+    /** Maximum number of days of logs to keep */
     @com.fasterxml.jackson.annotation.JsonProperty("index_days_max") val indexDaysMax: Long? = null,
-    /**
-     * Elasticsearch request timeout limit
-     */
+    /** Elasticsearch request timeout limit */
     val timeout: Float? = null,
-    /**
-     * PEM encoded CA certificate
-     */
-    val ca: String? = null
+    /** PEM encoded CA certificate */
+    val ca: String? = null,
 ) : LogsinkUpdateConfig
 
-/**
- * Typed representation of the `Logsink` API schema.
- */
+/** Typed representation of the `Logsink` API schema. */
 data class Logsink(
-    /**
-     * Optional object value serialized in the `sink` wire field.
-     */
+    /** Optional object value serialized in the `sink` wire field. */
     val sink: LogsinkSchema? = null
 )
 
-/**
- * Typed representation of the `LogsinkSchema` API schema.
- */
+/** Typed representation of the `LogsinkSchema` API schema. */
 data class LogsinkSchema(
-    /**
-     * A unique identifier for Logsink
-     */
+    /** A unique identifier for Logsink */
     @com.fasterxml.jackson.annotation.JsonProperty("sink_id") val sinkId: String,
-    /**
-     * The name of the Logsink
-     */
+    /** The name of the Logsink */
     @com.fasterxml.jackson.annotation.JsonProperty("sink_name") val sinkName: String,
-    /**
-     * Optional enumerated value serialized in the `sink_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sink_type") val sinkType: LogsinkSchemaSinkTypeEnum,
-    /**
-     * Required API value serialized in the `config` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(RsyslogLogsink::class), com.fasterxml.jackson.annotation.JsonSubTypes.Type(ElasticsearchLogsink::class), com.fasterxml.jackson.annotation.JsonSubTypes.Type(OpensearchLogsink::class), com.fasterxml.jackson.annotation.JsonSubTypes.Type(DatadogLogsink::class)) val config: Any
+    /** Optional enumerated value serialized in the `sink_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sink_type")
+    val sinkType: LogsinkSchemaSinkTypeEnum,
+    /** Required API value serialized in the `config` wire field. */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(RsyslogLogsink::class),
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ElasticsearchLogsink::class),
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(OpensearchLogsink::class),
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(DatadogLogsink::class),
+    )
+    val config: Any,
 )
 
-/**
- * Typed representation of the `LogsinkUpdate` API schema.
- */
+/** Typed representation of the `LogsinkUpdate` API schema. */
 data class LogsinkUpdate(
-    /**
-     * Required API value serialized in the `config` wire field.
-     */
+    /** Required API value serialized in the `config` wire field. */
     val config: LogsinkUpdateConfig
 )
 
-/**
- * Required API value serialized in the `config` wire field.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = LogsinkUpdateConfig.Deserializer::class)
+/** Required API value serialized in the `config` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = LogsinkUpdateConfig.Deserializer::class
+)
 sealed interface LogsinkUpdateConfig {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<LogsinkUpdateConfig>() {
@@ -100,7 +81,9 @@ sealed interface LogsinkUpdateConfig {
         ): LogsinkUpdateConfig {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = LogsinkUpdateConfigOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                LogsinkUpdateConfigOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -108,87 +91,93 @@ sealed interface LogsinkUpdateConfig {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out LogsinkUpdateConfig>> = listOf(RsyslogLogsink::class.java, ElasticsearchLogsink::class.java, OpensearchLogsink::class.java, DatadogLogsink::class.java)
-            dev.octri.showcase.digitalocean.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out LogsinkUpdateConfig>> =
+                listOf(
+                    RsyslogLogsink::class.java,
+                    ElasticsearchLogsink::class.java,
+                    OpensearchLogsink::class.java,
+                    DatadogLogsink::class.java,
+                )
+            dev.octri.showcase.digitalocean.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, LogsinkUpdateConfig::class.java, "no LogsinkUpdateConfig branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        LogsinkUpdateConfig::class.java,
+                        "no LogsinkUpdateConfig branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val LogsinkUpdateConfigOwnedTypes: List<Pair<List<String>, Class<out LogsinkUpdateConfig>>> = listOf(
-    listOf("server", "port", "tls", "format", "logline", "sd", "key", "cert") to RsyslogLogsink::class.java,
-    listOf("site", "datadog_api_key") to DatadogLogsink::class.java,
-)
+internal val LogsinkUpdateConfigOwnedTypes:
+    List<Pair<List<String>, Class<out LogsinkUpdateConfig>>> =
+    listOf(
+        listOf("server", "port", "tls", "format", "logline", "sd", "key", "cert") to
+            RsyslogLogsink::class.java,
+        listOf("site", "datadog_api_key") to DatadogLogsink::class.java,
+    )
 
-/**
- * Typed representation of the `OpensearchLogsink` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `OpensearchLogsink` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class OpensearchLogsink(
-    /**
-     * Opensearch connection URL
-     */
+    /** Opensearch connection URL */
     val url: String,
-    /**
-     * Opensearch index prefix
-     */
+    /** Opensearch index prefix */
     @com.fasterxml.jackson.annotation.JsonProperty("index_prefix") val indexPrefix: String,
-    /**
-     * Maximum number of days of logs to keep
-     */
+    /** Maximum number of days of logs to keep */
     @com.fasterxml.jackson.annotation.JsonProperty("index_days_max") val indexDaysMax: Long? = null,
-    /**
-     * Opensearch request timeout limit
-     */
+    /** Opensearch request timeout limit */
     val timeout: Float? = null,
-    /**
-     * PEM encoded CA certificate
-     */
-    val ca: String? = null
+    /** PEM encoded CA certificate */
+    val ca: String? = null,
 ) : LogsinkUpdateConfig
 
-/**
- * Typed representation of the `RsyslogLogsink` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `RsyslogLogsink` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RsyslogLogsink(
-    /**
-     * DNS name or IPv4 address of the rsyslog server
-     */
+    /** DNS name or IPv4 address of the rsyslog server */
     val server: String,
-    /**
-     * The internal port on which the rsyslog server is listening
-     */
+    /** The internal port on which the rsyslog server is listening */
     val port: Long,
     /**
-     * Use TLS (as the messages are not filtered and may contain sensitive information, it is highly recommended to set this to true if the remote server supports it)
+     * Use TLS (as the messages are not filtered and may contain sensitive information, it is highly
+     * recommended to set this to true if the remote server supports it)
      */
     val tls: Boolean,
     /**
-     * Message format used by the server, this can be either rfc3164 (the old BSD style message format), `rfc5424` (current syslog message format) or custom
+     * Message format used by the server, this can be either rfc3164 (the old BSD style message
+     * format), `rfc5424` (current syslog message format) or custom
      */
     val format: RsyslogLogsinkFormatEnum,
     /**
-     * Conditional (required if `format` == `custom`). Syslog log line template for a custom format, supporting limited rsyslog style templating (using `%tag%`). Supported tags are: `HOSTNAME`, `app-name`, `msg`, `msgid`, `pri`, `procid`, `structured-data`, `timestamp` and `timestamp:::date-rfc3339`. --- **Datadog Integration Example for Non-Mongo clusters**: ``` DD_KEY <%pri%>1 %timestamp:::date-rfc3339% %HOSTNAME%.DB_NAME %app-name% - - - %msg% ``` - Replace `DD_KEY` with your…
+     * Conditional (required if `format` == `custom`). Syslog log line template for a custom format,
+     * supporting limited rsyslog style templating (using `%tag%`). Supported tags are: `HOSTNAME`,
+     * `app-name`, `msg`, `msgid`, `pri`, `procid`, `structured-data`, `timestamp` and
+     * `timestamp:::date-rfc3339`. --- **Datadog Integration Example for Non-Mongo clusters**: ```
+     * DD_KEY <%pri%>1 %timestamp:::date-rfc3339% %HOSTNAME%.DB_NAME %app-name% - - - %msg% ``` -
+     * Replace `DD_KEY` with your…
      */
     val logline: String? = null,
-    /**
-     * content of the structured data block of rfc5424 message
-     */
+    /** content of the structured data block of rfc5424 message */
     val sd: String? = null,
-    /**
-     * PEM encoded CA certificate
-     */
+    /** PEM encoded CA certificate */
     val ca: String? = null,
-    /**
-     * (PEM format) client key if the server requires client authentication
-     */
+    /** (PEM format) client key if the server requires client authentication */
     val key: String? = null,
-    /**
-     * (PEM format) client cert to use
-     */
-    val cert: String? = null
+    /** (PEM format) client cert to use */
+    val cert: String? = null,
 ) : LogsinkUpdateConfig

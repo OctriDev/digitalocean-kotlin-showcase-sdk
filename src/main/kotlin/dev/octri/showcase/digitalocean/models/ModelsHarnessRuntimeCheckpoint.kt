@@ -6,43 +6,41 @@ package dev.octri.showcase.digitalocean.models
 import java.time.OffsetDateTime
 
 /**
- * Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
+ * Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log
+ * cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields
+ * (team_id, the substrate checkpoint id, event_seq) are never serialized.
  */
 data class Checkpoint(
-    /**
-     * Public checkpoint id, stable for the checkpoint's lifetime (e.g. cp_9f2c1a4b).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint_id") val checkpointId: String? = null,
-    /**
-     * Owning session.
-     */
+    /** Public checkpoint id, stable for the checkpoint's lifetime (e.g. cp_9f2c1a4b). */
+    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint_id")
+    val checkpointId: String? = null,
+    /** Owning session. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String? = null,
     /**
-     * Capture lifecycle: PENDING -> READY | FAILED. Only READY checkpoints are forkable/restorable. CreateCheckpoint blocks until terminal, so PENDING is only ever observable via list/get while a capture is in flight.
+     * Capture lifecycle: PENDING -> READY | FAILED. Only READY checkpoints are forkable/restorable.
+     * CreateCheckpoint blocks until terminal, so PENDING is only ever observable via list/get while
+     * a capture is in flight.
      */
     val status: CheckpointStatus? = null,
     /**
-     * How the checkpoint came to exist: explicit - requested via CreateCheckpoint; implicit - minted automatically by the platform (on run completion, or when ForkSession is called without from_checkpoint_id).
+     * How the checkpoint came to exist: explicit - requested via CreateCheckpoint; implicit -
+     * minted automatically by the platform (on run completion, or when ForkSession is called
+     * without from_checkpoint_id).
      */
     val kind: CheckpointKind? = null,
-    /**
-     * Optional user-supplied label from CreateCheckpoint; empty when omitted.
-     */
+    /** Optional user-supplied label from CreateCheckpoint; empty when omitted. */
     val label: String? = null,
     /**
-     * Event-log cursor (ULID) of the last event included in the cut; forks resume event replay from here.
+     * Event-log cursor (ULID) of the last event included in the cut; forks resume event replay from
+     * here.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-    /**
-     * Size of the captured machine state. 0 until the checkpoint reaches READY.
-     */
+    /** Size of the captured machine state. 0 until the checkpoint reaches READY. */
     @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Client-safe failure detail; set only when status is FAILED.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_message") val errorMessage: String? = null
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Client-safe failure detail; set only when status is FAILED. */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_message")
+    val errorMessage: String? = null,
 )

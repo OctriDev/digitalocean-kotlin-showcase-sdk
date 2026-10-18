@@ -5,620 +5,637 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AllDropletBackupPolicies` API schema.
- */
+/** Typed representation of the `AllDropletBackupPolicies` API schema. */
 data class AllDropletBackupPolicies(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     /**
-     * A map where the keys are the Droplet IDs and the values are objects containing the backup policy information for each Droplet.
+     * A map where the keys are the Droplet IDs and the values are objects containing the backup
+     * policy information for each Droplet.
      */
     val policies: Map<String, DropletBackupPolicyRecord>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllDropletBackups` API schema.
- */
+/** Typed representation of the `AllDropletBackups` API schema. */
 data class AllDropletBackups(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val backups: List<DropletSnapshot>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllDroplets` API schema.
- */
+/** Typed representation of the `AllDroplets` API schema. */
 data class AllDroplets(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val droplets: List<Droplet>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllDropletSnapshots` API schema.
- */
+/** Typed representation of the `AllDropletSnapshots` API schema. */
 data class AllDropletSnapshots(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val snapshots: List<DropletSnapshot>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllFirewalls` API schema.
- */
+/** Typed representation of the `AllFirewalls` API schema. */
 data class AllFirewalls(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val firewalls: List<Firewall>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllKernels` API schema.
- */
+/** Typed representation of the `AllKernels` API schema. */
 data class AllKernels(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val kernels: List<Kernel?>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * An objects containing information about a resource associated with a Droplet.
- */
+/** An objects containing information about a resource associated with a Droplet. */
 data class AssociatedResource(
-    /**
-     * The unique identifier for the resource associated with the Droplet.
-     */
+    /** The unique identifier for the resource associated with the Droplet. */
     val id: String? = null,
-    /**
-     * The name of the resource associated with the Droplet.
-     */
+    /** The name of the resource associated with the Droplet. */
     val name: String? = null,
     /**
-     * The cost of the resource in USD per month if the resource is retained after the Droplet is destroyed.
+     * The cost of the resource in USD per month if the resource is retained after the Droplet is
+     * destroyed.
      */
-    val cost: String? = null
+    val cost: String? = null,
 )
 
-/**
- * Typed representation of the `AssociatedResourcesList` API schema.
- */
+/** Typed representation of the `AssociatedResourcesList` API schema. */
 data class AssociatedResourcesList(
-    /**
-     * Reserved IPs that are associated with this Droplet. Requires `reserved_ip:read` scope.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips") val reservedIps: List<AssociatedResource>? = null,
-    /**
-     * Floating IPs that are associated with this Droplet. Requires `reserved_ip:read` scope.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips") val floatingIps: List<AssociatedResource>? = null,
-    /**
-     * Snapshots that are associated with this Droplet. Requires `image:read` scope.
-     */
+    /** Reserved IPs that are associated with this Droplet. Requires `reserved_ip:read` scope. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips")
+    val reservedIps: List<AssociatedResource>? = null,
+    /** Floating IPs that are associated with this Droplet. Requires `reserved_ip:read` scope. */
+    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips")
+    val floatingIps: List<AssociatedResource>? = null,
+    /** Snapshots that are associated with this Droplet. Requires `image:read` scope. */
     val snapshots: List<AssociatedResource>? = null,
-    /**
-     * Volumes that are associated with this Droplet. Requires `block_storage:read` scope.
-     */
+    /** Volumes that are associated with this Droplet. Requires `block_storage:read` scope. */
     val volumes: List<AssociatedResource>? = null,
     /**
-     * Volume Snapshots that are associated with this Droplet. Requires `block_storage_snapshot:read` scope.
+     * Volume Snapshots that are associated with this Droplet. Requires
+     * `block_storage_snapshot:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots") val volumeSnapshots: List<AssociatedResource>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots")
+    val volumeSnapshots: List<AssociatedResource>? = null,
 )
 
 /**
- * An object containing additional information about resource related to a Droplet requested to be destroyed.
+ * An object containing additional information about resource related to a Droplet requested to be
+ * destroyed.
  */
 data class AssociatedResourceStatusResources(
-    /**
-     * Optional array value serialized in the `reserved_ips` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips") val reservedIps: List<DestroyedAssociatedResource>? = null,
-    /**
-     * Optional array value serialized in the `floating_ips` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips") val floatingIps: List<DestroyedAssociatedResource>? = null,
-    /**
-     * Optional array value serialized in the `snapshots` wire field.
-     */
+    /** Optional array value serialized in the `reserved_ips` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips")
+    val reservedIps: List<DestroyedAssociatedResource>? = null,
+    /** Optional array value serialized in the `floating_ips` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips")
+    val floatingIps: List<DestroyedAssociatedResource>? = null,
+    /** Optional array value serialized in the `snapshots` wire field. */
     val snapshots: List<DestroyedAssociatedResource>? = null,
-    /**
-     * Optional array value serialized in the `volumes` wire field.
-     */
+    /** Optional array value serialized in the `volumes` wire field. */
     val volumes: List<DestroyedAssociatedResource>? = null,
-    /**
-     * Optional array value serialized in the `volume_snapshots` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots") val volumeSnapshots: List<DestroyedAssociatedResource>? = null
+    /** Optional array value serialized in the `volume_snapshots` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots")
+    val volumeSnapshots: List<DestroyedAssociatedResource>? = null,
 )
 
-/**
- * An objects containing information about a resources scheduled for deletion.
- */
+/** An objects containing information about a resources scheduled for deletion. */
 data class AssociatedResourceStatus(
-    /**
-     * An object containing information about a resource scheduled for deletion.
-     */
+    /** An object containing information about a resource scheduled for deletion. */
     val droplet: DestroyedAssociatedResource? = null,
     /**
-     * An object containing additional information about resource related to a Droplet requested to be destroyed.
+     * An object containing additional information about resource related to a Droplet requested to
+     * be destroyed.
      */
     val resources: AssociatedResourceStatusResources? = null,
     /**
-     * A time value given in ISO8601 combined date and time format indicating when the requested action was completed.
+     * A time value given in ISO8601 combined date and time format indicating when the requested
+     * action was completed.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: OffsetDateTime? = null,
-    /**
-     * A count of the associated resources that failed to be destroyed, if any.
-     */
-    val failures: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at")
+    val completedAt: OffsetDateTime? = null,
+    /** A count of the associated resources that failed to be destroyed, if any. */
+    val failures: Long? = null,
 )
 
-/**
- * An object containing information about a resource scheduled for deletion.
- */
+/** An object containing information about a resource scheduled for deletion. */
 data class DestroyedAssociatedResource(
-    /**
-     * The unique identifier for the resource scheduled for deletion.
-     */
+    /** The unique identifier for the resource scheduled for deletion. */
     val id: String? = null,
-    /**
-     * The name of the resource scheduled for deletion.
-     */
+    /** The name of the resource scheduled for deletion. */
     val name: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format indicating when the resource was destroyed if the request was successful.
+     * A time value given in ISO8601 combined date and time format indicating when the resource was
+     * destroyed if the request was successful.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("destroyed_at") val destroyedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("destroyed_at")
+    val destroyedAt: OffsetDateTime? = null,
     /**
-     * A string indicating that the resource was not successfully destroyed and providing additional information.
+     * A string indicating that the resource was not successfully destroyed and providing additional
+     * information.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_message") val errorMessage: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("error_message")
+    val errorMessage: String? = null,
 )
 
-/**
- * Typed representation of the `DropletBackupPolicyRecord` API schema.
- */
+/** Typed representation of the `DropletBackupPolicyRecord` API schema. */
 data class DropletBackupPolicyRecord(
-    /**
-     * The unique identifier for the Droplet.
-     */
+    /** The unique identifier for the Droplet. */
     @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long? = null,
+    /** A boolean value indicating whether backups are enabled for the Droplet. */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_enabled")
+    val backupEnabled: Boolean? = null,
+    /** An object specifying the backup policy for the Droplet. */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
+    val backupPolicy: DropletBackupPolicy? = null,
     /**
-     * A boolean value indicating whether backups are enabled for the Droplet.
+     * An object containing keys with the start and end times of the window during which the backup
+     * will occur.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_enabled") val backupEnabled: Boolean? = null,
-    /**
-     * An object specifying the backup policy for the Droplet.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicy? = null,
-    /**
-     * An object containing keys with the start and end times of the window during which the backup will occur.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_backup_window") val nextBackupWindow: DropletNextBackupWindow? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("next_backup_window")
+    val nextBackupWindow: DropletNextBackupWindow? = null,
 )
 
-/**
- * Typed representation of the `DropletBackupPolicyResponse` API schema.
- */
+/** Typed representation of the `DropletBackupPolicyResponse` API schema. */
 data class DropletBackupPolicyResponse(
-    /**
-     * Optional object value serialized in the `policy` wire field.
-     */
+    /** Optional object value serialized in the `policy` wire field. */
     val policy: DropletBackupPolicyRecord? = null
 )
 
-/**
- * Typed representation of the `DropletCreate` API schema.
- */
+/** Typed representation of the `DropletCreate` API schema. */
 data class DropletCreate(
-    /**
-     * The slug identifier for the size that you wish to select for this Droplet.
-     */
+    /** The slug identifier for the size that you wish to select for this Droplet. */
     val size: String,
     /**
-     * The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+     * The image ID of a public or private image or the slug identifier for a public image. This
+     * image will be the base image for your Droplet. Requires `image:read` scope.
      */
     val image: Any,
     /**
-     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific
+     * datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet
+     * in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted
+     * from the create request completely, the Droplet may deploy in any region.
      */
     val region: String? = null,
     /**
-     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the
+     * Droplet's root account upon creation. You must add the keys to your team before they can be
+     * embedded on a Droplet. Requires `ssh_key:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("ssh_keys") val sshKeys: List<Any>? = null,
-    /**
-     * A boolean indicating whether automated backups should be enabled for the Droplet.
-     */
+    /** A boolean indicating whether automated backups should be enabled for the Droplet. */
     val backups: Boolean? = null,
     /**
-     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`,
+     * the backup plan will default to daily.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicy? = null,
-    /**
-     * A boolean indicating whether to enable IPv6 on the Droplet.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
+    val backupPolicy: DropletBackupPolicy? = null,
+    /** A boolean indicating whether to enable IPv6 on the Droplet. */
     val ipv6: Boolean? = null,
-    /**
-     * A boolean indicating whether to install the DigitalOcean agent for monitoring.
-     */
+    /** A boolean indicating whether to install the DigitalOcean agent for monitoring. */
     val monitoring: Boolean? = null,
     /**
-     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names
+     * can either be existing or new tags. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
     /**
-     * A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+     * A string containing 'user data' which may be used to configure the Droplet on first boot,
+     * often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB
+     * in size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_data") val userData: String? = null,
     /**
-     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the
+     * Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default
+     * VPC for the region.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_networking") val privateNetworking: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_networking")
+    val privateNetworking: Boolean? = null,
     /**
-     * An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+     * An array of IDs for block storage volumes that will be attached to the Droplet once created.
+     * The volumes must not already be attached to an existing Droplet. Requires
+     * `block_storage:read` scpoe.
      */
     val volumes: List<String>? = null,
     /**
-     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded,
+     * the Droplet will be assigned to your account's default VPC for the region. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be
+     * assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+     * A boolean indicating whether to install the DigitalOcean agent used for providing access to
+     * the Droplet web console in the control panel. By default, the agent is installed on new
+     * Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from
+     * being installed, set to `false`. To make installation errors fatal, explicitly set it to
+     * `true`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent") val withDropletAgent: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent")
+    val withDropletAgent: Boolean? = null,
     /**
-     * An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+     * An optional boolean indicating whether this Droplet should be created with public networking
+     * or not. By default, all Droplets are created with public networking available. If explicitly
+     * set to `false`, only private networking will be enabled, and public networking will be
+     * disabled; currently this means that it will not have any public static or Reserved IPv4 or
+     * IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also
+     * be `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_networking") val publicNetworking: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("public_networking")
+    val publicNetworking: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DropletCreateRequest` API schema.
- */
+/** Typed representation of the `DropletCreateRequest` API schema. */
 data class DropletCreateRequest(
-    /**
-     * The slug identifier for the size that you wish to select for this Droplet.
-     */
+    /** The slug identifier for the size that you wish to select for this Droplet. */
     val size: String,
     /**
-     * The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+     * The image ID of a public or private image or the slug identifier for a public image. This
+     * image will be the base image for your Droplet. Requires `image:read` scope.
      */
     val image: Any,
     /**
-     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific
+     * datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet
+     * in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted
+     * from the create request completely, the Droplet may deploy in any region.
      */
     val region: String? = null,
     /**
-     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the
+     * Droplet's root account upon creation. You must add the keys to your team before they can be
+     * embedded on a Droplet. Requires `ssh_key:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("ssh_keys") val sshKeys: List<Any>? = null,
-    /**
-     * A boolean indicating whether automated backups should be enabled for the Droplet.
-     */
+    /** A boolean indicating whether automated backups should be enabled for the Droplet. */
     val backups: Boolean? = null,
     /**
-     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`,
+     * the backup plan will default to daily.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicyRequest? = null,
-    /**
-     * A boolean indicating whether to enable IPv6 on the Droplet.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
+    val backupPolicy: DropletBackupPolicyRequest? = null,
+    /** A boolean indicating whether to enable IPv6 on the Droplet. */
     val ipv6: Boolean? = null,
-    /**
-     * A boolean indicating whether to install the DigitalOcean agent for monitoring.
-     */
+    /** A boolean indicating whether to install the DigitalOcean agent for monitoring. */
     val monitoring: Boolean? = null,
     /**
-     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names
+     * can either be existing or new tags. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
     /**
-     * A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+     * A string containing 'user data' which may be used to configure the Droplet on first boot,
+     * often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB
+     * in size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_data") val userData: String? = null,
     /**
-     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the
+     * Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default
+     * VPC for the region.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_networking") val privateNetworking: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_networking")
+    val privateNetworking: Boolean? = null,
     /**
-     * An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+     * An array of IDs for block storage volumes that will be attached to the Droplet once created.
+     * The volumes must not already be attached to an existing Droplet. Requires
+     * `block_storage:read` scpoe.
      */
     val volumes: List<String>? = null,
     /**
-     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded,
+     * the Droplet will be assigned to your account's default VPC for the region. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be
+     * assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+     * A boolean indicating whether to install the DigitalOcean agent used for providing access to
+     * the Droplet web console in the control panel. By default, the agent is installed on new
+     * Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from
+     * being installed, set to `false`. To make installation errors fatal, explicitly set it to
+     * `true`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent") val withDropletAgent: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent")
+    val withDropletAgent: Boolean? = null,
     /**
-     * An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+     * An optional boolean indicating whether this Droplet should be created with public networking
+     * or not. By default, all Droplets are created with public networking available. If explicitly
+     * set to `false`, only private networking will be enabled, and public networking will be
+     * disabled; currently this means that it will not have any public static or Reserved IPv4 or
+     * IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also
+     * be `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_networking") val publicNetworking: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("public_networking")
+    val publicNetworking: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DropletMultiCreate` API schema.
- */
+/** Typed representation of the `DropletMultiCreate` API schema. */
 data class DropletMultiCreate(
     /**
-     * An array of human human-readable strings you wish to use when displaying the Droplet name. Each name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. Each name set during creation will also determine the hostname for the Droplet in its internal configuration.
+     * An array of human human-readable strings you wish to use when displaying the Droplet name.
+     * Each name, if set to a domain name managed in the DigitalOcean DNS management system, will
+     * configure a PTR record for the Droplet. Each name set during creation will also determine the
+     * hostname for the Droplet in its internal configuration.
      */
     val names: List<String>,
-    /**
-     * The slug identifier for the size that you wish to select for this Droplet.
-     */
+    /** The slug identifier for the size that you wish to select for this Droplet. */
     val size: String,
     /**
-     * The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+     * The image ID of a public or private image or the slug identifier for a public image. This
+     * image will be the base image for your Droplet. Requires `image:read` scope.
      */
     val image: Any,
     /**
-     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific
+     * datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet
+     * in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted
+     * from the create request completely, the Droplet may deploy in any region.
      */
     val region: String? = null,
     /**
-     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the
+     * Droplet's root account upon creation. You must add the keys to your team before they can be
+     * embedded on a Droplet. Requires `ssh_key:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("ssh_keys") val sshKeys: List<Any>? = null,
-    /**
-     * A boolean indicating whether automated backups should be enabled for the Droplet.
-     */
+    /** A boolean indicating whether automated backups should be enabled for the Droplet. */
     val backups: Boolean? = null,
     /**
-     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`,
+     * the backup plan will default to daily.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicy? = null,
-    /**
-     * A boolean indicating whether to enable IPv6 on the Droplet.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
+    val backupPolicy: DropletBackupPolicy? = null,
+    /** A boolean indicating whether to enable IPv6 on the Droplet. */
     val ipv6: Boolean? = null,
-    /**
-     * A boolean indicating whether to install the DigitalOcean agent for monitoring.
-     */
+    /** A boolean indicating whether to install the DigitalOcean agent for monitoring. */
     val monitoring: Boolean? = null,
     /**
-     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names
+     * can either be existing or new tags. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
     /**
-     * A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+     * A string containing 'user data' which may be used to configure the Droplet on first boot,
+     * often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB
+     * in size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_data") val userData: String? = null,
     /**
-     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the
+     * Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default
+     * VPC for the region.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_networking") val privateNetworking: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_networking")
+    val privateNetworking: Boolean? = null,
     /**
-     * An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+     * An array of IDs for block storage volumes that will be attached to the Droplet once created.
+     * The volumes must not already be attached to an existing Droplet. Requires
+     * `block_storage:read` scpoe.
      */
     val volumes: List<String>? = null,
     /**
-     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded,
+     * the Droplet will be assigned to your account's default VPC for the region. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be
+     * assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+     * A boolean indicating whether to install the DigitalOcean agent used for providing access to
+     * the Droplet web console in the control panel. By default, the agent is installed on new
+     * Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from
+     * being installed, set to `false`. To make installation errors fatal, explicitly set it to
+     * `true`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent") val withDropletAgent: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent")
+    val withDropletAgent: Boolean? = null,
     /**
-     * An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+     * An optional boolean indicating whether this Droplet should be created with public networking
+     * or not. By default, all Droplets are created with public networking available. If explicitly
+     * set to `false`, only private networking will be enabled, and public networking will be
+     * disabled; currently this means that it will not have any public static or Reserved IPv4 or
+     * IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also
+     * be `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_networking") val publicNetworking: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("public_networking")
+    val publicNetworking: Boolean? = null,
 )
 
-data class DropletsCreateResponseVariant0Links(
-    val actions: List<ActionLink>? = null
-)
+data class DropletsCreateResponseVariant0Links(val actions: List<ActionLink>? = null)
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DropletsCreateResponseVariant0(
     val droplet: Droplet,
-    val links: DropletsCreateResponseVariant0Links
+    val links: DropletsCreateResponseVariant0Links,
 ) : DropletsCreateResponse
 
-data class DropletsCreateResponseVariant1Links(
-    val actions: List<ActionLink>? = null
-)
+data class DropletsCreateResponseVariant1Links(val actions: List<ActionLink>? = null)
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DropletsCreateResponseVariant1(
     val droplets: List<Droplet>,
-    val links: DropletsCreateResponseVariant1Links
+    val links: DropletsCreateResponseVariant1Links,
 ) : DropletsCreateResponse
 
-/**
- * Typed representation of the `DropletsCreateResponse` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
+/** Typed representation of the `DropletsCreateResponse` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DropletsCreateResponseVariant0::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DropletsCreateResponseVariant1::class)
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = DropletsCreateResponseVariant0::class
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = DropletsCreateResponseVariant1::class
+    ),
 )
 sealed interface DropletsCreateResponse
 
-/**
- * Typed representation of the `DropletSingleCreateRequest` API schema.
- */
+/** Typed representation of the `DropletSingleCreateRequest` API schema. */
 data class DropletSingleCreateRequest(
     /**
-     * The human-readable string you wish to use when displaying the Droplet name. The name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. The name set during creation will also determine the hostname for the Droplet in its internal configuration.
+     * The human-readable string you wish to use when displaying the Droplet name. The name, if set
+     * to a domain name managed in the DigitalOcean DNS management system, will configure a PTR
+     * record for the Droplet. The name set during creation will also determine the hostname for the
+     * Droplet in its internal configuration.
      */
     val name: String,
-    /**
-     * The slug identifier for the size that you wish to select for this Droplet.
-     */
+    /** The slug identifier for the size that you wish to select for this Droplet. */
     val size: String,
     /**
-     * The image ID of a public or private image or the slug identifier for a public image. This image will be the base image for your Droplet. Requires `image:read` scope.
+     * The image ID of a public or private image or the slug identifier for a public image. This
+     * image will be the base image for your Droplet. Requires `image:read` scope.
      */
     val image: Any,
     /**
-     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted from the create request completely, the Droplet may deploy in any region.
+     * The slug identifier for the region that you wish to deploy the Droplet in. If the specific
+     * datacenter is not not important, a slug prefix (e.g. `nyc`) can be used to deploy the Droplet
+     * in any of the that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is omitted
+     * from the create request completely, the Droplet may deploy in any region.
      */
     val region: String? = null,
     /**
-     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the Droplet's root account upon creation. You must add the keys to your team before they can be embedded on a Droplet. Requires `ssh_key:read` scope.
+     * An array containing the IDs or fingerprints of the SSH keys that you wish to embed in the
+     * Droplet's root account upon creation. You must add the keys to your team before they can be
+     * embedded on a Droplet. Requires `ssh_key:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("ssh_keys") val sshKeys: List<Any>? = null,
-    /**
-     * A boolean indicating whether automated backups should be enabled for the Droplet.
-     */
+    /** A boolean indicating whether automated backups should be enabled for the Droplet. */
     val backups: Boolean? = null,
     /**
-     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`, the backup plan will default to daily.
+     * An object specifying the backup policy for the Droplet. If omitted and `backups` is `true`,
+     * the backup plan will default to daily.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicyRequest? = null,
-    /**
-     * A boolean indicating whether to enable IPv6 on the Droplet.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
+    val backupPolicy: DropletBackupPolicyRequest? = null,
+    /** A boolean indicating whether to enable IPv6 on the Droplet. */
     val ipv6: Boolean? = null,
-    /**
-     * A boolean indicating whether to install the DigitalOcean agent for monitoring.
-     */
+    /** A boolean indicating whether to install the DigitalOcean agent for monitoring. */
     val monitoring: Boolean? = null,
     /**
-     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to apply to the Droplet after it is created. Tag names
+     * can either be existing or new tags. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
     /**
-     * A string containing 'user data' which may be used to configure the Droplet on first boot, often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB in size.
+     * A string containing 'user data' which may be used to configure the Droplet on first boot,
+     * often a 'cloud-config' file or Bash script. It must be plain text and may not exceed 64 KiB
+     * in size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_data") val userData: String? = null,
     /**
-     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default VPC for the region.
+     * This parameter has been deprecated. Use `vpc_uuid` instead to specify a VPC network for the
+     * Droplet. If no `vpc_uuid` is provided, the Droplet will be placed in your account's default
+     * VPC for the region.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_networking") val privateNetworking: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_networking")
+    val privateNetworking: Boolean? = null,
     /**
-     * An array of IDs for block storage volumes that will be attached to the Droplet once created. The volumes must not already be attached to an existing Droplet. Requires `block_storage:read` scpoe.
+     * An array of IDs for block storage volumes that will be attached to the Droplet once created.
+     * The volumes must not already be attached to an existing Droplet. Requires
+     * `block_storage:read` scpoe.
      */
     val volumes: List<String>? = null,
     /**
-     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded,
+     * the Droplet will be assigned to your account's default VPC for the region. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires `vpc:read` scope.
+     * An optional string specifying the UUID of the VPC subnet to which the Droplet will be
+     * assigned. If excluded, the Droplet will be assigned to a default subnet of the VPC. Requires
+     * `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+     * A boolean indicating whether to install the DigitalOcean agent used for providing access to
+     * the Droplet web console in the control panel. By default, the agent is installed on new
+     * Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from
+     * being installed, set to `false`. To make installation errors fatal, explicitly set it to
+     * `true`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent") val withDropletAgent: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent")
+    val withDropletAgent: Boolean? = null,
     /**
-     * An optional boolean indicating whether this Droplet should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
+     * An optional boolean indicating whether this Droplet should be created with public networking
+     * or not. By default, all Droplets are created with public networking available. If explicitly
+     * set to `false`, only private networking will be enabled, and public networking will be
+     * disabled; currently this means that it will not have any public static or Reserved IPv4 or
+     * IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also
+     * be `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_networking") val publicNetworking: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("public_networking")
+    val publicNetworking: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DropletSnapshot` API schema.
- */
+/** Typed representation of the `DropletSnapshot` API schema. */
 data class DropletSnapshot(
-    /**
-     * The unique identifier for the snapshot or backup.
-     */
+    /** The unique identifier for the snapshot or backup. */
     val id: Long,
-    /**
-     * A human-readable name for the snapshot.
-     */
+    /** A human-readable name for the snapshot. */
     val name: String,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the snapshot was created.
+     * A time value given in ISO8601 combined date and time format that represents when the snapshot
+     * was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
-     * An array of the regions that the snapshot is available in. The regions are represented by their identifying slug values.
+     * An array of the regions that the snapshot is available in. The regions are represented by
+     * their identifying slug values.
      */
     val regions: List<String>,
-    /**
-     * The minimum size in GB required for a volume or Droplet to use this snapshot.
-     */
+    /** The minimum size in GB required for a volume or Droplet to use this snapshot. */
     @com.fasterxml.jackson.annotation.JsonProperty("min_disk_size") val minDiskSize: Long,
-    /**
-     * The billable size of the snapshot in gigabytes.
-     */
+    /** The billable size of the snapshot in gigabytes. */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Float,
     /**
-     * Describes the kind of image. It may be one of `snapshot` or `backup`. This specifies whether an image is a user-generated Droplet snapshot or automatically created Droplet backup.
+     * Describes the kind of image. It may be one of `snapshot` or `backup`. This specifies whether
+     * an image is a user-generated Droplet snapshot or automatically created Droplet backup.
      */
-    val type: DropletSnapshotVariant2TypeEnum
+    val type: DropletSnapshotVariant2TypeEnum,
 )
 
-/**
- * Typed representation of the `DropletsSupportedBackupPolicies` API schema.
- */
+/** Typed representation of the `DropletsSupportedBackupPolicies` API schema. */
 data class DropletsSupportedBackupPolicies(
-    /**
-     * Optional array value serialized in the `supported_policies` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("supported_policies") val supportedPolicies: List<SupportedDropletBackupPolicy>? = null
+    /** Optional array value serialized in the `supported_policies` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("supported_policies")
+    val supportedPolicies: List<SupportedDropletBackupPolicy>? = null
 )
 
-/**
- * Typed representation of the `ExistingDroplet` API schema.
- */
+/** Typed representation of the `ExistingDroplet` API schema. */
 data class ExistingDroplet(
-    /**
-     * Optional object value serialized in the `droplet` wire field.
-     */
+    /** Optional object value serialized in the `droplet` wire field. */
     val droplet: Droplet? = null
 )
 
-/**
- * Typed representation of the `NeighborDroplets` API schema.
- */
-data class NeighborDroplets(
-    val droplets: List<Droplet>? = null
-)
+/** Typed representation of the `NeighborDroplets` API schema. */
+data class NeighborDroplets(val droplets: List<Droplet>? = null)

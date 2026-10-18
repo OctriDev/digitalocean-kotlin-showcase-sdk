@@ -5,144 +5,97 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `RepositoryBlob` API schema.
- */
+/** Typed representation of the `RepositoryBlob` API schema. */
 data class RepositoryBlob(
-    /**
-     * The digest of the blob
-     */
+    /** The digest of the blob */
     val digest: String? = null,
-    /**
-     * The compressed size of the blob in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes") val compressedSizeBytes: Long? = null
+    /** The compressed size of the blob in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes")
+    val compressedSizeBytes: Long? = null,
 )
 
-/**
- * Typed representation of the `RepositoryManifest` API schema.
- */
+/** Typed representation of the `RepositoryManifest` API schema. */
 data class RepositoryManifest(
-    /**
-     * The name of the container registry.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("registry_name") val registryName: String? = null,
-    /**
-     * The name of the repository.
-     */
+    /** The name of the container registry. */
+    @com.fasterxml.jackson.annotation.JsonProperty("registry_name")
+    val registryName: String? = null,
+    /** The name of the repository. */
     val repository: String? = null,
-    /**
-     * The manifest digest
-     */
+    /** The manifest digest */
     val digest: String? = null,
+    /** The compressed size of the manifest in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes")
+    val compressedSizeBytes: Long? = null,
     /**
-     * The compressed size of the manifest in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes") val compressedSizeBytes: Long? = null,
-    /**
-     * The uncompressed size of the manifest in bytes (this size is calculated asynchronously so it may not be immediately available).
+     * The uncompressed size of the manifest in bytes (this size is calculated asynchronously so it
+     * may not be immediately available).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long? = null,
-    /**
-     * The time the manifest was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * All tags associated with this manifest
-     */
+    /** The time the manifest was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** All tags associated with this manifest */
     val tags: List<String>? = null,
-    /**
-     * All blobs associated with this manifest
-     */
-    val blobs: List<RepositoryBlob>? = null
+    /** All blobs associated with this manifest */
+    val blobs: List<RepositoryBlob>? = null,
 )
 
-/**
- * Typed representation of the `RepositoryManifests` API schema.
- */
+/** Typed representation of the `RepositoryManifests` API schema. */
 data class RepositoryManifests(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val manifests: List<RepositoryManifest>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `RepositoryTag` API schema.
- */
+/** Typed representation of the `RepositoryTag` API schema. */
 data class RepositoryTag(
-    /**
-     * The name of the container registry.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("registry_name") val registryName: String? = null,
-    /**
-     * The name of the repository.
-     */
+    /** The name of the container registry. */
+    @com.fasterxml.jackson.annotation.JsonProperty("registry_name")
+    val registryName: String? = null,
+    /** The name of the repository. */
     val repository: String? = null,
-    /**
-     * The name of the tag.
-     */
+    /** The name of the tag. */
     val tag: String? = null,
+    /** The digest of the manifest associated with the tag. */
+    @com.fasterxml.jackson.annotation.JsonProperty("manifest_digest")
+    val manifestDigest: String? = null,
+    /** The compressed size of the tag in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes")
+    val compressedSizeBytes: Long? = null,
     /**
-     * The digest of the manifest associated with the tag.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("manifest_digest") val manifestDigest: String? = null,
-    /**
-     * The compressed size of the tag in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compressed_size_bytes") val compressedSizeBytes: Long? = null,
-    /**
-     * The uncompressed size of the tag in bytes (this size is calculated asynchronously so it may not be immediately available).
+     * The uncompressed size of the tag in bytes (this size is calculated asynchronously so it may
+     * not be immediately available).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long? = null,
-    /**
-     * The time the tag was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
+    /** The time the tag was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `RepositoryTags` API schema.
- */
+/** Typed representation of the `RepositoryTags` API schema. */
 data class RepositoryTags(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val tags: List<RepositoryTag>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `RepositoryV2` API schema.
- */
+/** Typed representation of the `RepositoryV2` API schema. */
 data class RepositoryV2(
-    /**
-     * The name of the container registry.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("registry_name") val registryName: String? = null,
-    /**
-     * The name of the repository.
-     */
+    /** The name of the container registry. */
+    @com.fasterxml.jackson.annotation.JsonProperty("registry_name")
+    val registryName: String? = null,
+    /** The name of the repository. */
     val name: String? = null,
-    /**
-     * Optional object value serialized in the `latest_manifest` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("latest_manifest") val latestManifest: RepositoryManifest? = null,
-    /**
-     * The number of tags in the repository.
-     */
+    /** Optional object value serialized in the `latest_manifest` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("latest_manifest")
+    val latestManifest: RepositoryManifest? = null,
+    /** The number of tags in the repository. */
     @com.fasterxml.jackson.annotation.JsonProperty("tag_count") val tagCount: Long? = null,
-    /**
-     * The number of manifests in the repository.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("manifest_count") val manifestCount: Long? = null
+    /** The number of manifests in the repository. */
+    @com.fasterxml.jackson.annotation.JsonProperty("manifest_count")
+    val manifestCount: Long? = null,
 )

@@ -3,62 +3,105 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class AddOnsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To fetch details of all available Add-On Applications, send a GET request to `/v2/add-ons/apps`.
+     * To fetch details of all available Add-On Applications, send a GET request to
+     * `/v2/add-ons/apps`.
      */
     fun getApp(options: RequestOptions? = null): AddonsGetApp {
         return dev.octri.showcase.digitalocean.methods.AddOns.addonsGetApp(clientConfig, options)
     }
 
     /**
-     * To find out what metadata is required for a specific add-on, send a GET request to `/v2/add-ons/apps/{app_slug}/metadata`. Metadata varies by application.
+     * To find out what metadata is required for a specific add-on, send a GET request to
+     * `/v2/add-ons/apps/{app_slug}/metadata`. Metadata varies by application.
      */
     fun getAppMetadata(appSlug: String, options: RequestOptions? = null): AddonsGetAppMetadata {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsGetAppMetadata(clientConfig, appSlug, options)
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsGetAppMetadata(
+            clientConfig,
+            appSlug,
+            options,
+        )
     }
 
-    /**
-     * To fetch all Add-On Resources under your team, send a GET request to `/v2/add-ons/saas`.
-     */
+    /** To fetch all Add-On Resources under your team, send a GET request to `/v2/add-ons/saas`. */
     fun list(options: RequestOptions? = null): AddonsList {
         return dev.octri.showcase.digitalocean.methods.AddOns.addonsList(clientConfig, options)
     }
 
     /**
-     * To create an add-on resource, send a POST request to `/v2/add-ons/saas` with required parameters. Some add-ons require additional metadata to be provided in the request body. To find out what metadata is required for a specific add-on, send a GET request to `/v2/add-ons/apps/{app_slug}/metadata`.
+     * To create an add-on resource, send a POST request to `/v2/add-ons/saas` with required
+     * parameters. Some add-ons require additional metadata to be provided in the request body. To
+     * find out what metadata is required for a specific add-on, send a GET request to
+     * `/v2/add-ons/apps/{app_slug}/metadata`.
      */
-    fun create(request: dev.octri.showcase.digitalocean.methods.AddOns.AddonsCreateRequest, options: RequestOptions? = null): AddonsCreate {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsCreate(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.digitalocean.methods.AddOns.AddonsCreateRequest,
+        options: RequestOptions? = null,
+    ): AddonsCreate {
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsCreate(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * To fetch details of a specific Add-On Resource, send a GET request to `/v2/add-ons/saas/{resource_uuid}`. Replace `{resource_uuid}` with the UUID of the resource you want to retrieve.
+     * To fetch details of a specific Add-On Resource, send a GET request to
+     * `/v2/add-ons/saas/{resource_uuid}`. Replace `{resource_uuid}` with the UUID of the resource
+     * you want to retrieve.
      */
     fun get(resourceUuid: String, options: RequestOptions? = null): AddonsGet {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsGet(clientConfig, resourceUuid, options)
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsGet(
+            clientConfig,
+            resourceUuid,
+            options,
+        )
     }
 
     /**
-     * To delete an add-on resource, send a DELETE request to `/v2/add-ons/saas/{resource_uuid}` with the UUID of the resource to delete. You cannot retrieve the resource after it has been deleted. The response indicates a request was sent to the 3rd party add-on provider to delete the resource. You will no longer be billed for this resource.
+     * To delete an add-on resource, send a DELETE request to `/v2/add-ons/saas/{resource_uuid}`
+     * with the UUID of the resource to delete. You cannot retrieve the resource after it has been
+     * deleted. The response indicates a request was sent to the 3rd party add-on provider to delete
+     * the resource. You will no longer be billed for this resource.
      */
     fun delete(resourceUuid: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsDelete(clientConfig, resourceUuid, options)
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsDelete(
+            clientConfig,
+            resourceUuid,
+            options,
+        )
     }
 
     /**
-     * To change the name of an Add-On Resource, send a PATCH request to `/v2/add-ons/saas/{resource_uuid}`. Replace `{resource_uuid}` with the UUID of the resource for which you want to change the name.
+     * To change the name of an Add-On Resource, send a PATCH request to
+     * `/v2/add-ons/saas/{resource_uuid}`. Replace `{resource_uuid}` with the UUID of the resource
+     * for which you want to change the name.
      */
     fun patch(resourceUuid: String, name: String, options: RequestOptions? = null): AddonsUpdate {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsPatch(clientConfig, resourceUuid, name, options)
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsPatch(
+            clientConfig,
+            resourceUuid,
+            name,
+            options,
+        )
     }
 
     /**
-     * To change the plan associated with an Add-On Resource, send a PATCH request to `/v2/add-ons/saas/{resource_uuid}/plan`. Replace `{resource_uuid}` with the UUID of the resource for which you want to change the plan.
+     * To change the plan associated with an Add-On Resource, send a PATCH request to
+     * `/v2/add-ons/saas/{resource_uuid}/plan`. Replace `{resource_uuid}` with the UUID of the
+     * resource for which you want to change the plan.
      */
-    fun patchPlan(resourceUuid: String, planSlug: String, options: RequestOptions? = null): AddonsUpdate {
-        return dev.octri.showcase.digitalocean.methods.AddOns.addonsPatchPlan(clientConfig, resourceUuid, planSlug, options)
+    fun patchPlan(
+        resourceUuid: String,
+        planSlug: String,
+        options: RequestOptions? = null,
+    ): AddonsUpdate {
+        return dev.octri.showcase.digitalocean.methods.AddOns.addonsPatchPlan(
+            clientConfig,
+            resourceUuid,
+            planSlug,
+            options,
+        )
     }
-
 }

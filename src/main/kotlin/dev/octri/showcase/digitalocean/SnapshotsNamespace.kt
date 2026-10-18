@@ -3,27 +3,54 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class SnapshotsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the snapshots available on your account, send a GET request to `/v2/snapshots`. The response will be a JSON object with a key called `snapshots`. This will be set to an array of `snapshot` objects, each of which will contain the standard snapshot attributes. ### Filtering Results by Resource Type It's possible to request filtered results by including certain query parameters. #### List Droplet Snapshots To retrieve only snapshots based on Droplets, include the…
+     * To list all of the snapshots available on your account, send a GET request to
+     * `/v2/snapshots`. The response will be a JSON object with a key called `snapshots`. This will
+     * be set to an array of `snapshot` objects, each of which will contain the standard snapshot
+     * attributes. ### Filtering Results by Resource Type It's possible to request filtered results
+     * by including certain query parameters. #### List Droplet Snapshots To retrieve only snapshots
+     * based on Droplets, include the…
      */
-    fun list(perPage: Long? = null, page: Long? = null, resourceType: SchemaSchemaEnumbb7091b0? = null, options: RequestOptions? = null): SnapshotsResponse {
-        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsList(clientConfig, perPage, page, resourceType, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        resourceType: SchemaSchemaEnumbb7091b0? = null,
+        options: RequestOptions? = null,
+    ): SnapshotsResponse {
+        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsList(
+            clientConfig,
+            perPage,
+            page,
+            resourceType,
+            options,
+        )
     }
 
     /**
-     * To retrieve information about a snapshot, send a GET request to `/v2/snapshots/$SNAPSHOT_ID`. The response will be a JSON object with a key called `snapshot`. The value of this will be an snapshot object containing the standard snapshot attributes.
+     * To retrieve information about a snapshot, send a GET request to `/v2/snapshots/$SNAPSHOT_ID`.
+     * The response will be a JSON object with a key called `snapshot`. The value of this will be an
+     * snapshot object containing the standard snapshot attributes.
      */
     fun get(snapshotId: Any, options: RequestOptions? = null): SnapshotsExisting {
-        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsGet(clientConfig, snapshotId, options)
+        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsGet(
+            clientConfig,
+            snapshotId,
+            options,
+        )
     }
 
     /**
-     * Both Droplet and volume snapshots are managed through the `/v2/snapshots/` endpoint. To delete a snapshot, send a DELETE request to `/v2/snapshots/$SNAPSHOT_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
+     * Both Droplet and volume snapshots are managed through the `/v2/snapshots/` endpoint. To
+     * delete a snapshot, send a DELETE request to `/v2/snapshots/$SNAPSHOT_ID`. A status of 204
+     * will be given. This indicates that the request was processed successfully, but that no
+     * response body is needed.
      */
     fun delete(snapshotId: Any, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsDelete(clientConfig, snapshotId, options)
+        return dev.octri.showcase.digitalocean.methods.SnapshotsMethods.snapshotsDelete(
+            clientConfig,
+            snapshotId,
+            options,
+        )
     }
-
 }

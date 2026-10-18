@@ -18,80 +18,171 @@ import dev.octri.showcase.digitalocean.TriggerResponse
 
 object Functions {
 
-
     /**
-     * Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.
+     * Returns a list of namespaces associated with the current user. To get all namespaces, send a
+     * GET request to `/v2/functions/namespaces`.
      */
-    fun functionsListNamespaces(clientConfig: ClientConfig, options: RequestOptions? = null): ListNamespaces {
-        return SdkClient.request<ListNamespaces>(SdkClient.RequestSpec("GET", "/v2/functions/namespaces", config = clientConfig, operationId = "functionsListNamespaces", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsListNamespaces(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListNamespaces {
+        return SdkClient.request<ListNamespaces>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/functions/namespaces",
+                    config = clientConfig,
+                    operationId = "functionsListNamespaces",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a new serverless functions namespace in the desired region and associates it with the provided label. A namespace is a collection of functions and their associated packages, triggers, and project specifications. To create a namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` properties.
+     * Creates a new serverless functions namespace in the desired region and associates it with the
+     * provided label. A namespace is a collection of functions and their associated packages,
+     * triggers, and project specifications. To create a namespace, send a POST request to
+     * `/v2/functions/namespaces` with the `region` and `label` properties.
      *
      * @param region The datacenter region in which to create the namespace.
      * @param label The namespace's unique name.
      */
-    fun functionsCreateNamespace(clientConfig: ClientConfig, region: String, label: String, options: RequestOptions? = null): NamespaceCreated {
-        return SdkClient.request<NamespaceCreated>(SdkClient.RequestSpec("POST", "/v2/functions/namespaces", config = clientConfig, body = SdkClient.bodyMap("region" to (region), "label" to (label)), operationId = "functionsCreateNamespace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsCreateNamespace(
+        clientConfig: ClientConfig,
+        region: String,
+        label: String,
+        options: RequestOptions? = null,
+    ): NamespaceCreated {
+        return SdkClient.request<NamespaceCreated>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/functions/namespaces",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("region" to (region), "label" to (label)),
+                    operationId = "functionsCreateNamespace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "422" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
+     * Gets the namespace details for the given namespace UUID. To get namespace details, send a GET
+     * request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
      *
      * @param namespaceId The ID of the namespace to be managed.
      */
-    fun functionsGetNamespace(clientConfig: ClientConfig, namespaceId: String, options: RequestOptions? = null): NamespaceCreated {
-        return SdkClient.request<NamespaceCreated>(SdkClient.RequestSpec("GET", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}", config = clientConfig, operationId = "functionsGetNamespace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsGetNamespace(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        options: RequestOptions? = null,
+    ): NamespaceCreated {
+        return SdkClient.request<NamespaceCreated>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}",
+                    config = clientConfig,
+                    operationId = "functionsGetNamespace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes the given namespace. When a namespace is deleted all assets, in the namespace are deleted, this includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the namespace are not recoverable after deletion. Some metadata is retained, such as activations, or soft deleted for reporting purposes. To delete namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`. A successful deletion returns a 204 response.
+     * Deletes the given namespace. When a namespace is deleted all assets, in the namespace are
+     * deleted, this includes packages, functions and triggers. Deleting a namespace is a
+     * destructive operation and assets in the namespace are not recoverable after deletion. Some
+     * metadata is retained, such as activations, or soft deleted for reporting purposes. To delete
+     * namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`. A successful
+     * deletion returns a 204 response.
      *
      * @param namespaceId The ID of the namespace to be managed.
      */
-    fun functionsDeleteNamespace(clientConfig: ClientConfig, namespaceId: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}", config = clientConfig, operationId = "functionsDeleteNamespace", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun functionsDeleteNamespace(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}",
+                config = clientConfig,
+                operationId = "functionsDeleteNamespace",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
+     * Returns a list of triggers associated with the current user and namespace. To get all
+     * triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      */
-    fun functionsListTriggers(clientConfig: ClientConfig, namespaceId: String, options: RequestOptions? = null): ListTriggers {
-        return SdkClient.request<ListTriggers>(SdkClient.RequestSpec("GET", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers", config = clientConfig, operationId = "functionsListTriggers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsListTriggers(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        options: RequestOptions? = null,
+    ): ListTriggers {
+        return SdkClient.request<ListTriggers>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers",
+                    config = clientConfig,
+                    operationId = "functionsListTriggers",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [functionsCreateTrigger]. */
     data class FunctionsCreateTriggerRequest(
@@ -100,148 +191,319 @@ object Functions {
         val function: String,
         val type: String,
         val isEnabled: Boolean,
-        val scheduledDetails: ScheduledDetails
+        val scheduledDetails: ScheduledDetails,
     )
 
     /**
-     * Creates a new trigger for a given function in a namespace. To create a trigger, send a POST request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`, `type`, `is_enabled` and `scheduled_details` properties.
+     * Creates a new trigger for a given function in a namespace. To create a trigger, send a POST
+     * request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`,
+     * `type`, `is_enabled` and `scheduled_details` properties.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param name The trigger's unique name within the namespace.
      * @param function Name of function(action) that exists in the given namespace.
-     * @param type One of different type of triggers. Currently only SCHEDULED is
-     *   supported.
+     * @param type One of different type of triggers. Currently only SCHEDULED is supported.
      * @param isEnabled Indicates weather the trigger is paused or unpaused.
-     * @param scheduledDetails Trigger details for SCHEDULED type, where body is
-     *   optional.
+     * @param scheduledDetails Trigger details for SCHEDULED type, where body is optional.
      */
-    fun functionsCreateTrigger(clientConfig: ClientConfig, request: FunctionsCreateTriggerRequest, options: RequestOptions? = null): TriggerResponse {
-        return SdkClient.request<TriggerResponse>(SdkClient.RequestSpec("POST", "/v2/functions/namespaces/${SdkClient.encodePathSegment(request.namespaceId)}/triggers", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "function" to (request.function), "type" to (request.type), "is_enabled" to (request.isEnabled), "scheduled_details" to (request.scheduledDetails)), operationId = "functionsCreateTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsCreateTrigger(
+        clientConfig: ClientConfig,
+        request: FunctionsCreateTriggerRequest,
+        options: RequestOptions? = null,
+    ): TriggerResponse {
+        return SdkClient.request<TriggerResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(request.namespaceId)}/triggers",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name),
+                            "function" to (request.function),
+                            "type" to (request.type),
+                            "is_enabled" to (request.isEnabled),
+                            "scheduled_details" to (request.scheduledDetails),
+                        ),
+                    operationId = "functionsCreateTrigger",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "422" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
+     * Gets the trigger details. To get the trigger details, send a GET request to
+     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param triggerName The name of the trigger to be managed.
      */
-    fun functionsGetTrigger(clientConfig: ClientConfig, namespaceId: String, triggerName: String, options: RequestOptions? = null): TriggerResponse {
-        return SdkClient.request<TriggerResponse>(SdkClient.RequestSpec("GET", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}", config = clientConfig, operationId = "functionsGetTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsGetTrigger(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        triggerName: String,
+        options: RequestOptions? = null,
+    ): TriggerResponse {
+        return SdkClient.request<TriggerResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}",
+                    config = clientConfig,
+                    operationId = "functionsGetTrigger",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the details of the given trigger. To update a trigger, send a PUT request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the `is_enabled ` or `scheduled_details` properties.
+     * Updates the details of the given trigger. To update a trigger, send a PUT request to
+     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the
+     * `is_enabled ` or `scheduled_details` properties.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param triggerName The name of the trigger to be managed.
      * @param isEnabled Indicates weather the trigger is paused or unpaused.
-     * @param scheduledDetails Trigger details for SCHEDULED type, where body is
-     *   optional.
+     * @param scheduledDetails Trigger details for SCHEDULED type, where body is optional.
      */
-    fun functionsUpdateTrigger(clientConfig: ClientConfig, namespaceId: String, triggerName: String, isEnabled: Boolean? = null, scheduledDetails: ScheduledDetails? = null, options: RequestOptions? = null): TriggerResponse {
-        return SdkClient.request<TriggerResponse>(SdkClient.RequestSpec("PUT", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}", config = clientConfig, body = SdkClient.bodyMap("is_enabled" to (SdkClient.omitIfNull(isEnabled)), "scheduled_details" to
-    (SdkClient.omitIfNull(scheduledDetails))), operationId = "functionsUpdateTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsUpdateTrigger(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        triggerName: String,
+        isEnabled: Boolean? = null,
+        scheduledDetails: ScheduledDetails? = null,
+        options: RequestOptions? = null,
+    ): TriggerResponse {
+        return SdkClient.request<TriggerResponse>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "is_enabled" to (SdkClient.omitIfNull(isEnabled)),
+                            "scheduled_details" to (SdkClient.omitIfNull(scheduledDetails)),
+                        ),
+                    operationId = "functionsUpdateTrigger",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes the given trigger. To delete trigger, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`. A successful deletion returns a 204 response.
+     * Deletes the given trigger. To delete trigger, send a DELETE request to
+     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`. A successful deletion
+     * returns a 204 response.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param triggerName The name of the trigger to be managed.
      */
-    fun functionsDeleteTrigger(clientConfig: ClientConfig, namespaceId: String, triggerName: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}", config = clientConfig, operationId = "functionsDeleteTrigger", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun functionsDeleteTrigger(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        triggerName: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/triggers/${SdkClient.encodePathSegment(triggerName)}",
+                config = clientConfig,
+                operationId = "functionsDeleteTrigger",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Lists all access keys for a serverless functions namespace. To list access keys, send a GET request to `/v2/functions/namespaces/{namespace_id}/keys`.
+     * Lists all access keys for a serverless functions namespace. To list access keys, send a GET
+     * request to `/v2/functions/namespaces/{namespace_id}/keys`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      */
-    fun functionsAccessKeyList(clientConfig: ClientConfig, namespaceId: String, options: RequestOptions? = null): AccessKeyList {
-        return SdkClient.request<AccessKeyList>(SdkClient.RequestSpec("GET", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys", config = clientConfig, operationId = "functionsAccessKeyList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsAccessKeyList(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        options: RequestOptions? = null,
+    ): AccessKeyList {
+        return SdkClient.request<AccessKeyList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys",
+                    config = clientConfig,
+                    operationId = "functionsAccessKeyList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a new access key for a serverless functions namespace. The access key can be used to authenticate requests to the namespace's functions. The secret key is only returned once upon creation. To create an access key, send a POST request to `/v2/functions/namespaces/{namespace_id}/keys`.
+     * Creates a new access key for a serverless functions namespace. The access key can be used to
+     * authenticate requests to the namespace's functions. The secret key is only returned once upon
+     * creation. To create an access key, send a POST request to
+     * `/v2/functions/namespaces/{namespace_id}/keys`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param name The access key's name.
-     * @param expiresIn The duration after which the access key expires, specified as
-     *   a human-readable duration string in the format `<int>h` (hours) or `<int>d`
-     *   (days). Minimum value is `1h`. If omitted, the key will never expire.
+     * @param expiresIn The duration after which the access key expires, specified as a
+     *   human-readable duration string in the format `<int>h` (hours) or `<int>d` (days). Minimum
+     *   value is `1h`. If omitted, the key will never expire.
      */
-    fun functionsAccessKeyCreate(clientConfig: ClientConfig, namespaceId: String, name: String, expiresIn: String? = null, options: RequestOptions? = null): AccessKeyCreate {
-        return SdkClient.request<AccessKeyCreate>(SdkClient.RequestSpec("POST", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "expires_in" to (SdkClient.omitIfNull(expiresIn))), operationId = "functionsAccessKeyCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsAccessKeyCreate(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        name: String,
+        expiresIn: String? = null,
+        options: RequestOptions? = null,
+    ): AccessKeyCreate {
+        return SdkClient.request<AccessKeyCreate>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "expires_in" to (SdkClient.omitIfNull(expiresIn)),
+                        ),
+                    operationId = "functionsAccessKeyCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "409" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the name of an access key for a serverless functions namespace. To update an access key, send a PUT request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
+     * Updates the name of an access key for a serverless functions namespace. To update an access
+     * key, send a PUT request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param keyId The ID of the access key to be managed.
      * @param name The new name for the access key.
      */
-    fun functionsAccessKeyUpdate(clientConfig: ClientConfig, namespaceId: String, keyId: String, name: String, options: RequestOptions? = null): AccessKeyUpdate {
-        return SdkClient.request<AccessKeyUpdate>(SdkClient.RequestSpec("PUT", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys/${SdkClient.encodePathSegment(keyId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "functionsAccessKeyUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsAccessKeyUpdate(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        keyId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): AccessKeyUpdate {
+        return SdkClient.request<AccessKeyUpdate>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys/${SdkClient.encodePathSegment(keyId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("name" to (name)),
+                    operationId = "functionsAccessKeyUpdate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "409" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes an access key for a serverless functions namespace. To delete an access key, send a DELETE request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
+     * Deletes an access key for a serverless functions namespace. To delete an access key, send a
+     * DELETE request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
      *
      * @param namespaceId The ID of the namespace to be managed.
      * @param keyId The ID of the access key to be managed.
      */
-    fun functionsAccessKeyDelete(clientConfig: ClientConfig, namespaceId: String, keyId: String, options: RequestOptions? = null): Map<String, Any> {
-        return SdkClient.request<Map<String, Any>>(SdkClient.RequestSpec("DELETE", "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys/${SdkClient.encodePathSegment(keyId)}", config = clientConfig, operationId = "functionsAccessKeyDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun functionsAccessKeyDelete(
+        clientConfig: ClientConfig,
+        namespaceId: String,
+        keyId: String,
+        options: RequestOptions? = null,
+    ): Map<String, Any> {
+        return SdkClient.request<Map<String, Any>>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/v2/functions/namespaces/${SdkClient.encodePathSegment(namespaceId)}/keys/${SdkClient.encodePathSegment(keyId)}",
+                    config = clientConfig,
+                    operationId = "functionsAccessKeyDelete",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

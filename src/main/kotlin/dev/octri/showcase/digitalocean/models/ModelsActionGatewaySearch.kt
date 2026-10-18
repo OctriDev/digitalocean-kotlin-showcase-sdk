@@ -3,58 +3,42 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * One page of matching providers.
- */
+/** One page of matching providers. */
 data class SearchProvidersResponse(
-    /**
-     * Matching providers sorted by name.
-     */
+    /** Matching providers sorted by name. */
     val providers: List<ProviderSummary>? = null,
-    /**
-     * Token for the next page; empty on the last page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    /** Token for the next page; empty on the last page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
 
-/**
- * One page of matching sessions.
- */
+/** One page of matching sessions. */
 data class SearchSessionsResponse(
-    /**
-     * Matching sessions in rank order.
-     */
+    /** Matching sessions in rank order. */
     val sessions: List<Session>? = null,
-    /**
-     * Token for the next page; empty on the last page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    /** Token for the next page; empty on the last page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
 
-/**
- * One page of matching toolbelts.
- */
+/** One page of matching toolbelts. */
 data class SearchToolbeltsResponse(
-    /**
-     * Matching toolbelts sorted by name.
-     */
+    /** Matching toolbelts sorted by name. */
     val toolbelts: List<ToolbeltSummary>? = null,
-    /**
-     * Token for the next page; empty on the last page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    /** Token for the next page; empty on the last page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
 
-/**
- * One page of matching tools.
- */
+/** One page of matching tools. */
 data class SearchToolsResponse(
     /**
-     * Ordered by descending match quality, then by provider and name. The ordering is applied across the whole result set rather than within a page, so a client must not re-sort a page to rank it.
+     * Ordered by descending match quality, then by provider and name. The ordering is applied
+     * across the whole result set rather than within a page, so a client must not re-sort a page to
+     * rank it.
      */
     val tools: List<ToolSearchResult>? = null,
-    /**
-     * Token for the next page; empty on the last page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    /** Token for the next page; empty on the last page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
