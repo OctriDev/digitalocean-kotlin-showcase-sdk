@@ -5,295 +5,272 @@ package dev.octri.showcase.digitalocean.models
 
 typealias TagsArrayRead = List<String>
 
-/**
- * Typed representation of the `Volume` API schema.
- */
+/** Typed representation of the `Volume` API schema. */
 data class Volume(
-    /**
-     * Optional object value serialized in the `volume` wire field.
-     */
+    /** Optional object value serialized in the `volume` wire field. */
     val volume: VolumeFull? = null
 )
 
-/**
- * Typed representation of the `VolumeBase` API schema.
- */
+/** Typed representation of the `VolumeBase` API schema. */
 data class VolumeBase(
-    /**
-     * The unique identifier for the block storage volume.
-     */
+    /** The unique identifier for the block storage volume. */
     val id: String? = null,
     /**
-     * An array containing the IDs of the Droplets the volume is attached to. Note that at this time, a volume can only be attached to a single Droplet.
+     * An array containing the IDs of the Droplets the volume is attached to. Note that at this
+     * time, a volume can only be attached to a single Droplet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
+    val dropletIds: List<Long>? = null,
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String? = null,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes")
+    val sizeGigabytes: Long? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the block storage volume was created.
+     * A time value given in ISO8601 combined date and time format that represents when the block
+     * storage volume was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
+     * either existing or new tags. Requires `tag:create` scope.
      */
-    val tags: TagsArray? = null
+    val tags: TagsArray? = null,
 )
 
-/**
- * Typed representation of the `VolumeBaseRead` API schema.
- */
+/** Typed representation of the `VolumeBaseRead` API schema. */
 data class VolumeBaseRead(
-    /**
-     * The unique identifier for the block storage volume.
-     */
+    /** The unique identifier for the block storage volume. */
     val id: String? = null,
     /**
-     * An array containing the IDs of the Droplets the volume is attached to. Note that at this time, a volume can only be attached to a single Droplet.
+     * An array containing the IDs of the Droplets the volume is attached to. Note that at this
+     * time, a volume can only be attached to a single Droplet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
+    val dropletIds: List<Long>? = null,
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String? = null,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes")
+    val sizeGigabytes: Long? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the block storage volume was created.
+     * A time value given in ISO8601 combined date and time format that represents when the block
+     * storage volume was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * A flat array of tag names as strings applied to the resource. Requires `tag:read` scope.
-     */
-    val tags: TagsArrayRead? = null
+    /** A flat array of tag names as strings applied to the resource. Requires `tag:read` scope. */
+    val tags: TagsArrayRead? = null,
 )
 
-/**
- * Typed representation of the `VolumeBaseRequest` API schema.
- */
+/** Typed representation of the `VolumeBaseRequest` API schema. */
 data class VolumeBaseRequest(
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String? = null,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes")
+    val sizeGigabytes: Long? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
+     * either existing or new tags. Requires `tag:create` scope.
      */
-    val tags: TagsArray? = null
+    val tags: TagsArray? = null,
 )
 
-/**
- * Typed representation of the `VolumeFull` API schema.
- */
+/** Typed representation of the `VolumeFull` API schema. */
 data class VolumeFull(
-    /**
-     * The unique identifier for the block storage volume.
-     */
+    /** The unique identifier for the block storage volume. */
     val id: String? = null,
     /**
-     * An array containing the IDs of the Droplets the volume is attached to. Note that at this time, a volume can only be attached to a single Droplet.
+     * An array containing the IDs of the Droplets the volume is attached to. Note that at this
+     * time, a volume can only be attached to a single Droplet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
+    val dropletIds: List<Long>? = null,
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String? = null,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes")
+    val sizeGigabytes: Long? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the block storage volume was created.
+     * A time value given in ISO8601 combined date and time format that represents when the block
+     * storage volume was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * A flat array of tag names as strings applied to the resource. Requires `tag:read` scope.
-     */
+    /** A flat array of tag names as strings applied to the resource. Requires `tag:read` scope. */
     val tags: TagsArrayRead? = null,
     /**
-     * The region that the block storage volume is located in. When setting a region, the value should be the slug identifier for the region. When you query a block storage volume, the entire region object will be returned.
+     * The region that the block storage volume is located in. When setting a region, the value
+     * should be the slug identifier for the region. When you query a block storage volume, the
+     * entire region object will be returned.
      */
     val region: Region? = null,
-    /**
-     * The type of filesystem currently in-use on the volume.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type") val filesystemType: String? = null,
-    /**
-     * The label currently applied to the filesystem.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label") val filesystemLabel: String? = null
+    /** The type of filesystem currently in-use on the volume. */
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type")
+    val filesystemType: String? = null,
+    /** The label currently applied to the filesystem. */
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label")
+    val filesystemLabel: String? = null,
 )
 
-/**
- * Typed representation of the `Volumes` API schema.
- */
+/** Typed representation of the `Volumes` API schema. */
 data class Volumes(
-    /**
-     * Array of volumes.
-     */
+    /** Array of volumes. */
     val volumes: List<VolumeFull>,
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `VolumesExt4Request` API schema.
- */
+/** Typed representation of the `VolumesExt4Request` API schema. */
 data class VolumesExt4Request(
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long,
-    /**
-     * The slug identifier for the region where the resource will initially be available.
-     */
+    /** The slug identifier for the region where the resource will initially be available. */
     val region: RegionSlug,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
+     * either existing or new tags. Requires `tag:create` scope.
      */
     val tags: TagsArray? = null,
-    /**
-     * The unique identifier for the volume snapshot from which to create the volume.
-     */
+    /** The unique identifier for the volume snapshot from which to create the volume. */
     @com.fasterxml.jackson.annotation.JsonProperty("snapshot_id") val snapshotId: String? = null,
     /**
-     * The name of the filesystem type to be used on the volume. When provided, the volume will automatically be formatted to the specified filesystem type. Currently, the available options are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
+     * The name of the filesystem type to be used on the volume. When provided, the volume will
+     * automatically be formatted to the specified filesystem type. Currently, the available options
+     * are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to
+     * Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
+     * 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type") val filesystemType: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label") val filesystemLabel: VolumeWriteFileSystemLabel? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type")
+    val filesystemType: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label")
+    val filesystemLabel: VolumeWriteFileSystemLabel? = null,
 )
 
-/**
- * Typed representation of the `VolumeSnapshot` API schema.
- */
+/** Typed representation of the `VolumeSnapshot` API schema. */
 data class VolumeSnapshot(
-    /**
-     * Optional API value serialized in the `snapshot` wire field.
-     */
+    /** Optional API value serialized in the `snapshot` wire field. */
     val snapshot: Snapshots? = null
 )
 
-/**
- * Typed representation of the `VolumeSnapshotId` API schema.
- */
+/** Typed representation of the `VolumeSnapshotId` API schema. */
 data class VolumeSnapshotId(
-    /**
-     * The unique identifier for the volume snapshot from which to create the volume.
-     */
+    /** The unique identifier for the volume snapshot from which to create the volume. */
     @com.fasterxml.jackson.annotation.JsonProperty("snapshot_id") val snapshotId: String? = null
 )
 
-/**
- * Typed representation of the `VolumeSnapshots` API schema.
- */
+/** Typed representation of the `VolumeSnapshots` API schema. */
 data class VolumeSnapshots(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val snapshots: List<Snapshots>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `VolumesXfs` API schema.
- */
+/** Typed representation of the `VolumesXfs` API schema. */
 data class VolumesXfs(
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
+     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
+     * a volume from a snapshot.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long,
-    /**
-     * The slug identifier for the region where the resource will initially be available.
-     */
+    /** The slug identifier for the region where the resource will initially be available. */
     val region: RegionSlug,
-    /**
-     * The unique identifier for the block storage volume.
-     */
+    /** The unique identifier for the block storage volume. */
     val id: String? = null,
     /**
-     * An array containing the IDs of the Droplets the volume is attached to. Note that at this time, a volume can only be attached to a single Droplet.
+     * An array containing the IDs of the Droplets the volume is attached to. Note that at this
+     * time, a volume can only be attached to a single Droplet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
-    /**
-     * An optional free-form text field to describe a block storage volume.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
+    val dropletIds: List<Long>? = null,
+    /** An optional free-form text field to describe a block storage volume. */
     val description: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the block storage volume was created.
+     * A time value given in ISO8601 combined date and time format that represents when the block
+     * storage volume was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
+     * either existing or new tags. Requires `tag:create` scope.
      */
     val tags: TagsArray? = null,
-    /**
-     * The unique identifier for the volume snapshot from which to create the volume.
-     */
+    /** The unique identifier for the volume snapshot from which to create the volume. */
     @com.fasterxml.jackson.annotation.JsonProperty("snapshot_id") val snapshotId: String? = null,
     /**
-     * The name of the filesystem type to be used on the volume. When provided, the volume will automatically be formatted to the specified filesystem type. Currently, the available options are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
+     * The name of the filesystem type to be used on the volume. When provided, the volume will
+     * automatically be formatted to the specified filesystem type. Currently, the available options
+     * are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to
+     * Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
+     * 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type") val filesystemType: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label") val filesystemLabel: VolumeWriteFileSystemLabel? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type")
+    val filesystemType: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label")
+    val filesystemLabel: VolumeWriteFileSystemLabel? = null,
 )
 
 typealias VolumeWriteFileSystemLabel = String
 
-/**
- * Typed representation of the `VolumeWriteFileSystemType` API schema.
- */
+/** Typed representation of the `VolumeWriteFileSystemType` API schema. */
 data class VolumeWriteFileSystemType(
     /**
-     * The name of the filesystem type to be used on the volume. When provided, the volume will automatically be formatted to the specified filesystem type. Currently, the available options are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
+     * The name of the filesystem type to be used on the volume. When provided, the volume will
+     * automatically be formatted to the specified filesystem type. Currently, the available options
+     * are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to
+     * Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
+     * 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type") val filesystemType: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type")
+    val filesystemType: String? = null
 )

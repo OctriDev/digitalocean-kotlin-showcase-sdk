@@ -5,180 +5,156 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AvailableUpgrades` API schema.
- */
+/** Typed representation of the `AvailableUpgrades` API schema. */
 data class AvailableUpgrades(
-    /**
-     * Optional array value serialized in the `available_upgrade_versions` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_upgrade_versions") val availableUpgradeVersions: List<KubernetesVersion>? = null
+    /** Optional array value serialized in the `available_upgrade_versions` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_upgrade_versions")
+    val availableUpgradeVersions: List<KubernetesVersion>? = null
 )
 
 /**
- * An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
+ * An object specifying the control plane firewall for the Kubernetes cluster. Control plane
+ * firewall is in early availability (invite only).
  */
 data class ControlPlaneFirewall(
-    /**
-     * Indicates whether the control plane firewall is enabled.
-     */
+    /** Indicates whether the control plane firewall is enabled. */
     val enabled: Boolean? = null,
-    /**
-     * An array of public addresses (IPv4 or CIDR) allowed to access the control plane.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_addresses") val allowedAddresses: List<String>? = null
+    /** An array of public addresses (IPv4 or CIDR) allowed to access the control plane. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_addresses")
+    val allowedAddresses: List<String>? = null,
 )
 
 /**
- * An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
+ * An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should
+ * be enabled for the Kubernetes cluster.
  */
 data class CorednsAutoscaler(
-    /**
-     * Indicates whether the CoreDNS Cluster Proportional Autoscaler add-on is enabled.
-     */
+    /** Indicates whether the CoreDNS Cluster Proportional Autoscaler add-on is enabled. */
     val enabled: Boolean? = null
 )
 
-/**
- * Typed representation of the `Credentials` API schema.
- */
+/** Typed representation of the `Credentials` API schema. */
 data class Credentials(
-    /**
-     * The URL used to access the cluster API server.
-     */
+    /** The URL used to access the cluster API server. */
     val server: String? = null,
     /**
-     * A base64 encoding of bytes representing the certificate authority data for accessing the cluster.
+     * A base64 encoding of bytes representing the certificate authority data for accessing the
+     * cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_authority_data") val certificateAuthorityData: ByteArray? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_authority_data")
+    val certificateAuthorityData: ByteArray? = null,
     /**
-     * A base64 encoding of bytes representing the x509 client certificate data for access the cluster. This is only returned for clusters without support for token-based authentication. Newly created Kubernetes clusters do not return credentials using certificate-based authentication. For additional information, see here.
+     * A base64 encoding of bytes representing the x509 client certificate data for access the
+     * cluster. This is only returned for clusters without support for token-based authentication.
+     * Newly created Kubernetes clusters do not return credentials using certificate-based
+     * authentication. For additional information, see here.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_certificate_data") val clientCertificateData: ByteArray? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("client_certificate_data")
+    val clientCertificateData: ByteArray? = null,
     /**
-     * A base64 encoding of bytes representing the x509 client key data for access the cluster. This is only returned for clusters without support for token-based authentication. Newly created Kubernetes clusters do not return credentials using certificate-based authentication. For additional information, see here.
+     * A base64 encoding of bytes representing the x509 client key data for access the cluster. This
+     * is only returned for clusters without support for token-based authentication. Newly created
+     * Kubernetes clusters do not return credentials using certificate-based authentication. For
+     * additional information, see here.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_key_data") val clientKeyData: ByteArray? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("client_key_data")
+    val clientKeyData: ByteArray? = null,
     /**
-     * An access token used to authenticate with the cluster. This is only returned for clusters with support for token-based authentication.
+     * An access token used to authenticate with the cluster. This is only returned for clusters
+     * with support for token-based authentication.
      */
     val token: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the access token expires.
+     * A time value given in ISO8601 combined date and time format that represents when the access
+     * token expires.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
+    val expiresAt: OffsetDateTime? = null,
 )
 
 /**
- * An object containing the IDs of resources to be destroyed along with their associated with a Kubernetes cluster.
+ * An object containing the IDs of resources to be destroyed along with their associated with a
+ * Kubernetes cluster.
  */
 data class DestroyAssociatedKubernetesResources(
-    /**
-     * A list of IDs for associated load balancers to destroy along with the cluster.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers") val loadBalancers: List<String>? = null,
-    /**
-     * A list of IDs for associated volumes to destroy along with the cluster.
-     */
+    /** A list of IDs for associated load balancers to destroy along with the cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers")
+    val loadBalancers: List<String>? = null,
+    /** A list of IDs for associated volumes to destroy along with the cluster. */
     val volumes: List<String>? = null,
-    /**
-     * A list of IDs for associated volume snapshots to destroy along with the cluster.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots") val volumeSnapshots: List<String>? = null
+    /** A list of IDs for associated volume snapshots to destroy along with the cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots")
+    val volumeSnapshots: List<String>? = null,
 )
 
-/**
- * An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
- */
+/** An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster. */
 data class NfsCsiPlugin(
-    /**
-     * Indicates whether the NFS CSI plugin is enabled.
-     */
+    /** Indicates whether the NFS CSI plugin is enabled. */
     val enabled: Boolean? = null
 )
 
 /**
- * An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
+ * An object specifying whether the Peer-to-peer OCI registry component should be enabled for the
+ * Kubernetes cluster.
  */
 data class P2pOciRegistryPlugin(
-    /**
-     * Indicates whether the Peer-to-peer OCI registry component is enabled.
-     */
+    /** Indicates whether the Peer-to-peer OCI registry component is enabled. */
     val enabled: Boolean? = null
 )
 
 /**
- * An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
+ * An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes
+ * cluster.
  */
 data class RdmaSharedDevPlugin(
-    /**
-     * Indicates whether the RDMA shared device plugin is enabled.
-     */
+    /** Indicates whether the RDMA shared device plugin is enabled. */
     val enabled: Boolean? = null
 )
 
 /**
- * An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
+ * An object specifying whether the routing-agent component should be enabled for the Kubernetes
+ * cluster.
  */
 data class RoutingAgent(
-    /**
-     * Indicates whether the routing-agent component is enabled.
-     */
+    /** Indicates whether the routing-agent component is enabled. */
     val enabled: Boolean? = null
 )
 
-/**
- * An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
- */
+/** An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster. */
 data class Sso(
-    /**
-     * Indicates whether SSO authentication is enabled for the cluster.
-     */
+    /** Indicates whether SSO authentication is enabled for the cluster. */
     val enabled: Boolean? = null,
     /**
-     * Indicates whether any non-SSO forms of authentication are disallowed. Can only be set to `true` when `enabled` is `true`.
+     * Indicates whether any non-SSO forms of authentication are disallowed. Can only be set to
+     * `true` when `enabled` is `true`.
      */
     val required: Boolean? = null,
-    /**
-     * The OIDC issuer URL for the identity provider. Required when `enabled` is `true`.
-     */
+    /** The OIDC issuer URL for the identity provider. Required when `enabled` is `true`. */
     @com.fasterxml.jackson.annotation.JsonProperty("issuer_url") val issuerUrl: String? = null,
     /**
      * The OIDC client ID registered with the identity provider. Required when `enabled` is `true`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_id") val clientId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("client_id") val clientId: String? = null,
 )
 
-/**
- * Typed representation of the `UpdatedCluster` API schema.
- */
+/** Typed representation of the `UpdatedCluster` API schema. */
 data class UpdatedCluster(
-    /**
-     * Optional object value serialized in the `kubernetes_cluster` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster") val kubernetesCluster: Cluster? = null
+    /** Optional object value serialized in the `kubernetes_cluster` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster")
+    val kubernetesCluster: Cluster? = null
 )
 
-/**
- * Optional object value serialized in the `kubernetes_cluster_user` wire field.
- */
+/** Optional object value serialized in the `kubernetes_cluster_user` wire field. */
 data class User2KubernetesClusterUser(
-    /**
-     * The username for the cluster admin user.
-     */
+    /** The username for the cluster admin user. */
     val username: String? = null,
-    /**
-     * A list of in-cluster groups that the user belongs to.
-     */
-    val groups: List<String>? = null
+    /** A list of in-cluster groups that the user belongs to. */
+    val groups: List<String>? = null,
 )
 
-/**
- * Typed representation of the `User2` API schema.
- */
+/** Typed representation of the `User2` API schema. */
 data class User2(
-    /**
-     * Optional object value serialized in the `kubernetes_cluster_user` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster_user") val kubernetesClusterUser: User2KubernetesClusterUser? = null
+    /** Optional object value serialized in the `kubernetes_cluster_user` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster_user")
+    val kubernetesClusterUser: User2KubernetesClusterUser? = null
 )

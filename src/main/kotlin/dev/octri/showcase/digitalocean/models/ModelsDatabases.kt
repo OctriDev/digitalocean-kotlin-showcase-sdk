@@ -5,446 +5,351 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `Autoscale` API schema.
- */
+/** Typed representation of the `Autoscale` API schema. */
 data class Autoscale(
-    /**
-     * Contains all autoscaling configuration for a database cluster
-     */
+    /** Contains all autoscaling configuration for a database cluster */
     val autoscale: DatabaseAutoscaleParams? = null
 )
 
-/**
- * Typed representation of the `Backup` API schema.
- */
+/** Typed representation of the `Backup` API schema. */
 data class Backup(
     /**
      * A time value given in ISO8601 combined date and time format at which the backup was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * The size of the database backup in GBs.
-     */
+    /** The size of the database backup in GBs. */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Double,
-    /**
-     * Indicates if this backup is a full or an incremental one (available only for MySQL).
-     */
-    val incremental: Boolean? = null
+    /** Indicates if this backup is a full or an incremental one (available only for MySQL). */
+    val incremental: Boolean? = null,
 )
 
-/**
- * Typed representation of the `Logsinks` API schema.
- */
+/** Typed representation of the `Logsinks` API schema. */
 data class Logsinks(
-    /**
-     * Optional array value serialized in the `sinks` wire field.
-     */
+    /** Optional array value serialized in the `sinks` wire field. */
     val sinks: List<LogsinkSchema>? = null
 )
 
-/**
- * Typed representation of the `OnlineMigration` API schema.
- */
+/** Typed representation of the `OnlineMigration` API schema. */
 data class OnlineMigration(
-    /**
-     * The ID of the most recent migration.
-     */
+    /** The ID of the most recent migration. */
     val id: String? = null,
-    /**
-     * The current status of the migration.
-     */
+    /** The current status of the migration. */
     val status: OnlineMigrationStatusEnum? = null,
-    /**
-     * The time the migration was initiated, in ISO 8601 format.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+    /** The time the migration was initiated, in ISO 8601 format. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
 )
 
-/**
- * Optional object value serialized in the `kafka` wire field.
- */
+/** Optional object value serialized in the `kafka` wire field. */
 data class OptionsOptionsKafka(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `mongodb` wire field.
- */
+/** Optional object value serialized in the `mongodb` wire field. */
 data class OptionsOptionsMongodb(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `pg` wire field.
- */
+/** Optional object value serialized in the `pg` wire field. */
 data class OptionsOptionsPg(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `mysql` wire field.
- */
+/** Optional object value serialized in the `mysql` wire field. */
 data class OptionsOptionsMysql(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `redis` wire field.
- */
+/** Optional object value serialized in the `redis` wire field. */
 data class OptionsOptionsRedis(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `valkey` wire field.
- */
+/** Optional object value serialized in the `valkey` wire field. */
 data class OptionsOptionsValkey(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `opensearch` wire field.
- */
+/** Optional object value serialized in the `opensearch` wire field. */
 data class OptionsOptionsOpensearch(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `advanced_pg` wire field.
- */
+/** Optional object value serialized in the `advanced_pg` wire field. */
 data class OptionsOptionsAdvancedPg(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `advanced_mysql` wire field.
- */
+/** Optional object value serialized in the `advanced_mysql` wire field. */
 data class OptionsOptionsAdvancedMysql(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null,
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null,
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
-    val layouts: List<DatabaseLayoutOption>? = null
+    val layouts: List<DatabaseLayoutOption>? = null,
 )
 
-/**
- * Optional object value serialized in the `options` wire field.
- */
+/** Optional object value serialized in the `options` wire field. */
 data class OptionsOptions(
-    /**
-     * Optional object value serialized in the `kafka` wire field.
-     */
+    /** Optional object value serialized in the `kafka` wire field. */
     val kafka: OptionsOptionsKafka? = null,
-    /**
-     * Optional object value serialized in the `mongodb` wire field.
-     */
+    /** Optional object value serialized in the `mongodb` wire field. */
     val mongodb: OptionsOptionsMongodb? = null,
-    /**
-     * Optional object value serialized in the `pg` wire field.
-     */
+    /** Optional object value serialized in the `pg` wire field. */
     val pg: OptionsOptionsPg? = null,
-    /**
-     * Optional object value serialized in the `mysql` wire field.
-     */
+    /** Optional object value serialized in the `mysql` wire field. */
     val mysql: OptionsOptionsMysql? = null,
-    /**
-     * Optional object value serialized in the `redis` wire field.
-     */
+    /** Optional object value serialized in the `redis` wire field. */
     val redis: OptionsOptionsRedis? = null,
-    /**
-     * Optional object value serialized in the `valkey` wire field.
-     */
+    /** Optional object value serialized in the `valkey` wire field. */
     val valkey: OptionsOptionsValkey? = null,
-    /**
-     * Optional object value serialized in the `opensearch` wire field.
-     */
+    /** Optional object value serialized in the `opensearch` wire field. */
     val opensearch: OptionsOptionsOpensearch? = null,
-    /**
-     * Optional object value serialized in the `advanced_pg` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("advanced_pg") val advancedPg: OptionsOptionsAdvancedPg? = null,
-    /**
-     * Optional object value serialized in the `advanced_mysql` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("advanced_mysql") val advancedMysql: OptionsOptionsAdvancedMysql? = null
+    /** Optional object value serialized in the `advanced_pg` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("advanced_pg")
+    val advancedPg: OptionsOptionsAdvancedPg? = null,
+    /** Optional object value serialized in the `advanced_mysql` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("advanced_mysql")
+    val advancedMysql: OptionsOptionsAdvancedMysql? = null,
 )
 
-/**
- * Optional object value serialized in the `version_availability` wire field.
- */
+/** Optional object value serialized in the `version_availability` wire field. */
 data class OptionsVersionAvailability(
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val kafka: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val pg: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val mysql: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val redis: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val valkey: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val mongodb: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
     val opensearch: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("advanced_pg") val advancedPg: DatabaseVersionAvailabilities? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("advanced_pg")
+    val advancedPg: DatabaseVersionAvailabilities? = null,
     /**
-     * An array of objects, each indicating the version end-of-life, end-of-availability for various database engines
+     * An array of objects, each indicating the version end-of-life, end-of-availability for various
+     * database engines
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("advanced_mysql") val advancedMysql: DatabaseVersionAvailabilities? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("advanced_mysql")
+    val advancedMysql: DatabaseVersionAvailabilities? = null,
 )
 
-/**
- * Typed representation of the `Options` API schema.
- */
+/** Typed representation of the `Options` API schema. */
 data class Options(
-    /**
-     * Optional object value serialized in the `options` wire field.
-     */
+    /** Optional object value serialized in the `options` wire field. */
     val options: OptionsOptions? = null,
-    /**
-     * Optional object value serialized in the `version_availability` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_availability") val versionAvailability: OptionsVersionAvailability? = null
+    /** Optional object value serialized in the `version_availability` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("version_availability")
+    val versionAvailability: OptionsVersionAvailability? = null,
 )
 
-/**
- * PGBouncer connection pooling settings
- */
+/** PGBouncer connection pooling settings */
 data class PgbouncerAdvancedConfig(
+    /** Run server_reset_query (DISCARD ALL) in all pooling modes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_reset_query_always")
+    val serverResetQueryAlways: Boolean? = null,
+    /** List of parameters to ignore when given in startup packet. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ignore_startup_parameters")
+    val ignoreStartupParameters: List<PgbouncerAdvancedConfigIgnoreStartupParametersItemEnum>? =
+        null,
     /**
-     * Run server_reset_query (DISCARD ALL) in all pooling modes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_reset_query_always") val serverResetQueryAlways: Boolean? = null,
-    /**
-     * List of parameters to ignore when given in startup packet.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ignore_startup_parameters") val ignoreStartupParameters: List<PgbouncerAdvancedConfigIgnoreStartupParametersItemEnum>? = null,
-    /**
-     * If current server connections are below this number, adds more. Improves behavior when usual load comes suddenly back after period of total inactivity. The value is effectively capped at the pool size.
+     * If current server connections are below this number, adds more. Improves behavior when usual
+     * load comes suddenly back after period of total inactivity. The value is effectively capped at
+     * the pool size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("min_pool_size") val minPoolSize: Long? = null,
     /**
-     * The pooler closes any unused server connection that has been connected longer than this amount of seconds.
+     * The pooler closes any unused server connection that has been connected longer than this
+     * amount of seconds.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_lifetime") val serverLifetime: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("server_lifetime")
+    val serverLifetime: Long? = null,
     /**
-     * Drops server connections if they have been idle more than this many seconds. If 0, timeout is disabled.
+     * Drops server connections if they have been idle more than this many seconds. If 0, timeout is
+     * disabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_idle_timeout") val serverIdleTimeout: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("server_idle_timeout")
+    val serverIdleTimeout: Long? = null,
     /**
      * If non-zero, automatically creates a pool of that size per user when a pool doesn't exist.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("autodb_pool_size") val autodbPoolSize: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("autodb_pool_size")
+    val autodbPoolSize: Long? = null,
+    /** PGBouncer pool mode */
+    @com.fasterxml.jackson.annotation.JsonProperty("autodb_pool_mode")
+    val autodbPoolMode: PgbouncerAdvancedConfigAutodbPoolModeEnum? = null,
     /**
-     * PGBouncer pool mode
+     * Only allows a maximum this many server connections per database (regardless of user). If 0,
+     * allows unlimited connections.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("autodb_pool_mode") val autodbPoolMode: PgbouncerAdvancedConfigAutodbPoolModeEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("autodb_max_db_connections")
+    val autodbMaxDbConnections: Long? = null,
     /**
-     * Only allows a maximum this many server connections per database (regardless of user). If 0, allows unlimited connections.
+     * If the automatically-created database pools have been unused this many seconds, they are
+     * freed. If 0, timeout is disabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("autodb_max_db_connections") val autodbMaxDbConnections: Long? = null,
-    /**
-     * If the automatically-created database pools have been unused this many seconds, they are freed. If 0, timeout is disabled.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("autodb_idle_timeout") val autodbIdleTimeout: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("autodb_idle_timeout")
+    val autodbIdleTimeout: Long? = null,
 )
 
-/**
- * Required object value serialized in the `source` wire field.
- */
+/** Required object value serialized in the `source` wire field. */
 data class SourceDatabaseSource(
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val dbname: String? = null,
-    /**
-     * The default user for the database.
-     */
+    /** The default user for the database. */
     val username: String? = null,
-    /**
-     * The randomly generated password for the default user.
-     */
-    val password: String? = null
+    /** The randomly generated password for the default user. */
+    val password: String? = null,
 )
 
-/**
- * Typed representation of the `SourceDatabase` API schema.
- */
+/** Typed representation of the `SourceDatabase` API schema. */
 data class SourceDatabase(
-    /**
-     * Required object value serialized in the `source` wire field.
-     */
+    /** Required object value serialized in the `source` wire field. */
     val source: SourceDatabaseSource,
-    /**
-     * Enables SSL encryption when connecting to the source database.
-     */
+    /** Enables SSL encryption when connecting to the source database. */
     @com.fasterxml.jackson.annotation.JsonProperty("disable_ssl") val disableSsl: Boolean? = null,
-    /**
-     * List of databases that should be ignored during migration.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ignore_dbs") val ignoreDbs: List<String>? = null
+    /** List of databases that should be ignored during migration. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ignore_dbs")
+    val ignoreDbs: List<String>? = null,
 )
 
-/**
- * Typed representation of the `SqlMode` API schema.
- */
+/** Typed representation of the `SqlMode` API schema. */
 data class SqlMode(
-    /**
-     * A string specifying the configured SQL modes for the MySQL cluster.
-     */
+    /** A string specifying the configured SQL modes for the MySQL cluster. */
     @com.fasterxml.jackson.annotation.JsonProperty("sql_mode") val sqlMode: String
 )
 
-/**
- * TimescaleDB extension configuration values
- */
+/** TimescaleDB extension configuration values */
 data class TimescaledbAdvancedConfig(
     /**
-     * The number of background workers for timescaledb operations. Set to the sum of your number of databases and the total number of concurrent background workers you want running at any given point in time.
+     * The number of background workers for timescaledb operations. Set to the sum of your number of
+     * databases and the total number of concurrent background workers you want running at any given
+     * point in time.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_background_workers") val maxBackgroundWorkers: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("max_background_workers")
+    val maxBackgroundWorkers: Long? = null
 )
 
-/**
- * Typed representation of the `Users` API schema.
- */
+/** Typed representation of the `Users` API schema. */
 data class Users(
-    /**
-     * Optional array value serialized in the `users` wire field.
-     */
+    /** Optional array value serialized in the `users` wire field. */
     val users: List<DatabaseUser>? = null
 )
 
 typealias Version = String
 
-/**
- * Typed representation of the `Version2` API schema.
- */
+/** Typed representation of the `Version2` API schema. */
 data class Version2(
-    /**
-     * A string representing the version of the database engine in use for the cluster.
-     */
+    /** A string representing the version of the database engine in use for the cluster. */
     val version: Version? = null
 )

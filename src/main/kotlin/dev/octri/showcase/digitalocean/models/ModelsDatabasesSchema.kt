@@ -3,37 +3,27 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `SchemaRegistryConnection` API schema.
- */
+/** Typed representation of the `SchemaRegistryConnection` API schema. */
 data class SchemaRegistryConnection(
     /**
-     * This is provided as a convenience and should be able to be constructed by the other attributes.
+     * This is provided as a convenience and should be able to be constructed by the other
+     * attributes.
      */
     val uri: String? = null,
-    /**
-     * The FQDN pointing to the schema registry connection uri.
-     */
+    /** The FQDN pointing to the schema registry connection uri. */
     val host: String? = null,
-    /**
-     * The port on which the schema registry is listening.
-     */
+    /** The port on which the schema registry is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the schema registry. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the schema registry. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the schema registry. Requires `database:view_credentials` scope.
+     * The randomly generated password for the schema registry. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Typed representation of the `SchemaRegistryConnectionRequest` API schema.
- */
+/** Typed representation of the `SchemaRegistryConnectionRequest` API schema. */
 class SchemaRegistryConnectionRequest

@@ -3,34 +3,21 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `EventsLogs` API schema.
- */
+/** Typed representation of the `EventsLogs` API schema. */
 data class EventsLogs(
-    /**
-     * ID of the particular event.
-     */
+    /** ID of the particular event. */
     val id: String? = null,
-    /**
-     * The name of cluster.
-     */
+    /** The name of cluster. */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null,
-    /**
-     * Type of the event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: EventsLogsEventTypeEnum? = null,
-    /**
-     * The time of the generation of a event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("create_time") val createTime: String? = null
+    /** Type of the event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_type")
+    val eventType: EventsLogsEventTypeEnum? = null,
+    /** The time of the generation of a event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("create_time") val createTime: String? = null,
 )
 
-/**
- * Typed representation of the `EventsLogsResponse` API schema.
- */
+/** Typed representation of the `EventsLogsResponse` API schema. */
 data class EventsLogsResponse(
-    /**
-     * Optional array value serialized in the `events` wire field.
-     */
+    /** Optional array value serialized in the `events` wire field. */
     val events: List<EventsLogs>? = null
 )

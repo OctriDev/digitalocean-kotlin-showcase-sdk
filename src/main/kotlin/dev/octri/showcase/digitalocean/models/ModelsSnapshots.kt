@@ -3,27 +3,17 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `SnapshotsExisting` API schema.
- */
+/** Typed representation of the `SnapshotsExisting` API schema. */
 data class SnapshotsExisting(
-    /**
-     * Optional API value serialized in the `snapshot` wire field.
-     */
+    /** Optional API value serialized in the `snapshot` wire field. */
     val snapshot: Snapshots? = null
 )
 
-/**
- * Typed representation of the `SnapshotsResponse` API schema.
- */
+/** Typed representation of the `SnapshotsResponse` API schema. */
 data class SnapshotsResponse(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val snapshots: List<Snapshots>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )

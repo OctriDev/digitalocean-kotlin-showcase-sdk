@@ -3,50 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Status of an asynchronous video generation job.
- */
+/** Status of an asynchronous video generation job. */
 data class VideoGeneration(
-    /**
-     * The video generation job identifier.
-     */
+    /** The video generation job identifier. */
     val id: String,
-    /**
-     * Job status. Poll until the value is a terminal state such as `completed` or `failed`.
-     */
+    /** Job status. Poll until the value is a terminal state such as `completed` or `failed`. */
     val status: String,
-    /**
-     * Object type returned by the API.
-     */
+    /** Object type returned by the API. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Unix timestamp (in seconds) of when the job was created.
-     */
+    /** Unix timestamp (in seconds) of when the job was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The model used for generation.
-     */
+    /** The model used for generation. */
     val model: String? = null,
-    /**
-     * Download location for a completed video when a presigned URL is available.
-     */
+    /** Download location for a completed video when a presigned URL is available. */
     val output: VideoGenerationOutput? = null,
-    /**
-     * Error details when status is `failed`.
-     */
+    /** Error details when status is `failed`. */
     val error: Map<String, Any>? = null,
-    /**
-     * Request correlation identifier when provided by the API.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("x_request_id") @get:com.fasterxml.jackson.annotation.JsonProperty("x_request_id") val xRequestId: String? = null
+    /** Request correlation identifier when provided by the API. */
+    @com.fasterxml.jackson.annotation.JsonProperty("x_request_id")
+    @get:com.fasterxml.jackson.annotation.JsonProperty("x_request_id")
+    val xRequestId: String? = null,
 )
 
-/**
- * Download location for a completed video when a presigned URL is available.
- */
+/** Download location for a completed video when a presigned URL is available. */
 data class VideoGenerationOutput(
-    /**
-     * Presigned URL for the generated MP4.
-     */
+    /** Presigned URL for the generated MP4. */
     val url: String? = null
 )

@@ -5,442 +5,282 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * McpServer defines a remote MCP server configuration for an agent.
- */
+/** McpServer defines a remote MCP server configuration for an agent. */
 data class ApiMcpServer(
-    /**
-     * Optional list of allowed tool names to expose from this server
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools") val allowedTools: List<String>? = null,
-    /**
-     * Optional authorization header value for the MCP server
-     */
+    /** Optional list of allowed tool names to expose from this server */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
+    val allowedTools: List<String>? = null,
+    /** Optional authorization header value for the MCP server */
     val authorization: String? = null,
-    /**
-     * Optional additional headers to send to the MCP server
-     */
+    /** Optional additional headers to send to the MCP server */
     val headers: Map<String, String>? = null,
-    /**
-     * A label identifying this MCP server
-     */
+    /** A label identifying this MCP server */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String? = null,
-    /**
-     * The URL of the MCP server
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String? = null
+    /** The URL of the MCP server */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String? = null,
 )
 
-/**
- * Meta information about the data set
- */
+/** Meta information about the data set */
 data class ApiMeta(
-    /**
-     * The current page
-     */
+    /** The current page */
     val page: Long? = null,
-    /**
-     * Total number of pages
-     */
+    /** Total number of pages */
     val pages: Long? = null,
-    /**
-     * Total amount of items over all pages
-     */
-    val total: Long? = null
+    /** Total amount of items over all pages */
+    val total: Long? = null,
 )
 
-/**
- * Per-metric aggregated pass/fail statistics across all prompts.
- */
+/** Per-metric aggregated pass/fail statistics across all prompts. */
 data class ApiMetricResultSummary(
     /**
-     * Row-level (not attempt-level) aggregation across epochs for this metric, mirroring EpochResultSummary but scoped to one metric. Only set when the run's epochs > 1; pass_percent/pass_count/etc. above stay attempt-level (over row x epoch pairs) so they don't desynchronize from the counts sitting next to them.
+     * Row-level (not attempt-level) aggregation across epochs for this metric, mirroring
+     * EpochResultSummary but scoped to one metric. Only set when the run's epochs > 1;
+     * pass_percent/pass_count/etc. above stay attempt-level (over row x epoch pairs) so they don't
+     * desynchronize from the counts sitting next to them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("avg_at_k_percent") val avgAtKPercent: Double? = null,
-    /**
-     * Optional `double`-formatted value serialized in the `cons_at_k_percent` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cons_at_k_percent") val consAtKPercent: Double? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("avg_at_k_percent")
+    val avgAtKPercent: Double? = null,
+    /** Optional `double`-formatted value serialized in the `cons_at_k_percent` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cons_at_k_percent")
+    val consAtKPercent: Double? = null,
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Rows where the metric failed to score or completed below the threshold.
-     */
+    /** Rows where the metric failed to score or completed below the threshold. */
     @com.fasterxml.jackson.annotation.JsonProperty("fail_count") val failCount: Long? = null,
-    /**
-     * Optional `double`-formatted value serialized in the `fail_percent` wire field.
-     */
+    /** Optional `double`-formatted value serialized in the `fail_percent` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("fail_percent") val failPercent: Double? = null,
-    /**
-     * Optional `string` value serialized in the `metric_name` wire field.
-     */
+    /** Optional `string` value serialized in the `metric_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null,
-    /**
-     * Optional `string` value serialized in the `metric_uuid` wire field.
-     */
+    /** Optional `string` value serialized in the `metric_uuid` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_uuid") val metricUuid: String? = null,
-    /**
-     * Optional `double`-formatted value serialized in the `pass_at_k_percent` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pass_at_k_percent") val passAtKPercent: Double? = null,
-    /**
-     * Rows where the metric completed and passed the configured threshold.
-     */
+    /** Optional `double`-formatted value serialized in the `pass_at_k_percent` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("pass_at_k_percent")
+    val passAtKPercent: Double? = null,
+    /** Rows where the metric completed and passed the configured threshold. */
     @com.fasterxml.jackson.annotation.JsonProperty("pass_count") val passCount: Long? = null,
-    /**
-     * Optional `double`-formatted value serialized in the `pass_percent` wire field.
-     */
+    /** Optional `double`-formatted value serialized in the `pass_percent` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("pass_percent") val passPercent: Double? = null,
     /**
-     * Percentage of rows that were skipped for this metric, computed as skipped_count divided by the total rows the metric saw (pass_count + fail_count + skipped_count).
+     * Percentage of rows that were skipped for this metric, computed as skipped_count divided by
+     * the total rows the metric saw (pass_count + fail_count + skipped_count).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("skip_percent") val skipPercent: Double? = null,
-    /**
-     * Rows where the metric was not evaluated for this prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("skipped_count") val skippedCount: Long? = null
+    /** Rows where the metric was not evaluated for this prompt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("skipped_count") val skippedCount: Long? = null,
 )
 
-/**
- * Information about how to reach other pages
- */
+/** Information about how to reach other pages */
 data class ApiPages(
-    /**
-     * First page
-     */
+    /** First page */
     val first: String? = null,
-    /**
-     * Last page
-     */
+    /** Last page */
     val last: String? = null,
-    /**
-     * Next page
-     */
+    /** Next page */
     val next: String? = null,
-    /**
-     * Previous page
-     */
-    val previous: String? = null
+    /** Previous page */
+    val previous: String? = null,
 )
 
-/**
- * All performance metrics are for the candidate model unless noted otherwise.
- */
+/** All performance metrics are for the candidate model unless noted otherwise. */
 data class ApiPerformanceMetrics(
-    /**
-     * Latency metrics for candidate model invocations (in milliseconds).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_latency") val candidateLatency: ApiLatencyMetrics? = null,
-    /**
-     * Optional object value serialized in the `token_usage` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_usage") val tokenUsage: ApiTokenUsage? = null
+    /** Latency metrics for candidate model invocations (in milliseconds). */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_latency")
+    val candidateLatency: ApiLatencyMetrics? = null,
+    /** Optional object value serialized in the `token_usage` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_usage")
+    val tokenUsage: ApiTokenUsage? = null,
 )
 
-/**
- * A single file’s metadata in the request.
- */
+/** A single file’s metadata in the request. */
 data class ApiPresignedUrlFile(
-    /**
-     * Local filename
-     */
+    /** Local filename */
     @com.fasterxml.jackson.annotation.JsonProperty("file_name") val fileName: String? = null,
-    /**
-     * The size of the file in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_size") val fileSize: String? = null
+    /** The size of the file in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_size") val fileSize: String? = null,
 )
 
-/**
- * Configuration for cross-encoder reranking during retrieval.
- */
+/** Configuration for cross-encoder reranking during retrieval. */
 data class ApiRerankingConfiguration(
-    /**
-     * Whether reranking is enabled for retrieval
-     */
+    /** Whether reranking is enabled for retrieval */
     val enabled: Boolean? = null,
-    /**
-     * Reranker model internal name
-     */
-    val model: String? = null
+    /** Reranker model internal name */
+    val model: String? = null,
 )
 
-/**
- * Resource Usage Description
- */
+/** Resource Usage Description */
 data class ApiResourceUsage(
-    /**
-     * Optional array value serialized in the `measurements` wire field.
-     */
+    /** Optional array value serialized in the `measurements` wire field. */
     val measurements: List<ApiUsageMeasurement>? = null,
-    /**
-     * Optional `string` value serialized in the `resource_uuid` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid") val resourceUuid: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `start` wire field.
-     */
+    /** Optional `string` value serialized in the `resource_uuid` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid")
+    val resourceUuid: String? = null,
+    /** Optional `date-time`-formatted value serialized in the `start` wire field. */
     val start: OffsetDateTime? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `stop` wire field.
-     */
-    val stop: OffsetDateTime? = null
+    /** Optional `date-time`-formatted value serialized in the `stop` wire field. */
+    val stop: OffsetDateTime? = null,
 )
 
-/**
- * Retriever span
- */
+/** Retriever span */
 data class ApiRetrieverSpan(
-    /**
-     * Common optional fields shared by all span types
-     */
+    /** Common optional fields shared by all span types */
     val common: ApiSpanCommon? = null
 )
 
-/**
- * Metadata for scheduled indexing entries
- */
+/** Metadata for scheduled indexing entries */
 data class ApiScheduledIndexingInfo(
+    /** Created at timestamp */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
-     * Created at timestamp
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Days for execution (day is represented same as in a cron expression, e.g. Monday begins with 1 )
+     * Days for execution (day is represented same as in a cron expression, e.g. Monday begins with
+     * 1 )
      */
     val days: List<Int>? = null,
-    /**
-     * Deleted at timestamp (if soft deleted)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: OffsetDateTime? = null,
-    /**
-     * Whether the schedule is currently active
-     */
+    /** Deleted at timestamp (if soft deleted) */
+    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at")
+    val deletedAt: OffsetDateTime? = null,
+    /** Whether the schedule is currently active */
     @com.fasterxml.jackson.annotation.JsonProperty("is_active") val isActive: Boolean? = null,
-    /**
-     * Knowledge base uuid associated with this schedule
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid") val knowledgeBaseUuid: String? = null,
-    /**
-     * Last time the schedule was executed
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_ran_at") val lastRanAt: OffsetDateTime? = null,
-    /**
-     * Next scheduled run
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at") val nextRunAt: OffsetDateTime? = null,
-    /**
-     * Scheduled time of execution (HH:MM:SS format)
-     */
+    /** Knowledge base uuid associated with this schedule */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid")
+    val knowledgeBaseUuid: String? = null,
+    /** Last time the schedule was executed */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_ran_at")
+    val lastRanAt: OffsetDateTime? = null,
+    /** Next scheduled run */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at")
+    val nextRunAt: OffsetDateTime? = null,
+    /** Scheduled time of execution (HH:MM:SS format) */
     val time: String? = null,
-    /**
-     * Updated at timestamp
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * Unique identifier for the scheduled indexing entry
-     */
-    val uuid: String? = null
+    /** Updated at timestamp */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** Unique identifier for the scheduled indexing entry */
+    val uuid: String? = null,
 )
 
-/**
- * Spaces Bucket Data Source
- */
+/** Spaces Bucket Data Source */
 data class ApiSpacesDataSource(
-    /**
-     * Spaces bucket name
-     */
+    /** Spaces bucket name */
     @com.fasterxml.jackson.annotation.JsonProperty("bucket_name") val bucketName: String? = null,
-    /**
-     * Optional `string` value serialized in the `item_path` wire field.
-     */
+    /** Optional `string` value serialized in the `item_path` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_path") val itemPath: String? = null,
-    /**
-     * Region of bucket
-     */
-    val region: String? = null
+    /** Region of bucket */
+    val region: String? = null,
 )
 
-/**
- * Common optional fields shared by all span types
- */
+/** Common optional fields shared by all span types */
 data class ApiSpanCommon(
-    /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Optional `int64`-formatted value serialized in the `duration_ns` wire field.
-     */
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Optional `int64`-formatted value serialized in the `duration_ns` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("duration_ns") val durationNs: String? = null,
-    /**
-     * Arbitrary structured metadata
-     */
+    /** Arbitrary structured metadata */
     val metadata: Map<String, String>? = null,
-    /**
-     * Optional `int32`-formatted value serialized in the `status_code` wire field.
-     */
+    /** Optional `int32`-formatted value serialized in the `status_code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("status_code") val statusCode: Int? = null,
-    /**
-     * Free-form tags for filtering/grouping
-     */
-    val tags: List<String>? = null
+    /** Free-form tags for filtering/grouping */
+    val tags: List<String>? = null,
 )
 
-/**
- * Tool span
- */
+/** Tool span */
 data class ApiToolSpan(
-    /**
-     * Common optional fields shared by all span types
-     */
+    /** Common optional fields shared by all span types */
     val common: ApiSpanCommon? = null,
-    /**
-     * Optional `string` value serialized in the `tool_call_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_call_id") val toolCallId: String? = null
+    /** Optional `string` value serialized in the `tool_call_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_call_id") val toolCallId: String? = null,
 )
 
-/**
- * Represents a span within a trace (e.g., LLM call, tool call, etc.)
- */
+/** Represents a span within a trace (e.g., LLM call, tool call, etc.) */
 data class ApiTraceSpan(
-    /**
-     * Optional object value serialized in the `agent` wire field.
-     */
+    /** Optional object value serialized in the `agent` wire field. */
     val agent: ApiAgentSpan? = null,
-    /**
-     * When the span was created
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Input data for the span (flexible structure - can be messages array, string, etc.)
-     */
+    /** When the span was created */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Input data for the span (flexible structure - can be messages array, string, etc.) */
     val input: Map<String, Any>? = null,
-    /**
-     * LLM span
-     */
+    /** LLM span */
     val llm: ApiLLMSpan? = null,
-    /**
-     * Name/identifier for the span
-     */
+    /** Name/identifier for the span */
     val name: String? = null,
-    /**
-     * Output data from the span (flexible structure - can be message, string, etc.)
-     */
+    /** Output data from the span (flexible structure - can be message, string, etc.) */
     val output: Map<String, Any>? = null,
-    /**
-     * Retriever span
-     */
+    /** Retriever span */
     val retriever: ApiRetrieverSpan? = null,
-    /**
-     * Tool span
-     */
+    /** Tool span */
     val tool: ApiToolSpan? = null,
-    /**
-     * Types of spans in a trace
-     */
+    /** Types of spans in a trace */
     val type: ApiTraceSpanType? = null,
-    /**
-     * Workflow span - can contain child spans (agent, llm, tool, retriever)
-     */
-    val workflow: ApiWorkflowSpan? = null
+    /** Workflow span - can contain child spans (agent, llm, tool, retriever) */
+    val workflow: ApiWorkflowSpan? = null,
 )
 
-/**
- * Usage Measurement Description
- */
+/** Usage Measurement Description */
 data class ApiUsageMeasurement(
-    /**
-     * Optional `int64`-formatted value serialized in the `tokens` wire field.
-     */
+    /** Optional `int64`-formatted value serialized in the `tokens` wire field. */
     val tokens: Long? = null,
-    /**
-     * Optional `string` value serialized in the `usage_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage_type") val usageType: String? = null
+    /** Optional `string` value serialized in the `usage_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage_type") val usageType: String? = null,
 )
 
-/**
- * WebCrawlerDataSource
- */
+/** WebCrawlerDataSource */
 data class ApiWebCrawlerDataSource(
-    /**
-     * The base url to crawl.
-     */
+    /** The base url to crawl. */
     @com.fasterxml.jackson.annotation.JsonProperty("base_url") val baseUrl: String? = null,
     /**
-     * Options for specifying how URLs found on pages should be handled. - UNKNOWN: Default unknown value - SCOPED: Only include the base URL. - PATH: Crawl the base URL and linked pages within the URL path. - DOMAIN: Crawl the base URL and linked pages within the same domain. - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain. - SITEMAP: Crawl URLs discovered in the sitemap.
+     * Options for specifying how URLs found on pages should be handled. - UNKNOWN: Default unknown
+     * value - SCOPED: Only include the base URL. - PATH: Crawl the base URL and linked pages within
+     * the URL path. - DOMAIN: Crawl the base URL and linked pages within the same domain. -
+     * SUBDOMAINS: Crawl the base URL and linked pages for any subdomain. - SITEMAP: Crawl URLs
+     * discovered in the sitemap.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("crawling_option") val crawlingOption: ApiCrawlingOption? = null,
-    /**
-     * Whether to ingest and index media (images, etc.) on web pages.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("crawling_option")
+    val crawlingOption: ApiCrawlingOption? = null,
+    /** Whether to ingest and index media (images, etc.) on web pages. */
     @com.fasterxml.jackson.annotation.JsonProperty("embed_media") val embedMedia: Boolean? = null,
-    /**
-     * Declaring which tags to exclude in web pages while webcrawling
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exclude_tags") val excludeTags: List<String>? = null
+    /** Declaring which tags to exclude in web pages while webcrawling */
+    @com.fasterxml.jackson.annotation.JsonProperty("exclude_tags")
+    val excludeTags: List<String>? = null,
 )
 
-/**
- * Workflow span - can contain child spans (agent, llm, tool, retriever)
- */
+/** Workflow span - can contain child spans (agent, llm, tool, retriever) */
 data class ApiWorkflowSpan(
-    /**
-     * Common optional fields shared by all span types
-     */
+    /** Common optional fields shared by all span types */
     val common: ApiSpanCommon? = null,
     /**
-     * Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
+     * Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever
+     * (not workflow)
      */
-    val spans: List<ApiTraceSpan>? = null
+    val spans: List<ApiTraceSpan>? = null,
 )
 
-/**
- * Typed representation of the `ApiWorkspace` API schema.
- */
+/** Typed representation of the `ApiWorkspace` API schema. */
 data class ApiWorkspace(
-    /**
-     * Agents
-     */
+    /** Agents */
     val agents: List<ApiAgent>? = null,
-    /**
-     * Creation date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * The id of user who created this workspace
-     */
+    /** Creation date */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** The id of user who created this workspace */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-    /**
-     * The email of the user who created this workspace
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_email") val createdByEmail: String? = null,
-    /**
-     * Deleted date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: OffsetDateTime? = null,
-    /**
-     * Description of the workspace
-     */
+    /** The email of the user who created this workspace */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_email")
+    val createdByEmail: String? = null,
+    /** Deleted date */
+    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at")
+    val deletedAt: OffsetDateTime? = null,
+    /** Description of the workspace */
     val description: String? = null,
-    /**
-     * Evaluations
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases") val evaluationTestCases: List<ApiEvaluationTestCase>? = null,
-    /**
-     * Name of the workspace
-     */
+    /** Evaluations */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases")
+    val evaluationTestCases: List<ApiEvaluationTestCase>? = null,
+    /** Name of the workspace */
     val name: String? = null,
-    /**
-     * Update date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * Unique id
-     */
-    val uuid: String? = null
+    /** Update date */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** Unique id */
+    val uuid: String? = null,
 )

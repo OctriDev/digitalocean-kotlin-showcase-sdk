@@ -3,298 +3,181 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `Alert` API schema.
- */
+/** Typed representation of the `Alert` API schema. */
 data class Alert(
-    /**
-     * A unique ID that can be used to identify and reference the alert.
-     */
+    /** A unique ID that can be used to identify and reference the alert. */
     val id: String? = null,
-    /**
-     * A human-friendly display name.
-     */
+    /** A human-friendly display name. */
     val name: String? = null,
-    /**
-     * The type of alert.
-     */
+    /** The type of alert. */
     val type: AlertUpdatableTypeEnum? = null,
     /**
-     * The threshold at which the alert will enter a trigger state. The specific threshold is dependent on the alert type.
+     * The threshold at which the alert will enter a trigger state. The specific threshold is
+     * dependent on the alert type.
      */
     val threshold: Long? = null,
-    /**
-     * The comparison operator used against the alert's threshold.
-     */
+    /** The comparison operator used against the alert's threshold. */
     val comparison: AlertUpdatableComparisonEnum? = null,
-    /**
-     * The notification settings for a trigger alert.
-     */
+    /** The notification settings for a trigger alert. */
     val notifications: Notification? = null,
-    /**
-     * Period of time the threshold must be exceeded to trigger the alert.
-     */
-    val period: AlertUpdatablePeriodEnum? = null
+    /** Period of time the threshold must be exceeded to trigger the alert. */
+    val period: AlertUpdatablePeriodEnum? = null,
 )
 
-/**
- * Typed representation of the `AlertBase` API schema.
- */
+/** Typed representation of the `AlertBase` API schema. */
 data class AlertBase(
-    /**
-     * A unique ID that can be used to identify and reference the alert.
-     */
+    /** A unique ID that can be used to identify and reference the alert. */
     val id: String? = null
 )
 
-/**
- * Typed representation of the `AlertUpdatable` API schema.
- */
+/** Typed representation of the `AlertUpdatable` API schema. */
 data class AlertUpdatable(
-    /**
-     * A human-friendly display name.
-     */
+    /** A human-friendly display name. */
     val name: String? = null,
-    /**
-     * The type of alert.
-     */
+    /** The type of alert. */
     val type: AlertUpdatableTypeEnum? = null,
     /**
-     * The threshold at which the alert will enter a trigger state. The specific threshold is dependent on the alert type.
+     * The threshold at which the alert will enter a trigger state. The specific threshold is
+     * dependent on the alert type.
      */
     val threshold: Long? = null,
-    /**
-     * The comparison operator used against the alert's threshold.
-     */
+    /** The comparison operator used against the alert's threshold. */
     val comparison: AlertUpdatableComparisonEnum? = null,
-    /**
-     * The notification settings for a trigger alert.
-     */
+    /** The notification settings for a trigger alert. */
     val notifications: Notification? = null,
-    /**
-     * Period of time the threshold must be exceeded to trigger the alert.
-     */
-    val period: AlertUpdatablePeriodEnum? = null
+    /** Period of time the threshold must be exceeded to trigger the alert. */
+    val period: AlertUpdatablePeriodEnum? = null,
 )
 
-/**
- * Typed representation of the `AllAlerts` API schema.
- */
+/** Typed representation of the `AllAlerts` API schema. */
 data class AllAlerts(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val alerts: List<Alert>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllChecks` API schema.
- */
+/** Typed representation of the `AllChecks` API schema. */
 data class AllChecks(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val checks: List<Check>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `Check` API schema.
- */
+/** Typed representation of the `Check` API schema. */
 data class Check(
-    /**
-     * A unique ID that can be used to identify and reference the check.
-     */
+    /** A unique ID that can be used to identify and reference the check. */
     val id: String? = null,
-    /**
-     * A human-friendly display name.
-     */
+    /** A human-friendly display name. */
     val name: String? = null,
-    /**
-     * The type of health check to perform.
-     */
+    /** The type of health check to perform. */
     val type: CheckUpdatableTypeEnum? = null,
-    /**
-     * The endpoint to perform healthchecks on.
-     */
+    /** The endpoint to perform healthchecks on. */
     val target: String? = null,
-    /**
-     * An array containing the selected regions to perform healthchecks from.
-     */
+    /** An array containing the selected regions to perform healthchecks from. */
     val regions: List<CheckUpdatableRegionsItemEnum>? = null,
-    /**
-     * A boolean value indicating whether the check is enabled/disabled.
-     */
-    val enabled: Boolean? = null
+    /** A boolean value indicating whether the check is enabled/disabled. */
+    val enabled: Boolean? = null,
 )
 
-/**
- * Typed representation of the `CheckBase` API schema.
- */
+/** Typed representation of the `CheckBase` API schema. */
 data class CheckBase(
-    /**
-     * A unique ID that can be used to identify and reference the check.
-     */
+    /** A unique ID that can be used to identify and reference the check. */
     val id: String? = null
 )
 
-/**
- * Typed representation of the `CheckUpdatable` API schema.
- */
+/** Typed representation of the `CheckUpdatable` API schema. */
 data class CheckUpdatable(
-    /**
-     * A human-friendly display name.
-     */
+    /** A human-friendly display name. */
     val name: String? = null,
-    /**
-     * The type of health check to perform.
-     */
+    /** The type of health check to perform. */
     val type: CheckUpdatableTypeEnum? = null,
-    /**
-     * The endpoint to perform healthchecks on.
-     */
+    /** The endpoint to perform healthchecks on. */
     val target: String? = null,
-    /**
-     * An array containing the selected regions to perform healthchecks from.
-     */
+    /** An array containing the selected regions to perform healthchecks from. */
     val regions: List<CheckUpdatableRegionsItemEnum>? = null,
-    /**
-     * A boolean value indicating whether the check is enabled/disabled.
-     */
-    val enabled: Boolean? = null
+    /** A boolean value indicating whether the check is enabled/disabled. */
+    val enabled: Boolean? = null,
 )
 
-/**
- * Typed representation of the `ExistingAlert` API schema.
- */
+/** Typed representation of the `ExistingAlert` API schema. */
 data class ExistingAlert(
-    /**
-     * Optional object value serialized in the `alert` wire field.
-     */
+    /** Optional object value serialized in the `alert` wire field. */
     val alert: Alert? = null
 )
 
-/**
- * Typed representation of the `ExistingCheck` API schema.
- */
+/** Typed representation of the `ExistingCheck` API schema. */
 data class ExistingCheck(
-    /**
-     * Optional object value serialized in the `check` wire field.
-     */
+    /** Optional object value serialized in the `check` wire field. */
     val check: Check? = null
 )
 
-/**
- * Typed representation of the `ExistingCheckState` API schema.
- */
+/** Typed representation of the `ExistingCheckState` API schema. */
 data class ExistingCheckState(
-    /**
-     * Optional object value serialized in the `state` wire field.
-     */
+    /** Optional object value serialized in the `state` wire field. */
     val state: State? = null
 )
 
-/**
- * Required object value serialized in the `slack[]` wire field.
- */
+/** Required object value serialized in the `slack[]` wire field. */
 data class NotificationSlackItem(
-    /**
-     * Slack channel to notify of an alert trigger.
-     */
+    /** Slack channel to notify of an alert trigger. */
     val channel: String,
-    /**
-     * Slack Webhook URL.
-     */
-    val url: String
+    /** Slack Webhook URL. */
+    val url: String,
 )
 
-/**
- * The notification settings for a trigger alert.
- */
+/** The notification settings for a trigger alert. */
 data class Notification(
     /**
-     * An email to notify on an alert trigger. The Email has to be one that is verified on that DigitalOcean account.
+     * An email to notify on an alert trigger. The Email has to be one that is verified on that
+     * DigitalOcean account.
      */
     val email: List<String>,
-    /**
-     * Slack integration details.
-     */
-    val slack: List<NotificationSlackItem>
+    /** Slack integration details. */
+    val slack: List<NotificationSlackItem>,
 )
 
-/**
- * Typed representation of the `PreviousOutage` API schema.
- */
+/** Typed representation of the `PreviousOutage` API schema. */
 data class PreviousOutage(
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `started_at` wire field.
-     */
+    /** Optional `string` value serialized in the `started_at` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
-    /**
-     * Optional `string` value serialized in the `ended_at` wire field.
-     */
+    /** Optional `string` value serialized in the `ended_at` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("ended_at") val endedAt: String? = null,
-    /**
-     * Optional `integer` value serialized in the `duration_seconds` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("duration_seconds") val durationSeconds: Long? = null
+    /** Optional `integer` value serialized in the `duration_seconds` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("duration_seconds")
+    val durationSeconds: Long? = null,
 )
 
-/**
- * A map of region to regional state
- */
+/** A map of region to regional state */
 data class RegionalState(
-    /**
-     * Optional object value serialized in the `us_east` wire field.
-     */
+    /** Optional object value serialized in the `us_east` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("us_east") val usEast: RegionState? = null,
-    /**
-     * Optional object value serialized in the `eu_west` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("eu_west") val euWest: RegionState? = null
+    /** Optional object value serialized in the `eu_west` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("eu_west") val euWest: RegionState? = null,
 )
 
-/**
- * Typed representation of the `RegionState` API schema.
- */
+/** Typed representation of the `RegionState` API schema. */
 data class RegionState(
-    /**
-     * Optional enumerated value serialized in the `status` wire field.
-     */
+    /** Optional enumerated value serialized in the `status` wire field. */
     val status: RegionStateStatusEnum? = null,
-    /**
-     * Optional `string` value serialized in the `status_changed_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("status_changed_at") val statusChangedAt: String? = null,
-    /**
-     * Optional `number` value serialized in the `thirty_day_uptime_percentage` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("thirty_day_uptime_percentage") val thirtyDayUptimePercentage: Double? = null
+    /** Optional `string` value serialized in the `status_changed_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("status_changed_at")
+    val statusChangedAt: String? = null,
+    /** Optional `number` value serialized in the `thirty_day_uptime_percentage` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("thirty_day_uptime_percentage")
+    val thirtyDayUptimePercentage: Double? = null,
 )
 
-/**
- * Typed representation of the `State` API schema.
- */
+/** Typed representation of the `State` API schema. */
 data class State(
-    /**
-     * A map of region to regional state
-     */
+    /** A map of region to regional state */
     val regions: RegionalState? = null,
-    /**
-     * Optional object value serialized in the `previous_outage` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_outage") val previousOutage: PreviousOutage? = null
+    /** Optional object value serialized in the `previous_outage` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_outage")
+    val previousOutage: PreviousOutage? = null,
 )

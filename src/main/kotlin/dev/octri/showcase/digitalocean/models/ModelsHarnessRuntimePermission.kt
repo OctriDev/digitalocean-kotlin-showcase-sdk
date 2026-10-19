@@ -4,51 +4,47 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
+ * Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for
+ * every agent.
  */
 data class PermissionFilesystem(
-    /**
-     * Optional enumerated value serialized in the `mode` wire field.
-     */
+    /** Optional enumerated value serialized in the `mode` wire field. */
     val mode: PermissionFilesystemModeEnum? = null,
     /**
-     * Additional writable paths beyond the workspace. Values must not contain shell-style ${VAR}/$VAR expansions.
+     * Additional writable paths beyond the workspace. Values must not contain shell-style
+     * ${VAR}/$VAR expansions.
      */
-    val allowWrite: List<String>? = null
+    val allowWrite: List<String>? = null,
 )
 
 /**
- * Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
+ * Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay
+ * blocked by the broader egress policy.
  */
 data class PermissionNetwork(
-    /**
-     * Optional enumerated value serialized in the `default` wire field.
-     */
+    /** Optional enumerated value serialized in the `default` wire field. */
     val default: PermissionNetworkDefaultEnum? = null,
-    /**
-     * Optional array value serialized in the `allow` wire field.
-     */
-    val allow: List<String>? = null
+    /** Optional array value serialized in the `allow` wire field. */
+    val allow: List<String>? = null,
 )
 
-/**
- * Typed representation of the `PermissionRule` API schema.
- */
+/** Typed representation of the `PermissionRule` API schema. */
 data class PermissionRule(
     /**
      * Tool taxonomy this rule matches (e.g. bash, file.read, file.write, web.fetch, git.*, mcp).
      */
     val tool: String,
-    /**
-     * Required enumerated value serialized in the `action` wire field.
-     */
+    /** Required enumerated value serialized in the `action` wire field. */
     val action: PermissionRuleActionEnum,
     /**
-     * Optional keys narrowing the rule (e.g. {"command": "npm run deploy"} for bash). Values are globs and must not contain shell-style ${VAR}/$VAR expansions.
+     * Optional keys narrowing the rule (e.g. {"command": "npm run deploy"} for bash). Values are
+     * globs and must not contain shell-style ${VAR}/$VAR expansions.
      */
     val match: Map<String, String>? = null,
     /**
-     * What happens when the agent cannot enforce the rule exactly. "strict" rejects the session; "best-effort" degrades to the closest more-restrictive form and warns (never widens). Defaults to strict for deny rules, best-effort otherwise.
+     * What happens when the agent cannot enforce the rule exactly. "strict" rejects the session;
+     * "best-effort" degrades to the closest more-restrictive form and warns (never widens).
+     * Defaults to strict for deny rules, best-effort otherwise.
      */
-    val enforcement: PermissionRuleEnforcementEnum? = null
+    val enforcement: PermissionRuleEnforcementEnum? = null,
 )

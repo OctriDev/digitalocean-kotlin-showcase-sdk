@@ -5,314 +5,236 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Set for `digitalocean_oauth` and `private_oauth` connections.
- */
+/** Set for `digitalocean_oauth` and `private_oauth` connections. */
 data class ConnectionOauth(
-    /**
-     * Provider scopes granted, or requested while pending.
-     */
+    /** Provider scopes granted, or requested while pending. */
     val scopes: List<String>? = null,
-    /**
-     * When the user completed authorization.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("granted_at") val grantedAt: OffsetDateTime? = null
+    /** When the user completed authorization. */
+    @com.fasterxml.jackson.annotation.JsonProperty("granted_at")
+    val grantedAt: OffsetDateTime? = null,
 )
 
 /**
- * One connection of any kind. Everything every kind has stays on the envelope, so a reader takes an ID, a status or a provider without first asking what kind it is; only the members a kind alone has move into details.
+ * One connection of any kind. Everything every kind has stays on the envelope, so a reader takes an
+ * ID, a status or a provider without first asking what kind it is; only the members a kind alone
+ * has move into details.
  */
 data class Connection(
-    /**
-     * Opaque connection ID.
-     */
+    /** Opaque connection ID. */
     val id: String? = null,
-    /**
-     * Provider slug, for example `jira`.
-     */
+    /** Provider slug, for example `jira`. */
     val provider: String? = null,
-    /**
-     * Human-readable provider name, for example `Jira`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("provider_display_name") val providerDisplayName: String? = null,
-    /**
-     * Your identifier for the user the connection acts for.
-     */
+    /** Human-readable provider name, for example `Jira`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("provider_display_name")
+    val providerDisplayName: String? = null,
+    /** Your identifier for the user the connection acts for. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * pending, active, revoked, or expired.
-     */
+    /** pending, active, revoked, or expired. */
     val status: ConnectionStatusEnum? = null,
+    /** When the connection was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** When the connection was last modified. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** When the connection was revoked. */
+    @com.fasterxml.jackson.annotation.JsonProperty("revoked_at")
+    val revokedAt: OffsetDateTime? = null,
+    /** Non-sensitive provider configuration. */
+    @com.fasterxml.jackson.annotation.JsonProperty("connection_parameters")
+    val connectionParameters: Map<String, Any>? = null,
+    /** `digitalocean_oauth`, `private_oauth`, or `team_api_key`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("credential_kind")
+    val credentialKind: ConnectionCredentialKindEnum? = null,
     /**
-     * When the connection was created.
+     * Empty for `digitalocean_oauth`; otherwise the ID of the team provider credential the
+     * connection uses.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * When the connection was last modified.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * When the connection was revoked.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("revoked_at") val revokedAt: OffsetDateTime? = null,
-    /**
-     * Non-sensitive provider configuration.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("connection_parameters") val connectionParameters: Map<String, Any>? = null,
-    /**
-     * `digitalocean_oauth`, `private_oauth`, or `team_api_key`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_kind") val credentialKind: ConnectionCredentialKindEnum? = null,
-    /**
-     * Empty for `digitalocean_oauth`; otherwise the ID of the team provider credential the connection uses.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_id") val credentialId: String? = null,
-    /**
-     * Private network the connection's calls use, when configured.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("credential_id")
+    val credentialId: String? = null,
+    /** Private network the connection's calls use, when configured. */
     val network: ConnectionNetwork? = null,
-    /**
-     * Set for `digitalocean_oauth` and `private_oauth` connections.
-     */
+    /** Set for `digitalocean_oauth` and `private_oauth` connections. */
     val oauth: ConnectionOauth? = null,
-    /**
-     * Set for `team_api_key` connections.
-     */
+    /** Set for `team_api_key` connections. */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: Map<String, Any>? = null,
     /**
-     * Deprecated: read `oauth.scopes`. Duplicated here so a reader of the pre-union shape keeps working; empty for a kind with no OAuth grant.
+     * Deprecated: read `oauth.scopes`. Duplicated here so a reader of the pre-union shape keeps
+     * working; empty for a kind with no OAuth grant.
      */
     val scopes: List<String>? = null,
-    /**
-     * Deprecated: read `oauth.granted_at`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("granted_at") val grantedAt: OffsetDateTime? = null,
-    /**
-     * DigitalOcean user ID of the user who created the connection, when recorded.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("owning_user_id") val owningUserId: String? = null
+    /** Deprecated: read `oauth.granted_at`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("granted_at")
+    val grantedAt: OffsetDateTime? = null,
+    /** DigitalOcean user ID of the user who created the connection, when recorded. */
+    @com.fasterxml.jackson.annotation.JsonProperty("owning_user_id")
+    val owningUserId: String? = null,
 )
 
 /**
- * Present only while a connection is pending. Send the user to `connect_url`, then read the connection until it becomes active or expired.
+ * Present only while a connection is pending. Send the user to `connect_url`, then read the
+ * connection until it becomes active or expired.
  */
 data class ConnectionAuthorization(
-    /**
-     * Currently always `requires_authorization`.
-     */
+    /** Currently always `requires_authorization`. */
     val status: ConnectionAuthorizationStatusEnum? = null,
-    /**
-     * Browser URL, on a DigitalOcean Cloud origin, where the user authorizes the connection.
-     */
+    /** Browser URL, on a DigitalOcean Cloud origin, where the user authorizes the connection. */
     @com.fasterxml.jackson.annotation.JsonProperty("connect_url") val connectUrl: String? = null,
+    /** Verification code issued with `connect_url`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("verification_code")
+    val verificationCode: String? = null,
     /**
-     * Verification code issued with `connect_url`.
+     * When the authorization expires. The link can stop working earlier; if the connection becomes
+     * expired, create it again for a new link.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("verification_code") val verificationCode: String? = null,
-    /**
-     * When the authorization expires. The link can stop working earlier; if the connection becomes expired, create it again for a new link.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
+    val expiresAt: OffsetDateTime? = null,
 )
 
-/**
- * Use one of your team's provider credentials.
- */
+/** Use one of your team's provider credentials. */
 data class ConnectionCreateCredentialTeamCredential(
-    /**
-     * Required. ID of an active provider credential for the same provider that you can use.
-     */
+    /** Required. ID of an active provider credential for the same provider that you can use. */
     @com.fasterxml.jackson.annotation.JsonProperty("credential_id") val credentialId: String? = null
 )
 
-/**
- * Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application.
- */
+/** Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application. */
 data class ConnectionCreateCredential(
-    /**
-     * Use DigitalOcean's shared OAuth application.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("digitalocean_oauth") val digitaloceanOauth: Map<String, Any>? = null,
-    /**
-     * Use one of your team's provider credentials.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_credential") val teamCredential: ConnectionCreateCredentialTeamCredential? = null
+    /** Use DigitalOcean's shared OAuth application. */
+    @com.fasterxml.jackson.annotation.JsonProperty("digitalocean_oauth")
+    val digitaloceanOauth: Map<String, Any>? = null,
+    /** Use one of your team's provider credentials. */
+    @com.fasterxml.jackson.annotation.JsonProperty("team_credential")
+    val teamCredential: ConnectionCreateCredentialTeamCredential? = null,
 )
 
-/**
- * Required object value serialized in the `destinations[]` wire field.
- */
+/** Required object value serialized in the `destinations[]` wire field. */
 data class ConnectionCreateNetworkVpcDestinationsItem(
-    /**
-     * Host name or IP address. It must resolve only to private addresses.
-     */
+    /** Host name or IP address. It must resolve only to private addresses. */
     val host: String? = null,
-    /**
-     * Port, 1 to 65535.
-     */
+    /** Port, 1 to 65535. */
     val port: Long? = null,
     /**
-     * Optional CIDR ranges; when set, every address the host resolves to must fall within one of them.
+     * Optional CIDR ranges; when set, every address the host resolves to must fall within one of
+     * them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs") val allowedIpCidrs: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs")
+    val allowedIpCidrs: List<String>? = null,
 )
 
-/**
- * Route through a VPC.
- */
+/** Route through a VPC. */
 data class ConnectionCreateNetworkVpc(
-    /**
-     * UUID of a VPC owned by your team.
-     */
+    /** UUID of a VPC owned by your team. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /**
-     * Private hosts the connection's calls may reach through the VPC. At least one is required.
-     */
-    val destinations: List<ConnectionCreateNetworkVpcDestinationsItem>? = null
+    /** Private hosts the connection's calls may reach through the VPC. At least one is required. */
+    val destinations: List<ConnectionCreateNetworkVpcDestinationsItem>? = null,
 )
 
 /**
- * Optional private network for the connection's calls. Requires VPC networking to be enabled for your account (403 otherwise).
+ * Optional private network for the connection's calls. Requires VPC networking to be enabled for
+ * your account (403 otherwise).
  */
 data class ConnectionCreateNetwork(
-    /**
-     * Route through a VPC.
-     */
+    /** Route through a VPC. */
     val vpc: ConnectionCreateNetworkVpc? = null
 )
 
-/**
- * Describes a connection to create.
- */
+/** Describes a connection to create. */
 data class ConnectionCreate(
-    /**
-     * Required provider slug, from the provider list.
-     */
+    /** Required provider slug, from the provider list. */
     val provider: String,
     /**
-     * Required. Your identifier for the user the connection acts for: 1 to 64 characters from `[A-Za-z0-9._-]`. A session whose `actor_id` equals it uses this connection.
+     * Required. Your identifier for the user the connection acts for: 1 to 64 characters from
+     * `[A-Za-z0-9._-]`. A session whose `actor_id` equals it uses this connection.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
     /**
-     * Optional OAuth scopes to request. Defaults to every scope the provider offers; scopes outside that set are rejected. Ignored for API-key credentials.
+     * Optional OAuth scopes to request. Defaults to every scope the provider offers; scopes outside
+     * that set are rejected. Ignored for API-key credentials.
      */
     val scopes: List<String>? = null,
     /**
      * Values for the provider's `connection_parameters`, validated against their specifications.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connection_parameters") val connectionParameters: Map<String, Any>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("connection_parameters")
+    val connectionParameters: Map<String, Any>? = null,
     /**
      * Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application.
      */
     val credential: ConnectionCreateCredential? = null,
     /**
-     * Optional private network for the connection's calls. Requires VPC networking to be enabled for your account (403 otherwise).
+     * Optional private network for the connection's calls. Requires VPC networking to be enabled
+     * for your account (403 otherwise).
      */
-    val network: ConnectionCreateNetwork? = null
+    val network: ConnectionCreateNetwork? = null,
 )
 
-/**
- * Required object value serialized in the `destinations[]` wire field.
- */
+/** Required object value serialized in the `destinations[]` wire field. */
 data class ConnectionNetworkVpcDestinationsItem(
-    /**
-     * Host name or IP address. It must resolve only to private addresses.
-     */
+    /** Host name or IP address. It must resolve only to private addresses. */
     val host: String? = null,
-    /**
-     * Port, 1 to 65535.
-     */
+    /** Port, 1 to 65535. */
     val port: Long? = null,
     /**
-     * Optional CIDR ranges; when set, every address the host resolves to must fall within one of them.
+     * Optional CIDR ranges; when set, every address the host resolves to must fall within one of
+     * them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs") val allowedIpCidrs: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs")
+    val allowedIpCidrs: List<String>? = null,
 )
 
-/**
- * Route through a VPC.
- */
+/** Route through a VPC. */
 data class ConnectionNetworkVpc(
-    /**
-     * UUID of a VPC owned by your team.
-     */
+    /** UUID of a VPC owned by your team. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /**
-     * Region of the VPC. Set by DigitalOcean; do not send it.
-     */
+    /** Region of the VPC. Set by DigitalOcean; do not send it. */
     val region: String? = null,
-    /**
-     * Private hosts the connection's calls may reach through the VPC. At least one is required.
-     */
-    val destinations: List<ConnectionNetworkVpcDestinationsItem>? = null
+    /** Private hosts the connection's calls may reach through the VPC. At least one is required. */
+    val destinations: List<ConnectionNetworkVpcDestinationsItem>? = null,
 )
 
-/**
- * Routes a connection's calls through a private network instead of the public internet.
- */
+/** Routes a connection's calls through a private network instead of the public internet. */
 data class ConnectionNetwork(
-    /**
-     * Route through a VPC.
-     */
+    /** Route through a VPC. */
     val vpc: ConnectionNetworkVpc? = null
 )
 
 /**
- * Describes one non-sensitive value collected while configuring a provider connection. Clients can render these specifications generically.
+ * Describes one non-sensitive value collected while configuring a provider connection. Clients can
+ * render these specifications generically.
  */
 data class ConnectionParameterSpec(
-    /**
-     * Key of the value in `connection_parameters` or `credential_parameters`.
-     */
+    /** Key of the value in `connection_parameters` or `credential_parameters`. */
     val key: String? = null,
-    /**
-     * Display label.
-     */
+    /** Display label. */
     val label: String? = null,
-    /**
-     * Help text.
-     */
+    /** Help text. */
     val description: String? = null,
-    /**
-     * How the value is entered: string, `https_origin`, or enum.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_kind") val inputKind: ConnectionParameterSpecInputKindEnum? = null,
-    /**
-     * Whether the value must be supplied.
-     */
+    /** How the value is entered: string, `https_origin`, or enum. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_kind")
+    val inputKind: ConnectionParameterSpecInputKindEnum? = null,
+    /** Whether the value must be supplied. */
     val required: Boolean? = null,
     /**
-     * How the value is normalized before it is validated and stored: trim, lowercase, uppercase, or `https_origin`.
+     * How the value is normalized before it is validated and stored: trim, lowercase, uppercase, or
+     * `https_origin`.
      */
     val normalization: String? = null,
-    /**
-     * For enum inputs, the accepted values.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_values") val allowedValues: List<String>? = null,
-    /**
-     * For `https_origin` inputs, the host suffixes the origin's host must match.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_host_suffixes") val allowedHostSuffixes: List<String>? = null,
-    /**
-     * Maximum length of the value. 0 means the default maximum of 4096.
-     */
+    /** For enum inputs, the accepted values. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_values")
+    val allowedValues: List<String>? = null,
+    /** For `https_origin` inputs, the host suffixes the origin's host must match. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_host_suffixes")
+    val allowedHostSuffixes: List<String>? = null,
+    /** Maximum length of the value. 0 means the default maximum of 4096. */
     @com.fasterxml.jackson.annotation.JsonProperty("max_length") val maxLength: Int? = null,
-    /**
-     * Optional RE2 expression matched against the whole normalized value.
-     */
-    val pattern: String? = null
+    /** Optional RE2 expression matched against the whole normalized value. */
+    val pattern: String? = null,
 )
 
-/**
- * Returns the connection and any authorization still needed.
- */
+/** Returns the connection and any authorization still needed. */
 data class ConnectionResponse(
-    /**
-     * The connection.
-     */
+    /** The connection. */
     val connection: Connection? = null,
-    /**
-     * Present only while the connection is pending.
-     */
-    val authorization: ConnectionAuthorization? = null
+    /** Present only while the connection is pending. */
+    val authorization: ConnectionAuthorization? = null,
 )

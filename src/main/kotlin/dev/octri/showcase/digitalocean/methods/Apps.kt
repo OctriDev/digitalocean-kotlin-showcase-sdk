@@ -13,6 +13,7 @@ import dev.octri.showcase.digitalocean.AppJobInvocations
 import dev.octri.showcase.digitalocean.AppMetricsBandwidthUsage
 import dev.octri.showcase.digitalocean.AppProposeResponse
 import dev.octri.showcase.digitalocean.AppResponse
+import dev.octri.showcase.digitalocean.AppSpecRequest
 import dev.octri.showcase.digitalocean.AppsAlertResponse
 import dev.octri.showcase.digitalocean.AppsDeleteAppResponse
 import dev.octri.showcase.digitalocean.AppsDeploymentResponse
@@ -26,7 +27,6 @@ import dev.octri.showcase.digitalocean.AppsListDeploymentsParameterItemEnum
 import dev.octri.showcase.digitalocean.AppsListEventsParameterItemEnum
 import dev.octri.showcase.digitalocean.AppsListInstanceSizesResponse
 import dev.octri.showcase.digitalocean.AppsListRegionsResponse
-import dev.octri.showcase.digitalocean.AppSpecRequest
 import dev.octri.showcase.digitalocean.AppsResponse
 import dev.octri.showcase.digitalocean.AppsValidateRollback
 import dev.octri.showcase.digitalocean.CancelEvent
@@ -46,7 +46,7 @@ object Apps {
         val componentName: String,
         val type: SchemaSchemaEnum2ebc6d5a,
         val follow: Boolean? = null,
-        val podConnectionTimeout: String? = null
+        val podConnectionTimeout: String? = null,
     )
 
     /** Parameters for [appsGetJobInvocationLogs]. */
@@ -58,13 +58,20 @@ object Apps {
         val deploymentId: String? = null,
         val follow: Boolean? = null,
         val podConnectionTimeout: String? = null,
-        val tailLines: String? = null
+        val tailLines: String? = null,
     )
 
     /**
-     * List all apps on your account. Information about the current active deployment as well as any in progress ones will also be included for each app.
+     * List all apps on your account. Information about the current active deployment as well as any
+     * in progress ones will also be included for each app.
      */
-    fun appsList(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, withProjects: Boolean? = null, options: RequestOptions? = null): AppsResponse =
+    fun appsList(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        withProjects: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppsResponse =
         dev.octri.showcase.digitalocean.methods.AppsListOperation.appsList(
             clientConfig,
             page,
@@ -74,9 +81,17 @@ object Apps {
         )
 
     /**
-     * Create a new app by submitting an app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).
+     * Create a new app by submitting an app specification. For documentation on app specifications
+     * (`AppSpec` objects), please refer to
+     * [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).
      */
-    fun appsCreate(clientConfig: ClientConfig, spec: AppSpecRequest, accept: SchemaSchemaEnum? = null, projectId: String? = null, options: RequestOptions? = null): AppResponse =
+    fun appsCreate(
+        clientConfig: ClientConfig,
+        spec: AppSpecRequest,
+        accept: SchemaSchemaEnum? = null,
+        projectId: String? = null,
+        options: RequestOptions? = null,
+    ): AppResponse =
         dev.octri.showcase.digitalocean.methods.AppsCreateOperation.appsCreate(
             clientConfig,
             spec,
@@ -86,9 +101,15 @@ object Apps {
         )
 
     /**
-     * Delete an existing app. Once deleted, all active deployments will be permanently shut down and the app deleted. If needed, be sure to back up your app specification so that you may re-create it at a later time.
+     * Delete an existing app. Once deleted, all active deployments will be permanently shut down
+     * and the app deleted. If needed, be sure to back up your app specification so that you may
+     * re-create it at a later time.
      */
-    fun appsDelete(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): AppsDeleteAppResponse =
+    fun appsDelete(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): AppsDeleteAppResponse =
         dev.octri.showcase.digitalocean.methods.AppsDeleteOperation.appsDelete(
             clientConfig,
             id,
@@ -96,9 +117,16 @@ object Apps {
         )
 
     /**
-     * Retrieve details about an existing app by either its ID or name. To retrieve an app by its name, do not include an ID in the request path. Information about the current active deployment as well as any in progress ones will also be included in the response.
+     * Retrieve details about an existing app by either its ID or name. To retrieve an app by its
+     * name, do not include an ID in the request path. Information about the current active
+     * deployment as well as any in progress ones will also be included in the response.
      */
-    fun appsGet(clientConfig: ClientConfig, id: String, name: String? = null, options: RequestOptions? = null): AppResponse =
+    fun appsGet(
+        clientConfig: ClientConfig,
+        id: String,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): AppResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetOperation.appsGet(
             clientConfig,
             id,
@@ -107,9 +135,17 @@ object Apps {
         )
 
     /**
-     * Update an existing app by submitting a new app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).
+     * Update an existing app by submitting a new app specification. For documentation on app
+     * specifications (`AppSpec` objects), please refer to
+     * [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).
      */
-    fun appsUpdate(clientConfig: ClientConfig, id: String, spec: AppSpecRequest, updateAllSourceVersions: Boolean? = null, options: RequestOptions? = null): AppResponse =
+    fun appsUpdate(
+        clientConfig: ClientConfig,
+        id: String,
+        spec: AppSpecRequest,
+        updateAllSourceVersions: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppResponse =
         dev.octri.showcase.digitalocean.methods.AppsUpdateOperation.appsUpdate(
             clientConfig,
             id,
@@ -119,9 +155,16 @@ object Apps {
         )
 
     /**
-     * Triggers a rolling restart of an app, either across all components or only the components you specify. Pass `components` to limit the restart; omit it to restart all components. A successful response includes the resulting deployment object.
+     * Triggers a rolling restart of an app, either across all components or only the components you
+     * specify. Pass `components` to limit the restart; omit it to restart all components. A
+     * successful response includes the resulting deployment object.
      */
-    fun appsRestart(clientConfig: ClientConfig, appId: String, components: List<String>? = null, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsRestart(
+        clientConfig: ClientConfig,
+        appId: String,
+        components: List<String>? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsRestartOperation.appsRestart(
             clientConfig,
             appId,
@@ -130,35 +173,63 @@ object Apps {
         )
 
     /**
-     * Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
+     * Retrieve the logs of the active deployment if one exists. The response will include links to
+     * either real-time logs of an in-progress or active deployment or archived logs of a past
+     * deployment. Note log_type=BUILD logs will return logs associated with the current active
+     * deployment (being served). To view build logs associated with in-progress build, the query
+     * must explicitly reference the deployment id.
      */
-    fun appsGetLogsActiveDeployment(clientConfig: ClientConfig, appId: String, componentName: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse =
-        dev.octri.showcase.digitalocean.methods.AppsGetLogsActiveDeploymentOperation.appsGetLogsActiveDeployment(
-            clientConfig,
-            appId,
-            componentName,
-            type,
-            follow,
-            podConnectionTimeout,
-            options,
-        )
+    fun appsGetLogsActiveDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        componentName: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
+        dev.octri.showcase.digitalocean.methods.AppsGetLogsActiveDeploymentOperation
+            .appsGetLogsActiveDeployment(
+                clientConfig,
+                appId,
+                componentName,
+                type,
+                follow,
+                podConnectionTimeout,
+                options,
+            )
 
     /**
-     * Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.
+     * Returns a websocket URL that allows sending/receiving console input and output to a component
+     * of the active deployment if one exists.
      */
-    fun appsGetExecActiveDeployment(clientConfig: ClientConfig, appId: String, componentName: String, instanceName: String? = null, options: RequestOptions? = null): AppsGetExecResponse =
-        dev.octri.showcase.digitalocean.methods.AppsGetExecActiveDeploymentOperation.appsGetExecActiveDeployment(
-            clientConfig,
-            appId,
-            componentName,
-            instanceName,
-            options,
-        )
+    fun appsGetExecActiveDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        componentName: String,
+        instanceName: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetExecResponse =
+        dev.octri.showcase.digitalocean.methods.AppsGetExecActiveDeploymentOperation
+            .appsGetExecActiveDeployment(
+                clientConfig,
+                appId,
+                componentName,
+                instanceName,
+                options,
+            )
 
     /**
-     * Retrieve the list of running instances for a given application, including instance names and component types. Please note that these instances are ephemeral and may change over time. It is recommended not to make persistent changes or develop scripts that rely on their persistence.
+     * Retrieve the list of running instances for a given application, including instance names and
+     * component types. Please note that these instances are ephemeral and may change over time. It
+     * is recommended not to make persistent changes or develop scripts that rely on their
+     * persistence.
      */
-    fun appsGetInstances(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppInstances =
+    fun appsGetInstances(
+        clientConfig: ClientConfig,
+        appId: String,
+        options: RequestOptions? = null,
+    ): AppInstances =
         dev.octri.showcase.digitalocean.methods.AppsGetInstancesOperation.appsGetInstances(
             clientConfig,
             appId,
@@ -166,9 +237,17 @@ object Apps {
         )
 
     /**
-     * Lists deployments for a specific app. Filter by deployment type and use `page` and `per_page` to paginate the results.
+     * Lists deployments for a specific app. Filter by deployment type and use `page` and `per_page`
+     * to paginate the results.
      */
-    fun appsListDeployments(clientConfig: ClientConfig, appId: String, page: Long? = null, perPage: Long? = null, deploymentTypes: List<AppsListDeploymentsParameterItemEnum>? = null, options: RequestOptions? = null): AppsDeploymentsResponse =
+    fun appsListDeployments(
+        clientConfig: ClientConfig,
+        appId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        deploymentTypes: List<AppsListDeploymentsParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentsResponse =
         dev.octri.showcase.digitalocean.methods.AppsListDeploymentsOperation.appsListDeployments(
             clientConfig,
             appId,
@@ -179,9 +258,17 @@ object Apps {
         )
 
     /**
-     * Creates a deployment for a specific app by pulling the latest changes from its repository and scheduling a new deployment. Set `force_build` to build the app from source even when an existing cached build can be reused. The response includes the deployment record and its current phase.
+     * Creates a deployment for a specific app by pulling the latest changes from its repository and
+     * scheduling a new deployment. Set `force_build` to build the app from source even when an
+     * existing cached build can be reused. The response includes the deployment record and its
+     * current phase.
      */
-    fun appsCreateDeployment(clientConfig: ClientConfig, appId: String, forceBuild: Boolean? = null, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsCreateDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        forceBuild: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsCreateDeploymentOperation.appsCreateDeployment(
             clientConfig,
             appId,
@@ -190,9 +277,15 @@ object Apps {
         )
 
     /**
-     * Retrieves details for a specific deployment of an app. Use both identifiers to select the deployment, and inspect its phase and progress to check its current state.
+     * Retrieves details for a specific deployment of an app. Use both identifiers to select the
+     * deployment, and inspect its phase and progress to check its current state.
      */
-    fun appsGetDeployment(clientConfig: ClientConfig, appId: String, deploymentId: String, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsGetDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetDeploymentOperation.appsGetDeployment(
             clientConfig,
             appId,
@@ -201,9 +294,16 @@ object Apps {
         )
 
     /**
-     * Cancels an in-progress deployment for a specific app. Use the app and deployment identifiers to select the deployment to stop. The response contains the deployment after it has been cancelled.
+     * Cancels an in-progress deployment for a specific app. Use the app and deployment identifiers
+     * to select the deployment to stop. The response contains the deployment after it has been
+     * cancelled.
      */
-    fun appsCancelDeployment(clientConfig: ClientConfig, appId: String, deploymentId: String, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsCancelDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsCancelDeploymentOperation.appsCancelDeployment(
             clientConfig,
             appId,
@@ -212,9 +312,15 @@ object Apps {
         )
 
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. The response will include
+     * links to either real-time logs of an in-progress or active deployment or archived logs of a
+     * past deployment.
      */
-    fun appsGetLogs(clientConfig: ClientConfig, request: AppsGetLogsRequest, options: RequestOptions? = null): AppsGetLogsResponse =
+    fun appsGetLogs(
+        clientConfig: ClientConfig,
+        request: AppsGetLogsRequest,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetLogsOperation.appsGetLogs(
             clientConfig,
             request,
@@ -222,9 +328,20 @@ object Apps {
         )
 
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is
+     * specified, the logs will be limited to only that component. The response will include links
+     * to either real-time logs of an in-progress or active deployment or archived logs of a past
+     * deployment.
      */
-    fun appsGetLogsAggregate(clientConfig: ClientConfig, appId: String, deploymentId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse =
+    fun appsGetLogsAggregate(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetLogsAggregateOperation.appsGetLogsAggregate(
             clientConfig,
             appId,
@@ -236,9 +353,19 @@ object Apps {
         )
 
     /**
-     * Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.
+     * Returns a websocket URL that allows sending/receiving console input and output to a component
+     * of the specified deployment if one exists. Optionally, the instance_name parameter can be
+     * provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral;
+     * therefore, we recommended to avoid making persistent changes or such scripting around them.
      */
-    fun appsGetExec(clientConfig: ClientConfig, appId: String, deploymentId: String, componentName: String, instanceName: String? = null, options: RequestOptions? = null): AppsGetExecResponse =
+    fun appsGetExec(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        componentName: String,
+        instanceName: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetExecResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetExecOperation.appsGetExec(
             clientConfig,
             appId,
@@ -249,36 +376,65 @@ object Apps {
         )
 
     /**
-     * Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
+     * Retrieve the logs of the active deployment if one exists. The response will include links to
+     * either real-time logs of an in-progress or active deployment or archived logs of a past
+     * deployment. Note log_type=BUILD logs will return logs associated with the current active
+     * deployment (being served). To view build logs associated with in-progress build, the query
+     * must explicitly reference the deployment id.
      */
-    fun appsGetLogsActiveDeploymentAggregate(clientConfig: ClientConfig, appId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse =
-        dev.octri.showcase.digitalocean.methods.AppsGetLogsActiveDeploymentAggregateOperation.appsGetLogsActiveDeploymentAggregate(
-            clientConfig,
-            appId,
-            type,
-            follow,
-            podConnectionTimeout,
-            options,
-        )
+    fun appsGetLogsActiveDeploymentAggregate(
+        clientConfig: ClientConfig,
+        appId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
+        dev.octri.showcase.digitalocean.methods.AppsGetLogsActiveDeploymentAggregateOperation
+            .appsGetLogsActiveDeploymentAggregate(
+                clientConfig,
+                appId,
+                type,
+                follow,
+                podConnectionTimeout,
+                options,
+            )
 
     /**
-     * Lists job invocations for a specific app. Filter the results by job names or deployment, and use `page` and `per_page` to paginate the results.
+     * Lists job invocations for a specific app. Filter the results by job names or deployment, and
+     * use `page` and `per_page` to paginate the results.
      */
-    fun appsListJobInvocations(clientConfig: ClientConfig, appId: String, jobNames: List<Schema>? = null, deploymentId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): AppJobInvocations =
-        dev.octri.showcase.digitalocean.methods.AppsListJobInvocationsOperation.appsListJobInvocations(
-            clientConfig,
-            appId,
-            jobNames,
-            deploymentId,
-            page,
-            perPage,
-            options,
-        )
+    fun appsListJobInvocations(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobNames: List<Schema>? = null,
+        deploymentId: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocations =
+        dev.octri.showcase.digitalocean.methods.AppsListJobInvocationsOperation
+            .appsListJobInvocations(
+                clientConfig,
+                appId,
+                jobNames,
+                deploymentId,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * Retrieves a specific job invocation for an app. Use `job_invocation_id` to select the invocation and optionally provide `job_name` to specify the job associated with it.
+     * Retrieves a specific job invocation for an app. Use `job_invocation_id` to select the
+     * invocation and optionally provide `job_name` to specify the job associated with it.
      */
-    fun appsGetJobInvocation(clientConfig: ClientConfig, appId: String, jobInvocationId: String, jobName: String? = null, options: RequestOptions? = null): AppJobInvocation =
+    fun appsGetJobInvocation(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobInvocationId: String,
+        jobName: String? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocation =
         dev.octri.showcase.digitalocean.methods.AppsGetJobInvocationOperation.appsGetJobInvocation(
             clientConfig,
             appId,
@@ -288,31 +444,53 @@ object Apps {
         )
 
     /**
-     * Cancels a job invocation for a specified app. Use `app_id` and `job_invocation_id` to identify the invocation, and provide `job_name` to identify the associated job when needed. The response includes the invocation's phase and lifecycle timestamps.
+     * Cancels a job invocation for a specified app. Use `app_id` and `job_invocation_id` to
+     * identify the invocation, and provide `job_name` to identify the associated job when needed.
+     * The response includes the invocation's phase and lifecycle timestamps.
      */
-    fun appsCancelJobInvocation(clientConfig: ClientConfig, appId: String, jobInvocationId: String, jobName: String? = null, options: RequestOptions? = null): AppJobInvocation =
-        dev.octri.showcase.digitalocean.methods.AppsCancelJobInvocationOperation.appsCancelJobInvocation(
-            clientConfig,
-            appId,
-            jobInvocationId,
-            jobName,
-            options,
-        )
+    fun appsCancelJobInvocation(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobInvocationId: String,
+        jobName: String? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocation =
+        dev.octri.showcase.digitalocean.methods.AppsCancelJobInvocationOperation
+            .appsCancelJobInvocation(
+                clientConfig,
+                appId,
+                jobInvocationId,
+                jobName,
+                options,
+            )
 
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. If deployment is omitted the active deployment will be selected (if available). The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is
+     * specified, the logs will be limited to only that component. If deployment is omitted the
+     * active deployment will be selected (if available). The response will include links to either
+     * real-time logs of an in-progress or active deployment or archived logs of a past deployment.
      */
-    fun appsGetJobInvocationLogs(clientConfig: ClientConfig, request: AppsGetJobInvocationLogsRequest, options: RequestOptions? = null): AppsGetLogsResponse =
-        dev.octri.showcase.digitalocean.methods.AppsGetJobInvocationLogsOperation.appsGetJobInvocationLogs(
-            clientConfig,
-            request,
-            options,
-        )
+    fun appsGetJobInvocationLogs(
+        clientConfig: ClientConfig,
+        request: AppsGetJobInvocationLogsRequest,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
+        dev.octri.showcase.digitalocean.methods.AppsGetJobInvocationLogsOperation
+            .appsGetJobInvocationLogs(
+                clientConfig,
+                request,
+                options,
+            )
 
-    /**
-     * List all events for an app, including deployments and autoscaling events.
-     */
-    fun appsListEvents(clientConfig: ClientConfig, appId: String, page: Long? = null, perPage: Long? = null, eventTypes: List<AppsListEventsParameterItemEnum>? = null, options: RequestOptions? = null): AppEvents =
+    /** List all events for an app, including deployments and autoscaling events. */
+    fun appsListEvents(
+        clientConfig: ClientConfig,
+        appId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        eventTypes: List<AppsListEventsParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): AppEvents =
         dev.octri.showcase.digitalocean.methods.AppsListEventsOperation.appsListEvents(
             clientConfig,
             appId,
@@ -323,9 +501,15 @@ object Apps {
         )
 
     /**
-     * Retrieves a single event for a specified app. Use `app_id` and `event_id` to identify the event whose details you need.
+     * Retrieves a single event for a specified app. Use `app_id` and `event_id` to identify the
+     * event whose details you need.
      */
-    fun appsGetEvent(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): GetEvent =
+    fun appsGetEvent(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): GetEvent =
         dev.octri.showcase.digitalocean.methods.AppsGetEventOperation.appsGetEvent(
             clientConfig,
             appId,
@@ -334,9 +518,16 @@ object Apps {
         )
 
     /**
-     * Cancels an in-progress autoscaling event for a specified app. Use `app_id` and `event_id` to identify the event to cancel. The response includes the event details after the cancellation request.
+     * Cancels an in-progress autoscaling event for a specified app. Use `app_id` and `event_id` to
+     * identify the event to cancel. The response includes the event details after the cancellation
+     * request.
      */
-    fun appsCancelEvent(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): CancelEvent =
+    fun appsCancelEvent(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): CancelEvent =
         dev.octri.showcase.digitalocean.methods.AppsCancelEventOperation.appsCancelEvent(
             clientConfig,
             appId,
@@ -344,10 +535,16 @@ object Apps {
             options,
         )
 
-    /**
-     * Retrieve the logs of an autoscaling event for an app.
-     */
-    fun appsGetEventLogs(clientConfig: ClientConfig, appId: String, eventId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse =
+    /** Retrieve the logs of an autoscaling event for an app. */
+    fun appsGetEventLogs(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetEventLogsOperation.appsGetEventLogs(
             clientConfig,
             appId,
@@ -358,19 +555,26 @@ object Apps {
             options,
         )
 
-    /**
-     * List all instance sizes for `service`, `worker`, and `job` components.
-     */
-    fun appsListInstanceSizes(clientConfig: ClientConfig, options: RequestOptions? = null): AppsListInstanceSizesResponse =
-        dev.octri.showcase.digitalocean.methods.AppsListInstanceSizesOperation.appsListInstanceSizes(
-            clientConfig,
-            options,
-        )
+    /** List all instance sizes for `service`, `worker`, and `job` components. */
+    fun appsListInstanceSizes(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): AppsListInstanceSizesResponse =
+        dev.octri.showcase.digitalocean.methods.AppsListInstanceSizesOperation
+            .appsListInstanceSizes(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Retrieve information about a specific instance size for `service`, `worker`, and `job` components.
+     * Retrieve information about a specific instance size for `service`, `worker`, and `job`
+     * components.
      */
-    fun appsGetInstanceSize(clientConfig: ClientConfig, slug: String, options: RequestOptions? = null): AppsGetInstanceSizeResponse =
+    fun appsGetInstanceSize(
+        clientConfig: ClientConfig,
+        slug: String,
+        options: RequestOptions? = null,
+    ): AppsGetInstanceSizeResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetInstanceSizeOperation.appsGetInstanceSize(
             clientConfig,
             slug,
@@ -378,18 +582,30 @@ object Apps {
         )
 
     /**
-     * Lists the regions supported by App Platform. Use the returned region slugs and availability details to choose a region when configuring an app.
+     * Lists the regions supported by App Platform. Use the returned region slugs and availability
+     * details to choose a region when configuring an app.
      */
-    fun appsListRegions(clientConfig: ClientConfig, options: RequestOptions? = null): AppsListRegionsResponse =
+    fun appsListRegions(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): AppsListRegionsResponse =
         dev.octri.showcase.digitalocean.methods.AppsListRegionsOperation.appsListRegions(
             clientConfig,
             options,
         )
 
     /**
-     * To propose and validate a spec for a new or existing app, send a POST request to the `/v2/apps/propose` endpoint. The request returns some information about the proposed app, including app cost and upgrade cost. If an existing app ID is specified, the app spec is treated as a proposed update to the existing app.
+     * To propose and validate a spec for a new or existing app, send a POST request to the
+     * `/v2/apps/propose` endpoint. The request returns some information about the proposed app,
+     * including app cost and upgrade cost. If an existing app ID is specified, the app spec is
+     * treated as a proposed update to the existing app.
      */
-    fun appsValidateAppSpec(clientConfig: ClientConfig, spec: AppSpecRequest, appId: String? = null, options: RequestOptions? = null): AppProposeResponse =
+    fun appsValidateAppSpec(
+        clientConfig: ClientConfig,
+        spec: AppSpecRequest,
+        appId: String? = null,
+        options: RequestOptions? = null,
+    ): AppProposeResponse =
         dev.octri.showcase.digitalocean.methods.AppsValidateAppSpecOperation.appsValidateAppSpec(
             clientConfig,
             spec,
@@ -398,9 +614,14 @@ object Apps {
         )
 
     /**
-     * List alerts associated to the app and any components. This includes configuration information about the alerts including emails, slack webhooks, and triggering events or conditions.
+     * List alerts associated to the app and any components. This includes configuration information
+     * about the alerts including emails, slack webhooks, and triggering events or conditions.
      */
-    fun appsListAlerts(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppsListAlertsResponse =
+    fun appsListAlerts(
+        clientConfig: ClientConfig,
+        appId: String,
+        options: RequestOptions? = null,
+    ): AppsListAlertsResponse =
         dev.octri.showcase.digitalocean.methods.AppsListAlertsOperation.appsListAlerts(
             clientConfig,
             appId,
@@ -408,22 +629,43 @@ object Apps {
         )
 
     /**
-     * Updates the email and Slack webhook destinations for an app alert. Supply destination details in `emails`, `slack_webhooks`, or both; each email address must be associated with a user who has access to the app. The response includes the updated alert object.
+     * Updates the email and Slack webhook destinations for an app alert. Supply destination details
+     * in `emails`, `slack_webhooks`, or both; each email address must be associated with a user who
+     * has access to the app. The response includes the updated alert object.
      */
-    fun appsAssignAlertDestinations(clientConfig: ClientConfig, appId: String, alertId: String, emails: List<AppAlertEmail>? = null, slackWebhooks: List<AppAlertSlackWebhook>? = null, options: RequestOptions? = null): AppsAlertResponse =
-        dev.octri.showcase.digitalocean.methods.AppsAssignAlertDestinationsOperation.appsAssignAlertDestinations(
-            clientConfig,
-            appId,
-            alertId,
-            emails,
-            slackWebhooks,
-            options,
-        )
+    fun appsAssignAlertDestinations(
+        clientConfig: ClientConfig,
+        appId: String,
+        alertId: String,
+        emails: List<AppAlertEmail>? = null,
+        slackWebhooks: List<AppAlertSlackWebhook>? = null,
+        options: RequestOptions? = null,
+    ): AppsAlertResponse =
+        dev.octri.showcase.digitalocean.methods.AppsAssignAlertDestinationsOperation
+            .appsAssignAlertDestinations(
+                clientConfig,
+                appId,
+                alertId,
+                emails,
+                slackWebhooks,
+                options,
+            )
 
     /**
-     * Rollback an app to a previous deployment. A new deployment will be created to perform the rollback. The app will be pinned to the rollback deployment preventing any new deployments from being created, either manually or through Auto Deploy on Push webhooks. To resume deployments, the rollback must be either committed or reverted. It is recommended to use the Validate App Rollback endpoint to double check if the rollback is valid and if there are any warnings.
+     * Rollback an app to a previous deployment. A new deployment will be created to perform the
+     * rollback. The app will be pinned to the rollback deployment preventing any new deployments
+     * from being created, either manually or through Auto Deploy on Push webhooks. To resume
+     * deployments, the rollback must be either committed or reverted. It is recommended to use the
+     * Validate App Rollback endpoint to double check if the rollback is valid and if there are any
+     * warnings.
      */
-    fun appsCreateRollback(clientConfig: ClientConfig, appId: String, deploymentId: String? = null, skipPin: Boolean? = null, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsCreateRollback(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String? = null,
+        skipPin: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsCreateRollbackOperation.appsCreateRollback(
             clientConfig,
             appId,
@@ -433,9 +675,18 @@ object Apps {
         )
 
     /**
-     * Check whether an app can be rolled back to a specific deployment. This endpoint can also be used to check if there are any warnings or validation conditions that will cause the rollback to proceed under unideal circumstances. For example, if a component must be rebuilt as part of the rollback causing it to take longer than usual.
+     * Check whether an app can be rolled back to a specific deployment. This endpoint can also be
+     * used to check if there are any warnings or validation conditions that will cause the rollback
+     * to proceed under unideal circumstances. For example, if a component must be rebuilt as part
+     * of the rollback causing it to take longer than usual.
      */
-    fun appsValidateRollback(clientConfig: ClientConfig, appId: String, deploymentId: String? = null, skipPin: Boolean? = null, options: RequestOptions? = null): AppsValidateRollback =
+    fun appsValidateRollback(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String? = null,
+        skipPin: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppsValidateRollback =
         dev.octri.showcase.digitalocean.methods.AppsValidateRollbackOperation.appsValidateRollback(
             clientConfig,
             appId,
@@ -445,9 +696,14 @@ object Apps {
         )
 
     /**
-     * Commit an app rollback. This action permanently applies the rollback and unpins the app to resume new deployments.
+     * Commit an app rollback. This action permanently applies the rollback and unpins the app to
+     * resume new deployments.
      */
-    fun appsCommitRollback(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): Unit =
+    fun appsCommitRollback(
+        clientConfig: ClientConfig,
+        appId: String,
+        options: RequestOptions? = null,
+    ): Unit =
         dev.octri.showcase.digitalocean.methods.AppsCommitRollbackOperation.appsCommitRollback(
             clientConfig,
             appId,
@@ -455,41 +711,56 @@ object Apps {
         )
 
     /**
-     * Revert an app rollback. This action reverts the active rollback by creating a new deployment from the latest app spec prior to the rollback and unpins the app to resume new deployments.
+     * Revert an app rollback. This action reverts the active rollback by creating a new deployment
+     * from the latest app spec prior to the rollback and unpins the app to resume new deployments.
      */
-    fun appsRevertRollback(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppsDeploymentResponse =
+    fun appsRevertRollback(
+        clientConfig: ClientConfig,
+        appId: String,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse =
         dev.octri.showcase.digitalocean.methods.AppsRevertRollbackOperation.appsRevertRollback(
             clientConfig,
             appId,
             options,
         )
 
-    /**
-     * Retrieve daily bandwidth usage metrics for a single app.
-     */
-    fun appsGetMetricsBandwidthDaily(clientConfig: ClientConfig, appId: String, date: OffsetDateTime? = null, options: RequestOptions? = null): AppMetricsBandwidthUsage =
-        dev.octri.showcase.digitalocean.methods.AppsGetMetricsBandwidthDailyOperation.appsGetMetricsBandwidthDaily(
-            clientConfig,
-            appId,
-            date,
-            options,
-        )
+    /** Retrieve daily bandwidth usage metrics for a single app. */
+    fun appsGetMetricsBandwidthDaily(
+        clientConfig: ClientConfig,
+        appId: String,
+        date: OffsetDateTime? = null,
+        options: RequestOptions? = null,
+    ): AppMetricsBandwidthUsage =
+        dev.octri.showcase.digitalocean.methods.AppsGetMetricsBandwidthDailyOperation
+            .appsGetMetricsBandwidthDaily(
+                clientConfig,
+                appId,
+                date,
+                options,
+            )
 
-    /**
-     * Retrieve daily bandwidth usage metrics for multiple apps.
-     */
-    fun appsListMetricsBandwidthDaily(clientConfig: ClientConfig, appIds: List<String>, date: OffsetDateTime? = null, options: RequestOptions? = null): AppMetricsBandwidthUsage =
-        dev.octri.showcase.digitalocean.methods.AppsListMetricsBandwidthDailyOperation.appsListMetricsBandwidthDaily(
-            clientConfig,
-            appIds,
-            date,
-            options,
-        )
+    /** Retrieve daily bandwidth usage metrics for multiple apps. */
+    fun appsListMetricsBandwidthDaily(
+        clientConfig: ClientConfig,
+        appIds: List<String>,
+        date: OffsetDateTime? = null,
+        options: RequestOptions? = null,
+    ): AppMetricsBandwidthUsage =
+        dev.octri.showcase.digitalocean.methods.AppsListMetricsBandwidthDailyOperation
+            .appsListMetricsBandwidthDaily(
+                clientConfig,
+                appIds,
+                date,
+                options,
+            )
 
-    /**
-     * Retrieve information like health status, cpu and memory utilization of app components.
-     */
-    fun appsGetHealth(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppHealthResponse =
+    /** Retrieve information like health status, cpu and memory utilization of app components. */
+    fun appsGetHealth(
+        clientConfig: ClientConfig,
+        appId: String,
+        options: RequestOptions? = null,
+    ): AppHealthResponse =
         dev.octri.showcase.digitalocean.methods.AppsGetHealthOperation.appsGetHealth(
             clientConfig,
             appId,

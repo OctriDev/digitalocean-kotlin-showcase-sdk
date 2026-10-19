@@ -5,324 +5,215 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Backup represents a single backup of a vector database.
- */
+/** Backup represents a single backup of a vector database. */
 data class VectordbBackup(
-    /**
-     * Unique identifier for the backup (e.g., "vectordb-{uuid}-20240101-120000").
-     */
+    /** Unique identifier for the backup (e.g., "vectordb-{uuid}-20240101-120000"). */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_id") val backupId: String? = null,
-    /**
-     * Timestamp when the backup process completed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: OffsetDateTime? = null,
-    /**
-     * Timestamp when the backup process started.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: OffsetDateTime? = null,
-    /**
-     * Status of the backup: SUCCESS.
-     */
-    val status: String? = null
+    /** Timestamp when the backup process completed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at")
+    val completedAt: OffsetDateTime? = null,
+    /** Timestamp when the backup process started. */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at")
+    val startedAt: OffsetDateTime? = null,
+    /** Status of the backup: SUCCESS. */
+    val status: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbCreateVectorDBRequest` API schema.
- */
+/** Typed representation of the `VectordbCreateVectorDBRequest` API schema. */
 data class VectordbCreateVectorDBRequest(
-    /**
-     * Required. Human-readable name for the database.
-     */
+    /** Required. Human-readable name for the database. */
     val name: String? = null,
-    /**
-     * Required. ID of the project to create the vector database in.
-     */
+    /** Required. ID of the project to create the vector database in. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * Required. Region slug where the database will be provisioned.
-     */
+    /** Required. Region slug where the database will be provisioned. */
     val region: String? = null,
-    /**
-     * Required. Resource tier: small, medium, or large.
-     */
+    /** Required. Resource tier: small, medium, or large. */
     val size: String? = null,
-    /**
-     * A set of arbitrary tags to organize your vector database
-     */
-    val tags: List<String>? = null
+    /** A set of arbitrary tags to organize your vector database */
+    val tags: List<String>? = null,
 )
 
-/**
- * Typed representation of the `VectordbCreateVectorDBResponse` API schema.
- */
+/** Typed representation of the `VectordbCreateVectorDBResponse` API schema. */
 data class VectordbCreateVectorDBResponse(
-    /**
-     * VectorDB represents a provisioned vector database instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_db") val vectorDb: VectordbVectorDB? = null
+    /** VectorDB represents a provisioned vector database instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_db")
+    val vectorDb: VectordbVectorDB? = null
 )
 
-/**
- * Typed representation of the `VectordbGetRestoreStatusResponse` API schema.
- */
+/** Typed representation of the `VectordbGetRestoreStatusResponse` API schema. */
 data class VectordbGetRestoreStatusResponse(
-    /**
-     * The backup ID being restored.
-     */
+    /** The backup ID being restored. */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_id") val backupId: String? = null,
-    /**
-     * Error message if the restore failed.
-     */
+    /** Error message if the restore failed. */
     val error: String? = null,
     /**
-     * Current status: STARTED, TRANSFERRING, TRANSFERRED, FINALIZING, SUCCESS, FAILED, CANCELLING, CANCELED.
+     * Current status: STARTED, TRANSFERRING, TRANSFERRED, FINALIZING, SUCCESS, FAILED, CANCELLING,
+     * CANCELED.
      */
-    val status: String? = null
+    val status: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbGetVectorDBAdminCredentialsResponse` API schema.
- */
+/** Typed representation of the `VectordbGetVectorDBAdminCredentialsResponse` API schema. */
 data class VectordbGetVectorDBAdminCredentialsResponse(
-    /**
-     * API token for that user.
-     */
+    /** API token for that user. */
     @com.fasterxml.jackson.annotation.JsonProperty("api_token") val apiToken: String? = null,
-    /**
-     * Database user id from the cluster secret (opaque; matches what was provisioned).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
+    /** Database user id from the cluster secret (opaque; matches what was provisioned). */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbGetVectorDBResponse` API schema.
- */
+/** Typed representation of the `VectordbGetVectorDBResponse` API schema. */
 data class VectordbGetVectorDBResponse(
-    /**
-     * VectorDB represents a provisioned vector database instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_db") val vectorDb: VectordbVectorDB? = null
+    /** VectorDB represents a provisioned vector database instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_db")
+    val vectorDb: VectordbVectorDB? = null
 )
 
-/**
- * Typed representation of the `VectordbListBackupsResponse` API schema.
- */
+/** Typed representation of the `VectordbListBackupsResponse` API schema. */
 data class VectordbListBackupsResponse(
-    /**
-     * List of available backups.
-     */
+    /** List of available backups. */
     val backups: List<VectordbBackup>? = null
 )
 
-/**
- * Typed representation of the `VectordbListVectorDBsResponse` API schema.
- */
+/** Typed representation of the `VectordbListVectorDBsResponse` API schema. */
 data class VectordbListVectorDBsResponse(
-    /**
-     * Optional `int64`-formatted value serialized in the `total` wire field.
-     */
+    /** Optional `int64`-formatted value serialized in the `total` wire field. */
     val total: Long? = null,
-    /**
-     * Optional array value serialized in the `vector_dbs` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_dbs") val vectorDbs: List<VectordbVectorDB>? = null
+    /** Optional array value serialized in the `vector_dbs` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_dbs")
+    val vectorDbs: List<VectordbVectorDB>? = null,
 )
 
-/**
- * Typed representation of the `VectordbResizeVectorDBRequest` API schema.
- */
+/** Typed representation of the `VectordbResizeVectorDBRequest` API schema. */
 data class VectordbResizeVectorDBRequest(
-    /**
-     * Required. ID of the vector database to resize.
-     */
+    /** Required. ID of the vector database to resize. */
     val id: String? = null,
-    /**
-     * Required. Target resource tier: small, medium, or large.
-     */
-    val size: String? = null
+    /** Required. Target resource tier: small, medium, or large. */
+    val size: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbResizeVectorDBResponse` API schema.
- */
+/** Typed representation of the `VectordbResizeVectorDBResponse` API schema. */
 data class VectordbResizeVectorDBResponse(
-    /**
-     * VectorDB represents a provisioned vector database instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_db") val vectorDb: VectordbVectorDB? = null
+    /** VectorDB represents a provisioned vector database instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_db")
+    val vectorDb: VectordbVectorDB? = null
 )
 
-/**
- * Typed representation of the `VectordbRestoreBackupRequest` API schema.
- */
+/** Typed representation of the `VectordbRestoreBackupRequest` API schema. */
 data class VectordbRestoreBackupRequest(
-    /**
-     * Required. ID of the backup to restore from.
-     */
+    /** Required. ID of the backup to restore from. */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_id") val backupId: String? = null,
-    /**
-     * Required. ID of the vector database.
-     */
-    val id: String? = null
+    /** Required. ID of the vector database. */
+    val id: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbRestoreBackupResponse` API schema.
- */
+/** Typed representation of the `VectordbRestoreBackupResponse` API schema. */
 data class VectordbRestoreBackupResponse(
-    /**
-     * The backup ID being restored.
-     */
+    /** The backup ID being restored. */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_id") val backupId: String? = null,
-    /**
-     * Initial status of the restore operation (e.g., "STARTED").
-     */
-    val status: String? = null
+    /** Initial status of the restore operation (e.g., "STARTED"). */
+    val status: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbUpdateVectorDBRequest` API schema.
- */
+/** Typed representation of the `VectordbUpdateVectorDBRequest` API schema. */
 data class VectordbUpdateVectorDBRequest(
-    /**
-     * VectorDBConfig holds optional, advanced cluster settings.
-     */
+    /** VectorDBConfig holds optional, advanced cluster settings. */
     val config: VectordbVectorDBConfig? = null,
-    /**
-     * ID of the vector database.
-     */
+    /** ID of the vector database. */
     val id: String? = null,
-    /**
-     * Optional. New project UUID to assign the database to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
+    /** Optional. New project UUID to assign the database to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
 )
 
-/**
- * Typed representation of the `VectordbUpdateVectorDBResponse` API schema.
- */
+/** Typed representation of the `VectordbUpdateVectorDBResponse` API schema. */
 data class VectordbUpdateVectorDBResponse(
-    /**
-     * VectorDB represents a provisioned vector database instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_db") val vectorDb: VectordbVectorDB? = null
+    /** VectorDB represents a provisioned vector database instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_db")
+    val vectorDb: VectordbVectorDB? = null
 )
 
-/**
- * Typed representation of the `VectordbUpdateVectorDBTagsRequest` API schema.
- */
+/** Typed representation of the `VectordbUpdateVectorDBTagsRequest` API schema. */
 data class VectordbUpdateVectorDBTagsRequest(
-    /**
-     * Required. ID of the vector database to update tags for.
-     */
+    /** Required. ID of the vector database to update tags for. */
     val id: String? = null,
-    /**
-     * Tags to set on the vector database. Replaces all existing tags.
-     */
-    val tags: List<String>? = null
+    /** Tags to set on the vector database. Replaces all existing tags. */
+    val tags: List<String>? = null,
 )
 
-/**
- * Typed representation of the `VectordbUpdateVectorDBTagsResponse` API schema.
- */
+/** Typed representation of the `VectordbUpdateVectorDBTagsResponse` API schema. */
 data class VectordbUpdateVectorDBTagsResponse(
-    /**
-     * VectorDB represents a provisioned vector database instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_db") val vectorDb: VectordbVectorDB? = null
+    /** VectorDB represents a provisioned vector database instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_db")
+    val vectorDb: VectordbVectorDB? = null
 )
 
-/**
- * VectorDB represents a provisioned vector database instance.
- */
+/** VectorDB represents a provisioned vector database instance. */
 data class VectordbVectorDB(
-    /**
-     * VectorDBConfig holds optional, advanced cluster settings.
-     */
+    /** VectorDBConfig holds optional, advanced cluster settings. */
     val config: VectordbVectorDBConfig? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * VectorDBEndpoints contains the connection endpoints for a vector database instance.
-     */
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** VectorDBEndpoints contains the connection endpoints for a vector database instance. */
     val endpoints: VectordbVectorDBEndpoints? = null,
     /**
-     * ID of the vector database this instance was forked from. Empty when the instance was created directly via CreateVectorDB. Read-only and set by the platform at fork time; never modifiable through UpdateVectorDB.
+     * ID of the vector database this instance was forked from. Empty when the instance was created
+     * directly via CreateVectorDB. Read-only and set by the platform at fork time; never modifiable
+     * through UpdateVectorDB.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("forked_from_id") val forkedFromId: String? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("forked_from_id")
+    val forkedFromId: String? = null,
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
     /**
-     * Backup_id of the most recent restore initiated against this instance. Empty if no restore has ever been triggered. Lets callers recover the identifier of an in-flight or last-completed restore without having to retain the RestoreBackupResponse themselves. Use it with GetRestoreStatus to fetch the live status.
+     * Backup_id of the most recent restore initiated against this instance. Empty if no restore has
+     * ever been triggered. Lets callers recover the identifier of an in-flight or last-completed
+     * restore without having to retain the RestoreBackupResponse themselves. Use it with
+     * GetRestoreStatus to fetch the live status.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_restore_id") val lastRestoreId: String? = null,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_restore_id")
+    val lastRestoreId: String? = null,
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `owner_uuid` wire field.
-     */
+    /** Optional `string` value serialized in the `owner_uuid` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_uuid") val ownerUuid: String? = null,
-    /**
-     * Project this database belongs to.
-     */
+    /** Project this database belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Resource tier: small, medium, or large.
-     */
+    /** Resource tier: small, medium, or large. */
     val size: String? = null,
-    /**
-     * Lifecycle state: pending, creating, active, errored, or deleting.
-     */
+    /** Lifecycle state: pending, creating, active, errored, or deleting. */
     val status: String? = null,
-    /**
-     * Optional array value serialized in the `tags` wire field.
-     */
+    /** Optional array value serialized in the `tags` wire field. */
     val tags: List<String>? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
+    /** Optional `date-time`-formatted value serialized in the `updated_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
 )
 
-/**
- * VectorDBConfig holds optional, advanced cluster settings.
- */
+/** VectorDBConfig holds optional, advanced cluster settings. */
 data class VectordbVectorDBConfig(
     /**
-     * Default vector compression for new collections: rq, pq, bq, or sq. Empty means platform default (rq).
+     * Default vector compression for new collections: rq, pq, bq, or sq. Empty means platform
+     * default (rq).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_quantization") val defaultQuantization: String? = null,
-    /**
-     * Optional `boolean` value serialized in the `enable_auto_schema` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_auto_schema") val enableAutoSchema: Boolean? = null,
-    /**
-     * The Vector Database version running on the cluster.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("weaviate_version") val weaviateVersion: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("default_quantization")
+    val defaultQuantization: String? = null,
+    /** Optional `boolean` value serialized in the `enable_auto_schema` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_auto_schema")
+    val enableAutoSchema: Boolean? = null,
+    /** The Vector Database version running on the cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("weaviate_version")
+    val weaviateVersion: String? = null,
 )
 
-/**
- * VectorDBEndpoints contains the connection endpoints for a vector database instance.
- */
+/** VectorDBEndpoints contains the connection endpoints for a vector database instance. */
 data class VectordbVectorDBEndpoints(
     /**
-     * Endpoint for gRPC connections (e.g. "my-db-tor1-a1b2c3d4-grpc.weaviate.ondigitalocean.com:443").
+     * Endpoint for gRPC connections (e.g.
+     * "my-db-tor1-a1b2c3d4-grpc.weaviate.ondigitalocean.com:443").
      */
     val grpc: String? = null,
-    /**
-     * Endpoint for HTTPS connections (e.g. "my-db-tor1-a1b2c3d4.weaviate.ondigitalocean.com").
-     */
-    val http: String? = null
+    /** Endpoint for HTTPS connections (e.g. "my-db-tor1-a1b2c3d4.weaviate.ondigitalocean.com"). */
+    val http: String? = null,
 )

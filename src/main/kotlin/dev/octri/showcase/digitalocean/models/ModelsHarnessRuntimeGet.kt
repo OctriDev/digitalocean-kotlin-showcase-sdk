@@ -3,72 +3,60 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `GetCheckpointResponse` API schema.
- */
+/** Typed representation of the `GetCheckpointResponse` API schema. */
 data class GetCheckpointResponse(
     /**
-     * Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
+     * Checkpoint is a durable capture of a session's live sandbox machine state bound to the
+     * event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback.
+     * Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
      */
     val checkpoint: Checkpoint? = null
 )
 
-/**
- * Typed representation of the `GetIngressUrlResponse` API schema.
- */
+/** Typed representation of the `GetIngressUrlResponse` API schema. */
 data class GetIngressUrlResponse(
     /**
-     * A publicly routable HTTPS URL to one guest port of the session's sandbox. The hostname is stable while the session runs; it is revoked on pause and lock, and rollback moves the session to a new sandbox, so re-fetch after resume, unlock or rollback. Requests must carry the caller's DO token as a Bearer header.
+     * A publicly routable HTTPS URL to one guest port of the session's sandbox. The hostname is
+     * stable while the session runs; it is revoked on pause and lock, and rollback moves the
+     * session to a new sandbox, so re-fetch after resume, unlock or rollback. Requests must carry
+     * the caller's DO token as a Bearer header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ingress_url") val ingressUrl: SessionIngressUrl? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("ingress_url")
+    val ingressUrl: SessionIngressUrl? = null
 )
 
-/**
- * Typed representation of the `GetSessionResponse` API schema.
- */
+/** Typed representation of the `GetSessionResponse` API schema. */
 data class GetSessionResponse(
-    /**
-     * Session is the user-facing record of a environment session + sandbox pair.
-     */
+    /** Session is the user-facing record of a environment session + sandbox pair. */
     val session: DefinitionsSession? = null
 )
 
-/**
- * Typed representation of the `GetTemplateBuildResponse` API schema.
- */
+/** Typed representation of the `GetTemplateBuildResponse` API schema. */
 data class GetTemplateBuildResponse(
-    /**
-     * Optional object value serialized in the `build` wire field.
-     */
+    /** Optional object value serialized in the `build` wire field. */
     val build: SandboxTemplateBuild? = null
 )
 
-/**
- * Typed representation of the `GetTemplateResponse` API schema.
- */
+/** Typed representation of the `GetTemplateResponse` API schema. */
 data class GetTemplateResponse(
-    /**
-     * Optional object value serialized in the `template` wire field.
-     */
+    /** Optional object value serialized in the `template` wire field. */
     val template: SandboxTemplate? = null
 )
 
-/**
- * Typed representation of the `GetTriggerExecutionResponse` API schema.
- */
+/** Typed representation of the `GetTriggerExecutionResponse` API schema. */
 data class GetTriggerExecutionResponse(
-    /**
-     * One row per firing (webhook delivery or cron tick).
-     */
+    /** One row per firing (webhook delivery or cron tick). */
     val execution: TriggerExecution? = null
 )
 
-/**
- * Typed representation of the `GetTriggerResponse` API schema.
- */
+/** Typed representation of the `GetTriggerResponse` API schema. */
 data class GetTriggerResponse(
     /**
-     * A single automation bound to exactly one agent/session (agent == session in v1). The nested block present depends on `kind` (webhook xor cron) and `session_mode` (fresh => session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the webhook secret, the output email address / Slack webhook URL, and any env values inside session_template are write-only and never returned.
+     * A single automation bound to exactly one agent/session (agent == session in v1). The nested
+     * block present depends on `kind` (webhook xor cron) and `session_mode` (fresh =>
+     * session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the
+     * webhook secret, the output email address / Slack webhook URL, and any env values inside
+     * session_template are write-only and never returned.
      */
     val trigger: Trigger? = null
 )

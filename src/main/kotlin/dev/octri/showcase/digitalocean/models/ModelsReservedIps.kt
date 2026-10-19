@@ -3,124 +3,115 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Optional API value serialized in the `region` wire field.
- */
+/** Optional API value serialized in the `region` wire field. */
 data class ReservedIpRegion(
     /**
-     * The display name of the region. This will be a full name that is used in the control panel and other interfaces.
+     * The display name of the region. This will be a full name that is used in the control panel
+     * and other interfaces.
      */
     val name: String,
-    /**
-     * A human-readable string that is used as a unique identifier for each region.
-     */
+    /** A human-readable string that is used as a unique identifier for each region. */
     val slug: String,
-    /**
-     * This attribute is set to an array which contains features available in this region
-     */
+    /** This attribute is set to an array which contains features available in this region */
     val features: List<String>,
     /**
      * This is a boolean value that represents whether new Droplets can be created in this region.
      */
     val available: Boolean,
     /**
-     * This attribute is set to an array which contains the identifying slugs for the sizes available in this region. sizes:read is required to view.
+     * This attribute is set to an array which contains the identifying slugs for the sizes
+     * available in this region. sizes:read is required to view.
      */
-    val sizes: List<String>
+    val sizes: List<String>,
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/**
- * Typed representation of the `ReservedIp` API schema.
- */
+/** Typed representation of the `ReservedIp` API schema. */
 data class ReservedIp(
-    /**
-     * The public IP address of the reserved IP. It also serves as its identifier.
-     */
+    /** The public IP address of the reserved IP. It also serves as its identifier. */
     val ip: String? = null,
-    /**
-     * Optional API value serialized in the `region` wire field.
-     */
+    /** Optional API value serialized in the `region` wire field. */
     val region: ReservedIpRegion? = null,
     /**
-     * The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null. Requires `droplet:read` scope.
+     * The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is
+     * assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the
+     * value will be null. Requires `droplet:read` scope.
      */
     val droplet: ReservedIpDroplet? = null,
     /**
-     * A boolean value indicating whether or not the reserved IP has pending actions preventing new ones from being submitted.
+     * A boolean value indicating whether or not the reserved IP has pending actions preventing new
+     * ones from being submitted.
      */
     val locked: Boolean? = null,
     /**
-     * The UUID of the project to which the reserved IP currently belongs. Requires `project:read` scope.
+     * The UUID of the project to which the reserved IP currently belongs. Requires `project:read`
+     * scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ReservedIpCreateVariant0(
-    /**
-     * The ID of the Droplet that the reserved IP will be assigned to.
-     */
+    /** The ID of the Droplet that the reserved IP will be assigned to. */
     @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long
 ) : ReservedIpCreate
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ReservedIpCreateVariant1(
-    /**
-     * The slug identifier for the region the reserved IP will be reserved to.
-     */
+    /** The slug identifier for the region the reserved IP will be reserved to. */
     val region: String,
-    /**
-     * The UUID of the project to which the reserved IP will be assigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
+    /** The UUID of the project to which the reserved IP will be assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
 ) : ReservedIpCreate
 
-/**
- * Typed representation of the `ReservedIpCreate` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
+/** Typed representation of the `ReservedIpCreate` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ReservedIpCreateVariant0::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ReservedIpCreateVariant1::class)
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ReservedIpCreateVariant1::class),
 )
 sealed interface ReservedIpCreate
 
-/**
- * Optional object value serialized in the `links` wire field.
- */
+/** Optional object value serialized in the `links` wire field. */
 data class ReservedIpCreatedLinks(
-    /**
-     * Optional array value serialized in the `droplets` wire field.
-     */
+    /** Optional array value serialized in the `droplets` wire field. */
     val droplets: List<ActionLink>? = null,
-    /**
-     * Optional array value serialized in the `actions` wire field.
-     */
-    val actions: List<ActionLink>? = null
+    /** Optional array value serialized in the `actions` wire field. */
+    val actions: List<ActionLink>? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpCreated` API schema.
- */
+/** Typed representation of the `ReservedIpCreated` API schema. */
 data class ReservedIpCreated(
-    /**
-     * Optional object value serialized in the `reserved_ip` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ip") val reservedIp: ReservedIp? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: ReservedIpCreatedLinks? = null
+    /** Optional object value serialized in the `reserved_ip` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ip")
+    val reservedIp: ReservedIp? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: ReservedIpCreatedLinks? = null,
 )
 
 /**
- * The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the value will be null. Requires `droplet:read` scope.
+ * The Droplet that the reserved IP has been assigned to. When you query a reserved IP, if it is
+ * assigned to a Droplet, the entire Droplet object will be returned. If it is not assigned, the
+ * value will be null. Requires `droplet:read` scope.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReservedIpDroplet.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ReservedIpDroplet.Deserializer::class
+)
 sealed interface ReservedIpDroplet {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReservedIpDroplet>() {
@@ -130,7 +121,8 @@ sealed interface ReservedIpDroplet {
         ): ReservedIpDroplet {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = ReservedIpDropletOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                ReservedIpDropletOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -147,42 +139,79 @@ sealed interface ReservedIpDroplet {
                 }
             }
             return when {
-                node.isObject -> ObjectMapReservedIpDroplet(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ReservedIpDroplet::class.java, "no ReservedIpDroplet branch accepts this payload")
+                node.isObject ->
+                    ObjectMapReservedIpDroplet(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    Map<String, Any>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ReservedIpDroplet::class.java,
+                        "no ReservedIpDroplet branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val ReservedIpDropletOwnedTypes: List<Pair<List<String>, Class<out ReservedIpDroplet>>> = listOf(
-    listOf("id", "name", "memory", "vcpus", "disk", "disk_info", "locked", "status", "kernel", "created_at", "features", "backup_ids", "next_backup_window", "snapshot_ids", "image", "volume_ids", "size", "size_slug", "networks", "region", "tags", "vpc_uuid", "subnet_uuid", "gpu_info") to Droplet::class.java,
+internal val ReservedIpDropletOwnedTypes: List<Pair<List<String>, Class<out ReservedIpDroplet>>> =
+    listOf(
+        listOf(
+            "id",
+            "name",
+            "memory",
+            "vcpus",
+            "disk",
+            "disk_info",
+            "locked",
+            "status",
+            "kernel",
+            "created_at",
+            "features",
+            "backup_ids",
+            "next_backup_window",
+            "snapshot_ids",
+            "image",
+            "volume_ids",
+            "size",
+            "size_slug",
+            "networks",
+            "region",
+            "tags",
+            "vpc_uuid",
+            "subnet_uuid",
+            "gpu_info",
+        ) to Droplet::class.java
+    )
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ObjectMapReservedIpDroplet(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>
+) : ReservedIpDroplet
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ObjectMapReservedIpDroplet(@get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>) : ReservedIpDroplet
-
-/**
- * Typed representation of the `ReservedIpList` API schema.
- */
+/** Typed representation of the `ReservedIpList` API schema. */
 data class ReservedIpList(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips") val reservedIps: List<ReservedIp>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips")
+    val reservedIps: List<ReservedIp>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpResponse` API schema.
- */
+/** Typed representation of the `ReservedIpResponse` API schema. */
 data class ReservedIpResponse(
-    /**
-     * Optional object value serialized in the `reserved_ip` wire field.
-     */
+    /** Optional object value serialized in the `reserved_ip` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("reserved_ip") val reservedIp: ReservedIp? = null
 )

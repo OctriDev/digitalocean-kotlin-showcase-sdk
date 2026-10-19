@@ -5,72 +5,52 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `Action` API schema.
- */
+/** Typed representation of the `Action` API schema. */
 data class Action(
-    /**
-     * A unique numeric ID that can be used to identify and reference an action.
-     */
+    /** A unique numeric ID that can be used to identify and reference an action. */
     val id: Long? = null,
-    /**
-     * The current status of the action. This can be "in-progress", "completed", or "errored".
-     */
+    /** The current status of the action. This can be "in-progress", "completed", or "errored". */
     val status: ActionStatusEnum? = null,
     /**
-     * This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
+     * This is the type of action that the object represents. For example, this could be "transfer"
+     * to represent the state of an image transfer action.
      */
     val type: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+     * A time value given in ISO8601 combined date and time format that represents when the action
+     * was initiated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at")
+    val startedAt: OffsetDateTime? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the action was completed.
+     * A time value given in ISO8601 combined date and time format that represents when the action
+     * was completed.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: OffsetDateTime? = null,
-    /**
-     * A unique identifier for the resource that the action is associated with.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at")
+    val completedAt: OffsetDateTime? = null,
+    /** A unique identifier for the resource that the action is associated with. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: Long? = null,
-    /**
-     * The type of resource that the action is associated with.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
-    /**
-     * Optional object value serialized in the `region` wire field.
-     */
+    /** The type of resource that the action is associated with. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
+    val resourceType: String? = null,
+    /** Optional object value serialized in the `region` wire field. */
     val region: Region? = null,
-    /**
-     * A human-readable string that is used as a unique identifier for each region.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null
+    /** A human-readable string that is used as a unique identifier for each region. */
+    @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null,
 )
 
-/**
- * The linked actions can be used to check the status of a Droplet's create event.
- */
+/** The linked actions can be used to check the status of a Droplet's create event. */
 data class ActionLink(
-    /**
-     * A unique numeric ID that can be used to identify and reference an action.
-     */
+    /** A unique numeric ID that can be used to identify and reference an action. */
     val id: Long? = null,
-    /**
-     * A string specifying the type of the related action.
-     */
+    /** A string specifying the type of the related action. */
     val rel: String? = null,
-    /**
-     * A URL that can be used to access the action.
-     */
-    val href: String? = null
+    /** A URL that can be used to access the action. */
+    val href: String? = null,
 )
 
-/**
- * Typed representation of the `ActionResponse` API schema.
- */
+/** Typed representation of the `ActionResponse` API schema. */
 data class ActionResponse(
-    /**
-     * Optional object value serialized in the `action` wire field.
-     */
+    /** Optional object value serialized in the `action` wire field. */
     val action: Action? = null
 )

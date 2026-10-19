@@ -5,238 +5,148 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AppsDeployment` API schema.
- */
+/** Typed representation of the `AppsDeployment` API schema. */
 data class AppsDeployment(
-    /**
-     * Optional `string` value serialized in the `cause` wire field.
-     */
+    /** Optional `string` value serialized in the `cause` wire field. */
     val cause: String? = null,
-    /**
-     * Optional `string` value serialized in the `cloned_from` wire field.
-     */
+    /** Optional `string` value serialized in the `cloned_from` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("cloned_from") val clonedFrom: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional array value serialized in the `jobs` wire field.
-     */
+    /** Optional array value serialized in the `jobs` wire field. */
     val jobs: List<AppsDeploymentJob>? = null,
-    /**
-     * Optional array value serialized in the `functions` wire field.
-     */
+    /** Optional array value serialized in the `functions` wire field. */
     val functions: List<AppsDeploymentFunctions>? = null,
-    /**
-     * Optional enumerated value serialized in the `phase` wire field.
-     */
+    /** Optional enumerated value serialized in the `phase` wire field. */
     val phase: AppsDeploymentPhase? = null,
     /**
      * Optional `date-time`-formatted value serialized in the `phase_last_updated_at` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("phase_last_updated_at") val phaseLastUpdatedAt: OffsetDateTime? = null,
-    /**
-     * Optional object value serialized in the `progress` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("phase_last_updated_at")
+    val phaseLastUpdatedAt: OffsetDateTime? = null,
+    /** Optional object value serialized in the `progress` wire field. */
     val progress: AppsDeploymentProgress? = null,
-    /**
-     * Optional array value serialized in the `services` wire field.
-     */
+    /** Optional array value serialized in the `services` wire field. */
     val services: List<AppsDeploymentService>? = null,
-    /**
-     * The desired configuration of an application.
-     */
+    /** The desired configuration of an application. */
     val spec: AppSpec? = null,
-    /**
-     * Optional array value serialized in the `static_sites` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("static_sites") val staticSites: List<AppsDeploymentStaticSite>? = null,
-    /**
-     * Optional `string` value serialized in the `tier_slug` wire field.
-     */
+    /** Optional array value serialized in the `static_sites` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("static_sites")
+    val staticSites: List<AppsDeploymentStaticSite>? = null,
+    /** Optional `string` value serialized in the `tier_slug` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("tier_slug") val tierSlug: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `updated_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * Optional array value serialized in the `workers` wire field.
-     */
-    val workers: List<AppsDeploymentWorker>? = null
+    /** Optional `date-time`-formatted value serialized in the `updated_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** Optional array value serialized in the `workers` wire field. */
+    val workers: List<AppsDeploymentWorker>? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentFunctions` API schema.
- */
+/** Typed representation of the `AppsDeploymentFunctions` API schema. */
 data class AppsDeploymentFunctions(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * The commit hash of the repository that was used to build this functions component.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash") val sourceCommitHash: String? = null,
-    /**
-     * The namespace where the functions are deployed.
-     */
-    val namespace: String? = null
+    /** The commit hash of the repository that was used to build this functions component. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash")
+    val sourceCommitHash: String? = null,
+    /** The namespace where the functions are deployed. */
+    val namespace: String? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentJob` API schema.
- */
+/** Typed representation of the `AppsDeploymentJob` API schema. */
 data class AppsDeploymentJob(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `source_commit_hash` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash") val sourceCommitHash: String? = null
+    /** Optional `string` value serialized in the `source_commit_hash` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash")
+    val sourceCommitHash: String? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentProgress` API schema.
- */
+/** Typed representation of the `AppsDeploymentProgress` API schema. */
 data class AppsDeploymentProgress(
-    /**
-     * Optional `int32`-formatted value serialized in the `error_steps` wire field.
-     */
+    /** Optional `int32`-formatted value serialized in the `error_steps` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("error_steps") val errorSteps: Int? = null,
-    /**
-     * Optional `int32`-formatted value serialized in the `pending_steps` wire field.
-     */
+    /** Optional `int32`-formatted value serialized in the `pending_steps` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("pending_steps") val pendingSteps: Int? = null,
-    /**
-     * Optional `int32`-formatted value serialized in the `running_steps` wire field.
-     */
+    /** Optional `int32`-formatted value serialized in the `running_steps` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("running_steps") val runningSteps: Int? = null,
-    /**
-     * Optional array value serialized in the `steps` wire field.
-     */
+    /** Optional array value serialized in the `steps` wire field. */
     val steps: List<AppsDeploymentProgressStep>? = null,
-    /**
-     * Optional `int32`-formatted value serialized in the `success_steps` wire field.
-     */
+    /** Optional `int32`-formatted value serialized in the `success_steps` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("success_steps") val successSteps: Int? = null,
-    /**
-     * Optional array value serialized in the `summary_steps` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("summary_steps") val summarySteps: List<AppsDeploymentProgressStep>? = null,
-    /**
-     * Optional `int32`-formatted value serialized in the `total_steps` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_steps") val totalSteps: Int? = null
+    /** Optional array value serialized in the `summary_steps` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("summary_steps")
+    val summarySteps: List<AppsDeploymentProgressStep>? = null,
+    /** Optional `int32`-formatted value serialized in the `total_steps` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_steps") val totalSteps: Int? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentProgressStep` API schema.
- */
+/** Typed representation of the `AppsDeploymentProgressStep` API schema. */
 data class AppsDeploymentProgressStep(
-    /**
-     * Optional `string` value serialized in the `component_name` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("component_name") val componentName: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `ended_at` wire field.
-     */
+    /** Optional `string` value serialized in the `component_name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("component_name")
+    val componentName: String? = null,
+    /** Optional `date-time`-formatted value serialized in the `ended_at` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("ended_at") val endedAt: OffsetDateTime? = null,
     /**
-     * The base of a human-readable description of the step intended to be combined with the component name for presentation. For example: `message_base` = "Building service" `component_name` = "api"
+     * The base of a human-readable description of the step intended to be combined with the
+     * component name for presentation. For example: `message_base` = "Building service"
+     * `component_name` = "api"
      */
     @com.fasterxml.jackson.annotation.JsonProperty("message_base") val messageBase: String? = null,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional object value serialized in the `reason` wire field.
-     */
+    /** Optional object value serialized in the `reason` wire field. */
     val reason: AppsDeploymentProgressStepReason? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `started_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: OffsetDateTime? = null,
-    /**
-     * Optional enumerated value serialized in the `status` wire field.
-     */
+    /** Optional `date-time`-formatted value serialized in the `started_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at")
+    val startedAt: OffsetDateTime? = null,
+    /** Optional enumerated value serialized in the `status` wire field. */
     val status: AppsDeploymentProgressStepStatus? = null,
-    /**
-     * Optional array value serialized in the `steps` wire field.
-     */
-    val steps: List<Map<String, Any>>? = null
+    /** Optional array value serialized in the `steps` wire field. */
+    val steps: List<Map<String, Any>>? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentProgressStepReason` API schema.
- */
+/** Typed representation of the `AppsDeploymentProgressStepReason` API schema. */
 data class AppsDeploymentProgressStepReason(
-    /**
-     * Optional `string` value serialized in the `code` wire field.
-     */
+    /** Optional `string` value serialized in the `code` wire field. */
     val code: String? = null,
-    /**
-     * Optional `string` value serialized in the `message` wire field.
-     */
-    val message: String? = null
+    /** Optional `string` value serialized in the `message` wire field. */
+    val message: String? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentResponse` API schema.
- */
+/** Typed representation of the `AppsDeploymentResponse` API schema. */
 data class AppsDeploymentResponse(
-    /**
-     * Optional object value serialized in the `deployment` wire field.
-     */
+    /** Optional object value serialized in the `deployment` wire field. */
     val deployment: AppsDeployment? = null
 )
 
-/**
- * Typed representation of the `AppsDeploymentService` API schema.
- */
+/** Typed representation of the `AppsDeploymentService` API schema. */
 data class AppsDeploymentService(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `source_commit_hash` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash") val sourceCommitHash: String? = null
+    /** Optional `string` value serialized in the `source_commit_hash` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash")
+    val sourceCommitHash: String? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentStaticSite` API schema.
- */
+/** Typed representation of the `AppsDeploymentStaticSite` API schema. */
 data class AppsDeploymentStaticSite(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `source_commit_hash` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash") val sourceCommitHash: String? = null
+    /** Optional `string` value serialized in the `source_commit_hash` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash")
+    val sourceCommitHash: String? = null,
 )
 
-/**
- * Typed representation of the `AppsDeploymentWorker` API schema.
- */
+/** Typed representation of the `AppsDeploymentWorker` API schema. */
 data class AppsDeploymentWorker(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `source_commit_hash` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash") val sourceCommitHash: String? = null
+    /** Optional `string` value serialized in the `source_commit_hash` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_commit_hash")
+    val sourceCommitHash: String? = null,
 )
