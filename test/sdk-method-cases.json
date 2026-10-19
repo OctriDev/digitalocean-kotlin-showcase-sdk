@@ -1105,7 +1105,9 @@
         ],
         "toolChoice": "none",
         "stream": false,
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -1297,7 +1299,9 @@
         ],
         "toolChoice": "none",
         "stream": false,
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -1417,7 +1421,9 @@
           }
         ],
         "toolChoice": "none",
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -78988,7 +78994,9 @@
         ],
         "toolChoice": "none",
         "stream": false,
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -79177,7 +79185,9 @@
         ],
         "toolChoice": "none",
         "stream": false,
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -79294,7 +79304,9 @@
           }
         ],
         "toolChoice": "none",
-        "stop": "stop",
+        "stop": [
+          "stop"
+        ],
         "logitBias": null,
         "logprobs": false,
         "n": 1,
@@ -79448,7 +79460,10 @@
       "owner": "dev.octri.showcase.digitalocean.methods.ServerlessInference",
       "arguments": {
         "model": "qwen3-embedding-0.6b",
-        "input": "hello world",
+        "input": [
+          "hello world",
+          "goodbye world"
+        ],
         "user": "user-1234",
         "encodingFormat": "float"
       },
@@ -79499,7 +79514,10 @@
       "owner": "dev.octri.showcase.digitalocean.methods.ServerlessInference",
       "arguments": {
         "model": "qwen3-embedding-0.6b",
-        "input": "hello world",
+        "input": [
+          "hello world",
+          "goodbye world"
+        ],
         "user": "user-1234",
         "encodingFormat": "float"
       },

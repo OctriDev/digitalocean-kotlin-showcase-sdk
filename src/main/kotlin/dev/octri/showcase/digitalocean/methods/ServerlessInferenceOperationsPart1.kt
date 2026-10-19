@@ -171,6 +171,10 @@ internal object ServerlessInferenceInferenceCreateChatCompletionOperation {
             )
         }
 
+        if (request.stop != null) {
+            Validation.validateItems("stop", request.stop, Validation.LengthOpts(min = 1, max = 4))
+        }
+
         val nValue = request.n?.getOrNull()
         if (nValue != null) {
             Validation.validateRange("n", nValue, Validation.RangeOpts(min = 1.0, max = 128.0))
@@ -607,11 +611,13 @@ internal object ServerlessInferenceInferenceCreateEmbeddingOperation {
     fun inferenceCreateEmbedding(
         clientConfig: ClientConfig,
         model: String,
-        input: Any,
+        input: List<String>,
         user: String? = null,
         encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null,
         options: RequestOptions? = null,
     ): EmbeddingsResponse {
+        Validation.validateItems("input", input, Validation.LengthOpts(min = 1, max = 2048))
+
         return SdkClient.request<EmbeddingsResponse>(
                 SdkClient.RequestSpec(
                     "POST",

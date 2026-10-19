@@ -2548,8 +2548,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -2875,8 +2875,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -3116,8 +3116,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -3359,8 +3359,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -3669,8 +3669,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -3910,8 +3910,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -97042,8 +97042,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -97358,8 +97358,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -97588,8 +97588,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -97831,8 +97831,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -98130,8 +98130,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -98360,8 +98360,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -98534,8 +98534,8 @@
             {
               "name": "input",
               "required": true,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -98662,8 +98662,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -98712,8 +98712,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -101067,8 +101067,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -101243,8 +101243,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -101461,8 +101461,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -101608,8 +101608,8 @@
             {
               "name": "stop",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -101767,8 +101767,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -101985,8 +101985,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -224757,40 +224757,21 @@
         {
           "name": "stop",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "stream",
@@ -229829,40 +229810,21 @@
         {
           "name": "stop",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "stream",
@@ -240845,40 +240807,21 @@
         {
           "name": "input",
           "required": true,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "model",

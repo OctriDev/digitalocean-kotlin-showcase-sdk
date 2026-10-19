@@ -126,7 +126,7 @@ data class CreateResponseRequest(
     @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
     val toolChoice: CreateResponseRequestToolChoice? = null,
     /** Up to 4 sequences where the API will stop generating further tokens. */
-    val stop: Any? = null,
+    val stop: List<String>? = null,
     /** Set of key-value pairs that can be attached to the request. */
     val metadata: Map<String, String>? = null,
     /** A unique identifier representing your end-user. */

@@ -8,7 +8,7 @@ data class EmbeddingsRequest(
     /** Model id to use for embeddings. Must match a model your account can access. */
     val model: String,
     /** A single string or 1–2048 strings; each string produces one row in `data`, in order. */
-    val input: Any,
+    val input: List<String>,
     /** Optional end-user identifier to help with abuse monitoring. */
     val user: String? = null,
     /** How embedding values are returned in each `data[].embedding` field. */

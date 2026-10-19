@@ -41,7 +41,7 @@ object AgentInference {
         val tools: List<ChatCompletionTool>? = null,
         val toolChoice: ChatCompletionRequestToolChoice? = null,
         val stream: SdkClient.SdkOptional<Boolean?>? = null,
-        val stop: Any? = null,
+        val stop: List<String>? = null,
         val logitBias: SdkClient.SdkOptional<Map<String, Long>?>? = null,
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
@@ -207,6 +207,10 @@ object AgentInference {
             )
         }
 
+        if (request.stop != null) {
+            Validation.validateItems("stop", request.stop, Validation.LengthOpts(min = 1, max = 4))
+        }
+
         val nValue = request.n?.getOrNull()
         if (nValue != null) {
             Validation.validateRange("n", nValue, Validation.RangeOpts(min = 1.0, max = 128.0))
@@ -280,7 +284,7 @@ object AgentInference {
         val topLogprobs: SdkClient.SdkOptional<Long?>? = null,
         val tools: List<ChatCompletionTool>? = null,
         val toolChoice: ChatCompletionRequestToolChoice? = null,
-        val stop: Any? = null,
+        val stop: List<String>? = null,
         val logitBias: SdkClient.SdkOptional<Map<String, Long>?>? = null,
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,

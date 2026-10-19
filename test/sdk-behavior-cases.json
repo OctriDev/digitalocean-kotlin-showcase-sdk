@@ -67163,6 +67163,9 @@
           ],
           "tool_choice": "none",
           "stream": false,
+          "stop": [
+            "stop"
+          ],
           "logprobs": false,
           "n": 1,
           "reasoning_effort": "none",
@@ -67190,7 +67193,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello, how are you?\",\"tool_calls\":[{\"id\":\"call_abc123\",\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"arguments\":\"{\\\"location\\\": \\\"Boston\\\"}\"}}],\"tool_call_id\":\"call_abc123\"}],\"model\":\"llama3-8b-instruct\",\"max_tokens\":0,\"max_completion_tokens\":256,\"frequency_penalty\":0,\"presence_penalty\":0,\"top_logprobs\":0,\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"description\":\"Get the current weather for a location.\",\"parameters\":{}}}],\"tool_choice\":\"none\",\"stream\":false,\"logprobs\":false,\"n\":1,\"reasoning_effort\":\"none\",\"seed\":1,\"metadata\":{\"key\":\"key\"},\"temperature\":1,\"top_p\":1,\"user\":\"user-1234\"}",
+        "bodyText": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello, how are you?\",\"tool_calls\":[{\"id\":\"call_abc123\",\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"arguments\":\"{\\\"location\\\": \\\"Boston\\\"}\"}}],\"tool_call_id\":\"call_abc123\"}],\"model\":\"llama3-8b-instruct\",\"max_tokens\":0,\"max_completion_tokens\":256,\"frequency_penalty\":0,\"presence_penalty\":0,\"top_logprobs\":0,\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"description\":\"Get the current weather for a location.\",\"parameters\":{}}}],\"tool_choice\":\"none\",\"stream\":false,\"stop\":[\"stop\"],\"logprobs\":false,\"n\":1,\"reasoning_effort\":\"none\",\"seed\":1,\"metadata\":{\"key\":\"key\"},\"temperature\":1,\"top_p\":1,\"user\":\"user-1234\"}",
         "multipartFields": null
       },
       "response": {
@@ -67391,7 +67394,10 @@
         "headers": {},
         "body": {
           "model": "qwen3-embedding-0.6b",
-          "input": "hello world",
+          "input": [
+            "hello world",
+            "goodbye world"
+          ],
           "user": "user-1234",
           "encoding_format": "float"
         },
@@ -67411,7 +67417,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"model\":\"qwen3-embedding-0.6b\",\"input\":\"hello world\",\"user\":\"user-1234\",\"encoding_format\":\"float\"}",
+        "bodyText": "{\"model\":\"qwen3-embedding-0.6b\",\"input\":[\"hello world\",\"goodbye world\"],\"user\":\"user-1234\",\"encoding_format\":\"float\"}",
         "multipartFields": null
       },
       "response": {
@@ -67501,6 +67507,9 @@
           ],
           "tool_choice": "none",
           "stream": false,
+          "stop": [
+            "stop"
+          ],
           "logprobs": false,
           "n": 1,
           "reasoning_effort": "none",
@@ -67528,7 +67537,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello, how are you?\",\"tool_calls\":[{\"id\":\"call_abc123\",\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"arguments\":\"{\\\"location\\\": \\\"Boston\\\"}\"}}],\"tool_call_id\":\"call_abc123\"}],\"model\":\"llama3-8b-instruct\",\"max_tokens\":0,\"max_completion_tokens\":256,\"frequency_penalty\":0,\"presence_penalty\":0,\"top_logprobs\":0,\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"description\":\"Get the current weather for a location.\",\"parameters\":{}}}],\"tool_choice\":\"none\",\"stream\":false,\"logprobs\":false,\"n\":1,\"reasoning_effort\":\"none\",\"seed\":1,\"metadata\":{\"key\":\"key\"},\"temperature\":1,\"top_p\":1,\"user\":\"user-1234\"}",
+        "bodyText": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello, how are you?\",\"tool_calls\":[{\"id\":\"call_abc123\",\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"arguments\":\"{\\\"location\\\": \\\"Boston\\\"}\"}}],\"tool_call_id\":\"call_abc123\"}],\"model\":\"llama3-8b-instruct\",\"max_tokens\":0,\"max_completion_tokens\":256,\"frequency_penalty\":0,\"presence_penalty\":0,\"top_logprobs\":0,\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_weather\",\"description\":\"Get the current weather for a location.\",\"parameters\":{}}}],\"tool_choice\":\"none\",\"stream\":false,\"stop\":[\"stop\"],\"logprobs\":false,\"n\":1,\"reasoning_effort\":\"none\",\"seed\":1,\"metadata\":{\"key\":\"key\"},\"temperature\":1,\"top_p\":1,\"user\":\"user-1234\"}",
         "multipartFields": null
       },
       "response": {
