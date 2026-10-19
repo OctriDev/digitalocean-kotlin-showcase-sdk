@@ -26,295 +26,146 @@ import dev.octri.showcase.digitalocean.Validation
 
 object Uptime {
 
+
     /**
      * To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun uptimeListChecks(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllChecks {
+    fun uptimeListChecks(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllChecks {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllChecks>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/uptime/checks",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "uptimeListChecks",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllChecks>(SdkClient.RequestSpec("GET", "/v2/uptime/checks", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "uptimeListChecks", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To create an Uptime check, send a POST request to `/v2/uptime/checks` specifying the
-     * attributes in the table below in the JSON body.
+     * To create an Uptime check, send a POST request to `/v2/uptime/checks` specifying the attributes in the table below in the JSON body.
      *
      * @param name A human-friendly display name.
      * @param type The type of health check to perform.
      * @param target The endpoint to perform healthchecks on.
-     * @param regions An array containing the selected regions to perform healthchecks from.
-     * @param enabled A boolean value indicating whether the check is enabled/disabled.
+     * @param regions An array containing the selected regions to perform
+     *   healthchecks from.
+     * @param enabled A boolean value indicating whether the check is
+     *   enabled/disabled.
      */
-    fun uptimeCreateCheck(
-        clientConfig: ClientConfig,
-        name: String,
-        type: UptimeCreateCheckTypeEnum,
-        target: String,
-        regions: List<UptimeCreateCheckRegionsItemEnum>,
-        enabled: Boolean,
-        options: RequestOptions? = null,
-    ): ExistingCheck {
-        return SdkClient.request<ExistingCheck>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/uptime/checks",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "type" to (type),
-                            "target" to (target),
-                            "regions" to (regions),
-                            "enabled" to (enabled),
-                        ),
-                    operationId = "uptimeCreateCheck",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun uptimeCreateCheck(clientConfig: ClientConfig, name: String, type: UptimeCreateCheckTypeEnum, target: String, regions: List<UptimeCreateCheckRegionsItemEnum>, enabled: Boolean, options: RequestOptions? = null): ExistingCheck {
+        return SdkClient.request<ExistingCheck>(SdkClient.RequestSpec("POST", "/v2/uptime/checks", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "type" to (type), "target" to (target), "regions" to (regions), "enabled" to (enabled)), operationId = "uptimeCreateCheck", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To show information about an existing check, send a GET request to
-     * `/v2/uptime/checks/$CHECK_ID`.
+     * To show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.
      *
      * @param checkId A unique identifier for a check.
      */
-    fun uptimeGetCheck(
-        clientConfig: ClientConfig,
-        checkId: String,
-        options: RequestOptions? = null,
-    ): ExistingCheck {
+    fun uptimeGetCheck(clientConfig: ClientConfig, checkId: String, options: RequestOptions? = null): ExistingCheck {
         Validation.validateUuid("check_id", checkId)
 
-        return SdkClient.request<ExistingCheck>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}",
-                    config = clientConfig,
-                    operationId = "uptimeGetCheck",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingCheck>(SdkClient.RequestSpec("GET", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}", config = clientConfig, operationId = "uptimeGetCheck", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To update the settings of an Uptime check, send a PUT request to
-     * `/v2/uptime/checks/$CHECK_ID`.
+     * To update the settings of an Uptime check, send a PUT request to `/v2/uptime/checks/$CHECK_ID`.
      *
      * @param checkId A unique identifier for a check.
      */
-    fun uptimeUpdateCheck(
-        clientConfig: ClientConfig,
-        checkId: String,
-        body: CheckUpdatable,
-        options: RequestOptions? = null,
-    ): ExistingCheck {
+    fun uptimeUpdateCheck(clientConfig: ClientConfig, checkId: String, body: CheckUpdatable, options: RequestOptions? = null): ExistingCheck {
         Validation.validateUuid("check_id", checkId)
 
-        return SdkClient.request<ExistingCheck>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "uptimeUpdateCheck",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingCheck>(SdkClient.RequestSpec("PUT", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}", config = clientConfig, body = body, operationId = "uptimeUpdateCheck", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete an Uptime check, send a DELETE request to `/v2/uptime/checks/$CHECK_ID`. A 204
-     * status code with no body will be returned in response to a successful request. Deleting a
-     * check will also delete alerts associated with the check.
+     * To delete an Uptime check, send a DELETE request to `/v2/uptime/checks/$CHECK_ID`. A 204 status code with no body will be returned in response to a successful request. Deleting a check will also delete alerts associated with the check.
      *
      * @param checkId A unique identifier for a check.
      */
-    fun uptimeDeleteCheck(
-        clientConfig: ClientConfig,
-        checkId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun uptimeDeleteCheck(clientConfig: ClientConfig, checkId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("check_id", checkId)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}",
-                config = clientConfig,
-                operationId = "uptimeDeleteCheck",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}", config = clientConfig, operationId = "uptimeDeleteCheck", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To show information about an existing check's state, send a GET request to
-     * `/v2/uptime/checks/$CHECK_ID/state`.
+     * To show information about an existing check's state, send a GET request to `/v2/uptime/checks/$CHECK_ID/state`.
      *
      * @param checkId A unique identifier for a check.
      */
-    fun uptimeGetCheckState(
-        clientConfig: ClientConfig,
-        checkId: String,
-        options: RequestOptions? = null,
-    ): ExistingCheckState {
+    fun uptimeGetCheckState(clientConfig: ClientConfig, checkId: String, options: RequestOptions? = null): ExistingCheckState {
         Validation.validateUuid("check_id", checkId)
 
-        return SdkClient.request<ExistingCheckState>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/state",
-                    config = clientConfig,
-                    operationId = "uptimeGetCheckState",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingCheckState>(SdkClient.RequestSpec("GET", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/state", config = clientConfig, operationId = "uptimeGetCheckState", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list all of the alerts for an Uptime check, send a GET request to
-     * `/v2/uptime/checks/$CHECK_ID/alerts`.
+     * To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.
      *
      * @param checkId A unique identifier for a check.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun uptimeListAlerts(
-        clientConfig: ClientConfig,
-        checkId: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllAlerts {
+    fun uptimeListAlerts(clientConfig: ClientConfig, checkId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllAlerts {
         Validation.validateUuid("check_id", checkId)
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllAlerts>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "uptimeListAlerts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllAlerts>(SdkClient.RequestSpec("GET", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "uptimeListAlerts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [uptimeCreateAlert]. */
     data class UptimeCreateAlertRequest(
@@ -324,100 +175,57 @@ object Uptime {
         val notifications: Notification,
         val period: UptimeCreateAlertPeriodEnum,
         val threshold: Long? = null,
-        val comparison: UptimeCreateAlertComparisonEnum? = null,
+        val comparison: UptimeCreateAlertComparisonEnum? = null
     )
 
     /**
-     * To create an Uptime alert, send a POST request to `/v2/uptime/checks/$CHECK_ID/alerts`
-     * specifying the attributes in the table below in the JSON body.
+     * To create an Uptime alert, send a POST request to `/v2/uptime/checks/$CHECK_ID/alerts` specifying the attributes in the table below in the JSON body.
      *
      * @param checkId A unique identifier for a check.
      * @param name A human-friendly display name.
      * @param type The type of alert.
      * @param notifications The notification settings for a trigger alert.
-     * @param period Period of time the threshold must be exceeded to trigger the alert.
-     * @param threshold The threshold at which the alert will enter a trigger state. The specific
-     *   threshold is dependent on the alert type.
+     * @param period Period of time the threshold must be exceeded to trigger the
+     *   alert.
+     * @param threshold The threshold at which the alert will enter a trigger state.
+     *   The specific threshold is dependent on the alert type.
      * @param comparison The comparison operator used against the alert's threshold.
      */
-    fun uptimeCreateAlert(
-        clientConfig: ClientConfig,
-        request: UptimeCreateAlertRequest,
-        options: RequestOptions? = null,
-    ): ExistingAlert {
+    fun uptimeCreateAlert(clientConfig: ClientConfig, request: UptimeCreateAlertRequest, options: RequestOptions? = null): ExistingAlert {
         validateUptimeCreateAlertRequest(request)
 
-        return SdkClient.request<ExistingAlert>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(request.checkId)}/alerts",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "type" to (request.type),
-                            "notifications" to (request.notifications),
-                            "period" to (request.period),
-                            "threshold" to (SdkClient.omitIfNull(request.threshold)),
-                            "comparison" to (SdkClient.omitIfNull(request.comparison)),
-                        ),
-                    operationId = "uptimeCreateAlert",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingAlert>(SdkClient.RequestSpec("POST", "/v2/uptime/checks/${SdkClient.encodePathSegment(request.checkId)}/alerts", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "type" to (request.type), "notifications" to (request.notifications), "period" to (request.period), "threshold" to (SdkClient.omitIfNull(request.threshold)), "comparison" to (SdkClient.omitIfNull(request.comparison))), operationId = "uptimeCreateAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateUptimeCreateAlertRequest(request: UptimeCreateAlertRequest) {
         Validation.validateUuid("check_id", request.checkId)
     }
 
+
+
+
+
+
     /**
-     * To show information about an existing alert, send a GET request to
-     * `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
+     * To show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
      *
      * @param checkId A unique identifier for a check.
      * @param alertId A unique identifier for an alert.
      */
-    fun uptimeGetAlert(
-        clientConfig: ClientConfig,
-        checkId: String,
-        alertId: String,
-        options: RequestOptions? = null,
-    ): ExistingAlert {
+    fun uptimeGetAlert(clientConfig: ClientConfig, checkId: String, alertId: String, options: RequestOptions? = null): ExistingAlert {
         Validation.validateUuid("check_id", checkId)
 
         Validation.validateUuid("alert_id", alertId)
 
-        return SdkClient.request<ExistingAlert>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts/${SdkClient.encodePathSegment(alertId)}",
-                    config = clientConfig,
-                    operationId = "uptimeGetAlert",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingAlert>(SdkClient.RequestSpec("GET", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "uptimeGetAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [uptimeUpdateAlert]. */
     data class UptimeUpdateAlertRequest(
@@ -428,59 +236,29 @@ object Uptime {
         val notifications: Notification,
         val period: UptimeUpdateAlertPeriodEnum,
         val threshold: Long? = null,
-        val comparison: UptimeUpdateAlertComparisonEnum? = null,
+        val comparison: UptimeUpdateAlertComparisonEnum? = null
     )
 
     /**
-     * To update the settings of an Uptime alert, send a PUT request to
-     * `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
+     * To update the settings of an Uptime alert, send a PUT request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
      *
      * @param checkId A unique identifier for a check.
      * @param alertId A unique identifier for an alert.
      * @param name A human-friendly display name.
      * @param type The type of alert.
      * @param notifications The notification settings for a trigger alert.
-     * @param period Period of time the threshold must be exceeded to trigger the alert.
-     * @param threshold The threshold at which the alert will enter a trigger state. The specific
-     *   threshold is dependent on the alert type.
+     * @param period Period of time the threshold must be exceeded to trigger the
+     *   alert.
+     * @param threshold The threshold at which the alert will enter a trigger state.
+     *   The specific threshold is dependent on the alert type.
      * @param comparison The comparison operator used against the alert's threshold.
      */
-    fun uptimeUpdateAlert(
-        clientConfig: ClientConfig,
-        request: UptimeUpdateAlertRequest,
-        options: RequestOptions? = null,
-    ): ExistingAlert {
+    fun uptimeUpdateAlert(clientConfig: ClientConfig, request: UptimeUpdateAlertRequest, options: RequestOptions? = null): ExistingAlert {
         validateUptimeUpdateAlertRequest(request)
 
-        return SdkClient.request<ExistingAlert>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/uptime/checks/${SdkClient.encodePathSegment(request.checkId)}/alerts/${SdkClient.encodePathSegment(request.alertId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "type" to (request.type),
-                            "notifications" to (request.notifications),
-                            "period" to (request.period),
-                            "threshold" to (SdkClient.omitIfNull(request.threshold)),
-                            "comparison" to (SdkClient.omitIfNull(request.comparison)),
-                        ),
-                    operationId = "uptimeUpdateAlert",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingAlert>(SdkClient.RequestSpec("PUT", "/v2/uptime/checks/${SdkClient.encodePathSegment(request.checkId)}/alerts/${SdkClient.encodePathSegment(request.alertId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "type" to (request.type), "notifications" to (request.notifications), "period" to (request.period), "threshold" to (SdkClient.omitIfNull(request.threshold)), "comparison" to (SdkClient.omitIfNull(request.comparison))), operationId = "uptimeUpdateAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateUptimeUpdateAlertRequest(request: UptimeUpdateAlertRequest) {
         Validation.validateUuid("check_id", request.checkId)
@@ -488,41 +266,29 @@ object Uptime {
         Validation.validateUuid("alert_id", request.alertId)
     }
 
+
+
+
+
+
     /**
-     * To delete an Uptime alert, send a DELETE request to
-     * `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`. A 204 status code with no body will be
-     * returned in response to a successful request.
+     * To delete an Uptime alert, send a DELETE request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`. A 204 status code with no body will be returned in response to a successful request.
      *
      * @param checkId A unique identifier for a check.
      * @param alertId A unique identifier for an alert.
      */
-    fun uptimeDeleteAlert(
-        clientConfig: ClientConfig,
-        checkId: String,
-        alertId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun uptimeDeleteAlert(clientConfig: ClientConfig, checkId: String, alertId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("check_id", checkId)
 
         Validation.validateUuid("alert_id", alertId)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts/${SdkClient.encodePathSegment(alertId)}",
-                config = clientConfig,
-                operationId = "uptimeDeleteAlert",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/uptime/checks/${SdkClient.encodePathSegment(checkId)}/alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "uptimeDeleteAlert", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }

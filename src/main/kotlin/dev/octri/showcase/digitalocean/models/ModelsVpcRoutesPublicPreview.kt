@@ -5,67 +5,96 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AllVpcRoutes` API schema. */
+/**
+ * Typed representation of the `AllVpcRoutes` API schema.
+ */
 data class AllVpcRoutes(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val routes: List<Route>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `AllVpcSubnetRoutes` API schema. */
+/**
+ * Typed representation of the `AllVpcSubnetRoutes` API schema.
+ */
 data class AllVpcSubnetRoutes(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val routes: List<Route>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `Route` API schema. */
+/**
+ * Typed representation of the `Route` API schema.
+ */
 data class Route(
-    /** The unique identifier of the route. */
+    /**
+     * The unique identifier of the route.
+     */
     val id: String,
-    /** The route type inferred from how the route is sourced. */
+    /**
+     * The route type inferred from how the route is sourced.
+     */
     val type: RouteTypeEnum,
-    /** The destination IPv4 network for the route in CIDR notation. */
+    /**
+     * The destination IPv4 network for the route in CIDR notation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("destination_cidr") val destinationCidr: String,
     /**
-     * The URNs of resources that act as next hops for the route. Supported next hops are Droplets,
-     * using a numeric ID in the format `do:droplet:<id>`, and VPC NAT Gateways, using a UUID in the
-     * format `do:nat_gateway:<uuid>`.
+     * The URNs of resources that act as next hops for the route. Supported next hops are Droplets, using a numeric ID in the format `do:droplet:<id>`, and VPC NAT Gateways, using a UUID in the format `do:nat_gateway:<uuid>`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("target_urns") val targetUrns: List<String>,
-    /** Whether the caller can update or delete the route. */
+    /**
+     * Whether the caller can update or delete the route.
+     */
     val modifiable: Boolean? = null,
-    /** The time when the route was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
+    /**
+     * The time when the route was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `RouteCreate` API schema. */
+/**
+ * Typed representation of the `RouteCreate` API schema.
+ */
 data class RouteCreate(
-    /** A valid IPv4 CIDR accepted by the VPC routing product. */
+    /**
+     * A valid IPv4 CIDR accepted by the VPC routing product.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("destination_cidr") val destinationCidr: String,
     /**
-     * The URNs of supported next-hop resources. Droplet targets must use a numeric ID in the format
-     * `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the format `do:nat_gateway:<uuid>`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_urns") val targetUrns: List<String>,
-)
-
-/** Typed representation of the `RouteUpdate` API schema. */
-data class RouteUpdate(
-    /**
-     * The URNs of supported next-hop resources. Droplet targets must use a numeric ID in the format
-     * `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the format `do:nat_gateway:<uuid>`.
+     * The URNs of supported next-hop resources. Droplet targets must use a numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the format `do:nat_gateway:<uuid>`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("target_urns") val targetUrns: List<String>
 )
 
-/** Typed representation of the `SingleRoute` API schema. */
+/**
+ * Typed representation of the `RouteUpdate` API schema.
+ */
+data class RouteUpdate(
+    /**
+     * The URNs of supported next-hop resources. Droplet targets must use a numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the format `do:nat_gateway:<uuid>`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_urns") val targetUrns: List<String>
+)
+
+/**
+ * Typed representation of the `SingleRoute` API schema.
+ */
 data class SingleRoute(
-    /** Optional object value serialized in the `route` wire field. */
+    /**
+     * Optional object value serialized in the `route` wire field.
+     */
     val route: Route? = null
 )

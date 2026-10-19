@@ -3,80 +3,41 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class VpcNatGatewaysNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`. The
-     * response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of
-     * VPC NAT gateway objects. These each contain the standard VPC NAT gateway attributes.
+     * To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`. The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects. These each contain the standard VPC NAT gateway attributes.
      */
-    fun list(
-        request:
-            dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysListRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGateways {
-        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysList(
-            clientConfig,
-            request,
-            options,
-        )
+    fun list(request: dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysListRequest, options: RequestOptions? = null): VpcNatGateways {
+        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysList(clientConfig, request, options)
     }
 
     /**
-     * To create a new VPC NAT gateway, send a POST request to `/v2/vpc_nat_gateways` setting the
-     * required attributes. The response body will contain a JSON object with a key called
-     * `vpc_nat_gateway` containing the standard attributes for the new VPC NAT gateway.
+     * To create a new VPC NAT gateway, send a POST request to `/v2/vpc_nat_gateways` setting the required attributes. The response body will contain a JSON object with a key called `vpc_nat_gateway` containing the standard attributes for the new VPC NAT gateway.
      */
-    fun create(
-        request:
-            dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysCreateRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGatewayCreateResponse {
-        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysCreateRequest, options: RequestOptions? = null): VpcNatGatewayCreateResponse {
+        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysCreate(clientConfig, request, options)
     }
 
     /**
-     * To show information about an individual VPC NAT gateway, send a GET request to
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.
+     * To show information about an individual VPC NAT gateway, send a GET request to `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.
      */
     fun get(id: String, options: RequestOptions? = null): VpcNatGateway {
-        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysGet(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysGet(clientConfig, id, options)
     }
 
     /**
-     * To update the configuration of an existing VPC NAT Gateway, send a PUT request to
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`. The request must contain a full representation of
-     * the VPC NAT Gateway including existing attributes.
+     * To update the configuration of an existing VPC NAT Gateway, send a PUT request to `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`. The request must contain a full representation of the VPC NAT Gateway including existing attributes.
      */
-    fun update(
-        request:
-            dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysUpdateRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGatewayUpdateResponse {
-        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysUpdate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.VpcnatgatewaysUpdateRequest, options: RequestOptions? = null): VpcNatGatewayUpdateResponse {
+        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysUpdate(clientConfig, request, options)
     }
 
     /**
-     * To destroy a VPC NAT Gateway, send a DELETE request to the
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID` endpoint. A successful response will include a 202
-     * response code and no content.
+     * To destroy a VPC NAT Gateway, send a DELETE request to the `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID` endpoint. A successful response will include a 202 response code and no content.
      */
     fun delete(id: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysDelete(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.VpcNatGatewaysMethods.vpcnatgatewaysDelete(clientConfig, id, options)
     }
+
 }

@@ -3,74 +3,116 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Information for a agent function link */
+/**
+ * Information for a agent function link
+ */
 data class ApiLinkAgentFunctionInputPublic(
-    /** Agent id */
+    /**
+     * Agent id
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_uuid") val agentUuid: String? = null,
-    /** Function description */
+    /**
+     * Function description
+     */
     val description: String? = null,
-    /** The name of the function in the DigitalOcean functions platform */
+    /**
+     * The name of the function in the DigitalOcean functions platform
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("faas_name") val faasName: String? = null,
-    /** The namespace of the function in the DigitalOcean functions platform */
-    @com.fasterxml.jackson.annotation.JsonProperty("faas_namespace")
-    val faasNamespace: String? = null,
-    /** Function name */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_name")
-    val functionName: String? = null,
-    /** Describe the input schema for the function so the agent may call it */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_schema")
-    val inputSchema: Map<String, Any>? = null,
-    /** Describe the output schema for the function so the agent handle its response */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
-    val outputSchema: Map<String, Any>? = null,
+    /**
+     * The namespace of the function in the DigitalOcean functions platform
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("faas_namespace") val faasNamespace: String? = null,
+    /**
+     * Function name
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("function_name") val functionName: String? = null,
+    /**
+     * Describe the input schema for the function so the agent may call it
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_schema") val inputSchema: Map<String, Any>? = null,
+    /**
+     * Describe the output schema for the function so the agent handle its response
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null
 )
 
-/** Information about a newly function linked agent */
+/**
+ * Information about a newly function linked agent
+ */
 data class ApiLinkAgentFunctionOutput(
-    /** An Agent */
+    /**
+     * An Agent
+     */
     val agent: ApiAgent? = null
 )
 
-/** Information about an updated agent */
+/**
+ * Information about an updated agent
+ */
 data class ApiLinkAgentGuardrailOutput(
-    /** An Agent */
+    /**
+     * An Agent
+     */
     val agent: ApiAgent? = null
 )
 
-/** Information about linking an agent to a guardrail */
+/**
+ * Information about linking an agent to a guardrail
+ */
 data class ApiLinkAgentGuardrailsInputPublic(
-    /** The UUID of the agent. */
+    /**
+     * The UUID of the agent.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_uuid") val agentUuid: String? = null,
-    /** The list of guardrails to attach. */
-    val guardrails: List<ApiAgentGuardrailInput>? = null,
+    /**
+     * The list of guardrails to attach.
+     */
+    val guardrails: List<ApiAgentGuardrailInput>? = null
 )
 
-/** Information for linking an agent */
+/**
+ * Information for linking an agent
+ */
 data class ApiLinkAgentInputPublic(
-    /** Routed agent id */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid")
-    val childAgentUuid: String? = null,
-    /** Optional `string` value serialized in the `if_case` wire field. */
+    /**
+     * Routed agent id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid") val childAgentUuid: String? = null,
+    /**
+     * Optional `string` value serialized in the `if_case` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("if_case") val ifCase: String? = null,
-    /** A unique identifier for the parent agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid")
-    val parentAgentUuid: String? = null,
-    /** Name of route */
-    @com.fasterxml.jackson.annotation.JsonProperty("route_name") val routeName: String? = null,
+    /**
+     * A unique identifier for the parent agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid") val parentAgentUuid: String? = null,
+    /**
+     * Name of route
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("route_name") val routeName: String? = null
 )
 
-/** Information about a newly linked agent */
+/**
+ * Information about a newly linked agent
+ */
 data class ApiLinkAgentOutput(
-    /** Routed agent id */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid")
-    val childAgentUuid: String? = null,
-    /** A unique identifier for the parent agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid")
-    val parentAgentUuid: String? = null,
+    /**
+     * Routed agent id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid") val childAgentUuid: String? = null,
+    /**
+     * A unique identifier for the parent agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid") val parentAgentUuid: String? = null
 )
 
-/** Information about a linked knowledge base */
+/**
+ * Information about a linked knowledge base
+ */
 data class ApiLinkKnowledgeBaseOutput(
-    /** An Agent */
+    /**
+     * An Agent
+     */
     val agent: ApiAgent? = null
 )

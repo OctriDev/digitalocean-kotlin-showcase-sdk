@@ -3,363 +3,535 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllDomainRecordsResponse` API schema. */
+/**
+ * Typed representation of the `AllDomainRecordsResponse` API schema.
+ */
 data class AllDomainRecordsResponse(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_records")
-    val domainRecords: List<DomainRecord>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_records") val domainRecords: List<DomainRecord>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `CreatedDomainRecord` API schema. */
+/**
+ * Typed representation of the `CreatedDomainRecord` API schema.
+ */
 data class CreatedDomainRecord(
-    /** Optional object value serialized in the `domain_record` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_record")
-    val domainRecord: DomainRecord? = null
+    /**
+     * Optional object value serialized in the `domain_record` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_record") val domainRecord: DomainRecord? = null
 )
 
-/** Typed representation of the `DomainRecord` API schema. */
+/**
+ * Typed representation of the `DomainRecord` API schema.
+ */
 data class DomainRecord(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordAaaa` API schema. */
+/**
+ * Typed representation of the `DomainRecordAaaa` API schema.
+ */
 data class DomainRecordAaaa(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordARequest` API schema. */
+/**
+ * Typed representation of the `DomainRecordARequest` API schema.
+ */
 data class DomainRecordARequest(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordCaa` API schema. */
+/**
+ * Typed representation of the `DomainRecordCaa` API schema.
+ */
 data class DomainRecordCaa(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordCname` API schema. */
+/**
+ * Typed representation of the `DomainRecordCname` API schema.
+ */
 data class DomainRecordCname(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordMx` API schema. */
+/**
+ * Typed representation of the `DomainRecordMx` API schema.
+ */
 data class DomainRecordMx(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordNs` API schema. */
+/**
+ * Typed representation of the `DomainRecordNs` API schema.
+ */
 data class DomainRecordNs(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordRequest` API schema. */
+/**
+ * Typed representation of the `DomainRecordRequest` API schema.
+ */
 data class DomainRecordRequest(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordResponse` API schema. */
+/**
+ * Typed representation of the `DomainRecordResponse` API schema.
+ */
 data class DomainRecordResponse(
-    /** Optional object value serialized in the `domain_record` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_record")
-    val domainRecord: DomainRecord? = null
+    /**
+     * Optional object value serialized in the `domain_record` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_record") val domainRecord: DomainRecord? = null
 )
 
-/** Typed representation of the `DomainRecordSoa` API schema. */
+/**
+ * Typed representation of the `DomainRecordSoa` API schema.
+ */
 data class DomainRecordSoa(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordSrv` API schema. */
+/**
+ * Typed representation of the `DomainRecordSrv` API schema.
+ */
 data class DomainRecordSrv(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `DomainRecordTxt` API schema. */
+/**
+ * Typed representation of the `DomainRecordTxt` API schema.
+ */
 data class DomainRecordTxt(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )

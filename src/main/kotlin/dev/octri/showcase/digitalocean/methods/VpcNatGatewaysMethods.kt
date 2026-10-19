@@ -15,74 +15,71 @@ import dev.octri.showcase.digitalocean.VpcNatGateway
 import dev.octri.showcase.digitalocean.VpcNatGatewayCreateRegionEnum
 import dev.octri.showcase.digitalocean.VpcNatGatewayCreateResponse
 import dev.octri.showcase.digitalocean.VpcNatGatewayCreateTypeEnum
-import dev.octri.showcase.digitalocean.VpcNatGatewayUpdateResponse
 import dev.octri.showcase.digitalocean.VpcNatGateways
+import dev.octri.showcase.digitalocean.VpcNatGatewayUpdateResponse
 
 object VpcNatGatewaysMethods {
 
-    /** Required object value serialized in the `vpcs[]` wire field. */
-    data class VpcNatGatewayCreateVpcsItem(
-        /** The unique identifier of the VPC to which the NAT gateway is attached. */
-        @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String,
-        /** The unique identifier of the VPC subnet to which the NAT gateway is attached. */
-        @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid")
-        val subnetUuid: String? = null,
-        /**
-         * The classification of the NAT gateway as the default egress route for the VPC traffic.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("default_gateway")
-        val defaultGateway: Boolean? = null,
-    )
-
+/**
+ * Required object value serialized in the `vpcs[]` wire field.
+ */
+data class VpcNatGatewayCreateVpcsItem(
     /**
-     * Specify the address using either `ip` or `ipv4`. Both fields accept the same value and `ip`
-     * takes precedence if both are provided. The assigned address is returned in the `ipv4` field
-     * of GET and list responses.
+     * The unique identifier of the VPC to which the NAT gateway is attached.
      */
-    data class VpcNatGatewayCreateEgressesPublicGatewaysItem(
-        /**
-         * The public egress IP address to assign to the VPC NAT gateway, and the preferred field
-         * for setting it. Provide an unassigned Bring Your Own IP (BYOIP) address on your account
-         * in the same region to use your own IP address. This field is only applied when creating
-         * the gateway and cannot be changed afterward. The assigned address is returned as `ipv4`
-         * in GET and list responses.
-         */
-        val ip: String? = null,
-        /**
-         * An alternative to `ip` for setting the public egress IP address on create. Accepts the
-         * same value as `ip`, which takes precedence if both are provided. This field is only
-         * applied when creating the gateway and cannot be changed afterward.
-         */
-        val ipv4: String? = null,
-    )
-
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String,
     /**
-     * An optional object specifying the public egress IP address to assign to the VPC NAT gateway.
-     * Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP
-     * address automatically.
+     * The unique identifier of the VPC subnet to which the NAT gateway is attached.
      */
-    data class VpcNatGatewayCreateEgresses(
-        /**
-         * An array containing a single public gateway object that sets the gateway's public egress
-         * IP address.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("public_gateways")
-        val publicGateways: List<VpcNatGatewayCreateEgressesPublicGatewaysItem>? = null
-    )
+    @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
+    /**
+     * The classification of the NAT gateway as the default egress route for the VPC traffic.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway") val defaultGateway: Boolean? = null
+)
 
-    /** Required object value serialized in the `vpcs[]` wire field. */
-    data class VpcNatGatewayUpdateVpcsItem(
-        /** The unique identifier of the VPC to which the NAT gateway is attached. */
-        @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-        /** The unique identifier of the VPC subnet to which the NAT gateway is attached. */
-        @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid")
-        val subnetUuid: String? = null,
-        /**
-         * The classification of the NAT gateway as the default egress route for the VPC traffic.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("default_gateway")
-        val defaultGateway: Boolean? = null,
-    )
+/**
+ * Specify the address using either `ip` or `ipv4`. Both fields accept the same value and `ip` takes precedence if both are provided. The assigned address is returned in the `ipv4` field of GET and list responses.
+ */
+data class VpcNatGatewayCreateEgressesPublicGatewaysItem(
+    /**
+     * The public egress IP address to assign to the VPC NAT gateway, and the preferred field for setting it. Provide an unassigned Bring Your Own IP (BYOIP) address on your account in the same region to use your own IP address. This field is only applied when creating the gateway and cannot be changed afterward. The assigned address is returned as `ipv4` in GET and list responses.
+     */
+    val ip: String? = null,
+    /**
+     * An alternative to `ip` for setting the public egress IP address on create. Accepts the same value as `ip`, which takes precedence if both are provided. This field is only applied when creating the gateway and cannot be changed afterward.
+     */
+    val ipv4: String? = null
+)
+
+/**
+ * An optional object specifying the public egress IP address to assign to the VPC NAT gateway. Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP address automatically.
+ */
+data class VpcNatGatewayCreateEgresses(
+    /**
+     * An array containing a single public gateway object that sets the gateway's public egress IP address.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_gateways") val publicGateways: List<VpcNatGatewayCreateEgressesPublicGatewaysItem>? = null
+)
+
+/**
+ * Required object value serialized in the `vpcs[]` wire field.
+ */
+data class VpcNatGatewayUpdateVpcsItem(
+    /**
+     * The unique identifier of the VPC to which the NAT gateway is attached.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
+    /**
+     * The unique identifier of the VPC subnet to which the NAT gateway is attached.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
+    /**
+     * The classification of the NAT gateway as the default egress route for the VPC traffic.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway") val defaultGateway: Boolean? = null
+)
+
 
     /** Parameters for [vpcnatgatewaysList]. */
     data class VpcnatgatewaysListRequest(
@@ -91,13 +88,11 @@ object VpcNatGatewaysMethods {
         val state: SchemaSchemaEnum08bd8b38? = null,
         val region: SchemaSchemaEnum4e60cfc6? = null,
         val type: SchemaSchemaEnuma5e30895? = null,
-        val name: String? = null,
+        val name: String? = null
     )
 
     /**
-     * To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`. The
-     * response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of
-     * VPC NAT gateway objects. These each contain the standard VPC NAT gateway attributes.
+     * To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`. The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects. These each contain the standard VPC NAT gateway attributes.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
@@ -106,55 +101,29 @@ object VpcNatGatewaysMethods {
      * @param type The type of the VPC NAT gateway.
      * @param name The name of the VPC NAT gateway.
      */
-    fun vpcnatgatewaysList(
-        clientConfig: ClientConfig,
-        request: VpcnatgatewaysListRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGateways {
+    fun vpcnatgatewaysList(clientConfig: ClientConfig, request: VpcnatgatewaysListRequest, options: RequestOptions? = null): VpcNatGateways {
         validateVpcnatgatewaysListRequest(request)
 
-        return SdkClient.request<VpcNatGateways>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/vpc_nat_gateways",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "state" to SdkClient.queryValue(request.state, "form", true),
-                            "region" to SdkClient.queryValue(request.region, "form", true),
-                            "type" to SdkClient.queryValue(request.type, "form", true),
-                            "name" to SdkClient.queryValue(request.name, "form", true),
-                        ),
-                    operationId = "vpcnatgatewaysList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VpcNatGateways>(SdkClient.RequestSpec("GET", "/v2/vpc_nat_gateways", config = clientConfig, query = mapOf("per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "state" to SdkClient.queryValue(request.state, "form", true), "region" to
+    SdkClient.queryValue(request.region, "form", true), "type" to SdkClient.queryValue(request.type, "form", true), "name" to SdkClient.queryValue(request.name, "form", true)), operationId = "vpcnatgatewaysList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateVpcnatgatewaysListRequest(request: VpcnatgatewaysListRequest) {
         if (request.perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                request.perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (request.page != null) {
             Validation.validateRange("page", request.page, Validation.RangeOpts(min = 1.0))
-        }
+}
     }
+
+
+
+
+
 
     /** Parameters for [vpcnatgatewaysCreate]. */
     data class VpcnatgatewaysCreateRequest(
@@ -166,13 +135,11 @@ object VpcNatGatewaysMethods {
         val udpTimeoutSeconds: Long? = null,
         val icmpTimeoutSeconds: Long? = null,
         val tcpTimeoutSeconds: Long? = null,
-        val egresses: VpcNatGatewayCreateEgresses? = null,
+        val egresses: VpcNatGatewayCreateEgresses? = null
     )
 
     /**
-     * To create a new VPC NAT gateway, send a POST request to `/v2/vpc_nat_gateways` setting the
-     * required attributes. The response body will contain a JSON object with a key called
-     * `vpc_nat_gateway` containing the standard attributes for the new VPC NAT gateway.
+     * To create a new VPC NAT gateway, send a POST request to `/v2/vpc_nat_gateways` setting the required attributes. The response body will contain a JSON object with a key called `vpc_nat_gateway` containing the standard attributes for the new VPC NAT gateway.
      *
      * @param name The human-readable name of the VPC NAT gateway.
      * @param type The type of the VPC NAT gateway.
@@ -182,81 +149,37 @@ object VpcNatGatewaysMethods {
      * @param udpTimeoutSeconds The UDP timeout in seconds for the VPC NAT gateway.
      * @param icmpTimeoutSeconds The ICMP timeout in seconds for the VPC NAT gateway.
      * @param tcpTimeoutSeconds The TCP timeout in seconds for the VPC NAT gateway.
-     * @param egresses An optional object specifying the public egress IP address to assign to the
-     *   VPC NAT gateway. Provide this only to use a specific address. If omitted, DigitalOcean
-     *   allocates a public IP address automatically.
+     * @param egresses An optional object specifying the public egress IP address to
+     *   assign to the VPC NAT gateway. Provide this only to use a specific address. If
+     *   omitted, DigitalOcean allocates a public IP address automatically.
      */
-    fun vpcnatgatewaysCreate(
-        clientConfig: ClientConfig,
-        request: VpcnatgatewaysCreateRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGatewayCreateResponse {
-        return SdkClient.request<VpcNatGatewayCreateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/vpc_nat_gateways",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "type" to (request.type),
-                            "region" to (request.region),
-                            "size" to (request.size),
-                            "vpcs" to (request.vpcs),
-                            "udp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.udpTimeoutSeconds)),
-                            "icmp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.icmpTimeoutSeconds)),
-                            "tcp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.tcpTimeoutSeconds)),
-                            "egresses" to (SdkClient.omitIfNull(request.egresses)),
-                        ),
-                    operationId = "vpcnatgatewaysCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun vpcnatgatewaysCreate(clientConfig: ClientConfig, request: VpcnatgatewaysCreateRequest, options: RequestOptions? = null): VpcNatGatewayCreateResponse {
+        return SdkClient.request<VpcNatGatewayCreateResponse>(SdkClient.RequestSpec("POST", "/v2/vpc_nat_gateways", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "type" to (request.type), "region" to (request.region), "size" to (request.size), "vpcs" to (request.vpcs), "udp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.udpTimeoutSeconds)), "icmp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.icmpTimeoutSeconds)), "tcp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.tcpTimeoutSeconds)), "egresses" to (SdkClient.omitIfNull(request.egresses))), operationId = "vpcnatgatewaysCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To show information about an individual VPC NAT gateway, send a GET request to
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.
+     * To show information about an individual VPC NAT gateway, send a GET request to `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`.
      *
      * @param id The unique identifier of the VPC NAT gateway.
      */
-    fun vpcnatgatewaysGet(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): VpcNatGateway {
-        return SdkClient.request<VpcNatGateway>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "vpcnatgatewaysGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun vpcnatgatewaysGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): VpcNatGateway {
+        return SdkClient.request<VpcNatGateway>(SdkClient.RequestSpec("GET", "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "vpcnatgatewaysGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [vpcnatgatewaysUpdate]. */
     data class VpcnatgatewaysUpdateRequest(
@@ -266,13 +189,11 @@ object VpcNatGatewaysMethods {
         val vpcs: List<VpcNatGatewayUpdateVpcsItem>? = null,
         val udpTimeoutSeconds: Long? = null,
         val icmpTimeoutSeconds: Long? = null,
-        val tcpTimeoutSeconds: Long? = null,
+        val tcpTimeoutSeconds: Long? = null
     )
 
     /**
-     * To update the configuration of an existing VPC NAT Gateway, send a PUT request to
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`. The request must contain a full representation of
-     * the VPC NAT Gateway including existing attributes.
+     * To update the configuration of an existing VPC NAT Gateway, send a PUT request to `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID`. The request must contain a full representation of the VPC NAT Gateway including existing attributes.
      *
      * @param id The unique identifier of the VPC NAT gateway.
      * @param name The human-readable name of the VPC NAT gateway.
@@ -282,73 +203,32 @@ object VpcNatGatewaysMethods {
      * @param icmpTimeoutSeconds The ICMP timeout in seconds for the VPC NAT gateway.
      * @param tcpTimeoutSeconds The TCP timeout in seconds for the VPC NAT gateway.
      */
-    fun vpcnatgatewaysUpdate(
-        clientConfig: ClientConfig,
-        request: VpcnatgatewaysUpdateRequest,
-        options: RequestOptions? = null,
-    ): VpcNatGatewayUpdateResponse {
-        return SdkClient.request<VpcNatGatewayUpdateResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(request.id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "size" to (request.size),
-                            "vpcs" to (SdkClient.omitIfNull(request.vpcs)),
-                            "udp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.udpTimeoutSeconds)),
-                            "icmp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.icmpTimeoutSeconds)),
-                            "tcp_timeout_seconds" to
-                                (SdkClient.omitIfNull(request.tcpTimeoutSeconds)),
-                        ),
-                    operationId = "vpcnatgatewaysUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun vpcnatgatewaysUpdate(clientConfig: ClientConfig, request: VpcnatgatewaysUpdateRequest, options: RequestOptions? = null): VpcNatGatewayUpdateResponse {
+        return SdkClient.request<VpcNatGatewayUpdateResponse>(SdkClient.RequestSpec("PUT", "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "size" to (request.size), "vpcs" to (SdkClient.omitIfNull(request.vpcs)), "udp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.udpTimeoutSeconds)), "icmp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.icmpTimeoutSeconds)), "tcp_timeout_seconds" to
+    (SdkClient.omitIfNull(request.tcpTimeoutSeconds))), operationId = "vpcnatgatewaysUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To destroy a VPC NAT Gateway, send a DELETE request to the
-     * `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID` endpoint. A successful response will include a 202
-     * response code and no content.
+     * To destroy a VPC NAT Gateway, send a DELETE request to the `/v2/vpc_nat_gateways/$VPC_NAT_GATEWAY_ID` endpoint. A successful response will include a 202 response code and no content.
      *
      * @param id The unique identifier of the VPC NAT gateway.
      */
-    fun vpcnatgatewaysDelete(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(id)}",
-                config = clientConfig,
-                operationId = "vpcnatgatewaysDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun vpcnatgatewaysDelete(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/vpc_nat_gateways/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "vpcnatgatewaysDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }

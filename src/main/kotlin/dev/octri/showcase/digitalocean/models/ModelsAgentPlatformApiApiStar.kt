@@ -3,29 +3,42 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiStarMetric` API schema. */
+/**
+ * Typed representation of the `ApiStarMetric` API schema.
+ */
 data class ApiStarMetric(
-    /** Optional `string` value serialized in the `metric_uuid` wire field. */
+    /**
+     * Optional `string` value serialized in the `metric_uuid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_uuid") val metricUuid: String? = null,
-    /** Optional `string` value serialized in the `name` wire field. */
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
     val name: String? = null,
     /**
-     * The success threshold for the star metric. This is a value that the metric must reach to be
-     * considered successful.
+     * The success threshold for the star metric. This is a value that the metric must reach to be considered successful.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold")
-    val successThreshold: Float? = null,
-    /** The success threshold for the star metric. This is a percentage value between 0 and 100. */
-    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold_pct")
-    val successThresholdPct: Int? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold") val successThreshold: Float? = null,
+    /**
+     * The success threshold for the star metric. This is a percentage value between 0 and 100.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold_pct") val successThresholdPct: Int? = null
 )
 
-/** Star metric summary with identifying details and threshold. */
+/**
+ * Star metric summary with identifying details and threshold.
+ */
 data class ApiStarMetricSummary(
-    /** Optional `string` value serialized in the `metric_name` wire field. */
+    /**
+     * Optional `string` value serialized in the `metric_name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null,
-    /** Optional `string` value serialized in the `metric_uuid` wire field. */
+    /**
+     * Optional `string` value serialized in the `metric_uuid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_uuid") val metricUuid: String? = null,
-    /** Optional `float`-formatted value serialized in the `threshold` wire field. */
-    val threshold: Float? = null,
+    /**
+     * Optional `float`-formatted value serialized in the `threshold` wire field.
+     */
+    val threshold: Float? = null
 )

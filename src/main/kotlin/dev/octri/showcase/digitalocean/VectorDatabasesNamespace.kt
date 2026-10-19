@@ -3,193 +3,85 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class VectorDatabasesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists vector databases provisioned on your account. Use `page` and `per_page` to paginate the
-     * results. The response includes the `vector_dbs` array and the overall count in `total`.
+     * Lists vector databases provisioned on your account. Use `page` and `per_page` to paginate the results. The response includes the `vector_dbs` array and the overall count in `total`.
      *
-     * To list all of the vector databases on your account, send a GET request to
-     * `/v2/vector-databases`. Use the `page` and `per_page` query parameters to paginate the
-     * results. The response body contains a `vector_dbs` array of vector database objects and a
-     * `total` field with the overall count.
+     * To list all of the vector databases on your account, send a GET request to `/v2/vector-databases`. Use the `page` and `per_page` query parameters to paginate the results. The response body contains a `vector_dbs` array of vector database objects and a `total` field with the overall count.
      */
-    fun list(
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): VectordbListVectorDBsResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesList(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun list(page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): VectordbListVectorDBsResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesList(clientConfig, page, perPage, options)
     }
 
     /**
-     * To create a vector database, send a POST request to `/v2/vector-databases`. The response body
-     * contains a JSON object with a `vector_db` key holding the newly created database. Its initial
-     * `status` is `creating` and changes to `active` once the database is ready to receive traffic.
+     * To create a vector database, send a POST request to `/v2/vector-databases`. The response body contains a JSON object with a `vector_db` key holding the newly created database. Its initial `status` is `creating` and changes to `active` once the database is ready to receive traffic.
      */
-    fun create(
-        name: String? = null,
-        projectId: String? = null,
-        region: String? = null,
-        size: String? = null,
-        tags: List<String>? = null,
-        options: RequestOptions? = null,
-    ): VectordbCreateVectorDBResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesCreate(
-            clientConfig,
-            name,
-            projectId,
-            region,
-            size,
-            tags,
-            options,
-        )
+    fun create(name: String? = null, projectId: String? = null, region: String? = null, size: String? = null, tags: List<String>? = null, options: RequestOptions? = null): VectordbCreateVectorDBResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesCreate(clientConfig, name, projectId, region, size, tags, options)
     }
 
     /**
-     * To show information about an existing vector database, send a GET request to
-     * `/v2/vector-databases/{id}`. The response body contains a JSON object with a `vector_db` key
-     * holding the standard vector database attributes, including an embedded `endpoints` object
-     * with the connection information needed to access the database.
+     * To show information about an existing vector database, send a GET request to `/v2/vector-databases/{id}`. The response body contains a JSON object with a `vector_db` key holding the standard vector database attributes, including an embedded `endpoints` object with the connection information needed to access the database.
      */
     fun get(id: String, options: RequestOptions? = null): VectordbGetVectorDBResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesGet(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesGet(clientConfig, id, options)
     }
 
     /**
-     * To update an existing vector database, send a PUT request to `/v2/vector-databases/{id}`. The
-     * response body contains a JSON object with a `vector_db` key holding the updated vector
-     * database.
+     * To update an existing vector database, send a PUT request to `/v2/vector-databases/{id}`. The response body contains a JSON object with a `vector_db` key holding the updated vector database.
      */
-    fun update(
-        id: String,
-        config: VectordbVectorDBConfig? = null,
-        id2: String? = null,
-        projectId: String? = null,
-        options: RequestOptions? = null,
-    ): VectordbUpdateVectorDBResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesUpdate(
-            clientConfig,
-            id,
-            config,
-            id2,
-            projectId,
-            options,
-        )
+    fun update(id: String, config: VectordbVectorDBConfig? = null, id2: String? = null, projectId: String? = null, options: RequestOptions? = null): VectordbUpdateVectorDBResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesUpdate(clientConfig, id, config, id2, projectId, options)
     }
 
     /**
-     * To delete a vector database, send a DELETE request to `/v2/vector-databases/{id}`. Deleting a
-     * vector database is irreversible and destroys the underlying instance along with its data.
+     * To delete a vector database, send a DELETE request to `/v2/vector-databases/{id}`. Deleting a vector database is irreversible and destroys the underlying instance along with its data.
      */
     fun delete(id: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesDelete(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesDelete(clientConfig, id, options)
     }
 
     /**
-     * To list the available backups for a vector database, send a GET request to
-     * `/v2/vector-databases/{id}/backups`. Only backups with a status of `SUCCESS` are returned.
+     * To list the available backups for a vector database, send a GET request to `/v2/vector-databases/{id}/backups`. Only backups with a status of `SUCCESS` are returned.
      */
     fun listBackups(id: String, options: RequestOptions? = null): VectordbListBackupsResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesListBackups(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesListBackups(clientConfig, id, options)
     }
 
     /**
-     * To check the status of a restore operation, send a GET request to
-     * `/v2/vector-databases/{id}/backups/{backup_id}/restore`. The response body contains the
-     * current status of the restore.
+     * To check the status of a restore operation, send a GET request to `/v2/vector-databases/{id}/backups/{backup_id}/restore`. The response body contains the current status of the restore.
      */
-    fun getRestoreStatus(
-        id: String,
-        backupId: String,
-        options: RequestOptions? = null,
-    ): VectordbGetRestoreStatusResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases
-            .vectorDatabasesGetRestoreStatus(clientConfig, id, backupId, options)
+    fun getRestoreStatus(id: String, backupId: String, options: RequestOptions? = null): VectordbGetRestoreStatusResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesGetRestoreStatus(clientConfig, id, backupId, options)
     }
 
     /**
-     * To restore a vector database from a backup, send a POST request to
-     * `/v2/vector-databases/{id}/backups/{backup_id}/restore`. The restore runs asynchronously; use
-     * the restore-status endpoint to monitor its progress.
+     * To restore a vector database from a backup, send a POST request to `/v2/vector-databases/{id}/backups/{backup_id}/restore`. The restore runs asynchronously; use the restore-status endpoint to monitor its progress.
      */
-    fun postRestoreBackup(
-        id: String,
-        backupId: String,
-        backupId2: String? = null,
-        id2: String? = null,
-        options: RequestOptions? = null,
-    ): VectordbRestoreBackupResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases
-            .vectorDatabasesPostRestoreBackup(clientConfig, id, backupId, backupId2, id2, options)
+    fun postRestoreBackup(id: String, backupId: String, backupId2: String? = null, id2: String? = null, options: RequestOptions? = null): VectordbRestoreBackupResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesPostRestoreBackup(clientConfig, id, backupId, backupId2, id2, options)
     }
 
     /**
-     * To retrieve the admin credentials for a vector database, send a GET request to
-     * `/v2/vector-databases/{id}/credentials`. The response body contains the `user_id` and
-     * `api_token` for the admin user provisioned on the cluster.
+     * To retrieve the admin credentials for a vector database, send a GET request to `/v2/vector-databases/{id}/credentials`. The response body contains the `user_id` and `api_token` for the admin user provisioned on the cluster.
      */
-    fun getCredentials(
-        id: String,
-        options: RequestOptions? = null,
-    ): VectordbGetVectorDBAdminCredentialsResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases
-            .vectorDatabasesGetCredentials(clientConfig, id, options)
+    fun getCredentials(id: String, options: RequestOptions? = null): VectordbGetVectorDBAdminCredentialsResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesGetCredentials(clientConfig, id, options)
     }
 
     /**
-     * To resize a vector database, send a POST request to `/v2/vector-databases/{id}/resize`. This
-     * changes the database's resource tier. The response body contains a JSON object with the
-     * updated vector database.
+     * To resize a vector database, send a POST request to `/v2/vector-databases/{id}/resize`. This changes the database's resource tier. The response body contains a JSON object with the updated vector database.
      */
-    fun postResize(
-        id: String,
-        id2: String? = null,
-        size: String? = null,
-        options: RequestOptions? = null,
-    ): VectordbResizeVectorDBResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesPostResize(
-            clientConfig,
-            id,
-            id2,
-            size,
-            options,
-        )
+    fun postResize(id: String, id2: String? = null, size: String? = null, options: RequestOptions? = null): VectordbResizeVectorDBResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesPostResize(clientConfig, id, id2, size, options)
     }
 
     /**
-     * To update the tags on a vector database, send a PUT request to
-     * `/v2/vector-databases/{id}/tags`. The supplied set of tags replaces the database's existing
-     * tags.
+     * To update the tags on a vector database, send a PUT request to `/v2/vector-databases/{id}/tags`. The supplied set of tags replaces the database's existing tags.
      */
-    fun updateTags(
-        id: String,
-        id2: String? = null,
-        tags: List<String>? = null,
-        options: RequestOptions? = null,
-    ): VectordbUpdateVectorDBTagsResponse {
-        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesUpdateTags(
-            clientConfig,
-            id,
-            id2,
-            tags,
-            options,
-        )
+    fun updateTags(id: String, id2: String? = null, tags: List<String>? = null, options: RequestOptions? = null): VectordbUpdateVectorDBTagsResponse {
+        return dev.octri.showcase.digitalocean.methods.VectorDatabases.vectorDatabasesUpdateTags(clientConfig, id, id2, tags, options)
     }
+
 }

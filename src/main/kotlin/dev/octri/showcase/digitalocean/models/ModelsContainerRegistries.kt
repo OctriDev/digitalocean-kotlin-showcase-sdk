@@ -5,60 +5,66 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AllRegistriesInfo` API schema. */
+/**
+ * Typed representation of the `AllRegistriesInfo` API schema.
+ */
 data class AllRegistriesInfo(
-    /** Optional array value serialized in the `registries` wire field. */
+    /**
+     * Optional array value serialized in the `registries` wire field.
+     */
     val registries: List<Registry>? = null
 )
 
-/** Typed representation of the `Multiregistry` API schema. */
+/**
+ * Typed representation of the `Multiregistry` API schema.
+ */
 data class Multiregistry(
     /**
-     * A globally unique name for the container registry. Must be lowercase and be composed only of
-     * numbers, letters and `-`, up to a limit of 63 characters.
+     * A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
      */
     val name: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the registry
-     * was created.
+     * A time value given in ISO8601 combined date and time format that represents when the registry was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Slug of the region where registry data is stored */
-    val region: String? = null,
-    /** The amount of storage used in the registry in bytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("storage_usage_bytes")
-    val storageUsageBytes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * The time at which the storage usage was updated. Storage usage is calculated asynchronously,
-     * and may not immediately reflect pushes to the registry.
+     * Slug of the region where registry data is stored
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("storage_usage_bytes_updated_at")
-    val storageUsageBytesUpdatedAt: OffsetDateTime? = null,
+    val region: String? = null,
+    /**
+     * The amount of storage used in the registry in bytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("storage_usage_bytes") val storageUsageBytes: Long? = null,
+    /**
+     * The time at which the storage usage was updated. Storage usage is calculated asynchronously, and may not immediately reflect pushes to the registry.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("storage_usage_bytes_updated_at") val storageUsageBytesUpdatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `MultiregistryCreate` API schema. */
+/**
+ * Typed representation of the `MultiregistryCreate` API schema.
+ */
 data class MultiregistryCreate(
     /**
-     * A globally unique name for the container registry. Must be lowercase and be composed only of
-     * numbers, letters and `-`, up to a limit of 63 characters.
+     * A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
      */
     val name: String,
     /**
-     * The slug of the subscription tier to sign up for. Valid values can be retrieved using the
-     * options endpoint.
+     * The slug of the subscription tier to sign up for. Valid values can be retrieved using the options endpoint.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_tier_slug")
-    val subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_tier_slug") val subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null,
     /**
-     * Slug of the region where registry data is stored. When not provided, a region will be
-     * selected.
+     * Slug of the region where registry data is stored. When not provided, a region will be selected.
      */
-    val region: MultiregistryCreateRegionEnum? = null,
+    val region: MultiregistryCreateRegionEnum? = null
 )
 
-/** Typed representation of the `MultiregistryInfo` API schema. */
+/**
+ * Typed representation of the `MultiregistryInfo` API schema.
+ */
 data class MultiregistryInfo(
-    /** Optional object value serialized in the `registry` wire field. */
+    /**
+     * Optional object value serialized in the `registry` wire field.
+     */
     val registry: Multiregistry? = null
 )

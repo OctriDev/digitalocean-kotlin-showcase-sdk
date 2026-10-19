@@ -3,17 +3,24 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiChunkingOptions` API schema. */
+/**
+ * Typed representation of the `ApiChunkingOptions` API schema.
+ */
 data class ApiChunkingOptions(
-    /** Optional `int64`-formatted value serialized in the `child_chunk_size` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_chunk_size")
-    val childChunkSize: Long? = null,
-    /** Common options */
+    /**
+     * Optional `int64`-formatted value serialized in the `child_chunk_size` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_chunk_size") val childChunkSize: Long? = null,
+    /**
+     * Common options
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size") val maxChunkSize: Long? = null,
-    /** Hierarchical options */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_chunk_size")
-    val parentChunkSize: Long? = null,
-    /** Semantic options */
-    @com.fasterxml.jackson.annotation.JsonProperty("semantic_threshold")
-    val semanticThreshold: Float? = null,
+    /**
+     * Hierarchical options
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_chunk_size") val parentChunkSize: Long? = null,
+    /**
+     * Semantic options
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("semantic_threshold") val semanticThreshold: Float? = null
 )

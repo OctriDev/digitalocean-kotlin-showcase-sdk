@@ -3,43 +3,62 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** CancelKnowledgeBaseIndexingJobInputPublic description */
+/**
+ * CancelKnowledgeBaseIndexingJobInputPublic description
+ */
 data class ApiCancelKnowledgeBaseIndexingJobInputPublic(
-    /** A unique identifier for an indexing job. */
+    /**
+     * A unique identifier for an indexing job.
+     */
     val uuid: String? = null
 )
 
-/** CancelKnowledgeBaseIndexingJobOutput description */
+/**
+ * CancelKnowledgeBaseIndexingJobOutput description
+ */
 data class ApiCancelKnowledgeBaseIndexingJobOutput(
-    /** IndexingJob description */
+    /**
+     * IndexingJob description
+     */
     val job: ApiIndexingJob? = null
 )
 
-/** Typed representation of the `ApiCancelModelEvaluationRunInputPublic` API schema. */
+/**
+ * Typed representation of the `ApiCancelModelEvaluationRunInputPublic` API schema.
+ */
 data class ApiCancelModelEvaluationRunInputPublic(
     /**
-     * UUID of the model evaluation run to cancel. Returned by `CreateModelEvaluationRun` and listed
-     * via `ListModelEvaluationRuns`. The run must be in a non-terminal status (queued,
-     * running_dataset, or evaluating_results); already-terminal runs return an error.
+     * UUID of the model evaluation run to cancel. Returned by `CreateModelEvaluationRun` and listed via `ListModelEvaluationRuns`. The run must be in a non-terminal status (queued, running_dataset, or evaluating_results); already-terminal runs return an error.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("eval_run_uuid") val evalRunUuid: String? = null
 )
 
-/** Typed representation of the `ApiCancelModelEvaluationRunOutput` API schema. */
+/**
+ * Typed representation of the `ApiCancelModelEvaluationRunOutput` API schema.
+ */
 data class ApiCancelModelEvaluationRunOutput(
-    /** Model Evaluation Run Summary - lightweight view used in run history list. */
+    /**
+     * Model Evaluation Run Summary - lightweight view used in run history list.
+     */
     val run: ApiModelEvaluationRunSummary? = null
 )
 
-/** Public parameters for cancelling a simulation run. */
+/**
+ * Public parameters for cancelling a simulation run.
+ */
 data class ApiCancelSimulationRunInputPublic(
-    /** UUID of the run to cancel. */
+    /**
+     * UUID of the run to cancel.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_uuid") val runUuid: String? = null
 )
 
-/** Output for cancelling a simulation run. */
+/**
+ * Output for cancelling a simulation run.
+ */
 data class ApiCancelSimulationRunOutput(
-    /** One execution of a scenario set against a candidate agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run")
-    val simulationRun: ApiSimulationRun? = null
+    /**
+     * One execution of a scenario set against a candidate agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run") val simulationRun: ApiSimulationRun? = null
 )

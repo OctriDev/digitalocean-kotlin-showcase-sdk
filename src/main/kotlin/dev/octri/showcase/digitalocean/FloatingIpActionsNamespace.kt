@@ -3,42 +3,29 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class FloatingIpActionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To retrieve all actions that have been executed on a floating IP, send a GET request to
-     * `/v2/floating_ips/$FLOATING_IP/actions`.
+     * To retrieve all actions that have been executed on a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions`.
      */
     fun list(floatingIp: String, options: RequestOptions? = null): FloatingIpActions {
-        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods
-            .floatingIpsActionList(clientConfig, floatingIp, options)
+        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods.floatingIpsActionList(clientConfig, floatingIp, options)
     }
 
     /**
-     * Triggers an assignment or unassignment action on a floating IP. Set `type` to `assign` or
-     * `unassign`; include `droplet_id` when assigning the floating IP to a Droplet. The response
-     * contains the action object for tracking the operation.
+     * Triggers an assignment or unassignment action on a floating IP. Set `type` to `assign` or `unassign`; include `droplet_id` when assigning the floating IP to a Droplet. The response contains the action object for tracking the operation.
      *
-     * To initiate an action on a floating IP send a POST request to
-     * `/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request, set the `type`
-     * attribute to on of the supported action types: | Action | Details |------------|-------- |
-     * `assign` | Assigns a floating IP to a Droplet | `unassign` | Unassign a floating IP from a
-     * Droplet
+     * To initiate an action on a floating IP send a POST request to `/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request, set the `type` attribute to on of the supported action types: | Action | Details |------------|-------- | `assign` | Assigns a floating IP to a Droplet | `unassign` | Unassign a floating IP from a Droplet
      */
-    fun post(
-        floatingIp: String,
-        body: Any? = null,
-        options: RequestOptions? = null,
-    ): FloatingIpAction {
-        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods
-            .floatingIpsActionPost(clientConfig, floatingIp, body, options)
+    fun post(floatingIp: String, body: Any? = null, options: RequestOptions? = null): FloatingIpAction {
+        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods.floatingIpsActionPost(clientConfig, floatingIp, body, options)
     }
 
     /**
-     * To retrieve the status of a floating IP action, send a GET request to
-     * `/v2/floating_ips/$FLOATING_IP/actions/$ACTION_ID`.
+     * To retrieve the status of a floating IP action, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions/$ACTION_ID`.
      */
     fun get(floatingIp: String, actionId: Long, options: RequestOptions? = null): FloatingIpAction {
-        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods
-            .floatingIpsActionGet(clientConfig, floatingIp, actionId, options)
+        return dev.octri.showcase.digitalocean.methods.FloatingIpActionsMethods.floatingIpsActionGet(clientConfig, floatingIp, actionId, options)
     }
+
 }

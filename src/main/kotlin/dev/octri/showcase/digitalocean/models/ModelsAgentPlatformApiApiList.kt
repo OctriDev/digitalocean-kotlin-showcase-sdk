@@ -3,394 +3,620 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListAgentAPIKeysOutput` API schema. */
+/**
+ * Typed representation of the `ApiListAgentAPIKeysOutput` API schema.
+ */
 data class ApiListAgentAPIKeysOutput(
-    /** Api key infos */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
-    val apiKeyInfos: List<ApiAgentAPIKeyInfo>? = null,
-    /** Links to other pages */
+    /**
+     * Api key infos
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiAgentAPIKeyInfo>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** List of Agents that linked to a specific Anthropic Key */
+/**
+ * List of Agents that linked to a specific Anthropic Key
+ */
 data class ApiListAgentsByAnthropicKeyOutput(
-    /** Optional array value serialized in the `agents` wire field. */
+    /**
+     * Optional array value serialized in the `agents` wire field.
+     */
     val agents: List<ApiAgent>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** List of Agents that are linked to a specific OpenAI Key */
+/**
+ * List of Agents that are linked to a specific OpenAI Key
+ */
 data class ApiListAgentsByOpenAIKeyOutput(
-    /** Optional array value serialized in the `agents` wire field. */
+    /**
+     * Optional array value serialized in the `agents` wire field.
+     */
     val agents: List<ApiAgent>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Typed representation of the `ApiListAgentsByWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiListAgentsByWorkspaceOutput` API schema.
+ */
 data class ApiListAgentsByWorkspaceOutput(
-    /** Optional array value serialized in the `agents` wire field. */
+    /**
+     * Optional array value serialized in the `agents` wire field.
+     */
     val agents: List<ApiAgent>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** List of Agents */
+/**
+ * List of Agents
+ */
 data class ApiListAgentsOutputPublic(
-    /** Agents */
+    /**
+     * Agents
+     */
     val agents: List<ApiAgentPublic>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** List of agent versions */
+/**
+ * List of agent versions
+ */
 data class ApiListAgentVersionsOutput(
-    /** Agents */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_versions")
-    val agentVersions: List<ApiAgentVersion>? = null,
-    /** Links to other pages */
+    /**
+     * Agents
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_versions") val agentVersions: List<ApiAgentVersion>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
 /**
  * ListAnthropicAPIKeysOutput is used to return the list of Anthropic API keys for a specific agent.
  */
 data class ApiListAnthropicAPIKeysOutput(
-    /** Api key infos */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
-    val apiKeyInfos: List<ApiAnthropicAPIKeyInfo>? = null,
-    /** Links to other pages */
+    /**
+     * Api key infos
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiAnthropicAPIKeyInfo>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Response containing a list of custom models (public) */
+/**
+ * Response containing a list of custom models (public)
+ */
 data class ApiListCustomModelsOutputPublic(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Maximum number of custom models allowed for this team's tier */
+    /**
+     * Maximum number of custom models allowed for this team's tier
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_threshold") val maxThreshold: Long? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** List of custom models */
-    val models: List<ApiCustomModel>? = null,
+    /**
+     * List of custom models
+     */
+    val models: List<ApiCustomModel>? = null
 )
 
-/** Output for listing evaluation datasets. */
+/**
+ * Output for listing evaluation datasets.
+ */
 data class ApiListEvaluationDatasetsOutput(
-    /** The list of evaluation datasets. */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_datasets")
-    val evaluationDatasets: List<ApiEvaluationDataset>? = null
+    /**
+     * The list of evaluation datasets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_datasets") val evaluationDatasets: List<ApiEvaluationDataset>? = null
 )
 
-/** Typed representation of the `ApiListEvaluationMetricsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListEvaluationMetricsOutput` API schema.
+ */
 data class ApiListEvaluationMetricsOutput(
-    /** Optional array value serialized in the `metrics` wire field. */
+    /**
+     * Optional array value serialized in the `metrics` wire field.
+     */
     val metrics: List<ApiEvaluationMetric>? = null
 )
 
-/** Typed representation of the `ApiListEvaluationRunsByTestCaseOutput` API schema. */
+/**
+ * Typed representation of the `ApiListEvaluationRunsByTestCaseOutput` API schema.
+ */
 data class ApiListEvaluationRunsByTestCaseOutput(
-    /** List of evaluation runs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_runs")
-    val evaluationRuns: List<ApiEvaluationRun>? = null
+    /**
+     * List of evaluation runs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_runs") val evaluationRuns: List<ApiEvaluationRun>? = null
 )
 
-/** Typed representation of the `ApiListEvaluationTestCasesByWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiListEvaluationTestCasesByWorkspaceOutput` API schema.
+ */
 data class ApiListEvaluationTestCasesByWorkspaceOutput(
-    /** Optional array value serialized in the `evaluation_test_cases` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases")
-    val evaluationTestCases: List<ApiEvaluationTestCase>? = null
+    /**
+     * Optional array value serialized in the `evaluation_test_cases` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases") val evaluationTestCases: List<ApiEvaluationTestCase>? = null
 )
 
-/** Typed representation of the `ApiListEvaluationTestCasesOutput` API schema. */
+/**
+ * Typed representation of the `ApiListEvaluationTestCasesOutput` API schema.
+ */
 data class ApiListEvaluationTestCasesOutput(
     /**
-     * Alternative way of authentication for internal usage only - should not be exposed to public
-     * api
+     * Alternative way of authentication for internal usage only - should not be exposed to public api
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases")
-    val evaluationTestCases: List<ApiEvaluationTestCase>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases") val evaluationTestCases: List<ApiEvaluationTestCase>? = null
 )
 
-/** Typed representation of the `ApiListIndexingJobDataSourcesOutput` API schema. */
+/**
+ * Typed representation of the `ApiListIndexingJobDataSourcesOutput` API schema.
+ */
 data class ApiListIndexingJobDataSourcesOutput(
-    /** Optional array value serialized in the `indexed_data_sources` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("indexed_data_sources")
-    val indexedDataSources: List<ApiIndexedDataSource>? = null
+    /**
+     * Optional array value serialized in the `indexed_data_sources` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("indexed_data_sources") val indexedDataSources: List<ApiIndexedDataSource>? = null
 )
 
-/** A list of knowledge base data sources */
+/**
+ * A list of knowledge base data sources
+ */
 data class ApiListKnowledgeBaseDataSourcesOutput(
-    /** The data sources */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_data_sources")
-    val knowledgeBaseDataSources: List<ApiKnowledgeBaseDataSource>? = null,
-    /** Links to other pages */
+    /**
+     * The data sources
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_data_sources") val knowledgeBaseDataSources: List<ApiKnowledgeBaseDataSource>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Indexing jobs */
+/**
+ * Indexing jobs
+ */
 data class ApiListKnowledgeBaseIndexingJobsOutput(
-    /** The indexing jobs */
+    /**
+     * The indexing jobs
+     */
     val jobs: List<ApiIndexingJob>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** List of knowledge bases */
+/**
+ * List of knowledge bases
+ */
 data class ApiListKnowledgeBasesOutput(
-    /** The knowledge bases */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_bases")
-    val knowledgeBases: List<ApiKnowledgeBase>? = null,
-    /** Links to other pages */
+    /**
+     * The knowledge bases
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_bases") val knowledgeBases: List<ApiKnowledgeBase>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Typed representation of the `ApiListModelAPIKeysOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelAPIKeysOutput` API schema.
+ */
 data class ApiListModelAPIKeysOutput(
-    /** Api key infos */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
-    val apiKeyInfos: List<ApiModelAPIKeyInfo>? = null,
-    /** Links to other pages */
+    /**
+     * Api key infos
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiModelAPIKeyInfo>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Typed representation of the `ApiListModelCatalogOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelCatalogOutput` API schema.
+ */
 data class ApiListModelCatalogOutput(
-    /** All deployment availability values the client can offer in the availability filter UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_availability")
-    val availableAvailability: List<String>? = null,
-    /** All badge values the client can offer in the badges filter UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_badges")
-    val availableBadges: List<String>? = null,
-    /** All model type values the client can offer in the type filter UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_model_types")
-    val availableModelTypes: List<String>? = null,
-    /** All provider values the client can offer in the provider filter UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_providers")
-    val availableProviders: List<String>? = null,
-    /** All sort-by field values the client can offer in the sort UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiModelCatalogSortBy>? = null,
-    /** All sort-direction values the client can offer in the sort UI. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Optional array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ApiModelCatalogEntry>? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * All deployment availability values the client can offer in the availability filter UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_availability") val availableAvailability: List<String>? = null,
+    /**
+     * All badge values the client can offer in the badges filter UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_badges") val availableBadges: List<String>? = null,
+    /**
+     * All model type values the client can offer in the type filter UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_model_types") val availableModelTypes: List<String>? = null,
+    /**
+     * All provider values the client can offer in the provider filter UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_providers") val availableProviders: List<String>? = null,
+    /**
+     * All sort-by field values the client can offer in the sort UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiModelCatalogSortBy>? = null,
+    /**
+     * All sort-direction values the client can offer in the sort UI.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Optional array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ApiModelCatalogEntry>? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Typed representation of the `ApiListModelEvaluationMetricsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelEvaluationMetricsOutput` API schema.
+ */
 data class ApiListModelEvaluationMetricsOutput(
-    /** List of model evaluation metrics */
+    /**
+     * List of model evaluation metrics
+     */
     val metrics: List<ApiEvaluationMetric>? = null
 )
 
-/** Typed representation of the `ApiListModelEvaluationPresetsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelEvaluationPresetsOutput` API schema.
+ */
 data class ApiListModelEvaluationPresetsOutput(
-    /** List of explicitly saved evaluation presets (reusable configs). */
+    /**
+     * List of explicitly saved evaluation presets (reusable configs).
+     */
     val presets: List<ApiModelEvaluationPreset>? = null
 )
 
-/** Typed representation of the `ApiListModelEvaluationRunsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelEvaluationRunsOutput` API schema.
+ */
 data class ApiListModelEvaluationRunsOutput(
     /**
      * Full set of candidate model source types the FE can offer in the candidate-type filter UI.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_candidate_types")
-    val availableCandidateTypes: List<ApiCandidateModelSource>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("available_candidate_types") val availableCandidateTypes: List<ApiCandidateModelSource>? = null,
     /**
-     * Full set of statuses the FE can offer in the status filter UI. Returned on every list call so
-     * clients never need to hardcode the enum values.
+     * Full set of statuses the FE can offer in the status filter UI. Returned on every list call so clients never need to hardcode the enum values.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiModelEvaluationRunStatus>? = null,
-    /** Links to other pages */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiModelEvaluationRunStatus>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** Summary view of evaluation runs for the run history list. */
-    val runs: List<ApiModelEvaluationRunSummary>? = null,
+    /**
+     * Summary view of evaluation runs for the run history list.
+     */
+    val runs: List<ApiModelEvaluationRunSummary>? = null
 )
 
-/** List of model router presets */
+/**
+ * List of model router presets
+ */
 data class ApiListModelRouterPresetsOutput(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The model router presets */
-    val presets: List<ApiModelRouterPreset>? = null,
+    /**
+     * The model router presets
+     */
+    val presets: List<ApiModelRouterPreset>? = null
 )
 
-/** List of model routers */
+/**
+ * List of model routers
+ */
 data class ApiListModelRoutersOutput(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The model routers */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_routers")
-    val modelRouters: List<ApiModelRouter>? = null,
+    /**
+     * The model routers
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_routers") val modelRouters: List<ApiModelRouter>? = null
 )
 
-/** List of model router task presets */
+/**
+ * List of model router task presets
+ */
 data class ApiListModelRouterTaskPresetsOutput(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The task presets */
-    val tasks: List<ApiModelRouterTaskPreset>? = null,
+    /**
+     * The task presets
+     */
+    val tasks: List<ApiModelRouterTaskPreset>? = null
 )
 
-/** A list of models */
+/**
+ * A list of models
+ */
 data class ApiListModelsOutputPublic(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The models */
-    val models: List<ApiModelPublic>? = null,
+    /**
+     * The models
+     */
+    val models: List<ApiModelPublic>? = null
 )
 
-/** ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys for a specific agent. */
+/**
+ * ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys for a specific agent.
+ */
 data class ApiListOpenAIAPIKeysOutput(
-    /** Api key infos */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
-    val apiKeyInfos: List<ApiOpenAIAPIKeyInfo>? = null,
-    /** Links to other pages */
+    /**
+     * Api key infos
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiOpenAIAPIKeyInfo>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Region Codes */
+/**
+ * Region Codes
+ */
 data class ApiListRegionsOutput(
-    /** Region code */
+    /**
+     * Region code
+     */
     val regions: List<GenaiapiRegion>? = null
 )
 
-/** Output for listing the Common Scenario & Goal Library. */
+/**
+ * Output for listing the Common Scenario & Goal Library.
+ */
 data class ApiListScenarioLibraryOutput(
-    /** Categories currently in use, for filtering library results. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_categories")
-    val availableCategories: List<String>? = null,
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiScenarioLibrarySortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Links to other pages */
+    /**
+     * Categories currently in use, for filtering library results.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_categories") val availableCategories: List<String>? = null,
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiScenarioLibrarySortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The library entries for the current page. */
-    val scenarios: List<ApiScenarioLibraryEntry>? = null,
+    /**
+     * The library entries for the current page.
+     */
+    val scenarios: List<ApiScenarioLibraryEntry>? = null
 )
 
-/** Output for listing scenario sets. */
+/**
+ * Output for listing scenario sets.
+ */
 data class ApiListScenarioSetsOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiScenarioSetSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Source kinds available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_source_kinds")
-    val availableSourceKinds: List<ApiScenarioSetSourceKind>? = null,
-    /** Statuses available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiScenarioSetStatus>? = null,
-    /** Links to other pages */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiScenarioSetSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Source kinds available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_source_kinds") val availableSourceKinds: List<ApiScenarioSetSourceKind>? = null,
+    /**
+     * Statuses available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiScenarioSetStatus>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The scenario sets for the current page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_sets")
-    val scenarioSets: List<ApiScenarioSet>? = null,
+    /**
+     * The scenario sets for the current page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_sets") val scenarioSets: List<ApiScenarioSet>? = null
 )
 
-/** Output for listing the scenarios in a scenario set. */
+/**
+ * Output for listing the scenarios in a scenario set.
+ */
 data class ApiListScenariosOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiScenarioSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Links to other pages */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiScenarioSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The scenarios for the current page. */
-    val scenarios: List<ApiScenario>? = null,
+    /**
+     * The scenarios for the current page.
+     */
+    val scenarios: List<ApiScenario>? = null
 )
 
-/** Output for listing the episodes within a simulation run. */
+/**
+ * Output for listing the episodes within a simulation run.
+ */
 data class ApiListSimulationEpisodesOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiSimulationEpisodeSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Statuses available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiSimulationEpisodeStatus>? = null,
-    /** Verdicts available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_verdicts")
-    val availableVerdicts: List<ApiSimulationEpisodeVerdict>? = null,
-    /** The episodes for the current page. */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiSimulationEpisodeSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Statuses available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiSimulationEpisodeStatus>? = null,
+    /**
+     * Verdicts available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_verdicts") val availableVerdicts: List<ApiSimulationEpisodeVerdict>? = null,
+    /**
+     * The episodes for the current page.
+     */
     val episodes: List<ApiSimulationEpisode>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Output for listing simulation runs. */
+/**
+ * Output for listing simulation runs.
+ */
 data class ApiListSimulationRunsOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiSimulationRunSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Statuses available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiSimulationRunStatus>? = null,
-    /** Links to other pages */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiSimulationRunSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Statuses available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiSimulationRunStatus>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The simulation runs for the current page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("simulation_runs")
-    val simulationRuns: List<ApiSimulationRun>? = null,
+    /**
+     * The simulation runs for the current page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("simulation_runs") val simulationRuns: List<ApiSimulationRun>? = null
 )

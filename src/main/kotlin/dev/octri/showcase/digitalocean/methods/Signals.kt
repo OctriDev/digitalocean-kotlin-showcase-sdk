@@ -28,165 +28,80 @@ import java.time.OffsetDateTime
 
 object Signals {
 
-    /**
-     * To list all signals consent records for your team, send a GET request to `/v1/consent`. Each
-     * record indicates whether signals collection is enabled for a source: per-environment records
-     * (`source: agent`) for Harness Runtime, and the team-level record (`source: inference`) for
-     * Serverless Inference chat completions. Pass `?source=agent` or `?source=inference` to return
-     * only that source's records. When filtered, the response also echoes the `source`.
-     *
-     * @param source Filter consent records by source. `agent` returns per-environment records
-     *   (Harness Runtime); `inference` returns the team-level record for Serverless Inference chat
-     *   completions. When omitted, records for all sources are returned.
-     */
-    fun signalsListConsents(
-        clientConfig: ClientConfig,
-        source: SchemaSchemaEnumc045be37? = null,
-        options: RequestOptions? = null,
-    ): ListConsents {
-        return SdkClient.request<ListConsents>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/consent",
-                    config = clientConfig,
-                    query = mapOf("source" to SdkClient.queryValue(source, "form", true)),
-                    operationId = "signalsListConsents",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
-    }
 
     /**
-     * To enable or disable signals collection for a source that is consented at the team level,
-     * send a PUT request to `/v1/consent?source=inference` with an `enabled` boolean in the request
-     * body. Currently the only team-level source is `inference`, which covers Serverless Inference
-     * chat completions made by your team. To revoke consent, send the same request with `enabled`
-     * set to `false`. The `source` query parameter is required. Per-environment consent for Harness
-     * Runtime…
+     * To list all signals consent records for your team, send a GET request to `/v1/consent`. Each record indicates whether signals collection is enabled for a source: per-environment records (`source: agent`) for Harness Runtime, and the team-level record (`source: inference`) for Serverless Inference chat completions. Pass `?source=agent` or `?source=inference` to return only that source's records. When filtered, the response also echoes the `source`.
      *
-     * @param source The consent source to update. Only team-level sources are accepted on this
-     *   endpoint; currently `inference` (Serverless Inference chat completions). Per-environment
-     *   consent (`agent`) is managed with `PUT /v1/consent/{agent_id}` instead.
+     * @param source Filter consent records by source. `agent` returns
+     *   per-environment records (Harness Runtime); `inference` returns the team-level
+     *   record for Serverless Inference chat completions. When omitted, records for
+     *   all sources are returned.
+     */
+    fun signalsListConsents(clientConfig: ClientConfig, source: SchemaSchemaEnumc045be37? = null, options: RequestOptions? = null): ListConsents {
+        return SdkClient.request<ListConsents>(SdkClient.RequestSpec("GET", "/v1/consent", config = clientConfig, query = mapOf("source" to SdkClient.queryValue(source, "form", true)), operationId = "signalsListConsents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * To enable or disable signals collection for a source that is consented at the team level, send a PUT request to `/v1/consent?source=inference` with an `enabled` boolean in the request body. Currently the only team-level source is `inference`, which covers Serverless Inference chat completions made by your team. To revoke consent, send the same request with `enabled` set to `false`. The `source` query parameter is required. Per-environment consent for Harness Runtime…
+     *
+     * @param source The consent source to update. Only team-level sources are
+     *   accepted on this endpoint; currently `inference` (Serverless Inference chat
+     *   completions). Per-environment consent (`agent`) is managed with `PUT
+     *   /v1/consent/{agent_id}` instead.
      * @param enabled Whether to enable signals collection for this source.
      */
-    fun signalsUpdateTeamConsent(
-        clientConfig: ClientConfig,
-        source: SchemaSchemaEnuma49c3d7d,
-        enabled: Boolean,
-        options: RequestOptions? = null,
-    ): UpdateTeamConsentResponse {
-        return SdkClient.request<UpdateTeamConsentResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v1/consent",
-                    config = clientConfig,
-                    query = mapOf("source" to SdkClient.queryValue(source, "form", true)),
-                    body = SdkClient.bodyMap("enabled" to (enabled)),
-                    operationId = "signalsUpdateTeamConsent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun signalsUpdateTeamConsent(clientConfig: ClientConfig, source: SchemaSchemaEnuma49c3d7d, enabled: Boolean, options: RequestOptions? = null): UpdateTeamConsentResponse {
+        return SdkClient.request<UpdateTeamConsentResponse>(SdkClient.RequestSpec("PUT", "/v1/consent", config = clientConfig, query = mapOf("source" to SdkClient.queryValue(source, "form", true)), body = SdkClient.bodyMap("enabled" to (enabled)), operationId = "signalsUpdateTeamConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the consent record for a specific environment, send a GET request to
-     * `/v1/consent/{agent_id}`. The response includes an `enabled` field indicating whether signals
-     * collection is on for this environment. This endpoint only serves per-environment (`source:
-     * agent`) records. Team-level inference consent is read from `GET
-     * /v1/consent?source=inference`.
+     * To retrieve the consent record for a specific environment, send a GET request to `/v1/consent/{agent_id}`. The response includes an `enabled` field indicating whether signals collection is on for this environment. This endpoint only serves per-environment (`source: agent`) records. Team-level inference consent is read from `GET /v1/consent?source=inference`.
      *
-     * @param agentId A unique identifier for an environment. For Harness Runtime, this is the
-     *   Environment Config ID.
+     * @param agentId A unique identifier for an environment. For Harness Runtime,
+     *   this is the Environment Config ID.
      */
-    fun signalsGetConsent(
-        clientConfig: ClientConfig,
-        agentId: String,
-        options: RequestOptions? = null,
-    ): AgentConsent {
+    fun signalsGetConsent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): AgentConsent {
         Validation.validateUuid("agent_id", agentId)
 
-        return SdkClient.request<AgentConsent>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/consent/${SdkClient.encodePathSegment(agentId)}",
-                    config = clientConfig,
-                    operationId = "signalsGetConsent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentConsent>(SdkClient.RequestSpec("GET", "/v1/consent/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, operationId = "signalsGetConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To enable or disable signals collection for a specific environment, send a PUT request to
-     * `/v1/consent/{agent_id}` with an `enabled` boolean in the request body. This endpoint only
-     * manages per-environment (`source: agent`) consent. To manage team-level consent for
-     * Serverless Inference, use `PUT /v1/consent?source=inference` instead.
+     * To enable or disable signals collection for a specific environment, send a PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the request body. This endpoint only manages per-environment (`source: agent`) consent. To manage team-level consent for Serverless Inference, use `PUT /v1/consent?source=inference` instead.
      *
-     * @param agentId A unique identifier for an environment. For Harness Runtime, this is the
-     *   Environment Config ID.
+     * @param agentId A unique identifier for an environment. For Harness Runtime,
+     *   this is the Environment Config ID.
      * @param enabled Whether to enable signals collection for this environment.
      */
-    fun signalsUpdateConsent(
-        clientConfig: ClientConfig,
-        agentId: String,
-        enabled: Boolean,
-        options: RequestOptions? = null,
-    ): UpdateConsentResponse {
+    fun signalsUpdateConsent(clientConfig: ClientConfig, agentId: String, enabled: Boolean, options: RequestOptions? = null): UpdateConsentResponse {
         Validation.validateUuid("agent_id", agentId)
 
-        return SdkClient.request<UpdateConsentResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v1/consent/${SdkClient.encodePathSegment(agentId)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("enabled" to (enabled)),
-                    operationId = "signalsUpdateConsent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UpdateConsentResponse>(SdkClient.RequestSpec("PUT", "/v1/consent/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, body = SdkClient.bodyMap("enabled" to (enabled)), operationId = "signalsUpdateConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [signalsListAgentSessions]. */
     data class SignalsListAgentSessionsRequest(
@@ -195,81 +110,54 @@ object Signals {
         val after: String? = null,
         val startTime: OffsetDateTime? = null,
         val endTime: OffsetDateTime? = null,
-        val signalType: String? = null,
+        val signalType: String? = null
     )
 
     /**
-     * To list signals sessions for a specific environment, send a GET request to
-     * `/v1/signals/agents/{agent_id}/sessions`. Results are paginated using cursor-based pagination
-     * with `limit` and `after` parameters.
+     * To list signals sessions for a specific environment, send a GET request to `/v1/signals/agents/{agent_id}/sessions`. Results are paginated using cursor-based pagination with `limit` and `after` parameters.
      *
-     * @param agentId A unique identifier for an environment. For Harness Runtime, this is the
-     *   Environment Config ID.
+     * @param agentId A unique identifier for an environment. For Harness Runtime,
+     *   this is the Environment Config ID.
      * @param limit Maximum number of items to return per page.
-     * @param after An opaque cursor string returned from a previous page. Pass this value to
-     *   retrieve the next page of results.
-     * @param startTime Filter results to those occurring at or after this timestamp (RFC 3339).
-     * @param endTime Filter results to those occurring at or before this timestamp (RFC 3339).
-     * @param signalType Filter results by signal type. Use the export options endpoint to list
-     *   available signal types.
+     * @param after An opaque cursor string returned from a previous page. Pass this
+     *   value to retrieve the next page of results.
+     * @param startTime Filter results to those occurring at or after this timestamp
+     *   (RFC 3339).
+     * @param endTime Filter results to those occurring at or before this timestamp
+     *   (RFC 3339).
+     * @param signalType Filter results by signal type. Use the export options
+     *   endpoint to list available signal types.
      */
-    fun signalsListAgentSessions(
-        clientConfig: ClientConfig,
-        request: SignalsListAgentSessionsRequest,
-        options: RequestOptions? = null,
-    ): ListSessionsResponseResponse {
+    fun signalsListAgentSessions(clientConfig: ClientConfig, request: SignalsListAgentSessionsRequest, options: RequestOptions? = null): ListSessionsResponseResponse {
         validateSignalsListAgentSessionsRequest(request)
 
-        return SdkClient.request<ListSessionsResponseResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/agents/${SdkClient.encodePathSegment(request.agentId)}/sessions",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                            "start_time" to
-                                SdkClient.queryValue(request.startTime, "form", true, "date-time"),
-                            "end_time" to
-                                SdkClient.queryValue(request.endTime, "form", true, "date-time"),
-                            "signal_type" to SdkClient.queryValue(request.signalType, "form", true),
-                        ),
-                    operationId = "signalsListAgentSessions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListSessionsResponseResponse>(SdkClient.RequestSpec("GET", "/v1/signals/agents/${SdkClient.encodePathSegment(request.agentId)}/sessions", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(request.limit, "form", true), "after" to SdkClient.queryValue(request.after, "form", true), "start_time" to
+    SdkClient.queryValue(request.startTime, "form", true, "date-time"), "end_time" to
+    SdkClient.queryValue(request.endTime, "form", true, "date-time"), "signal_type" to
+    SdkClient.queryValue(request.signalType, "form", true)), operationId = "signalsListAgentSessions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateSignalsListAgentSessionsRequest(request: SignalsListAgentSessionsRequest) {
         Validation.validateUuid("agent_id", request.agentId)
 
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
         if (request.startTime != null) {
             Validation.validateDateTime("start_time", request.startTime)
-        }
+}
 
         if (request.endTime != null) {
             Validation.validateDateTime("end_time", request.endTime)
-        }
+}
     }
+
+
+
+
+
 
     /** Parameters for [signalsListSessionDialogues]. */
     data class SignalsListSessionDialoguesRequest(
@@ -278,126 +166,74 @@ object Signals {
         val after: String? = null,
         val startTime: OffsetDateTime? = null,
         val endTime: OffsetDateTime? = null,
-        val signalType: String? = null,
+        val signalType: String? = null
     )
 
     /**
-     * To list the dialogue turns within a specific session, send a GET request to
-     * `/v1/signals/sessions/{session_id}/dialogues`. Each dialogue represents a single turn of
-     * conversation between a user and the environment, along with any signals detected. Results are
-     * paginated using cursor-based pagination.
+     * To list the dialogue turns within a specific session, send a GET request to `/v1/signals/sessions/{session_id}/dialogues`. Each dialogue represents a single turn of conversation between a user and the environment, along with any signals detected. Results are paginated using cursor-based pagination.
      *
      * @param sessionId A unique identifier for a signals session.
      * @param limit Maximum number of items to return per page.
-     * @param after An opaque cursor string returned from a previous page. Pass this value to
-     *   retrieve the next page of results.
-     * @param startTime Filter results to those occurring at or after this timestamp (RFC 3339).
-     * @param endTime Filter results to those occurring at or before this timestamp (RFC 3339).
-     * @param signalType Filter results by signal type. Use the export options endpoint to list
-     *   available signal types.
+     * @param after An opaque cursor string returned from a previous page. Pass this
+     *   value to retrieve the next page of results.
+     * @param startTime Filter results to those occurring at or after this timestamp
+     *   (RFC 3339).
+     * @param endTime Filter results to those occurring at or before this timestamp
+     *   (RFC 3339).
+     * @param signalType Filter results by signal type. Use the export options
+     *   endpoint to list available signal types.
      */
-    fun signalsListSessionDialogues(
-        clientConfig: ClientConfig,
-        request: SignalsListSessionDialoguesRequest,
-        options: RequestOptions? = null,
-    ): ListDialoguesResponse {
+    fun signalsListSessionDialogues(clientConfig: ClientConfig, request: SignalsListSessionDialoguesRequest, options: RequestOptions? = null): ListDialoguesResponse {
         validateSignalsListSessionDialoguesRequest(request)
 
-        return SdkClient.request<ListDialoguesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/sessions/${SdkClient.encodePathSegment(request.sessionId)}/dialogues",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                            "start_time" to
-                                SdkClient.queryValue(request.startTime, "form", true, "date-time"),
-                            "end_time" to
-                                SdkClient.queryValue(request.endTime, "form", true, "date-time"),
-                            "signal_type" to SdkClient.queryValue(request.signalType, "form", true),
-                        ),
-                    operationId = "signalsListSessionDialogues",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListDialoguesResponse>(SdkClient.RequestSpec("GET", "/v1/signals/sessions/${SdkClient.encodePathSegment(request.sessionId)}/dialogues", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(request.limit, "form", true), "after" to SdkClient.queryValue(request.after, "form", true), "start_time" to
+    SdkClient.queryValue(request.startTime, "form", true, "date-time"), "end_time" to
+    SdkClient.queryValue(request.endTime, "form", true, "date-time"), "signal_type" to
+    SdkClient.queryValue(request.signalType, "form", true)), operationId = "signalsListSessionDialogues", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    private fun validateSignalsListSessionDialoguesRequest(
-        request: SignalsListSessionDialoguesRequest
-    ) {
+
+    private fun validateSignalsListSessionDialoguesRequest(request: SignalsListSessionDialoguesRequest) {
         Validation.validateUuid("session_id", request.sessionId)
 
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
         if (request.startTime != null) {
             Validation.validateDateTime("start_time", request.startTime)
-        }
+}
 
         if (request.endTime != null) {
             Validation.validateDateTime("end_time", request.endTime)
-        }
+}
     }
+
+
+
+
+
 
     /**
-     * To list signals export jobs for your team, send a GET request to `/v1/signals/exports`.
-     * Results are paginated using cursor-based pagination with `limit` and `after` parameters.
+     * To list signals export jobs for your team, send a GET request to `/v1/signals/exports`. Results are paginated using cursor-based pagination with `limit` and `after` parameters.
      *
      * @param limit Maximum number of items to return per page.
-     * @param after An opaque cursor string returned from a previous page. Pass this value to
-     *   retrieve the next page of results.
+     * @param after An opaque cursor string returned from a previous page. Pass this
+     *   value to retrieve the next page of results.
      */
-    fun signalsListExports(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): ListExportsResponse {
+    fun signalsListExports(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListExportsResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListExportsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/exports",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "signalsListExports",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListExportsResponse>(SdkClient.RequestSpec("GET", "/v1/signals/exports", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "signalsListExports", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [signalsCreateExport]. */
     data class SignalsCreateExportRequest(
@@ -406,310 +242,162 @@ object Signals {
         val signalType: List<String>? = null,
         val sessionIds: List<String>? = null,
         val startTime: OffsetDateTime? = null,
-        val endTime: OffsetDateTime? = null,
+        val endTime: OffsetDateTime? = null
     )
 
     /**
-     * To create a new signals data export, send a POST request to `/v1/signals/exports`. To export
-     * one Harness Runtime environment, include its `agent_id` (`type` defaults to `agent`). To
-     * export the team's Serverless Inference Signals conversations, set `type` to `inference` and
-     * omit `agent_id`. You may optionally filter the export by `signal_type`, `session_ids`,
-     * `start_time`, and `end_time`. Use the export options endpoint to discover available signal
-     * types. The export job runs…
+     * To create a new signals data export, send a POST request to `/v1/signals/exports`. To export one Harness Runtime environment, include its `agent_id` (`type` defaults to `agent`). To export the team's Serverless Inference Signals conversations, set `type` to `inference` and omit `agent_id`. You may optionally filter the export by `signal_type`, `session_ids`, `start_time`, and `end_time`. Use the export options endpoint to discover available signal types. The export job runs…
      *
-     * @param type The scope of the export. `agent` exports Signals conversations for one Harness
-     *   Runtime environment and requires `agent_id`. `inference` exports Serverless Inference
-     *   Signals conversations for the whole team (team-wide; omit `agent_id`). Defaults to `agent`
-     *   when `agent_id` is provided and to `inference` when it is omitted.
-     * @param agentId The environment whose data should be exported. For Harness Runtime, this is
-     *   the Environment Config ID. Required when `type` is `agent`; must be omitted when `type` is
-     *   `inference`.
-     * @param signalType Filter the export to only include the specified signal types. Use the
-     *   export options endpoint to list available values.
-     * @param sessionIds Optional list of specific session IDs to include in the export.
-     * @param startTime Include only sessions that started at or after this timestamp.
+     * @param type The scope of the export. `agent` exports Signals conversations for
+     *   one Harness Runtime environment and requires `agent_id`. `inference` exports
+     *   Serverless Inference Signals conversations for the whole team (team-wide; omit
+     *   `agent_id`). Defaults to `agent` when `agent_id` is provided and to
+     *   `inference` when it is omitted.
+     * @param agentId The environment whose data should be exported. For Harness
+     *   Runtime, this is the Environment Config ID. Required when `type` is `agent`;
+     *   must be omitted when `type` is `inference`.
+     * @param signalType Filter the export to only include the specified signal
+     *   types. Use the export options endpoint to list available values.
+     * @param sessionIds Optional list of specific session IDs to include in the
+     *   export.
+     * @param startTime Include only sessions that started at or after this
+     *   timestamp.
      * @param endTime Include only sessions that started at or before this timestamp.
      */
-    fun signalsCreateExport(
-        clientConfig: ClientConfig,
-        request: SignalsCreateExportRequest,
-        options: RequestOptions? = null,
-    ): ExportJob {
+    fun signalsCreateExport(clientConfig: ClientConfig, request: SignalsCreateExportRequest, options: RequestOptions? = null): ExportJob {
         validateSignalsCreateExportRequest(request)
 
-        return SdkClient.request<ExportJob>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v1/signals/exports",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "type" to (SdkClient.omitIfNull(request.type)),
-                            "agent_id" to (SdkClient.omitIfNull(request.agentId)),
-                            "signal_type" to (SdkClient.omitIfNull(request.signalType)),
-                            "session_ids" to (SdkClient.omitIfNull(request.sessionIds)),
-                            "start_time" to (SdkClient.omitIfNull(request.startTime)),
-                            "end_time" to (SdkClient.omitIfNull(request.endTime)),
-                        ),
-                    operationId = "signalsCreateExport",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExportJob>(SdkClient.RequestSpec("POST", "/v1/signals/exports", config = clientConfig, body = SdkClient.bodyMap("type" to (SdkClient.omitIfNull(request.type)), "agent_id" to (SdkClient.omitIfNull(request.agentId)), "signal_type" to (SdkClient.omitIfNull(request.signalType)), "session_ids" to (SdkClient.omitIfNull(request.sessionIds)), "start_time" to (SdkClient.omitIfNull(request.startTime)), "end_time" to (SdkClient.omitIfNull(request.endTime))), operationId = "signalsCreateExport", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateSignalsCreateExportRequest(request: SignalsCreateExportRequest) {
         if (request.agentId != null) {
             Validation.validateUuid("agent_id", request.agentId)
-        }
+}
 
         if (request.startTime != null) {
             Validation.validateDateTime("start_time", request.startTime)
-        }
+}
 
         if (request.endTime != null) {
             Validation.validateDateTime("end_time", request.endTime)
-        }
+}
     }
 
+
+
+
+
+
     /**
-     * To retrieve the available filter options for creating an export, send a GET request to
-     * `/v1/signals/exports/options`. The response lists valid signal types that can be used in the
-     * `signal_type` filter when creating an export.
+     * To retrieve the available filter options for creating an export, send a GET request to `/v1/signals/exports/options`. The response lists valid signal types that can be used in the `signal_type` filter when creating an export.
      */
-    fun signalsGetExportOptions(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): ExportOptions {
-        return SdkClient.request<ExportOptions>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/exports/options",
-                    config = clientConfig,
-                    operationId = "signalsGetExportOptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun signalsGetExportOptions(clientConfig: ClientConfig, options: RequestOptions? = null): ExportOptions {
+        return SdkClient.request<ExportOptions>(SdkClient.RequestSpec("GET", "/v1/signals/exports/options", config = clientConfig, operationId = "signalsGetExportOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the status and details of a signals export job, send a GET request to
-     * `/v1/signals/exports/{export_id}`.
+     * To retrieve the status and details of a signals export job, send a GET request to `/v1/signals/exports/{export_id}`.
      *
      * @param exportId A unique identifier for an export job.
      */
-    fun signalsGetExport(
-        clientConfig: ClientConfig,
-        exportId: String,
-        options: RequestOptions? = null,
-    ): ExportJob {
+    fun signalsGetExport(clientConfig: ClientConfig, exportId: String, options: RequestOptions? = null): ExportJob {
         Validation.validateUuid("export_id", exportId)
 
-        return SdkClient.request<ExportJob>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/exports/${SdkClient.encodePathSegment(exportId)}",
-                    config = clientConfig,
-                    operationId = "signalsGetExport",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExportJob>(SdkClient.RequestSpec("GET", "/v1/signals/exports/${SdkClient.encodePathSegment(exportId)}", config = clientConfig, operationId = "signalsGetExport", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a pre-signed download URL for a completed export, send a GET request to
-     * `/v1/signals/exports/{export_id}/download`. The export must have a `complete` status. The URL
-     * is temporary and will expire.
+     * To retrieve a pre-signed download URL for a completed export, send a GET request to `/v1/signals/exports/{export_id}/download`. The export must have a `complete` status. The URL is temporary and will expire.
      *
      * @param exportId A unique identifier for an export job.
      */
-    fun signalsGetExportDownload(
-        clientConfig: ClientConfig,
-        exportId: String,
-        options: RequestOptions? = null,
-    ): ExportDownload {
+    fun signalsGetExportDownload(clientConfig: ClientConfig, exportId: String, options: RequestOptions? = null): ExportDownload {
         Validation.validateUuid("export_id", exportId)
 
-        return SdkClient.request<ExportDownload>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/exports/${SdkClient.encodePathSegment(exportId)}/download",
-                    config = clientConfig,
-                    operationId = "signalsGetExportDownload",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExportDownload>(SdkClient.RequestSpec("GET", "/v1/signals/exports/${SdkClient.encodePathSegment(exportId)}/download", config = clientConfig, operationId = "signalsGetExportDownload", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list signals data deletion jobs for your team, newest first, send a GET request to
-     * `/v1/signals/deletions`. Results are paginated using cursor-based pagination with `limit` and
-     * `after` parameters.
+     * To list signals data deletion jobs for your team, newest first, send a GET request to `/v1/signals/deletions`. Results are paginated using cursor-based pagination with `limit` and `after` parameters.
      *
      * @param limit Maximum number of items to return per page.
-     * @param after An opaque cursor string returned from a previous page. Pass this value to
-     *   retrieve the next page of results.
+     * @param after An opaque cursor string returned from a previous page. Pass this
+     *   value to retrieve the next page of results.
      */
-    fun signalsListDeletions(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): ListDeletionsResponse {
+    fun signalsListDeletions(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListDeletionsResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListDeletionsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/deletions",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "signalsListDeletions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListDeletionsResponse>(SdkClient.RequestSpec("GET", "/v1/signals/deletions", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "signalsListDeletions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To permanently delete Signals conversation data, send a POST request to
-     * `/v1/signals/deletions`. Deletion cannot be undone. Two deletion types are supported: -
-     * `agent` — deletes Signals conversations for one Harness Runtime environment and turns off
-     * collection for that environment. Requires `agent_id`, which is the environment's Environment
-     * Config ID (the environment's `agent_id`). On create, matching conversations are hidden from
-     * Signals reads immediately. Wait until the…
+     * To permanently delete Signals conversation data, send a POST request to `/v1/signals/deletions`. Deletion cannot be undone. Two deletion types are supported: - `agent` — deletes Signals conversations for one Harness Runtime environment and turns off collection for that environment. Requires `agent_id`, which is the environment's Environment Config ID (the environment's `agent_id`). On create, matching conversations are hidden from Signals reads immediately. Wait until the…
      *
-     * @param type The scope of the deletion. `agent` deletes Signals conversations for one Harness
-     *   Runtime environment and requires `agent_id`. `inference` deletes Serverless Inference
-     *   Signals conversations for the whole team (team-wide; omit `agent_id`).
-     * @param teamId The team whose data should be deleted. Must match the authenticated team.
-     * @param agentId The Harness Runtime Environment Config ID of the environment whose
-     *   conversations should be deleted. This is the environment's `agent_id`. Required when `type`
-     *   is `agent`; must be omitted when `type` is `inference`.
+     * @param type The scope of the deletion. `agent` deletes Signals conversations
+     *   for one Harness Runtime environment and requires `agent_id`. `inference`
+     *   deletes Serverless Inference Signals conversations for the whole team
+     *   (team-wide; omit `agent_id`).
+     * @param teamId The team whose data should be deleted. Must match the
+     *   authenticated team.
+     * @param agentId The Harness Runtime Environment Config ID of the environment
+     *   whose conversations should be deleted. This is the environment's `agent_id`.
+     *   Required when `type` is `agent`; must be omitted when `type` is `inference`.
      */
-    fun signalsCreateDeletion(
-        clientConfig: ClientConfig,
-        type: CreateDeletionRequestTypeEnum,
-        teamId: Long,
-        agentId: String? = null,
-        options: RequestOptions? = null,
-    ): DeletionJob {
+    fun signalsCreateDeletion(clientConfig: ClientConfig, type: CreateDeletionRequestTypeEnum, teamId: Long, agentId: String? = null, options: RequestOptions? = null): DeletionJob {
         if (agentId != null) {
             Validation.validateUuid("agent_id", agentId)
-        }
+}
 
-        return SdkClient.request<DeletionJob>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v1/signals/deletions",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "type" to (type),
-                            "team_id" to (teamId),
-                            "agent_id" to (SdkClient.omitIfNull(agentId)),
-                        ),
-                    operationId = "signalsCreateDeletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DeletionJob>(SdkClient.RequestSpec("POST", "/v1/signals/deletions", config = clientConfig, body = SdkClient.bodyMap("type" to (type), "team_id" to (teamId), "agent_id" to (SdkClient.omitIfNull(agentId))), operationId = "signalsCreateDeletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the status of a signals data deletion job, send a GET request to
-     * `/v1/signals/deletions/{deletion_id}`.
+     * To retrieve the status of a signals data deletion job, send a GET request to `/v1/signals/deletions/{deletion_id}`.
      *
      * @param deletionId A unique identifier for a data deletion job.
      */
-    fun signalsGetDeletion(
-        clientConfig: ClientConfig,
-        deletionId: String,
-        options: RequestOptions? = null,
-    ): DeletionJob {
-        return SdkClient.request<DeletionJob>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v1/signals/deletions/${SdkClient.encodePathSegment(deletionId)}",
-                    config = clientConfig,
-                    operationId = "signalsGetDeletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun signalsGetDeletion(clientConfig: ClientConfig, deletionId: String, options: RequestOptions? = null): DeletionJob {
+        return SdkClient.request<DeletionJob>(SdkClient.RequestSpec("GET", "/v1/signals/deletions/${SdkClient.encodePathSegment(deletionId)}", config = clientConfig, operationId = "signalsGetDeletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

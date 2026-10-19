@@ -3,18 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `Databases` API schema. */
+/**
+ * Typed representation of the `Databases` API schema.
+ */
 data class Databases(
-    /** Optional array value serialized in the `dbs` wire field. */
+    /**
+     * Optional array value serialized in the `dbs` wire field.
+     */
     val dbs: List<Database>? = null
 )
 
-/** Typed representation of the `DatabasesBasicAuthCredentials` API schema. */
+/**
+ * Typed representation of the `DatabasesBasicAuthCredentials` API schema.
+ */
 data class DatabasesBasicAuthCredentials(
-    /** basic authentication username for metrics HTTP endpoint */
-    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth_username")
-    val basicAuthUsername: String? = null,
-    /** basic authentication password for metrics HTTP endpoint */
-    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth_password")
-    val basicAuthPassword: String? = null,
+    /**
+     * basic authentication username for metrics HTTP endpoint
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth_username") val basicAuthUsername: String? = null,
+    /**
+     * basic authentication password for metrics HTTP endpoint
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth_password") val basicAuthPassword: String? = null
 )

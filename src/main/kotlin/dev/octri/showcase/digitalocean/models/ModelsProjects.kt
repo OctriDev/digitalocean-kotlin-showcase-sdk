@@ -5,151 +5,173 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `DefaultProject` API schema. */
+/**
+ * Typed representation of the `DefaultProject` API schema.
+ */
 data class DefaultProject(
-    /** Optional API value serialized in the `project` wire field. */
+    /**
+     * Optional API value serialized in the `project` wire field.
+     */
     val project: Project? = null
 )
 
-/** Typed representation of the `ExistingProject` API schema. */
+/**
+ * Typed representation of the `ExistingProject` API schema.
+ */
 data class ExistingProject(
-    /** Optional API value serialized in the `project` wire field. */
+    /**
+     * Optional API value serialized in the `project` wire field.
+     */
     val project: Project? = null
 )
 
-/** Typed representation of the `Project` API schema. */
+/**
+ * Typed representation of the `Project` API schema.
+ */
 data class Project(
-    /** The unique universal identifier of this project. */
+    /**
+     * The unique universal identifier of this project.
+     */
     val id: String? = null,
-    /** The unique universal identifier of the project owner. */
+    /**
+     * The unique universal identifier of the project owner.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_uuid") val ownerUuid: String? = null,
-    /** The integer id of the project owner. */
+    /**
+     * The integer id of the project owner.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: Long? = null,
     /**
-     * The human-readable name for the project. The maximum length is 175 characters and the name
-     * must be unique.
+     * The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
      */
     val name: String? = null,
-    /** The description of the project. The maximum length is 255 characters. */
+    /**
+     * The description of the project. The maximum length is 255 characters.
+     */
     val description: String? = null,
     /**
-     * The purpose of the project. The maximum length is 255 characters. It can have one of the
-     * following values: - Just trying out DigitalOcean - Class project / Educational purposes -
-     * Website or blog - Web Application - Service or API - Mobile Application - Machine learning /
-     * AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is
-     * specified, for example, "your custom purpose", your purpose will be stored as `Other: your
-     * custom purpose`.
+     * The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
      */
     val purpose: String? = null,
-    /** The environment of the project's resources. */
+    /**
+     * The environment of the project's resources.
+     */
     val environment: ProjectBaseEnvironmentEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the project
-     * was created.
+     * A time value given in ISO8601 combined date and time format that represents when the project was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the project
-     * was updated.
+     * A time value given in ISO8601 combined date and time format that represents when the project was updated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** If true, all resources will be added to this project if no project is specified. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * If true, all resources will be added to this project if no project is specified.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null
 )
 
-/** Typed representation of the `ProjectBase` API schema. */
+/**
+ * Typed representation of the `ProjectBase` API schema.
+ */
 data class ProjectBase(
-    /** The unique universal identifier of this project. */
+    /**
+     * The unique universal identifier of this project.
+     */
     val id: String? = null,
-    /** The unique universal identifier of the project owner. */
+    /**
+     * The unique universal identifier of the project owner.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_uuid") val ownerUuid: String? = null,
-    /** The integer id of the project owner. */
+    /**
+     * The integer id of the project owner.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: Long? = null,
     /**
-     * The human-readable name for the project. The maximum length is 175 characters and the name
-     * must be unique.
+     * The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
      */
     val name: String? = null,
-    /** The description of the project. The maximum length is 255 characters. */
+    /**
+     * The description of the project. The maximum length is 255 characters.
+     */
     val description: String? = null,
     /**
-     * The purpose of the project. The maximum length is 255 characters. It can have one of the
-     * following values: - Just trying out DigitalOcean - Class project / Educational purposes -
-     * Website or blog - Web Application - Service or API - Mobile Application - Machine learning /
-     * AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is
-     * specified, for example, "your custom purpose", your purpose will be stored as `Other: your
-     * custom purpose`.
+     * The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
      */
     val purpose: String? = null,
-    /** The environment of the project's resources. */
+    /**
+     * The environment of the project's resources.
+     */
     val environment: ProjectBaseEnvironmentEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the project
-     * was created.
+     * A time value given in ISO8601 combined date and time format that represents when the project was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the project
-     * was updated.
+     * A time value given in ISO8601 combined date and time format that represents when the project was updated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `ProjectBaseRequest` API schema. */
+/**
+ * Typed representation of the `ProjectBaseRequest` API schema.
+ */
 data class ProjectBaseRequest(
     /**
-     * The human-readable name for the project. The maximum length is 175 characters and the name
-     * must be unique.
+     * The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
      */
     val name: String? = null,
-    /** The description of the project. The maximum length is 255 characters. */
+    /**
+     * The description of the project. The maximum length is 255 characters.
+     */
     val description: String? = null,
     /**
-     * The purpose of the project. The maximum length is 255 characters. It can have one of the
-     * following values: - Just trying out DigitalOcean - Class project / Educational purposes -
-     * Website or blog - Web Application - Service or API - Mobile Application - Machine learning /
-     * AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is
-     * specified, for example, "your custom purpose", your purpose will be stored as `Other: your
-     * custom purpose`.
+     * The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
      */
     val purpose: String? = null,
-    /** The environment of the project's resources. */
-    val environment: ProjectBaseRequestEnvironmentEnum? = null,
+    /**
+     * The environment of the project's resources.
+     */
+    val environment: ProjectBaseRequestEnvironmentEnum? = null
 )
 
-/** Typed representation of the `ProjectRequest` API schema. */
+/**
+ * Typed representation of the `ProjectRequest` API schema.
+ */
 data class ProjectRequest(
     /**
-     * The human-readable name for the project. The maximum length is 175 characters and the name
-     * must be unique.
+     * The human-readable name for the project. The maximum length is 175 characters and the name must be unique.
      */
     val name: String? = null,
-    /** The description of the project. The maximum length is 255 characters. */
+    /**
+     * The description of the project. The maximum length is 255 characters.
+     */
     val description: String? = null,
     /**
-     * The purpose of the project. The maximum length is 255 characters. It can have one of the
-     * following values: - Just trying out DigitalOcean - Class project / Educational purposes -
-     * Website or blog - Web Application - Service or API - Mobile Application - Machine learning /
-     * AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is
-     * specified, for example, "your custom purpose", your purpose will be stored as `Other: your
-     * custom purpose`.
+     * The purpose of the project. The maximum length is 255 characters. It can have one of the following values: - Just trying out DigitalOcean - Class project / Educational purposes - Website or blog - Web Application - Service or API - Mobile Application - Machine learning / AI / Data processing - IoT - Operational / Developer tooling If another value for purpose is specified, for example, "your custom purpose", your purpose will be stored as `Other: your custom purpose`.
      */
     val purpose: String? = null,
-    /** The environment of the project's resources. */
+    /**
+     * The environment of the project's resources.
+     */
     val environment: ProjectBaseRequestEnvironmentEnum? = null,
-    /** If true, all resources will be added to this project if no project is specified. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null,
+    /**
+     * If true, all resources will be added to this project if no project is specified.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null
 )
 
-/** Typed representation of the `ProjectsList` API schema. */
+/**
+ * Typed representation of the `ProjectsList` API schema.
+ */
 data class ProjectsList(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val projects: List<Project>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )

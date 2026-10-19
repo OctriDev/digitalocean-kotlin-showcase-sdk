@@ -25,291 +25,96 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object MonitoringGetDropletAutoscaleCurrentMemoryUtilizationOperation {
     /**
-     * To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a
-     * GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
+     * To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleCurrentMemoryUtilization(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleCurrentMemoryUtilization",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleCurrentMemoryUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleCurrentMemoryUtilization", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDropletAutoscaleTargetMemoryUtilizationOperation {
     /**
-     * To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a
-     * GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
+     * To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleTargetMemoryUtilization(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleTargetMemoryUtilization",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleTargetMemoryUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleTargetMemoryUtilization", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlCpuUsageOperation {
     /**
-     * Retrieve CPU usage (percent) for a MySQL cluster. Response is a time series of cluster-level
-     * CPU usage. Use **aggregate** to get avg, max, or min over the range.
+     * Retrieve CPU usage (percent) for a MySQL cluster. Response is a time series of cluster-level CPU usage. Use **aggregate** to get avg, max, or min over the range.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param aggregate Aggregation over the time range (avg, max, or min).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlCpuUsage(
-        clientConfig: ClientConfig,
-        dbId: String,
-        aggregate: SchemaSchemaEnum0dce2982,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlCpuUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/cpu_usage",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "aggregate" to SdkClient.queryValue(aggregate, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlCpuUsage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/cpu_usage", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "aggregate" to SdkClient.queryValue(aggregate, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlCpuUsage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlLoadOperation {
     /**
-     * Retrieve load metrics for a MySQL cluster. Use **metric** for the window: **load1**
-     * (1-minute), **load5** (5-minute), or **load15** (15-minute). Use **aggregate** to get either
-     * the average (avg) or maximum (max) over that window over the time range.
+     * Retrieve load metrics for a MySQL cluster. Use **metric** for the window: **load1** (1-minute), **load5** (5-minute), or **load15** (15-minute). Use **aggregate** to get either the average (avg) or maximum (max) over that window over the time range.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
-     * @param metric Load window: **load1** (1-minute), **load5** (5-minute), **load15**
-     *   (15-minute). The value is either average or max over that window, depending on the
-     *   **aggregate** parameter (avg or max).
+     * @param metric Load window: **load1** (1-minute), **load5** (5-minute),
+     *   **load15** (15-minute). The value is either average or max over that window,
+     *   depending on the **aggregate** parameter (avg or max).
      * @param aggregate Aggregation over the time range (avg or max).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlLoad(
-        clientConfig: ClientConfig,
-        dbId: String,
-        metric: SchemaSchemaEnum1b18cc1a,
-        aggregate: SchemaSchemaEnum4cd6a9cb,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlLoad(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum1b18cc1a, aggregate: SchemaSchemaEnum4cd6a9cb, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/load",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "metric" to SdkClient.queryValue(metric, "form", true),
-                            "aggregate" to SdkClient.queryValue(aggregate, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlLoad",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/load", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "aggregate" to SdkClient.queryValue(aggregate, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlLoad", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlMemoryUsageOperation {
     /**
-     * Retrieve memory usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min)
-     * over the time range.
+     * Retrieve memory usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param aggregate Aggregation over the time range (avg, max, or min).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlMemoryUsage(
-        clientConfig: ClientConfig,
-        dbId: String,
-        aggregate: SchemaSchemaEnum0dce2982,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlMemoryUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/memory_usage",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "aggregate" to SdkClient.queryValue(aggregate, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlMemoryUsage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/memory_usage", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "aggregate" to SdkClient.queryValue(aggregate, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlMemoryUsage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlDiskUsageOperation {
     /**
-     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over
-     * the time range.
+     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param aggregate Aggregation over the time range (avg, max, or min).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlDiskUsage(
-        clientConfig: ClientConfig,
-        dbId: String,
-        aggregate: SchemaSchemaEnum0dce2982,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlDiskUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/disk_usage",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "aggregate" to SdkClient.queryValue(aggregate, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlDiskUsage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/disk_usage", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "aggregate" to SdkClient.queryValue(aggregate, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlDiskUsage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -321,40 +126,10 @@ internal object MonitoringGetDatabaseMysqlThreadsConnectedOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsConnected(
-        clientConfig: ClientConfig,
-        dbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlThreadsConnected(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/threads_connected",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlThreadsConnected",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_connected", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsConnected", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -366,40 +141,10 @@ internal object MonitoringGetDatabaseMysqlThreadsCreatedRateOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsCreatedRate(
-        clientConfig: ClientConfig,
-        dbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlThreadsCreatedRate(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/threads_created_rate",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlThreadsCreatedRate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_created_rate", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsCreatedRate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -411,142 +156,47 @@ internal object MonitoringGetDatabaseMysqlThreadsActiveOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsActive(
-        clientConfig: ClientConfig,
-        dbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlThreadsActive(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/threads_active",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlThreadsActive",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_active", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsActive", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlIndexVsSequentialReadsOperation {
     /**
-     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of
-     * reads using an index.
+     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of reads using an index.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(
-        clientConfig: ClientConfig,
-        dbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlIndexVsSequentialReads",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlIndexVsSequentialReads", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlOpRatesOperation {
     /**
-     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select,
-     * insert, update, or delete.
+     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select, insert, update, or delete.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param metric Operation type (select, insert, update, or delete).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlOpRates(
-        clientConfig: ClientConfig,
-        dbId: String,
-        metric: SchemaSchemaEnum92787d5e,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlOpRates(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum92787d5e, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/op_rates",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "metric" to SdkClient.queryValue(metric, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlOpRates",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/op_rates", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlOpRates", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlSchemaThroughputOperation {
     /**
-     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and
-     * **metric** (insert, fetch, update, delete).
+     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param schema The schema (database) name.
@@ -554,51 +204,16 @@ internal object MonitoringGetDatabaseMysqlSchemaThroughputOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlSchemaThroughput(
-        clientConfig: ClientConfig,
-        dbId: String,
-        schema: String,
-        metric: SchemaSchemaEnumc619b583,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlSchemaThroughput(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/schema_throughput",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "schema" to SdkClient.queryValue(schema, "form", true),
-                            "metric" to SdkClient.queryValue(metric, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlSchemaThroughput",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/schema_throughput", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "schema" to SdkClient.queryValue(schema, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlSchemaThroughput", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDatabaseMysqlSchemaLatencyOperation {
     /**
-     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric**
-     * (insert, fetch, update, delete).
+     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param schema The schema (database) name.
@@ -606,93 +221,26 @@ internal object MonitoringGetDatabaseMysqlSchemaLatencyOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlSchemaLatency(
-        clientConfig: ClientConfig,
-        dbId: String,
-        schema: String,
-        metric: SchemaSchemaEnumc619b583,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
+    fun monitoringGetDatabaseMysqlSchemaLatency(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/database/mysql/schema_latency",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "db_id" to SdkClient.queryValue(dbId, "form", true),
-                            "schema" to SdkClient.queryValue(schema, "form", true),
-                            "metric" to SdkClient.queryValue(metric, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDatabaseMysqlSchemaLatency",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/schema_latency", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "schema" to SdkClient.queryValue(schema, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlSchemaLatency", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringCreateDestinationOperation {
     /**
-     * Creates a logging destination for sending logs to a managed or externally managed OpenSearch
-     * cluster. Supply `type` and `config`, including the cluster `endpoint`; include credentials
-     * unless you provide a managed cluster's `cluster_uuid`. A 200 response returns the created
-     * destination.
+     * Creates a logging destination for sending logs to a managed or externally managed OpenSearch cluster. Supply `type` and `config`, including the cluster `endpoint`; include credentials unless you provide a managed cluster's `cluster_uuid`. A 200 response returns the created destination.
      *
      * To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.
      *
-     * @param type The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch
-     *   cluster or `opensearch_ext` for an externally managed one.
+     * @param type The destination type. `opensearch_dbaas` for a DigitalOcean
+     *   managed OpenSearch cluster or `opensearch_ext` for an externally managed one.
      * @param config Required object value serialized in the `config` wire field.
      * @param name destination name
      */
-    fun monitoringCreateDestination(
-        clientConfig: ClientConfig,
-        type: DestinationRequestTypeEnum,
-        config: OpensearchConfigRequest,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): DestinationResponse {
-        return SdkClient.request<DestinationResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/monitoring/sinks/destinations",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "type" to (type),
-                            "config" to (config),
-                            "name" to (SdkClient.omitIfNull(name)),
-                        ),
-                    operationId = "monitoringCreateDestination",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringCreateDestination(clientConfig: ClientConfig, type: DestinationRequestTypeEnum, config: OpensearchConfigRequest, name: String? = null, options: RequestOptions? = null): DestinationResponse {
+        return SdkClient.request<DestinationResponse>(SdkClient.RequestSpec("POST", "/v2/monitoring/sinks/destinations", config = clientConfig, body = SdkClient.bodyMap("type" to (type), "config" to (config), "name" to (SdkClient.omitIfNull(name))), operationId = "monitoringCreateDestination", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -700,187 +248,61 @@ internal object MonitoringListDestinationsOperation {
     /**
      * To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.
      */
-    fun monitoringListDestinations(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): MonitoringListDestinations {
-        return SdkClient.request<MonitoringListDestinations>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/sinks/destinations",
-                    config = clientConfig,
-                    operationId = "monitoringListDestinations",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringListDestinations(clientConfig: ClientConfig, options: RequestOptions? = null): MonitoringListDestinations {
+        return SdkClient.request<MonitoringListDestinations>(SdkClient.RequestSpec("GET", "/v2/monitoring/sinks/destinations", config = clientConfig, operationId = "monitoringListDestinations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDestinationOperation {
     /**
-     * To get the details of a destination, send a GET request to
-     * `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+     * To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
      *
      * @param destinationUuid A unique identifier for a destination.
      */
-    fun monitoringGetDestination(
-        clientConfig: ClientConfig,
-        destinationUuid: String,
-        options: RequestOptions? = null,
-    ): DestinationResponse {
-        return SdkClient.request<DestinationResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}",
-                    config = clientConfig,
-                    operationId = "monitoringGetDestination",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDestination(clientConfig: ClientConfig, destinationUuid: String, options: RequestOptions? = null): DestinationResponse {
+        return SdkClient.request<DestinationResponse>(SdkClient.RequestSpec("GET", "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}", config = clientConfig, operationId = "monitoringGetDestination", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringUpdateDestinationOperation {
     /**
-     * Updates the configuration of an existing logging destination. Identify it with
-     * `destination_uuid` and supply the required `type` and `config` fields, including the cluster
-     * `endpoint`; credentials are optional if you provide a managed cluster's `cluster_uuid`. A 204
-     * response confirms the update and has no response body.
+     * Updates the configuration of an existing logging destination. Identify it with `destination_uuid` and supply the required `type` and `config` fields, including the cluster `endpoint`; credentials are optional if you provide a managed cluster's `cluster_uuid`. A 204 response confirms the update and has no response body.
      *
-     * To update the details of a destination, send a PATCH request to
-     * `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+     * To update the details of a destination, send a PATCH request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
      *
      * @param destinationUuid A unique identifier for a destination.
-     * @param type The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch
-     *   cluster or `opensearch_ext` for an externally managed one.
+     * @param type The destination type. `opensearch_dbaas` for a DigitalOcean
+     *   managed OpenSearch cluster or `opensearch_ext` for an externally managed one.
      * @param config Required object value serialized in the `config` wire field.
      * @param name destination name
      */
-    fun monitoringUpdateDestination(
-        clientConfig: ClientConfig,
-        destinationUuid: String,
-        type: DestinationRequestTypeEnum,
-        config: OpensearchConfigRequest,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}",
-                config = clientConfig,
-                body =
-                    SdkClient.bodyMap(
-                        "type" to (type),
-                        "config" to (config),
-                        "name" to (SdkClient.omitIfNull(name)),
-                    ),
-                operationId = "monitoringUpdateDestination",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun monitoringUpdateDestination(clientConfig: ClientConfig, destinationUuid: String, type: DestinationRequestTypeEnum, config: OpensearchConfigRequest, name: String? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}", config = clientConfig, body = SdkClient.bodyMap("type" to (type), "config" to (config), "name" to (SdkClient.omitIfNull(name))), operationId = "monitoringUpdateDestination", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object MonitoringDeleteDestinationOperation {
     /**
-     * To delete a destination and all associated sinks, send a DELETE request to
-     * `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+     * To delete a destination and all associated sinks, send a DELETE request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
      *
      * @param destinationUuid A unique identifier for a destination.
      */
-    fun monitoringDeleteDestination(
-        clientConfig: ClientConfig,
-        destinationUuid: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}",
-                config = clientConfig,
-                operationId = "monitoringDeleteDestination",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun monitoringDeleteDestination(clientConfig: ClientConfig, destinationUuid: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/monitoring/sinks/destinations/${SdkClient.encodePathSegment(destinationUuid)}", config = clientConfig, operationId = "monitoringDeleteDestination", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object MonitoringCreateSinkOperation {
     /**
-     * To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the
-     * resources identified in `resources` to the specified pre-existing destination.
+     * To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the resources identified in `resources` to the specified pre-existing destination.
      *
-     * @param destinationUuid A unique identifier for an already-existing destination.
+     * @param destinationUuid A unique identifier for an already-existing
+     *   destination.
      * @param resources List of resources identified by their URNs.
      */
-    fun monitoringCreateSink(
-        clientConfig: ClientConfig,
-        destinationUuid: String? = null,
-        resources: List<SinkResource>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/monitoring/sinks",
-                config = clientConfig,
-                body =
-                    SdkClient.bodyMap(
-                        "destination_uuid" to (SdkClient.omitIfNull(destinationUuid)),
-                        "resources" to (SdkClient.omitIfNull(resources)),
-                    ),
-                operationId = "monitoringCreateSink",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun monitoringCreateSink(clientConfig: ClientConfig, destinationUuid: String? = null, resources: List<SinkResource>? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/monitoring/sinks", config = clientConfig, body = SdkClient.bodyMap("destination_uuid" to
+    (SdkClient.omitIfNull(destinationUuid)), "resources" to (SdkClient.omitIfNull(resources))), operationId = "monitoringCreateSink", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
@@ -890,73 +312,24 @@ internal object MonitoringListSinksOperation {
      *
      * @param resourceId A unique URN for a resource.
      */
-    fun monitoringListSinks(
-        clientConfig: ClientConfig,
-        resourceId: Urn? = null,
-        options: RequestOptions? = null,
-    ): ListSinks {
+    fun monitoringListSinks(clientConfig: ClientConfig, resourceId: Urn? = null, options: RequestOptions? = null): ListSinks {
         if (resourceId != null) {
-            Validation.validatePattern(
-                "resource_id",
-                resourceId,
-                "^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*",
-            )
-        }
+            Validation.validatePattern("resource_id", resourceId, "^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*")
+}
 
-        return SdkClient.request<ListSinks>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/sinks",
-                    config = clientConfig,
-                    query = mapOf("resource_id" to SdkClient.queryValue(resourceId, "form", true)),
-                    operationId = "monitoringListSinks",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListSinks>(SdkClient.RequestSpec("GET", "/v2/monitoring/sinks", config = clientConfig, query = mapOf("resource_id" to
+    SdkClient.queryValue(resourceId, "form", true)), operationId = "monitoringListSinks", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetSinkOperation {
     /**
-     * To get the details of a sink (resources and destination), send a GET request to
-     * `/v2/monitoring/sinks/${sink_uuid}`.
+     * To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/${sink_uuid}`.
      *
      * @param sinkUuid A unique identifier for a sink.
      */
-    fun monitoringGetSink(
-        clientConfig: ClientConfig,
-        sinkUuid: String,
-        options: RequestOptions? = null,
-    ): Sinks {
-        return SdkClient.request<Sinks>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/sinks/${SdkClient.encodePathSegment(sinkUuid)}",
-                    config = clientConfig,
-                    operationId = "monitoringGetSink",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetSink(clientConfig: ClientConfig, sinkUuid: String, options: RequestOptions? = null): Sinks {
+        return SdkClient.request<Sinks>(SdkClient.RequestSpec("GET", "/v2/monitoring/sinks/${SdkClient.encodePathSegment(sinkUuid)}", config = clientConfig, operationId = "monitoringGetSink", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -966,28 +339,7 @@ internal object MonitoringDeleteSinkOperation {
      *
      * @param sinkUuid A unique identifier for a sink.
      */
-    fun monitoringDeleteSink(
-        clientConfig: ClientConfig,
-        sinkUuid: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/monitoring/sinks/${SdkClient.encodePathSegment(sinkUuid)}",
-                config = clientConfig,
-                operationId = "monitoringDeleteSink",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun monitoringDeleteSink(clientConfig: ClientConfig, sinkUuid: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/monitoring/sinks/${SdkClient.encodePathSegment(sinkUuid)}", config = clientConfig, operationId = "monitoringDeleteSink", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

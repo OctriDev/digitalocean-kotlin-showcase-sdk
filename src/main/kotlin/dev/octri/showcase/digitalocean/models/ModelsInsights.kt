@@ -6,87 +6,123 @@ package dev.octri.showcase.digitalocean.models
 import java.time.OffsetDateTime
 
 /**
- * Email notification channel configuration. Recipients must be verified team member email
- * addresses.
+ * Email notification channel configuration. Recipients must be verified team member email addresses.
  */
 data class EmailNotificationConfig(
-    /** One or more recipient email addresses, separated by commas, semicolons, or spaces. */
+    /**
+     * One or more recipient email addresses, separated by commas, semicolons, or spaces.
+     */
     val to: String
 )
 
 /**
- * Metrics query that the alert rule evaluates. `metric` must be a dotted OpenTelemetry name (for
- * example `do.droplets.cpu_utilization`). Underscored Prometheus-style names are rejected. When
- * `resource_urns` is omitted or empty, the rule is not scoped to specific resources.
+ * Metrics query that the alert rule evaluates. `metric` must be a dotted OpenTelemetry name (for example `do.droplets.cpu_utilization`). Underscored Prometheus-style names are rejected. When `resource_urns` is omitted or empty, the rule is not scoped to specific resources.
  */
 data class MetricsQuery(
-    /** Dotted OpenTelemetry metric name to evaluate (for example `do.droplets.cpu_utilization`). */
+    /**
+     * Dotted OpenTelemetry metric name to evaluate (for example `do.droplets.cpu_utilization`).
+     */
     val metric: String,
-    /** Optional label filters applied to the metric series. */
+    /**
+     * Optional label filters applied to the metric series.
+     */
     val filters: List<QueryFilter>? = null,
     /**
-     * Optional list of DigitalOcean resource URNs the rule applies to. Empty or omitted means the
-     * rule is not scoped to specific resources.
+     * Optional list of DigitalOcean resource URNs the rule applies to. Empty or omitted means the rule is not scoped to specific resources.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_urns")
-    val resourceUrns: List<String>? = null,
-    /** Optional resource tags used to select matching resources. */
-    val tags: List<String>? = null,
-)
-
-/** A filter applied to the metrics query. */
-data class QueryFilter(
-    /** The metric label or field to filter on. */
-    @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String,
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_urns") val resourceUrns: List<String>? = null,
     /**
-     * Comparison operator for the filter. Allowed values: - `FILTER_OPERATOR_EQUAL` = equal -
-     * `FILTER_OPERATOR_NOT_EQUAL` = `not_equal` - `FILTER_OPERATOR_LESS_THAN` = `less_than` -
-     * `FILTER_OPERATOR_LESS_THAN_OR_EQUAL` = `less_than_or_equal` - `FILTER_OPERATOR_GREATER_THAN`
-     * = `greater_than` - `FILTER_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
+     * Optional resource tags used to select matching resources.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("operator")
-    val `operator`: QueryFilterOperatorEnum,
-    /** Value compared against the field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    val tags: List<String>? = null
 )
 
 /**
- * Indicates whether a secret credential is configured without exposing its value. Status fields
- * that use this schema are omitted from responses when the secret is not set.
+ * A filter applied to the metrics query.
+ */
+data class QueryFilter(
+    /**
+     * The metric label or field to filter on.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String,
+    /**
+     * Comparison operator for the filter. Allowed values: - `FILTER_OPERATOR_EQUAL` = equal - `FILTER_OPERATOR_NOT_EQUAL` = `not_equal` - `FILTER_OPERATOR_LESS_THAN` = `less_than` - `FILTER_OPERATOR_LESS_THAN_OR_EQUAL` = `less_than_or_equal` - `FILTER_OPERATOR_GREATER_THAN` = `greater_than` - `FILTER_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("operator") val `operator`: QueryFilterOperatorEnum,
+    /**
+     * Value compared against the field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String
+)
+
+/**
+ * Indicates whether a secret credential is configured without exposing its value. Status fields that use this schema are omitted from responses when the secret is not set.
  */
 data class SecretStatus(
-    /** Whether the secret is configured. */
+    /**
+     * Whether the secret is configured.
+     */
     val configured: Boolean
 )
 
-/** A single span returned by a spans search. */
+/**
+ * A single span returned by a spans search.
+ */
 data class SpanRecord(
-    /** The trace identifier the span belongs to. */
+    /**
+     * The trace identifier the span belongs to.
+     */
     val traceId: String? = null,
-    /** The span identifier. */
+    /**
+     * The span identifier.
+     */
     val spanId: String? = null,
-    /** The parent span identifier. Omitted for root spans. */
+    /**
+     * The parent span identifier. Omitted for root spans.
+     */
     val parentSpanId: String? = null,
-    /** The span start time. */
+    /**
+     * The span start time.
+     */
     val startTime: OffsetDateTime? = null,
-    /** The span end time. */
+    /**
+     * The span end time.
+     */
     val endTime: OffsetDateTime? = null,
-    /** The span duration in nanoseconds. */
+    /**
+     * The span duration in nanoseconds.
+     */
     val durationNs: Long? = null,
-    /** The span name. */
+    /**
+     * The span name.
+     */
     val name: String? = null,
-    /** The span kind. */
+    /**
+     * The span kind.
+     */
     val kind: String? = null,
-    /** The span status code. */
+    /**
+     * The span status code.
+     */
     val statusCode: String? = null,
-    /** The span status message. Omitted when empty. */
+    /**
+     * The span status message. Omitted when empty.
+     */
     val statusMessage: String? = null,
-    /** The name of the service that emitted the span. */
+    /**
+     * The name of the service that emitted the span.
+     */
     val serviceName: String? = null,
-    /** Resource attributes associated with the span. */
+    /**
+     * Resource attributes associated with the span.
+     */
     val resource: Map<String, String>? = null,
-    /** Span attributes. */
+    /**
+     * Span attributes.
+     */
     val attributes: Map<String, String>? = null,
-    /** The datacenter region slug the span was queried from. */
-    val region: String? = null,
+    /**
+     * The datacenter region slug the span was queried from.
+     */
+    val region: String? = null
 )

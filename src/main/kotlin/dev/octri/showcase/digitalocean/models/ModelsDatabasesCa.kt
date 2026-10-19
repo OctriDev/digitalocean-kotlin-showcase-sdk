@@ -3,14 +3,22 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `Ca` API schema. */
+/**
+ * Typed representation of the `Ca` API schema.
+ */
 data class Ca(
-    /** base64 encoding of the certificate used to secure database connections */
+    /**
+     * base64 encoding of the certificate used to secure database connections
+     */
     val certificate: String
 )
 
-/** Typed representation of the `CaResponse` API schema. */
+/**
+ * Typed representation of the `CaResponse` API schema.
+ */
 data class CaResponse(
-    /** Required object value serialized in the `ca` wire field. */
+    /**
+     * Required object value serialized in the `ca` wire field.
+     */
     val ca: Ca
 )

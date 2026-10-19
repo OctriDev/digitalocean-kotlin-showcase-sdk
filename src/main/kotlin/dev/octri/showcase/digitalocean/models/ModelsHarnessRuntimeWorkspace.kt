@@ -5,97 +5,152 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `WorkspacePartUploadUrl` API schema. */
+/**
+ * Typed representation of the `WorkspacePartUploadUrl` API schema.
+ */
 data class WorkspacePartUploadUrl(
-    /** Optional `int32`-formatted value serialized in the `part_number` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("part_number") val partNumber: Int? = null,
-    /** Presigned PUT URL for this part. PUT the part bytes here directly. */
-    @com.fasterxml.jackson.annotation.JsonProperty("upload_url") val uploadUrl: String? = null,
-)
-
-/** Typed representation of the `WorkspacePartUploadUrls` API schema. */
-data class WorkspacePartUploadUrls(
-    /** Optional `string` value serialized in the `transfer_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
-    /** One presigned PUT URL per requested part number, in request order. */
-    @com.fasterxml.jackson.annotation.JsonProperty("part_urls")
-    val partUrls: List<WorkspacePartUploadUrl>? = null,
-    /** Shared expiry for all URLs in this batch. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
-)
-
-/** Typed representation of the `WorkspaceTransferCancelled` API schema. */
-data class WorkspaceTransferCancelled(
-    /** Optional `string` value serialized in the `transfer_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
     /**
-     * True if this call transitioned an active transfer to terminal; false if it was already
-     * terminal.
+     * Optional `int32`-formatted value serialized in the `part_number` wire field.
      */
-    val aborted: Boolean? = null,
-    /** Optional enumerated value serialized in the `status` wire field. */
-    val status: WorkspaceTransferCancelledStatusEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("part_number") val partNumber: Int? = null,
+    /**
+     * Presigned PUT URL for this part. PUT the part bytes here directly.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("upload_url") val uploadUrl: String? = null
 )
 
 /**
- * Response to CreateWorkspaceTransfer. Upload responses carry `upload_id`, `part_size`, and
- * `expires_at`; download responses carry only `transfer_id`, `direction`, and `status`.
+ * Typed representation of the `WorkspacePartUploadUrls` API schema.
  */
-data class WorkspaceTransferCreated(
-    /** Opaque id used on all subsequent calls. */
+data class WorkspacePartUploadUrls(
+    /**
+     * Optional `string` value serialized in the `transfer_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
-    /** Optional enumerated value serialized in the `direction` wire field. */
-    val direction: WorkspaceTransferCreatedDirectionEnum? = null,
-    /** Optional enumerated value serialized in the `status` wire field. */
-    val status: WorkspaceTransferCreatedStatusEnum? = null,
-    /** Upload only. Multipart upload id (informational). */
-    @com.fasterxml.jackson.annotation.JsonProperty("upload_id") val uploadId: String? = null,
-    /** Upload only. Split the payload into parts of this size; the last part may be smaller. */
-    @com.fasterxml.jackson.annotation.JsonProperty("part_size") val partSize: Long? = null,
-    /** Transfer credential window. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
+    /**
+     * One presigned PUT URL per requested part number, in request order.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("part_urls") val partUrls: List<WorkspacePartUploadUrl>? = null,
+    /**
+     * Shared expiry for all URLs in this batch.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `WorkspaceTransferStatus` API schema. */
-data class WorkspaceTransferStatus(
-    /** Optional `string` value serialized in the `transfer_id` wire field. */
+/**
+ * Typed representation of the `WorkspaceTransferCancelled` API schema.
+ */
+data class WorkspaceTransferCancelled(
+    /**
+     * Optional `string` value serialized in the `transfer_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
-    /** Optional enumerated value serialized in the `direction` wire field. */
+    /**
+     * True if this call transitioned an active transfer to terminal; false if it was already terminal.
+     */
+    val aborted: Boolean? = null,
+    /**
+     * Optional enumerated value serialized in the `status` wire field.
+     */
+    val status: WorkspaceTransferCancelledStatusEnum? = null
+)
+
+/**
+ * Response to CreateWorkspaceTransfer. Upload responses carry `upload_id`, `part_size`, and `expires_at`; download responses carry only `transfer_id`, `direction`, and `status`.
+ */
+data class WorkspaceTransferCreated(
+    /**
+     * Opaque id used on all subsequent calls.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
+    /**
+     * Optional enumerated value serialized in the `direction` wire field.
+     */
+    val direction: WorkspaceTransferCreatedDirectionEnum? = null,
+    /**
+     * Optional enumerated value serialized in the `status` wire field.
+     */
+    val status: WorkspaceTransferCreatedStatusEnum? = null,
+    /**
+     * Upload only. Multipart upload id (informational).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("upload_id") val uploadId: String? = null,
+    /**
+     * Upload only. Split the payload into parts of this size; the last part may be smaller.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("part_size") val partSize: Long? = null,
+    /**
+     * Transfer credential window.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null
+)
+
+/**
+ * Typed representation of the `WorkspaceTransferStatus` API schema.
+ */
+data class WorkspaceTransferStatus(
+    /**
+     * Optional `string` value serialized in the `transfer_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
+    /**
+     * Optional enumerated value serialized in the `direction` wire field.
+     */
     val direction: WorkspaceTransferStatusDirectionEnum? = null,
-    /** Optional enumerated value serialized in the `status` wire field. */
+    /**
+     * Optional enumerated value serialized in the `status` wire field.
+     */
     val status: WorkspaceTransferStatusStatusEnum? = null,
-    /** Optional `int64`-formatted value serialized in the `bytes_written` wire field. */
+    /**
+     * Optional `int64`-formatted value serialized in the `bytes_written` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("bytes_written") val bytesWritten: Long? = null,
     /**
      * Lowercase hex SHA-256 of the payload, when known. Verify the downloaded object against this.
      */
     val sha256: String? = null,
-    /** Download + completed only. Presigned GET URL; fetch the object directly. */
+    /**
+     * Download + completed only. Presigned GET URL; fetch the object directly.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("download_url") val downloadUrl: String? = null,
-    /** Expiry of download_url when present. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
-    /** Populated when status is failed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_message")
-    val errorMessage: String? = null,
+    /**
+     * Expiry of download_url when present.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null,
+    /**
+     * Populated when status is failed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_message") val errorMessage: String? = null
 )
 
-/** Typed representation of the `WorkspaceUploadCommitted` API schema. */
+/**
+ * Typed representation of the `WorkspaceUploadCommitted` API schema.
+ */
 data class WorkspaceUploadCommitted(
-    /** Optional `string` value serialized in the `transfer_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `transfer_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("transfer_id") val transferId: String? = null,
-    /** Optional enumerated value serialized in the `status` wire field. */
+    /**
+     * Optional enumerated value serialized in the `status` wire field.
+     */
     val status: WorkspaceUploadCommittedStatusEnum? = null,
-    /** Size of the completed staging object, when known. */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long? = null,
+    /**
+     * Size of the completed staging object, when known.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long? = null
 )
 
-/** Typed representation of the `WorkspaceUploadResponse` API schema. */
+/**
+ * Typed representation of the `WorkspaceUploadResponse` API schema.
+ */
 data class WorkspaceUploadResponse(
-    /** Absolute guest path the payload was written to. */
+    /**
+     * Absolute guest path the payload was written to.
+     */
     val path: String? = null,
-    /** Number of bytes committed to the workspace. */
-    @com.fasterxml.jackson.annotation.JsonProperty("bytes_written") val bytesWritten: Long? = null,
+    /**
+     * Number of bytes committed to the workspace.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("bytes_written") val bytesWritten: Long? = null
 )

@@ -3,49 +3,64 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `CreateFirewallResponse` API schema. */
+/**
+ * Typed representation of the `CreateFirewallResponse` API schema.
+ */
 data class CreateFirewallResponse(
-    /** Optional object value serialized in the `firewall` wire field. */
+    /**
+     * Optional object value serialized in the `firewall` wire field.
+     */
     val firewall: Firewall? = null
 )
 
-/** Typed representation of the `FirewallRequest` API schema. */
+/**
+ * Typed representation of the `FirewallRequest` API schema.
+ */
 data class FirewallRequest(
     /**
-     * A human-readable name for a firewall. The name must begin with an alphanumeric character.
-     * Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-).
+     * A human-readable name for a firewall. The name must begin with an alphanumeric character. Subsequent characters must either be alphanumeric characters, a period (.), or a dash (-).
      */
     val name: String? = null,
     /**
-     * An array containing the IDs of the Droplets assigned to the firewall. Requires `droplet:read`
-     * scope.
+     * An array containing the IDs of the Droplets assigned to the firewall. Requires `droplet:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
-    val dropletIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
     val tags: ExistingTagsArray? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("inbound_rules")
-    val inboundRules: List<FirewallRulesInboundRulesItem>? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("outbound_rules")
-    val outboundRules: List<FirewallRulesOutboundRulesItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("inbound_rules") val inboundRules: List<FirewallRulesInboundRulesItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("outbound_rules") val outboundRules: List<FirewallRulesOutboundRulesItem>? = null
 )
 
-/** Typed representation of the `GetFirewallResponse` API schema. */
+/**
+ * Typed representation of the `GetFirewallResponse` API schema.
+ */
 data class GetFirewallResponse(
-    /** Optional object value serialized in the `firewall` wire field. */
+    /**
+     * Optional object value serialized in the `firewall` wire field.
+     */
     val firewall: Firewall? = null
 )
 
-/** Typed representation of the `ListFirewallsResponse` API schema. */
+/**
+ * Typed representation of the `ListFirewallsResponse` API schema.
+ */
 data class ListFirewallsResponse(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val firewalls: List<Firewall>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `PutFirewallResponse` API schema. */
+/**
+ * Typed representation of the `PutFirewallResponse` API schema.
+ */
 data class PutFirewallResponse(
-    /** Optional object value serialized in the `firewall` wire field. */
+    /**
+     * Optional object value serialized in the `firewall` wire field.
+     */
     val firewall: Firewall? = null
 )

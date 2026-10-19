@@ -5,197 +5,312 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AccessKey` API schema. */
+/**
+ * Typed representation of the `AccessKey` API schema.
+ */
 data class AccessKey(
-    /** The access key's unique identifier with prefix 'dof_v1_'. */
+    /**
+     * The access key's unique identifier with prefix 'dof_v1_'.
+     */
     val id: String? = null,
-    /** The access key's name. */
+    /**
+     * The access key's name.
+     */
     val name: String? = null,
-    /** When the key expires (null for non-expiring keys). */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
-    /** The date and time the key was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The date and time the key was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    /**
+     * When the key expires (null for non-expiring keys).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null,
+    /**
+     * The date and time the key was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The date and time the key was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `AccessKeyCreate` API schema. */
+/**
+ * Typed representation of the `AccessKeyCreate` API schema.
+ */
 data class AccessKeyCreate(
-    /** Optional API value serialized in the `access_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("access_key")
-    val accessKey: AccessKeyCreateResponse? = null
+    /**
+     * Optional API value serialized in the `access_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("access_key") val accessKey: AccessKeyCreateResponse? = null
 )
 
-/** Typed representation of the `AccessKeyCreateRequest` API schema. */
+/**
+ * Typed representation of the `AccessKeyCreateRequest` API schema.
+ */
 data class AccessKeyCreateRequest(
-    /** The access key's name. */
+    /**
+     * The access key's name.
+     */
     val name: String,
     /**
-     * The duration after which the access key expires, specified as a human-readable duration
-     * string in the format `<int>h` (hours) or `<int>d` (days). Minimum value is `1h`. If omitted,
-     * the key will never expire.
+     * The duration after which the access key expires, specified as a human-readable duration string in the format `<int>h` (hours) or `<int>d` (days). Minimum value is `1h`. If omitted, the key will never expire.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_in") val expiresIn: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in") val expiresIn: String? = null
 )
 
-/** Typed representation of the `AccessKeyCreateResponse` API schema. */
+/**
+ * Typed representation of the `AccessKeyCreateResponse` API schema.
+ */
 data class AccessKeyCreateResponse(
     /**
-     * The secret key used to authenticate. This is only returned once upon creation. Make sure to
-     * copy and securely store it.
+     * The secret key used to authenticate. This is only returned once upon creation. Make sure to copy and securely store it.
      */
     val secret: String? = null,
-    /** The access key's unique identifier with prefix 'dof_v1_'. */
+    /**
+     * The access key's unique identifier with prefix 'dof_v1_'.
+     */
     val id: String? = null,
-    /** The access key's name. */
+    /**
+     * The access key's name.
+     */
     val name: String? = null,
-    /** When the key expires (null for non-expiring keys). */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
-    /** The date and time the key was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The date and time the key was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    /**
+     * When the key expires (null for non-expiring keys).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null,
+    /**
+     * The date and time the key was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The date and time the key was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `AccessKeyList` API schema. */
+/**
+ * Typed representation of the `AccessKeyList` API schema.
+ */
 data class AccessKeyList(
-    /** Optional array value serialized in the `access_keys` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("access_keys")
-    val accessKeys: List<AccessKey>? = null,
-    /** Total number of access keys */
-    val count: Long? = null,
+    /**
+     * Optional array value serialized in the `access_keys` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("access_keys") val accessKeys: List<AccessKey>? = null,
+    /**
+     * Total number of access keys
+     */
+    val count: Long? = null
 )
 
-/** Typed representation of the `AccessKeyUpdate` API schema. */
+/**
+ * Typed representation of the `AccessKeyUpdate` API schema.
+ */
 data class AccessKeyUpdate(
-    /** Optional object value serialized in the `access_key` wire field. */
+    /**
+     * Optional object value serialized in the `access_key` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("access_key") val accessKey: AccessKey? = null
 )
 
-/** Typed representation of the `CreateNamespace` API schema. */
+/**
+ * Typed representation of the `CreateNamespace` API schema.
+ */
 data class CreateNamespace(
-    /** The datacenter region in which to create the namespace. */
+    /**
+     * The datacenter region in which to create the namespace.
+     */
     val region: String,
-    /** The namespace's unique name. */
-    val label: String,
+    /**
+     * The namespace's unique name.
+     */
+    val label: String
 )
 
-/** Typed representation of the `CreateTrigger` API schema. */
+/**
+ * Typed representation of the `CreateTrigger` API schema.
+ */
 data class CreateTrigger(
-    /** The trigger's unique name within the namespace. */
+    /**
+     * The trigger's unique name within the namespace.
+     */
     val name: String,
-    /** Name of function(action) that exists in the given namespace. */
+    /**
+     * Name of function(action) that exists in the given namespace.
+     */
     val function: String,
-    /** One of different type of triggers. Currently only SCHEDULED is supported. */
+    /**
+     * One of different type of triggers. Currently only SCHEDULED is supported.
+     */
     val type: String,
-    /** Indicates weather the trigger is paused or unpaused. */
+    /**
+     * Indicates weather the trigger is paused or unpaused.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_enabled") val isEnabled: Boolean,
-    /** Trigger details for SCHEDULED type, where body is optional. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details")
-    val scheduledDetails: ScheduledDetails,
+    /**
+     * Trigger details for SCHEDULED type, where body is optional.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details") val scheduledDetails: ScheduledDetails
 )
 
-/** Typed representation of the `ListNamespaces` API schema. */
-data class ListNamespaces(val namespaces: List<NamespaceInfo>? = null)
+/**
+ * Typed representation of the `ListNamespaces` API schema.
+ */
+data class ListNamespaces(
+    val namespaces: List<NamespaceInfo>? = null
+)
 
-/** Typed representation of the `ListTriggers` API schema. */
-data class ListTriggers(val triggers: List<TriggerInfo>? = null)
+/**
+ * Typed representation of the `ListTriggers` API schema.
+ */
+data class ListTriggers(
+    val triggers: List<TriggerInfo>? = null
+)
 
-/** Typed representation of the `NamespaceCreated` API schema. */
+/**
+ * Typed representation of the `NamespaceCreated` API schema.
+ */
 data class NamespaceCreated(
-    /** Optional object value serialized in the `namespace` wire field. */
+    /**
+     * Optional object value serialized in the `namespace` wire field.
+     */
     val namespace: NamespaceInfo? = null
 )
 
-/** Typed representation of the `NamespaceInfo` API schema. */
+/**
+ * Typed representation of the `NamespaceInfo` API schema.
+ */
 data class NamespaceInfo(
     /**
-     * The namespace's API hostname. Each function in a namespace is provided an endpoint at the
-     * namespace's hostname.
+     * The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("api_host") val apiHost: String? = null,
-    /** A unique string format of UUID with a prefix fn-. */
+    /**
+     * A unique string format of UUID with a prefix fn-.
+     */
     val namespace: String? = null,
-    /** UTC time string. */
+    /**
+     * UTC time string.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** UTC time string. */
+    /**
+     * UTC time string.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-    /** The namespace's unique name. */
+    /**
+     * The namespace's unique name.
+     */
     val label: String? = null,
-    /** The namespace's datacenter region. */
+    /**
+     * The namespace's datacenter region.
+     */
     val region: String? = null,
-    /** The namespace's Universally Unique Identifier. */
+    /**
+     * The namespace's Universally Unique Identifier.
+     */
     val uuid: String? = null,
     /**
-     * A random alpha numeric string. This key is used in conjunction with the namespace's UUID to
-     * authenticate a user to use the namespace via `doctl`, DigitalOcean's official CLI.
+     * A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate a user to use the namespace via `doctl`, DigitalOcean's official CLI.
      */
-    val key: String? = null,
+    val key: String? = null
 )
 
-/** Optional data to be sent to function while triggering the function. */
+/**
+ * Optional data to be sent to function while triggering the function.
+ */
 data class ScheduledDetailsBody(
-    /** Optional `string` value serialized in the `name` wire field. */
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
     val name: String? = null
 )
 
-/** Trigger details for SCHEDULED type, where body is optional. */
+/**
+ * Trigger details for SCHEDULED type, where body is optional.
+ */
 data class ScheduledDetails(
-    /** valid cron expression string which is required for SCHEDULED type triggers. */
+    /**
+     * valid cron expression string which is required for SCHEDULED type triggers.
+     */
     val cron: String,
-    /** Optional data to be sent to function while triggering the function. */
-    val body: ScheduledDetailsBody? = null,
+    /**
+     * Optional data to be sent to function while triggering the function.
+     */
+    val body: ScheduledDetailsBody? = null
 )
 
-/** Optional object value serialized in the `scheduled_runs` wire field. */
+/**
+ * Optional object value serialized in the `scheduled_runs` wire field.
+ */
 data class TriggerInfoScheduledRuns(
-    /** Indicates last run time. null value indicates trigger not run yet. */
+    /**
+     * Indicates last run time. null value indicates trigger not run yet.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_run_at") val lastRunAt: String? = null,
-    /** Indicates next run time. null value indicates trigger will not run. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at") val nextRunAt: String? = null,
+    /**
+     * Indicates next run time. null value indicates trigger will not run.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at") val nextRunAt: String? = null
 )
 
-/** Typed representation of the `TriggerInfo` API schema. */
+/**
+ * Typed representation of the `TriggerInfo` API schema.
+ */
 data class TriggerInfo(
-    /** A unique string format of UUID with a prefix fn-. */
+    /**
+     * A unique string format of UUID with a prefix fn-.
+     */
     val namespace: String? = null,
-    /** The trigger's unique name within the namespace. */
+    /**
+     * The trigger's unique name within the namespace.
+     */
     val name: String? = null,
-    /** Name of function(action) that exists in the given namespace. */
+    /**
+     * Name of function(action) that exists in the given namespace.
+     */
     val function: String? = null,
-    /** String which indicates the type of trigger source like SCHEDULED. */
+    /**
+     * String which indicates the type of trigger source like SCHEDULED.
+     */
     val type: String? = null,
-    /** Indicates weather the trigger is paused or unpaused. */
+    /**
+     * Indicates weather the trigger is paused or unpaused.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_enabled") val isEnabled: Boolean? = null,
-    /** UTC time string. */
+    /**
+     * UTC time string.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** UTC time string. */
+    /**
+     * UTC time string.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-    /** Trigger details for SCHEDULED type, where body is optional. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details")
-    val scheduledDetails: ScheduledDetails? = null,
-    /** Optional object value serialized in the `scheduled_runs` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_runs")
-    val scheduledRuns: TriggerInfoScheduledRuns? = null,
+    /**
+     * Trigger details for SCHEDULED type, where body is optional.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details") val scheduledDetails: ScheduledDetails? = null,
+    /**
+     * Optional object value serialized in the `scheduled_runs` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_runs") val scheduledRuns: TriggerInfoScheduledRuns? = null
 )
 
-/** Typed representation of the `TriggerResponse` API schema. */
+/**
+ * Typed representation of the `TriggerResponse` API schema.
+ */
 data class TriggerResponse(
-    /** Optional object value serialized in the `trigger` wire field. */
+    /**
+     * Optional object value serialized in the `trigger` wire field.
+     */
     val trigger: TriggerInfo? = null
 )
 
-/** Typed representation of the `UpdateTrigger` API schema. */
+/**
+ * Typed representation of the `UpdateTrigger` API schema.
+ */
 data class UpdateTrigger(
-    /** Indicates weather the trigger is paused or unpaused. */
+    /**
+     * Indicates weather the trigger is paused or unpaused.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_enabled") val isEnabled: Boolean? = null,
-    /** Trigger details for SCHEDULED type, where body is optional. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details")
-    val scheduledDetails: ScheduledDetails? = null,
+    /**
+     * Trigger details for SCHEDULED type, where body is optional.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_details") val scheduledDetails: ScheduledDetails? = null
 )

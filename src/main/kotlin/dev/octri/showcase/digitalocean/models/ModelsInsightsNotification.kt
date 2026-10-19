@@ -5,99 +5,100 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** A reusable Insights notification channel. */
+/**
+ * A reusable Insights notification channel.
+ */
 data class NotificationChannel(
-    /** A unique identifier for the notification channel. */
+    /**
+     * A unique identifier for the notification channel.
+     */
     val id: String,
-    /** A human-readable name for the notification channel. */
+    /**
+     * A human-readable name for the notification channel.
+     */
     val name: String,
     /**
-     * The configured channel type. Allowed values: - `CHANNEL_TYPE_EMAIL` = email -
-     * `CHANNEL_TYPE_SLACK` = slack - `CHANNEL_TYPE_WEBHOOK` = webhook
+     * The configured channel type. Allowed values: - `CHANNEL_TYPE_EMAIL` = email - `CHANNEL_TYPE_SLACK` = slack - `CHANNEL_TYPE_WEBHOOK` = webhook
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("channel_type")
-    val channelType: NotificationChannelChannelTypeEnum,
-    /** Time the notification channel was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("channel_type") val channelType: NotificationChannelChannelTypeEnum,
+    /**
+     * Time the notification channel was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Time the notification channel was last updated. */
+    /**
+     * Time the notification channel was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
     /**
-     * Email notification channel configuration. Recipients must be verified team member email
-     * addresses.
+     * Email notification channel configuration. Recipients must be verified team member email addresses.
      */
     val email: EmailNotificationConfig? = null,
     /**
-     * Slack notification channel configuration as returned in API responses. The webhook URL is
-     * never returned; `webhook_url_status` indicates whether it is configured.
+     * Slack notification channel configuration as returned in API responses. The webhook URL is never returned; `webhook_url_status` indicates whether it is configured.
      */
     val slack: SlackNotificationConfigResponse? = null,
     /**
-     * Generic HTTPS webhook notification channel configuration as returned in API responses. The
-     * URL and headers are returned in full. Credential secrets are never returned; nested
-     * `*_status` objects indicate whether they are configured.
+     * Generic HTTPS webhook notification channel configuration as returned in API responses. The URL and headers are returned in full. Credential secrets are never returned; nested `*_status` objects indicate whether they are configured.
      */
     val webhook: WebhookNotificationConfigResponse? = null,
     /**
      * Output-only usage summary derived from alert rules that reference this notification channel.
      */
-    val usage: NotificationChannelUsage? = null,
+    val usage: NotificationChannelUsage? = null
 )
 
 /**
- * Binding from an alert rule to a notification channel. When `notify_on` is omitted or empty, the
- * channel is notified for all severities.
+ * Binding from an alert rule to a notification channel. When `notify_on` is omitted or empty, the channel is notified for all severities.
  */
 data class NotificationChannelBinding(
-    /** ID of an existing notification channel owned by the account. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel_id")
-    val notificationChannelId: String,
     /**
-     * Severities that trigger this channel. Allowed values: - `SEVERITY_WARNING` = warning -
-     * `SEVERITY_CRITICAL` = critical
+     * ID of an existing notification channel owned by the account.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("notify_on")
-    val notifyOn: List<NotificationChannelBindingNotifyOnItemEnum>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel_id") val notificationChannelId: String,
+    /**
+     * Severities that trigger this channel. Allowed values: - `SEVERITY_WARNING` = warning - `SEVERITY_CRITICAL` = critical
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notify_on") val notifyOn: List<NotificationChannelBindingNotifyOnItemEnum>? = null
 )
 
 /**
- * Create or update body for a notification channel. Provide a `name` and exactly one of `email`,
- * `slack`, or `webhook`. Secret fields are write-only: send the full value to set or rotate; omit
- * the field on update to keep the existing secret.
+ * Create or update body for a notification channel. Provide a `name` and exactly one of `email`, `slack`, or `webhook`. Secret fields are write-only: send the full value to set or rotate; omit the field on update to keep the existing secret.
  */
 data class NotificationChannelRequestRequest(
-    /** A human-readable name for the notification channel. */
+    /**
+     * A human-readable name for the notification channel.
+     */
     val name: String,
     /**
-     * Email notification channel configuration. Recipients must be verified team member email
-     * addresses.
+     * Email notification channel configuration. Recipients must be verified team member email addresses.
      */
     val email: EmailNotificationConfig? = null,
     /**
-     * Slack notification channel configuration for create and update requests. `webhook_url` is
-     * write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the
-     * existing secret.
+     * Slack notification channel configuration for create and update requests. `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the existing secret.
      */
     val slack: SlackNotificationConfigRequest? = null,
     /**
-     * Generic HTTPS webhook notification channel configuration for create and update requests. The
-     * URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or
-     * `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is
-     * returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`,
-     * `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field
-     * on update to…
+     * Generic HTTPS webhook notification channel configuration for create and update requests. The URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on update to…
      */
-    val webhook: WebhookNotificationConfigRequest? = null,
+    val webhook: WebhookNotificationConfigRequest? = null
 )
 
-/** Typed representation of the `NotificationChannelResponse` API schema. */
+/**
+ * Typed representation of the `NotificationChannelResponse` API schema.
+ */
 data class NotificationChannelResponse(
-    /** A reusable Insights notification channel. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel")
-    val notificationChannel: NotificationChannel
+    /**
+     * A reusable Insights notification channel.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel") val notificationChannel: NotificationChannel
 )
 
-/** Output-only usage summary derived from alert rules that reference this notification channel. */
+/**
+ * Output-only usage summary derived from alert rules that reference this notification channel.
+ */
 data class NotificationChannelUsage(
-    /** Number of alert rules that reference this channel. */
+    /**
+     * Number of alert rules that reference this channel.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("rule_count") val ruleCount: Long? = null
 )

@@ -11,1082 +11,329 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object MonitoringGetLbFrontendHttpRequestsPerSecondOperation {
     /**
-     * To retrieve frontend HTTP requests per second for a given load balancer, send a GET request
-     * to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
+     * To retrieve frontend HTTP requests per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendHttpRequestsPerSecond(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendHttpRequestsPerSecond",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendHttpRequestsPerSecond(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendHttpRequestsPerSecond", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendNetworkThroughputHttpOperation {
     /**
-     * To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a
-     * GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
+     * To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendNetworkThroughputHttp(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendNetworkThroughputHttp",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendNetworkThroughputHttp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendNetworkThroughputHttp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendNetworkThroughputUdpOperation {
     /**
-     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET
-     * request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
+     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendNetworkThroughputUdp(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendNetworkThroughputUdp",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendNetworkThroughputUdp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendNetworkThroughputUdp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendNetworkThroughputTcpOperation {
     /**
-     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET
-     * request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
+     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendNetworkThroughputTcp(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendNetworkThroughputTcp",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendNetworkThroughputTcp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendNetworkThroughputTcp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendNlbTcpNetworkThroughputOperation {
     /**
-     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET
-     * request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
+     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendNlbTcpNetworkThroughput(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendNlbTcpNetworkThroughput",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendNlbTcpNetworkThroughput(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendNlbTcpNetworkThroughput", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendNlbUdpNetworkThroughputOperation {
     /**
-     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET
-     * request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
+     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendNlbUdpNetworkThroughput(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendNlbUdpNetworkThroughput",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendNlbUdpNetworkThroughput(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendNlbUdpNetworkThroughput", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendTlsConnectionsCurrentOperation {
     /**
-     * To retrieve frontend current TLS connections rate for a given load balancer, send a GET
-     * request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
+     * To retrieve frontend current TLS connections rate for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendTlsConnectionsCurrent(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendTlsConnectionsCurrent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendTlsConnectionsCurrent(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendTlsConnectionsCurrent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendTlsConnectionsLimitOperation {
     /**
-     * To retrieve frontend max TLS connections limit for a given load balancer, send a GET request
-     * to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
+     * To retrieve frontend max TLS connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendTlsConnectionsLimit(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendTlsConnectionsLimit",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendTlsConnectionsLimit(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendTlsConnectionsLimit", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbFrontendTlsConnectionsExceedingRateLimitOperation {
     /**
-     * To retrieve frontend closed TLS connections for exceeded rate limit for a given load
-     * balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
+     * To retrieve frontend closed TLS connections for exceeded rate limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbFrontendTlsConnectionsExceedingRateLimit",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbFrontendTlsConnectionsExceedingRateLimit", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpSessionDurationAvgOperation {
     /**
-     * To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send
-     * a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
+     * To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpSessionDurationAvg(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpSessionDurationAvg",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpSessionDurationAvg(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpSessionDurationAvg", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpSessionDuration50POperation {
     /**
-     * To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load
-     * balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
+     * To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpSessionDuration50p(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpSessionDuration50p",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpSessionDuration50p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpSessionDuration50p", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpSessionDuration95POperation {
     /**
-     * To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load
-     * balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
+     * To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpSessionDuration95p(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpSessionDuration95p",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpSessionDuration95p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpSessionDuration95p", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpResponseTimeAvgOperation {
     /**
-     * To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a
-     * GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
+     * To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpResponseTimeAvg(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpResponseTimeAvg",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpResponseTimeAvg(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpResponseTimeAvg", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpResponseTime50POperation {
     /**
-     * To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer,
-     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
+     * To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpResponseTime50p(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpResponseTime50p",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpResponseTime50p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpResponseTime50p", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpResponseTime95POperation {
     /**
-     * To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer,
-     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
+     * To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpResponseTime95p(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpResponseTime95p",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpResponseTime95p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpResponseTime95p", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpResponseTime99POperation {
     /**
-     * To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer,
-     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
+     * To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpResponseTime99p(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpResponseTime99p",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpResponseTime99p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpResponseTime99p", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsQueueSizeOperation {
     /**
-     * To retrieve Droplets queue size for a given load balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
+     * To retrieve Droplets queue size for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsQueueSize(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_queue_size",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsQueueSize",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsQueueSize(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_queue_size", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsQueueSize", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHttpResponsesOperation {
     /**
-     * To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request
-     * to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
+     * To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHttpResponses(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_http_responses",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHttpResponses",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHttpResponses(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_http_responses", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHttpResponses", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsConnectionsOperation {
     /**
-     * To retrieve Droplets active connections for a given load balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_connections`.
+     * To retrieve Droplets active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_connections`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsConnections(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_connections",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsConnections",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsConnections(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_connections", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsConnections", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsHealthChecksOperation {
     /**
-     * To retrieve Droplets health check status for a given load balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
+     * To retrieve Droplets health check status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsHealthChecks(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_health_checks",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsHealthChecks",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsHealthChecks(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_health_checks", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsHealthChecks", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetLbDropletsDowntimeOperation {
     /**
-     * To retrieve Droplets downtime status for a given load balancer, send a GET request to
-     * `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
+     * To retrieve Droplets downtime status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
      *
      * @param lbId A unique identifier for a load balancer.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetLbDropletsDowntime(
-        clientConfig: ClientConfig,
-        lbId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/load_balancer/droplets_downtime",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "lb_id" to SdkClient.queryValue(lbId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetLbDropletsDowntime",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetLbDropletsDowntime(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/load_balancer/droplets_downtime", config = clientConfig, query = mapOf("lb_id" to SdkClient.queryValue(lbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetLbDropletsDowntime", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDropletAutoscaleCurrentInstancesOperation {
     /**
-     * To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to
-     * `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
+     * To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleCurrentInstances(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/current_instances",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleCurrentInstances",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleCurrentInstances(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/current_instances", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleCurrentInstances", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDropletAutoscaleTargetInstancesOperation {
     /**
-     * To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to
-     * `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
+     * To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleTargetInstances(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/target_instances",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleTargetInstances",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleTargetInstances(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/target_instances", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleTargetInstances", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDropletAutoscaleCurrentCpuUtilizationYmlOperation {
     /**
-     * To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a
-     * GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
+     * To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleCurrentCpuUtilizationYml",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleCurrentCpuUtilizationYml", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object MonitoringGetDropletAutoscaleTargetCpuUtilizationOperation {
     /**
-     * To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET
-     * request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
+     * To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDropletAutoscaleTargetCpuUtilization(
-        clientConfig: ClientConfig,
-        autoscalePoolId: String,
-        start: String,
-        end: String,
-        options: RequestOptions? = null,
-    ): Metrics {
-        return SdkClient.request<Metrics>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "autoscale_pool_id" to
-                                SdkClient.queryValue(autoscalePoolId, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "monitoringGetDropletAutoscaleTargetCpuUtilization",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun monitoringGetDropletAutoscaleTargetCpuUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
+        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization", config = clientConfig, query = mapOf("autoscale_pool_id" to
+    SdkClient.queryValue(autoscalePoolId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDropletAutoscaleTargetCpuUtilization", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

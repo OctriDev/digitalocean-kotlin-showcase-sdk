@@ -3,17 +3,22 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `SendInputRequest` API schema. */
+/**
+ * Typed representation of the `SendInputRequest` API schema.
+ */
 data class SendInputRequest(
-    /** The user message to deliver into the session. Required and non-empty. */
+    /**
+     * The user message to deliver into the session. Required and non-empty.
+     */
     val text: String
 )
 
-/** Typed representation of the `SendInputResponse` API schema. */
+/**
+ * Typed representation of the `SendInputResponse` API schema.
+ */
 data class SendInputResponse(
     /**
-     * The run id the input was attributed to. Clients can correlate against the run.started event
-     * on the stream. May be empty if OHR returned no run id.
+     * The run id the input was attributed to. Clients can correlate against the run.started event on the stream. May be empty if OHR returned no run id.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("run_id") val runId: String? = null
 )

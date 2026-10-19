@@ -3,73 +3,51 @@
 
 package dev.octri.showcase.digitalocean
 
-typealias ApiCreateKnowledgeBaseDataSourceOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseDataSourceOutput
+typealias ApiCreateKnowledgeBaseDataSourceOutput = dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseDataSourceOutput
 
-typealias ApiCreateKnowledgeBaseInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseInputPublic
+typealias ApiCreateKnowledgeBaseInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseInputPublic
 
-typealias ApiCreateKnowledgeBaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseOutput
+typealias ApiCreateKnowledgeBaseOutput = dev.octri.showcase.digitalocean.models.ApiCreateKnowledgeBaseOutput
 
-typealias ApiCreateModelAPIKeyInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelAPIKeyInputPublic
+typealias ApiCreateModelAPIKeyInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateModelAPIKeyInputPublic
 
-typealias ApiCreateModelEvalDatasetUploadPresignedUrlsInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelEvalDatasetUploadPresignedUrlsInputPublic
+typealias ApiCreateModelEvalDatasetUploadPresignedUrlsInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateModelEvalDatasetUploadPresignedUrlsInputPublic
 
-typealias ApiCreateModelEvaluationRunInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelEvaluationRunInputPublic
+typealias ApiCreateModelEvaluationRunInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateModelEvaluationRunInputPublic
 
-typealias ApiCreateModelEvaluationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelEvaluationRunOutput
+typealias ApiCreateModelEvaluationRunOutput = dev.octri.showcase.digitalocean.models.ApiCreateModelEvaluationRunOutput
 
-typealias ApiCreateModelRouterInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelRouterInputPublic
+typealias ApiCreateModelRouterInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateModelRouterInputPublic
 
-typealias ApiCreateModelRouterOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateModelRouterOutput
+typealias ApiCreateModelRouterOutput = dev.octri.showcase.digitalocean.models.ApiCreateModelRouterOutput
 
-typealias ApiCreateOpenAIAPIKeyInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateOpenAIAPIKeyInputPublic
+typealias ApiCreateOpenAIAPIKeyInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateOpenAIAPIKeyInputPublic
 
-typealias ApiCreateOpenAIAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateOpenAIAPIKeyOutput
+typealias ApiCreateOpenAIAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiCreateOpenAIAPIKeyOutput
 
-typealias ApiCreateScenarioSetFromLibraryInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetFromLibraryInputPublic
+typealias ApiCreateScenarioSetFromLibraryInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetFromLibraryInputPublic
 
-typealias ApiCreateScenarioSetFromLibraryOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetFromLibraryOutput
+typealias ApiCreateScenarioSetFromLibraryOutput = dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetFromLibraryOutput
 
-typealias ApiCreateScenarioSetInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetInputPublic
+typealias ApiCreateScenarioSetInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetInputPublic
 
-typealias ApiCreateScenarioSetOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetOutput
+typealias ApiCreateScenarioSetOutput = dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetOutput
 
-typealias ApiCreateScenarioSetUploadPresignedUrlsInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetUploadPresignedUrlsInputPublic
+typealias ApiCreateScenarioSetUploadPresignedUrlsInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateScenarioSetUploadPresignedUrlsInputPublic
 
-typealias ApiCreateScheduledIndexingInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateScheduledIndexingInputPublic
+typealias ApiCreateScheduledIndexingInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateScheduledIndexingInputPublic
 
-typealias ApiCreateScheduledIndexingOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateScheduledIndexingOutput
+typealias ApiCreateScheduledIndexingOutput = dev.octri.showcase.digitalocean.models.ApiCreateScheduledIndexingOutput
 
-typealias ApiCreateSimulationRunInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateSimulationRunInputPublic
+typealias ApiCreateSimulationRunInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateSimulationRunInputPublic
 
-typealias ApiCreateSimulationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiCreateSimulationRunOutput
+typealias ApiCreateSimulationRunOutput = dev.octri.showcase.digitalocean.models.ApiCreateSimulationRunOutput
 
-typealias ApiCreateWorkspaceInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiCreateWorkspaceInputPublic
+typealias ApiCreateWorkspaceInputPublic = dev.octri.showcase.digitalocean.models.ApiCreateWorkspaceInputPublic
 
 typealias ApiCreateWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiCreateWorkspaceOutput
 
-typealias ApiCustomEvaluationMetricConfig =
-    dev.octri.showcase.digitalocean.models.ApiCustomEvaluationMetricConfig
+typealias ApiCustomEvaluationMetricConfig = dev.octri.showcase.digitalocean.models.ApiCustomEvaluationMetricConfig
 
 typealias ApiCustomModel = dev.octri.showcase.digitalocean.models.ApiCustomModel
 
@@ -77,58 +55,41 @@ typealias ApiCustomModelImportJob = dev.octri.showcase.digitalocean.models.ApiCu
 
 typealias ApiCustomModelStatus = dev.octri.showcase.digitalocean.models.ApiCustomModelStatus
 
-typealias ApiDeleteAgentAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteAgentAPIKeyOutput
+typealias ApiDeleteAgentAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiDeleteAgentAPIKeyOutput
 
 typealias ApiDeleteAgentOutput = dev.octri.showcase.digitalocean.models.ApiDeleteAgentOutput
 
-typealias ApiDeleteAnthropicAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteAnthropicAPIKeyOutput
+typealias ApiDeleteAnthropicAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiDeleteAnthropicAPIKeyOutput
 
-typealias ApiDeleteCustomEvaluationMetricOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteCustomEvaluationMetricOutput
+typealias ApiDeleteCustomEvaluationMetricOutput = dev.octri.showcase.digitalocean.models.ApiDeleteCustomEvaluationMetricOutput
 
-typealias ApiDeleteCustomModelOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiDeleteCustomModelOutputPublic
+typealias ApiDeleteCustomModelOutputPublic = dev.octri.showcase.digitalocean.models.ApiDeleteCustomModelOutputPublic
 
-typealias ApiDeleteCustomModelStatus =
-    dev.octri.showcase.digitalocean.models.ApiDeleteCustomModelStatus
+typealias ApiDeleteCustomModelStatus = dev.octri.showcase.digitalocean.models.ApiDeleteCustomModelStatus
 
-typealias ApiDeleteEvaluationDatasetOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteEvaluationDatasetOutput
+typealias ApiDeleteEvaluationDatasetOutput = dev.octri.showcase.digitalocean.models.ApiDeleteEvaluationDatasetOutput
 
-typealias ApiDeleteKnowledgeBaseDataSourceOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteKnowledgeBaseDataSourceOutput
+typealias ApiDeleteKnowledgeBaseDataSourceOutput = dev.octri.showcase.digitalocean.models.ApiDeleteKnowledgeBaseDataSourceOutput
 
-typealias ApiDeleteKnowledgeBaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteKnowledgeBaseOutput
+typealias ApiDeleteKnowledgeBaseOutput = dev.octri.showcase.digitalocean.models.ApiDeleteKnowledgeBaseOutput
 
-typealias ApiDeleteModelAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteModelAPIKeyOutput
+typealias ApiDeleteModelAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiDeleteModelAPIKeyOutput
 
-typealias ApiDeleteModelEvaluationPresetOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationPresetOutput
+typealias ApiDeleteModelEvaluationPresetOutput = dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationPresetOutput
 
-typealias ApiDeleteModelEvaluationRunOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationRunOutputPublic
+typealias ApiDeleteModelEvaluationRunOutputPublic = dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationRunOutputPublic
 
-typealias ApiDeleteModelEvaluationRunStatus =
-    dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationRunStatus
+typealias ApiDeleteModelEvaluationRunStatus = dev.octri.showcase.digitalocean.models.ApiDeleteModelEvaluationRunStatus
 
-typealias ApiDeleteModelRouterOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteModelRouterOutput
+typealias ApiDeleteModelRouterOutput = dev.octri.showcase.digitalocean.models.ApiDeleteModelRouterOutput
 
-typealias ApiDeleteOpenAIAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteOpenAIAPIKeyOutput
+typealias ApiDeleteOpenAIAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiDeleteOpenAIAPIKeyOutput
 
-typealias ApiDeleteScenarioSetOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteScenarioSetOutput
+typealias ApiDeleteScenarioSetOutput = dev.octri.showcase.digitalocean.models.ApiDeleteScenarioSetOutput
 
-typealias ApiDeleteScheduledIndexingOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteScheduledIndexingOutput
+typealias ApiDeleteScheduledIndexingOutput = dev.octri.showcase.digitalocean.models.ApiDeleteScheduledIndexingOutput
 
-typealias ApiDeleteSimulationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiDeleteSimulationRunOutput
+typealias ApiDeleteSimulationRunOutput = dev.octri.showcase.digitalocean.models.ApiDeleteSimulationRunOutput
 
 typealias ApiDeleteWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiDeleteWorkspaceOutput
 
@@ -140,48 +101,37 @@ typealias ApiDeploymentVisibility = dev.octri.showcase.digitalocean.models.ApiDe
 
 typealias ApiDropboxDataSource = dev.octri.showcase.digitalocean.models.ApiDropboxDataSource
 
-typealias ApiDropboxDataSourceDisplay =
-    dev.octri.showcase.digitalocean.models.ApiDropboxDataSourceDisplay
+typealias ApiDropboxDataSourceDisplay = dev.octri.showcase.digitalocean.models.ApiDropboxDataSourceDisplay
 
-typealias ApiDropboxOauth2GetTokensInput =
-    dev.octri.showcase.digitalocean.models.ApiDropboxOauth2GetTokensInput
+typealias ApiDropboxOauth2GetTokensInput = dev.octri.showcase.digitalocean.models.ApiDropboxOauth2GetTokensInput
 
-typealias ApiDropboxOauth2GetTokensOutput =
-    dev.octri.showcase.digitalocean.models.ApiDropboxOauth2GetTokensOutput
+typealias ApiDropboxOauth2GetTokensOutput = dev.octri.showcase.digitalocean.models.ApiDropboxOauth2GetTokensOutput
 
-typealias ApiDuplicateScenarioSetInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiDuplicateScenarioSetInputPublic
+typealias ApiDuplicateScenarioSetInputPublic = dev.octri.showcase.digitalocean.models.ApiDuplicateScenarioSetInputPublic
 
-typealias ApiDuplicateScenarioSetOutput =
-    dev.octri.showcase.digitalocean.models.ApiDuplicateScenarioSetOutput
+typealias ApiDuplicateScenarioSetOutput = dev.octri.showcase.digitalocean.models.ApiDuplicateScenarioSetOutput
 
 typealias ApiEpochResultSummary = dev.octri.showcase.digitalocean.models.ApiEpochResultSummary
 
 typealias ApiEvaluationDataset = dev.octri.showcase.digitalocean.models.ApiEvaluationDataset
 
-typealias ApiEvaluationDatasetParadigm =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationDatasetParadigm
+typealias ApiEvaluationDatasetParadigm = dev.octri.showcase.digitalocean.models.ApiEvaluationDatasetParadigm
 
 typealias ApiEvaluationDatasetType = dev.octri.showcase.digitalocean.models.ApiEvaluationDatasetType
 
 typealias ApiEvaluationMetric = dev.octri.showcase.digitalocean.models.ApiEvaluationMetric
 
-typealias ApiEvaluationMetricCategory =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationMetricCategory
+typealias ApiEvaluationMetricCategory = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricCategory
 
-typealias ApiEvaluationMetricResult =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationMetricResult
+typealias ApiEvaluationMetricResult = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricResult
 
-typealias ApiEvaluationMetricResultStatus =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationMetricResultStatus
+typealias ApiEvaluationMetricResultStatus = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricResultStatus
 
-typealias ApiEvaluationMetricSource =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationMetricSource
+typealias ApiEvaluationMetricSource = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricSource
 
 typealias ApiEvaluationMetricType = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricType
 
-typealias ApiEvaluationMetricValueType =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationMetricValueType
+typealias ApiEvaluationMetricValueType = dev.octri.showcase.digitalocean.models.ApiEvaluationMetricValueType
 
 typealias ApiEvaluationPricing = dev.octri.showcase.digitalocean.models.ApiEvaluationPricing
 
@@ -193,118 +143,89 @@ typealias ApiEvaluationScope = dev.octri.showcase.digitalocean.models.ApiEvaluat
 
 typealias ApiEvaluationTestCase = dev.octri.showcase.digitalocean.models.ApiEvaluationTestCase
 
-typealias ApiEvaluationTestCaseMetricList =
-    dev.octri.showcase.digitalocean.models.ApiEvaluationTestCaseMetricList
+typealias ApiEvaluationTestCaseMetricList = dev.octri.showcase.digitalocean.models.ApiEvaluationTestCaseMetricList
 
 typealias ApiEvaluationTraceSpan = dev.octri.showcase.digitalocean.models.ApiEvaluationTraceSpan
 
-typealias ApiFilePresignedUrlResponse =
-    dev.octri.showcase.digitalocean.models.ApiFilePresignedUrlResponse
+typealias ApiFilePresignedUrlResponse = dev.octri.showcase.digitalocean.models.ApiFilePresignedUrlResponse
 
 typealias ApiFileUploadDataSource = dev.octri.showcase.digitalocean.models.ApiFileUploadDataSource
 
-typealias ApiGenerateOauth2URLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGenerateOauth2URLOutput
+typealias ApiGenerateOauth2URLOutput = dev.octri.showcase.digitalocean.models.ApiGenerateOauth2URLOutput
 
-typealias ApiGenerateScenarioSetInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiGenerateScenarioSetInputPublic
+typealias ApiGenerateScenarioSetInputPublic = dev.octri.showcase.digitalocean.models.ApiGenerateScenarioSetInputPublic
 
-typealias ApiGenerateScenarioSetOutput =
-    dev.octri.showcase.digitalocean.models.ApiGenerateScenarioSetOutput
+typealias ApiGenerateScenarioSetOutput = dev.octri.showcase.digitalocean.models.ApiGenerateScenarioSetOutput
 
 typealias ApiGetAgentOutput = dev.octri.showcase.digitalocean.models.ApiGetAgentOutput
 
 typealias ApiGetAgentUsageOutput = dev.octri.showcase.digitalocean.models.ApiGetAgentUsageOutput
 
-typealias ApiGetAnthropicAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetAnthropicAPIKeyOutput
+typealias ApiGetAnthropicAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiGetAnthropicAPIKeyOutput
 
 typealias ApiGetChildrenOutput = dev.octri.showcase.digitalocean.models.ApiGetChildrenOutput
 
-typealias ApiGetCustomModelOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiGetCustomModelOutputPublic
+typealias ApiGetCustomModelOutputPublic = dev.octri.showcase.digitalocean.models.ApiGetCustomModelOutputPublic
 
-typealias ApiGetEvaluationDatasetDownloadURLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetEvaluationDatasetDownloadURLOutput
+typealias ApiGetEvaluationDatasetDownloadURLOutput = dev.octri.showcase.digitalocean.models.ApiGetEvaluationDatasetDownloadURLOutput
 
-typealias ApiGetEvaluationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunOutput
+typealias ApiGetEvaluationRunOutput = dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunOutput
 
-typealias ApiGetEvaluationRunPromptResultsOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunPromptResultsOutput
+typealias ApiGetEvaluationRunPromptResultsOutput = dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunPromptResultsOutput
 
-typealias ApiGetEvaluationRunResultsOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunResultsOutput
+typealias ApiGetEvaluationRunResultsOutput = dev.octri.showcase.digitalocean.models.ApiGetEvaluationRunResultsOutput
 
-typealias ApiGetEvaluationTestCaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetEvaluationTestCaseOutput
+typealias ApiGetEvaluationTestCaseOutput = dev.octri.showcase.digitalocean.models.ApiGetEvaluationTestCaseOutput
 
-typealias ApiGetIndexingJobDetailsSignedURLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetIndexingJobDetailsSignedURLOutput
+typealias ApiGetIndexingJobDetailsSignedURLOutput = dev.octri.showcase.digitalocean.models.ApiGetIndexingJobDetailsSignedURLOutput
 
-typealias ApiGetKnowledgeBaseIndexingJobOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetKnowledgeBaseIndexingJobOutput
+typealias ApiGetKnowledgeBaseIndexingJobOutput = dev.octri.showcase.digitalocean.models.ApiGetKnowledgeBaseIndexingJobOutput
 
-typealias ApiGetKnowledgeBaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetKnowledgeBaseOutput
+typealias ApiGetKnowledgeBaseOutput = dev.octri.showcase.digitalocean.models.ApiGetKnowledgeBaseOutput
 
-typealias ApiGetModelCatalogCardOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetModelCatalogCardOutput
+typealias ApiGetModelCatalogCardOutput = dev.octri.showcase.digitalocean.models.ApiGetModelCatalogCardOutput
 
-typealias ApiGetModelEvaluationPresetOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationPresetOutput
+typealias ApiGetModelEvaluationPresetOutput = dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationPresetOutput
 
-typealias ApiGetModelEvaluationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationRunOutput
+typealias ApiGetModelEvaluationRunOutput = dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationRunOutput
 
-typealias ApiGetModelEvaluationRunResultsDownloadURLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationRunResultsDownloadURLOutput
+typealias ApiGetModelEvaluationRunResultsDownloadURLOutput = dev.octri.showcase.digitalocean.models.ApiGetModelEvaluationRunResultsDownloadURLOutput
 
 typealias ApiGetModelRouterOutput = dev.octri.showcase.digitalocean.models.ApiGetModelRouterOutput
 
 typealias ApiGetOpenAIAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiGetOpenAIAPIKeyOutput
 
-typealias ApiGetScenarioSetDownloadURLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetScenarioSetDownloadURLOutput
+typealias ApiGetScenarioSetDownloadURLOutput = dev.octri.showcase.digitalocean.models.ApiGetScenarioSetDownloadURLOutput
 
 typealias ApiGetScenarioSetOutput = dev.octri.showcase.digitalocean.models.ApiGetScenarioSetOutput
 
-typealias ApiGetScheduledIndexingOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetScheduledIndexingOutput
+typealias ApiGetScheduledIndexingOutput = dev.octri.showcase.digitalocean.models.ApiGetScheduledIndexingOutput
 
-typealias ApiGetSimulationEpisodeOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeOutput
+typealias ApiGetSimulationEpisodeOutput = dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeOutput
 
-typealias ApiGetSimulationEpisodeTrajectoryOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeTrajectoryOutput
+typealias ApiGetSimulationEpisodeTrajectoryOutput = dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeTrajectoryOutput
 
-typealias ApiGetSimulationEpisodeTrajectoryURLOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeTrajectoryURLOutput
+typealias ApiGetSimulationEpisodeTrajectoryURLOutput = dev.octri.showcase.digitalocean.models.ApiGetSimulationEpisodeTrajectoryURLOutput
 
-typealias ApiGetSimulationRunOutput =
-    dev.octri.showcase.digitalocean.models.ApiGetSimulationRunOutput
+typealias ApiGetSimulationRunOutput = dev.octri.showcase.digitalocean.models.ApiGetSimulationRunOutput
 
 typealias ApiGetWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiGetWorkspaceOutput
 
 typealias ApiGoogleDriveDataSource = dev.octri.showcase.digitalocean.models.ApiGoogleDriveDataSource
 
-typealias ApiGoogleDriveDataSourceDisplay =
-    dev.octri.showcase.digitalocean.models.ApiGoogleDriveDataSourceDisplay
+typealias ApiGoogleDriveDataSourceDisplay = dev.octri.showcase.digitalocean.models.ApiGoogleDriveDataSourceDisplay
 
 typealias ApiGuardrailType = dev.octri.showcase.digitalocean.models.ApiGuardrailType
 
-typealias ApiImportCustomModelInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiImportCustomModelInputPublic
+typealias ApiImportCustomModelInputPublic = dev.octri.showcase.digitalocean.models.ApiImportCustomModelInputPublic
 
-typealias ApiImportCustomModelOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiImportCustomModelOutputPublic
+typealias ApiImportCustomModelOutputPublic = dev.octri.showcase.digitalocean.models.ApiImportCustomModelOutputPublic
 
 typealias ApiImportValidationStep = dev.octri.showcase.digitalocean.models.ApiImportValidationStep
 
 typealias ApiIndexedDataSource = dev.octri.showcase.digitalocean.models.ApiIndexedDataSource
 
-typealias ApiIndexedDataSourceStatus =
-    dev.octri.showcase.digitalocean.models.ApiIndexedDataSourceStatus
+typealias ApiIndexedDataSourceStatus = dev.octri.showcase.digitalocean.models.ApiIndexedDataSourceStatus
 
 typealias ApiIndexingJob = dev.octri.showcase.digitalocean.models.ApiIndexingJob
 
@@ -314,128 +235,91 @@ typealias ApiKBDataSource = dev.octri.showcase.digitalocean.models.ApiKBDataSour
 
 typealias ApiKnowledgeBase = dev.octri.showcase.digitalocean.models.ApiKnowledgeBase
 
-typealias ApiKnowledgeBaseDataSource =
-    dev.octri.showcase.digitalocean.models.ApiKnowledgeBaseDataSource
+typealias ApiKnowledgeBaseDataSource = dev.octri.showcase.digitalocean.models.ApiKnowledgeBaseDataSource
 
 typealias ApiLatencyMetrics = dev.octri.showcase.digitalocean.models.ApiLatencyMetrics
 
-typealias ApiLinkAgentFunctionInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiLinkAgentFunctionInputPublic
+typealias ApiLinkAgentFunctionInputPublic = dev.octri.showcase.digitalocean.models.ApiLinkAgentFunctionInputPublic
 
-typealias ApiLinkAgentFunctionOutput =
-    dev.octri.showcase.digitalocean.models.ApiLinkAgentFunctionOutput
+typealias ApiLinkAgentFunctionOutput = dev.octri.showcase.digitalocean.models.ApiLinkAgentFunctionOutput
 
-typealias ApiLinkAgentGuardrailOutput =
-    dev.octri.showcase.digitalocean.models.ApiLinkAgentGuardrailOutput
+typealias ApiLinkAgentGuardrailOutput = dev.octri.showcase.digitalocean.models.ApiLinkAgentGuardrailOutput
 
-typealias ApiLinkAgentGuardrailsInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiLinkAgentGuardrailsInputPublic
+typealias ApiLinkAgentGuardrailsInputPublic = dev.octri.showcase.digitalocean.models.ApiLinkAgentGuardrailsInputPublic
 
 typealias ApiLinkAgentInputPublic = dev.octri.showcase.digitalocean.models.ApiLinkAgentInputPublic
 
 typealias ApiLinkAgentOutput = dev.octri.showcase.digitalocean.models.ApiLinkAgentOutput
 
-typealias ApiLinkKnowledgeBaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiLinkKnowledgeBaseOutput
+typealias ApiLinkKnowledgeBaseOutput = dev.octri.showcase.digitalocean.models.ApiLinkKnowledgeBaseOutput
 
 typealias ApiLinks = dev.octri.showcase.digitalocean.models.ApiLinks
 
-typealias ApiListAgentAPIKeysOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAgentAPIKeysOutput
+typealias ApiListAgentAPIKeysOutput = dev.octri.showcase.digitalocean.models.ApiListAgentAPIKeysOutput
 
-typealias ApiListAgentsByAnthropicKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAgentsByAnthropicKeyOutput
+typealias ApiListAgentsByAnthropicKeyOutput = dev.octri.showcase.digitalocean.models.ApiListAgentsByAnthropicKeyOutput
 
-typealias ApiListAgentsByOpenAIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAgentsByOpenAIKeyOutput
+typealias ApiListAgentsByOpenAIKeyOutput = dev.octri.showcase.digitalocean.models.ApiListAgentsByOpenAIKeyOutput
 
-typealias ApiListAgentsByWorkspaceOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAgentsByWorkspaceOutput
+typealias ApiListAgentsByWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiListAgentsByWorkspaceOutput
 
-typealias ApiListAgentsOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiListAgentsOutputPublic
+typealias ApiListAgentsOutputPublic = dev.octri.showcase.digitalocean.models.ApiListAgentsOutputPublic
 
-typealias ApiListAgentVersionsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAgentVersionsOutput
+typealias ApiListAgentVersionsOutput = dev.octri.showcase.digitalocean.models.ApiListAgentVersionsOutput
 
-typealias ApiListAnthropicAPIKeysOutput =
-    dev.octri.showcase.digitalocean.models.ApiListAnthropicAPIKeysOutput
+typealias ApiListAnthropicAPIKeysOutput = dev.octri.showcase.digitalocean.models.ApiListAnthropicAPIKeysOutput
 
-typealias ApiListCustomModelsOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiListCustomModelsOutputPublic
+typealias ApiListCustomModelsOutputPublic = dev.octri.showcase.digitalocean.models.ApiListCustomModelsOutputPublic
 
-typealias ApiListEvaluationDatasetsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListEvaluationDatasetsOutput
+typealias ApiListEvaluationDatasetsOutput = dev.octri.showcase.digitalocean.models.ApiListEvaluationDatasetsOutput
 
-typealias ApiListEvaluationMetricsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListEvaluationMetricsOutput
+typealias ApiListEvaluationMetricsOutput = dev.octri.showcase.digitalocean.models.ApiListEvaluationMetricsOutput
 
-typealias ApiListEvaluationRunsByTestCaseOutput =
-    dev.octri.showcase.digitalocean.models.ApiListEvaluationRunsByTestCaseOutput
+typealias ApiListEvaluationRunsByTestCaseOutput = dev.octri.showcase.digitalocean.models.ApiListEvaluationRunsByTestCaseOutput
 
-typealias ApiListEvaluationTestCasesByWorkspaceOutput =
-    dev.octri.showcase.digitalocean.models.ApiListEvaluationTestCasesByWorkspaceOutput
+typealias ApiListEvaluationTestCasesByWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiListEvaluationTestCasesByWorkspaceOutput
 
-typealias ApiListEvaluationTestCasesOutput =
-    dev.octri.showcase.digitalocean.models.ApiListEvaluationTestCasesOutput
+typealias ApiListEvaluationTestCasesOutput = dev.octri.showcase.digitalocean.models.ApiListEvaluationTestCasesOutput
 
-typealias ApiListIndexingJobDataSourcesOutput =
-    dev.octri.showcase.digitalocean.models.ApiListIndexingJobDataSourcesOutput
+typealias ApiListIndexingJobDataSourcesOutput = dev.octri.showcase.digitalocean.models.ApiListIndexingJobDataSourcesOutput
 
-typealias ApiListKnowledgeBaseDataSourcesOutput =
-    dev.octri.showcase.digitalocean.models.ApiListKnowledgeBaseDataSourcesOutput
+typealias ApiListKnowledgeBaseDataSourcesOutput = dev.octri.showcase.digitalocean.models.ApiListKnowledgeBaseDataSourcesOutput
 
-typealias ApiListKnowledgeBaseIndexingJobsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListKnowledgeBaseIndexingJobsOutput
+typealias ApiListKnowledgeBaseIndexingJobsOutput = dev.octri.showcase.digitalocean.models.ApiListKnowledgeBaseIndexingJobsOutput
 
-typealias ApiListKnowledgeBasesOutput =
-    dev.octri.showcase.digitalocean.models.ApiListKnowledgeBasesOutput
+typealias ApiListKnowledgeBasesOutput = dev.octri.showcase.digitalocean.models.ApiListKnowledgeBasesOutput
 
-typealias ApiListModelAPIKeysOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelAPIKeysOutput
+typealias ApiListModelAPIKeysOutput = dev.octri.showcase.digitalocean.models.ApiListModelAPIKeysOutput
 
-typealias ApiListModelCatalogOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelCatalogOutput
+typealias ApiListModelCatalogOutput = dev.octri.showcase.digitalocean.models.ApiListModelCatalogOutput
 
-typealias ApiListModelEvaluationMetricsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelEvaluationMetricsOutput
+typealias ApiListModelEvaluationMetricsOutput = dev.octri.showcase.digitalocean.models.ApiListModelEvaluationMetricsOutput
 
-typealias ApiListModelEvaluationPresetsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelEvaluationPresetsOutput
+typealias ApiListModelEvaluationPresetsOutput = dev.octri.showcase.digitalocean.models.ApiListModelEvaluationPresetsOutput
 
-typealias ApiListModelEvaluationRunsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelEvaluationRunsOutput
+typealias ApiListModelEvaluationRunsOutput = dev.octri.showcase.digitalocean.models.ApiListModelEvaluationRunsOutput
 
-typealias ApiListModelRouterPresetsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelRouterPresetsOutput
+typealias ApiListModelRouterPresetsOutput = dev.octri.showcase.digitalocean.models.ApiListModelRouterPresetsOutput
 
-typealias ApiListModelRoutersOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelRoutersOutput
+typealias ApiListModelRoutersOutput = dev.octri.showcase.digitalocean.models.ApiListModelRoutersOutput
 
-typealias ApiListModelRouterTaskPresetsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListModelRouterTaskPresetsOutput
+typealias ApiListModelRouterTaskPresetsOutput = dev.octri.showcase.digitalocean.models.ApiListModelRouterTaskPresetsOutput
 
-typealias ApiListModelsOutputPublic =
-    dev.octri.showcase.digitalocean.models.ApiListModelsOutputPublic
+typealias ApiListModelsOutputPublic = dev.octri.showcase.digitalocean.models.ApiListModelsOutputPublic
 
-typealias ApiListOpenAIAPIKeysOutput =
-    dev.octri.showcase.digitalocean.models.ApiListOpenAIAPIKeysOutput
+typealias ApiListOpenAIAPIKeysOutput = dev.octri.showcase.digitalocean.models.ApiListOpenAIAPIKeysOutput
 
 typealias ApiListRegionsOutput = dev.octri.showcase.digitalocean.models.ApiListRegionsOutput
 
-typealias ApiListScenarioLibraryOutput =
-    dev.octri.showcase.digitalocean.models.ApiListScenarioLibraryOutput
+typealias ApiListScenarioLibraryOutput = dev.octri.showcase.digitalocean.models.ApiListScenarioLibraryOutput
 
-typealias ApiListScenarioSetsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListScenarioSetsOutput
+typealias ApiListScenarioSetsOutput = dev.octri.showcase.digitalocean.models.ApiListScenarioSetsOutput
 
 typealias ApiListScenariosOutput = dev.octri.showcase.digitalocean.models.ApiListScenariosOutput
 
-typealias ApiListSimulationEpisodesOutput =
-    dev.octri.showcase.digitalocean.models.ApiListSimulationEpisodesOutput
+typealias ApiListSimulationEpisodesOutput = dev.octri.showcase.digitalocean.models.ApiListSimulationEpisodesOutput
 
-typealias ApiListSimulationRunsOutput =
-    dev.octri.showcase.digitalocean.models.ApiListSimulationRunsOutput
+typealias ApiListSimulationRunsOutput = dev.octri.showcase.digitalocean.models.ApiListSimulationRunsOutput
 
 typealias ApiListWorkspacesOutput = dev.octri.showcase.digitalocean.models.ApiListWorkspacesOutput
 
@@ -461,27 +345,21 @@ typealias ApiModelCatalogSortBy = dev.octri.showcase.digitalocean.models.ApiMode
 
 typealias ApiModelEndpoint = dev.octri.showcase.digitalocean.models.ApiModelEndpoint
 
-typealias ApiModelEvaluationEpochAttempt =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationEpochAttempt
+typealias ApiModelEvaluationEpochAttempt = dev.octri.showcase.digitalocean.models.ApiModelEvaluationEpochAttempt
 
 typealias ApiModelEvaluationPreset = dev.octri.showcase.digitalocean.models.ApiModelEvaluationPreset
 
 typealias ApiModelEvaluationResult = dev.octri.showcase.digitalocean.models.ApiModelEvaluationResult
 
-typealias ApiModelEvaluationRunDetail =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunDetail
+typealias ApiModelEvaluationRunDetail = dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunDetail
 
-typealias ApiModelEvaluationRunProgress =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunProgress
+typealias ApiModelEvaluationRunProgress = dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunProgress
 
-typealias ApiModelEvaluationRunResultSummary =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunResultSummary
+typealias ApiModelEvaluationRunResultSummary = dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunResultSummary
 
-typealias ApiModelEvaluationRunStatus =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunStatus
+typealias ApiModelEvaluationRunStatus = dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunStatus
 
-typealias ApiModelEvaluationRunSummary =
-    dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunSummary
+typealias ApiModelEvaluationRunSummary = dev.octri.showcase.digitalocean.models.ApiModelEvaluationRunSummary
 
 typealias ApiModelModalities = dev.octri.showcase.digitalocean.models.ApiModelModalities
 
@@ -509,11 +387,9 @@ typealias ApiModelRouterConfig = dev.octri.showcase.digitalocean.models.ApiModel
 
 typealias ApiModelRouterPreset = dev.octri.showcase.digitalocean.models.ApiModelRouterPreset
 
-typealias ApiModelRouterSelectionPolicy =
-    dev.octri.showcase.digitalocean.models.ApiModelRouterSelectionPolicy
+typealias ApiModelRouterSelectionPolicy = dev.octri.showcase.digitalocean.models.ApiModelRouterSelectionPolicy
 
-typealias ApiModelRouterTaskDetails =
-    dev.octri.showcase.digitalocean.models.ApiModelRouterTaskDetails
+typealias ApiModelRouterTaskDetails = dev.octri.showcase.digitalocean.models.ApiModelRouterTaskDetails
 
 typealias ApiModelRouterTaskPolicy = dev.octri.showcase.digitalocean.models.ApiModelRouterTaskPolicy
 
@@ -527,11 +403,9 @@ typealias ApiModelUsecase = dev.octri.showcase.digitalocean.models.ApiModelUseca
 
 typealias ApiModelVersion = dev.octri.showcase.digitalocean.models.ApiModelVersion
 
-typealias ApiMoveAgentsToWorkspaceInputPublic =
-    dev.octri.showcase.digitalocean.models.ApiMoveAgentsToWorkspaceInputPublic
+typealias ApiMoveAgentsToWorkspaceInputPublic = dev.octri.showcase.digitalocean.models.ApiMoveAgentsToWorkspaceInputPublic
 
-typealias ApiMoveAgentsToWorkspaceOutput =
-    dev.octri.showcase.digitalocean.models.ApiMoveAgentsToWorkspaceOutput
+typealias ApiMoveAgentsToWorkspaceOutput = dev.octri.showcase.digitalocean.models.ApiMoveAgentsToWorkspaceOutput
 
 typealias ApiOpenAIAPIKeyInfo = dev.octri.showcase.digitalocean.models.ApiOpenAIAPIKeyInfo
 
@@ -543,13 +417,11 @@ typealias ApiPerEpochResultSummary = dev.octri.showcase.digitalocean.models.ApiP
 
 typealias ApiPerformanceMetrics = dev.octri.showcase.digitalocean.models.ApiPerformanceMetrics
 
-typealias ApiPerModelResultSummaries =
-    dev.octri.showcase.digitalocean.models.ApiPerModelResultSummaries
+typealias ApiPerModelResultSummaries = dev.octri.showcase.digitalocean.models.ApiPerModelResultSummaries
 
 typealias ApiPerModelResultSummary = dev.octri.showcase.digitalocean.models.ApiPerModelResultSummary
 
-typealias ApiPerTaskResultSummaries =
-    dev.octri.showcase.digitalocean.models.ApiPerTaskResultSummaries
+typealias ApiPerTaskResultSummaries = dev.octri.showcase.digitalocean.models.ApiPerTaskResultSummaries
 
 typealias ApiPerTaskResultSummary = dev.octri.showcase.digitalocean.models.ApiPerTaskResultSummary
 
@@ -561,8 +433,6 @@ typealias ApiPrompt = dev.octri.showcase.digitalocean.models.ApiPrompt
 
 typealias ApiPromptChunk = dev.octri.showcase.digitalocean.models.ApiPromptChunk
 
-typealias ApiRegenerateAgentAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiRegenerateAgentAPIKeyOutput
+typealias ApiRegenerateAgentAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiRegenerateAgentAPIKeyOutput
 
-typealias ApiRegenerateModelAPIKeyOutput =
-    dev.octri.showcase.digitalocean.models.ApiRegenerateModelAPIKeyOutput
+typealias ApiRegenerateModelAPIKeyOutput = dev.octri.showcase.digitalocean.models.ApiRegenerateModelAPIKeyOutput

@@ -3,11 +3,17 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllSizes` API schema. */
+/**
+ * Typed representation of the `AllSizes` API schema.
+ */
 data class AllSizes(
     val sizes: List<Size>,
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )

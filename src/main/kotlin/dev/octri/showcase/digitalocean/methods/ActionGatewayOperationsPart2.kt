@@ -5,14 +5,14 @@ package dev.octri.showcase.digitalocean.methods
 
 import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.Error2
-import dev.octri.showcase.digitalocean.GetToolHealthResponse
 import dev.octri.showcase.digitalocean.GetToolbeltResponse
+import dev.octri.showcase.digitalocean.GetToolHealthResponse
 import dev.octri.showcase.digitalocean.GetUserResponse
 import dev.octri.showcase.digitalocean.ListProviderHealthResponse
 import dev.octri.showcase.digitalocean.ListProvidersResponse
-import dev.octri.showcase.digitalocean.ListToolHealthResponse
-import dev.octri.showcase.digitalocean.ListToolbeltProviderToolsResponse
 import dev.octri.showcase.digitalocean.ListToolbeltProvidersResponse
+import dev.octri.showcase.digitalocean.ListToolbeltProviderToolsResponse
+import dev.octri.showcase.digitalocean.ListToolHealthResponse
 import dev.octri.showcase.digitalocean.ListToolkitsResponse
 import dev.octri.showcase.digitalocean.ListToolsResponse
 import dev.octri.showcase.digitalocean.ListUsersResponse
@@ -26,149 +26,72 @@ import dev.octri.showcase.digitalocean.SdkClient
 import dev.octri.showcase.digitalocean.SearchProvidersResponse
 import dev.octri.showcase.digitalocean.SearchToolbeltsResponse
 import dev.octri.showcase.digitalocean.SearchToolsResponse
-import dev.octri.showcase.digitalocean.ToolSearchResult
+import dev.octri.showcase.digitalocean.ToolbeltsResponse
 import dev.octri.showcase.digitalocean.ToolbeltSummary
 import dev.octri.showcase.digitalocean.ToolbeltToolDetail
 import dev.octri.showcase.digitalocean.ToolbeltUpdateResponse
-import dev.octri.showcase.digitalocean.ToolbeltsResponse
+import dev.octri.showcase.digitalocean.ToolSearchResult
 import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayToolbeltsListOperation {
     /**
-     * Returns your team's toolbelts, one entry per name describing its latest version, sorted by
-     * name. Offset-paged with page and `per_page`; pagination reports the total.
+     * Returns your team's toolbelts, one entry per name describing its latest version, sorted by name. Offset-paged with page and `per_page`; pagination reports the total.
      *
      * @param status active (default), deprecated, or all. Case-insensitive.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun toolbeltsList(
-        clientConfig: ClientConfig,
-        status: SchemaSchemaEnumdba9253b? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ToolbeltsResponse {
+    fun toolbeltsList(clientConfig: ClientConfig, status: SchemaSchemaEnumdba9253b? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ToolbeltsResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ToolbeltsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/toolbelts",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "status" to SdkClient.queryValue(status, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "toolbeltsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ToolbeltsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/toolbelts", config = clientConfig, query = mapOf("status" to SdkClient.queryValue(status, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "toolbeltsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolbeltsListSearchOperation {
     /**
-     * Returns your team's toolbelts whose name, display name, or description contains query,
-     * case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total
-     * is reported.
+     * Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `display_name`, or
-     *   description. Empty matches every toolbelt of your team.
+     * @param query Matched case-insensitively as a substring of name,
+     *   `display_name`, or description. Empty matches every toolbelt of your team.
      * @param status active (default), deprecated, or all. Case-insensitive.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same query
-     *   and status; otherwise the request is rejected with 400.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same query and status; otherwise the request is rejected with 400.
      */
-    fun toolbeltsListSearch(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        status: SchemaSchemaEnumdba9253b? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): SearchToolbeltsResponse {
+    fun toolbeltsListSearch(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchToolbeltsResponse {
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<SearchToolbeltsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/toolbelts/search",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "status" to SdkClient.queryValue(status, "form", true),
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "toolbeltsListSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SearchToolbeltsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/toolbelts/search", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "status" to SdkClient.queryValue(status, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "toolbeltsListSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Returns your team's toolbelts whose name, display name, or description contains query,
-     * case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total
-     * is reported.
+     * Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `display_name`, or
-     *   description. Empty matches every toolbelt of your team.
+     * @param query Matched case-insensitively as a substring of name,
+     *   `display_name`, or description. Empty matches every toolbelt of your team.
      * @param status active (default), deprecated, or all. Case-insensitive.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same query
-     *   and status; otherwise the request is rejected with 400.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same query and status; otherwise the request is rejected with 400.
      */
-    fun toolbeltsListSearchPaginated(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        status: SchemaSchemaEnumdba9253b? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ToolbeltSummary) -> Boolean,
-    ) {
+    fun toolbeltsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ToolbeltSummary) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolbeltsListSearch(clientConfig, query, status, pageSize, cursor, options)
@@ -182,15 +105,9 @@ internal object ActionGatewayToolbeltsListSearchOperation {
         }
     }
 
-    fun toolbeltsListSearchPages(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        status: SchemaSchemaEnumdba9253b? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ActionGateway.ToolbeltsListSearchPage) -> Boolean,
-    ) {
+
+
+    fun toolbeltsListSearchPages(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.ToolbeltsListSearchPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolbeltsListSearch(clientConfig, query, status, pageSize, cursor, options)
@@ -207,97 +124,56 @@ internal object ActionGatewayToolbeltsListSearchOperation {
 
 internal object ActionGatewayToolbeltsGetOperation {
     /**
-     * Returns the latest version of the named toolbelt, or the version requested, with catalog
-     * metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless
-     * a version is requested.
+     * Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
      *
      * @param name Toolbelt name.
      * @param version Version number to read. Empty returns the latest version.
-     * @param pageSize Page size for `tool_details` only; toolbelt.tools always lists every member.
-     *   Defaults to 20; values above 100 are capped at 100.
-     * @param pageToken `next_page_token` from the previous response, to continue `tool_details`.
-     *   Treat it as opaque, and send it only with the same toolbelt, version, and search.
-     * @param search Restricts `tool_details` to members whose tool slug, name, title, description,
-     *   provider, or category contains this value, case-insensitively. It does not filter
-     *   toolbelt.tools. This is a substring match, not a filter expression.
+     * @param pageSize Page size for `tool_details` only; toolbelt.tools always lists
+     *   every member. Defaults to 20; values above 100 are capped at 100.
+     * @param pageToken `next_page_token` from the previous response, to continue
+     *   `tool_details`. Treat it as opaque, and send it only with the same toolbelt,
+     *   version, and search.
+     * @param search Restricts `tool_details` to members whose tool slug, name,
+     *   title, description, provider, or category contains this value,
+     *   case-insensitively. It does not filter toolbelt.tools. This is a substring
+     *   match, not a filter expression.
      */
-    fun toolbeltsGet(
-        clientConfig: ClientConfig,
-        name: String,
-        version: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        search: String? = null,
-        options: RequestOptions? = null,
-    ): GetToolbeltResponse {
+    fun toolbeltsGet(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null): GetToolbeltResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
         if (version != null) {
             Validation.validatePattern("version", version, "^[0-9]+$")
-        }
+}
 
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<GetToolbeltResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "version" to SdkClient.queryValue(version, "form", true),
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                            "search" to SdkClient.queryValue(search, "form", true),
-                        ),
-                    operationId = "toolbeltsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<GetToolbeltResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}", config = clientConfig, query = mapOf("version" to SdkClient.queryValue(version, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true), "search" to SdkClient.queryValue(search, "form", true)), operationId = "toolbeltsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Returns the latest version of the named toolbelt, or the version requested, with catalog
-     * metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless
-     * a version is requested.
+     * Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
      *
      * @param name Toolbelt name.
      * @param version Version number to read. Empty returns the latest version.
-     * @param pageSize Page size for `tool_details` only; toolbelt.tools always lists every member.
-     *   Defaults to 20; values above 100 are capped at 100.
-     * @param pageToken `next_page_token` from the previous response, to continue `tool_details`.
-     *   Treat it as opaque, and send it only with the same toolbelt, version, and search.
-     * @param search Restricts `tool_details` to members whose tool slug, name, title, description,
-     *   provider, or category contains this value, case-insensitively. It does not filter
-     *   toolbelt.tools. This is a substring match, not a filter expression.
+     * @param pageSize Page size for `tool_details` only; toolbelt.tools always lists
+     *   every member. Defaults to 20; values above 100 are capped at 100.
+     * @param pageToken `next_page_token` from the previous response, to continue
+     *   `tool_details`. Treat it as opaque, and send it only with the same toolbelt,
+     *   version, and search.
+     * @param search Restricts `tool_details` to members whose tool slug, name,
+     *   title, description, provider, or category contains this value,
+     *   case-insensitively. It does not filter toolbelt.tools. This is a substring
+     *   match, not a filter expression.
      */
-    fun toolbeltsGetPaginated(
-        clientConfig: ClientConfig,
-        name: String,
-        version: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        search: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ToolbeltToolDetail) -> Boolean,
-    ) {
+    fun toolbeltsGetPaginated(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null, yieldFn: (ToolbeltToolDetail) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolbeltsGet(clientConfig, name, version, pageSize, cursor, search, options)
@@ -311,16 +187,9 @@ internal object ActionGatewayToolbeltsGetOperation {
         }
     }
 
-    fun toolbeltsGetPages(
-        clientConfig: ClientConfig,
-        name: String,
-        version: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        search: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ActionGateway.ToolbeltsGetPage) -> Boolean,
-    ) {
+
+
+    fun toolbeltsGetPages(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.ToolbeltsGetPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolbeltsGet(clientConfig, name, version, pageSize, cursor, search, options)
@@ -337,628 +206,274 @@ internal object ActionGatewayToolbeltsGetOperation {
 
 internal object ActionGatewayToolbeltsDeleteOperation {
     /**
-     * Marks the toolbelt deleted and returns its latest version with status deprecated. Its
-     * versions stay readable by explicit version until the name is reused. The name is free to
-     * reuse immediately; a new toolbelt with it starts a fresh version history. Returns 404 when
-     * the toolbelt does not exist or is already deleted.
+     * Marks the toolbelt deleted and returns its latest version with status deprecated. Its versions stay readable by explicit version until the name is reused. The name is free to reuse immediately; a new toolbelt with it starts a fresh version history. Returns 404 when the toolbelt does not exist or is already deleted.
      *
      * @param name Toolbelt name.
      */
-    fun toolbeltsDelete(
-        clientConfig: ClientConfig,
-        name: String,
-        options: RequestOptions? = null,
-    ): ToolbeltUpdateResponse {
+    fun toolbeltsDelete(clientConfig: ClientConfig, name: String, options: RequestOptions? = null): ToolbeltUpdateResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
-        return SdkClient.request<ToolbeltUpdateResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}",
-                    config = clientConfig,
-                    operationId = "toolbeltsDelete",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ToolbeltUpdateResponse>(SdkClient.RequestSpec("DELETE", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}", config = clientConfig, operationId = "toolbeltsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolbeltsListProvidersOperation {
     /**
-     * Returns the distinct providers of the toolbelt's members, each with its member count, sorted
-     * by provider ID. List one provider's members with `GET
-     * .../toolbelts/{name}/providers/{provider}/tools`.
+     * Returns the distinct providers of the toolbelt's members, each with its member count, sorted by provider ID. List one provider's members with `GET .../toolbelts/{name}/providers/{provider}/tools`.
      *
      * @param name Toolbelt name.
      * @param version Version number to read. Empty reads the latest version.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
-     * @param search Restricts providers whose ID, name, or description contains this value,
-     *   case-insensitively.
+     * @param search Restricts providers whose ID, name, or description contains this
+     *   value, case-insensitively.
      */
-    fun toolbeltsListProviders(
-        clientConfig: ClientConfig,
-        name: String,
-        version: String? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        search: String? = null,
-        options: RequestOptions? = null,
-    ): ListToolbeltProvidersResponse {
+    fun toolbeltsListProviders(clientConfig: ClientConfig, name: String, version: String? = null, page: Long? = null, perPage: Long? = null, search: String? = null, options: RequestOptions? = null): ListToolbeltProvidersResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
         if (version != null) {
             Validation.validatePattern("version", version, "^[0-9]+$")
-        }
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListToolbeltProvidersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/providers",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "version" to SdkClient.queryValue(version, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "search" to SdkClient.queryValue(search, "form", true),
-                        ),
-                    operationId = "toolbeltsListProviders",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListToolbeltProvidersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/providers", config = clientConfig, query = mapOf("version" to SdkClient.queryValue(version, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "search" to SdkClient.queryValue(search, "form", true)), operationId = "toolbeltsListProviders", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolbeltsListProviderToolsOperation {
     /**
-     * Returns a page of catalog metadata for the toolbelt's members from the named provider, sorted
-     * by tool slug. An unknown provider returns an empty page.
+     * Returns a page of catalog metadata for the toolbelt's members from the named provider, sorted by tool slug. An unknown provider returns an empty page.
      *
      * @param name Toolbelt name.
-     * @param provider A provider ID from the toolbelt's provider list, or `_legacy` for members
-     *   recorded without a provider. Matched exactly.
+     * @param provider A provider ID from the toolbelt's provider list, or `_legacy`
+     *   for members recorded without a provider. Matched exactly.
      * @param version Version number to read. Empty reads the latest version.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
-     * @param search Restricts tools whose slug, name, title, description, provider, or category
-     *   contains this value, case-insensitively, within the provider only.
+     * @param search Restricts tools whose slug, name, title, description, provider,
+     *   or category contains this value, case-insensitively, within the provider only.
      */
-    fun toolbeltsListProviderTools(
-        clientConfig: ClientConfig,
-        request: ActionGateway.ToolbeltsListProviderToolsRequest,
-        options: RequestOptions? = null,
-    ): ListToolbeltProviderToolsResponse {
+    fun toolbeltsListProviderTools(clientConfig: ClientConfig, request: ActionGateway.ToolbeltsListProviderToolsRequest, options: RequestOptions? = null): ListToolbeltProviderToolsResponse {
         validateToolbeltsListProviderToolsRequest(request)
 
-        return SdkClient.request<ListToolbeltProviderToolsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(request.name)}/providers/${SdkClient.encodePathSegment(request.provider)}/tools",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "version" to SdkClient.queryValue(request.version, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                        ),
-                    operationId = "toolbeltsListProviderTools",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListToolbeltProviderToolsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(request.name)}/providers/${SdkClient.encodePathSegment(request.provider)}/tools", config = clientConfig, query = mapOf("version" to
+    SdkClient.queryValue(request.version, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true)), operationId = "toolbeltsListProviderTools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    private fun validateToolbeltsListProviderToolsRequest(
-        request: ActionGateway.ToolbeltsListProviderToolsRequest
-    ) {
+
+    private fun validateToolbeltsListProviderToolsRequest(request: ActionGateway.ToolbeltsListProviderToolsRequest) {
         Validation.validatePattern("name", request.name, "^[a-z][a-z0-9_-]{0,63}$")
 
         if (request.version != null) {
             Validation.validatePattern("version", request.version, "^[0-9]+$")
-        }
+}
 
         if (request.page != null) {
             Validation.validateRange("page", request.page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (request.perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                request.perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
     }
 }
 
 internal object ActionGatewayToolbeltsAddToolsOperation {
     /**
-     * Adds the listed tools and returns the toolbelt. When membership changes, this creates a new
-     * version that keeps the display name and description. Tools already in the toolbelt are left
-     * as they are, so a request that adds nothing new returns the current version unchanged.
-     * Returns 400 when a tool is not an active catalog tool, when a pin differs from the tool's
-     * current released version or from the version the toolbelt already holds, or when the toolbelt
-     * would exceed 500 tools.…
+     * Adds the listed tools and returns the toolbelt. When membership changes, this creates a new version that keeps the display name and description. Tools already in the toolbelt are left as they are, so a request that adds nothing new returns the current version unchanged. Returns 400 when a tool is not an active catalog tool, when a pin differs from the tool's current released version or from the version the toolbelt already holds, or when the toolbelt would exceed 500 tools.…
      *
      * @param name Toolbelt name, from the path.
-     * @param tools Tool slugs (`<provider>_<name>`) to add or remove, each optionally pinned as
-     *   `<tool_slug>@<version>`. At least one is required. When adding, a pin must equal the tool's
-     *   current released version.
+     * @param tools Tool slugs (`<provider>_<name>`) to add or remove, each
+     *   optionally pinned as `<tool_slug>@<version>`. At least one is required. When
+     *   adding, a pin must equal the tool's current released version.
      */
-    fun toolbeltsAddTools(
-        clientConfig: ClientConfig,
-        name: String,
-        tools: List<String>,
-        options: RequestOptions? = null,
-    ): ToolbeltUpdateResponse {
+    fun toolbeltsAddTools(clientConfig: ClientConfig, name: String, tools: List<String>, options: RequestOptions? = null): ToolbeltUpdateResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
         Validation.validateItems("tools", tools, Validation.LengthOpts(min = 1, max = 500))
 
-        return SdkClient.request<ToolbeltUpdateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/tools/add",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("tools" to (tools)),
-                    operationId = "toolbeltsAddTools",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ToolbeltUpdateResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/tools/add", config = clientConfig, body = SdkClient.bodyMap("tools" to (tools)), operationId = "toolbeltsAddTools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolbeltsDeleteToolsOperation {
     /**
-     * Removes the listed tools and returns the toolbelt. When membership changes, this creates a
-     * new version that keeps the display name and description. Tools that are not members are
-     * ignored, and removing every tool is allowed; deleting the toolbelt itself is a separate
-     * DELETE. Returns 400 when a pin differs from the version the toolbelt holds, and 404 for an
-     * unknown or deleted toolbelt.
+     * Removes the listed tools and returns the toolbelt. When membership changes, this creates a new version that keeps the display name and description. Tools that are not members are ignored, and removing every tool is allowed; deleting the toolbelt itself is a separate DELETE. Returns 400 when a pin differs from the version the toolbelt holds, and 404 for an unknown or deleted toolbelt.
      *
      * @param name Toolbelt name, from the path.
-     * @param tools Tool slugs (`<provider>_<name>`) to add or remove, each optionally pinned as
-     *   `<tool_slug>@<version>`. At least one is required. When adding, a pin must equal the tool's
-     *   current released version.
+     * @param tools Tool slugs (`<provider>_<name>`) to add or remove, each
+     *   optionally pinned as `<tool_slug>@<version>`. At least one is required. When
+     *   adding, a pin must equal the tool's current released version.
      */
-    fun toolbeltsDeleteTools(
-        clientConfig: ClientConfig,
-        name: String,
-        tools: List<String>,
-        options: RequestOptions? = null,
-    ): ToolbeltUpdateResponse {
+    fun toolbeltsDeleteTools(clientConfig: ClientConfig, name: String, tools: List<String>, options: RequestOptions? = null): ToolbeltUpdateResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
         Validation.validateItems("tools", tools, Validation.LengthOpts(min = 1, max = 500))
 
-        return SdkClient.request<ToolbeltUpdateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/tools/remove",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("tools" to (tools)),
-                    operationId = "toolbeltsDeleteTools",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ToolbeltUpdateResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/toolbelts/${SdkClient.encodePathSegment(name)}/tools/remove", config = clientConfig, body = SdkClient.bodyMap("tools" to (tools)), operationId = "toolbeltsDeleteTools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsListOperation {
     /**
-     * Returns one page of the tools your team can use: released catalog tools plus the enabled
-     * tools of your team's MCP servers. definitions[i] describes tools[i]. Offset-paged with page
-     * and `per_page`; an unknown `toolkitId` returns an empty page.
+     * Returns one page of the tools your team can use: released catalog tools plus the enabled tools of your team's MCP servers. definitions[i] describes tools[i]. Offset-paged with page and `per_page`; an unknown `toolkitId` returns an empty page.
      *
-     * @param toolkitId Restricts the page to one provider. It accepts the provider ID the catalog
-     *   returns, including the `serverRef` of one of your team's MCP servers.
-     * @param page 1-based page index; values below 1 are treated as 1. A page past the end returns
-     *   an empty tools list with the real total.
-     * @param perPage Page size. Defaults to 100 when omitted or 0; values above 100 are capped
-     *   at 100.
+     * @param toolkitId Restricts the page to one provider. It accepts the provider
+     *   ID the catalog returns, including the `serverRef` of one of your team's MCP
+     *   servers.
+     * @param page 1-based page index; values below 1 are treated as 1. A page past
+     *   the end returns an empty tools list with the real total.
+     * @param perPage Page size. Defaults to 100 when omitted or 0; values above 100
+     *   are capped at 100.
      */
-    fun toolsList(
-        clientConfig: ClientConfig,
-        toolkitId: String? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ListToolsResponse {
+    fun toolsList(clientConfig: ClientConfig, toolkitId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListToolsResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListToolsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "toolkit_id" to SdkClient.queryValue(toolkitId, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "toolsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListToolsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools", config = clientConfig, query = mapOf("toolkit_id" to
+    SdkClient.queryValue(toolkitId, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "toolsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsListHealthOperation {
     /**
-     * Returns availability and latency for each catalog tool over the requested window, sorted by
-     * provider and then tool slug. A tool with no calls in the window is listed with `data_status`
-     * `HEALTH_DATA_STATUS_NO_DATA`. Metrics are aggregated across all customers; request volumes
-     * are not reported. Tools of your team's MCP servers are not included. Offset-paged with page
-     * and `per_page`.
+     * Returns availability and latency for each catalog tool over the requested window, sorted by provider and then tool slug. A tool with no calls in the window is listed with `data_status` `HEALTH_DATA_STATUS_NO_DATA`. Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's MCP servers are not included. Offset-paged with page and `per_page`.
      *
-     * @param provider Optional provider ID, matched exactly, to return only that provider's tools.
+     * @param provider Optional provider ID, matched exactly, to return only that
+     *   provider's tools.
      * @param window Window to aggregate over. Defaults to twenty-four hours. -
-     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`: One hour;
-     *   history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`: Twenty-four hours;
-     *   history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`: Seven days; history points are 6
-     *   hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty days; history points are 24 hours.
+     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`:
+     *   One hour; history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`:
+     *   Twenty-four hours; history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`:
+     *   Seven days; history points are 6 hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty
+     *   days; history points are 24 hours.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun toolsListHealth(
-        clientConfig: ClientConfig,
-        provider: String? = null,
-        window: SchemaSchemaEnume6ebae80? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ListToolHealthResponse {
+    fun toolsListHealth(clientConfig: ClientConfig, provider: String? = null, window: SchemaSchemaEnume6ebae80? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListToolHealthResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListToolHealthResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/health",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "provider" to SdkClient.queryValue(provider, "form", true),
-                            "window" to SdkClient.queryValue(window, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "toolsListHealth",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListToolHealthResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/health", config = clientConfig, query = mapOf("provider" to SdkClient.queryValue(provider, "form", true), "window" to SdkClient.queryValue(window, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "toolsListHealth", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsListHealthProvidersOperation {
     /**
-     * Returns availability and latency for each catalog provider over the requested window, sorted
-     * by provider ID. Metrics are aggregated across all customers; request volumes are not
-     * reported. Tools of your team's MCP servers are not included. Offset-paged with page and
-     * `per_page`.
+     * Returns availability and latency for each catalog provider over the requested window, sorted by provider ID. Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's MCP servers are not included. Offset-paged with page and `per_page`.
      *
-     * @param provider Optional provider ID, matched exactly, to return only that provider.
+     * @param provider Optional provider ID, matched exactly, to return only that
+     *   provider.
      * @param window Window to aggregate over. Defaults to twenty-four hours. -
-     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`: One hour;
-     *   history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`: Twenty-four hours;
-     *   history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`: Seven days; history points are 6
-     *   hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty days; history points are 24 hours.
+     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`:
+     *   One hour; history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`:
+     *   Twenty-four hours; history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`:
+     *   Seven days; history points are 6 hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty
+     *   days; history points are 24 hours.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun toolsListHealthProviders(
-        clientConfig: ClientConfig,
-        provider: String? = null,
-        window: SchemaSchemaEnume6ebae80? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ListProviderHealthResponse {
+    fun toolsListHealthProviders(clientConfig: ClientConfig, provider: String? = null, window: SchemaSchemaEnume6ebae80? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListProviderHealthResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListProviderHealthResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/health/providers",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "provider" to SdkClient.queryValue(provider, "form", true),
-                            "window" to SdkClient.queryValue(window, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "toolsListHealthProviders",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListProviderHealthResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/health/providers", config = clientConfig, query = mapOf("provider" to SdkClient.queryValue(provider, "form", true), "window" to SdkClient.queryValue(window, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "toolsListHealthProviders", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsGetHealthOperation {
     /**
-     * Returns availability and latency for one catalog tool over the requested window, optionally
-     * with a history series. Metrics are aggregated across all customers; request volumes are not
-     * reported. Returns 404 when `tool_slug` is not a catalog tool.
+     * Returns availability and latency for one catalog tool over the requested window, optionally with a history series. Metrics are aggregated across all customers; request volumes are not reported. Returns 404 when `tool_slug` is not a catalog tool.
      *
      * @param toolSlug Catalog tool slug, for example `exa_search`. Required.
      * @param window Window to aggregate over. Defaults to twenty-four hours. -
-     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`: One hour;
-     *   history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`: Twenty-four hours;
-     *   history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`: Seven days; history points are 6
-     *   hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty days; history points are 24 hours.
-     * @param includeHistory Additionally returns the window split into resolution-aligned points
-     *   (the history field below).
+     *   `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours. - `HEALTH_WINDOW_ONE_HOUR`:
+     *   One hour; history points are 10 minutes. - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`:
+     *   Twenty-four hours; history points are 1 hour. - `HEALTH_WINDOW_SEVEN_DAYS`:
+     *   Seven days; history points are 6 hours. - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty
+     *   days; history points are 24 hours.
+     * @param includeHistory Additionally returns the window split into
+     *   resolution-aligned points (the history field below).
      */
-    fun toolsGetHealth(
-        clientConfig: ClientConfig,
-        toolSlug: String,
-        window: SchemaSchemaEnume6ebae80? = null,
-        includeHistory: Boolean? = null,
-        options: RequestOptions? = null,
-    ): GetToolHealthResponse {
-        return SdkClient.request<GetToolHealthResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/health/tools/${SdkClient.encodePathSegment(toolSlug)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "window" to SdkClient.queryValue(window, "form", true),
-                            "include_history" to SdkClient.queryValue(includeHistory, "form", true),
-                        ),
-                    operationId = "toolsGetHealth",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun toolsGetHealth(clientConfig: ClientConfig, toolSlug: String, window: SchemaSchemaEnume6ebae80? = null, includeHistory: Boolean? = null, options: RequestOptions? = null): GetToolHealthResponse {
+        return SdkClient.request<GetToolHealthResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/health/tools/${SdkClient.encodePathSegment(toolSlug)}", config = clientConfig, query = mapOf("window" to SdkClient.queryValue(window, "form", true), "include_history" to
+    SdkClient.queryValue(includeHistory, "form", true)), operationId = "toolsGetHealth", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsListProvidersOperation {
     /**
-     * Returns the active catalog providers with at least one released tool, sorted by display name,
-     * with the credential kinds each accepts and the parameters a connection or team credential
-     * needs. Your team's MCP servers are listed separately under `/v2/action-gateway/mcp-servers`.
+     * Returns the active catalog providers with at least one released tool, sorted by display name, with the credential kinds each accepts and the parameters a connection or team credential needs. Your team's MCP servers are listed separately under `/v2/action-gateway/mcp-servers`.
      */
-    fun toolsListProviders(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): ListProvidersResponse {
-        return SdkClient.request<ListProvidersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/providers",
-                    config = clientConfig,
-                    operationId = "toolsListProviders",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun toolsListProviders(clientConfig: ClientConfig, options: RequestOptions? = null): ListProvidersResponse {
+        return SdkClient.request<ListProvidersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/providers", config = clientConfig, operationId = "toolsListProviders", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayToolsListSearchProvidersOperation {
     /**
-     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name,
-     * or description contains query, case-insensitively, sorted by name. Cursor-paged with
-     * `page_size` and `page_token`; no total is reported.
+     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `display_name`, or
-     *   description. It does not match the titles of the tools a provider owns: "providers owning a
-     *   tool that matches" is a tool search grouped by the provider field of each result.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same
-     *   query; otherwise the request is rejected with 400.
+     * @param query Matched case-insensitively as a substring of name,
+     *   `display_name`, or description. It does not match the titles of the tools a
+     *   provider owns: "providers owning a tool that matches" is a tool search grouped
+     *   by the provider field of each result.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same query; otherwise the request is rejected with 400.
      */
-    fun toolsListSearchProviders(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): SearchProvidersResponse {
+    fun toolsListSearchProviders(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchProvidersResponse {
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<SearchProvidersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/providers/search",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "toolsListSearchProviders",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SearchProvidersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/providers/search", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "toolsListSearchProviders", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name,
-     * or description contains query, case-insensitively, sorted by name. Cursor-paged with
-     * `page_size` and `page_token`; no total is reported.
+     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `display_name`, or
-     *   description. It does not match the titles of the tools a provider owns: "providers owning a
-     *   tool that matches" is a tool search grouped by the provider field of each result.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same
-     *   query; otherwise the request is rejected with 400.
+     * @param query Matched case-insensitively as a substring of name,
+     *   `display_name`, or description. It does not match the titles of the tools a
+     *   provider owns: "providers owning a tool that matches" is a tool search grouped
+     *   by the provider field of each result.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same query; otherwise the request is rejected with 400.
      */
-    fun toolsListSearchProvidersPaginated(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ProviderSummary) -> Boolean,
-    ) {
+    fun toolsListSearchProvidersPaginated(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ProviderSummary) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolsListSearchProviders(clientConfig, query, pageSize, cursor, options)
@@ -972,14 +487,9 @@ internal object ActionGatewayToolsListSearchProvidersOperation {
         }
     }
 
-    fun toolsListSearchProvidersPages(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ActionGateway.ToolsListSearchProvidersPage) -> Boolean,
-    ) {
+
+
+    fun toolsListSearchProvidersPages(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.ToolsListSearchProvidersPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = toolsListSearchProviders(clientConfig, query, pageSize, cursor, options)
@@ -996,110 +506,61 @@ internal object ActionGatewayToolsListSearchProvidersOperation {
 
 internal object ActionGatewayToolsListSearchOperation {
     /**
-     * Returns the tools your team can use that match query, optionally restricted to some providers
-     * or to the members of one of your toolbelts. Results are ranked across the whole result set:
-     * exact tool name matches first, then name or title prefixes, then name or title substrings,
-     * then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case- and accent-insensitively as a substring of the tool's name, title,
-     *   description, category, provider ID, or tool slug. Empty matches every tool your team can
-     *   use.
-     * @param provider Restricts results to these provider IDs, OR'd together. Repeat the parameter
-     *   to select several. An unknown ID matches nothing.
-     * @param toolbelt Restricts results to the members of that toolbelt of your team at its latest
-     *   version, combined with query and provider as AND. Members are matched at the version the
-     *   toolbelt pins, which is the same set and the same versions `GET
-     *   /v2/action-gateway/toolbelts/{name}` reports. An unknown or deleted toolbelt returns 404
-     *   rather than an empty page.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken A `next_page_token` from the preceding response. It is pinned to the query
-     *   and filters that produced it: replaying one against a different search is rejected with
-     *   400, not a silent restart from the top.
+     * @param query Matched case- and accent-insensitively as a substring of the
+     *   tool's name, title, description, category, provider ID, or tool slug. Empty
+     *   matches every tool your team can use.
+     * @param provider Restricts results to these provider IDs, OR'd together. Repeat
+     *   the parameter to select several. An unknown ID matches nothing.
+     * @param toolbelt Restricts results to the members of that toolbelt of your team
+     *   at its latest version, combined with query and provider as AND. Members are
+     *   matched at the version the toolbelt pins, which is the same set and the same
+     *   versions `GET /v2/action-gateway/toolbelts/{name}` reports. An unknown or
+     *   deleted toolbelt returns 404 rather than an empty page.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken A `next_page_token` from the preceding response. It is pinned
+     *   to the query and filters that produced it: replaying one against a different
+     *   search is rejected with 400, not a silent restart from the top.
      */
-    fun toolsListSearch(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        provider: List<String>? = null,
-        toolbelt: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): SearchToolsResponse {
+    fun toolsListSearch(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchToolsResponse {
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<SearchToolsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/search",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "provider" to SdkClient.queryValue(provider, "form", true),
-                            "toolbelt" to SdkClient.queryValue(toolbelt, "form", true),
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "toolsListSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SearchToolsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/search", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "provider" to SdkClient.queryValue(provider, "form", true), "toolbelt" to SdkClient.queryValue(toolbelt, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "toolsListSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Returns the tools your team can use that match query, optionally restricted to some providers
-     * or to the members of one of your toolbelts. Results are ranked across the whole result set:
-     * exact tool name matches first, then name or title prefixes, then name or title substrings,
-     * then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case- and accent-insensitively as a substring of the tool's name, title,
-     *   description, category, provider ID, or tool slug. Empty matches every tool your team can
-     *   use.
-     * @param provider Restricts results to these provider IDs, OR'd together. Repeat the parameter
-     *   to select several. An unknown ID matches nothing.
-     * @param toolbelt Restricts results to the members of that toolbelt of your team at its latest
-     *   version, combined with query and provider as AND. Members are matched at the version the
-     *   toolbelt pins, which is the same set and the same versions `GET
-     *   /v2/action-gateway/toolbelts/{name}` reports. An unknown or deleted toolbelt returns 404
-     *   rather than an empty page.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken A `next_page_token` from the preceding response. It is pinned to the query
-     *   and filters that produced it: replaying one against a different search is rejected with
-     *   400, not a silent restart from the top.
+     * @param query Matched case- and accent-insensitively as a substring of the
+     *   tool's name, title, description, category, provider ID, or tool slug. Empty
+     *   matches every tool your team can use.
+     * @param provider Restricts results to these provider IDs, OR'd together. Repeat
+     *   the parameter to select several. An unknown ID matches nothing.
+     * @param toolbelt Restricts results to the members of that toolbelt of your team
+     *   at its latest version, combined with query and provider as AND. Members are
+     *   matched at the version the toolbelt pins, which is the same set and the same
+     *   versions `GET /v2/action-gateway/toolbelts/{name}` reports. An unknown or
+     *   deleted toolbelt returns 404 rather than an empty page.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken A `next_page_token` from the preceding response. It is pinned
+     *   to the query and filters that produced it: replaying one against a different
+     *   search is rejected with 400, not a silent restart from the top.
      */
-    fun toolsListSearchPaginated(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        provider: List<String>? = null,
-        toolbelt: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ToolSearchResult) -> Boolean,
-    ) {
+    fun toolsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ToolSearchResult) -> Boolean) {
         var cursor = pageToken
         while (true) {
-            val page =
-                toolsListSearch(clientConfig, query, provider, toolbelt, pageSize, cursor, options)
+            val page = toolsListSearch(clientConfig, query, provider, toolbelt, pageSize, cursor, options)
             val items = page.tools.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -1110,20 +571,12 @@ internal object ActionGatewayToolsListSearchOperation {
         }
     }
 
-    fun toolsListSearchPages(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        provider: List<String>? = null,
-        toolbelt: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ActionGateway.ToolsListSearchPage) -> Boolean,
-    ) {
+
+
+    fun toolsListSearchPages(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.ToolsListSearchPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
-            val page =
-                toolsListSearch(clientConfig, query, provider, toolbelt, pageSize, cursor, options)
+            val page = toolsListSearch(clientConfig, query, provider, toolbelt, pageSize, cursor, options)
             val items = page.tools.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextPageToken
@@ -1137,129 +590,46 @@ internal object ActionGatewayToolsListSearchOperation {
 
 internal object ActionGatewayToolsListToolkitsOperation {
     /**
-     * Returns the providers (toolkits) whose tools your team can use: catalog providers with at
-     * least one released tool, plus your team's registered MCP servers.
+     * Returns the providers (toolkits) whose tools your team can use: catalog providers with at least one released tool, plus your team's registered MCP servers.
      */
-    fun toolsListToolkits(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): ListToolkitsResponse {
-        return SdkClient.request<ListToolkitsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/tools/toolkits",
-                    config = clientConfig,
-                    operationId = "toolsListToolkits",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun toolsListToolkits(clientConfig: ClientConfig, options: RequestOptions? = null): ListToolkitsResponse {
+        return SdkClient.request<ListToolkitsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/tools/toolkits", config = clientConfig, operationId = "toolsListToolkits", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayUsersListOperation {
     /**
-     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of
-     * connections that are not revoked, and actors with limit overrides. Only sessions and
-     * connections you can see count. Offset-paged with page and `per_page`.
+     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of connections that are not revoked, and actors with limit overrides. Only sessions and connections you can see count. Offset-paged with page and `per_page`.
      *
      * @param userId User ID prefix to return. An empty value returns all users.
-     * @param sort `user_id`|`created_at`|`session_count`|`connection_count`. `created_at` is the
-     *   earliest creation time among the user's sessions, connections, and limit overrides.
-     *   Defaults to `created_at`.
+     * @param sort `user_id`|`created_at`|`session_count`|`connection_count`.
+     *   `created_at` is the earliest creation time among the user's sessions,
+     *   connections, and limit overrides. Defaults to `created_at`.
      * @param sortDirection asc|desc. Defaults to desc.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun usersList(
-        clientConfig: ClientConfig,
-        userId: String? = null,
-        sort: SchemaSchemaEnumae407830? = null,
-        sortDirection: SchemaSchemaEnum4a1468b2? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ListUsersResponse {
+    fun usersList(clientConfig: ClientConfig, userId: String? = null, sort: SchemaSchemaEnumae407830? = null, sortDirection: SchemaSchemaEnum4a1468b2? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListUsersResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListUsersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/users",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "user_id" to SdkClient.queryValue(userId, "form", true),
-                            "sort" to SdkClient.queryValue(sort, "form", true),
-                            "sort_direction" to SdkClient.queryValue(sortDirection, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "usersList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListUsersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/users", config = clientConfig, query = mapOf("user_id" to SdkClient.queryValue(userId, "form", true), "sort" to SdkClient.queryValue(sort, "form", true), "sort_direction" to
+    SdkClient.queryValue(sortDirection, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "usersList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayUsersGetOperation {
     /**
-     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user
-     * has none you can see and no limit overrides.
+     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user has none you can see and no limit overrides.
      *
      * @param userId User ID.
      */
-    fun usersGet(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GetUserResponse {
-        return SdkClient.request<GetUserResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/users/${SdkClient.encodePathSegment(userId)}",
-                    config = clientConfig,
-                    operationId = "usersGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun usersGet(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): GetUserResponse {
+        return SdkClient.request<GetUserResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "usersGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

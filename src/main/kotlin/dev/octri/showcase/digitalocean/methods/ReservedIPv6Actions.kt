@@ -11,44 +11,22 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 object ReservedIPv6Actions {
 
+
     /**
-     * Triggers an action on a reserved IPv6 address to assign it to a Droplet or unassign it. Set
-     * `type` to `assign` or `unassign`, and include `droplet_id` when assigning the address. A 201
-     * response returns the created action object.
+     * Triggers an action on a reserved IPv6 address to assign it to a Droplet or unassign it. Set `type` to `assign` or `unassign`, and include `droplet_id` when assigning the address. A 201 response returns the created action object.
      *
-     * To initiate an action on a reserved IPv6 send a POST request to
-     * `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request, set the `type`
-     * attribute to on of the supported action types: | Action | Details |------------|-------- |
-     * `assign` | Assigns a reserved IPv6 to a Droplet | `unassign` | Unassign a reserved IPv6 from
-     * a Droplet
+     * To initiate an action on a reserved IPv6 send a POST request to `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request, set the `type` attribute to on of the supported action types: | Action | Details |------------|-------- | `assign` | Assigns a reserved IPv6 to a Droplet | `unassign` | Unassign a reserved IPv6 from a Droplet
      *
      * @param reservedIpv6 A reserved IPv6 address.
      */
-    fun reservedIPv6ActionsPost(
-        clientConfig: ClientConfig,
-        reservedIpv6: String,
-        body: Any? = null,
-        options: RequestOptions? = null,
-    ): ReservedIpv6Action {
-        return SdkClient.request<ReservedIpv6Action>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/reserved_ipv6/${SdkClient.encodePathSegment(reservedIpv6)}/actions",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "reservedIPv6ActionsPost",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun reservedIPv6ActionsPost(clientConfig: ClientConfig, reservedIpv6: String, body: Any? = null, options: RequestOptions? = null): ReservedIpv6Action {
+        return SdkClient.request<ReservedIpv6Action>(SdkClient.RequestSpec("POST", "/v2/reserved_ipv6/${SdkClient.encodePathSegment(reservedIpv6)}/actions", config = clientConfig, body = body, operationId = "reservedIPv6ActionsPost", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -3,123 +3,204 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** One page of connections. */
+/**
+ * One page of connections.
+ */
 data class ListConnectionsResponse(
-    /** Connections on this page. */
+    /**
+     * Connections on this page.
+     */
     val connections: List<Connection>? = null,
-    /** Paging applied to this response and the total number of connections. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of connections.
+     */
+    val pagination: Pagination? = null
 )
 
-/** Lists your team's MCP servers. */
+/**
+ * Lists your team's MCP servers.
+ */
 data class ListMcpServersResponse(
-    /** Servers sorted by `serverRef`. */
+    /**
+     * Servers sorted by `serverRef`.
+     */
     val mcpServers: List<McpServer>? = null
 )
 
-/** Lists an MCP server's discovered tools. */
+/**
+ * Lists an MCP server's discovered tools.
+ */
 data class ListMcpServerToolsResponse(
-    /** Tools sorted by name. */
+    /**
+     * Tools sorted by name.
+     */
     val tools: List<McpServerTool>? = null
 )
 
-/** One page of output views. */
+/**
+ * One page of output views.
+ */
 data class ListOutputViewsResponse(
-    /** Ordered by tool version, then published views before your team's own, then name. */
+    /**
+     * Ordered by tool version, then published views before your team's own, then name.
+     */
     val views: List<OutputView>? = null,
     /**
-     * The tool version the views are bound to, echoed so an unpinned request learns which version
-     * it resolved. Empty when the request named no tool.
+     * The tool version the views are bound to, echoed so an unpinned request learns which version it resolved. Empty when the request named no tool.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
-    /** Tool slug of that version. Empty when the request named no tool. */
+    /**
+     * Tool slug of that version. Empty when the request named no tool.
+     */
     val tool: String? = null,
-    /** Version of that tool, for example `v3`. Empty when the request named no tool. */
+    /**
+     * Version of that tool, for example `v3`. Empty when the request named no tool.
+     */
     val version: String? = null,
-    /** Empty on the last page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
-    val nextPageToken: NextPageToken? = null,
+    /**
+     * Empty on the last page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
 )
 
-/** One page of provider health. */
+/**
+ * One page of provider health.
+ */
 data class ListProviderHealthResponse(
-    /** When the metrics were computed and the window they cover. */
+    /**
+     * When the metrics were computed and the window they cover.
+     */
     val snapshot: HealthSnapshot? = null,
-    /** Providers sorted by ID. */
+    /**
+     * Providers sorted by ID.
+     */
     val providers: List<ProviderHealth>? = null,
-    /** Paging applied to this response and the total number of providers. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of providers.
+     */
+    val pagination: Pagination? = null
 )
 
-/** Lists the catalog providers. */
+/**
+ * Lists the catalog providers.
+ */
 data class ListProvidersResponse(
-    /** Providers sorted by display name. */
+    /**
+     * Providers sorted by display name.
+     */
     val providers: List<ProviderSummary>? = null
 )
 
-/** One page of sessions. */
+/**
+ * One page of sessions.
+ */
 data class ListSessionsResponse(
-    /** Sessions, newest first. */
+    /**
+     * Sessions, newest first.
+     */
     val sessions: List<Session>? = null,
-    /** Paging applied to this response and the total number of sessions. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of sessions.
+     */
+    val pagination: Pagination? = null
 )
 
-/** One page of a toolbelt's providers. */
+/**
+ * One page of a toolbelt's providers.
+ */
 data class ListToolbeltProvidersResponse(
-    /** The toolbelt version the providers were read from. */
+    /**
+     * The toolbelt version the providers were read from.
+     */
     val toolbelt: Toolbelt? = null,
-    /** Providers sorted by ID. */
+    /**
+     * Providers sorted by ID.
+     */
     val providers: List<ToolbeltProviderSummary>? = null,
-    /** Paging applied to this response and the total number of providers. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of providers.
+     */
+    val pagination: Pagination? = null
 )
 
-/** One page of a toolbelt's members from one provider. */
+/**
+ * One page of a toolbelt's members from one provider.
+ */
 data class ListToolbeltProviderToolsResponse(
-    /** Members sorted by tool slug. */
+    /**
+     * Members sorted by tool slug.
+     */
     val tools: List<ToolbeltToolDetail>? = null,
-    /** Paging applied to this response and the total number of matching members. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of matching members.
+     */
+    val pagination: Pagination? = null
 )
 
-/** One page of tool health. */
+/**
+ * One page of tool health.
+ */
 data class ListToolHealthResponse(
-    /** When the metrics were computed and the window they cover. */
+    /**
+     * When the metrics were computed and the window they cover.
+     */
     val snapshot: HealthSnapshot? = null,
-    /** Tools sorted by provider, then tool slug. */
+    /**
+     * Tools sorted by provider, then tool slug.
+     */
     val tools: List<ToolHealth>? = null,
-    /** Paging applied to this response and the total number of tools. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of tools.
+     */
+    val pagination: Pagination? = null
 )
 
-/** Lists the toolkits available to your team. */
+/**
+ * Lists the toolkits available to your team.
+ */
 data class ListToolkitsResponse(
-    /** Catalog version identifier, for example `v1`. */
+    /**
+     * Catalog version identifier, for example `v1`.
+     */
     val version: String? = null,
-    /** Toolkits available to your team. */
-    val toolkits: List<Toolkit>? = null,
+    /**
+     * Toolkits available to your team.
+     */
+    val toolkits: List<Toolkit>? = null
 )
 
-/** One page of the tool catalog. */
+/**
+ * One page of the tool catalog.
+ */
 data class ListToolsResponse(
-    /** Catalog version identifier, for example `v1`. */
+    /**
+     * Catalog version identifier, for example `v1`.
+     */
     val version: String? = null,
-    /** Tools on this page, grouped by provider and sorted by name within a provider. */
+    /**
+     * Tools on this page, grouped by provider and sorted by name within a provider.
+     */
     val tools: List<Tool>? = null,
-    /** definitions[i] describes tools[i]. */
+    /**
+     * definitions[i] describes tools[i].
+     */
     val definitions: List<ToolDefinition>? = null,
     /**
-     * page and `per_page` echo the values applied; total is the number of tools matching
-     * `toolkitId` across all pages.
+     * page and `per_page` echo the values applied; total is the number of tools matching `toolkitId` across all pages.
      */
-    val pagination: Pagination? = null,
+    val pagination: Pagination? = null
 )
 
-/** One page of user IDs. */
+/**
+ * One page of user IDs.
+ */
 data class ListUsersResponse(
-    /** User IDs on this page. */
+    /**
+     * User IDs on this page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_ids") val userIds: List<String>? = null,
-    /** Paging applied to this response and the total number of users. */
-    val pagination: Pagination? = null,
+    /**
+     * Paging applied to this response and the total number of users.
+     */
+    val pagination: Pagination? = null
 )

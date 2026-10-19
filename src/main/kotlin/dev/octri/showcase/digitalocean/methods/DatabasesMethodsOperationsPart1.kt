@@ -27,1048 +27,374 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListOptionsOperation {
     /**
-     * To list all of the options available for the offered database engines, send a GET request to
-     * `/v2/databases/options`. The result will be a JSON object with an `options` key.
+     * To list all of the options available for the offered database engines, send a GET request to `/v2/databases/options`. The result will be a JSON object with an `options` key.
      */
     fun databasesListOptions(clientConfig: ClientConfig, options: RequestOptions? = null): Options {
-        return SdkClient.request<Options>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/options",
-                    config = clientConfig,
-                    operationId = "databasesListOptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Options>(SdkClient.RequestSpec("GET", "/v2/databases/options", config = clientConfig, operationId = "databasesListOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesListClustersOperation {
     /**
-     * To list all of the database clusters available on your account, send a GET request to
-     * `/v2/databases`. To limit the results to database clusters with a specific tag, include the
-     * `tag_name` query parameter set to the name of the tag. For example,
-     * `/v2/databases?tag_name=$TAG_NAME`. The result will be a JSON object with a `databases` key.
-     * This will be set to an array of database objects, each of which will contain the standard
-     * database attributes. The embedded `connection` and…
+     * To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`. The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes. The embedded `connection` and…
      *
-     * @param tagName Limits the results to database clusters with a specific tag. Requires
-     *   `tag:read` scope.
+     * @param tagName Limits the results to database clusters with a specific tag.
+     *   Requires `tag:read` scope.
      */
-    fun databasesListClusters(
-        clientConfig: ClientConfig,
-        tagName: String? = null,
-        options: RequestOptions? = null,
-    ): DatabaseClusters {
-        return SdkClient.request<DatabaseClusters>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases",
-                    config = clientConfig,
-                    query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)),
-                    operationId = "databasesListClusters",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun databasesListClusters(clientConfig: ClientConfig, tagName: String? = null, options: RequestOptions? = null): DatabaseClusters {
+        return SdkClient.request<DatabaseClusters>(SdkClient.RequestSpec("GET", "/v2/databases", config = clientConfig, query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)), operationId = "databasesListClusters", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesCreateClusterOperation {
     /**
-     * Creates a database cluster with the selected engine, size, region, and node count. Supply
-     * `name`, `engine`, `num_nodes`, `size`, and `region`; use `backup_restore` to create a cluster
-     * from an existing backup. The new cluster starts with a `creating` status and changes to
-     * `online` when ready to receive traffic.
+     * Creates a database cluster with the selected engine, size, region, and node count. Supply `name`, `engine`, `num_nodes`, `size`, and `region`; use `backup_restore` to create a cluster from an existing backup. The new cluster starts with a `creating` status and changes to `online` when ready to receive traffic.
      *
-     * To create a database cluster, send a POST request to `/v2/databases`. To see a list of
-     * options for each engine, such as available regions, size slugs, and versions, send a GET
-     * request to the `/v2/databases/options` endpoint. The available sizes for the
-     * `storage_size_mib` field depends on the cluster's size. To see a list of available sizes, see
-     * Managed Database Pricing. The create response returns a JSON object with a key called
-     * `database`. The value of this is an object…
+     * To create a database cluster, send a POST request to `/v2/databases`. To see a list of options for each engine, such as available regions, size slugs, and versions, send a GET request to the `/v2/databases/options` endpoint. The available sizes for the `storage_size_mib` field depends on the cluster's size. To see a list of available sizes, see Managed Database Pricing. The create response returns a JSON object with a key called `database`. The value of this is an object…
      */
-    fun databasesCreateCluster(
-        clientConfig: ClientConfig,
-        body: DatabasesMethods.DatabasesCreateCluster,
-        options: RequestOptions? = null,
-    ): DatabaseClusterResponse {
-        return SdkClient.request<DatabaseClusterResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/databases",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "databasesCreateCluster",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun databasesCreateCluster(clientConfig: ClientConfig, body: DatabasesMethods.DatabasesCreateCluster, options: RequestOptions? = null): DatabaseClusterResponse {
+        return SdkClient.request<DatabaseClusterResponse>(SdkClient.RequestSpec("POST", "/v2/databases", config = clientConfig, body = body, operationId = "databasesCreateCluster", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetClusterOperation {
     /**
-     * To show information about an existing database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This
-     * will be set to an object containing the standard database cluster attributes. The embedded
-     * `connection` and `private_connection` objects will contain the information needed to access
-     * the database cluster. For multi-node clusters, the `standby_connection` and
-     * `standby_private_connection` objects contain the…
+     * To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes. The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetCluster(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseClusterResponse {
+    fun databasesGetCluster(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseClusterResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseClusterResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}",
-                    config = clientConfig,
-                    operationId = "databasesGetCluster",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseClusterResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}", config = clientConfig, operationId = "databasesGetCluster", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesDestroyClusterOperation {
     /**
-     * To destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`. A
-     * status of 204 will be given. This indicates that the request was processed successfully, but
-     * that no response body is needed.
+     * To destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesDestroyCluster(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesDestroyCluster(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}",
-                config = clientConfig,
-                operationId = "databasesDestroyCluster",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}", config = clientConfig, operationId = "databasesDestroyCluster", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesGetConfigOperation {
     /**
-     * Shows configuration parameters for an existing database cluster by sending a GET request to
-     * `/v2/databases/$DATABASE_ID/config`. The response is a JSON object with a `config` key, which
-     * is set to an object containing any database configuration parameters.
+     * Shows configuration parameters for an existing database cluster by sending a GET request to `/v2/databases/$DATABASE_ID/config`. The response is a JSON object with a `config` key, which is set to an object containing any database configuration parameters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetConfig(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseConfigResponse {
+    fun databasesGetConfig(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseConfigResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseConfigResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/config",
-                    config = clientConfig,
-                    operationId = "databasesGetConfig",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseConfigResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/config", config = clientConfig, operationId = "databasesGetConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesPatchConfigOperation {
     /**
-     * Updates configuration settings for an existing database cluster. Supply `config` with the
-     * settings you want to change; the available settings depend on the cluster's database engine.
-     * Use the cluster's UUID to target the configuration.
+     * Updates configuration settings for an existing database cluster. Supply `config` with the settings you want to change; the available settings depend on the cluster's database engine. Use the cluster's UUID to target the configuration.
      *
-     * To update the configuration for an existing database cluster, send a PATCH request to
-     * `/v2/databases/$DATABASE_ID/config`.
+     * To update the configuration for an existing database cluster, send a PATCH request to `/v2/databases/$DATABASE_ID/config`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param config Optional API value serialized in the `config` wire field.
      */
-    fun databasesPatchConfig(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        config: DatabaseConfigConfig? = null,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesPatchConfig(clientConfig: ClientConfig, databaseClusterUuid: String, config: DatabaseConfigConfig? = null, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PATCH",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/config",
-                config = clientConfig,
-                body = SdkClient.bodyMap("config" to (SdkClient.omitIfNull(config))),
-                operationId = "databasesPatchConfig",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PATCH", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/config", config = clientConfig, body = SdkClient.bodyMap("config" to (SdkClient.omitIfNull(config))), operationId = "databasesPatchConfig", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesGetCaOperation {
     /**
-     * To retrieve the public certificate used to secure the connection to the database cluster send
-     * a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a
-     * `ca` key. This will be set to an object containing the base64 encoding of the public key
-     * certificate.
+     * To retrieve the public certificate used to secure the connection to the database cluster send a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a `ca` key. This will be set to an object containing the base64 encoding of the public key certificate.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetCa(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): CaResponse {
+    fun databasesGetCa(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): CaResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<CaResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/ca",
-                    config = clientConfig,
-                    operationId = "databasesGetCa",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<CaResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/ca", config = clientConfig, operationId = "databasesGetCa", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetMigrationStatusOperation {
     /**
-     * To retrieve the status of the most recent online migration, send a GET request to
-     * `/v2/databases/$DATABASE_ID/online-migration`.
+     * To retrieve the status of the most recent online migration, send a GET request to `/v2/databases/$DATABASE_ID/online-migration`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetMigrationStatus(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): OnlineMigration {
+    fun databasesGetMigrationStatus(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): OnlineMigration {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<OnlineMigration>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration",
-                    config = clientConfig,
-                    operationId = "databasesGetMigrationStatus",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OnlineMigration>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration", config = clientConfig, operationId = "databasesGetMigrationStatus", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateOnlineMigrationOperation {
     /**
-     * Submits an online migration that connects a database cluster to an existing source cluster
-     * and replicates its contents. Supply the source connection details in `source`; online
-     * migration is available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the source
-     * database continues to receive writes, migration can continue for up to two weeks unless you
-     * stop it manually.
+     * Submits an online migration that connects a database cluster to an existing source cluster and replicates its contents. Supply the source connection details in `source`; online migration is available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the source database continues to receive writes, migration can continue for up to two weeks unless you stop it manually.
      *
-     * To start an online migration, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster establishes a
-     * connection with an existing cluster and replicates its contents to the target cluster. Online
-     * migration is only available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the
-     * existing database is continuously being written to, the migration process will continue for
-     * up to two weeks unless it is manually stopped. Online migration…
+     * To start an online migration, send a PUT request to `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster establishes a connection with an existing cluster and replicates its contents to the target cluster. Online migration is only available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the existing database is continuously being written to, the migration process will continue for up to two weeks unless it is manually stopped. Online migration…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param source Required object value serialized in the `source` wire field.
-     * @param disableSsl Enables SSL encryption when connecting to the source database.
+     * @param disableSsl Enables SSL encryption when connecting to the source
+     *   database.
      * @param ignoreDbs List of databases that should be ignored during migration.
      */
-    fun databasesUpdateOnlineMigration(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        source: DatabasesMethods.SourceDatabaseSource,
-        disableSsl: Boolean? = null,
-        ignoreDbs: List<String>? = null,
-        options: RequestOptions? = null,
-    ): OnlineMigration {
+    fun databasesUpdateOnlineMigration(clientConfig: ClientConfig, databaseClusterUuid: String, source: DatabasesMethods.SourceDatabaseSource, disableSsl: Boolean? = null, ignoreDbs: List<String>? = null, options: RequestOptions? = null): OnlineMigration {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<OnlineMigration>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "source" to (source),
-                            "disable_ssl" to (SdkClient.omitIfNull(disableSsl)),
-                            "ignore_dbs" to (SdkClient.omitIfNull(ignoreDbs)),
-                        ),
-                    operationId = "databasesUpdateOnlineMigration",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OnlineMigration>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration", config = clientConfig, body = SdkClient.bodyMap("source" to (source), "disable_ssl" to (SdkClient.omitIfNull(disableSsl)), "ignore_dbs" to (SdkClient.omitIfNull(ignoreDbs))), operationId = "databasesUpdateOnlineMigration", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteOnlineMigrationOperation {
     /**
-     * To stop an online migration, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/online-migration/$MIGRATION_ID`. A status of 204 will be given.
-     * This indicates that the request was processed successfully, but that no response body is
-     * needed.
+     * To stop an online migration, send a DELETE request to `/v2/databases/$DATABASE_ID/online-migration/$MIGRATION_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param migrationId A unique identifier assigned to the online migration.
      */
-    fun databasesDeleteOnlineMigration(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        migrationId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesDeleteOnlineMigration(clientConfig: ClientConfig, databaseClusterUuid: String, migrationId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration/${SdkClient.encodePathSegment(migrationId)}",
-                config = clientConfig,
-                operationId = "databasesDeleteOnlineMigration",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/online-migration/${SdkClient.encodePathSegment(migrationId)}", config = clientConfig, operationId = "databasesDeleteOnlineMigration", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateRegionOperation {
     /**
-     * To migrate a database cluster to a new region, send a `PUT` request to
-     * `/v2/databases/$DATABASE_ID/migrate`. The body of the request must specify a `region`
-     * attribute. A successful request will receive a 202 Accepted status code with no body in
-     * response. Querying the database cluster will show that its `status` attribute will now be set
-     * to `migrating`. This will transition back to `online` when the migration has completed.
+     * To migrate a database cluster to a new region, send a `PUT` request to `/v2/databases/$DATABASE_ID/migrate`. The body of the request must specify a `region` attribute. A successful request will receive a 202 Accepted status code with no body in response. Querying the database cluster will show that its `status` attribute will now be set to `migrating`. This will transition back to `online` when the migration has completed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param region A slug identifier for the region to which the database cluster will be
-     *   migrated.
+     * @param region A slug identifier for the region to which the database cluster
+     *   will be migrated.
      */
-    fun databasesUpdateRegion(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        region: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateRegion(clientConfig: ClientConfig, databaseClusterUuid: String, region: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/migrate",
-                config = clientConfig,
-                body = SdkClient.bodyMap("region" to (region)),
-                operationId = "databasesUpdateRegion",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/migrate", config = clientConfig, body = SdkClient.bodyMap("region" to (region)), operationId = "databasesUpdateRegion", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateClusterSizeOperation {
     /**
-     * To resize a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/resize`. The
-     * body of the request must specify both the size and num_nodes attributes. A successful request
-     * will receive a 202 Accepted status code with no body in response. Querying the database
-     * cluster will show that its status attribute will now be set to resizing. This will transition
-     * back to online when the resize operation has completed.
+     * To resize a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/resize`. The body of the request must specify both the size and num_nodes attributes. A successful request will receive a 202 Accepted status code with no body in response. Querying the database cluster will show that its status attribute will now be set to resizing. This will transition back to online when the resize operation has completed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param size A slug identifier representing desired the size of the nodes in the database
-     *   cluster.
-     * @param numNodes The number of nodes in the database cluster. Valid values are are 1-3. In
-     *   addition to the primary node, up to two standby nodes may be added for highly available
-     *   configurations.
-     * @param storageSizeMib Additional storage added to the cluster, in MiB. If null, no additional
-     *   storage is added to the cluster, beyond what is provided as a base amount from the 'size'
-     *   and any previously added additional storage.
+     * @param size A slug identifier representing desired the size of the nodes in
+     *   the database cluster.
+     * @param numNodes The number of nodes in the database cluster. Valid values are
+     *   are 1-3. In addition to the primary node, up to two standby nodes may be added
+     *   for highly available configurations.
+     * @param storageSizeMib Additional storage added to the cluster, in MiB. If
+     *   null, no additional storage is added to the cluster, beyond what is provided
+     *   as a base amount from the 'size' and any previously added additional storage.
      */
-    fun databasesUpdateClusterSize(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        size: String,
-        numNodes: Int,
-        storageSizeMib: Long? = null,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateClusterSize(clientConfig: ClientConfig, databaseClusterUuid: String, size: String, numNodes: Int, storageSizeMib: Long? = null, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/resize",
-                config = clientConfig,
-                body =
-                    SdkClient.bodyMap(
-                        "size" to (size),
-                        "num_nodes" to (numNodes),
-                        "storage_size_mib" to (SdkClient.omitIfNull(storageSizeMib)),
-                    ),
-                operationId = "databasesUpdateClusterSize",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/resize", config = clientConfig, body = SdkClient.bodyMap("size" to (size), "num_nodes" to (numNodes), "storage_size_mib" to (SdkClient.omitIfNull(storageSizeMib))), operationId = "databasesUpdateClusterSize", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesListFirewallRulesOperation {
     /**
-     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a
-     * JSON object with a `rules` key.
+     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a JSON object with a `rules` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListFirewallRules(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): FirewallRulesResponse {
+    fun databasesListFirewallRules(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): FirewallRulesResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<FirewallRulesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall",
-                    config = clientConfig,
-                    operationId = "databasesListFirewallRules",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<FirewallRulesResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall", config = clientConfig, operationId = "databasesListFirewallRules", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateFirewallRulesOperation {
     /**
-     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to
-     * specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The
-     * firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC
-     * network to limit database access instead.
+     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC network to limit database access instead.
      *
-     * To update a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which
-     * resources should be able to open connections to the database. You may limit connections to
-     * specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet
-     * or Kubernetes node with that tag applied to it will have access. The firewall is limited to
-     * 100 rules (or trusted…
+     * To update a database cluster's firewall rules (known as "trusted sources" in the control panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which resources should be able to open connections to the database. You may limit connections to specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet or Kubernetes node with that tag applied to it will have access. The firewall is limited to 100 rules (or trusted…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesUpdateFirewallRules(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        rules: List<FirewallRuleRequest>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateFirewallRules(clientConfig: ClientConfig, databaseClusterUuid: String, rules: List<FirewallRuleRequest>? = null, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall",
-                config = clientConfig,
-                body = SdkClient.bodyMap("rules" to (SdkClient.omitIfNull(rules))),
-                operationId = "databasesUpdateFirewallRules",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall", config = clientConfig, body = SdkClient.bodyMap("rules" to (SdkClient.omitIfNull(rules))), operationId = "databasesUpdateFirewallRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesGetDoSettingsOperation {
     /**
-     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current
-     * `service_cnames` configuration.
+     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current `service_cnames` configuration.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetDoSettings(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DoSettingsResponse {
+    fun databasesGetDoSettings(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DoSettingsResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DoSettingsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings",
-                    config = clientConfig,
-                    operationId = "databasesGetDoSettings",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DoSettingsResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings", config = clientConfig, operationId = "databasesGetDoSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateDoSettingsOperation {
     /**
-     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is
-     * `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the
-     * TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables
-     * TLS verification when connecting via a custom hostname. After updating, the database nodes
-     * will be replaced to apply…
+     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables TLS verification when connecting via a custom hostname. After updating, the database nodes will be replaced to apply…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param doSettings DigitalOcean-specific settings for the database cluster.
      */
-    fun databasesUpdateDoSettings(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        doSettings: DoSettings,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateDoSettings(clientConfig: ClientConfig, databaseClusterUuid: String, doSettings: DoSettings, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings",
-                config = clientConfig,
-                body = SdkClient.bodyMap("do_settings" to (doSettings)),
-                operationId = "databasesUpdateDoSettings",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "400" to Error2::class.java,
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "422" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings", config = clientConfig, body = SdkClient.bodyMap("do_settings" to (doSettings)), operationId = "databasesUpdateDoSettings", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateMaintenanceWindowOperation {
     /**
-     * To configure the window when automatic maintenance should be performed for a database
-     * cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request
-     * will receive a 204 No Content status code with no body in response.
+     * To configure the window when automatic maintenance should be performed for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param day The day of the week on which to apply maintenance updates.
-     * @param hour The hour in UTC at which maintenance updates will be applied in 24 hour format.
+     * @param hour The hour in UTC at which maintenance updates will be applied in 24
+     *   hour format.
      */
-    fun databasesUpdateMaintenanceWindow(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        day: String,
-        hour: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateMaintenanceWindow(clientConfig: ClientConfig, databaseClusterUuid: String, day: String, hour: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/maintenance",
-                config = clientConfig,
-                body = SdkClient.bodyMap("day" to (day), "hour" to (hour)),
-                operationId = "databasesUpdateMaintenanceWindow",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/maintenance", config = clientConfig, body = SdkClient.bodyMap("day" to (day), "hour" to (hour)), operationId = "databasesUpdateMaintenanceWindow", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesInstallUpdateOperation {
     /**
-     * To start the installation of updates for a database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No
-     * Content status code with no body in response.
+     * To start the installation of updates for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesInstallUpdate(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesInstallUpdate(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/install_update",
-                config = clientConfig,
-                operationId = "databasesInstallUpdate",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/install_update", config = clientConfig, operationId = "databasesInstallUpdate", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesListBackupsOperation {
     /**
-     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET
-     * request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for
-     * Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will
-     * be set to an array of backup objects, each of which will contain the size of the backup and
-     * the timestamp at which it was created.
+     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will be set to an array of backup objects, each of which will contain the size of the backup and the timestamp at which it was created.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListBackups(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseBackups {
+    fun databasesListBackups(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseBackups {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseBackups>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/backups",
-                    config = clientConfig,
-                    operationId = "databasesListBackups",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseBackups>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/backups", config = clientConfig, operationId = "databasesListBackups", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesListReplicasOperation {
     /**
-     * To list all of the read-only replicas associated with a database cluster, send a GET request
-     * to `/v2/databases/$DATABASE_ID/replicas`. **Note**: Read-only replicas are not supported for
-     * Caching or Valkey clusters. The result will be a JSON object with a `replicas` key. This will
-     * be set to an array of database replica objects, each of which will contain the standard
-     * database replica attributes.
+     * To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListReplicas(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseReplicas {
+    fun databasesListReplicas(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseReplicas {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseReplicas>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas",
-                    config = clientConfig,
-                    operationId = "databasesListReplicas",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseReplicas>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas", config = clientConfig, operationId = "databasesListReplicas", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesCreateReplicaOperation {
     /**
-     * Creates a read-only replica for a PostgreSQL or MySQL database cluster. Supply `name` and
-     * `size`; `size` must be at least as large as the source cluster's node size, and `region`
-     * defaults to the cluster's region when omitted. The replica starts with a `status` of
-     * `forking` and transitions to `active` when it is ready to receive traffic.
+     * Creates a read-only replica for a PostgreSQL or MySQL database cluster. Supply `name` and `size`; `size` must be at least as large as the source cluster's node size, and `region` defaults to the cluster's region when omitted. The replica starts with a `status` of `forking` and transitions to `active` when it is ready to receive traffic.
      *
-     * To create a read-only replica for a PostgreSQL or MySQL database cluster, send a POST request
-     * to `/v2/databases/$DATABASE_ID/replicas` specifying the name it should be given, the size of
-     * the node to be used, and the region where it will be located. **Note**: Read-only replicas
-     * are not supported for Caching or Valkey clusters. The response will be a JSON object with a
-     * key called `replica`. The value of this will be an object that contains the standard
-     * attributes associated…
+     * To create a read-only replica for a PostgreSQL or MySQL database cluster, send a POST request to `/v2/databases/$DATABASE_ID/replicas` specifying the name it should be given, the size of the node to be used, and the region where it will be located. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The response will be a JSON object with a key called `replica`. The value of this will be an object that contains the standard attributes associated…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param name The name to give the read-only replicating
-     * @param size A slug identifier representing the size of the node for the read-only replica.
-     *   The size of the replica must be at least as large as the node size for the database cluster
-     *   from which it is replicating.
-     * @param region A slug identifier for the region where the read-only replica will be located.
-     *   If excluded, the replica will be placed in the same region as the cluster.
-     * @param tags A flat array of tag names as strings to apply to the read-only replica after it
-     *   is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
-     * @param privateNetworkUuid A string specifying the UUID of the VPC to which the read-only
-     *   replica will be assigned. If excluded, the replica will be assigned to your account's
-     *   default VPC for the region. Requires `vpc:read` scope.
-     * @param storageSizeMib Additional storage added to the cluster, in MiB. If null, no additional
-     *   storage is added to the cluster, beyond what is provided as a base amount from the 'size'
-     *   and any previously added additional storage.
-     * @param doSettings DigitalOcean-specific settings for the read-only replica, including custom
-     *   service CNAMEs.
+     * @param size A slug identifier representing the size of the node for the
+     *   read-only replica. The size of the replica must be at least as large as the
+     *   node size for the database cluster from which it is replicating.
+     * @param region A slug identifier for the region where the read-only replica
+     *   will be located. If excluded, the replica will be placed in the same region as
+     *   the cluster.
+     * @param tags A flat array of tag names as strings to apply to the read-only
+     *   replica after it is created. Tag names can either be existing or new tags.
+     *   Requires `tag:create` scope.
+     * @param privateNetworkUuid A string specifying the UUID of the VPC to which the
+     *   read-only replica will be assigned. If excluded, the replica will be assigned
+     *   to your account's default VPC for the region. Requires `vpc:read` scope.
+     * @param storageSizeMib Additional storage added to the cluster, in MiB. If
+     *   null, no additional storage is added to the cluster, beyond what is provided
+     *   as a base amount from the 'size' and any previously added additional storage.
+     * @param doSettings DigitalOcean-specific settings for the read-only replica,
+     *   including custom service CNAMEs.
      */
-    fun databasesCreateReplica(
-        clientConfig: ClientConfig,
-        request: DatabasesMethods.DatabasesCreateReplicaRequest,
-        options: RequestOptions? = null,
-    ): DatabaseReplicaResponse {
+    fun databasesCreateReplica(clientConfig: ClientConfig, request: DatabasesMethods.DatabasesCreateReplicaRequest, options: RequestOptions? = null): DatabaseReplicaResponse {
         validateDatabasesCreateReplicaRequest(request)
 
-        return SdkClient.request<DatabaseReplicaResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/replicas",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "size" to (request.size),
-                            "region" to (SdkClient.omitIfNull(request.region)),
-                            "tags" to (SdkClient.omitIfNull(request.tags)),
-                            "private_network_uuid" to
-                                (SdkClient.omitIfNull(request.privateNetworkUuid)),
-                            "connection" to (SdkClient.omitIfNull(request.connection)),
-                            "private_connection" to
-                                (SdkClient.omitIfNull(request.privateConnection)),
-                            "storage_size_mib" to (SdkClient.omitIfNull(request.storageSizeMib)),
-                            "do_settings" to (SdkClient.omitIfNull(request.doSettings)),
-                        ),
-                    operationId = "databasesCreateReplica",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseReplicaResponse>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/replicas", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "size" to (request.size), "region" to (SdkClient.omitIfNull(request.region)), "tags" to (SdkClient.omitIfNull(request.tags)), "private_network_uuid" to
+    (SdkClient.omitIfNull(request.privateNetworkUuid)), "connection" to (SdkClient.omitIfNull(request.connection)), "private_connection" to
+    (SdkClient.omitIfNull(request.privateConnection)), "storage_size_mib" to
+    (SdkClient.omitIfNull(request.storageSizeMib)), "do_settings" to (SdkClient.omitIfNull(request.doSettings))), operationId = "databasesCreateReplica", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    private fun validateDatabasesCreateReplicaRequest(
-        request: DatabasesMethods.DatabasesCreateReplicaRequest
-    ) {
+
+    private fun validateDatabasesCreateReplicaRequest(request: DatabasesMethods.DatabasesCreateReplicaRequest) {
         Validation.validateUuid("database_cluster_uuid", request.databaseClusterUuid)
     }
 }
 
 internal object DatabasesMethodsDatabasesListEventsLogsOperation {
     /**
-     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`.
-     * The result will be a JSON object with a `events` key.
+     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`. The result will be a JSON object with a `events` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListEventsLogs(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): EventsLogsResponse {
+    fun databasesListEventsLogs(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): EventsLogsResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<EventsLogsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/events",
-                    config = clientConfig,
-                    operationId = "databasesListEventsLogs",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EventsLogsResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/events", config = clientConfig, operationId = "databasesListEventsLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetReplicaOperation {
     /**
-     * To show information about an existing database replica, send a GET request to
-     * `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not
-     * supported for Caching or Valkey clusters. The response will be a JSON object with a `replica
-     * key`. This will be set to an object containing the standard database replica attributes.
+     * To show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param replicaName The name of the database replica.
      */
-    fun databasesGetReplica(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        replicaName: String,
-        options: RequestOptions? = null,
-    ): DatabaseReplicaResponse {
+    fun databasesGetReplica(clientConfig: ClientConfig, databaseClusterUuid: String, replicaName: String, options: RequestOptions? = null): DatabaseReplicaResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseReplicaResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas/${SdkClient.encodePathSegment(replicaName)}",
-                    config = clientConfig,
-                    operationId = "databasesGetReplica",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseReplicaResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas/${SdkClient.encodePathSegment(replicaName)}", config = clientConfig, operationId = "databasesGetReplica", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesDestroyReplicaOperation {
     /**
-     * To destroy a specific read-only replica, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not
-     * supported for Caching or Valkey clusters. A status of 204 will be given. This indicates that
-     * the request was processed successfully, but that no response body is needed.
+     * To destroy a specific read-only replica, send a DELETE request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param replicaName The name of the database replica.
      */
-    fun databasesDestroyReplica(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        replicaName: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesDestroyReplica(clientConfig: ClientConfig, databaseClusterUuid: String, replicaName: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas/${SdkClient.encodePathSegment(replicaName)}",
-                config = clientConfig,
-                operationId = "databasesDestroyReplica",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/replicas/${SdkClient.encodePathSegment(replicaName)}", config = clientConfig, operationId = "databasesDestroyReplica", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

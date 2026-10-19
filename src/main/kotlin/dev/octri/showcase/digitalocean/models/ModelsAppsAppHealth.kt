@@ -3,42 +3,60 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AppHealth` API schema. */
+/**
+ * Typed representation of the `AppHealth` API schema.
+ */
 data class AppHealth(
-    /** Optional array value serialized in the `components` wire field. */
+    /**
+     * Optional array value serialized in the `components` wire field.
+     */
     val components: List<AppComponentHealth>? = null,
-    /** Optional array value serialized in the `functions_components` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("functions_components")
-    val functionsComponents: List<AppFunctionsComponentHealth>? = null,
+    /**
+     * Optional array value serialized in the `functions_components` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("functions_components") val functionsComponents: List<AppFunctionsComponentHealth>? = null
 )
 
-/** Typed representation of the `AppHealthCheckSpec` API schema. */
+/**
+ * Typed representation of the `AppHealthCheckSpec` API schema.
+ */
 data class AppHealthCheckSpec(
-    /** The number of failed health checks before considered unhealthy. */
-    @com.fasterxml.jackson.annotation.JsonProperty("failure_threshold")
-    val failureThreshold: Int? = null,
-    /** The port on which the health check will be performed. */
+    /**
+     * The number of failed health checks before considered unhealthy.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("failure_threshold") val failureThreshold: Int? = null,
+    /**
+     * The port on which the health check will be performed.
+     */
     val port: Long? = null,
     /**
-     * The route path used for the HTTP health check ping. If not set, the HTTP health check will be
-     * disabled and a TCP health check used instead.
+     * The route path used for the HTTP health check ping. If not set, the HTTP health check will be disabled and a TCP health check used instead.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("http_path") val httpPath: String? = null,
-    /** The number of seconds to wait before beginning health checks. */
-    @com.fasterxml.jackson.annotation.JsonProperty("initial_delay_seconds")
-    val initialDelaySeconds: Int? = null,
-    /** The number of seconds to wait between health checks. */
+    /**
+     * The number of seconds to wait before beginning health checks.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("initial_delay_seconds") val initialDelaySeconds: Int? = null,
+    /**
+     * The number of seconds to wait between health checks.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("period_seconds") val periodSeconds: Int? = null,
-    /** The number of successful health checks before considered healthy. */
-    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold")
-    val successThreshold: Int? = null,
-    /** The number of seconds after which the check times out. */
-    @com.fasterxml.jackson.annotation.JsonProperty("timeout_seconds")
-    val timeoutSeconds: Int? = null,
+    /**
+     * The number of successful health checks before considered healthy.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("success_threshold") val successThreshold: Int? = null,
+    /**
+     * The number of seconds after which the check times out.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("timeout_seconds") val timeoutSeconds: Int? = null
 )
 
-/** Typed representation of the `AppHealthResponse` API schema. */
+/**
+ * Typed representation of the `AppHealthResponse` API schema.
+ */
 data class AppHealthResponse(
-    /** Optional object value serialized in the `app_health` wire field. */
+    /**
+     * Optional object value serialized in the `app_health` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_health") val appHealth: AppHealth? = null
 )

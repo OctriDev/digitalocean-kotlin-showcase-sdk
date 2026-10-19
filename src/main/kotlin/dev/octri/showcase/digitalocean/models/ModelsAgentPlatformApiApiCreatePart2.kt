@@ -3,63 +3,82 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Public parameters for creating a simulation run. */
+/**
+ * Public parameters for creating a simulation run.
+ */
 data class ApiCreateSimulationRunInputPublic(
-    /** Configuration of the candidate agent under test for a simulation run. */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_config")
-    val agentConfig: ApiCandidateAgentConfig? = null,
     /**
-     * Optional configuration that opts a simulation run into an evaluation. When included on the
-     * create-run request, the platform reserves a model_evaluation_run linked to this simulation
-     * run and dispatches the evaluation automatically after the simulation finishes. The evaluation
-     * reuses the simulation run's judge_model_uuid.
+     * Configuration of the candidate agent under test for a simulation run.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_config")
-    val evaluationConfig: ApiSimulationEvaluationConfig? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_config") val agentConfig: ApiCandidateAgentConfig? = null,
     /**
-     * Optional run-level episodes-per-scenario override. When set, overrides each scenario's
-     * exploration_budget.
+     * Optional configuration that opts a simulation run into an evaluation. When included on the create-run request, the platform reserves a model_evaluation_run linked to this simulation run and dispatches the evaluation automatically after the simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("exploration_budget")
-    val explorationBudget: Long? = null,
-    /** Optional model override for the judge. Platform default when unset. */
-    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid")
-    val judgeModelUuid: String? = null,
-    /** Optional run-level turn budget. When set, overrides each scenario's max_turns. */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_config") val evaluationConfig: ApiSimulationEvaluationConfig? = null,
+    /**
+     * Optional run-level episodes-per-scenario override. When set, overrides each scenario's exploration_budget.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("exploration_budget") val explorationBudget: Long? = null,
+    /**
+     * Optional model override for the judge. Platform default when unset.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid") val judgeModelUuid: String? = null,
+    /**
+     * Optional run-level turn budget. When set, overrides each scenario's max_turns.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_turns") val maxTurns: Long? = null,
-    /** Optional run name. */
+    /**
+     * Optional run name.
+     */
     val name: String? = null,
-    /** UUID of the existing scenario set to execute. The set must be ready. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid")
-    val scenarioSetUuid: String? = null,
-    /** Optional user simulator model settings such as temperature and max_tokens. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_simulator_config")
-    val userSimulatorConfig: Map<String, Any>? = null,
-    /** Optional model override for the user simulator. Platform default when unset. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_simulator_model_uuid")
-    val userSimulatorModelUuid: String? = null,
+    /**
+     * UUID of the existing scenario set to execute. The set must be ready.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid") val scenarioSetUuid: String? = null,
+    /**
+     * Optional user simulator model settings such as temperature and max_tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_simulator_config") val userSimulatorConfig: Map<String, Any>? = null,
+    /**
+     * Optional model override for the user simulator. Platform default when unset.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_simulator_model_uuid") val userSimulatorModelUuid: String? = null
 )
 
-/** Output for creating a simulation run. */
+/**
+ * Output for creating a simulation run.
+ */
 data class ApiCreateSimulationRunOutput(
-    /** One execution of a scenario set against a candidate agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run")
-    val simulationRun: ApiSimulationRun? = null
+    /**
+     * One execution of a scenario set against a candidate agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run") val simulationRun: ApiSimulationRun? = null
 )
 
-/** Parameters for Workspace Creation */
+/**
+ * Parameters for Workspace Creation
+ */
 data class ApiCreateWorkspaceInputPublic(
-    /** Ids of the agents(s) to attach to the workspace */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids")
-    val agentUuids: List<String>? = null,
-    /** Description of the workspace */
+    /**
+     * Ids of the agents(s) to attach to the workspace
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids") val agentUuids: List<String>? = null,
+    /**
+     * Description of the workspace
+     */
     val description: String? = null,
-    /** Name of the workspace */
-    val name: String? = null,
+    /**
+     * Name of the workspace
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `ApiCreateWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiCreateWorkspaceOutput` API schema.
+ */
 data class ApiCreateWorkspaceOutput(
-    /** Optional object value serialized in the `workspace` wire field. */
+    /**
+     * Optional object value serialized in the `workspace` wire field.
+     */
     val workspace: ApiWorkspace? = null
 )

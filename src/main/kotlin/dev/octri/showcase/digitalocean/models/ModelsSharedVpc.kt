@@ -5,61 +5,84 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `VpcMember` API schema. */
+/**
+ * Typed representation of the `VpcMember` API schema.
+ */
 data class VpcMember(
-    /** The name of the resource. */
+    /**
+     * The name of the resource.
+     */
     val name: String? = null,
     /**
      * The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
      */
     val urn: Urn? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the resource
-     * was created.
+     * A time value given in ISO8601 combined date and time format that represents when the resource was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Typed representation of the `VpcPeering` API schema. */
+/**
+ * Typed representation of the `VpcPeering` API schema.
+ */
 data class VpcPeering(
-    /** A unique ID that can be used to identify and reference the VPC peering. */
+    /**
+     * A unique ID that can be used to identify and reference the VPC peering.
+     */
     val id: String? = null,
-    /** A time value given in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The current status of the VPC peering. */
+    /**
+     * A time value given in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The current status of the VPC peering.
+     */
     val status: VpcPeeringBaseStatusEnum? = null,
-    /** An array of the two peered VPCs IDs. */
+    /**
+     * An array of the two peered VPCs IDs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_ids") val vpcIds: List<String>? = null,
     /**
-     * The name of the VPC peering. Must be unique within the team and may only contain alphanumeric
-     * characters and dashes.
+     * The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
      */
-    val name: String? = null,
+    val name: String? = null
 )
 
-/** Typed representation of the `VpcPeeringBase` API schema. */
+/**
+ * Typed representation of the `VpcPeeringBase` API schema.
+ */
 data class VpcPeeringBase(
-    /** A unique ID that can be used to identify and reference the VPC peering. */
+    /**
+     * A unique ID that can be used to identify and reference the VPC peering.
+     */
     val id: String? = null,
-    /** A time value given in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The current status of the VPC peering. */
-    val status: VpcPeeringBaseStatusEnum? = null,
+    /**
+     * A time value given in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The current status of the VPC peering.
+     */
+    val status: VpcPeeringBaseStatusEnum? = null
 )
 
-/** Typed representation of the `VpcPeeringCreate` API schema. */
+/**
+ * Typed representation of the `VpcPeeringCreate` API schema.
+ */
 data class VpcPeeringCreate(
-    /** An array of the two peered VPCs IDs. */
+    /**
+     * An array of the two peered VPCs IDs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_ids") val vpcIds: List<String>? = null
 )
 
-/** Typed representation of the `VpcPeeringUpdatable` API schema. */
+/**
+ * Typed representation of the `VpcPeeringUpdatable` API schema.
+ */
 data class VpcPeeringUpdatable(
     /**
-     * The name of the VPC peering. Must be unique within the team and may only contain alphanumeric
-     * characters and dashes.
+     * The name of the VPC peering. Must be unique within the team and may only contain alphanumeric characters and dashes.
      */
     val name: String? = null
 )

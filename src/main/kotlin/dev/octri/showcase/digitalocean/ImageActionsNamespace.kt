@@ -3,50 +3,29 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class ImageActionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To retrieve all actions that have been executed on an image, send a GET request to
-     * `/v2/images/$IMAGE_ID/actions`.
+     * To retrieve all actions that have been executed on an image, send a GET request to `/v2/images/$IMAGE_ID/actions`.
      */
     fun list(imageId: Long, options: RequestOptions? = null): GetImageActionsResponse {
-        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsList(
-            clientConfig,
-            imageId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsList(clientConfig, imageId, options)
     }
 
     /**
-     * Triggers an action on an image to convert it to a snapshot or transfer it to another region.
-     * Set `type` to `convert` or `transfer`, and provide `region` when transferring. The 201
-     * response includes an action object you can use to track the action's status.
+     * Triggers an action on an image to convert it to a snapshot or transfer it to another region. Set `type` to `convert` or `transfer`, and provide `region` when transferring. The 201 response includes an action object you can use to track the action's status.
      *
-     * The following actions are available on an Image. ## Convert an Image to a Snapshot To convert
-     * an image, for example, a backup to a snapshot, send a POST request to
-     * `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`. ## Transfer an Image
-     * To transfer an image to another region, send a POST request to
-     * `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set `region`
-     * attribute to the slug identifier of the region you wish to transfer to.
+     * The following actions are available on an Image. ## Convert an Image to a Snapshot To convert an image, for example, a backup to a snapshot, send a POST request to `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`. ## Transfer an Image To transfer an image to another region, send a POST request to `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set `region` attribute to the slug identifier of the region you wish to transfer to.
      */
     fun post(imageId: Long, body: Any? = null, options: RequestOptions? = null): Action {
-        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsPost(
-            clientConfig,
-            imageId,
-            body,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsPost(clientConfig, imageId, body, options)
     }
 
     /**
-     * To retrieve the status of an image action, send a GET request to
-     * `/v2/images/$IMAGE_ID/actions/$IMAGE_ACTION_ID`.
+     * To retrieve the status of an image action, send a GET request to `/v2/images/$IMAGE_ID/actions/$IMAGE_ACTION_ID`.
      */
     fun get(imageId: Long, actionId: Long, options: RequestOptions? = null): Action {
-        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsGet(
-            clientConfig,
-            imageId,
-            actionId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ImageActions.imageActionsGet(clientConfig, imageId, actionId, options)
     }
+
 }

@@ -3,141 +3,76 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class VpcsNamespace(private val clientConfig: ClientConfig) {
-    /** To list all of the VPCs on your account, send a GET request to `/v2/vpcs`. */
+    /**
+     * To list all of the VPCs on your account, send a GET request to `/v2/vpcs`.
+     */
     fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllVpcs {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsList(
-            clientConfig,
-            perPage,
-            page,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsList(clientConfig, perPage, page, options)
     }
 
     /**
-     * To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes in the table
-     * below in the JSON body. **Note:** If you do not currently have a VPC network in a specific
-     * datacenter region, the first one that you create will be set as the default for that region.
-     * The default VPC for a region cannot be changed or deleted.
+     * To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes in the table below in the JSON body. **Note:** If you do not currently have a VPC network in a specific datacenter region, the first one that you create will be set as the default for that region. The default VPC for a region cannot be changed or deleted.
      */
     fun create(body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
         return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsCreate(clientConfig, body, options)
     }
 
-    /** To show information about an existing VPC, send a GET request to `/v2/vpcs/$VPC_ID`. */
+    /**
+     * To show information about an existing VPC, send a GET request to `/v2/vpcs/$VPC_ID`.
+     */
     fun get(vpcId: String, options: RequestOptions? = null): ExistingVpc {
         return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsGet(clientConfig, vpcId, options)
     }
 
-    /** To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`. */
+    /**
+     * To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
+     */
     fun update(vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsUpdate(
-            clientConfig,
-            vpcId,
-            body,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsUpdate(clientConfig, vpcId, body, options)
     }
 
     /**
      * To update a subset of information about a VPC, send a PATCH request to `/v2/vpcs/$VPC_ID`.
      */
     fun patch(vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsPatch(
-            clientConfig,
-            vpcId,
-            body,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsPatch(clientConfig, vpcId, body, options)
     }
 
     /**
-     * To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status code with no body
-     * will be returned in response to a successful request. The default VPC for a region can not be
-     * deleted. Additionally, a VPC can only be deleted if it does not contain any member resources.
-     * Attempting to delete a region's default VPC or a VPC that still has members will result in a
-     * 403 Forbidden error response.
+     * To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status code with no body will be returned in response to a successful request. The default VPC for a region can not be deleted. Additionally, a VPC can only be deleted if it does not contain any member resources. Attempting to delete a region's default VPC or a VPC that still has members will result in a 403 Forbidden error response.
      */
     fun delete(vpcId: String, options: RequestOptions? = null): Unit {
         return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsDelete(clientConfig, vpcId, options)
     }
 
     /**
-     * To list all of the resources that are members of a VPC, send a GET request to
-     * `/v2/vpcs/$VPC_ID/members`. To only list resources of a specific type that are members of the
-     * VPC, included a `resource_type` query parameter. For example, to only list Droplets in the
-     * VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`. Only resources
-     * that you are authorized to see will be returned (e.g. to see Droplets, you must have
-     * `droplet:read`).
+     * To list all of the resources that are members of a VPC, send a GET request to `/v2/vpcs/$VPC_ID/members`. To only list resources of a specific type that are members of the VPC, included a `resource_type` query parameter. For example, to only list Droplets in the VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`. Only resources that you are authorized to see will be returned (e.g. to see Droplets, you must have `droplet:read`).
      */
-    fun listMembers(
-        vpcId: String,
-        resourceType: SchemaSchemaEnumdc8bc0f2? = null,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): VpcMembers {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsListMembers(
-            clientConfig,
-            vpcId,
-            resourceType,
-            perPage,
-            page,
-            options,
-        )
-    }
-
-    /** To list all of a VPC's peerings, send a GET request to `/v2/vpcs/$VPC_ID/peerings`. */
-    fun listPeerings(
-        vpcId: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): VpcPeerings {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsListPeerings(
-            clientConfig,
-            vpcId,
-            perPage,
-            page,
-            options,
-        )
+    fun listMembers(vpcId: String, resourceType: SchemaSchemaEnumdc8bc0f2? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VpcMembers {
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsListMembers(clientConfig, vpcId, resourceType, perPage, page, options)
     }
 
     /**
-     * To create a new VPC peering for a given VPC, send a POST request to
-     * `/v2/vpcs/$VPC_ID/peerings`.
+     * To list all of a VPC's peerings, send a GET request to `/v2/vpcs/$VPC_ID/peerings`.
      */
-    fun createPeerings(
-        vpcId: String,
-        name: String,
-        vpcId2: String,
-        options: RequestOptions? = null,
-    ): VpcPeeringResponse {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsCreatePeerings(
-            clientConfig,
-            vpcId,
-            name,
-            vpcId2,
-            options,
-        )
+    fun listPeerings(vpcId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VpcPeerings {
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsListPeerings(clientConfig, vpcId, perPage, page, options)
     }
 
     /**
-     * To update the name of a VPC peering in a particular VPC, send a PATCH request to
-     * `/v2/vpcs/$VPC_ID/peerings/$VPC_PEERING_ID` with the new `name` in the request body.
+     * To create a new VPC peering for a given VPC, send a POST request to `/v2/vpcs/$VPC_ID/peerings`.
      */
-    fun patchPeerings(
-        vpcId: String,
-        vpcPeeringId: String,
-        name: String,
-        options: RequestOptions? = null,
-    ): VpcPeeringResponse {
-        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsPatchPeerings(
-            clientConfig,
-            vpcId,
-            vpcPeeringId,
-            name,
-            options,
-        )
+    fun createPeerings(vpcId: String, name: String, vpcId2: String, options: RequestOptions? = null): VpcPeeringResponse {
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsCreatePeerings(clientConfig, vpcId, name, vpcId2, options)
     }
+
+    /**
+     * To update the name of a VPC peering in a particular VPC, send a PATCH request to `/v2/vpcs/$VPC_ID/peerings/$VPC_PEERING_ID` with the new `name` in the request body.
+     */
+    fun patchPeerings(vpcId: String, vpcPeeringId: String, name: String, options: RequestOptions? = null): VpcPeeringResponse {
+        return dev.octri.showcase.digitalocean.methods.Vpcs.vpcsPatchPeerings(clientConfig, vpcId, vpcPeeringId, name, options)
+    }
+
 }

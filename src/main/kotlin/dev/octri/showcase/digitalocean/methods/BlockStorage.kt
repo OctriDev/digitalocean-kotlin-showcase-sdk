@@ -11,383 +11,182 @@ import dev.octri.showcase.digitalocean.SdkClient
 import dev.octri.showcase.digitalocean.TagsArray
 import dev.octri.showcase.digitalocean.Validation
 import dev.octri.showcase.digitalocean.Volume
+import dev.octri.showcase.digitalocean.Volumes
 import dev.octri.showcase.digitalocean.VolumeSnapshot
 import dev.octri.showcase.digitalocean.VolumeSnapshots
-import dev.octri.showcase.digitalocean.Volumes
 
 object BlockStorage {
 
+
     /**
-     * To list all of the block storage volumes available on your account, send a GET request to
-     * `/v2/volumes`. ## Filtering Results ### By Region The `region` may be provided as query
-     * parameter in order to restrict results to volumes available in a specific region. For
-     * example: `/v2/volumes?region=nyc1` ### By Name It is also possible to list volumes on your
-     * account that match a specified name. To do so, send a GET request with the volume's name as a
-     * query parameter to…
+     * To list all of the block storage volumes available on your account, send a GET request to `/v2/volumes`. ## Filtering Results ### By Region The `region` may be provided as query parameter in order to restrict results to volumes available in a specific region. For example: `/v2/volumes?region=nyc1` ### By Name It is also possible to list volumes on your account that match a specified name. To do so, send a GET request with the volume's name as a query parameter to…
      *
      * @param name The block storage volume's name.
-     * @param region The slug identifier for the region where the resource is available.
+     * @param region The slug identifier for the region where the resource is
+     *   available.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun volumesList(
-        clientConfig: ClientConfig,
-        name: String? = null,
-        region: RegionSlug? = null,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): Volumes {
+    fun volumesList(clientConfig: ClientConfig, name: String? = null, region: RegionSlug? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Volumes {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<Volumes>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/volumes",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "name" to SdkClient.queryValue(name, "form", true),
-                            "region" to SdkClient.queryValue(region, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "volumesList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Volumes>(SdkClient.RequestSpec("GET", "/v2/volumes", config = clientConfig, query = mapOf("name" to SdkClient.queryValue(name, "form", true), "region" to SdkClient.queryValue(region, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "volumesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a block storage volume, optionally from a snapshot. Set `filesystem_type` to format
-     * the volume automatically, and provide `snapshot_id` when creating from a snapshot.
-     * Pre-formatted volumes auto-mount only on supported Droplets created on or after April 26,
-     * 2018; attaching them to unsupported Droplets is not recommended.
+     * Creates a block storage volume, optionally from a snapshot. Set `filesystem_type` to format the volume automatically, and provide `snapshot_id` when creating from a snapshot. Pre-formatted volumes auto-mount only on supported Droplets created on or after April 26, 2018; attaching them to unsupported Droplets is not recommended.
      *
-     * To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type`
-     * attribute may be provided in order to automatically format the volume's filesystem.
-     * Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora,
-     * Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching
-     * pre-formatted volumes to Droplets without support for auto-mounting is not recommended.
+     * To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type` attribute may be provided in order to automatically format the volume's filesystem. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to Droplets without support for auto-mounting is not recommended.
      */
-    fun volumesCreate(
-        clientConfig: ClientConfig,
-        body: Any,
-        options: RequestOptions? = null,
-    ): Volume {
-        return SdkClient.request<Volume>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/volumes",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "volumesCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun volumesCreate(clientConfig: ClientConfig, body: Any, options: RequestOptions? = null): Volume {
+        return SdkClient.request<Volume>(SdkClient.RequestSpec("POST", "/v2/volumes", config = clientConfig, body = body, operationId = "volumesCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Block storage volumes may also be deleted by name by sending a DELETE request with the
-     * volume's **name** and the **region slug** for the region it is located in as query parameters
-     * to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`. No response body will be sent back, but the
-     * response code will indicate success. Specifically, the response code will be a 204, which
-     * means that the action was successful with no returned body data.
+     * Block storage volumes may also be deleted by name by sending a DELETE request with the volume's **name** and the **region slug** for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
      *
      * @param name The block storage volume's name.
-     * @param region The slug identifier for the region where the resource is available.
+     * @param region The slug identifier for the region where the resource is
+     *   available.
      */
-    fun volumesDeleteByName(
-        clientConfig: ClientConfig,
-        name: String? = null,
-        region: RegionSlug? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/volumes",
-                config = clientConfig,
-                query =
-                    mapOf(
-                        "name" to SdkClient.queryValue(name, "form", true),
-                        "region" to SdkClient.queryValue(region, "form", true),
-                    ),
-                operationId = "volumesDeleteByName",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun volumesDeleteByName(clientConfig: ClientConfig, name: String? = null, region: RegionSlug? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/volumes", config = clientConfig, query = mapOf("name" to SdkClient.queryValue(name, "form", true), "region" to SdkClient.queryValue(region, "form", true)), operationId = "volumesDeleteByName", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the details of a snapshot that has been created from a volume, send a GET request
-     * to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
+     * To retrieve the details of a snapshot that has been created from a volume, send a GET request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
      *
      * @param snapshotId The unique identifier for the snapshot.
      */
-    fun volumeSnapshotsGetById(
-        clientConfig: ClientConfig,
-        snapshotId: String,
-        options: RequestOptions? = null,
-    ): VolumeSnapshot {
-        return SdkClient.request<VolumeSnapshot>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/volumes/snapshots/${SdkClient.encodePathSegment(snapshotId)}",
-                    config = clientConfig,
-                    operationId = "volumeSnapshotsGetById",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun volumeSnapshotsGetById(clientConfig: ClientConfig, snapshotId: String, options: RequestOptions? = null): VolumeSnapshot {
+        return SdkClient.request<VolumeSnapshot>(SdkClient.RequestSpec("GET", "/v2/volumes/snapshots/${SdkClient.encodePathSegment(snapshotId)}", config = clientConfig, operationId = "volumeSnapshotsGetById", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a volume snapshot, send a DELETE request to
-     * `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`. A status of 204 will be given. This indicates
-     * that the request was processed successfully, but that no response body is needed.
+     * To delete a volume snapshot, send a DELETE request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param snapshotId The unique identifier for the snapshot.
      */
-    fun volumeSnapshotsDeleteById(
-        clientConfig: ClientConfig,
-        snapshotId: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/volumes/snapshots/${SdkClient.encodePathSegment(snapshotId)}",
-                config = clientConfig,
-                operationId = "volumeSnapshotsDeleteById",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun volumeSnapshotsDeleteById(clientConfig: ClientConfig, snapshotId: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/volumes/snapshots/${SdkClient.encodePathSegment(snapshotId)}", config = clientConfig, operationId = "volumeSnapshotsDeleteById", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To show information about a block storage volume, send a GET request to
-     * `/v2/volumes/$VOLUME_ID`.
+     * To show information about a block storage volume, send a GET request to `/v2/volumes/$VOLUME_ID`.
      *
      * @param volumeId The ID of the block storage volume.
      */
-    fun volumesGet(
-        clientConfig: ClientConfig,
-        volumeId: String,
-        options: RequestOptions? = null,
-    ): Volume {
+    fun volumesGet(clientConfig: ClientConfig, volumeId: String, options: RequestOptions? = null): Volume {
         Validation.validateUuid("volume_id", volumeId)
 
-        return SdkClient.request<Volume>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}",
-                    config = clientConfig,
-                    operationId = "volumesGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Volume>(SdkClient.RequestSpec("GET", "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}", config = clientConfig, operationId = "volumesGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a block storage volume, destroying all data and removing it from your account, send
-     * a DELETE request to `/v2/volumes/$VOLUME_ID`. No response body will be sent back, but the
-     * response code will indicate success. Specifically, the response code will be a 204, which
-     * means that the action was successful with no returned body data.
+     * To delete a block storage volume, destroying all data and removing it from your account, send a DELETE request to `/v2/volumes/$VOLUME_ID`. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
      *
      * @param volumeId The ID of the block storage volume.
      */
-    fun volumesDelete(
-        clientConfig: ClientConfig,
-        volumeId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun volumesDelete(clientConfig: ClientConfig, volumeId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("volume_id", volumeId)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}",
-                config = clientConfig,
-                operationId = "volumesDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}", config = clientConfig, operationId = "volumesDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the snapshots that have been created from a volume, send a GET request to
-     * `/v2/volumes/$VOLUME_ID/snapshots`.
+     * To retrieve the snapshots that have been created from a volume, send a GET request to `/v2/volumes/$VOLUME_ID/snapshots`.
      *
      * @param volumeId The ID of the block storage volume.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun volumeSnapshotsList(
-        clientConfig: ClientConfig,
-        volumeId: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): VolumeSnapshots {
+    fun volumeSnapshotsList(clientConfig: ClientConfig, volumeId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeSnapshots {
         Validation.validateUuid("volume_id", volumeId)
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<VolumeSnapshots>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}/snapshots",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "volumeSnapshotsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VolumeSnapshots>(SdkClient.RequestSpec("GET", "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}/snapshots", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "volumeSnapshotsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To create a snapshot from a volume, sent a POST request to
-     * `/v2/volumes/$VOLUME_ID/snapshots`.
+     * To create a snapshot from a volume, sent a POST request to `/v2/volumes/$VOLUME_ID/snapshots`.
      *
      * @param volumeId The ID of the block storage volume.
      * @param name A human-readable name for the volume snapshot.
-     * @param tags A flat array of tag names as strings to be applied to the resource. Tag names may
-     *   be for either existing or new tags. Requires `tag:create` scope.
+     * @param tags A flat array of tag names as strings to be applied to the
+     *   resource. Tag names may be for either existing or new tags. Requires
+     *   `tag:create` scope.
      */
-    fun volumeSnapshotsCreate(
-        clientConfig: ClientConfig,
-        volumeId: String,
-        name: String,
-        tags: SdkClient.SdkOptional<TagsArray?>? = null,
-        options: RequestOptions? = null,
-    ): VolumeSnapshot {
+    fun volumeSnapshotsCreate(clientConfig: ClientConfig, volumeId: String, name: String, tags: SdkClient.SdkOptional<TagsArray?>? = null, options: RequestOptions? = null): VolumeSnapshot {
         Validation.validateUuid("volume_id", volumeId)
 
-        return SdkClient.request<VolumeSnapshot>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}/snapshots",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "tags" to (tags ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "volumeSnapshotsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VolumeSnapshot>(SdkClient.RequestSpec("POST", "/v2/volumes/${SdkClient.encodePathSegment(volumeId)}/snapshots", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "tags" to (tags ?: SdkClient.SdkOptional.Omitted)), operationId = "volumeSnapshotsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

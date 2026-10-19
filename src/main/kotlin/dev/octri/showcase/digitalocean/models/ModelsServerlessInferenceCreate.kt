@@ -3,171 +3,200 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Request body for image generation. */
+/**
+ * Request body for image generation.
+ */
 data class CreateImageRequest(
     /**
-     * A text description of the desired image(s). Supports up to 32,000 characters and provides
-     * automatic prompt optimization for best results.
+     * A text description of the desired image(s). Supports up to 32,000 characters and provides automatic prompt optimization for best results.
      */
     val prompt: String,
-    /** The model to use for image generation. */
+    /**
+     * The model to use for image generation.
+     */
     val model: String,
-    /** The number of images to generate. Must be between 1 and 10. */
+    /**
+     * The number of images to generate. Must be between 1 and 10.
+     */
     val n: Long,
-    /** The moderation setting for the image generation. Supported values: low, auto. */
+    /**
+     * The moderation setting for the image generation. Supported values: low, auto.
+     */
     val moderation: String? = null,
     /**
      * The background setting for the image generation. Supported values: transparent, opaque, auto.
      */
     val background: String? = null,
-    /** The output format for the image generation. Supported values: png, webp, jpeg. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
-    val outputFormat: String? = null,
-    /** The output compression level for the image generation (0-100). */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
-    val outputCompression: Long? = null,
+    /**
+     * The output format for the image generation. Supported values: png, webp, jpeg.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: String? = null,
+    /**
+     * The output compression level for the image generation (0-100).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression") val outputCompression: Long? = null,
     /**
      * The quality of the image that will be generated. Supported values: auto, high, medium, low.
      */
     val quality: String? = null,
     /**
-     * The size of the generated images. GPT-IMAGE-1 supports: auto (automatically select best
-     * size), 1536x1024 (landscape), 1024x1536 (portrait).
+     * The size of the generated images. GPT-IMAGE-1 supports: auto (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
      */
     val size: CreateImageRequestSizeEnum? = null,
     /**
-     * If set to true, partial image data will be streamed as the image is being generated. The
-     * response will be sent as server-sent events with partial image chunks. When stream is true,
-     * partial_images must be greater than 0.
+     * If set to true, partial image data will be streamed as the image is being generated. The response will be sent as server-sent events with partial image chunks. When stream is true, partial_images must be greater than 0.
      */
     val stream: Boolean? = null,
     /**
-     * The number of partial image chunks to return during streaming generation. Defaults to 0. When
-     * stream=true, this must be greater than 0 to receive progressive updates of the image as it is
-     * being generated.
+     * The number of partial image chunks to return during streaming generation. Defaults to 0. When stream=true, this must be greater than 0 to receive progressive updates of the image as it is being generated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
-    val partialImages: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images") val partialImages: Long? = null,
     /**
-     * A unique identifier representing your end-user, which can help DigitalOcean to monitor and
-     * detect abuse.
+     * A unique identifier representing your end-user, which can help DigitalOcean to monitor and detect abuse.
      */
-    val user: String? = null,
+    val user: String? = null
 )
 
-/** Required object value serialized in the `input[]` wire field. */
+/**
+ * Required object value serialized in the `input[]` wire field.
+ */
 data class CreateResponseRequestInputVariant1Item(
-    /** The content of the message. */
+    /**
+     * The content of the message.
+     */
     val content: String,
-    /** The role of the message author. */
-    val role: CreateResponseRequestInputVariant1ItemRoleEnum? = null,
+    /**
+     * The role of the message author.
+     */
+    val role: CreateResponseRequestInputVariant1ItemRoleEnum? = null
 )
 
-/** Options for streaming response. Only set this when you set stream to true. */
+/**
+ * Options for streaming response. Only set this when you set stream to true.
+ */
 data class CreateResponseRequestStreamOptions(
     /**
-     * If set, an additional chunk will be streamed before the data: [DONE] message with token usage
-     * statistics for the entire request.
+     * If set, an additional chunk will be streamed before the data: [DONE] message with token usage statistics for the entire request.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_usage")
-    val includeUsage: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("include_usage") val includeUsage: Boolean? = null
 )
 
-/** Required object value serialized in the `tools[]` wire field. */
+/**
+ * Required object value serialized in the `tools[]` wire field.
+ */
 data class CreateResponseRequestToolsItem(
-    /** The type of the tool. */
+    /**
+     * The type of the tool.
+     */
     val type: CreateResponseRequestToolsItemTypeEnum,
-    /** The name of the function to be called. */
+    /**
+     * The name of the function to be called.
+     */
     val name: String? = null,
-    /** A description of what the function does. */
+    /**
+     * A description of what the function does.
+     */
     val description: String? = null,
-    /** The parameters the function accepts, described as a JSON Schema object. */
-    val parameters: Map<String, Any>? = null,
+    /**
+     * The parameters the function accepts, described as a JSON Schema object.
+     */
+    val parameters: Map<String, Any>? = null
 )
 
-/** Request body for sending a prompt to a model using the Responses API. */
+/**
+ * Request body for sending a prompt to a model using the Responses API.
+ */
 data class CreateResponseRequest(
     /**
-     * The model ID of the model you want to use. Get the model ID using `/v1/models` or on the
-     * available models page.
+     * The model ID of the model you want to use. Get the model ID using `/v1/models` or on the available models page.
      */
     val model: String,
     /**
-     * The prompt or input content you want the model to respond to. Can be a simple text string or
-     * an array of message objects for conversation context.
+     * The prompt or input content you want the model to respond to. Can be a simple text string or an array of message objects for conversation context.
      */
     val input: Any,
-    /** The maximum number of tokens to generate in the response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Long? = null,
     /**
-     * A value between 0.0 and 2.0 to control randomness and creativity. Lower values like 0.2 make
-     * the output more focused and deterministic, while higher values like 0.8 make it more random.
+     * The maximum number of tokens to generate in the response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null,
+    /**
+     * A value between 0.0 and 2.0 to control randomness and creativity. Lower values like 0.2 make the output more focused and deterministic, while higher values like 0.8 make it more random.
      */
     val temperature: Double? = null,
-    /** Set to true to stream partial responses as Server-Sent Events. */
+    /**
+     * Set to true to stream partial responses as Server-Sent Events.
+     */
     val stream: Boolean? = null,
     /**
-     * System-level instructions for the model. This sets the behavior and context for the response
-     * generation.
+     * System-level instructions for the model. This sets the behavior and context for the response generation.
      */
     val instructions: String? = null,
     /**
-     * An alternative to sampling with temperature, called nucleus sampling, where the model
-     * considers the results of the tokens with top_p probability mass.
+     * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /** Options for streaming response. Only set this when you set stream to true. */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_options")
-    val streamOptions: CreateResponseRequestStreamOptions? = null,
-    /** A list of tools the model may call. */
+    /**
+     * Options for streaming response. Only set this when you set stream to true.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_options") val streamOptions: CreateResponseRequestStreamOptions? = null,
+    /**
+     * A list of tools the model may call.
+     */
     val tools: List<CreateResponseRequestToolsItem>? = null,
-    /** Controls which (if any) tool is called by the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: CreateResponseRequestToolChoice? = null,
-    /** Up to 4 sequences where the API will stop generating further tokens. */
+    /**
+     * Controls which (if any) tool is called by the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: CreateResponseRequestToolChoice? = null,
+    /**
+     * Up to 4 sequences where the API will stop generating further tokens.
+     */
     val stop: List<String>? = null,
-    /** Set of key-value pairs that can be attached to the request. */
+    /**
+     * Set of key-value pairs that can be attached to the request.
+     */
     val metadata: Map<String, String>? = null,
-    /** A unique identifier representing your end-user. */
-    val user: String? = null,
+    /**
+     * A unique identifier representing your end-user.
+     */
+    val user: String? = null
 )
 
-/** Required object value serialized in the `function` wire field. */
+/**
+ * Required object value serialized in the `function` wire field.
+ */
 data class CreateResponseRequestToolChoiceVariant1Function(
-    /** The name of the function to call. */
+    /**
+     * The name of the function to call.
+     */
     val name: String
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateResponseRequestToolChoiceVariant1(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: CreateResponseRequestToolChoiceVariant1TypeEnum,
-    /** Required object value serialized in the `function` wire field. */
-    val function: CreateResponseRequestToolChoiceVariant1Function,
+    /**
+     * Required object value serialized in the `function` wire field.
+     */
+    val function: CreateResponseRequestToolChoiceVariant1Function
 ) : CreateResponseRequestToolChoice
 
-/** Controls which (if any) tool is called by the model. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = CreateResponseRequestToolChoice.Deserializer::class
-)
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateResponseRequestToolChoice.Deserializer::class)
 sealed interface CreateResponseRequestToolChoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<CreateResponseRequestToolChoice>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateResponseRequestToolChoice>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CreateResponseRequestToolChoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out CreateResponseRequestToolChoice>> =
-                listOf(CreateResponseRequestToolChoiceVariant1::class.java)
+            val objectTypes: List<Class<out CreateResponseRequestToolChoice>> = listOf(CreateResponseRequestToolChoiceVariant1::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -176,238 +205,313 @@ sealed interface CreateResponseRequestToolChoice {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringCreateResponseRequestToolChoice(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        CreateResponseRequestToolChoice::class.java,
-                        "no CreateResponseRequestToolChoice branch accepts this payload",
-                    )
+                node.isTextual -> StringCreateResponseRequestToolChoice(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateResponseRequestToolChoice::class.java, "no CreateResponseRequestToolChoice branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringCreateResponseRequestToolChoice(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : CreateResponseRequestToolChoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringCreateResponseRequestToolChoice(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateResponseRequestToolChoice
 
-/** Required object value serialized in the `content[]` wire field. */
+/**
+ * Required object value serialized in the `content[]` wire field.
+ */
 data class CreateResponseResponseOutputItemContentItem(
     /**
-     * The type of content part. `reasoning_text` for reasoning content, `output_text` for final
-     * output text.
+     * The type of content part. `reasoning_text` for reasoning content, `output_text` for final output text.
      */
     val type: CreateResponseResponseOutputItemContentItemTypeEnum,
-    /** The text content. */
-    val text: String,
-)
-
-/** Required object value serialized in the `output[]` wire field. */
-data class CreateResponseResponseOutputItem(
-    /** The type of output item. One of `reasoning`, `message`, or `function_call`. */
-    val type: CreateResponseResponseOutputItemTypeEnum,
     /**
-     * Array of content parts for this output item. Each part has a type and text. Content types
-     * include `reasoning_text` for reasoning items and `output_text` for final output.
+     * The text content.
      */
-    val content: List<CreateResponseResponseOutputItemContentItem>,
-    /** The unique ID of the output item. */
-    val id: String? = null,
-    /** Status of the item. */
-    val status: String? = null,
-    /** The role associated with this output item (typically `assistant`). */
-    val role: String? = null,
-    /** The unique ID of the function tool call (present when type is `function_call`). */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /** The name of the function to call (present when type is `function_call`). */
-    val name: String? = null,
-    /** JSON string of function arguments (present when type is `function_call`). */
-    val arguments: String? = null,
-)
-
-/** Required object value serialized in the `tools[]` wire field. */
-data class CreateResponseResponseToolsItem(
-    /** The type of the tool. */
-    val type: CreateResponseResponseToolsItemTypeEnum,
-    /** The name of the function. */
-    val name: String? = null,
-    /** A description of what the function does. */
-    val description: String? = null,
-    /** The parameters the function accepts. */
-    val parameters: Map<String, Any>? = null,
-)
-
-/** The response includes structured output and token usage details. */
-data class CreateResponseResponse(
-    /** A unique identifier for the response. */
-    val id: String,
-    /** The object type, which is always `response`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: CreateResponseResponseObjectEnum,
-    /** The Unix timestamp (in seconds) of when the response was created. */
-    val created: Long,
-    /** The model used to generate the response. */
-    val model: String,
-    /**
-     * An array of content items generated by the model. Each item has a type and a content array.
-     * Types include reasoning and output text.
-     */
-    val output: List<CreateResponseResponseOutputItem>,
-    /**
-     * Detailed usage statistics for the Responses API request, including input/output token counts
-     * and detailed breakdowns.
-     */
-    val usage: ResponseUsage,
-    /** Whether parallel tool calls are enabled. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: Boolean? = null,
-    /** Temperature setting used for the response. */
-    val temperature: Double? = null,
-    /** Tool choice setting used for the response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: String? = null,
-    /** Tools available for the response. */
-    val tools: List<CreateResponseResponseToolsItem>? = null,
-    /** Top-p setting used for the response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /** Maximum output tokens setting. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Long? = null,
-    /** Status of the response. */
-    val status: String? = null,
-    /** User identifier. */
-    val user: String? = null,
-)
-
-/** Required object value serialized in the `function` wire field. */
-data class CreateResponseStreamResponseChoicesItemDeltaToolCallsItemFunction(
-    /** The name of the function to call. */
-    val name: String,
-    /** The arguments to call the function with, as a JSON string. */
-    val arguments: String,
-)
-
-/** Required object value serialized in the `tool_calls[]` wire field. */
-data class CreateResponseStreamResponseChoicesItemDeltaToolCallsItem(
-    /** The ID of the tool call. */
-    val id: String,
-    /** The type of the tool call. */
-    val type: CreateResponseStreamResponseChoicesItemDeltaToolCallsItemTypeEnum,
-    /** Required object value serialized in the `function` wire field. */
-    val function: CreateResponseStreamResponseChoicesItemDeltaToolCallsItemFunction,
-)
-
-/** A chunk of the response message generated by the model. */
-data class CreateResponseStreamResponseChoicesItemDelta(
-    /** The role of the message author. Only present in the first chunk. */
-    val role: CreateResponseStreamResponseChoicesItemDeltaRoleEnum? = null,
-    /**
-     * The contents of the chunk message. Can be null for chunks with tool calls or other non-text
-     * content.
-     */
-    val content: String? = null,
-    /**
-     * The reasoning content generated by the model. Only present when the model generates reasoning
-     * text.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_content")
-    val reasoningContent: String? = null,
-    /**
-     * The tool calls generated by the model, such as function calls. Only present when the model
-     * decides to call a tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls")
-    val toolCalls: List<CreateResponseStreamResponseChoicesItemDeltaToolCallsItem>? = null,
-)
-
-/** Log probability information for the choice. */
-data class CreateResponseStreamResponseChoicesItemLogprobs(
-    /** A list of message content tokens with log probability information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true)
-    val content: List<ChatCompletionTokenLogprob>?
-)
-
-/** Required object value serialized in the `choices[]` wire field. */
-data class CreateResponseStreamResponseChoicesItem(
-    /** The index of the choice in the list of choices. */
-    val index: Long,
-    /** A chunk of the response message generated by the model. */
-    val delta: CreateResponseStreamResponseChoicesItemDelta,
-    /** The reason the model stopped generating tokens. Only present in the final chunk. */
-    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason")
-    val finishReason: CreateResponseStreamResponseChoicesItemFinishReasonEnum? = null,
-    /** Log probability information for the choice. */
-    val logprobs: CreateResponseStreamResponseChoicesItemLogprobs? = null,
+    val text: String
 )
 
 /**
- * Represents a streamed chunk of a text-to-text response returned by the model, based on the
- * provided input.
+ * Required object value serialized in the `output[]` wire field.
  */
-data class CreateResponseStreamResponse(
-    /** A unique identifier for the response. Each chunk has the same ID. */
-    val id: String,
-    /** The object type, which is always `response.chunk`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: CreateResponseStreamResponseObjectEnum,
+data class CreateResponseResponseOutputItem(
     /**
-     * The Unix timestamp (in seconds) of when the response was created. Each chunk has the same
-     * timestamp.
+     * The type of output item. One of `reasoning`, `message`, or `function_call`.
+     */
+    val type: CreateResponseResponseOutputItemTypeEnum,
+    /**
+     * Array of content parts for this output item. Each part has a type and text. Content types include `reasoning_text` for reasoning items and `output_text` for final output.
+     */
+    val content: List<CreateResponseResponseOutputItemContentItem>,
+    /**
+     * The unique ID of the output item.
+     */
+    val id: String? = null,
+    /**
+     * Status of the item.
+     */
+    val status: String? = null,
+    /**
+     * The role associated with this output item (typically `assistant`).
+     */
+    val role: String? = null,
+    /**
+     * The unique ID of the function tool call (present when type is `function_call`).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
+    /**
+     * The name of the function to call (present when type is `function_call`).
+     */
+    val name: String? = null,
+    /**
+     * JSON string of function arguments (present when type is `function_call`).
+     */
+    val arguments: String? = null
+)
+
+/**
+ * Required object value serialized in the `tools[]` wire field.
+ */
+data class CreateResponseResponseToolsItem(
+    /**
+     * The type of the tool.
+     */
+    val type: CreateResponseResponseToolsItemTypeEnum,
+    /**
+     * The name of the function.
+     */
+    val name: String? = null,
+    /**
+     * A description of what the function does.
+     */
+    val description: String? = null,
+    /**
+     * The parameters the function accepts.
+     */
+    val parameters: Map<String, Any>? = null
+)
+
+/**
+ * The response includes structured output and token usage details.
+ */
+data class CreateResponseResponse(
+    /**
+     * A unique identifier for the response.
+     */
+    val id: String,
+    /**
+     * The object type, which is always `response`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateResponseResponseObjectEnum,
+    /**
+     * The Unix timestamp (in seconds) of when the response was created.
      */
     val created: Long,
-    /** The model used to generate the response. */
+    /**
+     * The model used to generate the response.
+     */
     val model: String,
     /**
-     * A list of response choice chunks. Can contain more than one element if `n` is greater than 1.
-     * Can also be empty for the last chunk if you set `stream_options: {"include_usage": true}`.
+     * An array of content items generated by the model. Each item has a type and a content array. Types include reasoning and output text.
+     */
+    val output: List<CreateResponseResponseOutputItem>,
+    /**
+     * Detailed usage statistics for the Responses API request, including input/output token counts and detailed breakdowns.
+     */
+    val usage: ResponseUsage,
+    /**
+     * Whether parallel tool calls are enabled.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
+    /**
+     * Temperature setting used for the response.
+     */
+    val temperature: Double? = null,
+    /**
+     * Tool choice setting used for the response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: String? = null,
+    /**
+     * Tools available for the response.
+     */
+    val tools: List<CreateResponseResponseToolsItem>? = null,
+    /**
+     * Top-p setting used for the response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
+    /**
+     * Maximum output tokens setting.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null,
+    /**
+     * Status of the response.
+     */
+    val status: String? = null,
+    /**
+     * User identifier.
+     */
+    val user: String? = null
+)
+
+/**
+ * Required object value serialized in the `function` wire field.
+ */
+data class CreateResponseStreamResponseChoicesItemDeltaToolCallsItemFunction(
+    /**
+     * The name of the function to call.
+     */
+    val name: String,
+    /**
+     * The arguments to call the function with, as a JSON string.
+     */
+    val arguments: String
+)
+
+/**
+ * Required object value serialized in the `tool_calls[]` wire field.
+ */
+data class CreateResponseStreamResponseChoicesItemDeltaToolCallsItem(
+    /**
+     * The ID of the tool call.
+     */
+    val id: String,
+    /**
+     * The type of the tool call.
+     */
+    val type: CreateResponseStreamResponseChoicesItemDeltaToolCallsItemTypeEnum,
+    /**
+     * Required object value serialized in the `function` wire field.
+     */
+    val function: CreateResponseStreamResponseChoicesItemDeltaToolCallsItemFunction
+)
+
+/**
+ * A chunk of the response message generated by the model.
+ */
+data class CreateResponseStreamResponseChoicesItemDelta(
+    /**
+     * The role of the message author. Only present in the first chunk.
+     */
+    val role: CreateResponseStreamResponseChoicesItemDeltaRoleEnum? = null,
+    /**
+     * The contents of the chunk message. Can be null for chunks with tool calls or other non-text content.
+     */
+    val content: String? = null,
+    /**
+     * The reasoning content generated by the model. Only present when the model generates reasoning text.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_content") val reasoningContent: String? = null,
+    /**
+     * The tool calls generated by the model, such as function calls. Only present when the model decides to call a tool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls") val toolCalls: List<CreateResponseStreamResponseChoicesItemDeltaToolCallsItem>? = null
+)
+
+/**
+ * Log probability information for the choice.
+ */
+data class CreateResponseStreamResponseChoicesItemLogprobs(
+    /**
+     * A list of message content tokens with log probability information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: List<ChatCompletionTokenLogprob>?
+)
+
+/**
+ * Required object value serialized in the `choices[]` wire field.
+ */
+data class CreateResponseStreamResponseChoicesItem(
+    /**
+     * The index of the choice in the list of choices.
+     */
+    val index: Long,
+    /**
+     * A chunk of the response message generated by the model.
+     */
+    val delta: CreateResponseStreamResponseChoicesItemDelta,
+    /**
+     * The reason the model stopped generating tokens. Only present in the final chunk.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason") val finishReason: CreateResponseStreamResponseChoicesItemFinishReasonEnum? = null,
+    /**
+     * Log probability information for the choice.
+     */
+    val logprobs: CreateResponseStreamResponseChoicesItemLogprobs? = null
+)
+
+/**
+ * Represents a streamed chunk of a text-to-text response returned by the model, based on the provided input.
+ */
+data class CreateResponseStreamResponse(
+    /**
+     * A unique identifier for the response. Each chunk has the same ID.
+     */
+    val id: String,
+    /**
+     * The object type, which is always `response.chunk`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateResponseStreamResponseObjectEnum,
+    /**
+     * The Unix timestamp (in seconds) of when the response was created. Each chunk has the same timestamp.
+     */
+    val created: Long,
+    /**
+     * The model used to generate the response.
+     */
+    val model: String,
+    /**
+     * A list of response choice chunks. Can contain more than one element if `n` is greater than 1. Can also be empty for the last chunk if you set `stream_options: {"include_usage": true}`.
      */
     val choices: List<CreateResponseStreamResponseChoicesItem>,
     /**
-     * An optional field that will only be present when you set `stream_options: {"include_usage":
-     * true}` in your request. When present, it contains a null value except for the last chunk
-     * which contains the token usage statistics for the entire request.
+     * An optional field that will only be present when you set `stream_options: {"include_usage": true}` in your request. When present, it contains a null value except for the last chunk which contains the token usage statistics for the entire request.
      */
-    val usage: ResponseUsage? = null,
+    val usage: ResponseUsage? = null
 )
 
-/** Request body for text-to-speech generation. */
+/**
+ * Request body for text-to-speech generation.
+ */
 data class CreateSpeechRequest(
-    /** The text-to-speech model to use. */
+    /**
+     * The text-to-speech model to use.
+     */
     val model: String,
-    /** The text to convert to speech. */
+    /**
+     * The text to convert to speech.
+     */
     val input: String,
-    /** The voice to use for synthesis. */
+    /**
+     * The voice to use for synthesis.
+     */
     val voice: String? = null,
     /**
-     * The audio format to return. Supported values include `mp3` and `wav`. The API may return raw
-     * audio bytes or a JSON envelope with base64-encoded audio.
+     * The audio format to return. Supported values include `mp3` and `wav`. The API may return raw audio bytes or a JSON envelope with base64-encoded audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
-    val responseFormat: String? = null,
-    /** Optional style or delivery instructions for the synthesizer. */
-    val instructions: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: String? = null,
+    /**
+     * Optional style or delivery instructions for the synthesizer.
+     */
+    val instructions: String? = null
 )
 
-/** Request body to start an asynchronous video generation job. */
+/**
+ * Request body to start an asynchronous video generation job.
+ */
 data class CreateVideoRequest(
-    /** The video generation model to use. */
+    /**
+     * The video generation model to use.
+     */
     val model: String,
-    /** A text description of the desired video. */
+    /**
+     * A text description of the desired video.
+     */
     val prompt: String,
-    /** The output resolution, for example `1280x720`. */
+    /**
+     * The output resolution, for example `1280x720`.
+     */
     val size: String? = null,
-    /** Frames per second for the generated video. */
-    val fps: Long? = null,
+    /**
+     * Frames per second for the generated video.
+     */
+    val fps: Long? = null
 )

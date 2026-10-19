@@ -35,8 +35,7 @@ typealias SearchToolsResult = dev.octri.showcase.digitalocean.models.SearchTools
 
 typealias SecretStatus = dev.octri.showcase.digitalocean.models.SecretStatus
 
-typealias SelectiveDestroyAssociatedResource =
-    dev.octri.showcase.digitalocean.models.SelectiveDestroyAssociatedResource
+typealias SelectiveDestroyAssociatedResource = dev.octri.showcase.digitalocean.models.SelectiveDestroyAssociatedResource
 
 typealias SendInputRequest = dev.octri.showcase.digitalocean.models.SendInputRequest
 
@@ -58,13 +57,11 @@ typealias SessionNetwork = dev.octri.showcase.digitalocean.models.SessionNetwork
 
 typealias SessionPolicy = dev.octri.showcase.digitalocean.models.SessionPolicy
 
-typealias SessionPolicyDefaultActionEnum =
-    dev.octri.showcase.digitalocean.models.SessionPolicyDefaultActionEnum
+typealias SessionPolicyDefaultActionEnum = dev.octri.showcase.digitalocean.models.SessionPolicyDefaultActionEnum
 
 typealias SessionPolicyRulesItem = dev.octri.showcase.digitalocean.models.SessionPolicyRulesItem
 
-typealias SessionPolicyRulesItemActionEnum =
-    dev.octri.showcase.digitalocean.models.SessionPolicyRulesItemActionEnum
+typealias SessionPolicyRulesItemActionEnum = dev.octri.showcase.digitalocean.models.SessionPolicyRulesItemActionEnum
 
 typealias SessionStatus = dev.octri.showcase.digitalocean.models.SessionStatus
 
@@ -72,11 +69,9 @@ typealias SessionTool = dev.octri.showcase.digitalocean.models.SessionTool
 
 typealias SessionTools = dev.octri.showcase.digitalocean.models.SessionTools
 
-typealias SessionToolsReferencesItem =
-    dev.octri.showcase.digitalocean.models.SessionToolsReferencesItem
+typealias SessionToolsReferencesItem = dev.octri.showcase.digitalocean.models.SessionToolsReferencesItem
 
-typealias SessionToolsReferencesItemKindEnum =
-    dev.octri.showcase.digitalocean.models.SessionToolsReferencesItemKindEnum
+typealias SessionToolsReferencesItemKindEnum = dev.octri.showcase.digitalocean.models.SessionToolsReferencesItemKindEnum
 
 typealias SetActorLimits = dev.octri.showcase.digitalocean.models.SetActorLimits
 
@@ -84,21 +79,17 @@ typealias Settings = dev.octri.showcase.digitalocean.models.Settings
 
 typealias SettingsSettings = dev.octri.showcase.digitalocean.models.SettingsSettings
 
-typealias SettingsTierCoverageValue =
-    dev.octri.showcase.digitalocean.models.SettingsTierCoverageValue
+typealias SettingsTierCoverageValue = dev.octri.showcase.digitalocean.models.SettingsTierCoverageValue
 
 typealias SimpleCharge = dev.octri.showcase.digitalocean.models.SimpleCharge
 
 typealias SinglePartnerAttachment = dev.octri.showcase.digitalocean.models.SinglePartnerAttachment
 
-typealias SinglePartnerAttachmentBgpAuthKey =
-    dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentBgpAuthKey
+typealias SinglePartnerAttachmentBgpAuthKey = dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentBgpAuthKey
 
-typealias SinglePartnerAttachmentDeleting =
-    dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentDeleting
+typealias SinglePartnerAttachmentDeleting = dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentDeleting
 
-typealias SinglePartnerAttachmentServiceKey =
-    dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentServiceKey
+typealias SinglePartnerAttachmentServiceKey = dev.octri.showcase.digitalocean.models.SinglePartnerAttachmentServiceKey
 
 typealias SingleRoute = dev.octri.showcase.digitalocean.models.SingleRoute
 
@@ -116,11 +107,9 @@ typealias SlackDetails = dev.octri.showcase.digitalocean.models.SlackDetails
 
 typealias SlackNotificationConfig = dev.octri.showcase.digitalocean.models.SlackNotificationConfig
 
-typealias SlackNotificationConfigRequest =
-    dev.octri.showcase.digitalocean.models.SlackNotificationConfigRequest
+typealias SlackNotificationConfigRequest = dev.octri.showcase.digitalocean.models.SlackNotificationConfigRequest
 
-typealias SlackNotificationConfigResponse =
-    dev.octri.showcase.digitalocean.models.SlackNotificationConfigResponse
+typealias SlackNotificationConfigResponse = dev.octri.showcase.digitalocean.models.SlackNotificationConfigResponse
 
 typealias SlackOutputWrite = dev.octri.showcase.digitalocean.models.SlackOutputWrite
 
@@ -132,8 +121,7 @@ typealias SnapshotsExisting = dev.octri.showcase.digitalocean.models.SnapshotsEx
 
 typealias SnapshotsResponse = dev.octri.showcase.digitalocean.models.SnapshotsResponse
 
-typealias SnapshotsVariant2ResourceTypeEnum =
-    dev.octri.showcase.digitalocean.models.SnapshotsVariant2ResourceTypeEnum
+typealias SnapshotsVariant2ResourceTypeEnum = dev.octri.showcase.digitalocean.models.SnapshotsVariant2ResourceTypeEnum
 
 typealias SourceDatabase = dev.octri.showcase.digitalocean.models.SourceDatabase
 
@@ -145,28 +133,23 @@ typealias SpanRecord = dev.octri.showcase.digitalocean.models.SpanRecord
 
 typealias SpansFilterExpression = dev.octri.showcase.digitalocean.models.SpansFilterExpression
 
-typealias SpansFilterExpressionOperatorEnum =
-    dev.octri.showcase.digitalocean.models.SpansFilterExpressionOperatorEnum
+typealias SpansFilterExpressionOperatorEnum = dev.octri.showcase.digitalocean.models.SpansFilterExpressionOperatorEnum
 
-typealias SpansFilterExpressionTypeEnum =
-    dev.octri.showcase.digitalocean.models.SpansFilterExpressionTypeEnum
+typealias SpansFilterExpressionTypeEnum = dev.octri.showcase.digitalocean.models.SpansFilterExpressionTypeEnum
 
 typealias SpansFilterField = dev.octri.showcase.digitalocean.models.SpansFilterField
 
-typealias SpansFilterFieldScopeEnum =
-    dev.octri.showcase.digitalocean.models.SpansFilterFieldScopeEnum
+typealias SpansFilterFieldScopeEnum = dev.octri.showcase.digitalocean.models.SpansFilterFieldScopeEnum
 
 typealias SpansFilterValue = dev.octri.showcase.digitalocean.models.SpansFilterValue
 
 typealias SpansFilterValueVariant4 = dev.octri.showcase.digitalocean.models.SpansFilterValueVariant4
 
-typealias SpansFilterValueVariant4TypeEnum =
-    dev.octri.showcase.digitalocean.models.SpansFilterValueVariant4TypeEnum
+typealias SpansFilterValueVariant4TypeEnum = dev.octri.showcase.digitalocean.models.SpansFilterValueVariant4TypeEnum
 
 typealias SpansOrderBy = dev.octri.showcase.digitalocean.models.SpansOrderBy
 
-typealias SpansOrderByDirectionEnum =
-    dev.octri.showcase.digitalocean.models.SpansOrderByDirectionEnum
+typealias SpansOrderByDirectionEnum = dev.octri.showcase.digitalocean.models.SpansOrderByDirectionEnum
 
 typealias SpansPaginationRequest = dev.octri.showcase.digitalocean.models.SpansPaginationRequest
 
@@ -220,14 +203,11 @@ typealias StreamEventProducerEnum = dev.octri.showcase.digitalocean.models.Strea
 
 typealias StreamEventTypeEnum = dev.octri.showcase.digitalocean.models.StreamEventTypeEnum
 
-typealias StringChatCompletionRequestToolChoice =
-    dev.octri.showcase.digitalocean.models.StringChatCompletionRequestToolChoice
+typealias StringChatCompletionRequestToolChoice = dev.octri.showcase.digitalocean.models.StringChatCompletionRequestToolChoice
 
-typealias StringCreateResponseRequestToolChoice =
-    dev.octri.showcase.digitalocean.models.StringCreateResponseRequestToolChoice
+typealias StringCreateResponseRequestToolChoice = dev.octri.showcase.digitalocean.models.StringCreateResponseRequestToolChoice
 
-typealias StringMessagesToolChoiceParam =
-    dev.octri.showcase.digitalocean.models.StringMessagesToolChoiceParam
+typealias StringMessagesToolChoiceParam = dev.octri.showcase.digitalocean.models.StringMessagesToolChoiceParam
 
 typealias StringSpansFilterValue = dev.octri.showcase.digitalocean.models.StringSpansFilterValue
 
@@ -241,24 +221,19 @@ typealias SubscriptionTierBase = dev.octri.showcase.digitalocean.models.Subscrip
 
 typealias SubscriptionTierExtended = dev.octri.showcase.digitalocean.models.SubscriptionTierExtended
 
-typealias SubscriptionTierExtendedEligibilityReasonsItemEnum =
-    dev.octri.showcase.digitalocean.models.SubscriptionTierExtendedEligibilityReasonsItemEnum
+typealias SubscriptionTierExtendedEligibilityReasonsItemEnum = dev.octri.showcase.digitalocean.models.SubscriptionTierExtendedEligibilityReasonsItemEnum
 
-typealias SupportedDropletBackupPolicy =
-    dev.octri.showcase.digitalocean.models.SupportedDropletBackupPolicy
+typealias SupportedDropletBackupPolicy = dev.octri.showcase.digitalocean.models.SupportedDropletBackupPolicy
 
 typealias SuppressedResource = dev.octri.showcase.digitalocean.models.SuppressedResource
 
 typealias SuppressedResourceRoot = dev.octri.showcase.digitalocean.models.SuppressedResourceRoot
 
-typealias SuppressedResourceRootLinks =
-    dev.octri.showcase.digitalocean.models.SuppressedResourceRootLinks
+typealias SuppressedResourceRootLinks = dev.octri.showcase.digitalocean.models.SuppressedResourceRootLinks
 
-typealias SuppressedResourceRootLinksPages =
-    dev.octri.showcase.digitalocean.models.SuppressedResourceRootLinksPages
+typealias SuppressedResourceRootLinksPages = dev.octri.showcase.digitalocean.models.SuppressedResourceRootLinksPages
 
-typealias SuppressedResourceRootMeta =
-    dev.octri.showcase.digitalocean.models.SuppressedResourceRootMeta
+typealias SuppressedResourceRootMeta = dev.octri.showcase.digitalocean.models.SuppressedResourceRootMeta
 
 typealias SystemoneAnswer = dev.octri.showcase.digitalocean.models.SystemoneAnswer
 
@@ -266,8 +241,7 @@ typealias SystemoneAnswerTypeEnum = dev.octri.showcase.digitalocean.models.Syste
 
 typealias SystemoneQuestion = dev.octri.showcase.digitalocean.models.SystemoneQuestion
 
-typealias SystemoneQuestionTypeEnum =
-    dev.octri.showcase.digitalocean.models.SystemoneQuestionTypeEnum
+typealias SystemoneQuestionTypeEnum = dev.octri.showcase.digitalocean.models.SystemoneQuestionTypeEnum
 
 typealias SystemoneRequest = dev.octri.showcase.digitalocean.models.SystemoneRequest
 
@@ -293,11 +267,9 @@ typealias TagsRequest = dev.octri.showcase.digitalocean.models.TagsRequest
 
 typealias TagsResource = dev.octri.showcase.digitalocean.models.TagsResource
 
-typealias TagsResourceResourcesItem =
-    dev.octri.showcase.digitalocean.models.TagsResourceResourcesItem
+typealias TagsResourceResourcesItem = dev.octri.showcase.digitalocean.models.TagsResourceResourcesItem
 
-typealias TagsResourceResourcesItemResourceTypeEnum =
-    dev.octri.showcase.digitalocean.models.TagsResourceResourcesItemResourceTypeEnum
+typealias TagsResourceResourcesItemResourceTypeEnum = dev.octri.showcase.digitalocean.models.TagsResourceResourcesItemResourceTypeEnum
 
 typealias TagsResources = dev.octri.showcase.digitalocean.models.TagsResources
 
@@ -307,16 +279,13 @@ typealias TeamInvitationRoleEnum = dev.octri.showcase.digitalocean.models.TeamIn
 
 typealias TeamInvitationStatus = dev.octri.showcase.digitalocean.models.TeamInvitationStatus
 
-typealias TeamInvitationStatusStatusEnum =
-    dev.octri.showcase.digitalocean.models.TeamInvitationStatusStatusEnum
+typealias TeamInvitationStatusStatusEnum = dev.octri.showcase.digitalocean.models.TeamInvitationStatusStatusEnum
 
 typealias TierCoverage = dev.octri.showcase.digitalocean.models.TierCoverage
 
-typealias TierCoverageTierCoverageValue =
-    dev.octri.showcase.digitalocean.models.TierCoverageTierCoverageValue
+typealias TierCoverageTierCoverageValue = dev.octri.showcase.digitalocean.models.TierCoverageTierCoverageValue
 
-typealias TimescaledbAdvancedConfig =
-    dev.octri.showcase.digitalocean.models.TimescaledbAdvancedConfig
+typealias TimescaledbAdvancedConfig = dev.octri.showcase.digitalocean.models.TimescaledbAdvancedConfig
 
 typealias TokenCreated = dev.octri.showcase.digitalocean.models.TokenCreated
 
@@ -340,8 +309,7 @@ typealias ToolbeltStatusEnum = dev.octri.showcase.digitalocean.models.ToolbeltSt
 
 typealias ToolbeltSummary = dev.octri.showcase.digitalocean.models.ToolbeltSummary
 
-typealias ToolbeltSummaryStatusEnum =
-    dev.octri.showcase.digitalocean.models.ToolbeltSummaryStatusEnum
+typealias ToolbeltSummaryStatusEnum = dev.octri.showcase.digitalocean.models.ToolbeltSummaryStatusEnum
 
 typealias ToolbeltToolDetail = dev.octri.showcase.digitalocean.models.ToolbeltToolDetail
 
@@ -365,8 +333,7 @@ typealias ToolResult = dev.octri.showcase.digitalocean.models.ToolResult
 
 typealias ToolResultError = dev.octri.showcase.digitalocean.models.ToolResultError
 
-typealias ToolResultErrorStatusEnum =
-    dev.octri.showcase.digitalocean.models.ToolResultErrorStatusEnum
+typealias ToolResultErrorStatusEnum = dev.octri.showcase.digitalocean.models.ToolResultErrorStatusEnum
 
 typealias ToolResultStatusEnum = dev.octri.showcase.digitalocean.models.ToolResultStatusEnum
 
@@ -378,30 +345,23 @@ typealias TracesFieldRefScopeEnum = dev.octri.showcase.digitalocean.models.Trace
 
 typealias TracesFilterExpression = dev.octri.showcase.digitalocean.models.TracesFilterExpression
 
-typealias TracesFilterExpressionOperatorEnum =
-    dev.octri.showcase.digitalocean.models.TracesFilterExpressionOperatorEnum
+typealias TracesFilterExpressionOperatorEnum = dev.octri.showcase.digitalocean.models.TracesFilterExpressionOperatorEnum
 
-typealias TracesFilterExpressionTypeEnum =
-    dev.octri.showcase.digitalocean.models.TracesFilterExpressionTypeEnum
+typealias TracesFilterExpressionTypeEnum = dev.octri.showcase.digitalocean.models.TracesFilterExpressionTypeEnum
 
 typealias TracesFilterValue = dev.octri.showcase.digitalocean.models.TracesFilterValue
 
-typealias TracesFilterValueVariant4 =
-    dev.octri.showcase.digitalocean.models.TracesFilterValueVariant4
+typealias TracesFilterValueVariant4 = dev.octri.showcase.digitalocean.models.TracesFilterValueVariant4
 
-typealias TracesFilterValueVariant4TypeEnum =
-    dev.octri.showcase.digitalocean.models.TracesFilterValueVariant4TypeEnum
+typealias TracesFilterValueVariant4TypeEnum = dev.octri.showcase.digitalocean.models.TracesFilterValueVariant4TypeEnum
 
-typealias TracesFilterValueVariant5 =
-    dev.octri.showcase.digitalocean.models.TracesFilterValueVariant5
+typealias TracesFilterValueVariant5 = dev.octri.showcase.digitalocean.models.TracesFilterValueVariant5
 
-typealias TracesFilterValueVariant5TypeEnum =
-    dev.octri.showcase.digitalocean.models.TracesFilterValueVariant5TypeEnum
+typealias TracesFilterValueVariant5TypeEnum = dev.octri.showcase.digitalocean.models.TracesFilterValueVariant5TypeEnum
 
 typealias TracesOrderBy = dev.octri.showcase.digitalocean.models.TracesOrderBy
 
-typealias TracesOrderByDirectionEnum =
-    dev.octri.showcase.digitalocean.models.TracesOrderByDirectionEnum
+typealias TracesOrderByDirectionEnum = dev.octri.showcase.digitalocean.models.TracesOrderByDirectionEnum
 
 typealias TracesPaginationRequest = dev.octri.showcase.digitalocean.models.TracesPaginationRequest
 
@@ -421,8 +381,7 @@ typealias TracesTraceResponse = dev.octri.showcase.digitalocean.models.TracesTra
 
 typealias TracesTraceSummary = dev.octri.showcase.digitalocean.models.TracesTraceSummary
 
-typealias TracesTraceSummaryStatusEnum =
-    dev.octri.showcase.digitalocean.models.TracesTraceSummaryStatusEnum
+typealias TracesTraceSummaryStatusEnum = dev.octri.showcase.digitalocean.models.TracesTraceSummaryStatusEnum
 
 typealias TransferId = dev.octri.showcase.digitalocean.models.TransferId
 
@@ -450,11 +409,9 @@ typealias TriggerSessionMode = dev.octri.showcase.digitalocean.models.TriggerSes
 
 typealias TriggerStatus = dev.octri.showcase.digitalocean.models.TriggerStatus
 
-typealias UnknownMessagesRequestContentBlockParam =
-    dev.octri.showcase.digitalocean.models.UnknownMessagesRequestContentBlockParam
+typealias UnknownMessagesRequestContentBlockParam = dev.octri.showcase.digitalocean.models.UnknownMessagesRequestContentBlockParam
 
-typealias UnknownMessagesResponseContentBlock =
-    dev.octri.showcase.digitalocean.models.UnknownMessagesResponseContentBlock
+typealias UnknownMessagesResponseContentBlock = dev.octri.showcase.digitalocean.models.UnknownMessagesResponseContentBlock
 
 typealias UpdateConsentResponse = dev.octri.showcase.digitalocean.models.UpdateConsentResponse
 
@@ -470,8 +427,7 @@ typealias UpdateEndpointTtlEnum = dev.octri.showcase.digitalocean.models.UpdateE
 
 typealias UpdateRegistry = dev.octri.showcase.digitalocean.models.UpdateRegistry
 
-typealias UpdateTeamConsentResponse =
-    dev.octri.showcase.digitalocean.models.UpdateTeamConsentResponse
+typealias UpdateTeamConsentResponse = dev.octri.showcase.digitalocean.models.UpdateTeamConsentResponse
 
 typealias UpdateTemplateRequest = dev.octri.showcase.digitalocean.models.UpdateTemplateRequest
 
@@ -479,5 +435,4 @@ typealias UpdateTrigger = dev.octri.showcase.digitalocean.models.UpdateTrigger
 
 typealias UpdateTriggerRequest = dev.octri.showcase.digitalocean.models.UpdateTriggerRequest
 
-typealias UptimeCreateAlertComparisonEnum =
-    dev.octri.showcase.digitalocean.models.UptimeCreateAlertComparisonEnum
+typealias UptimeCreateAlertComparisonEnum = dev.octri.showcase.digitalocean.models.UptimeCreateAlertComparisonEnum

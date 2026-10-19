@@ -3,31 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** MySQL Incremental Backup configuration settings */
+/**
+ * MySQL Incremental Backup configuration settings
+ */
 data class MysqlIncrementalBackup(
     /**
-     * Enable periodic incremental backups. When enabled, full_backup_week_schedule must be set.
-     * Incremental backups only store changes since the last backup, making them faster and more
-     * storage-efficient than full backups. This is particularly useful for large databases where
-     * daily full backups would be too time-consuming or expensive.
+     * Enable periodic incremental backups. When enabled, full_backup_week_schedule must be set. Incremental backups only store changes since the last backup, making them faster and more storage-efficient than full backups. This is particularly useful for large databases where daily full backups would be too time-consuming or expensive.
      */
     val enabled: Boolean? = null,
     /**
-     * Comma-separated list of days of the week when full backups should be created. Valid values:
-     * mon, tue, wed, thu, fri, sat, sun. Default is null. Example : "mon,fri,sun".
+     * Comma-separated list of days of the week when full backups should be created. Valid values: mon, tue, wed, thu, fri, sat, sun. Default is null. Example : "mon,fri,sun".
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("full_backup_week_schedule")
-    val fullBackupWeekSchedule: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("full_backup_week_schedule") val fullBackupWeekSchedule: String? = null
 )
 
-/** Typed representation of the `MysqlSettings` API schema. */
+/**
+ * Typed representation of the `MysqlSettings` API schema.
+ */
 data class MysqlSettings(
     /**
-     * A string specifying the authentication method to be used for connections to the MySQL user
-     * account. The valid values are `mysql_native_password` or `caching_sha2_password`. If excluded
-     * when creating a new user, the default for the version of MySQL in use will be used. As of
-     * MySQL 8.0, the default is `caching_sha2_password`.
+     * A string specifying the authentication method to be used for connections to the MySQL user account. The valid values are `mysql_native_password` or `caching_sha2_password`. If excluded when creating a new user, the default for the version of MySQL in use will be used. As of MySQL 8.0, the default is `caching_sha2_password`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("auth_plugin")
-    val authPlugin: MysqlSettingsAuthPluginEnum
+    @com.fasterxml.jackson.annotation.JsonProperty("auth_plugin") val authPlugin: MysqlSettingsAuthPluginEnum
 )

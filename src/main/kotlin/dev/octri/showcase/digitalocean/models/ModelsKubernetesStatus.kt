@@ -5,16 +5,26 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `StatusMessages` API schema. */
+/**
+ * Typed representation of the `StatusMessages` API schema.
+ */
 data class StatusMessages(
-    /** Status information about the cluster which impacts it's lifecycle. */
+    /**
+     * Status information about the cluster which impacts it's lifecycle.
+     */
     val message: String? = null,
-    /** A timestamp in ISO8601 format that represents when the status message was emitted. */
-    val timestamp: OffsetDateTime? = null,
+    /**
+     * A timestamp in ISO8601 format that represents when the status message was emitted.
+     */
+    val timestamp: OffsetDateTime? = null
 )
 
-/** Typed representation of the `StatusMessagesResponse` API schema. */
+/**
+ * Typed representation of the `StatusMessagesResponse` API schema.
+ */
 data class StatusMessagesResponse(
-    /** Optional array value serialized in the `messages` wire field. */
+    /**
+     * Optional array value serialized in the `messages` wire field.
+     */
     val messages: List<StatusMessages>? = null
 )

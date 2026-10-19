@@ -5,455 +5,620 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Model Evaluation Run Summary - lightweight view used in run history list. */
+/**
+ * Model Evaluation Run Summary - lightweight view used in run history list.
+ */
 data class ApiModelEvaluationRunSummary(
-    /** Name of the candidate model being evaluated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_name")
-    val candidateModelName: String? = null,
     /**
-     * Whether the candidate is a served model (serverless platform, a dedicated deployment, or a
-     * model router) or an OHS-hosted agent config.
+     * Name of the candidate model being evaluated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_source")
-    val candidateModelSource: ApiCandidateModelSource? = null,
-    /** UUID of the candidate model being evaluated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_uuid")
-    val candidateModelUuid: String? = null,
-    /** Timestamp when the run was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Name of the dataset used for evaluation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_name") val candidateModelName: String? = null,
+    /**
+     * Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_source") val candidateModelSource: ApiCandidateModelSource? = null,
+    /**
+     * UUID of the candidate model being evaluated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_uuid") val candidateModelUuid: String? = null,
+    /**
+     * Timestamp when the run was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Name of the dataset used for evaluation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_name") val datasetName: String? = null,
-    /** UUID of the dataset used for evaluation. */
+    /**
+     * UUID of the dataset used for evaluation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_uuid") val datasetUuid: String? = null,
-    /** UUID of the evaluation run. */
+    /**
+     * UUID of the evaluation run.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("eval_run_uuid") val evalRunUuid: String? = null,
-    /** Optional `string` value serialized in the `judge_model_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_name")
-    val judgeModelName: String? = null,
-    /** Judge model used to score responses. */
-    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid")
-    val judgeModelUuid: String? = null,
-    /** Name of the evaluation run. */
+    /**
+     * Optional `string` value serialized in the `judge_model_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_name") val judgeModelName: String? = null,
+    /**
+     * Judge model used to score responses.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid") val judgeModelUuid: String? = null,
+    /**
+     * Name of the evaluation run.
+     */
     val name: String? = null,
     /**
-     * Per-phase progress for a model evaluation run. The candidate phase invokes the candidate
-     * model once per dataset row; the judge phase scores each candidate-success row with the
-     * configured metrics. Counts grow as the run advances; compare against total_rows to render a
-     * progress bar.
+     * Per-phase progress for a model evaluation run. The candidate phase invokes the candidate model once per dataset row; the judge phase scores each candidate-success row with the configured metrics. Counts grow as the run advances; compare against total_rows to render a progress bar.
      */
     val progress: ApiModelEvaluationRunProgress? = null,
-    /** Model Evaluation Run Statuses */
-    val status: ApiModelEvaluationRunStatus? = null,
+    /**
+     * Model Evaluation Run Statuses
+     */
+    val status: ApiModelEvaluationRunStatus? = null
 )
 
-/** Input/output modalities */
+/**
+ * Input/output modalities
+ */
 data class ApiModelModalities(
-    /** Optional array value serialized in the `input` wire field. */
+    /**
+     * Optional array value serialized in the `input` wire field.
+     */
     val input: List<String>? = null,
-    /** Optional array value serialized in the `output` wire field. */
-    val output: List<String>? = null,
+    /**
+     * Optional array value serialized in the `output` wire field.
+     */
+    val output: List<String>? = null
 )
 
-/** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+/**
+ * Pricing per million tokens (aligns with existing ModelPrice pattern)
+ */
 data class ApiModelPricing(
     /**
-     * Per-million cache read rate for standard chat models (token_type "cache read input").
-     * Multimodal models use text_cache_read_input_price_per_million /
-     * image_cache_read_input_price_per_million instead.
+     * Per-million cache read rate for standard chat models (token_type "cache read input"). Multimodal models use text_cache_read_input_price_per_million / image_cache_read_input_price_per_million instead.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_read_input_price_per_million")
-    val cacheReadInputPricePerMillion: Double? = null,
-    /** Price per million tokens written to the prompt cache with a 1-hour lifetime. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_1h_input_price_per_million")
-    val cacheWrite1hInputPricePerMillion: Double? = null,
-    /** Price per million tokens written to the prompt cache with a 5-minute lifetime. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_5m_input_price_per_million")
-    val cacheWrite5mInputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_read_input_price_per_million") val cacheReadInputPricePerMillion: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the
-     * `image_cache_read_input_price_per_million` wire field.
+     * Price per million tokens written to the prompt cache with a 1-hour lifetime.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_cache_read_input_price_per_million")
-    val imageCacheReadInputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_1h_input_price_per_million") val cacheWrite1hInputPricePerMillion: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the `image_input_price_per_million` wire
-     * field.
+     * Price per million tokens written to the prompt cache with a 5-minute lifetime.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_input_price_per_million")
-    val imageInputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_5m_input_price_per_million") val cacheWrite5mInputPricePerMillion: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the `image_output_price_per_million` wire
-     * field.
+     * Optional `double`-formatted value serialized in the `image_cache_read_input_price_per_million` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_output_price_per_million")
-    val imageOutputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("image_cache_read_input_price_per_million") val imageCacheReadInputPricePerMillion: Double? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `image_input_price_per_million` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_input_price_per_million") val imageInputPricePerMillion: Double? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `image_output_price_per_million` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_output_price_per_million") val imageOutputPricePerMillion: Double? = null,
     /**
      * Cache read input price per single token. Equivalent to cache_read_input_price_per_million.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_read")
-    val inputCacheRead: Double? = null,
-    /** Optional `double`-formatted value serialized in the `input_price_per_million` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_price_per_million")
-    val inputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_read") val inputCacheRead: Double? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `input_price_per_million` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_price_per_million") val inputPricePerMillion: Double? = null,
     /**
      * Optional `double`-formatted value serialized in the `output_price_per_million` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_price_per_million")
-    val outputPricePerMillion: Double? = null,
-    /** Optional `double`-formatted value serialized in the `price_per_audio` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_audio")
-    val pricePerAudio: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_price_per_million") val outputPricePerMillion: Double? = null,
     /**
-     * Unit-based pricing for non-token models (e.g., Fal AI image/video/audio generation, speech
-     * models). At most one of these is typically populated per model. Token-based models (chat,
-     * embeddings) leave all of these at 0 and populate input_price_per_million /
-     * output_price_per_million instead.
+     * Optional `double`-formatted value serialized in the `price_per_audio` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_image")
-    val pricePerImage: Double? = null,
-    /** Optional `double`-formatted value serialized in the `price_per_megapixel` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_megapixel")
-    val pricePerMegapixel: Double? = null,
-    /** Optional `double`-formatted value serialized in the `price_per_second` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_second")
-    val pricePerSecond: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_audio") val pricePerAudio: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the `price_per_thousand_characters` wire
-     * field.
+     * Unit-based pricing for non-token models (e.g., Fal AI image/video/audio generation, speech models). At most one of these is typically populated per model. Token-based models (chat, embeddings) leave all of these at 0 and populate input_price_per_million / output_price_per_million instead.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_thousand_characters")
-    val pricePerThousandCharacters: Double? = null,
-    /** Optional `double`-formatted value serialized in the `price_per_video` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_video")
-    val pricePerVideo: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_image") val pricePerImage: Double? = null,
     /**
-     * Price per million reasoning tokens. 0 if the model does not charge separately for reasoning
-     * tokens.
+     * Optional `double`-formatted value serialized in the `price_per_megapixel` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_price_per_million")
-    val reasoningPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_megapixel") val pricePerMegapixel: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the `text_cache_read_input_price_per_million`
-     * wire field.
+     * Optional `double`-formatted value serialized in the `price_per_second` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_cache_read_input_price_per_million")
-    val textCacheReadInputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_second") val pricePerSecond: Double? = null,
     /**
-     * Per-million token rates for models that bill text vs image tokens separately (e.g. OpenAI
-     * gpt-image-2). Standard chat models leave these at 0 and use input_price_per_million /
-     * output_price_per_million instead. Values align with usage token_type / internal/usage.Type
-     * string values for each meter.
+     * Optional `double`-formatted value serialized in the `price_per_thousand_characters` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_input_price_per_million")
-    val textInputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_thousand_characters") val pricePerThousandCharacters: Double? = null,
     /**
-     * Optional `double`-formatted value serialized in the `text_output_price_per_million` wire
-     * field.
+     * Optional `double`-formatted value serialized in the `price_per_video` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_output_price_per_million")
-    val textOutputPricePerMillion: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_video") val pricePerVideo: Double? = null,
+    /**
+     * Price per million reasoning tokens. 0 if the model does not charge separately for reasoning tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_price_per_million") val reasoningPricePerMillion: Double? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `text_cache_read_input_price_per_million` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_cache_read_input_price_per_million") val textCacheReadInputPricePerMillion: Double? = null,
+    /**
+     * Per-million token rates for models that bill text vs image tokens separately (e.g. OpenAI gpt-image-2). Standard chat models leave these at 0 and use input_price_per_million / output_price_per_million instead. Values align with usage token_type / internal/usage.Type string values for each meter.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_input_price_per_million") val textInputPricePerMillion: Double? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `text_output_price_per_million` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_output_price_per_million") val textOutputPricePerMillion: Double? = null
 )
 
-/** The complete set of prices for a model, covering every available variant. */
+/**
+ * The complete set of prices for a model, covering every available variant.
+ */
 data class ApiModelPricingDetail(
-    /** Each available pricing variant for the model. */
+    /**
+     * Each available pricing variant for the model.
+     */
     val variants: List<ApiModelPricingVariant>? = null
 )
 
-/** Pricing entry for a specific model. */
+/**
+ * Pricing entry for a specific model.
+ */
 data class ApiModelPricingEntry(
-    /** Model name (for display purposes). */
+    /**
+     * Model name (for display purposes).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("model_name") val modelName: String? = null,
-    /** Model UUID. */
+    /**
+     * Model UUID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("model_uuid") val modelUuid: String? = null,
-    /** Token pricing breakdown for a single model. */
+    /**
+     * Token pricing breakdown for a single model.
+     */
     val pricing: ApiTokenPricing? = null,
-    /** Number of prompts/rows routed to this model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_count") val promptCount: Long? = null,
+    /**
+     * Number of prompts/rows routed to this model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_count") val promptCount: Long? = null
 )
 
 /**
- * A time window during which the model's rates stay the same. Together these intervals show how
- * pricing changes over the course of a day.
+ * A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
  */
 data class ApiModelPricingInterval(
-    /** End of the interval, exclusive. Always on the hour. */
+    /**
+     * End of the interval, exclusive. Always on the hour.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("end_time") val endTime: OffsetDateTime? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
     val prices: ApiModelPricing? = null,
-    /** Start of the interval, inclusive. Always on the hour. */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_time")
-    val startTime: OffsetDateTime? = null,
+    /**
+     * Start of the interval, inclusive. Always on the hour.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: OffsetDateTime? = null
 )
 
-/** Pricing for one variant of a model: a specific tier and billing mode. */
+/**
+ * Pricing for one variant of a model: a specific tier and billing mode.
+ */
 data class ApiModelPricingVariant(
-    /** Currency code for this variant's rates (e.g. `USD`). */
+    /**
+     * Currency code for this variant's rates (e.g. `USD`).
+     */
     val currency: String? = null,
-    /** Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`). */
+    /**
+     * Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`).
+     */
     val label: String? = null,
     /**
-     * Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE:
-     * Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous
-     * batch requests.
+     * Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE: Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous batch requests.
      */
     val mode: ApiModelBillingMode? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
     val prices: ApiModelPricing? = null,
     /**
-     * Pricing that varies over time. When present, the rates move between the low and high bounds
-     * below across the intervals in the schedule.
+     * Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scaled_pricing")
-    val scaledPricing: ApiModelScaledPricing? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scaled_pricing") val scaledPricing: ApiModelScaledPricing? = null,
     /**
-     * A pricing variant of a model, such as a faster serving option or a larger context window. -
-     * MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster,
-     * higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the
-     * 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token
-     * context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
+     * A pricing variant of a model, such as a faster serving option or a larger context window. - MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster, higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
      */
-    val tier: ApiModelPricingTier? = null,
+    val tier: ApiModelPricingTier? = null
 )
 
-/** Typed representation of the `ApiModelProviderKeyInfo` API schema. */
+/**
+ * Typed representation of the `ApiModelProviderKeyInfo` API schema.
+ */
 data class ApiModelProviderKeyInfo(
-    /** API key ID */
+    /**
+     * API key ID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_uuid") val apiKeyUuid: String? = null,
-    /** Key creation date */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Created by user id from DO */
+    /**
+     * Key creation date
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Created by user id from DO
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-    /** Key deleted date */
-    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at")
-    val deletedAt: OffsetDateTime? = null,
-    /** Models supported by the openAI api key */
+    /**
+     * Key deleted date
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: OffsetDateTime? = null,
+    /**
+     * Models supported by the openAI api key
+     */
     val models: List<ApiModel>? = null,
-    /** Name of the key */
+    /**
+     * Name of the key
+     */
     val name: String? = null,
-    /** Optional enumerated value serialized in the `provider` wire field. */
+    /**
+     * Optional enumerated value serialized in the `provider` wire field.
+     */
     val provider: ApiModelProvider? = null,
-    /** Key last updated date */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    /**
+     * Key last updated date
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** A machine learning model stored on the GenAI platform */
+/**
+ * A machine learning model stored on the GenAI platform
+ */
 data class ApiModelPublic(
-    /** Agreement Description */
+    /**
+     * Agreement Description
+     */
     val agreement: ApiAgreement? = null,
-    /** Benchmark scores for this model, stored as arbitrary JSON */
-    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score")
-    val benchmarkScore: Map<String, Any>? = null,
-    /** Model capabilities (inference, reasoning, vectorization, etc.) */
+    /**
+     * Benchmark scores for this model, stored as arbitrary JSON
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score") val benchmarkScore: Map<String, Any>? = null,
+    /**
+     * Model capabilities (inference, reasoning, vectorization, etc.)
+     */
     val capabilities: List<String>? = null,
-    /** Context window (maximum tokens) */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_window")
-    val contextWindow: String? = null,
-    /** Creation date / time */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Model description */
+    /**
+     * Context window (maximum tokens)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_window") val contextWindow: String? = null,
+    /**
+     * Creation date / time
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Model description
+     */
     val description: String? = null,
-    /** Available endpoints and their capabilities */
+    /**
+     * Available endpoints and their capabilities
+     */
     val endpoints: List<ApiModelEndpoint>? = null,
-    /** Human-readable model identifier */
+    /**
+     * Human-readable model identifier
+     */
     val id: String? = null,
-    /** True if it is a foundational model provided by do */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_foundational")
-    val isFoundational: Boolean? = null,
-    /** Default chunking size limit to show in UI */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_default_chunk_size")
-    val kbDefaultChunkSize: Long? = null,
-    /** Maximum chunk size limit of model */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_max_chunk_size")
-    val kbMaxChunkSize: Long? = null,
-    /** Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_min_chunk_size")
-    val kbMinChunkSize: Long? = null,
-    /** Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life) */
-    @com.fasterxml.jackson.annotation.JsonProperty("lifecycle_status")
-    val lifecycleStatus: String? = null,
-    /** Input/output modalities */
+    /**
+     * True if it is a foundational model provided by do
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_foundational") val isFoundational: Boolean? = null,
+    /**
+     * Default chunking size limit to show in UI
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_default_chunk_size") val kbDefaultChunkSize: Long? = null,
+    /**
+     * Maximum chunk size limit of model
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_max_chunk_size") val kbMaxChunkSize: Long? = null,
+    /**
+     * Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_min_chunk_size") val kbMinChunkSize: Long? = null,
+    /**
+     * Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("lifecycle_status") val lifecycleStatus: String? = null,
+    /**
+     * Input/output modalities
+     */
     val modalities: ApiModelModalities? = null,
-    /** Model availability (serverless, dedicated, etc.) */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_availability")
-    val modelAvailability: String? = null,
-    /** Display name of the model */
+    /**
+     * Model availability (serverless, dedicated, etc.)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_availability") val modelAvailability: String? = null,
+    /**
+     * Display name of the model
+     */
     val name: String? = null,
-    /** Parameter count in billions */
-    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count")
-    val parameterCount: Float? = null,
-    /** Unique id of the model, this model is based on */
+    /**
+     * Parameter count in billions
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count") val parameterCount: Float? = null,
+    /**
+     * Unique id of the model, this model is based on
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_uuid") val parentUuid: String? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
     val pricing: ApiModelPricing? = null,
-    /** Optional enumerated value serialized in the `provider` wire field. */
+    /**
+     * Optional enumerated value serialized in the `provider` wire field.
+     */
     val provider: ApiModelProvider? = null,
-    /** Available reasoning efforts for this model */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_efforts")
-    val reasoningEfforts: List<String>? = null,
-    /** Playground settings derived from model metadata */
+    /**
+     * Available reasoning efforts for this model
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_efforts") val reasoningEfforts: List<String>? = null,
+    /**
+     * Playground settings derived from model metadata
+     */
     val settings: List<ApiModelSetting>? = null,
-    /** Whether this model supports extended thinking (Anthropic models) */
+    /**
+     * Whether this model supports extended thinking (Anthropic models)
+     */
     val thinking: Boolean? = null,
-    /** Model type (chat, embedding, image, reasoning, coding) */
+    /**
+     * Model type (chat, embedding, image, reasoning, coding)
+     */
     val type: String? = null,
-    /** Last modified */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** Model has been fully uploaded */
-    @com.fasterxml.jackson.annotation.JsonProperty("upload_complete")
-    val uploadComplete: Boolean? = null,
-    /** Download url */
+    /**
+     * Last modified
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * Model has been fully uploaded
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("upload_complete") val uploadComplete: Boolean? = null,
+    /**
+     * Download url
+     */
     val url: String? = null,
-    /** Unique id */
+    /**
+     * Unique id
+     */
     val uuid: String? = null,
-    /** Version Information about a Model */
-    val version: ApiModelVersion? = null,
+    /**
+     * Version Information about a Model
+     */
+    val version: ApiModelVersion? = null
 )
 
-/** Model router */
+/**
+ * Model router
+ */
 data class ApiModelRouter(
-    /** Optional object value serialized in the `config` wire field. */
+    /**
+     * Optional object value serialized in the `config` wire field.
+     */
     val config: ApiModelRouterConfig? = null,
-    /** Creation date / time */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Description */
+    /**
+     * Creation date / time
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Description
+     */
     val description: String? = null,
-    /** Name of the model router */
+    /**
+     * Name of the model router
+     */
     val name: String? = null,
-    /** Target regions for the router */
+    /**
+     * Target regions for the router
+     */
     val regions: List<String>? = null,
-    /** Last modified */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** Unique id */
-    val uuid: String? = null,
+    /**
+     * Last modified
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * Unique id
+     */
+    val uuid: String? = null
 )
 
-/** Typed representation of the `ApiModelRouterConfig` API schema. */
+/**
+ * Typed representation of the `ApiModelRouterConfig` API schema.
+ */
 data class ApiModelRouterConfig(
-    /** Router-level fallback models */
-    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models")
-    val fallbackModels: List<String>? = null,
-    /** Task routing policies */
-    val policies: List<ApiModelRouterTaskPolicy>? = null,
+    /**
+     * Router-level fallback models
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models") val fallbackModels: List<String>? = null,
+    /**
+     * Task routing policies
+     */
+    val policies: List<ApiModelRouterTaskPolicy>? = null
 )
 
-/** Model router preset used to prefill new router configurations. */
+/**
+ * Model router preset used to prefill new router configurations.
+ */
 data class ApiModelRouterPreset(
-    /** Optional object value serialized in the `config` wire field. */
+    /**
+     * Optional object value serialized in the `config` wire field.
+     */
     val config: ApiModelRouterConfig? = null,
-    /** Display name for UI surfaces */
+    /**
+     * Display name for UI surfaces
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /** Long description for details views */
-    @com.fasterxml.jackson.annotation.JsonProperty("long_description")
-    val longDescription: String? = null,
-    /** Short description for list views */
-    @com.fasterxml.jackson.annotation.JsonProperty("short_description")
-    val shortDescription: String? = null,
-    /** Stable slug for routing usage */
-    val slug: String? = null,
+    /**
+     * Long description for details views
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("long_description") val longDescription: String? = null,
+    /**
+     * Short description for list views
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("short_description") val shortDescription: String? = null,
+    /**
+     * Stable slug for routing usage
+     */
+    val slug: String? = null
 )
 
-/** Selection policy preference for choosing among assigned models. */
+/**
+ * Selection policy preference for choosing among assigned models.
+ */
 data class ApiModelRouterSelectionPolicy(
-    /** One of: none, cheapest, fastest */
+    /**
+     * One of: none, cheapest, fastest
+     */
     val prefer: String? = null
 )
 
-/** Task definition embedded in a model router config. */
+/**
+ * Task definition embedded in a model router config.
+ */
 data class ApiModelRouterTaskDetails(
-    /** Short task description */
+    /**
+     * Short task description
+     */
     val description: String? = null,
-    /** Task name */
-    val name: String? = null,
-)
-
-/** Model router policy */
-data class ApiModelRouterTaskPolicy(
-    /** Task definition embedded in a model router config. */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_task")
-    val customTask: ApiModelRouterTaskDetails? = null,
-    /** Models assigned to the task */
-    val models: List<String>? = null,
-    /** Selection policy preference for choosing among assigned models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy")
-    val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
-    /** Task slug */
-    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null,
-)
-
-/** Task preset that can be referenced by slug in model router policies. */
-data class ApiModelRouterTaskPreset(
-    /** Higher-level grouping used by the UI */
-    val category: String? = null,
-    /** Task description */
-    val description: String? = null,
-    /** Default models assigned to this task */
-    val models: List<String>? = null,
-    /** Display name */
-    val name: String? = null,
-    /** Selection policy preference for choosing among assigned models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy")
-    val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
-    /** Lightweight labels for filtering */
-    val tags: List<String>? = null,
-    /** Task slug */
-    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null,
+    /**
+     * Task name
+     */
+    val name: String? = null
 )
 
 /**
- * Pricing that varies over time. When present, the rates move between the low and high bounds below
- * across the intervals in the schedule.
+ * Model router policy
+ */
+data class ApiModelRouterTaskPolicy(
+    /**
+     * Task definition embedded in a model router config.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_task") val customTask: ApiModelRouterTaskDetails? = null,
+    /**
+     * Models assigned to the task
+     */
+    val models: List<String>? = null,
+    /**
+     * Selection policy preference for choosing among assigned models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy") val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
+    /**
+     * Task slug
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null
+)
+
+/**
+ * Task preset that can be referenced by slug in model router policies.
+ */
+data class ApiModelRouterTaskPreset(
+    /**
+     * Higher-level grouping used by the UI
+     */
+    val category: String? = null,
+    /**
+     * Task description
+     */
+    val description: String? = null,
+    /**
+     * Default models assigned to this task
+     */
+    val models: List<String>? = null,
+    /**
+     * Display name
+     */
+    val name: String? = null,
+    /**
+     * Selection policy preference for choosing among assigned models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy") val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
+    /**
+     * Lightweight labels for filtering
+     */
+    val tags: List<String>? = null,
+    /**
+     * Task slug
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null
+)
+
+/**
+ * Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
  */
 data class ApiModelScaledPricing(
     /**
-     * The pricing schedule as a series of consecutive time intervals, ordered by start time.
-     * Neighboring hours with the same rates are combined, so each interval represents a distinct
-     * price.
+     * The pricing schedule as a series of consecutive time intervals, ordered by start time. Neighboring hours with the same rates are combined, so each interval represents a distinct price.
      */
     val intervals: List<ApiModelPricingInterval>? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_prices")
-    val maxPrices: ApiModelPricing? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
-    @com.fasterxml.jackson.annotation.JsonProperty("min_prices")
-    val minPrices: ApiModelPricing? = null,
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_prices") val maxPrices: ApiModelPricing? = null,
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("min_prices") val minPrices: ApiModelPricing? = null
 )
 
-/** A configurable setting for a model in the playground */
+/**
+ * A configurable setting for a model in the playground
+ */
 data class ApiModelSetting(
-    /** String default value (for type="dropdown", e.g. "medium") */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_string")
-    val defaultString: String? = null,
-    /** Numeric default value (for type="number") */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_value")
-    val defaultValue: Double? = null,
-    /** Maximum allowed value (for type="number") */
+    /**
+     * String default value (for type="dropdown", e.g. "medium")
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_string") val defaultString: String? = null,
+    /**
+     * Numeric default value (for type="number")
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: Double? = null,
+    /**
+     * Maximum allowed value (for type="number")
+     */
     val max: Double? = null,
-    /** Minimum allowed value (for type="number") */
+    /**
+     * Minimum allowed value (for type="number")
+     */
     val min: Double? = null,
-    /** Setting key name (e.g. "max_tokens", "temperature", "resolution") */
+    /**
+     * Setting key name (e.g. "max_tokens", "temperature", "resolution")
+     */
     val name: String? = null,
-    /** Allowed values for dropdown selections (for type="dropdown") */
+    /**
+     * Allowed values for dropdown selections (for type="dropdown")
+     */
     val options: List<String>? = null,
-    /** Step increment for numeric settings (for type="number") */
+    /**
+     * Step increment for numeric settings (for type="number")
+     */
     val step: Double? = null,
-    /** Setting value type: "number" or "dropdown" */
-    val type: String? = null,
+    /**
+     * Setting value type: "number" or "dropdown"
+     */
+    val type: String? = null
 )
 
-/** Version Information about a Model */
+/**
+ * Version Information about a Model
+ */
 data class ApiModelVersion(
-    /** Major version number */
+    /**
+     * Major version number
+     */
     val major: Long? = null,
-    /** Minor version number */
+    /**
+     * Minor version number
+     */
     val minor: Long? = null,
-    /** Patch version number */
-    val patch: Long? = null,
+    /**
+     * Patch version number
+     */
+    val patch: Long? = null
 )

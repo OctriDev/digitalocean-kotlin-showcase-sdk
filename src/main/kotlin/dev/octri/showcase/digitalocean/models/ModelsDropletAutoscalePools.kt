@@ -5,278 +5,335 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AllAutoscalePools` API schema. */
+/**
+ * Typed representation of the `AllAutoscalePools` API schema.
+ */
 data class AllAutoscalePools(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pools")
-    val autoscalePools: List<AutoscalePool>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pools") val autoscalePools: List<AutoscalePool>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `AllMembers` API schema. */
+/**
+ * Typed representation of the `AllMembers` API schema.
+ */
 data class AllMembers(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val droplets: List<Member>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `AutoscalePool` API schema. */
+/**
+ * Typed representation of the `AutoscalePool` API schema.
+ */
 data class AutoscalePool(
     /**
-     * A unique identifier for each autoscale pool instance. This is automatically generated upon
-     * autoscale pool creation.
+     * A unique identifier for each autoscale pool instance. This is automatically generated upon autoscale pool creation.
      */
     val id: String,
-    /** The human-readable name set for the autoscale pool. */
+    /**
+     * The human-readable name set for the autoscale pool.
+     */
     val name: String,
     /**
-     * The scaling configuration for an autoscale pool, which is how the pool scales up and down
-     * (either by resource utilization or static configuration).
+     * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
      */
     val config: AutoscalePoolConfig,
-    /** Required object value serialized in the `droplet_template` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_template")
-    val dropletTemplate: AutoscalePoolDropletTemplate,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the
-     * autoscale pool was created.
+     * Required object value serialized in the `droplet_template` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_template") val dropletTemplate: AutoscalePoolDropletTemplate,
+    /**
+     * A time value given in ISO8601 combined date and time format that represents when the autoscale pool was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the
-     * autoscale pool was last updated.
+     * A time value given in ISO8601 combined date and time format that represents when the autoscale pool was last updated.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** The current status of the autoscale pool. */
+    /**
+     * The current status of the autoscale pool.
+     */
     val status: AutoscalePoolStatusEnum,
-    /** The number of active Droplets in the autoscale pool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("active_resources_count")
-    val activeResourcesCount: Long,
-    /** Optional object value serialized in the `current_utilization` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("current_utilization")
-    val currentUtilization: CurrentUtilization? = null,
+    /**
+     * The number of active Droplets in the autoscale pool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("active_resources_count") val activeResourcesCount: Long,
+    /**
+     * Optional object value serialized in the `current_utilization` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("current_utilization") val currentUtilization: CurrentUtilization? = null
 )
 
 /**
- * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either
- * by resource utilization or static configuration).
+ * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolStaticConfig::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolDynamicConfig::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolDynamicConfig::class)
 )
 sealed interface AutoscalePoolConfig
 
-/** Typed representation of the `AutoscalePoolCreate` API schema. */
+/**
+ * Typed representation of the `AutoscalePoolCreate` API schema.
+ */
 data class AutoscalePoolCreate(
-    /** The human-readable name of the autoscale pool. This field cannot be updated */
+    /**
+     * The human-readable name of the autoscale pool. This field cannot be updated
+     */
     val name: String,
     /**
-     * The scaling configuration for an autoscale pool, which is how the pool scales up and down
-     * (either by resource utilization or static configuration).
+     * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
      */
     val config: AutoscalePoolCreateConfig,
-    /** Required object value serialized in the `droplet_template` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_template")
-    val dropletTemplate: AutoscalePoolDropletTemplate,
+    /**
+     * Required object value serialized in the `droplet_template` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_template") val dropletTemplate: AutoscalePoolDropletTemplate
 )
 
 /**
- * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either
- * by resource utilization or static configuration).
+ * The scaling configuration for an autoscale pool, which is how the pool scales up and down (either by resource utilization or static configuration).
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolStaticConfig::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolDynamicConfig::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoscalePoolDynamicConfig::class)
 )
 sealed interface AutoscalePoolCreateConfig
 
-/** Typed representation of the `AutoscalePoolCreateResponse` API schema. */
+/**
+ * Typed representation of the `AutoscalePoolCreateResponse` API schema.
+ */
 data class AutoscalePoolCreateResponse(
-    /** Optional object value serialized in the `autoscale_pool` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pool")
-    val autoscalePool: AutoscalePool? = null
+    /**
+     * Optional object value serialized in the `autoscale_pool` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pool") val autoscalePool: AutoscalePool? = null
 )
 
-/** Typed representation of the `AutoscalePoolDropletTemplate` API schema. */
+/**
+ * Typed representation of the `AutoscalePoolDropletTemplate` API schema.
+ */
 data class AutoscalePoolDropletTemplate(
-    /** The datacenter in which all of the Droplets will be created. */
+    /**
+     * The datacenter in which all of the Droplets will be created.
+     */
     val region: AutoscalePoolDropletTemplateRegionEnum,
-    /** The Droplet size to be used for all Droplets in the autoscale pool. */
+    /**
+     * The Droplet size to be used for all Droplets in the autoscale pool.
+     */
     val size: String,
     /**
-     * The Droplet image to be used for all Droplets in the autoscale pool. You may specify the slug
-     * or the image ID.
+     * The Droplet image to be used for all Droplets in the autoscale pool. You may specify the slug or the image ID.
      */
     val image: String,
     /**
-     * The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify
-     * the key ID or the fingerprint. Requires `ssh_key:read` scope.
+     * The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify the key ID or the fingerprint. Requires `ssh_key:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("ssh_keys") val sshKeys: List<String>,
-    /** The name(s) to be applied to all Droplets in the autoscale pool. */
+    /**
+     * The name(s) to be applied to all Droplets in the autoscale pool.
+     */
     val name: String? = null,
     /**
      * The tags to apply to each of the Droplets in the autoscale pool. Requires `tag:read` scope.
      */
     val tags: List<String>? = null,
     /**
-     * The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the
-     * region where you want to create the Droplets. Requires `vpc:read` scope.
+     * The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the region where you want to create the Droplets. Requires `vpc:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * Installs the Droplet agent. This must be set to true to monitor Droplets for resource
-     * utilization scaling.
+     * Installs the Droplet agent. This must be set to true to monitor Droplets for resource utilization scaling.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent")
-    val withDropletAgent: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("with_droplet_agent") val withDropletAgent: Boolean? = null,
     /**
-     * The project that the Droplets in the autoscale pool will belong to. Requires `project:read`
-     * scope.
+     * The project that the Droplets in the autoscale pool will belong to. Requires `project:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Assigns a unique IPv6 address to each of the Droplets in the autoscale pool. */
+    /**
+     * Assigns a unique IPv6 address to each of the Droplets in the autoscale pool.
+     */
     val ipv6: Boolean? = null,
     /**
-     * A string containing user data that cloud-init consumes to configure a Droplet on first boot.
-     * User data is often a cloud-config file or Bash script. It must be plain text and may not
-     * exceed 64 KiB in size.
+     * A string containing user data that cloud-init consumes to configure a Droplet on first boot. User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_data") val userData: String? = null,
     /**
-     * An optional boolean indicating whether the Droplets should be created with public networking
-     * or not. By default, all Droplets are created with public networking available. If explicitly
-     * set to `false`, only private networking will be enabled, and public networking will be
-     * disabled; currently this means that it will not have any public static or Reserved IPv4 or
-     * IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also
-     * be `false`.
+     * An optional boolean indicating whether the Droplets should be created with public networking or not. By default, all Droplets are created with public networking available. If explicitly set to `false`, only private networking will be enabled, and public networking will be disabled; currently this means that it will not have any public static or Reserved IPv4 or IPv6 address, nor can one be assigned later. If explicitly set to `false`, `ipv6` must also be `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_networking")
-    val publicNetworking: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("public_networking") val publicNetworking: Boolean? = null
 )
 
-/** Typed representation of the `AutoscalePoolDynamicConfig` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `AutoscalePoolDynamicConfig` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AutoscalePoolDynamicConfig(
-    /** The minimum number of Droplets in an autoscale pool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("min_instances") val minInstances: Long,
-    /** The maximum number of Droplets in an autoscale pool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_instances") val maxInstances: Long,
-    /** Target CPU utilization as a decimal. */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_cpu_utilization")
-    val targetCpuUtilization: Float? = null,
-    /** Target memory utilization as a decimal. */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_memory_utilization")
-    val targetMemoryUtilization: Float? = null,
     /**
-     * The number of minutes to wait between scaling events in an autoscale pool. Defaults to 10
-     * minutes.
+     * The minimum number of Droplets in an autoscale pool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("cooldown_minutes")
-    val cooldownMinutes: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("min_instances") val minInstances: Long,
+    /**
+     * The maximum number of Droplets in an autoscale pool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_instances") val maxInstances: Long,
+    /**
+     * Target CPU utilization as a decimal.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_cpu_utilization") val targetCpuUtilization: Float? = null,
+    /**
+     * Target memory utilization as a decimal.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_memory_utilization") val targetMemoryUtilization: Float? = null,
+    /**
+     * The number of minutes to wait between scaling events in an autoscale pool. Defaults to 10 minutes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cooldown_minutes") val cooldownMinutes: Long? = null
 ) : AutoscalePoolConfig, AutoscalePoolCreateConfig
 
-/** Typed representation of the `AutoscalePoolStaticConfig` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `AutoscalePoolStaticConfig` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AutoscalePoolStaticConfig(
-    /** Fixed number of instances in an autoscale pool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_number_instances")
-    val targetNumberInstances: Long
+    /**
+     * Fixed number of instances in an autoscale pool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_number_instances") val targetNumberInstances: Long
 ) : AutoscalePoolConfig, AutoscalePoolCreateConfig
 
-/** Typed representation of the `CurrentUtilization` API schema. */
+/**
+ * Typed representation of the `CurrentUtilization` API schema.
+ */
 data class CurrentUtilization(
-    /** The average memory utilization of the autoscale pool. */
+    /**
+     * The average memory utilization of the autoscale pool.
+     */
     val memory: Float? = null,
-    /** The average CPU utilization of the autoscale pool. */
-    val cpu: Float? = null,
+    /**
+     * The average CPU utilization of the autoscale pool.
+     */
+    val cpu: Float? = null
 )
 
-/** Typed representation of the `ExistingAutoscalePool` API schema. */
+/**
+ * Typed representation of the `ExistingAutoscalePool` API schema.
+ */
 data class ExistingAutoscalePool(
-    /** Optional object value serialized in the `autoscale_pool` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pool")
-    val autoscalePool: AutoscalePool? = null
+    /**
+     * Optional object value serialized in the `autoscale_pool` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("autoscale_pool") val autoscalePool: AutoscalePool? = null
 )
 
-/** Typed representation of the `History` API schema. */
+/**
+ * Typed representation of the `History` API schema.
+ */
 data class History(
-    /** The unique identifier of the history event. */
+    /**
+     * The unique identifier of the history event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("history_event_id") val historyEventId: String,
-    /** The current number of Droplets in the autoscale pool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("current_instance_count")
-    val currentInstanceCount: Long,
-    /** The target number of Droplets for the autoscale pool after the scaling event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("desired_instance_count")
-    val desiredInstanceCount: Long,
-    /** The reason for the scaling event. */
+    /**
+     * The current number of Droplets in the autoscale pool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("current_instance_count") val currentInstanceCount: Long,
+    /**
+     * The target number of Droplets for the autoscale pool after the scaling event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("desired_instance_count") val desiredInstanceCount: Long,
+    /**
+     * The reason for the scaling event.
+     */
     val reason: HistoryReasonEnum,
-    /** The status of the scaling event. */
+    /**
+     * The status of the scaling event.
+     */
     val status: HistoryStatusEnum,
-    /** The creation time of the history event in ISO8601 combined date and time format. */
+    /**
+     * The creation time of the history event in ISO8601 combined date and time format.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** The last updated time of the history event in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
+    /**
+     * The last updated time of the history event in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime
 )
 
-/** Typed representation of the `HistoryEvents` API schema. */
+/**
+ * Typed representation of the `HistoryEvents` API schema.
+ */
 data class HistoryEvents(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val history: List<History>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
-)
-
-/** Typed representation of the `Member` API schema. */
-data class Member(
-    /** The unique identifier of the Droplet. */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long,
-    /** The creation time of the Droplet in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** The last updated time of the Droplet in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** The health status of the Droplet. */
-    @com.fasterxml.jackson.annotation.JsonProperty("health_status")
-    val healthStatus: MemberHealthStatusEnum,
-    /** The power status of the Droplet. */
-    val status: MemberStatusEnum,
-    /** Required object value serialized in the `current_utilization` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("current_utilization")
-    val currentUtilization: MemberCurrentUtilization,
     /**
-     * A human-readable description of why the Droplet is unhealthy. Only present when
-     * `health_status` is `unhealthy`.
+     * Optional object value serialized in the `links` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("unhealthy_reason")
-    val unhealthyReason: String? = null,
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `MemberCurrentUtilization` API schema. */
+/**
+ * Typed representation of the `Member` API schema.
+ */
+data class Member(
+    /**
+     * The unique identifier of the Droplet.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long,
+    /**
+     * The creation time of the Droplet in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
+    /**
+     * The last updated time of the Droplet in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
+    /**
+     * The health status of the Droplet.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("health_status") val healthStatus: MemberHealthStatusEnum,
+    /**
+     * The power status of the Droplet.
+     */
+    val status: MemberStatusEnum,
+    /**
+     * Required object value serialized in the `current_utilization` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("current_utilization") val currentUtilization: MemberCurrentUtilization,
+    /**
+     * A human-readable description of why the Droplet is unhealthy. Only present when `health_status` is `unhealthy`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unhealthy_reason") val unhealthyReason: String? = null
+)
+
+/**
+ * Typed representation of the `MemberCurrentUtilization` API schema.
+ */
 data class MemberCurrentUtilization(
-    /** The memory utilization average of the individual Droplet. */
+    /**
+     * The memory utilization average of the individual Droplet.
+     */
     val memory: Float? = null,
-    /** The CPU utilization average of the individual Droplet. */
-    val cpu: Float? = null,
+    /**
+     * The CPU utilization average of the individual Droplet.
+     */
+    val cpu: Float? = null
 )

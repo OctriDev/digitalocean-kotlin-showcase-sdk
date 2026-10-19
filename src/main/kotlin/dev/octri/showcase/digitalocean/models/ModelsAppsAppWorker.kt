@@ -3,71 +3,90 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AppWorkerSpec` API schema. */
+/**
+ * Typed representation of the `AppWorkerSpec` API schema.
+ */
 data class AppWorkerSpec(
-    /** The name. Must be unique across all components within the same app. */
+    /**
+     * The name. Must be unique across all components within the same app.
+     */
     val name: String,
-    /** Optional object value serialized in the `git` wire field. */
+    /**
+     * Optional object value serialized in the `git` wire field.
+     */
     val git: AppsGitSourceSpec? = null,
-    /** Optional object value serialized in the `github` wire field. */
+    /**
+     * Optional object value serialized in the `github` wire field.
+     */
     val github: AppsGithubSourceSpec? = null,
-    /** Optional object value serialized in the `gitlab` wire field. */
+    /**
+     * Optional object value serialized in the `gitlab` wire field.
+     */
     val gitlab: AppsGitlabSourceSpec? = null,
-    /** Optional object value serialized in the `bitbucket` wire field. */
+    /**
+     * Optional object value serialized in the `bitbucket` wire field.
+     */
     val bitbucket: AppsBitbucketSourceSpec? = null,
-    /** Optional object value serialized in the `image` wire field. */
+    /**
+     * Optional object value serialized in the `image` wire field.
+     */
     val image: AppsImageSourceSpec? = null,
     /**
-     * The path to the Dockerfile relative to the root of the repo. If set, it will be used to build
-     * this component. Otherwise, App Platform will attempt to build it using buildpacks.
+     * The path to the Dockerfile relative to the root of the repo. If set, it will be used to build this component. Otherwise, App Platform will attempt to build it using buildpacks.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("dockerfile_path")
-    val dockerfilePath: String? = null,
-    /** An optional build command to run while building this component from source. */
-    @com.fasterxml.jackson.annotation.JsonProperty("build_command")
-    val buildCommand: String? = null,
-    /** An optional run command to override the component's default. */
+    @com.fasterxml.jackson.annotation.JsonProperty("dockerfile_path") val dockerfilePath: String? = null,
+    /**
+     * An optional build command to run while building this component from source.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("build_command") val buildCommand: String? = null,
+    /**
+     * An optional run command to override the component's default.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_command") val runCommand: String? = null,
     /**
-     * An optional path to the working directory to use for the build. For Dockerfile builds, this
-     * will be used as the build context. Must be relative to the root of the repo.
+     * An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_dir") val sourceDir: String? = null,
-    /** A list of environment variables made available to the component. */
+    /**
+     * A list of environment variables made available to the component.
+     */
     val envs: List<AppVariableDefinition>? = null,
     /**
-     * An environment slug describing the type of this app. For a full list, please refer to the
-     * product documentation.
+     * An environment slug describing the type of this app. For a full list, please refer to the product documentation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment_slug")
-    val environmentSlug: String? = null,
-    /** A list of configured log forwarding destinations. */
-    @com.fasterxml.jackson.annotation.JsonProperty("log_destinations")
-    val logDestinations: List<AppLogDestinationDefinition>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("environment_slug") val environmentSlug: String? = null,
     /**
-     * The amount of instances that this component should be scaled to. Default: 1. Must not be set
-     * if autoscaling is used.
+     * A list of configured log forwarding destinations.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("instance_count")
-    val instanceCount: Long? = null,
-    /** The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb` */
-    @com.fasterxml.jackson.annotation.JsonProperty("instance_size_slug")
-    val instanceSizeSlug: AppComponentInstanceBaseInstanceSizeSlugVariant0Enum? = null,
-    /** Configuration for automatically scaling this component based on metrics. */
+    @com.fasterxml.jackson.annotation.JsonProperty("log_destinations") val logDestinations: List<AppLogDestinationDefinition>? = null,
+    /**
+     * The amount of instances that this component should be scaled to. Default: 1. Must not be set if autoscaling is used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("instance_count") val instanceCount: Long? = null,
+    /**
+     * The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("instance_size_slug") val instanceSizeSlug: AppComponentInstanceBaseInstanceSizeSlugVariant0Enum? = null,
+    /**
+     * Configuration for automatically scaling this component based on metrics.
+     */
     val autoscaling: AppAutoscalingSpec? = null,
-    /** Optional object value serialized in the `termination` wire field. */
+    /**
+     * Optional object value serialized in the `termination` wire field.
+     */
     val termination: AppWorkerSpecTermination? = null,
-    /** Optional object value serialized in the `liveness_health_check` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("liveness_health_check")
-    val livenessHealthCheck: AppHealthCheckSpec? = null,
+    /**
+     * Optional object value serialized in the `liveness_health_check` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("liveness_health_check") val livenessHealthCheck: AppHealthCheckSpec? = null
 )
 
-/** Typed representation of the `AppWorkerSpecTermination` API schema. */
+/**
+ * Typed representation of the `AppWorkerSpecTermination` API schema.
+ */
 data class AppWorkerSpecTermination(
     /**
-     * The number of seconds to wait between sending a TERM signal to a container and issuing a KILL
-     * which causes immediate shutdown. (Default 120)
+     * The number of seconds to wait between sending a TERM signal to a container and issuing a KILL which causes immediate shutdown. (Default 120)
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("grace_period_seconds")
-    val gracePeriodSeconds: Int? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("grace_period_seconds") val gracePeriodSeconds: Int? = null
 )

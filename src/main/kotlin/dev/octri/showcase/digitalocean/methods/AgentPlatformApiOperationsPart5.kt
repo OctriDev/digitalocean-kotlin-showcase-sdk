@@ -37,42 +37,14 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AgentPlatformApiGenaiGetOauth2UrlOperation {
     /**
-     * To generate an Oauth2-URL for use with your localhost, send a GET request to
-     * `/v2/gen-ai/oauth2/url`. Pass 'localhost:3000 as redirect_url
+     * To generate an Oauth2-URL for use with your localhost, send a GET request to `/v2/gen-ai/oauth2/url`. Pass 'localhost:3000 as redirect_url
      *
      * @param type Type "google" / "dropbox".
      * @param redirectUrl The redirect url.
      */
-    fun genaiGetOauth2Url(
-        clientConfig: ClientConfig,
-        type: String? = null,
-        redirectUrl: String? = null,
-        options: RequestOptions? = null,
-    ): ApiGenerateOauth2URLOutput {
-        return SdkClient.request<ApiGenerateOauth2URLOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/oauth2/url",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "type" to SdkClient.queryValue(type, "form", true),
-                            "redirect_url" to SdkClient.queryValue(redirectUrl, "form", true),
-                        ),
-                    operationId = "genaiGetOauth2Url",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiGetOauth2Url(clientConfig: ClientConfig, type: String? = null, redirectUrl: String? = null, options: RequestOptions? = null): ApiGenerateOauth2URLOutput {
+        return SdkClient.request<ApiGenerateOauth2URLOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/oauth2/url", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(type, "form", true), "redirect_url" to
+    SdkClient.queryValue(redirectUrl, "form", true)), operationId = "genaiGetOauth2Url", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -83,36 +55,8 @@ internal object AgentPlatformApiGenaiListOpenaiApiKeysOperation {
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiListOpenaiApiKeys(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ApiListOpenAIAPIKeysOutput {
-        return SdkClient.request<ApiListOpenAIAPIKeysOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/openai/keys",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "genaiListOpenaiApiKeys",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListOpenaiApiKeys(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListOpenAIAPIKeysOutput {
+        return SdkClient.request<ApiListOpenAIAPIKeysOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/openai/keys", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiListOpenaiApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -123,70 +67,19 @@ internal object AgentPlatformApiGenaiCreateOpenaiApiKeyOperation {
      * @param apiKey OpenAI API key
      * @param name Name of the key
      */
-    fun genaiCreateOpenaiApiKey(
-        clientConfig: ClientConfig,
-        apiKey: String? = null,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): ApiCreateOpenAIAPIKeyOutput {
-        return SdkClient.request<ApiCreateOpenAIAPIKeyOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/openai/keys",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "api_key" to (SdkClient.omitIfNull(apiKey)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                        ),
-                    operationId = "genaiCreateOpenaiApiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateOpenaiApiKey(clientConfig: ClientConfig, apiKey: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateOpenAIAPIKeyOutput {
+        return SdkClient.request<ApiCreateOpenAIAPIKeyOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/openai/keys", config = clientConfig, body = SdkClient.bodyMap("api_key" to (SdkClient.omitIfNull(apiKey)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiCreateOpenaiApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiGetOpenaiApiKeyOperation {
     /**
-     * To retrieve details of an OpenAI API key, send a GET request to
-     * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+     * To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
      *
      * @param apiKeyUuid API key ID
      */
-    fun genaiGetOpenaiApiKey(
-        clientConfig: ClientConfig,
-        apiKeyUuid: String,
-        options: RequestOptions? = null,
-    ): ApiGetOpenAIAPIKeyOutput {
-        return SdkClient.request<ApiGetOpenAIAPIKeyOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
-                    config = clientConfig,
-                    operationId = "genaiGetOpenaiApiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiGetOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiGetOpenAIAPIKeyOutput {
+        return SdkClient.request<ApiGetOpenAIAPIKeyOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, operationId = "genaiGetOpenaiApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -199,80 +92,25 @@ internal object AgentPlatformApiGenaiUpdateOpenaiApiKeyOperation {
      * @param apiKeyUuid2 API key ID
      * @param name Name of the key
      */
-    fun genaiUpdateOpenaiApiKey(
-        clientConfig: ClientConfig,
-        apiKeyUuid: String,
-        apiKey: String? = null,
-        apiKeyUuid2: String? = null,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): ApiUpdateOpenAIAPIKeyOutput {
-        return SdkClient.request<ApiUpdateOpenAIAPIKeyOutput>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "api_key" to (SdkClient.omitIfNull(apiKey)),
-                            "api_key_uuid" to (SdkClient.omitIfNull(apiKeyUuid2)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                        ),
-                    operationId = "genaiUpdateOpenaiApiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiUpdateOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, apiKey: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateOpenAIAPIKeyOutput {
+        return SdkClient.request<ApiUpdateOpenAIAPIKeyOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, body = SdkClient.bodyMap("api_key" to (SdkClient.omitIfNull(apiKey)), "api_key_uuid" to (SdkClient.omitIfNull(apiKeyUuid2)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiUpdateOpenaiApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteOpenaiApiKeyOperation {
     /**
-     * To delete an OpenAI API key, send a DELETE request to
-     * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+     * To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
      *
      * @param apiKeyUuid API key ID
      */
-    fun genaiDeleteOpenaiApiKey(
-        clientConfig: ClientConfig,
-        apiKeyUuid: String,
-        options: RequestOptions? = null,
-    ): ApiDeleteOpenAIAPIKeyOutput {
-        return SdkClient.request<ApiDeleteOpenAIAPIKeyOutput>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
-                    config = clientConfig,
-                    operationId = "genaiDeleteOpenaiApiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiDeleteOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteOpenAIAPIKeyOutput {
+        return SdkClient.request<ApiDeleteOpenAIAPIKeyOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, operationId = "genaiDeleteOpenaiApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiListAgentsByOpenaiKeyOperation {
     /**
-     * Lists agents linked to a specific OpenAI key. Use `page` and `per_page` to paginate the
-     * results. The response includes pagination metadata and links to other pages.
+     * Lists agents linked to a specific OpenAI key. Use `page` and `per_page` to paginate the results. The response includes pagination metadata and links to other pages.
      *
      * List Agents by OpenAI Key.
      *
@@ -280,37 +118,8 @@ internal object AgentPlatformApiGenaiListAgentsByOpenaiKeyOperation {
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiListAgentsByOpenaiKey(
-        clientConfig: ClientConfig,
-        uuid: String,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ApiListAgentsByOpenAIKeyOutput {
-        return SdkClient.request<ApiListAgentsByOpenAIKeyOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(uuid)}/agents",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "genaiListAgentsByOpenaiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListAgentsByOpenaiKey(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByOpenAIKeyOutput {
+        return SdkClient.request<ApiListAgentsByOpenAIKeyOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/openai/keys/${SdkClient.encodePathSegment(uuid)}/agents", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiListAgentsByOpenaiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -321,188 +130,76 @@ internal object AgentPlatformApiGenaiListDatacenterRegionsOperation {
      * @param servesInference Include datacenters that serve inference.
      * @param servesBatch Include datacenters that are capable of running batch jobs.
      */
-    fun genaiListDatacenterRegions(
-        clientConfig: ClientConfig,
-        servesInference: Boolean? = null,
-        servesBatch: Boolean? = null,
-        options: RequestOptions? = null,
-    ): ApiListRegionsOutput {
-        return SdkClient.request<ApiListRegionsOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/regions",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "serves_inference" to
-                                SdkClient.queryValue(servesInference, "form", true),
-                            "serves_batch" to SdkClient.queryValue(servesBatch, "form", true),
-                        ),
-                    operationId = "genaiListDatacenterRegions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListDatacenterRegions(clientConfig: ClientConfig, servesInference: Boolean? = null, servesBatch: Boolean? = null, options: RequestOptions? = null): ApiListRegionsOutput {
+        return SdkClient.request<ApiListRegionsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/regions", config = clientConfig, query = mapOf("serves_inference" to
+    SdkClient.queryValue(servesInference, "form", true), "serves_batch" to
+    SdkClient.queryValue(servesBatch, "form", true)), operationId = "genaiListDatacenterRegions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiListScenarioLibraryOperation {
     /**
-     * To list the platform-curated Common Scenario & Goal Library, send a GET request to
-     * `/v2/gen-ai/scenario_library`.
+     * To list the platform-curated Common Scenario & Goal Library, send a GET request to `/v2/gen-ai/scenario_library`.
      *
      * @param page Page number.
      * @param perPage Items per page.
-     * @param category Filter by category (exact match). Empty means no category filter.
+     * @param category Filter by category (exact match). Empty means no category
+     *   filter.
      * @param search Free-text search across name, description, and goal_description
      *   (case-insensitive substring match). Empty means no search.
      * @param sortBy Field to sort by. Defaults to name when unspecified. -
-     *   SCENARIO_LIBRARY_SORT_FIELD_NAME: Sort by customer-facing name (case-insensitive).
-     *   Default. - SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT: Sort by creation date.
+     *   SCENARIO_LIBRARY_SORT_FIELD_NAME: Sort by customer-facing name
+     *   (case-insensitive). Default. - SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT: Sort by
+     *   creation date.
      * @param sortDirection Sort direction. Defaults to ascending when unspecified.
      */
-    fun genaiListScenarioLibrary(
-        clientConfig: ClientConfig,
-        request: AgentPlatformApi.GenaiListScenarioLibraryRequest,
-        options: RequestOptions? = null,
-    ): ApiListScenarioLibraryOutput {
-        return SdkClient.request<ApiListScenarioLibraryOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_library",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "category" to SdkClient.queryValue(request.category, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                        ),
-                    operationId = "genaiListScenarioLibrary",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListScenarioLibrary(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListScenarioLibraryRequest, options: RequestOptions? = null): ApiListScenarioLibraryOutput {
+        return SdkClient.request<ApiListScenarioLibraryOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_library", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "category" to
+    SdkClient.queryValue(request.category, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true), "sort_by" to
+    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListScenarioLibrary", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateScenarioSetFromLibraryOperation {
     /**
-     * To create a scenario set from a Common Scenario & Goal Library entry, send a POST request to
-     * `/v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set`. The library
-     * scenarios are copied into a new scenario set owned by the calling team. The new set is ready
-     * to use when creating a simulation run.
+     * To create a scenario set from a Common Scenario & Goal Library entry, send a POST request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set`. The library scenarios are copied into a new scenario set owned by the calling team. The new set is ready to use when creating a simulation run.
      *
      * @param libraryScenarioUuid UUID of the library entry to copy.
      * @param libraryScenarioUuid2 UUID of the library entry to copy.
-     * @param name Optional name for the new scenario set. Defaults to the library entry's name when
-     *   unset.
+     * @param name Optional name for the new scenario set. Defaults to the library
+     *   entry's name when unset.
      */
-    fun genaiCreateScenarioSetFromLibrary(
-        clientConfig: ClientConfig,
-        libraryScenarioUuid: String,
-        libraryScenarioUuid2: String? = null,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): ApiCreateScenarioSetFromLibraryOutput {
-        return SdkClient.request<ApiCreateScenarioSetFromLibraryOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scenario_library/${SdkClient.encodePathSegment(libraryScenarioUuid)}/create_scenario_set",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "library_scenario_uuid" to (SdkClient.omitIfNull(libraryScenarioUuid2)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                        ),
-                    operationId = "genaiCreateScenarioSetFromLibrary",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateScenarioSetFromLibrary(clientConfig: ClientConfig, libraryScenarioUuid: String, libraryScenarioUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateScenarioSetFromLibraryOutput {
+        return SdkClient.request<ApiCreateScenarioSetFromLibraryOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scenario_library/${SdkClient.encodePathSegment(libraryScenarioUuid)}/create_scenario_set", config = clientConfig, body = SdkClient.bodyMap("library_scenario_uuid" to
+    (SdkClient.omitIfNull(libraryScenarioUuid2)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiCreateScenarioSetFromLibrary", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiListScenarioLibraryScenariosOperation {
     /**
-     * To list the scenarios inside a Common Scenario & Goal Library entry without creating a
-     * team-owned scenario set, send a GET request to
-     * `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
+     * To list the scenarios inside a Common Scenario & Goal Library entry without creating a team-owned scenario set, send a GET request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
      *
      * @param libraryScenarioUuid UUID of the library entry to read.
      * @param page Page number.
      * @param perPage Items per page.
-     * @param search Free-text search across name, description, and user_persona (case-insensitive
-     *   substring match). Empty means no search.
-     * @param sortBy Field to sort by. Defaults to original file order when unspecified. -
-     *   SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order. Default. -
-     *   SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort
-     *   last. - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
+     * @param search Free-text search across name, description, and user_persona
+     *   (case-insensitive substring match). Empty means no search.
+     * @param sortBy Field to sort by. Defaults to original file order when
+     *   unspecified. - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order.
+     *   Default. - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive).
+     *   Empty names sort last. - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario
+     *   description (case-insensitive).
      * @param sortDirection Sort direction. Defaults to ascending when unspecified.
      */
-    fun genaiListScenarioLibraryScenarios(
-        clientConfig: ClientConfig,
-        request: AgentPlatformApi.GenaiListScenarioLibraryScenariosRequest,
-        options: RequestOptions? = null,
-    ): ApiListScenariosOutput {
-        return SdkClient.request<ApiListScenariosOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_library/${SdkClient.encodePathSegment(request.libraryScenarioUuid)}/scenarios",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                        ),
-                    operationId = "genaiListScenarioLibraryScenarios",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListScenarioLibraryScenarios(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListScenarioLibraryScenariosRequest, options: RequestOptions? = null): ApiListScenariosOutput {
+        return SdkClient.request<ApiListScenariosOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_library/${SdkClient.encodePathSegment(request.libraryScenarioUuid)}/scenarios", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true), "sort_by" to
+    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListScenarioLibraryScenarios", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -513,555 +210,209 @@ internal object AgentPlatformApiGenaiListScenarioSetsOperation {
      * @param page Page number.
      * @param perPage Items per page.
      * @param statuses Filter by one or more statuses. Empty means no status filter.
-     *     - SCENARIO_SET_STATUS_GENERATING: Generation is in progress. The scenarios are not ready
-     *       yet. - SCENARIO_SET_STATUS_READY: The scenario set is ready to use.
-     *     - SCENARIO_SET_STATUS_FAILED: Generation failed. The scenario set has no readable
-     *       scenarios. - SCENARIO_SET_STATUS_CANCELLED: Generation was cancelled before completion.
-     *
-     * @param sourceKinds Filter by one or more source kinds. Empty means no source-kind filter. -
-     *   SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Created from uploaded or inline scenarios. -
-     *   SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED: Produced by goal-driven generation. -
-     *   SCENARIO_SET_SOURCE_KIND_LIBRARY: Copied from a platform-curated library entry. -
-     *   SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced from a completed Signals export.
-     * @param search Free-text search across name and description (case-insensitive substring
-     *   match). Empty means no search.
+     *   - SCENARIO_SET_STATUS_GENERATING: Generation is in progress. The scenarios are
+     *   not ready yet. - SCENARIO_SET_STATUS_READY: The scenario set is ready to use.
+     *   - SCENARIO_SET_STATUS_FAILED: Generation failed. The scenario set has no
+     *   readable scenarios. - SCENARIO_SET_STATUS_CANCELLED: Generation was cancelled
+     *   before completion.
+     * @param sourceKinds Filter by one or more source kinds. Empty means no
+     *   source-kind filter. - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Created from
+     *   uploaded or inline scenarios. - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED:
+     *   Produced by goal-driven generation. - SCENARIO_SET_SOURCE_KIND_LIBRARY: Copied
+     *   from a platform-curated library entry. -
+     *   SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced from a completed Signals
+     *   export.
+     * @param search Free-text search across name and description (case-insensitive
+     *   substring match). Empty means no search.
      * @param sortBy Field to sort by. Defaults to creation date when unspecified. -
      *   SCENARIO_SET_SORT_FIELD_CREATED_AT: Sort by creation date. Default. -
-     *   SCENARIO_SET_SORT_FIELD_NAME: Sort by customer-supplied name (case-insensitive). -
-     *   SCENARIO_SET_SORT_FIELD_STATUS: Sort by status using lifecycle order (generating → ready →
-     *   terminal). - SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT: Sort by scenario_count. -
+     *   SCENARIO_SET_SORT_FIELD_NAME: Sort by customer-supplied name
+     *   (case-insensitive). - SCENARIO_SET_SORT_FIELD_STATUS: Sort by status using
+     *   lifecycle order (generating → ready → terminal). -
+     *   SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT: Sort by scenario_count. -
      *   SCENARIO_SET_SORT_FIELD_UPDATED_AT: Sort by last update date.
      * @param sortDirection Sort direction. Defaults to descending when unspecified.
      */
-    fun genaiListScenarioSets(
-        clientConfig: ClientConfig,
-        request: AgentPlatformApi.GenaiListScenarioSetsRequest,
-        options: RequestOptions? = null,
-    ): ApiListScenarioSetsOutput {
-        return SdkClient.request<ApiListScenarioSetsOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_sets",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "statuses" to SdkClient.queryValue(request.statuses, "form", true),
-                            "source_kinds" to
-                                SdkClient.queryValue(request.sourceKinds, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                        ),
-                    operationId = "genaiListScenarioSets",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListScenarioSets(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListScenarioSetsRequest, options: RequestOptions? = null): ApiListScenarioSetsOutput {
+        return SdkClient.request<ApiListScenarioSetsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_sets", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "statuses" to
+    SdkClient.queryValue(request.statuses, "form", true), "source_kinds" to
+    SdkClient.queryValue(request.sourceKinds, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true), "sort_by" to
+    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListScenarioSets", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateScenarioSetOperation {
     /**
-     * To create a scenario set, send a POST request to `/v2/gen-ai/scenario_sets`. Provide exactly
-     * one of `scenarios` or `file_upload_scenario_set`. The set is created in the ready state.
+     * To create a scenario set, send a POST request to `/v2/gen-ai/scenario_sets`. Provide exactly one of `scenarios` or `file_upload_scenario_set`. The set is created in the ready state.
      *
-     * @param fileUploadScenarioSet Uploaded scenario file to ingest. Provide this or `scenarios`,
-     *   not both.
+     * @param fileUploadScenarioSet Uploaded scenario file to ingest. Provide this or
+     *   `scenarios`, not both.
      * @param name The name of the scenario set.
-     * @param scenarios Inline scenarios. Provide this or `file_upload_scenario_set`, not both.
+     * @param scenarios Inline scenarios. Provide this or `file_upload_scenario_set`,
+     *   not both.
      */
-    fun genaiCreateScenarioSet(
-        clientConfig: ClientConfig,
-        fileUploadScenarioSet: ApiFileUploadDataSource? = null,
-        name: String? = null,
-        scenarios: List<ApiScenario>? = null,
-        options: RequestOptions? = null,
-    ): ApiCreateScenarioSetOutput {
-        return SdkClient.request<ApiCreateScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scenario_sets",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "file_upload_scenario_set" to
-                                (SdkClient.omitIfNull(fileUploadScenarioSet)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "scenarios" to (SdkClient.omitIfNull(scenarios)),
-                        ),
-                    operationId = "genaiCreateScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateScenarioSet(clientConfig: ClientConfig, fileUploadScenarioSet: ApiFileUploadDataSource? = null, name: String? = null, scenarios: List<ApiScenario>? = null, options: RequestOptions? = null): ApiCreateScenarioSetOutput {
+        return SdkClient.request<ApiCreateScenarioSetOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scenario_sets", config = clientConfig, body = SdkClient.bodyMap("file_upload_scenario_set" to
+    (SdkClient.omitIfNull(fileUploadScenarioSet)), "name" to (SdkClient.omitIfNull(name)), "scenarios" to (SdkClient.omitIfNull(scenarios))), operationId = "genaiCreateScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateScenarioSetUploadPresignedUrlsOperation {
     /**
-     * To create presigned URLs for uploading a scenario set file, send a POST request to
-     * `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`. After uploading, pass the stored
-     * object in Create Scenario Set as `file_upload_scenario_set`.
+     * To create presigned URLs for uploading a scenario set file, send a POST request to `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`. After uploading, pass the stored object in Create Scenario Set as `file_upload_scenario_set`.
      *
      * @param files A list of files to generate presigned URLs for.
      */
-    fun genaiCreateScenarioSetUploadPresignedUrls(
-        clientConfig: ClientConfig,
-        files: List<ApiPresignedUrlFile>? = null,
-        options: RequestOptions? = null,
-    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput {
-        return SdkClient.request<ApiCreateDataSourceFileUploadPresignedUrlsOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scenario_sets/file_upload_presigned_urls",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("files" to (SdkClient.omitIfNull(files))),
-                    operationId = "genaiCreateScenarioSetUploadPresignedUrls",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateScenarioSetUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput {
+        return SdkClient.request<ApiCreateDataSourceFileUploadPresignedUrlsOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scenario_sets/file_upload_presigned_urls", config = clientConfig, body = SdkClient.bodyMap("files" to (SdkClient.omitIfNull(files))), operationId = "genaiCreateScenarioSetUploadPresignedUrls", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateGeneratedScenarioSetOperation {
     /**
-     * To dispatch goal-driven scenario generation, send a POST request to
-     * `/v2/gen-ai/scenario_sets/generate`. The scenario set is returned in the generating state.
-     * Poll the retrieve scenario set endpoint until the set reaches a ready, failed, or cancelled
-     * status.
+     * To dispatch goal-driven scenario generation, send a POST request to `/v2/gen-ai/scenario_sets/generate`. The scenario set is returned in the generating state. Poll the retrieve scenario set endpoint until the set reaches a ready, failed, or cancelled status.
      *
-     * @param generatorModelUuid Optional model to use for generation. Platform default when unset.
+     * @param generatorModelUuid Optional model to use for generation. Platform
+     *   default when unset.
      * @param goalDescription The goal that drives scenario generation.
      * @param name The name of the scenario set to create.
      * @param numScenarios Number of scenarios to generate. Defaults to 1 if unset.
      */
-    fun genaiCreateGeneratedScenarioSet(
-        clientConfig: ClientConfig,
-        generatorModelUuid: String? = null,
-        goalDescription: String? = null,
-        name: String? = null,
-        numScenarios: Long? = null,
-        options: RequestOptions? = null,
-    ): ApiGenerateScenarioSetOutput {
-        return SdkClient.request<ApiGenerateScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scenario_sets/generate",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "generator_model_uuid" to (SdkClient.omitIfNull(generatorModelUuid)),
-                            "goal_description" to (SdkClient.omitIfNull(goalDescription)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "num_scenarios" to (SdkClient.omitIfNull(numScenarios)),
-                        ),
-                    operationId = "genaiCreateGeneratedScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateGeneratedScenarioSet(clientConfig: ClientConfig, generatorModelUuid: String? = null, goalDescription: String? = null, name: String? = null, numScenarios: Long? = null, options: RequestOptions? = null): ApiGenerateScenarioSetOutput {
+        return SdkClient.request<ApiGenerateScenarioSetOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scenario_sets/generate", config = clientConfig, body = SdkClient.bodyMap("generator_model_uuid" to
+    (SdkClient.omitIfNull(generatorModelUuid)), "goal_description" to
+    (SdkClient.omitIfNull(goalDescription)), "name" to (SdkClient.omitIfNull(name)), "num_scenarios" to (SdkClient.omitIfNull(numScenarios))), operationId = "genaiCreateGeneratedScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiGetScenarioSetOperation {
     /**
-     * To retrieve a scenario set, send a GET request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
+     * To retrieve a scenario set, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
      *
      * @param scenarioSetUuid UUID of the scenario set.
      */
-    fun genaiGetScenarioSet(
-        clientConfig: ClientConfig,
-        scenarioSetUuid: String,
-        options: RequestOptions? = null,
-    ): ApiGetScenarioSetOutput {
-        return SdkClient.request<ApiGetScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}",
-                    config = clientConfig,
-                    operationId = "genaiGetScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiGetScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiGetScenarioSetOutput {
+        return SdkClient.request<ApiGetScenarioSetOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}", config = clientConfig, operationId = "genaiGetScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateScenarioSetOperation {
     /**
-     * To update a scenario set in place, send a PUT request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. Provide a new `name` and/or replacement
-     * `scenarios`. At least one is required. Replacing contents keeps the same scenario set UUID,
-     * remints scenario UUIDs, and is rejected unless the set is ready and no simulation run
-     * references it. There is no file-upload path on update.
+     * To update a scenario set in place, send a PUT request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. Provide a new `name` and/or replacement `scenarios`. At least one is required. Replacing contents keeps the same scenario set UUID, remints scenario UUIDs, and is rejected unless the set is ready and no simulation run references it. There is no file-upload path on update.
      *
-     * @param scenarioSetUuid UUID of the scenario set to update. Returned by `CreateScenarioSet`
-     *   and listed via `ListScenarioSets`.
-     * @param name Optional new name. When set, must be non-empty and at most 255 characters.
+     * @param scenarioSetUuid UUID of the scenario set to update. Returned by
+     *   `CreateScenarioSet` and listed via `ListScenarioSets`.
+     * @param name Optional new name. When set, must be non-empty and at most 255
+     *   characters.
      * @param scenarioSetUuid2 UUID of the scenario set to update.
-     * @param scenarios Optional inline scenarios to replace the set contents. At least one of name
-     *   or scenarios is required.
+     * @param scenarios Optional inline scenarios to replace the set contents. At
+     *   least one of name or scenarios is required.
      */
-    fun genaiUpdateScenarioSet(
-        clientConfig: ClientConfig,
-        scenarioSetUuid: String,
-        name: String? = null,
-        scenarioSetUuid2: String? = null,
-        scenarios: List<ApiScenario>? = null,
-        options: RequestOptions? = null,
-    ): ApiUpdateScenarioSetOutput {
-        return SdkClient.request<ApiUpdateScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "scenario_set_uuid" to (SdkClient.omitIfNull(scenarioSetUuid2)),
-                            "scenarios" to (SdkClient.omitIfNull(scenarios)),
-                        ),
-                    operationId = "genaiUpdateScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiUpdateScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, name: String? = null, scenarioSetUuid2: String? = null, scenarios: List<ApiScenario>? = null, options: RequestOptions? = null): ApiUpdateScenarioSetOutput {
+        return SdkClient.request<ApiUpdateScenarioSetOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "scenario_set_uuid" to
+    (SdkClient.omitIfNull(scenarioSetUuid2)), "scenarios" to (SdkClient.omitIfNull(scenarios))), operationId = "genaiUpdateScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteScenarioSetOperation {
     /**
-     * To delete a scenario set, send a DELETE request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. A scenario set that is referenced by a
-     * simulation run cannot be deleted.
+     * To delete a scenario set, send a DELETE request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. A scenario set that is referenced by a simulation run cannot be deleted.
      *
-     * @param scenarioSetUuid UUID of the scenario set to delete. Returned by `CreateScenarioSet`
-     *   and listed via `ListScenarioSets`. A set still referenced by a simulation run cannot be
-     *   deleted.
+     * @param scenarioSetUuid UUID of the scenario set to delete. Returned by
+     *   `CreateScenarioSet` and listed via `ListScenarioSets`. A set still referenced
+     *   by a simulation run cannot be deleted.
      */
-    fun genaiDeleteScenarioSet(
-        clientConfig: ClientConfig,
-        scenarioSetUuid: String,
-        options: RequestOptions? = null,
-    ): ApiDeleteScenarioSetOutput {
-        return SdkClient.request<ApiDeleteScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}",
-                    config = clientConfig,
-                    operationId = "genaiDeleteScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiDeleteScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiDeleteScenarioSetOutput {
+        return SdkClient.request<ApiDeleteScenarioSetOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}", config = clientConfig, operationId = "genaiDeleteScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiGetScenarioSetDownloadUrlOperation {
     /**
-     * To retrieve a presigned download URL for a scenario set file, send a GET request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
+     * To retrieve a presigned download URL for a scenario set file, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
      *
      * @param scenarioSetUuid UUID of the scenario set.
      */
-    fun genaiGetScenarioSetDownloadUrl(
-        clientConfig: ClientConfig,
-        scenarioSetUuid: String,
-        options: RequestOptions? = null,
-    ): ApiGetScenarioSetDownloadURLOutput {
-        return SdkClient.request<ApiGetScenarioSetDownloadURLOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}/download_url",
-                    config = clientConfig,
-                    operationId = "genaiGetScenarioSetDownloadUrl",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiGetScenarioSetDownloadUrl(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiGetScenarioSetDownloadURLOutput {
+        return SdkClient.request<ApiGetScenarioSetDownloadURLOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}/download_url", config = clientConfig, operationId = "genaiGetScenarioSetDownloadUrl", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateDuplicateScenarioSetOperation {
     /**
-     * To duplicate a scenario set, send a POST request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate`. The source set must be ready. The
-     * new set is named `{original name} duplicate` and contains a copy of the source scenarios.
+     * To duplicate a scenario set, send a POST request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate`. The source set must be ready. The new set is named `{original name} duplicate` and contains a copy of the source scenarios.
      *
      * @param scenarioSetUuid UUID of the scenario set to duplicate.
      * @param scenarioSetUuid2 UUID of the scenario set to duplicate.
      */
-    fun genaiCreateDuplicateScenarioSet(
-        clientConfig: ClientConfig,
-        scenarioSetUuid: String,
-        scenarioSetUuid2: String? = null,
-        options: RequestOptions? = null,
-    ): ApiDuplicateScenarioSetOutput {
-        return SdkClient.request<ApiDuplicateScenarioSetOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}/duplicate",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "scenario_set_uuid" to (SdkClient.omitIfNull(scenarioSetUuid2))
-                        ),
-                    operationId = "genaiCreateDuplicateScenarioSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateDuplicateScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, scenarioSetUuid2: String? = null, options: RequestOptions? = null): ApiDuplicateScenarioSetOutput {
+        return SdkClient.request<ApiDuplicateScenarioSetOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(scenarioSetUuid)}/duplicate", config = clientConfig, body = SdkClient.bodyMap("scenario_set_uuid" to
+    (SdkClient.omitIfNull(scenarioSetUuid2))), operationId = "genaiCreateDuplicateScenarioSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiListScenariosOperation {
     /**
-     * To list the scenarios in a scenario set, send a GET request to
-     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios`.
+     * To list the scenarios in a scenario set, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios`.
      *
      * @param scenarioSetUuid UUID of the scenario set to read.
      * @param page Page number.
      * @param perPage Items per page.
-     * @param search Free-text search across name, description, and user_persona (case-insensitive
-     *   substring match). Empty means no search.
-     * @param sortBy Field to sort by. Defaults to original file order when unspecified. -
-     *   SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order. Default. -
-     *   SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort
-     *   last. - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
+     * @param search Free-text search across name, description, and user_persona
+     *   (case-insensitive substring match). Empty means no search.
+     * @param sortBy Field to sort by. Defaults to original file order when
+     *   unspecified. - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order.
+     *   Default. - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive).
+     *   Empty names sort last. - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario
+     *   description (case-insensitive).
      * @param sortDirection Sort direction. Defaults to ascending when unspecified.
      */
-    fun genaiListScenarios(
-        clientConfig: ClientConfig,
-        request: AgentPlatformApi.GenaiListScenariosRequest,
-        options: RequestOptions? = null,
-    ): ApiListScenariosOutput {
-        return SdkClient.request<ApiListScenariosOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(request.scenarioSetUuid)}/scenarios",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                        ),
-                    operationId = "genaiListScenarios",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListScenarios(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListScenariosRequest, options: RequestOptions? = null): ApiListScenariosOutput {
+        return SdkClient.request<ApiListScenariosOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scenario_sets/${SdkClient.encodePathSegment(request.scenarioSetUuid)}/scenarios", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true), "sort_by" to
+    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListScenarios", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateScheduledIndexingOperation {
     /**
-     * To create scheduled indexing for a knowledge base, send a POST request to
-     * `/v2/gen-ai/scheduled-indexing`.
+     * To create scheduled indexing for a knowledge base, send a POST request to `/v2/gen-ai/scheduled-indexing`.
      *
-     * @param days Days for execution (day is represented same as in a cron expression, e.g. Monday
-     *   begins with 1 )
+     * @param days Days for execution (day is represented same as in a cron
+     *   expression, e.g. Monday begins with 1 )
      * @param knowledgeBaseUuid Knowledge base uuid for which the schedule is created
      * @param time Time of execution (HH:MM) UTC
      */
-    fun genaiCreateScheduledIndexing(
-        clientConfig: ClientConfig,
-        days: List<Int>? = null,
-        knowledgeBaseUuid: String? = null,
-        time: String? = null,
-        options: RequestOptions? = null,
-    ): ApiCreateScheduledIndexingOutput {
-        return SdkClient.request<ApiCreateScheduledIndexingOutput>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/gen-ai/scheduled-indexing",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "days" to (SdkClient.omitIfNull(days)),
-                            "knowledge_base_uuid" to (SdkClient.omitIfNull(knowledgeBaseUuid)),
-                            "time" to (SdkClient.omitIfNull(time)),
-                        ),
-                    operationId = "genaiCreateScheduledIndexing",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiCreateScheduledIndexing(clientConfig: ClientConfig, days: List<Int>? = null, knowledgeBaseUuid: String? = null, time: String? = null, options: RequestOptions? = null): ApiCreateScheduledIndexingOutput {
+        return SdkClient.request<ApiCreateScheduledIndexingOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/scheduled-indexing", config = clientConfig, body = SdkClient.bodyMap("days" to (SdkClient.omitIfNull(days)), "knowledge_base_uuid" to
+    (SdkClient.omitIfNull(knowledgeBaseUuid)), "time" to (SdkClient.omitIfNull(time))), operationId = "genaiCreateScheduledIndexing", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiGetScheduledIndexingOperation {
     /**
-     * Get Scheduled Indexing for knowledge base using knoweldge base uuid, send a GET request to
-     * `/v2/gen-ai/scheduled-indexing/knowledge-base/{knowledge_base_uuid}`.
+     * Get Scheduled Indexing for knowledge base using knoweldge base uuid, send a GET request to `/v2/gen-ai/scheduled-indexing/knowledge-base/{knowledge_base_uuid}`.
      *
      * @param knowledgeBaseUuid UUID of the scheduled indexing entry
      */
-    fun genaiGetScheduledIndexing(
-        clientConfig: ClientConfig,
-        knowledgeBaseUuid: String,
-        options: RequestOptions? = null,
-    ): ApiGetScheduledIndexingOutput {
-        return SdkClient.request<ApiGetScheduledIndexingOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/scheduled-indexing/knowledge-base/${SdkClient.encodePathSegment(knowledgeBaseUuid)}",
-                    config = clientConfig,
-                    operationId = "genaiGetScheduledIndexing",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiGetScheduledIndexing(clientConfig: ClientConfig, knowledgeBaseUuid: String, options: RequestOptions? = null): ApiGetScheduledIndexingOutput {
+        return SdkClient.request<ApiGetScheduledIndexingOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/scheduled-indexing/knowledge-base/${SdkClient.encodePathSegment(knowledgeBaseUuid)}", config = clientConfig, operationId = "genaiGetScheduledIndexing", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteScheduledIndexingOperation {
     /**
-     * Delete Scheduled Indexing for knowledge base, send a DELETE request to
-     * `/v2/gen-ai/scheduled-indexing/{uuid}`.
+     * Delete Scheduled Indexing for knowledge base, send a DELETE request to `/v2/gen-ai/scheduled-indexing/{uuid}`.
      *
      * @param uuid UUID of the scheduled indexing
      */
-    fun genaiDeleteScheduledIndexing(
-        clientConfig: ClientConfig,
-        uuid: String,
-        options: RequestOptions? = null,
-    ): ApiDeleteScheduledIndexingOutput {
-        return SdkClient.request<ApiDeleteScheduledIndexingOutput>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/gen-ai/scheduled-indexing/${SdkClient.encodePathSegment(uuid)}",
-                    config = clientConfig,
-                    operationId = "genaiDeleteScheduledIndexing",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiDeleteScheduledIndexing(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteScheduledIndexingOutput {
+        return SdkClient.request<ApiDeleteScheduledIndexingOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/scheduled-indexing/${SdkClient.encodePathSegment(uuid)}", config = clientConfig, operationId = "genaiDeleteScheduledIndexing", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -1073,57 +424,29 @@ internal object AgentPlatformApiGenaiListSimulationRunsOperation {
      * @param page Page number.
      * @param perPage Items per page.
      * @param statuses Filter by one or more statuses. Empty means no status filter.
-     *     - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing. -
-     *       SIMULATION_RUN_STATUS_RUNNING: Episodes are executing. -
-     *       SIMULATION_RUN_STATUS_SUCCEEDED: All episodes finished successfully. -
-     *       SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout or
-     *       workflow error. - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled. -
-     *       SIMULATION_RUN_STATUS_EVALUATING: Episodes finished and…
-     *
-     * @param search Free-text search across the run name and scenario set name (case-insensitive
-     *   substring match). Empty means no search.
+     *   - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing. -
+     *   SIMULATION_RUN_STATUS_RUNNING: Episodes are executing. -
+     *   SIMULATION_RUN_STATUS_SUCCEEDED: All episodes finished successfully. -
+     *   SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout
+     *   or workflow error. - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled. -
+     *   SIMULATION_RUN_STATUS_EVALUATING: Episodes finished and…
+     * @param search Free-text search across the run name and scenario set name
+     *   (case-insensitive substring match). Empty means no search.
      * @param sortBy Field to sort by. Defaults to creation date when unspecified. -
      *   SIMULATION_RUN_SORT_FIELD_CREATED_AT: Sort by creation date. Default. -
-     *   SIMULATION_RUN_SORT_FIELD_NAME: Sort by customer-supplied run name (case-insensitive). -
-     *   SIMULATION_RUN_SORT_FIELD_STATUS: Sort by status using lifecycle order (pending → running →
-     *   terminal). - SIMULATION_RUN_SORT_FIELD_UPDATED_AT: Sort by last update date.
+     *   SIMULATION_RUN_SORT_FIELD_NAME: Sort by customer-supplied run name
+     *   (case-insensitive). - SIMULATION_RUN_SORT_FIELD_STATUS: Sort by status using
+     *   lifecycle order (pending → running → terminal). -
+     *   SIMULATION_RUN_SORT_FIELD_UPDATED_AT: Sort by last update date.
      * @param sortDirection Sort direction. Defaults to descending when unspecified.
      */
-    fun genaiListSimulationRuns(
-        clientConfig: ClientConfig,
-        request: AgentPlatformApi.GenaiListSimulationRunsRequest,
-        options: RequestOptions? = null,
-    ): ApiListSimulationRunsOutput {
-        return SdkClient.request<ApiListSimulationRunsOutput>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/gen-ai/simulation_runs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "scenario_set_uuid" to
-                                SdkClient.queryValue(request.scenarioSetUuid, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "statuses" to SdkClient.queryValue(request.statuses, "form", true),
-                            "search" to SdkClient.queryValue(request.search, "form", true),
-                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                        ),
-                    operationId = "genaiListSimulationRuns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun genaiListSimulationRuns(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListSimulationRunsRequest, options: RequestOptions? = null): ApiListSimulationRunsOutput {
+        return SdkClient.request<ApiListSimulationRunsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs", config = clientConfig, query = mapOf("scenario_set_uuid" to
+    SdkClient.queryValue(request.scenarioSetUuid, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "statuses" to
+    SdkClient.queryValue(request.statuses, "form", true), "search" to
+    SdkClient.queryValue(request.search, "form", true), "sort_by" to
+    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListSimulationRuns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

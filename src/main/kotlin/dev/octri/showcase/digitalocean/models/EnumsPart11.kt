@@ -4,15 +4,13 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * A status string indicating the state of a custom image. This may be `NEW`, `available`,
- * `pending`, `deleted`, or `retired`.
+ * A status string indicating the state of a custom image. This may be `NEW`, `available`, `pending`, `deleted`, or `retired`.
  */
-class ImageStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+class ImageStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is ImageStatusEnum && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -23,26 +21,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val DELETED = ImageStatusEnum("deleted")
         @JvmField val RETIRED = ImageStatusEnum("retired")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageStatusEnum(value)
     }
 }
 
 /**
- * Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`.
- * Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated
- * Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or
- * an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
+ * Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
  */
-class ImageTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+class ImageTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is ImageTypeEnum && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -53,15 +44,14 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CUSTOM = ImageTypeEnum("custom")
         @JvmField val ADMIN = ImageTypeEnum("admin")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageTypeEnum(value)
     }
 }
 
-/** The action to be taken on the image. Can be either `convert` or `transfer`. */
+/**
+ * The action to be taken on the image. Can be either `convert` or `transfer`.
+ */
 enum class ImageActionBaseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     CONVERT("convert"),
     TRANSFER("transfer");
@@ -71,20 +61,19 @@ enum class ImageActionBaseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue v
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The background setting for the requested image. */
-class ImageGenPartialImageEventBackgroundEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenPartialImageEventBackgroundEnum && value == other.value
-
+/**
+ * The background setting for the requested image.
+ */
+class ImageGenPartialImageEventBackgroundEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventBackgroundEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -93,22 +82,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val OPAQUE = ImageGenPartialImageEventBackgroundEnum("opaque")
         @JvmField val AUTO = ImageGenPartialImageEventBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenPartialImageEventBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventBackgroundEnum(value)
     }
 }
 
-/** The output format for the requested image. */
-class ImageGenPartialImageEventOutputFormatEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenPartialImageEventOutputFormatEnum && value == other.value
-
+/**
+ * The output format for the requested image.
+ */
+class ImageGenPartialImageEventOutputFormatEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventOutputFormatEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -117,22 +103,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val WEBP = ImageGenPartialImageEventOutputFormatEnum("webp")
         @JvmField val JPEG = ImageGenPartialImageEventOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenPartialImageEventOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventOutputFormatEnum(value)
     }
 }
 
-/** The quality setting for the requested image. */
-class ImageGenPartialImageEventQualityEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenPartialImageEventQualityEnum && value == other.value
-
+/**
+ * The quality setting for the requested image.
+ */
+class ImageGenPartialImageEventQualityEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventQualityEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -142,22 +125,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val HIGH = ImageGenPartialImageEventQualityEnum("high")
         @JvmField val AUTO = ImageGenPartialImageEventQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenPartialImageEventQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventQualityEnum(value)
     }
 }
 
-/** The size of the requested image. */
-class ImageGenPartialImageEventSizeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenPartialImageEventSizeEnum && value == other.value
-
+/**
+ * The size of the requested image.
+ */
+class ImageGenPartialImageEventSizeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventSizeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -167,48 +147,38 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val V1536X1024 = ImageGenPartialImageEventSizeEnum("1536x1024")
         @JvmField val AUTO = ImageGenPartialImageEventSizeEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenPartialImageEventSizeEnum(value)
-    }
-}
-
-/** The type of the event. Always `image_generation.partial_image`. */
-class ImageGenPartialImageEventTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenPartialImageEventTypeEnum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField
-        val IMAGE_GENERATION_PARTIAL_IMAGE =
-            ImageGenPartialImageEventTypeEnum("image_generation.partial_image")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenPartialImageEventTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventSizeEnum(value)
     }
 }
 
 /**
- * PENDING: route not yet published, URL not servable. READY: servable. There is no failed state;
- * the substrate retries until READY.
+ * The type of the event. Always `image_generation.partial_image`.
  */
-class IngressUrlState
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean = other is IngressUrlState && value == other.value
-
+class ImageGenPartialImageEventTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
 
+    companion object {
+
+        @JvmField val IMAGE_GENERATION_PARTIAL_IMAGE = ImageGenPartialImageEventTypeEnum("image_generation.partial_image")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventTypeEnum(value)
+    }
+}
+
+/**
+ * PENDING: route not yet published, URL not servable. READY: servable. There is no failed state; the substrate retries until READY.
+ */
+class IngressUrlState private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is IngressUrlState && value == other.value
+    override fun hashCode(): Int = value.hashCode()
     override fun toString(): String = value
 
     companion object {
@@ -216,21 +186,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val INGRESS_URL_STATE_PENDING = IngressUrlState("INGRESS_URL_STATE_PENDING")
         @JvmField val INGRESS_URL_STATE_READY = IngressUrlState("INGRESS_URL_STATE_READY")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = IngressUrlState(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = IngressUrlState(value)
     }
 }
 
-/** Typed representation of the `InstanceSizeCpuType` API schema. */
-class InstanceSizeCpuType
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * Typed representation of the `InstanceSizeCpuType` API schema.
+ */
+class InstanceSizeCpuType private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is InstanceSizeCpuType && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -239,27 +207,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val SHARED = InstanceSizeCpuType("SHARED")
         @JvmField val DEDICATED = InstanceSizeCpuType("DEDICATED")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = InstanceSizeCpuType(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = InstanceSizeCpuType(value)
     }
 }
 
 /**
- * Specify the final compression type for a given topic. This configuration accepts the standard
- * compression codecs ('gzip', 'snappy', 'lz4', 'zstd'). It additionally accepts 'uncompressed'
- * which is equivalent to no compression; and 'producer' which means retain the original compression
- * codec set by the producer.
+ * Specify the final compression type for a given topic. This configuration accepts the standard compression codecs ('gzip', 'snappy', 'lz4', 'zstd'). It additionally accepts 'uncompressed' which is equivalent to no compression; and 'producer' which means retain the original compression codec set by the producer.
  */
-class KafkaAdvancedConfigCompressionTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaAdvancedConfigCompressionTypeEnum && value == other.value
-
+class KafkaAdvancedConfigCompressionTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaAdvancedConfigCompressionTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -271,22 +231,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val UNCOMPRESSED = KafkaAdvancedConfigCompressionTypeEnum("uncompressed")
         @JvmField val PRODUCER = KafkaAdvancedConfigCompressionTypeEnum("producer")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaAdvancedConfigCompressionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaAdvancedConfigCompressionTypeEnum(value)
     }
 }
 
-/** The default cleanup policy for segments beyond the retention window */
-class KafkaAdvancedConfigLogCleanupPolicyEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaAdvancedConfigLogCleanupPolicyEnum && value == other.value
-
+/**
+ * The default cleanup policy for segments beyond the retention window
+ */
+class KafkaAdvancedConfigLogCleanupPolicyEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaAdvancedConfigLogCleanupPolicyEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -295,46 +252,39 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val COMPACT = KafkaAdvancedConfigLogCleanupPolicyEnum("compact")
         @JvmField val COMPACT_DELETE = KafkaAdvancedConfigLogCleanupPolicyEnum("compact,delete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaAdvancedConfigLogCleanupPolicyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaAdvancedConfigLogCleanupPolicyEnum(value)
     }
 }
 
-/** Define whether the timestamp in the message is message create time or log append time. */
-class KafkaAdvancedConfigLogMessageTimestampTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaAdvancedConfigLogMessageTimestampTypeEnum && value == other.value
-
+/**
+ * Define whether the timestamp in the message is message create time or log append time.
+ */
+class KafkaAdvancedConfigLogMessageTimestampTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaAdvancedConfigLogMessageTimestampTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val CREATETIME = KafkaAdvancedConfigLogMessageTimestampTypeEnum("CreateTime")
-        @JvmField
-        val LOGAPPENDTIME = KafkaAdvancedConfigLogMessageTimestampTypeEnum("LogAppendTime")
+        @JvmField val LOGAPPENDTIME = KafkaAdvancedConfigLogMessageTimestampTypeEnum("LogAppendTime")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaAdvancedConfigLogMessageTimestampTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaAdvancedConfigLogMessageTimestampTypeEnum(value)
     }
 }
 
-/** The type of the schema. */
-class KafkaSchemaSchemaTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaSchemaSchemaTypeEnum && value == other.value
-
+/**
+ * The type of the schema.
+ */
+class KafkaSchemaSchemaTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaSchemaSchemaTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -343,22 +293,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val JSON = KafkaSchemaSchemaTypeEnum("JSON")
         @JvmField val PROTOBUF = KafkaSchemaSchemaTypeEnum("PROTOBUF")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaSchemaSchemaTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaSchemaSchemaTypeEnum(value)
     }
 }
 
-/** The type of the schema. */
-class KafkaSchemaVerboseSchemaTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaSchemaVerboseSchemaTypeEnum && value == other.value
-
+/**
+ * The type of the schema.
+ */
+class KafkaSchemaVerboseSchemaTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaSchemaVerboseSchemaTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -367,22 +314,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val JSON = KafkaSchemaVerboseSchemaTypeEnum("JSON")
         @JvmField val PROTOBUF = KafkaSchemaVerboseSchemaTypeEnum("PROTOBUF")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaSchemaVerboseSchemaTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaSchemaVerboseSchemaTypeEnum(value)
     }
 }
 
-/** The type of the schema. */
-class KafkaSchemaVersionSchemaTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaSchemaVersionSchemaTypeEnum && value == other.value
-
+/**
+ * The type of the schema.
+ */
+class KafkaSchemaVersionSchemaTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaSchemaVersionSchemaTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -391,22 +335,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val JSON = KafkaSchemaVersionSchemaTypeEnum("JSON")
         @JvmField val PROTOBUF = KafkaSchemaVersionSchemaTypeEnum("PROTOBUF")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaSchemaVersionSchemaTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaSchemaVersionSchemaTypeEnum(value)
     }
 }
 
-/** The type of the schema. */
-class KafkaSchemaVersionVerboseSchemaTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaSchemaVersionVerboseSchemaTypeEnum && value == other.value
-
+/**
+ * The type of the schema.
+ */
+class KafkaSchemaVersionVerboseSchemaTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaSchemaVersionVerboseSchemaTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -415,22 +356,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val JSON = KafkaSchemaVersionVerboseSchemaTypeEnum("JSON")
         @JvmField val PROTOBUF = KafkaSchemaVersionVerboseSchemaTypeEnum("PROTOBUF")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaSchemaVersionVerboseSchemaTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaSchemaVersionVerboseSchemaTypeEnum(value)
     }
 }
 
-/** The state of the Kafka topic. */
-class KafkaTopicVariant1StateEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicVariant1StateEnum && value == other.value
-
+/**
+ * The state of the Kafka topic.
+ */
+class KafkaTopicVariant1StateEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicVariant1StateEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -440,26 +378,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val DELETING = KafkaTopicVariant1StateEnum("deleting")
         @JvmField val UNKNOWN = KafkaTopicVariant1StateEnum("unknown")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicVariant1StateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicVariant1StateEnum(value)
     }
 }
 
 /**
- * The cleanup_policy sets the retention policy to use on log segments. 'delete' will discard old
- * segments when retention time/size limits are reached. 'compact' will enable log compaction,
- * resulting in retention of the latest value for each key.
+ * The cleanup_policy sets the retention policy to use on log segments. 'delete' will discard old segments when retention time/size limits are reached. 'compact' will enable log compaction, resulting in retention of the latest value for each key.
  */
-class KafkaTopicConfigCleanupPolicyEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicConfigCleanupPolicyEnum && value == other.value
-
+class KafkaTopicConfigCleanupPolicyEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicConfigCleanupPolicyEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -468,22 +399,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val COMPACT = KafkaTopicConfigCleanupPolicyEnum("compact")
         @JvmField val COMPACT_DELETE = KafkaTopicConfigCleanupPolicyEnum("compact_delete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicConfigCleanupPolicyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicConfigCleanupPolicyEnum(value)
     }
 }
 
-/** The compression_type specifies the compression type of the topic. */
-class KafkaTopicConfigCompressionTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicConfigCompressionTypeEnum && value == other.value
-
+/**
+ * The compression_type specifies the compression type of the topic.
+ */
+class KafkaTopicConfigCompressionTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicConfigCompressionTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -495,27 +423,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val ZSTD = KafkaTopicConfigCompressionTypeEnum("zstd")
         @JvmField val UNCOMPRESSED = KafkaTopicConfigCompressionTypeEnum("uncompressed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicConfigCompressionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicConfigCompressionTypeEnum(value)
     }
 }
 
 /**
- * The message_format_version specifies the message format version used by the broker to append
- * messages to the logs. The value of this setting is assumed to be 3.0-IV1 if the broker protocol
- * version is 3.0 or higher. By setting a particular message format version, all existing messages
- * on disk must be smaller or equal to the specified version.
+ * The message_format_version specifies the message format version used by the broker to append messages to the logs. The value of this setting is assumed to be 3.0-IV1 if the broker protocol version is 3.0 or higher. By setting a particular message format version, all existing messages on disk must be smaller or equal to the specified version.
  */
-class KafkaTopicConfigMessageFormatVersionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicConfigMessageFormatVersionEnum && value == other.value
-
+class KafkaTopicConfigMessageFormatVersionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicConfigMessageFormatVersionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -562,25 +482,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val V3_3_IV2 = KafkaTopicConfigMessageFormatVersionEnum("3.3-IV2")
         @JvmField val V3_3_IV3 = KafkaTopicConfigMessageFormatVersionEnum("3.3-IV3")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicConfigMessageFormatVersionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicConfigMessageFormatVersionEnum(value)
     }
 }
 
 /**
- * The message_timestamp_type specifies whether to use the message create time or log append time as
- * the timestamp on a message.
+ * The message_timestamp_type specifies whether to use the message create time or log append time as the timestamp on a message.
  */
-class KafkaTopicConfigMessageTimestampTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicConfigMessageTimestampTypeEnum && value == other.value
-
+class KafkaTopicConfigMessageTimestampTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicConfigMessageTimestampTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -588,22 +502,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CREATE_TIME = KafkaTopicConfigMessageTimestampTypeEnum("create_time")
         @JvmField val LOG_APPEND_TIME = KafkaTopicConfigMessageTimestampTypeEnum("log_append_time")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicConfigMessageTimestampTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicConfigMessageTimestampTypeEnum(value)
     }
 }
 
-/** The state of the Kafka topic. */
-class KafkaTopicVerboseStateEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KafkaTopicVerboseStateEnum && value == other.value
-
+/**
+ * The state of the Kafka topic.
+ */
+class KafkaTopicVerboseStateEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KafkaTopicVerboseStateEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -613,56 +524,39 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val DELETING = KafkaTopicVerboseStateEnum("deleting")
         @JvmField val UNKNOWN = KafkaTopicVerboseStateEnum("unknown")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KafkaTopicVerboseStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KafkaTopicVerboseStateEnum(value)
     }
 }
 
 /**
- * The AMD GPU partition mode for this node pool. Only applicable to AMD GPU sizes that support
- * partitioning. Immutable after the node pool is created. When omitted, the GPUs in the pool are
- * left unpartitioned.
+ * The AMD GPU partition mode for this node pool. Only applicable to AMD GPU sizes that support partitioning. Immutable after the node pool is created. When omitted, the GPUs in the pool are left unpartitioned.
  */
-class KubernetesNodePoolGpuPartitionGpuPartitionModeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KubernetesNodePoolGpuPartitionGpuPartitionModeEnum && value == other.value
-
+class KubernetesNodePoolGpuPartitionGpuPartitionModeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KubernetesNodePoolGpuPartitionGpuPartitionModeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val AMD_PARTITION_MODE_SPX_NPS1 =
-            KubernetesNodePoolGpuPartitionGpuPartitionModeEnum("AMD_PARTITION_MODE_SPX_NPS1")
-        @JvmField
-        val AMD_PARTITION_MODE_DPX_NPS2 =
-            KubernetesNodePoolGpuPartitionGpuPartitionModeEnum("AMD_PARTITION_MODE_DPX_NPS2")
+        @JvmField val AMD_PARTITION_MODE_SPX_NPS1 = KubernetesNodePoolGpuPartitionGpuPartitionModeEnum("AMD_PARTITION_MODE_SPX_NPS1")
+        @JvmField val AMD_PARTITION_MODE_DPX_NPS2 = KubernetesNodePoolGpuPartitionGpuPartitionModeEnum("AMD_PARTITION_MODE_DPX_NPS2")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KubernetesNodePoolGpuPartitionGpuPartitionModeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KubernetesNodePoolGpuPartitionGpuPartitionModeEnum(value)
     }
 }
 
 /**
- * How the node reacts to pods that it won't tolerate. Available effect values are `NoSchedule`,
- * `PreferNoSchedule`, and `NoExecute`.
+ * How the node reacts to pods that it won't tolerate. Available effect values are `NoSchedule`, `PreferNoSchedule`, and `NoExecute`.
  */
-class KubernetesNodePoolTaintEffectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is KubernetesNodePoolTaintEffectEnum && value == other.value
-
+class KubernetesNodePoolTaintEffectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is KubernetesNodePoolTaintEffectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -671,42 +565,29 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val PREFERNOSCHEDULE = KubernetesNodePoolTaintEffectEnum("PreferNoSchedule")
         @JvmField val NOEXECUTE = KubernetesNodePoolTaintEffectEnum("NoExecute")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = KubernetesNodePoolTaintEffectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = KubernetesNodePoolTaintEffectEnum(value)
     }
 }
 
-/** Typed representation of the `LimitCategory` API schema. */
-class LimitCategory
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * Typed representation of the `LimitCategory` API schema.
+ */
+class LimitCategory private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is LimitCategory && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE =
-            LimitCategory("LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE")
-        @JvmField
-        val LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE =
-            LimitCategory("LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE")
-        @JvmField
-        val LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
-            LimitCategory("LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE")
-        @JvmField
-        val LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE =
-            LimitCategory("LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE")
+        @JvmField val LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE = LimitCategory("LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE")
+        @JvmField val LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE = LimitCategory("LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE")
+        @JvmField val LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE = LimitCategory("LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE")
+        @JvmField val LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE = LimitCategory("LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = LimitCategory(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = LimitCategory(value)
     }
 }

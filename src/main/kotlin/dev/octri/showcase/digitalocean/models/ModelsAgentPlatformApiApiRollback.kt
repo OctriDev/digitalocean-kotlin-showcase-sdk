@@ -3,19 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiRollbackToAgentVersionInputPublic` API schema. */
+/**
+ * Typed representation of the `ApiRollbackToAgentVersionInputPublic` API schema.
+ */
 data class ApiRollbackToAgentVersionInputPublic(
-    /** Agent unique identifier */
+    /**
+     * Agent unique identifier
+     */
     val uuid: String? = null,
-    /** Unique identifier */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_hash") val versionHash: String? = null,
+    /**
+     * Unique identifier
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("version_hash") val versionHash: String? = null
 )
 
-/** Typed representation of the `ApiRollbackToAgentVersionOutput` API schema. */
+/**
+ * Typed representation of the `ApiRollbackToAgentVersionOutput` API schema.
+ */
 data class ApiRollbackToAgentVersionOutput(
-    /** An alternative way to provide auth information. for internal use only. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audit_header")
-    val auditHeader: ApiAuditHeader? = null,
-    /** Unique identifier */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_hash") val versionHash: String? = null,
+    /**
+     * An alternative way to provide auth information. for internal use only.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audit_header") val auditHeader: ApiAuditHeader? = null,
+    /**
+     * Unique identifier
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("version_hash") val versionHash: String? = null
 )

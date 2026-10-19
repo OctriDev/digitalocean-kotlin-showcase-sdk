@@ -13,81 +13,38 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 object N1ClickApplications {
 
+
     /**
-     * To list all available 1-Click applications, send a GET request to `/v2/1-clicks`. The `type`
-     * may be provided as query paramater in order to restrict results to a certain type of 1-Click,
-     * for example: `/v2/1-clicks?type=droplet`. Current supported types are `kubernetes` and
-     * `droplet`. The response will be a JSON object with a key called `1_clicks`. This will be set
-     * to an array of 1-Click application data, each of which will contain the the slug and type for
-     * the 1-Click.
+     * To list all available 1-Click applications, send a GET request to `/v2/1-clicks`. The `type` may be provided as query paramater in order to restrict results to a certain type of 1-Click, for example: `/v2/1-clicks?type=droplet`. Current supported types are `kubernetes` and `droplet`. The response will be a JSON object with a key called `1_clicks`. This will be set to an array of 1-Click application data, each of which will contain the the slug and type for the 1-Click.
      *
      * @param type Restrict results to a certain type of 1-Click.
      */
-    fun oneClicksList(
-        clientConfig: ClientConfig,
-        type: SchemaSchemaEnumad406879? = null,
-        options: RequestOptions? = null,
-    ): OneClicksAll {
-        return SdkClient.request<OneClicksAll>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/1-clicks",
-                    config = clientConfig,
-                    query = mapOf("type" to SdkClient.queryValue(type, "form", true)),
-                    operationId = "oneClicksList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun oneClicksList(clientConfig: ClientConfig, type: SchemaSchemaEnumad406879? = null, options: RequestOptions? = null): OneClicksAll {
+        return SdkClient.request<OneClicksAll>(SdkClient.RequestSpec("GET", "/v2/1-clicks", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(type, "form", true)), operationId = "oneClicksList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To install a Kubernetes 1-Click application on a cluster, send a POST request to
-     * `/v2/1-clicks/kubernetes`. The `addon_slugs` and `cluster_uuid` must be provided as body
-     * parameter in order to specify which 1-Click application(s) to install. To list all available
-     * 1-Click Kubernetes applications, send a request to `/v2/1-clicks?type=kubernetes`.
+     * To install a Kubernetes 1-Click application on a cluster, send a POST request to `/v2/1-clicks/kubernetes`. The `addon_slugs` and `cluster_uuid` must be provided as body parameter in order to specify which 1-Click application(s) to install. To list all available 1-Click Kubernetes applications, send a request to `/v2/1-clicks?type=kubernetes`.
      *
-     * @param addonSlugs An array of 1-Click Application slugs to be installed to the Kubernetes
-     *   cluster.
-     * @param clusterUuid A unique ID for the Kubernetes cluster to which the 1-Click Applications
-     *   will be installed.
+     * @param addonSlugs An array of 1-Click Application slugs to be installed to the
+     *   Kubernetes cluster.
+     * @param clusterUuid A unique ID for the Kubernetes cluster to which the 1-Click
+     *   Applications will be installed.
      */
-    fun oneClicksInstallKubernetes(
-        clientConfig: ClientConfig,
-        addonSlugs: List<String>,
-        clusterUuid: String,
-        options: RequestOptions? = null,
-    ): OneClicksCreateResponse {
-        return SdkClient.request<OneClicksCreateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/1-clicks/kubernetes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "addon_slugs" to (addonSlugs),
-                            "cluster_uuid" to (clusterUuid),
-                        ),
-                    operationId = "oneClicksInstallKubernetes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun oneClicksInstallKubernetes(clientConfig: ClientConfig, addonSlugs: List<String>, clusterUuid: String, options: RequestOptions? = null): OneClicksCreateResponse {
+        return SdkClient.request<OneClicksCreateResponse>(SdkClient.RequestSpec("POST", "/v2/1-clicks/kubernetes", config = clientConfig, body = SdkClient.bodyMap("addon_slugs" to (addonSlugs), "cluster_uuid" to (clusterUuid)), operationId = "oneClicksInstallKubernetes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

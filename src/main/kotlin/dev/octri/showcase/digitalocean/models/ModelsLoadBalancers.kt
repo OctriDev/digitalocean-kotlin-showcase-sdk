@@ -5,193 +5,193 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AllLoadBalancers` API schema. */
+/**
+ * Typed representation of the `AllLoadBalancers` API schema.
+ */
 data class AllLoadBalancers(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers")
-    val loadBalancers: List<LoadBalancer>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers") val loadBalancers: List<LoadBalancer>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** An object specifying domain configurations for a Global load balancer. */
+/**
+ * An object specifying domain configurations for a Global load balancer.
+ */
 data class Domains(
-    /** FQDN to associate with a Global load balancer. */
+    /**
+     * FQDN to associate with a Global load balancer.
+     */
     val name: String? = null,
     /**
-     * A boolean value indicating if the domain is already managed by DigitalOcean. If true, all A
-     * and AAAA records required to enable Global load balancers will be automatically added.
+     * A boolean value indicating if the domain is already managed by DigitalOcean. If true, all A and AAAA records required to enable Global load balancers will be automatically added.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("is_managed") val isManaged: Boolean? = null,
-    /** The ID of the TLS certificate used for SSL termination. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_id")
-    val certificateId: String? = null,
+    /**
+     * The ID of the TLS certificate used for SSL termination.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_id") val certificateId: String? = null
 )
 
-/** Typed representation of the `ExistingLoadBalancer` API schema. */
+/**
+ * Typed representation of the `ExistingLoadBalancer` API schema.
+ */
 data class ExistingLoadBalancer(
-    /** Optional API value serialized in the `load_balancer` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("load_balancer")
-    val loadBalancer: LoadBalancer? = null
+    /**
+     * Optional API value serialized in the `load_balancer` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("load_balancer") val loadBalancer: LoadBalancer? = null
 )
 
-/** An object specifying a forwarding rule for a load balancer. */
+/**
+ * An object specifying a forwarding rule for a load balancer.
+ */
 data class ForwardingRule(
     /**
-     * The protocol used for traffic to the load balancer. The possible values are: `http`, `https`,
-     * `http2`, `http3`, `tcp`, or `udp`. If you set the `entry_protocol` to `udp`, the
-     * `target_protocol` must be set to `udp`. When using UDP, the load balancer requires that you
-     * set up a health check with a port that uses TCP, HTTP, or HTTPS to work properly.
+     * The protocol used for traffic to the load balancer. The possible values are: `http`, `https`, `http2`, `http3`, `tcp`, or `udp`. If you set the `entry_protocol` to `udp`, the `target_protocol` must be set to `udp`. When using UDP, the load balancer requires that you set up a health check with a port that uses TCP, HTTP, or HTTPS to work properly.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("entry_protocol")
-    val entryProtocol: ForwardingRuleEntryProtocolEnum,
-    /** An integer representing the port on which the load balancer instance will listen. */
+    @com.fasterxml.jackson.annotation.JsonProperty("entry_protocol") val entryProtocol: ForwardingRuleEntryProtocolEnum,
+    /**
+     * An integer representing the port on which the load balancer instance will listen.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("entry_port") val entryPort: Long,
     /**
-     * The protocol used for traffic from the load balancer to the backend Droplets. The possible
-     * values are: `http`, `https`, `http2`, `tcp`, or `udp`. If you set the `target_protocol` to
-     * `udp`, the `entry_protocol` must be set to `udp`. When using UDP, the load balancer requires
-     * that you set up a health check with a port that uses TCP, HTTP, or HTTPS to work properly.
+     * The protocol used for traffic from the load balancer to the backend Droplets. The possible values are: `http`, `https`, `http2`, `tcp`, or `udp`. If you set the `target_protocol` to `udp`, the `entry_protocol` must be set to `udp`. When using UDP, the load balancer requires that you set up a health check with a port that uses TCP, HTTP, or HTTPS to work properly.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_protocol")
-    val targetProtocol: ForwardingRuleTargetProtocolEnum,
+    @com.fasterxml.jackson.annotation.JsonProperty("target_protocol") val targetProtocol: ForwardingRuleTargetProtocolEnum,
     /**
-     * An integer representing the port on the backend Droplets to which the load balancer will send
-     * traffic.
+     * An integer representing the port on the backend Droplets to which the load balancer will send traffic.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("target_port") val targetPort: Long,
-    /** The ID of the TLS certificate used for SSL termination if enabled. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_id")
-    val certificateId: String? = null,
     /**
-     * A boolean value indicating whether SSL encrypted traffic will be passed through to the
-     * backend Droplets.
+     * The ID of the TLS certificate used for SSL termination if enabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tls_passthrough")
-    val tlsPassthrough: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_id") val certificateId: String? = null,
+    /**
+     * A boolean value indicating whether SSL encrypted traffic will be passed through to the backend Droplets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tls_passthrough") val tlsPassthrough: Boolean? = null
 )
 
-/** An object specifying CDN configurations for a Global load balancer. */
+/**
+ * An object specifying CDN configurations for a Global load balancer.
+ */
 data class GlbSettingsCdn(
-    /** A boolean flag to enable CDN caching. */
+    /**
+     * A boolean flag to enable CDN caching.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_enabled") val isEnabled: Boolean? = null
 )
 
-/** An object specifying forwarding configurations for a Global load balancer. */
+/**
+ * An object specifying forwarding configurations for a Global load balancer.
+ */
 data class GlbSettings(
     /**
-     * The protocol used for forwarding traffic from the load balancer to the target backends. The
-     * possible values are `http`, `https` and `http2`.
+     * The protocol used for forwarding traffic from the load balancer to the target backends. The possible values are `http`, `https` and `http2`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_protocol")
-    val targetProtocol: GlbSettingsTargetProtocolEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("target_protocol") val targetProtocol: GlbSettingsTargetProtocolEnum? = null,
     /**
-     * An integer representing the port on the target backends which the load balancer will forward
-     * traffic to.
+     * An integer representing the port on the target backends which the load balancer will forward traffic to.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("target_port") val targetPort: Long? = null,
-    /** An object specifying CDN configurations for a Global load balancer. */
+    /**
+     * An object specifying CDN configurations for a Global load balancer.
+     */
     val cdn: GlbSettingsCdn? = null,
     /**
-     * A map of region string to an integer priority value indicating preference for which regional
-     * target a Global load balancer will forward traffic to. A lower value indicates a higher
-     * priority.
+     * A map of region string to an integer priority value indicating preference for which regional target a Global load balancer will forward traffic to. A lower value indicates a higher priority.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("region_priorities")
-    val regionPriorities: Map<String, Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("region_priorities") val regionPriorities: Map<String, Long>? = null,
     /**
-     * An integer value as a percentage to indicate failure threshold to decide how the regional
-     * priorities will take effect. A value of `50` would indicate that the Global load balancer
-     * will choose a lower priority region to forward traffic to once this failure threshold has
-     * been reached for the higher priority region.
+     * An integer value as a percentage to indicate failure threshold to decide how the regional priorities will take effect. A value of `50` would indicate that the Global load balancer will choose a lower priority region to forward traffic to once this failure threshold has been reached for the higher priority region.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("failover_threshold")
-    val failoverThreshold: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("failover_threshold") val failoverThreshold: Long? = null
 )
 
-/** An object specifying health check settings for the load balancer. */
+/**
+ * An object specifying health check settings for the load balancer.
+ */
 data class HealthCheck(
     /**
-     * The protocol used for health checks sent to the backend Droplets. The possible values are
-     * `http`, `https`, or `tcp`.
+     * The protocol used for health checks sent to the backend Droplets. The possible values are `http`, `https`, or `tcp`.
      */
     val protocol: HealthCheckProtocolEnum? = null,
     /**
-     * An integer representing the port on the backend Droplets on which the health check will
-     * attempt a connection.
+     * An integer representing the port on the backend Droplets on which the health check will attempt a connection.
      */
     val port: Long? = null,
-    /** The path on the backend Droplets to which the load balancer instance will send a request. */
+    /**
+     * The path on the backend Droplets to which the load balancer instance will send a request.
+     */
     val path: String? = null,
-    /** The number of seconds between between two consecutive health checks. */
-    @com.fasterxml.jackson.annotation.JsonProperty("check_interval_seconds")
-    val checkIntervalSeconds: Long? = null,
     /**
-     * The number of seconds the load balancer instance will wait for a response until marking a
-     * health check as failed.
+     * The number of seconds between between two consecutive health checks.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_timeout_seconds")
-    val responseTimeoutSeconds: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("check_interval_seconds") val checkIntervalSeconds: Long? = null,
     /**
-     * The number of times a health check must fail for a backend Droplet to be marked "unhealthy"
-     * and be removed from the pool.
+     * The number of seconds the load balancer instance will wait for a response until marking a health check as failed.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("unhealthy_threshold")
-    val unhealthyThreshold: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_timeout_seconds") val responseTimeoutSeconds: Long? = null,
     /**
-     * The number of times a health check must pass for a backend Droplet to be marked "healthy" and
-     * be re-added to the pool.
+     * The number of times a health check must fail for a backend Droplet to be marked "unhealthy" and be removed from the pool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("healthy_threshold")
-    val healthyThreshold: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("unhealthy_threshold") val unhealthyThreshold: Long? = null,
+    /**
+     * The number of times a health check must pass for a backend Droplet to be marked "healthy" and be re-added to the pool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("healthy_threshold") val healthyThreshold: Long? = null
 )
 
-/** An object specifying allow and deny rules to control traffic to the load balancer. */
+/**
+ * An object specifying allow and deny rules to control traffic to the load balancer.
+ */
 data class LbFirewall(
     /**
-     * the rules for denying traffic to the load balancer (in the form 'ip:1.2.3.4' or
-     * 'cidr:1.2.0.0/16')
+     * the rules for denying traffic to the load balancer (in the form 'ip:1.2.3.4' or 'cidr:1.2.0.0/16')
      */
     val deny: List<String>? = null,
     /**
-     * the rules for allowing traffic to the load balancer (in the form 'ip:1.2.3.4' or
-     * 'cidr:1.2.0.0/16')
+     * the rules for allowing traffic to the load balancer (in the form 'ip:1.2.3.4' or 'cidr:1.2.0.0/16')
      */
-    val allow: List<String>? = null,
+    val allow: List<String>? = null
 )
 
-/** Typed representation of the `LoadBalancer` API schema. */
+/**
+ * Typed representation of the `LoadBalancer` API schema.
+ */
 data class LoadBalancer(
-    /** An array of objects specifying the forwarding rules for a load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules")
-    val forwardingRules: List<ForwardingRule>,
-    /** A unique ID that can be used to identify and reference a load balancer. */
+    /**
+     * An array of objects specifying the forwarding rules for a load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules") val forwardingRules: List<ForwardingRule>,
+    /**
+     * A unique ID that can be used to identify and reference a load balancer.
+     */
     val id: String? = null,
-    /** A human-readable name for a load balancer instance. */
+    /**
+     * A human-readable name for a load balancer instance.
+     */
     val name: String? = null,
     /**
-     * The ID of the project that the load balancer is associated with. If no ID is provided at
-     * creation, the load balancer associates with the user's default project. If an invalid project
-     * ID is provided, the load balancer will not be created.
+     * The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** An attribute containing the public-facing IPv6 address of the load balancer. */
+    /**
+     * An attribute containing the public-facing IPv6 address of the load balancer.
+     */
     val ipv6: String? = null,
     /**
-     * How many nodes the load balancer contains. Each additional node increases the load balancer's
-     * ability to manage more connections. Load balancers can be scaled up or down, and you can
-     * change the number of nodes after creation up to once per hour. This field is currently not
-     * available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers
-     * that reside in these regions.
+     * How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_unit") val sizeUnit: Long? = null,
     /**
-     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2,
-     * and SFO1. Each available load balancer size now equates to the load balancer having a set
-     * number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can
-     * resize load balancers after creation up to once per hour. You cannot resize a load balancer
-     * within the first hour of its creation.
+     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
      */
     val size: LoadBalancerBaseSizeEnum? = null,
     /**
@@ -199,135 +199,129 @@ data class LoadBalancer(
      */
     val algorithm: LoadBalancerBaseAlgorithmEnum? = null,
     /**
-     * A status string indicating the current state of the load balancer. This can be `new`,
-     * `active`, or `errored`.
+     * A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
      */
     val status: LoadBalancerBaseStatusEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the load
-     * balancer was created.
+     * A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** An object specifying health check settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("health_check")
-    val healthCheck: HealthCheck? = null,
-    /** An object specifying sticky sessions settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions")
-    val stickySessions: StickySessions? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be
-     * redirected to HTTPS on port 443.
+     * An object specifying health check settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https")
-    val redirectHttpToHttps: Boolean? = null,
-    /** A boolean value indicating whether PROXY Protocol is in use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol")
-    val enableProxyProtocol: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("health_check") val healthCheck: HealthCheck? = null,
     /**
-     * A boolean value indicating whether HTTP keepalive connections are maintained to target
-     * Droplets.
+     * An object specifying sticky sessions settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive")
-    val enableBackendKeepalive: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions") val stickySessions: StickySessions? = null,
+    /**
+     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https") val redirectHttpToHttps: Boolean? = null,
+    /**
+     * A boolean value indicating whether PROXY Protocol is in use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol") val enableProxyProtocol: Boolean? = null,
+    /**
+     * A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive") val enableBackendKeepalive: Boolean? = null,
     /**
      * An integer value which configures the idle timeout for HTTP requests to the target droplets.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds")
-    val httpIdleTimeoutSeconds: Long? = null,
-    /** A string specifying the UUID of the VPC to which the load balancer is assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds") val httpIdleTimeoutSeconds: Long? = null,
+    /**
+     * A string specifying the UUID of the VPC to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /** A string specifying the UUID of the VPC subnet to which the load balancer is assigned. */
+    /**
+     * A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt
-     * certificates that are added to the load balancer.
+     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records")
-    val disableLetsEncryptDnsRecords: Boolean? = null,
-    /** An object specifying allow and deny rules to control traffic to the load balancer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records") val disableLetsEncryptDnsRecords: Boolean? = null,
+    /**
+     * An object specifying allow and deny rules to control traffic to the load balancer.
+     */
     val firewall: LbFirewall? = null,
     /**
-     * A string indicating whether the load balancer should be external or internal. Internal load
-     * balancers have no public IPs and are only accessible to resources on the same VPC network.
-     * This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
      */
     val network: LoadBalancerBaseNetworkEnum? = null,
     /**
-     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6
-     * networking. This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_stack")
-    val networkStack: LoadBalancerBaseNetworkStackEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("network_stack") val networkStack: LoadBalancerBaseNetworkStackEnum? = null,
     /**
-     * A string indicating whether the load balancer should be a standard regional HTTP load
-     * balancer, a regional network load balancer that routes traffic at the TCP/UDP transport
-     * layer, or a global load balancer.
+     * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
      */
     val type: LoadBalancerBaseTypeEnum? = null,
-    /** An array of objects specifying the domain configurations for a Global load balancer. */
+    /**
+     * An array of objects specifying the domain configurations for a Global load balancer.
+     */
     val domains: List<Domains>? = null,
-    /** An object specifying forwarding configurations for a Global load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings")
-    val glbSettings: GlbSettings? = null,
     /**
-     * An array containing the UUIDs of the Regional load balancers to be used as target backends
-     * for a Global load balancer.
+     * An object specifying forwarding configurations for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids")
-    val targetLoadBalancerIds: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings") val glbSettings: GlbSettings? = null,
     /**
-     * A string indicating the policy for the TLS cipher suites used by the load balancer. The
-     * possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     * An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy")
-    val tlsCipherPolicy: LoadBalancerBaseTlsCipherPolicyEnum? = null,
-    /** An attribute containing the public-facing IP address of the load balancer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids") val targetLoadBalancerIds: List<String>? = null,
+    /**
+     * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy") val tlsCipherPolicy: LoadBalancerBaseTlsCipherPolicyEnum? = null,
+    /**
+     * An attribute containing the public-facing IP address of the load balancer.
+     */
     val ip: String? = null,
     /**
-     * The region where the load balancer instance is located. When setting a region, the value
-     * should be the slug identifier for the region. When you query a load balancer, an entire
-     * region object will be returned.
+     * The region where the load balancer instance is located. When setting a region, the value should be the slug identifier for the region. When you query a load balancer, an entire region object will be returned.
      */
     val region: Region? = null,
-    /** An array containing the IDs of the Droplets assigned to the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
-    val dropletIds: List<Long>? = null,
-    /** The name of a Droplet tag corresponding to Droplets assigned to the load balancer. */
-    val tag: String? = null,
+    /**
+     * An array containing the IDs of the Droplets assigned to the load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
+    /**
+     * The name of a Droplet tag corresponding to Droplets assigned to the load balancer.
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `LoadBalancerBase` API schema. */
+/**
+ * Typed representation of the `LoadBalancerBase` API schema.
+ */
 data class LoadBalancerBase(
-    /** An array of objects specifying the forwarding rules for a load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules")
-    val forwardingRules: List<ForwardingRule>,
-    /** A unique ID that can be used to identify and reference a load balancer. */
+    /**
+     * An array of objects specifying the forwarding rules for a load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules") val forwardingRules: List<ForwardingRule>,
+    /**
+     * A unique ID that can be used to identify and reference a load balancer.
+     */
     val id: String? = null,
-    /** A human-readable name for a load balancer instance. */
+    /**
+     * A human-readable name for a load balancer instance.
+     */
     val name: String? = null,
     /**
-     * The ID of the project that the load balancer is associated with. If no ID is provided at
-     * creation, the load balancer associates with the user's default project. If an invalid project
-     * ID is provided, the load balancer will not be created.
+     * The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** An attribute containing the public-facing IPv6 address of the load balancer. */
+    /**
+     * An attribute containing the public-facing IPv6 address of the load balancer.
+     */
     val ipv6: String? = null,
     /**
-     * How many nodes the load balancer contains. Each additional node increases the load balancer's
-     * ability to manage more connections. Load balancers can be scaled up or down, and you can
-     * change the number of nodes after creation up to once per hour. This field is currently not
-     * available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers
-     * that reside in these regions.
+     * How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_unit") val sizeUnit: Long? = null,
     /**
-     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2,
-     * and SFO1. Each available load balancer size now equates to the load balancer having a set
-     * number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can
-     * resize load balancers after creation up to once per hour. You cannot resize a load balancer
-     * within the first hour of its creation.
+     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
      */
     val size: LoadBalancerBaseSizeEnum? = null,
     /**
@@ -335,320 +329,285 @@ data class LoadBalancerBase(
      */
     val algorithm: LoadBalancerBaseAlgorithmEnum? = null,
     /**
-     * A status string indicating the current state of the load balancer. This can be `new`,
-     * `active`, or `errored`.
+     * A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
      */
     val status: LoadBalancerBaseStatusEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the load
-     * balancer was created.
+     * A time value given in ISO8601 combined date and time format that represents when the load balancer was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** An object specifying health check settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("health_check")
-    val healthCheck: HealthCheck? = null,
-    /** An object specifying sticky sessions settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions")
-    val stickySessions: StickySessions? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be
-     * redirected to HTTPS on port 443.
+     * An object specifying health check settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https")
-    val redirectHttpToHttps: Boolean? = null,
-    /** A boolean value indicating whether PROXY Protocol is in use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol")
-    val enableProxyProtocol: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("health_check") val healthCheck: HealthCheck? = null,
     /**
-     * A boolean value indicating whether HTTP keepalive connections are maintained to target
-     * Droplets.
+     * An object specifying sticky sessions settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive")
-    val enableBackendKeepalive: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions") val stickySessions: StickySessions? = null,
+    /**
+     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https") val redirectHttpToHttps: Boolean? = null,
+    /**
+     * A boolean value indicating whether PROXY Protocol is in use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol") val enableProxyProtocol: Boolean? = null,
+    /**
+     * A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive") val enableBackendKeepalive: Boolean? = null,
     /**
      * An integer value which configures the idle timeout for HTTP requests to the target droplets.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds")
-    val httpIdleTimeoutSeconds: Long? = null,
-    /** A string specifying the UUID of the VPC to which the load balancer is assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds") val httpIdleTimeoutSeconds: Long? = null,
+    /**
+     * A string specifying the UUID of the VPC to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /** A string specifying the UUID of the VPC subnet to which the load balancer is assigned. */
+    /**
+     * A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt
-     * certificates that are added to the load balancer.
+     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records")
-    val disableLetsEncryptDnsRecords: Boolean? = null,
-    /** An object specifying allow and deny rules to control traffic to the load balancer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records") val disableLetsEncryptDnsRecords: Boolean? = null,
+    /**
+     * An object specifying allow and deny rules to control traffic to the load balancer.
+     */
     val firewall: LbFirewall? = null,
     /**
-     * A string indicating whether the load balancer should be external or internal. Internal load
-     * balancers have no public IPs and are only accessible to resources on the same VPC network.
-     * This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
      */
     val network: LoadBalancerBaseNetworkEnum? = null,
     /**
-     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6
-     * networking. This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_stack")
-    val networkStack: LoadBalancerBaseNetworkStackEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("network_stack") val networkStack: LoadBalancerBaseNetworkStackEnum? = null,
     /**
-     * A string indicating whether the load balancer should be a standard regional HTTP load
-     * balancer, a regional network load balancer that routes traffic at the TCP/UDP transport
-     * layer, or a global load balancer.
+     * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
      */
     val type: LoadBalancerBaseTypeEnum? = null,
-    /** An array of objects specifying the domain configurations for a Global load balancer. */
+    /**
+     * An array of objects specifying the domain configurations for a Global load balancer.
+     */
     val domains: List<Domains>? = null,
-    /** An object specifying forwarding configurations for a Global load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings")
-    val glbSettings: GlbSettings? = null,
     /**
-     * An array containing the UUIDs of the Regional load balancers to be used as target backends
-     * for a Global load balancer.
+     * An object specifying forwarding configurations for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids")
-    val targetLoadBalancerIds: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings") val glbSettings: GlbSettings? = null,
     /**
-     * A string indicating the policy for the TLS cipher suites used by the load balancer. The
-     * possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     * An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy")
-    val tlsCipherPolicy: LoadBalancerBaseTlsCipherPolicyEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids") val targetLoadBalancerIds: List<String>? = null,
+    /**
+     * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy") val tlsCipherPolicy: LoadBalancerBaseTlsCipherPolicyEnum? = null
 )
 
-/** Typed representation of the `LoadBalancerBaseRequest` API schema. */
+/**
+ * Typed representation of the `LoadBalancerBaseRequest` API schema.
+ */
 data class LoadBalancerBaseRequest(
-    /** An array of objects specifying the forwarding rules for a load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules")
-    val forwardingRules: List<ForwardingRule>,
-    /** A human-readable name for a load balancer instance. */
+    /**
+     * An array of objects specifying the forwarding rules for a load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules") val forwardingRules: List<ForwardingRule>,
+    /**
+     * A human-readable name for a load balancer instance.
+     */
     val name: String? = null,
     /**
-     * The ID of the project that the load balancer is associated with. If no ID is provided at
-     * creation, the load balancer associates with the user's default project. If an invalid project
-     * ID is provided, the load balancer will not be created.
+     * The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
     /**
-     * How many nodes the load balancer contains. Each additional node increases the load balancer's
-     * ability to manage more connections. Load balancers can be scaled up or down, and you can
-     * change the number of nodes after creation up to once per hour. This field is currently not
-     * available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers
-     * that reside in these regions.
+     * How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_unit") val sizeUnit: Long? = null,
     /**
-     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2,
-     * and SFO1. Each available load balancer size now equates to the load balancer having a set
-     * number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can
-     * resize load balancers after creation up to once per hour. You cannot resize a load balancer
-     * within the first hour of its creation.
+     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
      */
     val size: LoadBalancerBaseRequestSizeEnum? = null,
     /**
      * This field has been deprecated. You can no longer specify an algorithm for load balancers.
      */
     val algorithm: LoadBalancerBaseRequestAlgorithmEnum? = null,
-    /** An object specifying health check settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("health_check")
-    val healthCheck: HealthCheck? = null,
-    /** An object specifying sticky sessions settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions")
-    val stickySessions: StickySessions? = null,
     /**
-     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be
-     * redirected to HTTPS on port 443.
+     * An object specifying health check settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https")
-    val redirectHttpToHttps: Boolean? = null,
-    /** A boolean value indicating whether PROXY Protocol is in use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol")
-    val enableProxyProtocol: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("health_check") val healthCheck: HealthCheck? = null,
     /**
-     * A boolean value indicating whether HTTP keepalive connections are maintained to target
-     * Droplets.
+     * An object specifying sticky sessions settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive")
-    val enableBackendKeepalive: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions") val stickySessions: StickySessions? = null,
+    /**
+     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https") val redirectHttpToHttps: Boolean? = null,
+    /**
+     * A boolean value indicating whether PROXY Protocol is in use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol") val enableProxyProtocol: Boolean? = null,
+    /**
+     * A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive") val enableBackendKeepalive: Boolean? = null,
     /**
      * An integer value which configures the idle timeout for HTTP requests to the target droplets.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds")
-    val httpIdleTimeoutSeconds: Long? = null,
-    /** A string specifying the UUID of the VPC to which the load balancer is assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds") val httpIdleTimeoutSeconds: Long? = null,
+    /**
+     * A string specifying the UUID of the VPC to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /** A string specifying the UUID of the VPC subnet to which the load balancer is assigned. */
+    /**
+     * A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt
-     * certificates that are added to the load balancer.
+     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records")
-    val disableLetsEncryptDnsRecords: Boolean? = null,
-    /** An object specifying allow and deny rules to control traffic to the load balancer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records") val disableLetsEncryptDnsRecords: Boolean? = null,
+    /**
+     * An object specifying allow and deny rules to control traffic to the load balancer.
+     */
     val firewall: LbFirewall? = null,
     /**
-     * A string indicating whether the load balancer should be external or internal. Internal load
-     * balancers have no public IPs and are only accessible to resources on the same VPC network.
-     * This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
      */
     val network: LoadBalancerBaseRequestNetworkEnum? = null,
     /**
-     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6
-     * networking. This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_stack")
-    val networkStack: LoadBalancerBaseRequestNetworkStackEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("network_stack") val networkStack: LoadBalancerBaseRequestNetworkStackEnum? = null,
     /**
-     * A string indicating whether the load balancer should be a standard regional HTTP load
-     * balancer, a regional network load balancer that routes traffic at the TCP/UDP transport
-     * layer, or a global load balancer.
+     * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
      */
     val type: LoadBalancerBaseRequestTypeEnum? = null,
-    /** An array of objects specifying the domain configurations for a Global load balancer. */
+    /**
+     * An array of objects specifying the domain configurations for a Global load balancer.
+     */
     val domains: List<Domains>? = null,
-    /** An object specifying forwarding configurations for a Global load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings")
-    val glbSettings: GlbSettings? = null,
     /**
-     * An array containing the UUIDs of the Regional load balancers to be used as target backends
-     * for a Global load balancer.
+     * An object specifying forwarding configurations for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids")
-    val targetLoadBalancerIds: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings") val glbSettings: GlbSettings? = null,
     /**
-     * A string indicating the policy for the TLS cipher suites used by the load balancer. The
-     * possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     * An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy")
-    val tlsCipherPolicy: LoadBalancerBaseRequestTlsCipherPolicyEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids") val targetLoadBalancerIds: List<String>? = null,
+    /**
+     * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy") val tlsCipherPolicy: LoadBalancerBaseRequestTlsCipherPolicyEnum? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LoadBalancerCreateRequestVariant0(
-    /** An array containing the IDs of the Droplets assigned to the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>,
-    /** The slug identifier for the region where the resource will initially be available. */
-    val region: RegionSlug,
-    /** An array of objects specifying the forwarding rules for a load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules")
-    val forwardingRules: List<ForwardingRule>,
     /**
-     * An optional IP address to assign to the load balancer from one of your Bring Your Own IP
-     * (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same
-     * region as the load balancer. If omitted, DigitalOcean assigns a public IP address
-     * automatically. This field is only applied when creating the load balancer, cannot be changed
-     * afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
+     * An array containing the IDs of the Droplets assigned to the load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>,
+    /**
+     * The slug identifier for the region where the resource will initially be available.
+     */
+    val region: RegionSlug,
+    /**
+     * An array of objects specifying the forwarding rules for a load balancer.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_rules") val forwardingRules: List<ForwardingRule>,
+    /**
+     * An optional IP address to assign to the load balancer from one of your Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned BYOIP address on your account in the same region as the load balancer. If omitted, DigitalOcean assigns a public IP address automatically. This field is only applied when creating the load balancer, cannot be changed afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.
      */
     val ip: String? = null,
-    /** A human-readable name for a load balancer instance. */
+    /**
+     * A human-readable name for a load balancer instance.
+     */
     val name: String? = null,
     /**
-     * The ID of the project that the load balancer is associated with. If no ID is provided at
-     * creation, the load balancer associates with the user's default project. If an invalid project
-     * ID is provided, the load balancer will not be created.
+     * The ID of the project that the load balancer is associated with. If no ID is provided at creation, the load balancer associates with the user's default project. If an invalid project ID is provided, the load balancer will not be created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
     /**
-     * How many nodes the load balancer contains. Each additional node increases the load balancer's
-     * ability to manage more connections. Load balancers can be scaled up or down, and you can
-     * change the number of nodes after creation up to once per hour. This field is currently not
-     * available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers
-     * that reside in these regions.
+     * How many nodes the load balancer contains. Each additional node increases the load balancer's ability to manage more connections. Load balancers can be scaled up or down, and you can change the number of nodes after creation up to once per hour. This field is currently not available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to scale load balancers that reside in these regions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_unit") val sizeUnit: Long? = null,
     /**
-     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2,
-     * and SFO1. Each available load balancer size now equates to the load balancer having a set
-     * number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can
-     * resize load balancers after creation up to once per hour. You cannot resize a load balancer
-     * within the first hour of its creation.
+     * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
      */
     val size: LoadBalancerBaseRequestSizeEnum? = null,
     /**
      * This field has been deprecated. You can no longer specify an algorithm for load balancers.
      */
     val algorithm: LoadBalancerBaseRequestAlgorithmEnum? = null,
-    /** An object specifying health check settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("health_check")
-    val healthCheck: HealthCheck? = null,
-    /** An object specifying sticky sessions settings for the load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions")
-    val stickySessions: StickySessions? = null,
     /**
-     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be
-     * redirected to HTTPS on port 443.
+     * An object specifying health check settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https")
-    val redirectHttpToHttps: Boolean? = null,
-    /** A boolean value indicating whether PROXY Protocol is in use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol")
-    val enableProxyProtocol: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("health_check") val healthCheck: HealthCheck? = null,
     /**
-     * A boolean value indicating whether HTTP keepalive connections are maintained to target
-     * Droplets.
+     * An object specifying sticky sessions settings for the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive")
-    val enableBackendKeepalive: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sticky_sessions") val stickySessions: StickySessions? = null,
+    /**
+     * A boolean value indicating whether HTTP requests to the load balancer on port 80 will be redirected to HTTPS on port 443.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_http_to_https") val redirectHttpToHttps: Boolean? = null,
+    /**
+     * A boolean value indicating whether PROXY Protocol is in use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_proxy_protocol") val enableProxyProtocol: Boolean? = null,
+    /**
+     * A boolean value indicating whether HTTP keepalive connections are maintained to target Droplets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enable_backend_keepalive") val enableBackendKeepalive: Boolean? = null,
     /**
      * An integer value which configures the idle timeout for HTTP requests to the target droplets.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds")
-    val httpIdleTimeoutSeconds: Long? = null,
-    /** A string specifying the UUID of the VPC to which the load balancer is assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_idle_timeout_seconds") val httpIdleTimeoutSeconds: Long? = null,
+    /**
+     * A string specifying the UUID of the VPC to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /** A string specifying the UUID of the VPC subnet to which the load balancer is assigned. */
+    /**
+     * A string specifying the UUID of the VPC subnet to which the load balancer is assigned.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
     /**
-     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt
-     * certificates that are added to the load balancer.
+     * A boolean value indicating whether to disable automatic DNS record creation for Let's Encrypt certificates that are added to the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records")
-    val disableLetsEncryptDnsRecords: Boolean? = null,
-    /** An object specifying allow and deny rules to control traffic to the load balancer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_lets_encrypt_dns_records") val disableLetsEncryptDnsRecords: Boolean? = null,
+    /**
+     * An object specifying allow and deny rules to control traffic to the load balancer.
+     */
     val firewall: LbFirewall? = null,
     /**
-     * A string indicating whether the load balancer should be external or internal. Internal load
-     * balancers have no public IPs and are only accessible to resources on the same VPC network.
-     * This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
      */
     val network: LoadBalancerBaseRequestNetworkEnum? = null,
     /**
-     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6
-     * networking. This property cannot be updated after creating the load balancer.
+     * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_stack")
-    val networkStack: LoadBalancerBaseRequestNetworkStackEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("network_stack") val networkStack: LoadBalancerBaseRequestNetworkStackEnum? = null,
     /**
-     * A string indicating whether the load balancer should be a standard regional HTTP load
-     * balancer, a regional network load balancer that routes traffic at the TCP/UDP transport
-     * layer, or a global load balancer.
+     * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
      */
     val type: LoadBalancerBaseRequestTypeEnum? = null,
-    /** An array of objects specifying the domain configurations for a Global load balancer. */
+    /**
+     * An array of objects specifying the domain configurations for a Global load balancer.
+     */
     val domains: List<Domains>? = null,
-    /** An object specifying forwarding configurations for a Global load balancer. */
-    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings")
-    val glbSettings: GlbSettings? = null,
     /**
-     * An array containing the UUIDs of the Regional load balancers to be used as target backends
-     * for a Global load balancer.
+     * An object specifying forwarding configurations for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids")
-    val targetLoadBalancerIds: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("glb_settings") val glbSettings: GlbSettings? = null,
     /**
-     * A string indicating the policy for the TLS cipher suites used by the load balancer. The
-     * possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     * An array containing the UUIDs of the Regional load balancers to be used as target backends for a Global load balancer.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy")
-    val tlsCipherPolicy: LoadBalancerBaseRequestTlsCipherPolicyEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("target_load_balancer_ids") val targetLoadBalancerIds: List<String>? = null,
+    /**
+     * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tls_cipher_policy") val tlsCipherPolicy: LoadBalancerBaseRequestTlsCipherPolicyEnum? = null
 ) : LoadBalancerCreateRequest

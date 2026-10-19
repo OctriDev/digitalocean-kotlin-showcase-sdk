@@ -45,660 +45,311 @@ import dev.octri.showcase.digitalocean.WebhookNotificationConfigRequest
 
 object Insights {
 
+
     /**
-     * To list alert instances for your account, send a GET request to
-     * `/v2/insights/alert-instances`. Alert instances are read-only records of alert rule firings
-     * against your resources. Results can optionally be filtered by `status`, `rule_id`, or
-     * `resource_urn`. Results are ordered by `triggered_at` descending (newest first). Because the
-     * list is append-only and continuously growing, offset-based pagination is best-effort: newly
-     * triggered instances may shift older rows onto…
+     * To list alert instances for your account, send a GET request to `/v2/insights/alert-instances`. Alert instances are read-only records of alert rule firings against your resources. Results can optionally be filtered by `status`, `rule_id`, or `resource_urn`. Results are ordered by `triggered_at` descending (newest first). Because the list is append-only and continuously growing, offset-based pagination is best-effort: newly triggered instances may shift older rows onto…
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
-     * @param status Optional filter. When set, only alert instances with this status are returned.
-     * @param ruleId Optional filter. When set, only alert instances fired by the alert rule with
-     *   this ID are returned.
-     * @param resourceUrn Optional filter. When set, only resources associated with this resource
-     *   URN are returned.
+     * @param status Optional filter. When set, only alert instances with this status
+     *   are returned.
+     * @param ruleId Optional filter. When set, only alert instances fired by the
+     *   alert rule with this ID are returned.
+     * @param resourceUrn Optional filter. When set, only resources associated with
+     *   this resource URN are returned.
      */
-    fun insightsListAlertInstances(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        status: SchemaSchemaEnum993f3fba? = null,
-        ruleId: String? = null,
-        resourceUrn: String? = null,
-        options: RequestOptions? = null,
-    ): ListAlertInstancesResponse {
+    fun insightsListAlertInstances(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, status: SchemaSchemaEnum993f3fba? = null, ruleId: String? = null, resourceUrn: String? = null, options: RequestOptions? = null): ListAlertInstancesResponse {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (ruleId != null) {
             Validation.validateUuid("rule_id", ruleId)
-        }
+}
 
-        return SdkClient.request<ListAlertInstancesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/alert-instances",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "status" to SdkClient.queryValue(status, "form", true),
-                            "rule_id" to SdkClient.queryValue(ruleId, "form", true),
-                            "resource_urn" to SdkClient.queryValue(resourceUrn, "form", true),
-                        ),
-                    operationId = "insightsListAlertInstances",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListAlertInstancesResponse>(SdkClient.RequestSpec("GET", "/v2/insights/alert-instances", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "status" to SdkClient.queryValue(status, "form", true), "rule_id" to SdkClient.queryValue(ruleId, "form", true), "resource_urn" to
+    SdkClient.queryValue(resourceUrn, "form", true)), operationId = "insightsListAlertInstances", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a single alert instance, send a GET request to
-     * `/v2/insights/alert-instances/{id}`.
+     * To retrieve a single alert instance, send a GET request to `/v2/insights/alert-instances/{id}`.
      *
      * @param id A unique identifier for an alert instance.
      */
-    fun insightsGetAlertInstance(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): AlertInstanceResponse {
+    fun insightsGetAlertInstance(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): AlertInstanceResponse {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<AlertInstanceResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/alert-instances/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "insightsGetAlertInstance",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AlertInstanceResponse>(SdkClient.RequestSpec("GET", "/v2/insights/alert-instances/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "insightsGetAlertInstance", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list alert rules for your account, send a GET request to `/v2/insights/alert-rules`.
-     * Results are paginated with `page` and `per_page` (default `20`, maximum `200`). Optionally
-     * filter by `resource_urn`.
+     * To list alert rules for your account, send a GET request to `/v2/insights/alert-rules`. Results are paginated with `page` and `per_page` (default `20`, maximum `200`). Optionally filter by `resource_urn`.
      *
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page
-     * @param resourceUrn Optional filter. When set, only resources associated with this resource
-     *   URN are returned.
+     * @param resourceUrn Optional filter. When set, only resources associated with
+     *   this resource URN are returned.
      */
-    fun insightsListAlertRules(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        resourceUrn: String? = null,
-        options: RequestOptions? = null,
-    ): InsightsListAlertRulesResponse {
+    fun insightsListAlertRules(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, resourceUrn: String? = null, options: RequestOptions? = null): InsightsListAlertRulesResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
-        return SdkClient.request<InsightsListAlertRulesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/alert-rules",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "resource_urn" to SdkClient.queryValue(resourceUrn, "form", true),
-                        ),
-                    operationId = "insightsListAlertRules",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<InsightsListAlertRulesResponse>(SdkClient.RequestSpec("GET", "/v2/insights/alert-rules", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "resource_urn" to
+    SdkClient.queryValue(resourceUrn, "form", true)), operationId = "insightsListAlertRules", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * Creates an alert rule for a metric query and its configured thresholds. Provide a `spec` with
-     * `name`, `query`, `thresholds`, and at least one `notification_channels` binding; `status`
-     * defaults to `ALERT_RULE_STATUS_ACTIVE` and `re_alert_duration` defaults to
-     * `RE_ALERT_DURATION_4H` when omitted. Use a dotted OpenTelemetry metric name for
-     * `query.metric`, such as `do.droplets.cpu_utilization`.
+     * Creates an alert rule for a metric query and its configured thresholds. Provide a `spec` with `name`, `query`, `thresholds`, and at least one `notification_channels` binding; `status` defaults to `ALERT_RULE_STATUS_ACTIVE` and `re_alert_duration` defaults to `RE_ALERT_DURATION_4H` when omitted. Use a dotted OpenTelemetry metric name for `query.metric`, such as `do.droplets.cpu_utilization`.
      *
-     * To create an alert rule, send a POST request to `/v2/insights/alert-rules` with a `spec`
-     * containing `name`, `query`, `thresholds`, and at least one `notification_channels` binding.
-     * `status` defaults to `ALERT_RULE_STATUS_ACTIVE` when omitted. `re_alert_duration` defaults to
-     * `RE_ALERT_DURATION_4H` when omitted. `query.metric` must be a dotted OpenTelemetry name such
-     * as `do.droplets.cpu_utilization`. Underscored Prometheus-style names are rejected with `422
-     * Unprocessable…
+     * To create an alert rule, send a POST request to `/v2/insights/alert-rules` with a `spec` containing `name`, `query`, `thresholds`, and at least one `notification_channels` binding. `status` defaults to `ALERT_RULE_STATUS_ACTIVE` when omitted. `re_alert_duration` defaults to `RE_ALERT_DURATION_4H` when omitted. `query.metric` must be a dotted OpenTelemetry name such as `do.droplets.cpu_utilization`. Underscored Prometheus-style names are rejected with `422 Unprocessable…
      */
-    fun insightsCreateAlertRule(
-        clientConfig: ClientConfig,
-        body: AlertRuleCreateRequest,
-        options: RequestOptions? = null,
-    ): AlertRuleResponse {
-        return SdkClient.request<AlertRuleResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/alert-rules",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "insightsCreateAlertRule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsCreateAlertRule(clientConfig: ClientConfig, body: AlertRuleCreateRequest, options: RequestOptions? = null): AlertRuleResponse {
+        return SdkClient.request<AlertRuleResponse>(SdkClient.RequestSpec("POST", "/v2/insights/alert-rules", config = clientConfig, body = body, operationId = "insightsCreateAlertRule", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * To retrieve an alert rule, send a GET request to `/v2/insights/alert-rules/{id}`.
      *
      * @param id A unique identifier for an alert rule.
      */
-    fun insightsGetAlertRule(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): AlertRuleResponse {
+    fun insightsGetAlertRule(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): AlertRuleResponse {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<AlertRuleResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "insightsGetAlertRule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AlertRuleResponse>(SdkClient.RequestSpec("GET", "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "insightsGetAlertRule", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * This PUT endpoint uses merge semantics. To update an alert rule, send a request to
-     * `/v2/insights/alert-rules/{id}` with a full `spec`. Omit `notification_channels` to keep
-     * existing bindings. Omit `status` or `re_alert_duration` to keep those existing values.
+     * This PUT endpoint uses merge semantics. To update an alert rule, send a request to `/v2/insights/alert-rules/{id}` with a full `spec`. Omit `notification_channels` to keep existing bindings. Omit `status` or `re_alert_duration` to keep those existing values.
      *
      * @param id A unique identifier for an alert rule.
-     * @param spec Spec for an Insights alert rule. On create, `name`, `query`, `thresholds`, and at
-     *   least one `notification_channels` binding are required. On update, omit
-     *   `notification_channels` to keep existing bindings; an explicit empty list is rejected.
-     * @param status Desired alert rule status. Allowed values: - `ALERT_RULE_STATUS_ACTIVE` =
-     *   active - `ALERT_RULE_STATUS_PAUSED` = paused
+     * @param spec Spec for an Insights alert rule. On create, `name`, `query`,
+     *   `thresholds`, and at least one `notification_channels` binding are required.
+     *   On update, omit `notification_channels` to keep existing bindings; an explicit
+     *   empty list is rejected.
+     * @param status Desired alert rule status. Allowed values: -
+     *   `ALERT_RULE_STATUS_ACTIVE` = active - `ALERT_RULE_STATUS_PAUSED` = paused
      */
-    fun insightsUpdateAlertRule(
-        clientConfig: ClientConfig,
-        id: String,
-        spec: AlertRuleSpec,
-        status: AlertRuleRequestStatusEnum? = null,
-        options: RequestOptions? = null,
-    ): AlertRuleResponse {
+    fun insightsUpdateAlertRule(clientConfig: ClientConfig, id: String, spec: AlertRuleSpec, status: AlertRuleRequestStatusEnum? = null, options: RequestOptions? = null): AlertRuleResponse {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<AlertRuleResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "spec" to (spec),
-                            "status" to (SdkClient.omitIfNull(status)),
-                        ),
-                    operationId = "insightsUpdateAlertRule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AlertRuleResponse>(SdkClient.RequestSpec("PUT", "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("spec" to (spec), "status" to (SdkClient.omitIfNull(status))), operationId = "insightsUpdateAlertRule", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * To delete an alert rule, send a DELETE request to `/v2/insights/alert-rules/{id}`.
      *
      * @param id A unique identifier for an alert rule.
      */
-    fun insightsDeleteAlertRule(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun insightsDeleteAlertRule(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("id", id)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}",
-                config = clientConfig,
-                operationId = "insightsDeleteAlertRule",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/insights/alert-rules/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "insightsDeleteAlertRule", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To list all notification channels for your account, send a GET request to
-     * `/v2/insights/notification-channels`. Results are paginated with `page` and `per_page`
-     * (default `20`, maximum `200`).
+     * To list all notification channels for your account, send a GET request to `/v2/insights/notification-channels`. Results are paginated with `page` and `per_page` (default `20`, maximum `200`).
      *
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page
      */
-    fun insightsListNotificationChannels(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): InsightsListNotificationChannelsResponse {
+    fun insightsListNotificationChannels(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): InsightsListNotificationChannelsResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
-        return SdkClient.request<InsightsListNotificationChannelsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/notification-channels",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "insightsListNotificationChannels",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<InsightsListNotificationChannelsResponse>(SdkClient.RequestSpec("GET", "/v2/insights/notification-channels", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "insightsListNotificationChannels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To create a notification channel, send a POST request to `/v2/insights/notification-channels`
-     * with a `name` and exactly one of `email`, `slack`, or `webhook`. Email recipients must be
-     * verified team member addresses. Webhook URLs must use HTTPS. Secret fields
-     * (`slack.webhook_url`, webhook credentials) are write-only. Subsequent reads never return
-     * secret values; they include optional `*_status` objects when a secret is configured.
+     * To create a notification channel, send a POST request to `/v2/insights/notification-channels` with a `name` and exactly one of `email`, `slack`, or `webhook`. Email recipients must be verified team member addresses. Webhook URLs must use HTTPS. Secret fields (`slack.webhook_url`, webhook credentials) are write-only. Subsequent reads never return secret values; they include optional `*_status` objects when a secret is configured.
      *
      * @param name A human-readable name for the notification channel.
-     * @param email Email notification channel configuration. Recipients must be verified team
-     *   member email addresses.
-     * @param slack Slack notification channel configuration for create and update requests.
-     *   `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on
-     *   update to keep the existing secret.
-     * @param webhook Generic HTTPS webhook notification channel configuration for create and update
-     *   requests. The URL must use HTTPS and must not include userinfo. Optionally configure either
-     *   `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is
-     *   not a secret and is returned in full on read. Credential fields (`basic_auth.password`,
-     *   `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or
-     *   rotate. Omit a secret field on update to…
+     * @param email Email notification channel configuration. Recipients must be
+     *   verified team member email addresses.
+     * @param slack Slack notification channel configuration for create and update
+     *   requests. `webhook_url` is write-only: send the full value to set or rotate.
+     *   Omit `webhook_url` on update to keep the existing secret.
+     * @param webhook Generic HTTPS webhook notification channel configuration for
+     *   create and update requests. The URL must use HTTPS and must not include
+     *   userinfo. Optionally configure either `basic_auth` or `bearer_token` (not
+     *   both), custom headers, and a signing secret. `url` is not a secret and is
+     *   returned in full on read. Credential fields (`basic_auth.password`,
+     *   `bearer_token.token`, `signature.secret`) are write-only: send the full value
+     *   to set or rotate. Omit a secret field on update to…
      */
-    fun insightsCreateNotificationChannel(
-        clientConfig: ClientConfig,
-        name: String,
-        email: EmailNotificationConfig? = null,
-        slack: SlackNotificationConfigRequest? = null,
-        webhook: WebhookNotificationConfigRequest? = null,
-        options: RequestOptions? = null,
-    ): NotificationChannelResponse {
-        return SdkClient.request<NotificationChannelResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/notification-channels",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "email" to (SdkClient.omitIfNull(email)),
-                            "slack" to (SdkClient.omitIfNull(slack)),
-                            "webhook" to (SdkClient.omitIfNull(webhook)),
-                        ),
-                    operationId = "insightsCreateNotificationChannel",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsCreateNotificationChannel(clientConfig: ClientConfig, name: String, email: EmailNotificationConfig? = null, slack: SlackNotificationConfigRequest? = null, webhook: WebhookNotificationConfigRequest? = null, options: RequestOptions? = null): NotificationChannelResponse {
+        return SdkClient.request<NotificationChannelResponse>(SdkClient.RequestSpec("POST", "/v2/insights/notification-channels", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "email" to (SdkClient.omitIfNull(email)), "slack" to (SdkClient.omitIfNull(slack)), "webhook" to (SdkClient.omitIfNull(webhook))), operationId = "insightsCreateNotificationChannel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a notification channel, send a GET request to
-     * `/v2/insights/notification-channels/{id}`. Secret credentials are never returned. When a
-     * secret is configured, the response includes an optional `*_status` object (for example
-     * `webhook_url_status`) with `configured: true`.
+     * To retrieve a notification channel, send a GET request to `/v2/insights/notification-channels/{id}`. Secret credentials are never returned. When a secret is configured, the response includes an optional `*_status` object (for example `webhook_url_status`) with `configured: true`.
      *
      * @param id A unique identifier for a notification channel.
      */
-    fun insightsGetNotificationChannel(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): NotificationChannelResponse {
+    fun insightsGetNotificationChannel(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): NotificationChannelResponse {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<NotificationChannelResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "insightsGetNotificationChannel",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<NotificationChannelResponse>(SdkClient.RequestSpec("GET", "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "insightsGetNotificationChannel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To update a notification channel, send a PUT request to
-     * `/v2/insights/notification-channels/{id}` with a `name` and exactly one of `email`, `slack`,
-     * or `webhook`. Sending a secret field rotates it; omitting the secret field keeps the existing
-     * value. Responses never return secret values; they include optional `*_status` objects when a
-     * secret is configured.
+     * To update a notification channel, send a PUT request to `/v2/insights/notification-channels/{id}` with a `name` and exactly one of `email`, `slack`, or `webhook`. Sending a secret field rotates it; omitting the secret field keeps the existing value. Responses never return secret values; they include optional `*_status` objects when a secret is configured.
      *
      * @param id A unique identifier for a notification channel.
      * @param name A human-readable name for the notification channel.
-     * @param email Email notification channel configuration. Recipients must be verified team
-     *   member email addresses.
-     * @param slack Slack notification channel configuration for create and update requests.
-     *   `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on
-     *   update to keep the existing secret.
-     * @param webhook Generic HTTPS webhook notification channel configuration for create and update
-     *   requests. The URL must use HTTPS and must not include userinfo. Optionally configure either
-     *   `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is
-     *   not a secret and is returned in full on read. Credential fields (`basic_auth.password`,
-     *   `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or
-     *   rotate. Omit a secret field on update to…
+     * @param email Email notification channel configuration. Recipients must be
+     *   verified team member email addresses.
+     * @param slack Slack notification channel configuration for create and update
+     *   requests. `webhook_url` is write-only: send the full value to set or rotate.
+     *   Omit `webhook_url` on update to keep the existing secret.
+     * @param webhook Generic HTTPS webhook notification channel configuration for
+     *   create and update requests. The URL must use HTTPS and must not include
+     *   userinfo. Optionally configure either `basic_auth` or `bearer_token` (not
+     *   both), custom headers, and a signing secret. `url` is not a secret and is
+     *   returned in full on read. Credential fields (`basic_auth.password`,
+     *   `bearer_token.token`, `signature.secret`) are write-only: send the full value
+     *   to set or rotate. Omit a secret field on update to…
      */
-    fun insightsUpdateNotificationChannel(
-        clientConfig: ClientConfig,
-        id: String,
-        name: String,
-        email: EmailNotificationConfig? = null,
-        slack: SlackNotificationConfigRequest? = null,
-        webhook: WebhookNotificationConfigRequest? = null,
-        options: RequestOptions? = null,
-    ): NotificationChannelResponse {
+    fun insightsUpdateNotificationChannel(clientConfig: ClientConfig, id: String, name: String, email: EmailNotificationConfig? = null, slack: SlackNotificationConfigRequest? = null, webhook: WebhookNotificationConfigRequest? = null, options: RequestOptions? = null): NotificationChannelResponse {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<NotificationChannelResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "email" to (SdkClient.omitIfNull(email)),
-                            "slack" to (SdkClient.omitIfNull(slack)),
-                            "webhook" to (SdkClient.omitIfNull(webhook)),
-                        ),
-                    operationId = "insightsUpdateNotificationChannel",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<NotificationChannelResponse>(SdkClient.RequestSpec("PUT", "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "email" to (SdkClient.omitIfNull(email)), "slack" to (SdkClient.omitIfNull(slack)), "webhook" to (SdkClient.omitIfNull(webhook))), operationId = "insightsUpdateNotificationChannel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a notification channel, send a DELETE request to
-     * `/v2/insights/notification-channels/{id}`. Deleting a channel that is still referenced by one
-     * or more alert rules returns `409 Conflict`.
+     * To delete a notification channel, send a DELETE request to `/v2/insights/notification-channels/{id}`. Deleting a channel that is still referenced by one or more alert rules returns `409 Conflict`.
      *
      * @param id A unique identifier for a notification channel.
      */
-    fun insightsDeleteNotificationChannel(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun insightsDeleteNotificationChannel(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("id", id)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}",
-                config = clientConfig,
-                operationId = "insightsDeleteNotificationChannel",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "409" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/insights/notification-channels/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "insightsDeleteNotificationChannel", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To evaluate a PromQL expression at a single point in time, send a GET request to
-     * `/v2/insights/query/{region}/prom/api/v1/query`.
+     * To evaluate a PromQL expression at a single point in time, send a GET request to `/v2/insights/query/{region}/prom/api/v1/query`.
      *
      * @param region The datacenter region slug for the query.
      * @param query A PromQL expression. This may be a metric selector (for example
      *   `do.droplets.cpu_time`) or a fuller expression (for example
      *   `rate(do.droplets.cpu_time[5m])`).
-     * @param time Evaluation timestamp for an instant query. Accepts a RFC3339 string or a UNIX
-     *   timestamp. Defaults to now when omitted.
+     * @param time Evaluation timestamp for an instant query. Accepts a RFC3339
+     *   string or a UNIX timestamp. Defaults to now when omitted.
      * @param timeout Optional evaluation timeout as a Prometheus duration string.
      */
-    fun insightsGetPromQuery(
-        clientConfig: ClientConfig,
-        region: String,
-        query: String,
-        time: String? = null,
-        timeout: String? = null,
-        options: RequestOptions? = null,
-    ): PromQueryResponse {
-        return SdkClient.request<PromQueryResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/query",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "time" to SdkClient.queryValue(time, "form", true),
-                            "timeout" to SdkClient.queryValue(timeout, "form", true),
-                        ),
-                    operationId = "insightsGetPromQuery",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsGetPromQuery(clientConfig: ClientConfig, region: String, query: String, time: String? = null, timeout: String? = null, options: RequestOptions? = null): PromQueryResponse {
+        return SdkClient.request<PromQueryResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/query", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "time" to SdkClient.queryValue(time, "form", true), "timeout" to SdkClient.queryValue(timeout, "form", true)), operationId = "insightsGetPromQuery", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To evaluate a PromQL expression at a single point in time, send a POST request to
-     * `/v2/insights/query/{region}/prom/api/v1/query` with `application/x-www-form-urlencoded`
-     * parameters.
+     * To evaluate a PromQL expression at a single point in time, send a POST request to `/v2/insights/query/{region}/prom/api/v1/query` with `application/x-www-form-urlencoded` parameters.
      *
      * @param region The datacenter region slug for the query.
      * @param query A PromQL expression to evaluate.
      * @param time Evaluation timestamp. RFC3339 or UNIX timestamp.
      * @param timeout Optional evaluation timeout duration.
      */
-    fun insightsPostPromQuery(
-        clientConfig: ClientConfig,
-        region: String,
-        query: String,
-        time: String? = null,
-        timeout: String? = null,
-        options: RequestOptions? = null,
-    ): PromQueryResponse {
-        return SdkClient.request<PromQueryResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/query",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "query" to (query),
-                            "time" to (SdkClient.omitIfNull(time)),
-                            "timeout" to (SdkClient.omitIfNull(timeout)),
-                        ),
-                    contentType = "application/x-www-form-urlencoded",
-                    operationId = "insightsPostPromQuery",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostPromQuery(clientConfig: ClientConfig, region: String, query: String, time: String? = null, timeout: String? = null, options: RequestOptions? = null): PromQueryResponse {
+        return SdkClient.request<PromQueryResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/query", config = clientConfig, body = SdkClient.bodyMap("query" to (query), "time" to (SdkClient.omitIfNull(time)), "timeout" to (SdkClient.omitIfNull(timeout))), contentType = "application/x-www-form-urlencoded", operationId = "insightsPostPromQuery", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [insightsGetPromQueryRange]. */
     data class InsightsGetPromQueryRangeRequest(
@@ -707,60 +358,34 @@ object Insights {
         val start: String,
         val end: String,
         val step: String,
-        val timeout: String? = null,
+        val timeout: String? = null
     )
 
     /**
-     * To evaluate a PromQL expression over a time range, send a GET request to
-     * `/v2/insights/query/{region}/prom/api/v1/query_range`.
+     * To evaluate a PromQL expression over a time range, send a GET request to `/v2/insights/query/{region}/prom/api/v1/query_range`.
      *
      * @param region The datacenter region slug for the query.
      * @param query A PromQL expression. This may be a metric selector (for example
      *   `do.droplets.cpu_time`) or a fuller expression (for example
      *   `rate(do.droplets.cpu_time[5m])`).
-     * @param start Start timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
-     * @param end End timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
-     * @param step Query resolution step width as a Prometheus duration string (for example `15s`,
-     *   `1m`, `1h`).
+     * @param start Start timestamp (inclusive). Accepts a RFC3339 string or a UNIX
+     *   timestamp.
+     * @param end End timestamp (inclusive). Accepts a RFC3339 string or a UNIX
+     *   timestamp.
+     * @param step Query resolution step width as a Prometheus duration string (for
+     *   example `15s`, `1m`, `1h`).
      * @param timeout Optional evaluation timeout as a Prometheus duration string.
      */
-    fun insightsGetPromQueryRange(
-        clientConfig: ClientConfig,
-        request: InsightsGetPromQueryRangeRequest,
-        options: RequestOptions? = null,
-    ): PromQueryRangeResponse {
-        return SdkClient.request<PromQueryRangeResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(request.region)}/prom/api/v1/query_range",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(request.query, "form", true),
-                            "start" to SdkClient.queryValue(request.start, "form", true),
-                            "end" to SdkClient.queryValue(request.end, "form", true),
-                            "step" to SdkClient.queryValue(request.step, "form", true),
-                            "timeout" to SdkClient.queryValue(request.timeout, "form", true),
-                        ),
-                    operationId = "insightsGetPromQueryRange",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsGetPromQueryRange(clientConfig: ClientConfig, request: InsightsGetPromQueryRangeRequest, options: RequestOptions? = null): PromQueryRangeResponse {
+        return SdkClient.request<PromQueryRangeResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(request.region)}/prom/api/v1/query_range", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(request.query, "form", true), "start" to SdkClient.queryValue(request.start, "form", true), "end" to SdkClient.queryValue(request.end, "form", true), "step" to SdkClient.queryValue(request.step, "form", true), "timeout" to
+    SdkClient.queryValue(request.timeout, "form", true)), operationId = "insightsGetPromQueryRange", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [insightsPostPromQueryRange]. */
     data class InsightsPostPromQueryRangeRequest(
@@ -769,13 +394,11 @@ object Insights {
         val start: String,
         val end: String,
         val step: String,
-        val timeout: String? = null,
+        val timeout: String? = null
     )
 
     /**
-     * To evaluate a PromQL expression over a time range, send a POST request to
-     * `/v2/insights/query/{region}/prom/api/v1/query_range` with
-     * `application/x-www-form-urlencoded` parameters.
+     * To evaluate a PromQL expression over a time range, send a POST request to `/v2/insights/query/{region}/prom/api/v1/query_range` with `application/x-www-form-urlencoded` parameters.
      *
      * @param region The datacenter region slug for the query.
      * @param query A PromQL expression to evaluate.
@@ -784,513 +407,213 @@ object Insights {
      * @param step Query resolution step width.
      * @param timeout Optional evaluation timeout duration.
      */
-    fun insightsPostPromQueryRange(
-        clientConfig: ClientConfig,
-        request: InsightsPostPromQueryRangeRequest,
-        options: RequestOptions? = null,
-    ): PromQueryRangeResponse {
-        return SdkClient.request<PromQueryRangeResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(request.region)}/prom/api/v1/query_range",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "query" to (request.query),
-                            "start" to (request.start),
-                            "end" to (request.end),
-                            "step" to (request.step),
-                            "timeout" to (SdkClient.omitIfNull(request.timeout)),
-                        ),
-                    contentType = "application/x-www-form-urlencoded",
-                    operationId = "insightsPostPromQueryRange",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostPromQueryRange(clientConfig: ClientConfig, request: InsightsPostPromQueryRangeRequest, options: RequestOptions? = null): PromQueryRangeResponse {
+        return SdkClient.request<PromQueryRangeResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(request.region)}/prom/api/v1/query_range", config = clientConfig, body = SdkClient.bodyMap("query" to (request.query), "start" to (request.start), "end" to (request.end), "step" to (request.step), "timeout" to (SdkClient.omitIfNull(request.timeout))), contentType = "application/x-www-form-urlencoded", operationId = "insightsPostPromQueryRange", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * To list label names, send a GET request to `/v2/insights/query/{region}/prom/api/v1/labels`.
      *
      * @param region The datacenter region slug for the query.
-     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or a UNIX
-     *   timestamp.
-     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
-     * @param match One or more series selectors. Repeat the parameter for multiple matchers.
+     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or
+     *   a UNIX timestamp.
+     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a
+     *   UNIX timestamp.
+     * @param match One or more series selectors. Repeat the parameter for multiple
+     *   matchers.
      */
-    fun insightsGetPromLabels(
-        clientConfig: ClientConfig,
-        region: String,
-        start: String? = null,
-        end: String? = null,
-        match: List<String>? = null,
-        options: RequestOptions? = null,
-    ): PromStringListResponse {
-        return SdkClient.request<PromStringListResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/labels",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                            "match[]" to SdkClient.queryValue(match, "form", true),
-                        ),
-                    operationId = "insightsGetPromLabels",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsGetPromLabels(clientConfig: ClientConfig, region: String, start: String? = null, end: String? = null, match: List<String>? = null, options: RequestOptions? = null): PromStringListResponse {
+        return SdkClient.request<PromStringListResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/labels", config = clientConfig, query = mapOf("start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true), "match[]" to SdkClient.queryValue(match, "form", true)), operationId = "insightsGetPromLabels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list label names, send a POST request to `/v2/insights/query/{region}/prom/api/v1/labels`
-     * with `application/x-www-form-urlencoded` parameters.
+     * To list label names, send a POST request to `/v2/insights/query/{region}/prom/api/v1/labels` with `application/x-www-form-urlencoded` parameters.
      *
      * @param region The datacenter region slug for the query.
      * @param start Optional start timestamp.
      * @param end Optional end timestamp.
      * @param match Optional series selectors.
      */
-    fun insightsPostPromLabels(
-        clientConfig: ClientConfig,
-        region: String,
-        start: String? = null,
-        end: String? = null,
-        match: List<String>? = null,
-        options: RequestOptions? = null,
-    ): PromStringListResponse {
-        return SdkClient.request<PromStringListResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/labels",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "start" to (SdkClient.omitIfNull(start)),
-                            "end" to (SdkClient.omitIfNull(end)),
-                            "match[]" to (SdkClient.omitIfNull(match)),
-                        ),
-                    contentType = "application/x-www-form-urlencoded",
-                    operationId = "insightsPostPromLabels",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostPromLabels(clientConfig: ClientConfig, region: String, start: String? = null, end: String? = null, match: List<String>? = null, options: RequestOptions? = null): PromStringListResponse {
+        return SdkClient.request<PromStringListResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/labels", config = clientConfig, body = SdkClient.bodyMap("start" to (SdkClient.omitIfNull(start)), "end" to (SdkClient.omitIfNull(end)), "match[]" to (SdkClient.omitIfNull(match))), contentType = "application/x-www-form-urlencoded", operationId = "insightsPostPromLabels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list values for a label name, send a GET request to
-     * `/v2/insights/query/{region}/prom/api/v1/label/{name}/values`.
+     * To list values for a label name, send a GET request to `/v2/insights/query/{region}/prom/api/v1/label/{name}/values`.
      *
      * @param region The datacenter region slug for the query.
      * @param name The label name whose values should be listed.
-     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or a UNIX
-     *   timestamp.
-     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
-     * @param match One or more series selectors. Repeat the parameter for multiple matchers.
+     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or
+     *   a UNIX timestamp.
+     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a
+     *   UNIX timestamp.
+     * @param match One or more series selectors. Repeat the parameter for multiple
+     *   matchers.
      */
-    fun insightsGetPromLabelValues(
-        clientConfig: ClientConfig,
-        region: String,
-        name: String,
-        start: String? = null,
-        end: String? = null,
-        match: List<String>? = null,
-        options: RequestOptions? = null,
-    ): PromStringListResponse {
-        return SdkClient.request<PromStringListResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/label/${SdkClient.encodePathSegment(name)}/values",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                            "match[]" to SdkClient.queryValue(match, "form", true),
-                        ),
-                    operationId = "insightsGetPromLabelValues",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsGetPromLabelValues(clientConfig: ClientConfig, region: String, name: String, start: String? = null, end: String? = null, match: List<String>? = null, options: RequestOptions? = null): PromStringListResponse {
+        return SdkClient.request<PromStringListResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/label/${SdkClient.encodePathSegment(name)}/values", config = clientConfig, query = mapOf("start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true), "match[]" to SdkClient.queryValue(match, "form", true)), operationId = "insightsGetPromLabelValues", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To find series matching one or more selectors, send a GET request to
-     * `/v2/insights/query/{region}/prom/api/v1/series`.
+     * To find series matching one or more selectors, send a GET request to `/v2/insights/query/{region}/prom/api/v1/series`.
      *
      * @param region The datacenter region slug for the query.
-     * @param match One or more series selectors. At least one matcher is required. Repeat the
-     *   parameter for multiple matchers.
-     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or a UNIX
-     *   timestamp.
-     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
+     * @param match One or more series selectors. At least one matcher is required.
+     *   Repeat the parameter for multiple matchers.
+     * @param start Optional start timestamp (inclusive). Accepts a RFC3339 string or
+     *   a UNIX timestamp.
+     * @param end Optional end timestamp (inclusive). Accepts a RFC3339 string or a
+     *   UNIX timestamp.
      */
-    fun insightsGetPromSeries(
-        clientConfig: ClientConfig,
-        region: String,
-        match: List<String>,
-        start: String? = null,
-        end: String? = null,
-        options: RequestOptions? = null,
-    ): PromSeriesResponse {
-        return SdkClient.request<PromSeriesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/series",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "match[]" to SdkClient.queryValue(match, "form", true),
-                            "start" to SdkClient.queryValue(start, "form", true),
-                            "end" to SdkClient.queryValue(end, "form", true),
-                        ),
-                    operationId = "insightsGetPromSeries",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsGetPromSeries(clientConfig: ClientConfig, region: String, match: List<String>, start: String? = null, end: String? = null, options: RequestOptions? = null): PromSeriesResponse {
+        return SdkClient.request<PromSeriesResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/series", config = clientConfig, query = mapOf("match[]" to SdkClient.queryValue(match, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "insightsGetPromSeries", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To find series matching one or more selectors, send a POST request to
-     * `/v2/insights/query/{region}/prom/api/v1/series` with `application/x-www-form-urlencoded`
-     * parameters.
+     * To find series matching one or more selectors, send a POST request to `/v2/insights/query/{region}/prom/api/v1/series` with `application/x-www-form-urlencoded` parameters.
      *
      * @param region The datacenter region slug for the query.
      * @param match One or more series selectors.
      * @param start Optional start timestamp.
      * @param end Optional end timestamp.
      */
-    fun insightsPostPromSeries(
-        clientConfig: ClientConfig,
-        region: String,
-        match: List<String>,
-        start: String? = null,
-        end: String? = null,
-        options: RequestOptions? = null,
-    ): PromSeriesResponse {
-        return SdkClient.request<PromSeriesResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/series",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "match[]" to (match),
-                            "start" to (SdkClient.omitIfNull(start)),
-                            "end" to (SdkClient.omitIfNull(end)),
-                        ),
-                    contentType = "application/x-www-form-urlencoded",
-                    operationId = "insightsPostPromSeries",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to PromError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to PromError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to PromError::class.java,
-                            "503" to PromError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostPromSeries(clientConfig: ClientConfig, region: String, match: List<String>, start: String? = null, end: String? = null, options: RequestOptions? = null): PromSeriesResponse {
+        return SdkClient.request<PromSeriesResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/prom/api/v1/series", config = clientConfig, body = SdkClient.bodyMap("match[]" to (match), "start" to (SdkClient.omitIfNull(start)), "end" to (SdkClient.omitIfNull(end))), contentType = "application/x-www-form-urlencoded", operationId = "insightsPostPromSeries", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to PromError::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to PromError::class.java, "429" to Error2::class.java, "500" to PromError::class.java, "503" to PromError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To search log records in a region, send a POST request to
-     * `/v2/insights/query/{region}/logs/search` with a JSON body describing the time range,
-     * optional filter, ordering, and pagination. The time range must not exceed 7 days.
-     * `pagination.limit` defaults to 100 and is clamped to 1000. Cursor pagination requires
-     * ordering by `timestamp` alone; other sort orders return `has_more: false` and cannot be
-     * paged.
+     * To search log records in a region, send a POST request to `/v2/insights/query/{region}/logs/search` with a JSON body describing the time range, optional filter, ordering, and pagination. The time range must not exceed 7 days. `pagination.limit` defaults to 100 and is clamped to 1000. Cursor pagination requires ordering by `timestamp` alone; other sort orders return `has_more: false` and cannot be paged.
      *
      * @param region The datacenter region slug for the query.
      * @param timeRange An inclusive query time window.
-     * @param filter A boolean filter tree for logs queries. Exactly one node is set per message.
+     * @param filter A boolean filter tree for logs queries. Exactly one node is set
+     *   per message.
      * @param orderBy Sort clauses applied to the result set.
-     * @param pagination Opaque keyset pagination request. Cursors are only valid when ordering by
-     *   `timestamp` alone.
+     * @param pagination Opaque keyset pagination request. Cursors are only valid
+     *   when ordering by `timestamp` alone.
      */
-    fun insightsPostLogsSearch(
-        clientConfig: ClientConfig,
-        region: String,
-        timeRange: LogsTimeRange,
-        filter: LogsFilterExpression? = null,
-        orderBy: List<LogsOrderBy>? = null,
-        pagination: LogsPaginationRequest? = null,
-        options: RequestOptions? = null,
-    ): LogsSearchResponse {
-        return SdkClient.request<LogsSearchResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/logs/search",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "time_range" to (timeRange),
-                            "filter" to (SdkClient.omitIfNull(filter)),
-                            "order_by" to (SdkClient.omitIfNull(orderBy)),
-                            "pagination" to (SdkClient.omitIfNull(pagination)),
-                        ),
-                    operationId = "insightsPostLogsSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostLogsSearch(clientConfig: ClientConfig, region: String, timeRange: LogsTimeRange, filter: LogsFilterExpression? = null, orderBy: List<LogsOrderBy>? = null, pagination: LogsPaginationRequest? = null, options: RequestOptions? = null): LogsSearchResponse {
+        return SdkClient.request<LogsSearchResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/logs/search", config = clientConfig, body = SdkClient.bodyMap("time_range" to (timeRange), "filter" to (SdkClient.omitIfNull(filter)), "order_by" to (SdkClient.omitIfNull(orderBy)), "pagination" to (SdkClient.omitIfNull(pagination))), operationId = "insightsPostLogsSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    /**
-     * To search traces in a region, send a POST request to
-     * `/v2/insights/query/{region}/traces/search` with a JSON body describing the time range,
-     * optional filter, ordering, and pagination. Each result is one trace, aggregated from all of
-     * its spans in the time range. A trace is included when at least one of its spans matches
-     * `filter`. The time range must not exceed 7 days (`168h`). `pagination.limit` defaults to 100
-     * (also used when `limit` is `0`) and must be between 0 and 1000.…
-     *
-     * @param region The datacenter region slug for the query.
-     * @param timeRange An inclusive query time window. Both bounds are required, `from` must not be
-     *   after `to`, and the window must not exceed 7 days (`168h`).
-     * @param filter A node in a traces filter tree. Every node is the same flat object; `type`
-     *   selects which other properties apply: - `condition` (default when `type` is omitted):
-     *   compares `field` to `value` using `operator`. - `and` / `or`: combines the nodes in
-     *   `expressions` (1 to 32 children). - `not`: negates the single node in `expressions`
-     *   (exactly one child). - `text_search`: case-insensitive substring match of `query` against
-     *   the span name, service name, and span status message. A…
-     * @param orderBy Sort clauses applied in order. Defaults to `started` descending.
-     * @param pagination Limits the size of a traces search result set. There is no cursor; use
-     *   `pagination.hasMore` in the response to tell whether more traces matched, and narrow the
-     *   time range or filter to see them.
-     */
-    fun insightsPostTracesSearch(
-        clientConfig: ClientConfig,
-        region: String,
-        timeRange: TracesTimeRange,
-        filter: TracesFilterExpression? = null,
-        orderBy: List<TracesOrderBy>? = null,
-        pagination: TracesPaginationRequest? = null,
-        options: RequestOptions? = null,
-    ): TracesSearchResponse {
-        return SdkClient.request<TracesSearchResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/traces/search",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "timeRange" to (timeRange),
-                            "filter" to (SdkClient.omitIfNull(filter)),
-                            "orderBy" to (SdkClient.omitIfNull(orderBy)),
-                            "pagination" to (SdkClient.omitIfNull(pagination)),
-                        ),
-                    operationId = "insightsPostTracesSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
-    }
+
+
+
+
+
 
     /**
-     * To retrieve a single trace and all of its spans, send a GET request to
-     * `/v2/insights/query/{region}/traces/{trace_id}`. Only spans that started within the lookup
-     * window are returned. The window defaults to the last 7 days and can be narrowed with the
-     * `from` and `to` query parameters; it must not exceed 7 days, and `from` must not be after
-     * `to`. Spans are returned ordered by start time. At most 10,000 spans are returned;
-     * `truncated` is `true` when the trace has more. A trace…
+     * To search traces in a region, send a POST request to `/v2/insights/query/{region}/traces/search` with a JSON body describing the time range, optional filter, ordering, and pagination. Each result is one trace, aggregated from all of its spans in the time range. A trace is included when at least one of its spans matches `filter`. The time range must not exceed 7 days (`168h`). `pagination.limit` defaults to 100 (also used when `limit` is `0`) and must be between 0 and 1000.…
      *
      * @param region The datacenter region slug for the query.
-     * @param traceId The OpenTelemetry trace ID to retrieve, as 32 lowercase hexadecimal
-     *   characters. IDs are matched exactly; an ID with no spans in the lookup window returns
-     *   `404`. Malformed or uppercase IDs are not rejected with `400`; they also return `404`.
-     * @param from Start of the trace lookup window. Accepts a relative time (`now`, a bare duration
-     *   such as `24h` to look back from now, or `now-2h`) or an absolute time (RFC3339, or a Unix
-     *   epoch integer in seconds, milliseconds, microseconds, or nanoseconds). Defaults to 7 days
-     *   before now.
-     * @param to End of the trace lookup window, in the same formats as `from`. Defaults to now.
+     * @param timeRange An inclusive query time window. Both bounds are required,
+     *   `from` must not be after `to`, and the window must not exceed 7 days (`168h`).
+     * @param filter A node in a traces filter tree. Every node is the same flat
+     *   object; `type` selects which other properties apply: - `condition` (default
+     *   when `type` is omitted): compares `field` to `value` using `operator`. - `and`
+     *   / `or`: combines the nodes in `expressions` (1 to 32 children). - `not`:
+     *   negates the single node in `expressions` (exactly one child). - `text_search`:
+     *   case-insensitive substring match of `query` against the span name, service
+     *   name, and span status message. A…
+     * @param orderBy Sort clauses applied in order. Defaults to `started`
+     *   descending.
+     * @param pagination Limits the size of a traces search result set. There is no
+     *   cursor; use `pagination.hasMore` in the response to tell whether more traces
+     *   matched, and narrow the time range or filter to see them.
      */
-    fun insightsGetTrace(
-        clientConfig: ClientConfig,
-        region: String,
-        traceId: String,
-        from: String? = null,
-        to: String? = null,
-        options: RequestOptions? = null,
-    ): TracesTraceResponse {
-        return SdkClient.request<TracesTraceResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/traces/${SdkClient.encodePathSegment(traceId)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "from" to SdkClient.queryValue(from, "form", true),
-                            "to" to SdkClient.queryValue(to, "form", true),
-                        ),
-                    operationId = "insightsGetTrace",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostTracesSearch(clientConfig: ClientConfig, region: String, timeRange: TracesTimeRange, filter: TracesFilterExpression? = null, orderBy: List<TracesOrderBy>? = null, pagination: TracesPaginationRequest? = null, options: RequestOptions? = null): TracesSearchResponse {
+        return SdkClient.request<TracesSearchResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/traces/search", config = clientConfig, body = SdkClient.bodyMap("timeRange" to (timeRange), "filter" to (SdkClient.omitIfNull(filter)), "orderBy" to (SdkClient.omitIfNull(orderBy)), "pagination" to (SdkClient.omitIfNull(pagination))), operationId = "insightsPostTracesSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To search spans in a region, send a POST request to
-     * `/v2/insights/query/{region}/spans/search` with a JSON body describing the time range,
-     * optional filter, ordering, and pagination. The time range must not exceed 7 days.
-     * `pagination.limit` defaults to 100 and must be between 1 and 1000. Results are ordered by
-     * `startTime` descending by default. Cursor-based pagination is not yet supported;
-     * `pagination.hasMore` indicates whether additional spans matched beyond the returned…
+     * To retrieve a single trace and all of its spans, send a GET request to `/v2/insights/query/{region}/traces/{trace_id}`. Only spans that started within the lookup window are returned. The window defaults to the last 7 days and can be narrowed with the `from` and `to` query parameters; it must not exceed 7 days, and `from` must not be after `to`. Spans are returned ordered by start time. At most 10,000 spans are returned; `truncated` is `true` when the trace has more. A trace…
      *
      * @param region The datacenter region slug for the query.
-     * @param timeRange An inclusive query time window. The window must not exceed 7 days.
-     * @param filter A boolean filter tree for spans search. Set `type` to select the node kind:
-     *   `condition` compares a single field, `and`/`or`/`not` combine child expressions, and
-     *   `text_search` matches a substring across the span name, service name, and status message.
-     * @param orderBy Sort clauses applied to the result set. Defaults to `startTime` descending
-     *   when omitted.
+     * @param traceId The OpenTelemetry trace ID to retrieve, as 32 lowercase
+     *   hexadecimal characters. IDs are matched exactly; an ID with no spans in the
+     *   lookup window returns `404`. Malformed or uppercase IDs are not rejected with
+     *   `400`; they also return `404`.
+     * @param from Start of the trace lookup window. Accepts a relative time (`now`,
+     *   a bare duration such as `24h` to look back from now, or `now-2h`) or an
+     *   absolute time (RFC3339, or a Unix epoch integer in seconds, milliseconds,
+     *   microseconds, or nanoseconds). Defaults to 7 days before now.
+     * @param to End of the trace lookup window, in the same formats as `from`.
+     *   Defaults to now.
+     */
+    fun insightsGetTrace(clientConfig: ClientConfig, region: String, traceId: String, from: String? = null, to: String? = null, options: RequestOptions? = null): TracesTraceResponse {
+        return SdkClient.request<TracesTraceResponse>(SdkClient.RequestSpec("GET", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/traces/${SdkClient.encodePathSegment(traceId)}", config = clientConfig, query = mapOf("from" to SdkClient.queryValue(from, "form", true), "to" to SdkClient.queryValue(to, "form", true)), operationId = "insightsGetTrace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * To search spans in a region, send a POST request to `/v2/insights/query/{region}/spans/search` with a JSON body describing the time range, optional filter, ordering, and pagination. The time range must not exceed 7 days. `pagination.limit` defaults to 100 and must be between 1 and 1000. Results are ordered by `startTime` descending by default. Cursor-based pagination is not yet supported; `pagination.hasMore` indicates whether additional spans matched beyond the returned…
+     *
+     * @param region The datacenter region slug for the query.
+     * @param timeRange An inclusive query time window. The window must not exceed 7
+     *   days.
+     * @param filter A boolean filter tree for spans search. Set `type` to select the
+     *   node kind: `condition` compares a single field, `and`/`or`/`not` combine child
+     *   expressions, and `text_search` matches a substring across the span name,
+     *   service name, and status message.
+     * @param orderBy Sort clauses applied to the result set. Defaults to `startTime`
+     *   descending when omitted.
      * @param pagination Limits the number of spans returned.
      */
-    fun insightsPostSpansSearch(
-        clientConfig: ClientConfig,
-        region: String,
-        timeRange: SpansTimeRange,
-        filter: SpansFilterExpression? = null,
-        orderBy: List<SpansOrderBy>? = null,
-        pagination: SpansPaginationRequest? = null,
-        options: RequestOptions? = null,
-    ): SpansSearchResponse {
-        return SdkClient.request<SpansSearchResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/insights/query/${SdkClient.encodePathSegment(region)}/spans/search",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "timeRange" to (timeRange),
-                            "filter" to (SdkClient.omitIfNull(filter)),
-                            "orderBy" to (SdkClient.omitIfNull(orderBy)),
-                            "pagination" to (SdkClient.omitIfNull(pagination)),
-                        ),
-                    operationId = "insightsPostSpansSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun insightsPostSpansSearch(clientConfig: ClientConfig, region: String, timeRange: SpansTimeRange, filter: SpansFilterExpression? = null, orderBy: List<SpansOrderBy>? = null, pagination: SpansPaginationRequest? = null, options: RequestOptions? = null): SpansSearchResponse {
+        return SdkClient.request<SpansSearchResponse>(SdkClient.RequestSpec("POST", "/v2/insights/query/${SdkClient.encodePathSegment(region)}/spans/search", config = clientConfig, body = SdkClient.bodyMap("timeRange" to (timeRange), "filter" to (SdkClient.omitIfNull(filter)), "orderBy" to (SdkClient.omitIfNull(orderBy)), "pagination" to (SdkClient.omitIfNull(pagination))), operationId = "insightsPostSpansSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

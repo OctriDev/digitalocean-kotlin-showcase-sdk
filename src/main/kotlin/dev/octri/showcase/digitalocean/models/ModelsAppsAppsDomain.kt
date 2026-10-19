@@ -5,30 +5,46 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AppsDomain` API schema. */
+/**
+ * Typed representation of the `AppsDomain` API schema.
+ */
 data class AppsDomain(
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** Optional enumerated value serialized in the `phase` wire field. */
+    /**
+     * Optional enumerated value serialized in the `phase` wire field.
+     */
     val phase: AppsDomainPhase? = null,
-    /** Optional object value serialized in the `progress` wire field. */
+    /**
+     * Optional object value serialized in the `progress` wire field.
+     */
     val progress: AppsDomainProgress? = null,
-    /** Optional object value serialized in the `spec` wire field. */
+    /**
+     * Optional object value serialized in the `spec` wire field.
+     */
     val spec: AppDomainSpec? = null,
-    /** Optional array value serialized in the `validations` wire field. */
+    /**
+     * Optional array value serialized in the `validations` wire field.
+     */
     val validations: List<AppDomainValidation>? = null,
-    /** Optional `boolean` value serialized in the `rotate_validation_records` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("rotate_validation_records")
-    val rotateValidationRecords: Boolean? = null,
+    /**
+     * Optional `boolean` value serialized in the `rotate_validation_records` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("rotate_validation_records") val rotateValidationRecords: Boolean? = null,
     /**
      * Optional `date-time`-formatted value serialized in the `certificate_expires_at` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_expires_at")
-    val certificateExpiresAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_expires_at") val certificateExpiresAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `AppsDomainProgress` API schema. */
+/**
+ * Typed representation of the `AppsDomainProgress` API schema.
+ */
 data class AppsDomainProgress(
-    /** Optional array value serialized in the `steps` wire field. */
+    /**
+     * Optional array value serialized in the `steps` wire field.
+     */
     val steps: List<Map<String, Any>>? = null
 )

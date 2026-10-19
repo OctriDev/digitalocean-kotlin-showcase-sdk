@@ -3,30 +3,40 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AppsCreateAppRequest` API schema. */
+/**
+ * Typed representation of the `AppsCreateAppRequest` API schema.
+ */
 data class AppsCreateAppRequest(
-    /** The desired configuration of an application. */
+    /**
+     * The desired configuration of an application.
+     */
     val spec: AppSpec,
     /**
-     * The ID of the project the app should be assigned to. If omitted, it will be assigned to your
-     * default project. Requires `project:assign_resource` and `project:update` scopes.
+     * The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
 )
 
-/** Typed representation of the `AppsCreateAppRequestRequest` API schema. */
+/**
+ * Typed representation of the `AppsCreateAppRequestRequest` API schema.
+ */
 data class AppsCreateAppRequestRequest(
-    /** The desired configuration of an application. */
+    /**
+     * The desired configuration of an application.
+     */
     val spec: AppSpecRequest,
     /**
-     * The ID of the project the app should be assigned to. If omitted, it will be assigned to your
-     * default project. Requires `project:assign_resource` and `project:update` scopes.
+     * The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project. Requires `project:assign_resource` and `project:update` scopes.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
 )
 
-/** Typed representation of the `AppsCreateDeploymentRequest` API schema. */
+/**
+ * Typed representation of the `AppsCreateDeploymentRequest` API schema.
+ */
 data class AppsCreateDeploymentRequest(
-    /** Optional `boolean` value serialized in the `force_build` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `force_build` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("force_build") val forceBuild: Boolean? = null
 )

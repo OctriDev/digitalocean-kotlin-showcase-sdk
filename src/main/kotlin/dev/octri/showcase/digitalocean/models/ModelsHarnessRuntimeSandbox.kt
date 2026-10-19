@@ -5,84 +5,142 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** A customer-selectable sandbox (microVM) size. */
+/**
+ * A customer-selectable sandbox (microVM) size.
+ */
 data class SandboxSize(
-    /** DO size slug; submit as spec.sandbox.sizeSlug on CreateSession. e.g. "mars-2vcpu-4gb". */
+    /**
+     * DO size slug; submit as spec.sandbox.sizeSlug on CreateSession. e.g. "mars-2vcpu-4gb".
+     */
     val slug: String? = null,
-    /** vCPU count (for display). */
+    /**
+     * vCPU count (for display).
+     */
     val vcpus: Long? = null,
-    /** Memory in MB (for display). */
+    /**
+     * Memory in MB (for display).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("memory_mb") val memoryMb: Long? = null,
-    /** Hourly on-demand price in USD (for display). */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_hour_usd")
-    val pricePerHourUsd: Double? = null,
-    /** Monthly on-demand price in USD, assuming continuous usage (for display). */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_month_usd")
-    val pricePerMonthUsd: Double? = null,
+    /**
+     * Hourly on-demand price in USD (for display).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_hour_usd") val pricePerHourUsd: Double? = null,
+    /**
+     * Monthly on-demand price in USD, assuming continuous usage (for display).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_month_usd") val pricePerMonthUsd: Double? = null
 )
 
-/** Response for ListSandboxSizes. */
+/**
+ * Response for ListSandboxSizes.
+ */
 data class SandboxSizesResponse(
-    /** Selectable sizes, ordered smallest-to-largest. */
+    /**
+     * Selectable sizes, ordered smallest-to-largest.
+     */
     val sizes: List<SandboxSize>? = null
 )
 
-/** Typed representation of the `SandboxTemplate` API schema. */
+/**
+ * Typed representation of the `SandboxTemplate` API schema.
+ */
 data class SandboxTemplate(
-    /** Required `uuid`-formatted value serialized in the `template_id` wire field. */
+    /**
+     * Required `uuid`-formatted value serialized in the `template_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: SandboxTemplateStatusEnum,
-    /** Required `date-time`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required `date-time`-formatted value serialized in the `updated_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `updated_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** Optional object value serialized in the `spec` wire field. */
-    val spec: SandboxTemplateSpec? = null,
+    /**
+     * Optional object value serialized in the `spec` wire field.
+     */
+    val spec: SandboxTemplateSpec? = null
 )
 
-/** Typed representation of the `SandboxTemplateBuild` API schema. */
+/**
+ * Typed representation of the `SandboxTemplateBuild` API schema.
+ */
 data class SandboxTemplateBuild(
-    /** Required `uuid`-formatted value serialized in the `build_id` wire field. */
+    /**
+     * Required `uuid`-formatted value serialized in the `build_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("build_id") val buildId: String,
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: SandboxTemplateBuildStatusEnum,
-    /** Required `date-time`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required `date-time`-formatted value serialized in the `updated_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `updated_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** Optional `uuid`-formatted value serialized in the `template_id` wire field. */
+    /**
+     * Optional `uuid`-formatted value serialized in the `template_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String? = null,
-    /** Optional `string` value serialized in the `name` wire field. */
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
     val name: String? = null,
-    /** Optional object value serialized in the `spec` wire field. */
+    /**
+     * Optional object value serialized in the `spec` wire field.
+     */
     val spec: SandboxTemplateSpec? = null,
-    /** Optional `string` value serialized in the `error` wire field. */
-    val error: String? = null,
+    /**
+     * Optional `string` value serialized in the `error` wire field.
+     */
+    val error: String? = null
 )
 
-/** Typed representation of the `SandboxTemplateImageSource` API schema. */
+/**
+ * Typed representation of the `SandboxTemplateImageSource` API schema.
+ */
 data class SandboxTemplateImageSource(
-    /** Optional `string` value serialized in the `registry` wire field. */
+    /**
+     * Optional `string` value serialized in the `registry` wire field.
+     */
     val registry: String? = null,
-    /** Optional `string` value serialized in the `repository` wire field. */
+    /**
+     * Optional `string` value serialized in the `repository` wire field.
+     */
     val repository: String? = null,
-    /** Optional `string` value serialized in the `tag` wire field. */
+    /**
+     * Optional `string` value serialized in the `tag` wire field.
+     */
     val tag: String? = null,
-    /** Optional `string` value serialized in the `digest` wire field. */
-    val digest: String? = null,
+    /**
+     * Optional `string` value serialized in the `digest` wire field.
+     */
+    val digest: String? = null
 )
 
-/** Typed representation of the `SandboxTemplateSpec` API schema. */
+/**
+ * Typed representation of the `SandboxTemplateSpec` API schema.
+ */
 data class SandboxTemplateSpec(
     /**
-     * Base template key. One of: coding-base, coding-claude-code, coding-codex, coding-hermes,
-     * coding-opencode, langgraph.
+     * Base template key. One of: coding-base, coding-claude-code, coding-codex, coding-hermes, coding-opencode, langgraph.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("base_template")
-    val baseTemplate: String? = null,
-    /** Optional object value serialized in the `image` wire field. */
-    val image: SandboxTemplateImageSource? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("base_template") val baseTemplate: String? = null,
+    /**
+     * Optional object value serialized in the `image` wire field.
+     */
+    val image: SandboxTemplateImageSource? = null
 )
