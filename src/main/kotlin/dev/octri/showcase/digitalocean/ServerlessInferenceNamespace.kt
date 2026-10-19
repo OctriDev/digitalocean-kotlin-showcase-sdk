@@ -60,7 +60,7 @@ class ServerlessInferenceNamespace(private val clientConfig: ClientConfig) {
      */
     fun inferenceCreateEmbedding(
         model: String,
-        input: Any,
+        input: List<String>,
         user: String? = null,
         encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null,
         options: RequestOptions? = null,

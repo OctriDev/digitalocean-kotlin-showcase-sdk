@@ -74621,7 +74621,9 @@
         ],
         "tool_choice": "none",
         "stream": false,
-        "stop": null,
+        "stop": [
+          "stop"
+        ],
         "logit_bias": null,
         "logprobs": false,
         "n": 1,
@@ -74866,7 +74868,10 @@
       "kind": "json",
       "value": {
         "model": "qwen3-embedding-0.6b",
-        "input": "hello world",
+        "input": [
+          "hello world",
+          "goodbye world"
+        ],
         "user": "user-1234",
         "encoding_format": "float"
       }
@@ -74987,7 +74992,9 @@
         ],
         "tool_choice": "none",
         "stream": false,
-        "stop": null,
+        "stop": [
+          "stop"
+        ],
         "logit_bias": null,
         "logprobs": false,
         "n": 1,

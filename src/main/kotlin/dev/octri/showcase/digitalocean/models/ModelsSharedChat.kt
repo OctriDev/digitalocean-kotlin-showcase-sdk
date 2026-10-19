@@ -129,7 +129,7 @@ data class ChatCompletionRequest(
      * Up to 4 sequences where the API will stop generating further tokens. The returned text will
      * not contain the stop sequence.
      */
-    val stop: Any? = null,
+    val stop: List<String>? = null,
     /**
      * Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object
      * that maps tokens (specified by their token ID in the tokenizer) to an associated bias value
