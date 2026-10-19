@@ -5,132 +5,79 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AllVpcSubnets` API schema.
- */
+/** Typed representation of the `AllVpcSubnets` API schema. */
 data class AllVpcSubnets(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_subnet") val vpcSubnet: List<VpcSubnet>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_subnet")
+    val vpcSubnet: List<VpcSubnet>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `SingleVpcSubnet` API schema.
- */
+/** Typed representation of the `SingleVpcSubnet` API schema. */
 data class SingleVpcSubnet(
-    /**
-     * Optional object value serialized in the `vpc_subnet` wire field.
-     */
+    /** Optional object value serialized in the `vpc_subnet` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_subnet") val vpcSubnet: VpcSubnet? = null
 )
 
-/**
- * Typed representation of the `VpcSubnet` API schema.
- */
+/** Typed representation of the `VpcSubnet` API schema. */
 data class VpcSubnet(
-    /**
-     * The unique identifier of the VPC subnet.
-     */
+    /** The unique identifier of the VPC subnet. */
     val id: String,
-    /**
-     * The uniform resource name of the VPC subnet.
-     */
+    /** The uniform resource name of the VPC subnet. */
     val urn: String,
-    /**
-     * The human-readable name of the VPC subnet.
-     */
+    /** The human-readable name of the VPC subnet. */
     val name: String,
-    /**
-     * The IPv4 range assigned to the subnet in CIDR notation.
-     */
+    /** The IPv4 range assigned to the subnet in CIDR notation. */
     @com.fasterxml.jackson.annotation.JsonProperty("ip_range") val ipRange: String,
-    /**
-     * The type of the VPC subnet.
-     */
+    /** The type of the VPC subnet. */
     val type: VpcSubnetTypeEnum,
-    /**
-     * The slug of the region containing the VPC subnet.
-     */
+    /** The slug of the region containing the VPC subnet. */
     val region: String,
-    /**
-     * The time when the VPC subnet was created.
-     */
+    /** The time when the VPC subnet was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Whether this is the default subnet for the VPC.
-     */
+    /** Whether this is the default subnet for the VPC. */
     val default: Boolean? = null,
-    /**
-     * Additional information about the VPC subnet.
-     */
-    val meta: VpcSubnetMeta? = null
+    /** Additional information about the VPC subnet. */
+    val meta: VpcSubnetMeta? = null,
 )
 
-/**
- * Typed representation of the `VpcSubnetCreate` API schema.
- */
+/** Typed representation of the `VpcSubnetCreate` API schema. */
 data class VpcSubnetCreate(
-    /**
-     * The human-readable name of the VPC subnet.
-     */
+    /** The human-readable name of the VPC subnet. */
     val name: String,
     /**
      * An RFC1918 CIDR range between /16 and /24 that does not overlap another team or VPC network.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_range") val ipRange: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_range") val ipRange: String? = null,
 )
 
-/**
- * Typed representation of the `VpcSubnetMembers` API schema.
- */
+/** Typed representation of the `VpcSubnetMembers` API schema. */
 data class VpcSubnetMembers(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val members: List<VpcMember>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Additional information about the VPC subnet.
- */
+/** Additional information about the VPC subnet. */
 data class VpcSubnetMeta(
-    /**
-     * Member statistics, excluding resources the caller is not permitted to read.
-     */
+    /** Member statistics, excluding resources the caller is not permitted to read. */
     val stats: VpcSubnetStatistics? = null
 )
 
-/**
- * Member statistics, excluding resources the caller is not permitted to read.
- */
+/** Member statistics, excluding resources the caller is not permitted to read. */
 data class VpcSubnetStatistics(
-    /**
-     * The number of members in the VPC subnet.
-     */
+    /** The number of members in the VPC subnet. */
     val members: Int? = null,
-    /**
-     * The number of members grouped by resource type.
-     */
-    val resources: Map<String, Int>? = null
+    /** The number of members grouped by resource type. */
+    val resources: Map<String, Int>? = null,
 )
 
-/**
- * Typed representation of the `VpcSubnetUpdate` API schema.
- */
+/** Typed representation of the `VpcSubnetUpdate` API schema. */
 data class VpcSubnetUpdate(
-    /**
-     * The new human-readable name of the VPC subnet.
-     */
+    /** The new human-readable name of the VPC subnet. */
     val name: String
 )

@@ -3,8 +3,8 @@
 
 package dev.octri.showcase.digitalocean.methods
 
-import dev.octri.showcase.digitalocean.ApiAgentGuardrailInput
 import dev.octri.showcase.digitalocean.ApiAWSDataSource
+import dev.octri.showcase.digitalocean.ApiAgentGuardrailInput
 import dev.octri.showcase.digitalocean.ApiCancelKnowledgeBaseIndexingJobOutput
 import dev.octri.showcase.digitalocean.ApiCancelModelEvaluationRunOutput
 import dev.octri.showcase.digitalocean.ApiCancelSimulationRunOutput
@@ -91,11 +91,11 @@ import dev.octri.showcase.digitalocean.ApiLinkAgentGuardrailOutput
 import dev.octri.showcase.digitalocean.ApiLinkAgentOutput
 import dev.octri.showcase.digitalocean.ApiLinkKnowledgeBaseOutput
 import dev.octri.showcase.digitalocean.ApiListAgentAPIKeysOutput
+import dev.octri.showcase.digitalocean.ApiListAgentVersionsOutput
 import dev.octri.showcase.digitalocean.ApiListAgentsByAnthropicKeyOutput
 import dev.octri.showcase.digitalocean.ApiListAgentsByOpenAIKeyOutput
 import dev.octri.showcase.digitalocean.ApiListAgentsByWorkspaceOutput
 import dev.octri.showcase.digitalocean.ApiListAgentsOutputPublic
-import dev.octri.showcase.digitalocean.ApiListAgentVersionsOutput
 import dev.octri.showcase.digitalocean.ApiListAnthropicAPIKeysOutput
 import dev.octri.showcase.digitalocean.ApiListCustomModelsOutputPublic
 import dev.octri.showcase.digitalocean.ApiListEvaluationDatasetsOutput
@@ -113,8 +113,8 @@ import dev.octri.showcase.digitalocean.ApiListModelEvaluationMetricsOutput
 import dev.octri.showcase.digitalocean.ApiListModelEvaluationPresetsOutput
 import dev.octri.showcase.digitalocean.ApiListModelEvaluationRunsOutput
 import dev.octri.showcase.digitalocean.ApiListModelRouterPresetsOutput
-import dev.octri.showcase.digitalocean.ApiListModelRoutersOutput
 import dev.octri.showcase.digitalocean.ApiListModelRouterTaskPresetsOutput
+import dev.octri.showcase.digitalocean.ApiListModelRoutersOutput
 import dev.octri.showcase.digitalocean.ApiListModelsOutputPublic
 import dev.octri.showcase.digitalocean.ApiListOpenAIAPIKeysOutput
 import dev.octri.showcase.digitalocean.ApiListRegionsOutput
@@ -220,7 +220,7 @@ object AgentPlatformApi {
         val thinkingTokenBudget: Long? = null,
         val webFetchEnabled: Boolean? = null,
         val webSearchEnabled: Boolean? = null,
-        val workspaceUuid: String? = null
+        val workspaceUuid: String? = null,
     )
 
     /** Parameters for [genaiAttachAgentFunction]. */
@@ -232,7 +232,7 @@ object AgentPlatformApi {
         val faasNamespace: String? = null,
         val functionName: String? = null,
         val inputSchema: Map<String, Any>? = null,
-        val outputSchema: Map<String, Any>? = null
+        val outputSchema: Map<String, Any>? = null,
     )
 
     /** Parameters for [genaiUpdateAgentFunction]. */
@@ -246,7 +246,7 @@ object AgentPlatformApi {
         val functionName: String? = null,
         val functionUuid2: String? = null,
         val inputSchema: Map<String, Any>? = null,
-        val outputSchema: Map<String, Any>? = null
+        val outputSchema: Map<String, Any>? = null,
     )
 
     /** Parameters for [genaiAttachAgent]. */
@@ -256,7 +256,7 @@ object AgentPlatformApi {
         val childAgentUuid2: String? = null,
         val ifCase: String? = null,
         val parentAgentUuid2: String? = null,
-        val routeName: String? = null
+        val routeName: String? = null,
     )
 
     /** Parameters for [genaiUpdateAttachedAgent]. */
@@ -267,7 +267,7 @@ object AgentPlatformApi {
         val ifCase: String? = null,
         val parentAgentUuid2: String? = null,
         val routeName: String? = null,
-        val uuid: String? = null
+        val uuid: String? = null,
     )
 
     /** Parameters for [genaiUpdateAgent]. */
@@ -299,7 +299,7 @@ object AgentPlatformApi {
         val topP: Float? = null,
         val uuid2: String? = null,
         val webFetchEnabled: Boolean? = null,
-        val webSearchEnabled: Boolean? = null
+        val webSearchEnabled: Boolean? = null,
     )
 
     /** Parameters for [genaiImportCustomModel]. */
@@ -311,7 +311,7 @@ object AgentPlatformApi {
         val preferredGpuRegion: String? = null,
         val sourceRef: CustomModelSourceRef? = null,
         val sourceType: CustomModelSourceType? = null,
-        val tags: CustomModelTags? = null
+        val tags: CustomModelTags? = null,
     )
 
     /** Parameters for [genaiUpdateCustomModelMetadata]. */
@@ -324,7 +324,7 @@ object AgentPlatformApi {
         val outputModalities: List<String>? = null,
         val parameters: String? = null,
         val tags: CustomModelTags? = null,
-        val uuid2: String? = null
+        val uuid2: String? = null,
     )
 
     /** Parameters for [genaiCreateEvaluationTestCase]. */
@@ -335,7 +335,7 @@ object AgentPlatformApi {
         val metrics: List<String>? = null,
         val name: String? = null,
         val starMetric: ApiStarMetric? = null,
-        val workspaceUuid: String? = null
+        val workspaceUuid: String? = null,
     )
 
     /** Parameters for [genaiUpdateEvaluationTestCase]. */
@@ -346,7 +346,7 @@ object AgentPlatformApi {
         val metrics: ApiEvaluationTestCaseMetricList? = null,
         val name: String? = null,
         val starMetric: ApiStarMetric? = null,
-        val testCaseUuid2: String? = null
+        val testCaseUuid2: String? = null,
     )
 
     /** Parameters for [genaiCreateKnowledgeBase]. */
@@ -360,7 +360,7 @@ object AgentPlatformApi {
         val rerankingConfig: ApiRerankingConfiguration? = null,
         val size: ApiOpenSearchPlanSize? = null,
         val tags: List<String>? = null,
-        val vpcUuid: String? = null
+        val vpcUuid: String? = null,
     )
 
     /** Parameters for [genaiCreateKnowledgeBaseDataSource]. */
@@ -371,7 +371,7 @@ object AgentPlatformApi {
         val chunkingOptions: ApiChunkingOptions? = null,
         val knowledgeBaseUuid2: String? = null,
         val spacesDataSource: ApiSpacesDataSource? = null,
-        val webCrawlerDataSource: ApiWebCrawlerDataSource? = null
+        val webCrawlerDataSource: ApiWebCrawlerDataSource? = null,
     )
 
     /** Parameters for [genaiUpdateKnowledgeBaseDataSource]. */
@@ -381,7 +381,7 @@ object AgentPlatformApi {
         val chunkingAlgorithm: ApiChunkingAlgorithm? = null,
         val chunkingOptions: ApiChunkingOptions? = null,
         val dataSourceUuid2: String? = null,
-        val knowledgeBaseUuid2: String? = null
+        val knowledgeBaseUuid2: String? = null,
     )
 
     /** Parameters for [genaiUpdateKnowledgeBase]. */
@@ -392,7 +392,7 @@ object AgentPlatformApi {
         val projectId: String? = null,
         val rerankingConfig: ApiRerankingConfiguration? = null,
         val tags: List<String>? = null,
-        val uuid2: String? = null
+        val uuid2: String? = null,
     )
 
     /** Parameters for [genaiListModelEvaluationRuns]. */
@@ -405,7 +405,7 @@ object AgentPlatformApi {
         val candidateTypes: List<GenaiListModelEvaluationRunsParameterItemEnum63bd63d3>? = null,
         val search: String? = null,
         val sortBy: GenaiListModelEvaluationRunsParameterEnumd59ebfaf? = null,
-        val sortDirection: GenaiListModelEvaluationRunsParameterEnum55e68c6e? = null
+        val sortDirection: GenaiListModelEvaluationRunsParameterEnum55e68c6e? = null,
     )
 
     /** Parameters for [genaiCreateModelEvaluationRun]. */
@@ -424,7 +424,7 @@ object AgentPlatformApi {
         val presetSaveSections: List<ApiPresetSaveSection>? = null,
         val saveAsPreset: Boolean? = null,
         val source: String? = null,
-        val starMetric: ApiStarMetric? = null
+        val starMetric: ApiStarMetric? = null,
     )
 
     /** Parameters for [genaiListModelCatalog]. */
@@ -439,7 +439,7 @@ object AgentPlatformApi {
         val sortBy: GenaiListModelCatalogParameterEnum78dae3f5? = null,
         val perPage: Long? = null,
         val sortDirection: GenaiListModelCatalogParameterEnum87804d40? = null,
-        val useCase: GenaiListModelCatalogParameterEnum? = null
+        val useCase: GenaiListModelCatalogParameterEnum? = null,
     )
 
     /** Parameters for [genaiUpdateModelRouter]. */
@@ -450,7 +450,7 @@ object AgentPlatformApi {
         val name: String? = null,
         val policies: List<ApiModelRouterTaskPolicy>? = null,
         val regions: List<String>? = null,
-        val uuid2: String? = null
+        val uuid2: String? = null,
     )
 
     /** Parameters for [genaiListScenarioLibrary]. */
@@ -460,7 +460,7 @@ object AgentPlatformApi {
         val category: String? = null,
         val search: String? = null,
         val sortBy: GenaiListScenarioLibraryParameterEnum? = null,
-        val sortDirection: GenaiListScenarioLibraryParameterEnum67de185e? = null
+        val sortDirection: GenaiListScenarioLibraryParameterEnum67de185e? = null,
     )
 
     /** Parameters for [genaiListScenarioLibraryScenarios]. */
@@ -470,7 +470,7 @@ object AgentPlatformApi {
         val perPage: Long? = null,
         val search: String? = null,
         val sortBy: GenaiListScenarioLibraryScenariosParameterEnum? = null,
-        val sortDirection: GenaiListScenarioLibraryScenariosParameterEnum41fc628a? = null
+        val sortDirection: GenaiListScenarioLibraryScenariosParameterEnum41fc628a? = null,
     )
 
     /** Parameters for [genaiListScenarioSets]. */
@@ -481,7 +481,7 @@ object AgentPlatformApi {
         val sourceKinds: List<GenaiListScenarioSetsParameterItemEnuma4431f49>? = null,
         val search: String? = null,
         val sortBy: GenaiListScenarioSetsParameterEnum? = null,
-        val sortDirection: GenaiListScenarioSetsParameterEnumed8b0d4b? = null
+        val sortDirection: GenaiListScenarioSetsParameterEnumed8b0d4b? = null,
     )
 
     /** Parameters for [genaiListScenarios]. */
@@ -491,7 +491,7 @@ object AgentPlatformApi {
         val perPage: Long? = null,
         val search: String? = null,
         val sortBy: GenaiListScenariosParameterEnum? = null,
-        val sortDirection: GenaiListScenariosParameterEnum4d4369ed? = null
+        val sortDirection: GenaiListScenariosParameterEnum4d4369ed? = null,
     )
 
     /** Parameters for [genaiListSimulationRuns]. */
@@ -502,7 +502,7 @@ object AgentPlatformApi {
         val statuses: List<GenaiListSimulationRunsParameterItemEnum>? = null,
         val search: String? = null,
         val sortBy: GenaiListSimulationRunsParameterEnum? = null,
-        val sortDirection: GenaiListSimulationRunsParameterEnum6e02f402? = null
+        val sortDirection: GenaiListSimulationRunsParameterEnum6e02f402? = null,
     )
 
     /** Parameters for [genaiCreateSimulationRun]. */
@@ -515,7 +515,7 @@ object AgentPlatformApi {
         val name: String? = null,
         val scenarioSetUuid: String? = null,
         val userSimulatorConfig: Map<String, Any>? = null,
-        val userSimulatorModelUuid: String? = null
+        val userSimulatorModelUuid: String? = null,
     )
 
     /** Parameters for [genaiListSimulationEpisodes]. */
@@ -528,1544 +528,2518 @@ object AgentPlatformApi {
         val verdicts: List<GenaiListSimulationEpisodesParameterItemEnumcabd4d0f>? = null,
         val search: String? = null,
         val sortBy: GenaiListSimulationEpisodesParameterEnum? = null,
-        val sortDirection: GenaiListSimulationEpisodesParameterEnumb5f03e8f? = null
+        val sortDirection: GenaiListSimulationEpisodesParameterEnumb5f03e8f? = null,
     )
 
-    /**
-     * To list all agents, send a GET request to `/v2/gen-ai/agents`.
-     */
-    fun genaiListAgents(clientConfig: ClientConfig, onlyDeployed: Boolean? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsOperation.genaiListAgents(
-            clientConfig,
-            onlyDeployed,
-            page,
-            perPage,
-            options,
-        )
+    /** To list all agents, send a GET request to `/v2/gen-ai/agents`. */
+    fun genaiListAgents(
+        clientConfig: ClientConfig,
+        onlyDeployed: Boolean? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsOperation
+            .genaiListAgents(
+                clientConfig,
+                onlyDeployed,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * Creates a new agent in the specified project and region. Configure the agent with fields such as `name`, `instruction`, and `model_uuid`, and optionally attach knowledge bases or MCP servers. A 200 response returns the newly created agent object.
+     * Creates a new agent in the specified project and region. Configure the agent with fields such
+     * as `name`, `instruction`, and `model_uuid`, and optionally attach knowledge bases or MCP
+     * servers. A 200 response returns the newly created agent object.
      */
-    fun genaiCreateAgent(clientConfig: ClientConfig, request: GenaiCreateAgentRequest, options: RequestOptions? = null): ApiCreateAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAgentOperation.genaiCreateAgent(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateAgent(
+        clientConfig: ClientConfig,
+        request: GenaiCreateAgentRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAgentOperation
+            .genaiCreateAgent(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
      * To list all agent API keys, send a GET request to `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
      */
-    fun genaiListAgentApiKeys(clientConfig: ClientConfig, agentUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentAPIKeysOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentApiKeysOperation.genaiListAgentApiKeys(
-            clientConfig,
-            agentUuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiListAgentApiKeys(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentAPIKeysOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentApiKeysOperation
+            .genaiListAgentApiKeys(
+                clientConfig,
+                agentUuid,
+                page,
+                perPage,
+                options,
+            )
 
     /**
      * To create an agent API key, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
      */
-    fun genaiCreateAgentApiKey(clientConfig: ClientConfig, agentUuid: String, agentUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateAgentAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAgentApiKeyOperation.genaiCreateAgentApiKey(
-            clientConfig,
-            agentUuid,
-            agentUuid2,
-            name,
-            options,
-        )
+    fun genaiCreateAgentApiKey(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        agentUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateAgentAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAgentApiKeyOperation
+            .genaiCreateAgentApiKey(
+                clientConfig,
+                agentUuid,
+                agentUuid2,
+                name,
+                options,
+            )
 
     /**
-     * Replaces the configurable details of an API key for an agent. Use the agent and API key identifiers to select the key, and supply `name` in the optional request body to set its name. A 200 response returns the API key information.
+     * Replaces the configurable details of an API key for an agent. Use the agent and API key
+     * identifiers to select the key, and supply `name` in the optional request body to set its
+     * name. A 200 response returns the API key information.
      */
-    fun genaiUpdateAgentApiKey(clientConfig: ClientConfig, agentUuid: String, apiKeyUuid: String, agentUuid2: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateAgentAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentApiKeyOperation.genaiUpdateAgentApiKey(
-            clientConfig,
-            agentUuid,
-            apiKeyUuid,
-            agentUuid2,
-            apiKeyUuid2,
-            name,
-            options,
-        )
+    fun genaiUpdateAgentApiKey(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        apiKeyUuid: String,
+        agentUuid2: String? = null,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateAgentAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentApiKeyOperation
+            .genaiUpdateAgentApiKey(
+                clientConfig,
+                agentUuid,
+                apiKeyUuid,
+                agentUuid2,
+                apiKeyUuid2,
+                name,
+                options,
+            )
 
     /**
-     * To delete an API key for an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
+     * To delete an API key for an agent, send a DELETE request to
+     * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
      */
-    fun genaiDeleteAgentApiKey(clientConfig: ClientConfig, agentUuid: String, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteAgentAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAgentApiKeyOperation.genaiDeleteAgentApiKey(
-            clientConfig,
-            agentUuid,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiDeleteAgentApiKey(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteAgentAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAgentApiKeyOperation
+            .genaiDeleteAgentApiKey(
+                clientConfig,
+                agentUuid,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * To regenerate an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`.
+     * To regenerate an agent API key, send a PUT request to
+     * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`.
      */
-    fun genaiRegenerateAgentApiKey(clientConfig: ClientConfig, agentUuid: String, apiKeyUuid: String, options: RequestOptions? = null): ApiRegenerateAgentAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRegenerateAgentApiKeyOperation.genaiRegenerateAgentApiKey(
-            clientConfig,
-            agentUuid,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiRegenerateAgentApiKey(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiRegenerateAgentAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRegenerateAgentApiKeyOperation
+            .genaiRegenerateAgentApiKey(
+                clientConfig,
+                agentUuid,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * To create a function route for an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/functions`.
+     * To create a function route for an agent, send a POST request to
+     * `/v2/gen-ai/agents/{agent_uuid}/functions`.
      */
-    fun genaiAttachAgentFunction(clientConfig: ClientConfig, request: GenaiAttachAgentFunctionRequest, options: RequestOptions? = null): ApiLinkAgentFunctionOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentFunctionOperation.genaiAttachAgentFunction(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiAttachAgentFunction(
+        clientConfig: ClientConfig,
+        request: GenaiAttachAgentFunctionRequest,
+        options: RequestOptions? = null,
+    ): ApiLinkAgentFunctionOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentFunctionOperation
+            .genaiAttachAgentFunction(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To update the function route, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+     * To update the function route, send a PUT request to
+     * `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
      */
-    fun genaiUpdateAgentFunction(clientConfig: ClientConfig, request: GenaiUpdateAgentFunctionRequest, options: RequestOptions? = null): ApiUpdateAgentFunctionOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentFunctionOperation.genaiUpdateAgentFunction(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateAgentFunction(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateAgentFunctionRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateAgentFunctionOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentFunctionOperation
+            .genaiUpdateAgentFunction(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To delete a function route from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+     * To delete a function route from an agent, send a DELETE request to
+     * `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
      */
-    fun genaiDetachAgentFunction(clientConfig: ClientConfig, agentUuid: String, functionUuid: String, options: RequestOptions? = null): ApiUnlinkAgentFunctionOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentFunctionOperation.genaiDetachAgentFunction(
-            clientConfig,
-            agentUuid,
-            functionUuid,
-            options,
-        )
+    fun genaiDetachAgentFunction(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        functionUuid: String,
+        options: RequestOptions? = null,
+    ): ApiUnlinkAgentFunctionOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentFunctionOperation
+            .genaiDetachAgentFunction(
+                clientConfig,
+                agentUuid,
+                functionUuid,
+                options,
+            )
 
     /**
-     * To attach guardrails to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/guardrails`.
+     * To attach guardrails to an agent, send a POST request to
+     * `/v2/gen-ai/agents/{agent_uuid}/guardrails`.
      */
-    fun genaiAttachAgentGuardrails(clientConfig: ClientConfig, agentUuid: String, agentUuid2: String? = null, guardrails: List<ApiAgentGuardrailInput>? = null, options: RequestOptions? = null): ApiLinkAgentGuardrailOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentGuardrailsOperation.genaiAttachAgentGuardrails(
-            clientConfig,
-            agentUuid,
-            agentUuid2,
-            guardrails,
-            options,
-        )
+    fun genaiAttachAgentGuardrails(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        agentUuid2: String? = null,
+        guardrails: List<ApiAgentGuardrailInput>? = null,
+        options: RequestOptions? = null,
+    ): ApiLinkAgentGuardrailOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentGuardrailsOperation
+            .genaiAttachAgentGuardrails(
+                clientConfig,
+                agentUuid,
+                agentUuid2,
+                guardrails,
+                options,
+            )
 
     /**
-     * To detach a guardrail from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}`.
+     * To detach a guardrail from an agent, send a DELETE request to
+     * `/v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}`.
      */
-    fun genaiDetachAgentGuardrail(clientConfig: ClientConfig, agentUuid: String, guardrailUuid: String, options: RequestOptions? = null): ApiUnlinkAgentGuardrailOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentGuardrailOperation.genaiDetachAgentGuardrail(
-            clientConfig,
-            agentUuid,
-            guardrailUuid,
-            options,
-        )
+    fun genaiDetachAgentGuardrail(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        guardrailUuid: String,
+        options: RequestOptions? = null,
+    ): ApiUnlinkAgentGuardrailOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentGuardrailOperation
+            .genaiDetachAgentGuardrail(
+                clientConfig,
+                agentUuid,
+                guardrailUuid,
+                options,
+            )
 
     /**
-     * To attach knowledge bases to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases`
+     * To attach knowledge bases to an agent, send a POST request to
+     * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases`
      */
-    fun genaiAttachKnowledgeBases(clientConfig: ClientConfig, agentUuid: String, options: RequestOptions? = null): ApiLinkKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachKnowledgeBasesOperation.genaiAttachKnowledgeBases(
-            clientConfig,
-            agentUuid,
-            options,
-        )
+    fun genaiAttachKnowledgeBases(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        options: RequestOptions? = null,
+    ): ApiLinkKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachKnowledgeBasesOperation
+            .genaiAttachKnowledgeBases(
+                clientConfig,
+                agentUuid,
+                options,
+            )
 
     /**
-     * To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+     * To attach a knowledge base to an agent, send a POST request to
+     * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
      */
-    fun genaiAttachKnowledgeBase(clientConfig: ClientConfig, agentUuid: String, knowledgeBaseUuid: String, options: RequestOptions? = null): ApiLinkKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachKnowledgeBaseOperation.genaiAttachKnowledgeBase(
-            clientConfig,
-            agentUuid,
-            knowledgeBaseUuid,
-            options,
-        )
+    fun genaiAttachKnowledgeBase(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        knowledgeBaseUuid: String,
+        options: RequestOptions? = null,
+    ): ApiLinkKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachKnowledgeBaseOperation
+            .genaiAttachKnowledgeBase(
+                clientConfig,
+                agentUuid,
+                knowledgeBaseUuid,
+                options,
+            )
 
     /**
-     * To detach a knowledge base from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
+     * To detach a knowledge base from an agent, send a DELETE request to
+     * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
      */
-    fun genaiDetachKnowledgeBase(clientConfig: ClientConfig, agentUuid: String, knowledgeBaseUuid: String, options: RequestOptions? = null): ApiUnlinkKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachKnowledgeBaseOperation.genaiDetachKnowledgeBase(
-            clientConfig,
-            agentUuid,
-            knowledgeBaseUuid,
-            options,
-        )
+    fun genaiDetachKnowledgeBase(
+        clientConfig: ClientConfig,
+        agentUuid: String,
+        knowledgeBaseUuid: String,
+        options: RequestOptions? = null,
+    ): ApiUnlinkKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachKnowledgeBaseOperation
+            .genaiDetachKnowledgeBase(
+                clientConfig,
+                agentUuid,
+                knowledgeBaseUuid,
+                options,
+            )
 
     /**
-     * Links a child agent as a route on a parent agent. Use the `parent_agent_uuid` and `child_agent_uuid` path parameters to identify the agents, and optionally provide `if_case` and `route_name` to configure the route. The response identifies the linked parent and child agents.
+     * Links a child agent as a route on a parent agent. Use the `parent_agent_uuid` and
+     * `child_agent_uuid` path parameters to identify the agents, and optionally provide `if_case`
+     * and `route_name` to configure the route. The response identifies the linked parent and child
+     * agents.
      */
-    fun genaiAttachAgent(clientConfig: ClientConfig, request: GenaiAttachAgentRequest, options: RequestOptions? = null): ApiLinkAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentOperation.genaiAttachAgent(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiAttachAgent(
+        clientConfig: ClientConfig,
+        request: GenaiAttachAgentRequest,
+        options: RequestOptions? = null,
+    ): ApiLinkAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiAttachAgentOperation
+            .genaiAttachAgent(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+     * To update an agent route for an agent, send a PUT request to
+     * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
      */
-    fun genaiUpdateAttachedAgent(clientConfig: ClientConfig, request: GenaiUpdateAttachedAgentRequest, options: RequestOptions? = null): ApiUpdateLinkedAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAttachedAgentOperation.genaiUpdateAttachedAgent(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateAttachedAgent(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateAttachedAgentRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateLinkedAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAttachedAgentOperation
+            .genaiUpdateAttachedAgent(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To delete an agent route from a parent agent, send a DELETE request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+     * To delete an agent route from a parent agent, send a DELETE request to
+     * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
      */
-    fun genaiDetachAgent(clientConfig: ClientConfig, parentAgentUuid: String, childAgentUuid: String, options: RequestOptions? = null): ApiUnlinkAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentOperation.genaiDetachAgent(
-            clientConfig,
-            parentAgentUuid,
-            childAgentUuid,
-            options,
-        )
+    fun genaiDetachAgent(
+        clientConfig: ClientConfig,
+        parentAgentUuid: String,
+        childAgentUuid: String,
+        options: RequestOptions? = null,
+    ): ApiUnlinkAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDetachAgentOperation
+            .genaiDetachAgent(
+                clientConfig,
+                parentAgentUuid,
+                childAgentUuid,
+                options,
+            )
 
     /**
-     * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The response body is a JSON object containing the agent.
+     * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The response body
+     * is a JSON object containing the agent.
      */
-    fun genaiGetAgent(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentOperation.genaiGetAgent(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiGetAgent(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentOperation
+            .genaiGetAgent(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * Replaces the configuration of an existing agent. Supply the fields you want to change, such as `name`, `instruction`, or `model_uuid`; all listed body fields are optional. The response includes the updated agent object.
+     * Replaces the configuration of an existing agent. Supply the fields you want to change, such
+     * as `name`, `instruction`, or `model_uuid`; all listed body fields are optional. The response
+     * includes the updated agent object.
      */
-    fun genaiUpdateAgent(clientConfig: ClientConfig, request: GenaiUpdateAgentRequest, options: RequestOptions? = null): ApiUpdateAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentOperation.genaiUpdateAgent(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateAgent(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateAgentRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentOperation
+            .genaiUpdateAgent(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`. */
+    fun genaiDeleteAgent(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteAgentOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAgentOperation
+            .genaiDeleteAgent(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
+     * To view agent routes for an agent, send a GET requtest to
+     * `/v2/gen-ai/agents/{uuid}/child_agents`.
      */
-    fun genaiDeleteAgent(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteAgentOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAgentOperation.genaiDeleteAgent(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiGetAgentChildren(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetChildrenOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentChildrenOperation
+            .genaiGetAgentChildren(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To view agent routes for an agent, send a GET requtest to `/v2/gen-ai/agents/{uuid}/child_agents`.
+     * Check whether an agent is public or private. To update the agent status, send a PUT request
+     * to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
      */
-    fun genaiGetAgentChildren(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetChildrenOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentChildrenOperation.genaiGetAgentChildren(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiUpdateAgentDeploymentVisibility(
+        clientConfig: ClientConfig,
+        uuid: String,
+        uuid2: String? = null,
+        visibility: ApiDeploymentVisibility? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateAgentDeploymentVisbilityOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateAgentDeploymentVisibilityOperation
+            .genaiUpdateAgentDeploymentVisibility(
+                clientConfig,
+                uuid,
+                uuid2,
+                visibility,
+                options,
+            )
 
     /**
-     * Check whether an agent is public or private. To update the agent status, send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+     * To get agent usage, send a GET request to `/v2/gen-ai/agents/{uuid}/usage`. Returns usage
+     * metrics for the specified agent within the provided time range.
      */
-    fun genaiUpdateAgentDeploymentVisibility(clientConfig: ClientConfig, uuid: String, uuid2: String? = null, visibility: ApiDeploymentVisibility? = null, options: RequestOptions? = null): ApiUpdateAgentDeploymentVisbilityOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentDeploymentVisibilityOperation.genaiUpdateAgentDeploymentVisibility(
-            clientConfig,
-            uuid,
-            uuid2,
-            visibility,
-            options,
-        )
+    fun genaiGetAgentUsage(
+        clientConfig: ClientConfig,
+        uuid: String,
+        start: String? = null,
+        stop: String? = null,
+        options: RequestOptions? = null,
+    ): ApiGetAgentUsageOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentUsageOperation
+            .genaiGetAgentUsage(
+                clientConfig,
+                uuid,
+                start,
+                stop,
+                options,
+            )
+
+    /** To list all agent versions, send a GET request to `/v2/gen-ai/agents/{uuid}/versions`. */
+    fun genaiListAgentVersions(
+        clientConfig: ClientConfig,
+        uuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentVersionsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentVersionsOperation
+            .genaiListAgentVersions(
+                clientConfig,
+                uuid,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To get agent usage, send a GET request to `/v2/gen-ai/agents/{uuid}/usage`. Returns usage metrics for the specified agent within the provided time range.
+     * To update to a specific agent version, send a PUT request to
+     * `/v2/gen-ai/agents/{uuid}/versions`.
      */
-    fun genaiGetAgentUsage(clientConfig: ClientConfig, uuid: String, start: String? = null, stop: String? = null, options: RequestOptions? = null): ApiGetAgentUsageOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAgentUsageOperation.genaiGetAgentUsage(
-            clientConfig,
-            uuid,
-            start,
-            stop,
-            options,
-        )
+    fun genaiRollbackToAgentVersion(
+        clientConfig: ClientConfig,
+        uuid: String,
+        uuid2: String? = null,
+        versionHash: String? = null,
+        options: RequestOptions? = null,
+    ): ApiRollbackToAgentVersionOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRollbackToAgentVersionOperation
+            .genaiRollbackToAgentVersion(
+                clientConfig,
+                uuid,
+                uuid2,
+                versionHash,
+                options,
+            )
+
+    /** To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`. */
+    fun genaiListAnthropicApiKeys(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAnthropicAPIKeysOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAnthropicApiKeysOperation
+            .genaiListAnthropicApiKeys(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`. */
+    fun genaiCreateAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKey: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateAnthropicAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAnthropicApiKeyOperation
+            .genaiCreateAnthropicApiKey(
+                clientConfig,
+                apiKey,
+                name,
+                options,
+            )
 
     /**
-     * To list all agent versions, send a GET request to `/v2/gen-ai/agents/{uuid}/versions`.
+     * To retrieve details of an Anthropic API key, send a GET request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      */
-    fun genaiListAgentVersions(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentVersionsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentVersionsOperation.genaiListAgentVersions(
-            clientConfig,
-            uuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiGetAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetAnthropicAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAnthropicApiKeyOperation
+            .genaiGetAnthropicApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * To update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.
+     * To update an Anthropic API key, send a PUT request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      */
-    fun genaiRollbackToAgentVersion(clientConfig: ClientConfig, uuid: String, uuid2: String? = null, versionHash: String? = null, options: RequestOptions? = null): ApiRollbackToAgentVersionOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRollbackToAgentVersionOperation.genaiRollbackToAgentVersion(
-            clientConfig,
-            uuid,
-            uuid2,
-            versionHash,
-            options,
-        )
+    fun genaiUpdateAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        apiKey: String? = null,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateAnthropicAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAnthropicApiKeyOperation
+            .genaiUpdateAnthropicApiKey(
+                clientConfig,
+                apiKeyUuid,
+                apiKey,
+                apiKeyUuid2,
+                name,
+                options,
+            )
 
     /**
-     * To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
+     * To delete an Anthropic API key, send a DELETE request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      */
-    fun genaiListAnthropicApiKeys(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAnthropicAPIKeysOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAnthropicApiKeysOperation.genaiListAnthropicApiKeys(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiDeleteAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteAnthropicAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAnthropicApiKeyOperation
+            .genaiDeleteAnthropicApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`.
+     * Lists agents linked to a specific Anthropic key. Use `page` and `per_page` to paginate the
+     * results.
      */
-    fun genaiCreateAnthropicApiKey(clientConfig: ClientConfig, apiKey: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateAnthropicAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateAnthropicApiKeyOperation.genaiCreateAnthropicApiKey(
-            clientConfig,
-            apiKey,
-            name,
-            options,
-        )
+    fun genaiListAgentsByAnthropicKey(
+        clientConfig: ClientConfig,
+        uuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsByAnthropicKeyOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListAgentsByAnthropicKeyOperation
+            .genaiListAgentsByAnthropicKey(
+                clientConfig,
+                uuid,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To list custom models, send a GET request to `/v2/gen-ai/custom_models`. */
+    fun genaiListCustomModels(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        status: GenaiListCustomModelsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): ApiListCustomModelsOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListCustomModelsOperation
+            .genaiListCustomModels(
+                clientConfig,
+                page,
+                perPage,
+                status,
+                options,
+            )
+
+    /** To import a custom model, send a POST request to `/v2/gen-ai/custom_models/import`. */
+    fun genaiImportCustomModel(
+        clientConfig: ClientConfig,
+        request: GenaiImportCustomModelRequest,
+        options: RequestOptions? = null,
+    ): ApiImportCustomModelOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiImportCustomModelOperation
+            .genaiImportCustomModel(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * To retrieve details of a custom model, send a GET request to
+     * `/v2/gen-ai/custom_models/{uuid}`.
      */
-    fun genaiGetAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiGetAnthropicAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetAnthropicApiKeyOperation.genaiGetAnthropicApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiGetCustomModel(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetCustomModelOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetCustomModelOperation
+            .genaiGetCustomModel(
+                clientConfig,
+                uuid,
+                options,
+            )
+
+    /** To delete a custom model, send a DELETE request to `/v2/genai/custom_models/{uuid}`. */
+    fun genaiDeleteCustomModel(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteCustomModelOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteCustomModelOperation
+            .genaiDeleteCustomModel(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * Updates metadata for a custom model identified by its UUID. Supply any metadata fields you
+     * want to change; non-empty `input_modalities` and `output_modalities` lists replace the
+     * existing lists and are supported only for Spaces-imported models. A 200 response returns the
+     * updated custom model.
      */
-    fun genaiUpdateAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, apiKey: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateAnthropicAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAnthropicApiKeyOperation.genaiUpdateAnthropicApiKey(
-            clientConfig,
-            apiKeyUuid,
-            apiKey,
-            apiKeyUuid2,
-            name,
-            options,
-        )
+    fun genaiUpdateCustomModelMetadata(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateCustomModelMetadataRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateCustomModelMetadataOutputPublic =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateCustomModelMetadataOperation
+            .genaiUpdateCustomModelMetadata(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To list evaluation datasets, send a GET request to `/v2/gen-ai/evaluation_datasets`. */
+    fun genaiListEvaluationDatasets(
+        clientConfig: ClientConfig,
+        datasetType: GenaiListEvaluationDatasetsParameterEnum? = null,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        hasGroundTruth: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationDatasetsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationDatasetsOperation
+            .genaiListEvaluationDatasets(
+                clientConfig,
+                datasetType,
+                datasetParadigm,
+                hasGroundTruth,
+                options,
+            )
 
     /**
-     * To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * Creates an evaluation dataset for agent evaluation. Set `dataset_paradigm` to describe the
+     * dataset row format and `dataset_type` to identify its type; both fields have defaults when
+     * omitted. Include `file_upload_dataset` to associate an uploaded file with the dataset.
      */
-    fun genaiDeleteAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteAnthropicAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteAnthropicApiKeyOperation.genaiDeleteAnthropicApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiCreateEvaluationDataset(
+        clientConfig: ClientConfig,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        datasetType: ApiEvaluationDatasetType? = null,
+        fileUploadDataset: ApiFileUploadDataSource? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateEvaluationDatasetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateEvaluationDatasetOperation
+            .genaiCreateEvaluationDataset(
+                clientConfig,
+                datasetParadigm,
+                datasetType,
+                fileUploadDataset,
+                name,
+                options,
+            )
 
     /**
-     * Lists agents linked to a specific Anthropic key. Use `page` and `per_page` to paginate the results.
+     * To create presigned URLs for evaluation dataset file upload, send a POST request to
+     * `/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls`.
      */
-    fun genaiListAgentsByAnthropicKey(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByAnthropicKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsByAnthropicKeyOperation.genaiListAgentsByAnthropicKey(
-            clientConfig,
-            uuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiCreateEvaluationDatasetFileUploadPresignedUrls(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateEvaluationDatasetFileUploadPresignXc0652e1fdd
+            .genaiCreateEvaluationDatasetFileUploadPresignedUrls(
+                clientConfig,
+                files,
+                options,
+            )
 
     /**
-     * To list custom models, send a GET request to `/v2/gen-ai/custom_models`.
+     * To delete an evaluation dataset, send a DELETE request to
+     * `/v2/genai/evaluation_datasets/{dataset_uuid}`. This works for both model and agent
+     * evaluation datasets.
      */
-    fun genaiListCustomModels(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, status: GenaiListCustomModelsParameterEnum? = null, options: RequestOptions? = null): ApiListCustomModelsOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListCustomModelsOperation.genaiListCustomModels(
-            clientConfig,
-            page,
-            perPage,
-            status,
-            options,
-        )
+    fun genaiDeleteEvaluationDataset(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteEvaluationDatasetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteEvaluationDatasetOperation
+            .genaiDeleteEvaluationDataset(
+                clientConfig,
+                datasetUuid,
+                options,
+            )
 
     /**
-     * To import a custom model, send a POST request to `/v2/gen-ai/custom_models/import`.
+     * To get a presigned download URL for an evaluation dataset, send a GET request to
+     * `/v2/genai/evaluation_datasets/{dataset_uuid}/download_url`.
      */
-    fun genaiImportCustomModel(clientConfig: ClientConfig, request: GenaiImportCustomModelRequest, options: RequestOptions? = null): ApiImportCustomModelOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiImportCustomModelOperation.genaiImportCustomModel(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiGetEvaluationDatasetDownloadUrl(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationDatasetDownloadURLOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetEvaluationDatasetDownloadUrlOperation
+            .genaiGetEvaluationDatasetDownloadUrl(
+                clientConfig,
+                datasetUuid,
+                options,
+            )
+
+    /** To list all evaluation metrics, send a GET request to `/v2/gen-ai/evaluation_metrics`. */
+    fun genaiListEvaluationMetrics(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationMetricsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationMetricsOperation
+            .genaiListEvaluationMetrics(
+                clientConfig,
+                options,
+            )
 
     /**
-     * To retrieve details of a custom model, send a GET request to `/v2/gen-ai/custom_models/{uuid}`.
+     * Creates a custom LLM-as-judge metric for model evaluation. Use `metric_name`, `description`,
+     * and `config` to define the metric and the judge instructions; prompt and model response are
+     * included in the judge context. Set `requires_ground_truth` in `config` when each evaluation
+     * row must provide ground truth.
      */
-    fun genaiGetCustomModel(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetCustomModelOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetCustomModelOperation.genaiGetCustomModel(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiCreateCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateCustomEvaluationMetricOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateCustomEvaluationMetricOperation
+            .genaiCreateCustomEvaluationMetric(
+                clientConfig,
+                config,
+                description,
+                metricName,
+                options,
+            )
 
     /**
-     * To delete a custom model, send a DELETE request to `/v2/genai/custom_models/{uuid}`.
+     * Replaces a custom evaluation metric with an updated metric configuration. Use `metric_uuid`
+     * to identify the metric and provide the metric fields you want to update. The update issues a
+     * new metric UUID.
      */
-    fun genaiDeleteCustomModel(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteCustomModelOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteCustomModelOperation.genaiDeleteCustomModel(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiUpdateCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        metricUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateCustomEvaluationMetricOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateCustomEvaluationMetricOperation
+            .genaiUpdateCustomEvaluationMetric(
+                clientConfig,
+                metricUuid,
+                config,
+                description,
+                metricName,
+                metricUuid2,
+                options,
+            )
 
     /**
-     * Updates metadata for a custom model identified by its UUID. Supply any metadata fields you want to change; non-empty `input_modalities` and `output_modalities` lists replace the existing lists and are supported only for Spaces-imported models. A 200 response returns the updated custom model.
+     * To soft-delete a custom model evaluation metric, send a DELETE request to
+     * `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
      */
-    fun genaiUpdateCustomModelMetadata(clientConfig: ClientConfig, request: GenaiUpdateCustomModelMetadataRequest, options: RequestOptions? = null): ApiUpdateCustomModelMetadataOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateCustomModelMetadataOperation.genaiUpdateCustomModelMetadata(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiDeleteCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteCustomEvaluationMetricOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteCustomEvaluationMetricOperation
+            .genaiDeleteCustomEvaluationMetric(
+                clientConfig,
+                metricUuid,
+                options,
+            )
+
+    /** To run an evaluation test case, send a POST request to `/v2/gen-ai/evaluation_runs`. */
+    fun genaiRunEvaluationTestCase(
+        clientConfig: ClientConfig,
+        agentDeploymentNames: List<String>? = null,
+        agentUuids: List<String>? = null,
+        runName: String? = null,
+        testCaseUuid: String? = null,
+        options: RequestOptions? = null,
+    ): ApiRunEvaluationTestCaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRunEvaluationTestCaseOperation
+            .genaiRunEvaluationTestCase(
+                clientConfig,
+                agentDeploymentNames,
+                agentUuids,
+                runName,
+                testCaseUuid,
+                options,
+            )
 
     /**
-     * To list evaluation datasets, send a GET request to `/v2/gen-ai/evaluation_datasets`.
+     * To retrive information about an existing evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}`.
      */
-    fun genaiListEvaluationDatasets(clientConfig: ClientConfig, datasetType: GenaiListEvaluationDatasetsParameterEnum? = null, datasetParadigm: ApiEvaluationDatasetParadigm? = null, hasGroundTruth: Boolean? = null, options: RequestOptions? = null): ApiListEvaluationDatasetsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationDatasetsOperation.genaiListEvaluationDatasets(
-            clientConfig,
-            datasetType,
-            datasetParadigm,
-            hasGroundTruth,
-            options,
-        )
+    fun genaiGetEvaluationRun(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationRunOperation
+            .genaiGetEvaluationRun(
+                clientConfig,
+                evaluationRunUuid,
+                options,
+            )
 
     /**
-     * Creates an evaluation dataset for agent evaluation. Set `dataset_paradigm` to describe the dataset row format and `dataset_type` to identify its type; both fields have defaults when omitted. Include `file_upload_dataset` to associate an uploaded file with the dataset.
+     * To retrieve results of an evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
      */
-    fun genaiCreateEvaluationDataset(clientConfig: ClientConfig, datasetParadigm: ApiEvaluationDatasetParadigm? = null, datasetType: ApiEvaluationDatasetType? = null, fileUploadDataset: ApiFileUploadDataSource? = null, name: String? = null, options: RequestOptions? = null): ApiCreateEvaluationDatasetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateEvaluationDatasetOperation.genaiCreateEvaluationDataset(
-            clientConfig,
-            datasetParadigm,
-            datasetType,
-            fileUploadDataset,
-            name,
-            options,
-        )
+    fun genaiGetEvaluationRunResults(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunResultsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetEvaluationRunResultsOperation
+            .genaiGetEvaluationRunResults(
+                clientConfig,
+                evaluationRunUuid,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To create presigned URLs for evaluation dataset file upload, send a POST request to `/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls`.
+     * To retrieve results of an evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
      */
-    fun genaiCreateEvaluationDatasetFileUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateEvaluationDatasetFileUploadPresignXc0652e1fdd.genaiCreateEvaluationDatasetFileUploadPresignedUrls(
-            clientConfig,
-            files,
-            options,
-        )
-
-    /**
-     * To delete an evaluation dataset, send a DELETE request to `/v2/genai/evaluation_datasets/{dataset_uuid}`. This works for both model and agent evaluation datasets.
-     */
-    fun genaiDeleteEvaluationDataset(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): ApiDeleteEvaluationDatasetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteEvaluationDatasetOperation.genaiDeleteEvaluationDataset(
-            clientConfig,
-            datasetUuid,
-            options,
-        )
-
-    /**
-     * To get a presigned download URL for an evaluation dataset, send a GET request to `/v2/genai/evaluation_datasets/{dataset_uuid}/download_url`.
-     */
-    fun genaiGetEvaluationDatasetDownloadUrl(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): ApiGetEvaluationDatasetDownloadURLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationDatasetDownloadUrlOperation.genaiGetEvaluationDatasetDownloadUrl(
-            clientConfig,
-            datasetUuid,
-            options,
-        )
-
-    /**
-     * To list all evaluation metrics, send a GET request to `/v2/gen-ai/evaluation_metrics`.
-     */
-    fun genaiListEvaluationMetrics(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListEvaluationMetricsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationMetricsOperation.genaiListEvaluationMetrics(
-            clientConfig,
-            options,
-        )
-
-    /**
-     * Creates a custom LLM-as-judge metric for model evaluation. Use `metric_name`, `description`, and `config` to define the metric and the judge instructions; prompt and model response are included in the judge context. Set `requires_ground_truth` in `config` when each evaluation row must provide ground truth.
-     */
-    fun genaiCreateCustomEvaluationMetric(clientConfig: ClientConfig, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, options: RequestOptions? = null): ApiCreateCustomEvaluationMetricOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateCustomEvaluationMetricOperation.genaiCreateCustomEvaluationMetric(
-            clientConfig,
-            config,
-            description,
-            metricName,
-            options,
-        )
-
-    /**
-     * Replaces a custom evaluation metric with an updated metric configuration. Use `metric_uuid` to identify the metric and provide the metric fields you want to update. The update issues a new metric UUID.
-     */
-    fun genaiUpdateCustomEvaluationMetric(clientConfig: ClientConfig, metricUuid: String, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, metricUuid2: String? = null, options: RequestOptions? = null): ApiUpdateCustomEvaluationMetricOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateCustomEvaluationMetricOperation.genaiUpdateCustomEvaluationMetric(
-            clientConfig,
-            metricUuid,
-            config,
-            description,
-            metricName,
-            metricUuid2,
-            options,
-        )
-
-    /**
-     * To soft-delete a custom model evaluation metric, send a DELETE request to `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
-     */
-    fun genaiDeleteCustomEvaluationMetric(clientConfig: ClientConfig, metricUuid: String, options: RequestOptions? = null): ApiDeleteCustomEvaluationMetricOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteCustomEvaluationMetricOperation.genaiDeleteCustomEvaluationMetric(
-            clientConfig,
-            metricUuid,
-            options,
-        )
-
-    /**
-     * To run an evaluation test case, send a POST request to `/v2/gen-ai/evaluation_runs`.
-     */
-    fun genaiRunEvaluationTestCase(clientConfig: ClientConfig, agentDeploymentNames: List<String>? = null, agentUuids: List<String>? = null, runName: String? = null, testCaseUuid: String? = null, options: RequestOptions? = null): ApiRunEvaluationTestCaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRunEvaluationTestCaseOperation.genaiRunEvaluationTestCase(
-            clientConfig,
-            agentDeploymentNames,
-            agentUuids,
-            runName,
-            testCaseUuid,
-            options,
-        )
-
-    /**
-     * To retrive information about an existing evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}`.
-     */
-    fun genaiGetEvaluationRun(clientConfig: ClientConfig, evaluationRunUuid: String, options: RequestOptions? = null): ApiGetEvaluationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationRunOperation.genaiGetEvaluationRun(
-            clientConfig,
-            evaluationRunUuid,
-            options,
-        )
-
-    /**
-     * To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
-     */
-    fun genaiGetEvaluationRunResults(clientConfig: ClientConfig, evaluationRunUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiGetEvaluationRunResultsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationRunResultsOperation.genaiGetEvaluationRunResults(
-            clientConfig,
-            evaluationRunUuid,
-            page,
-            perPage,
-            options,
-        )
-
-    /**
-     * To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
-     */
-    fun genaiGetEvaluationRunPromptResults(clientConfig: ClientConfig, evaluationRunUuid: String, promptId: Long, options: RequestOptions? = null): ApiGetEvaluationRunPromptResultsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationRunPromptResultsOperation.genaiGetEvaluationRunPromptResults(
-            clientConfig,
-            evaluationRunUuid,
-            promptId,
-            options,
-        )
+    fun genaiGetEvaluationRunPromptResults(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        promptId: Long,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunPromptResultsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetEvaluationRunPromptResultsOperation
+            .genaiGetEvaluationRunPromptResults(
+                clientConfig,
+                evaluationRunUuid,
+                promptId,
+                options,
+            )
 
     /**
      * To list all evaluation test cases, send a GET request to `/v2/gen-ai/evaluation_test_cases`.
      */
-    fun genaiListEvaluationTestCases(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListEvaluationTestCasesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationTestCasesOperation.genaiListEvaluationTestCases(
-            clientConfig,
-            options,
-        )
+    fun genaiListEvaluationTestCases(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationTestCasesOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListEvaluationTestCasesOperation
+            .genaiListEvaluationTestCases(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Creates an evaluation test case for a dataset in a workspace. Supply the test case name and any applicable `dataset_uuid`, `workspace_uuid`, metrics, or star metric configuration. A 200 response returns the new test case UUID.
+     * Creates an evaluation test case for a dataset in a workspace. Supply the test case name and
+     * any applicable `dataset_uuid`, `workspace_uuid`, metrics, or star metric configuration. A 200
+     * response returns the new test case UUID.
      */
-    fun genaiCreateEvaluationTestCase(clientConfig: ClientConfig, request: GenaiCreateEvaluationTestCaseRequest, options: RequestOptions? = null): ApiCreateEvaluationTestCaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateEvaluationTestCaseOperation.genaiCreateEvaluationTestCase(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateEvaluationTestCase(
+        clientConfig: ClientConfig,
+        request: GenaiCreateEvaluationTestCaseRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateEvaluationTestCaseOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateEvaluationTestCaseOperation
+            .genaiCreateEvaluationTestCase(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To list all evaluation runs by test case, send a GET request to `/v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs`.
+     * To list all evaluation runs by test case, send a GET request to
+     * `/v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs`.
      */
-    fun genaiListEvaluationRunsByTestCase(clientConfig: ClientConfig, evaluationTestCaseUuid: String, evaluationTestCaseVersion: Long? = null, options: RequestOptions? = null): ApiListEvaluationRunsByTestCaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationRunsByTestCaseOperation.genaiListEvaluationRunsByTestCase(
-            clientConfig,
-            evaluationTestCaseUuid,
-            evaluationTestCaseVersion,
-            options,
-        )
+    fun genaiListEvaluationRunsByTestCase(
+        clientConfig: ClientConfig,
+        evaluationTestCaseUuid: String,
+        evaluationTestCaseVersion: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationRunsByTestCaseOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListEvaluationRunsByTestCaseOperation
+            .genaiListEvaluationRunsByTestCase(
+                clientConfig,
+                evaluationTestCaseUuid,
+                evaluationTestCaseVersion,
+                options,
+            )
 
     /**
-     * To retrive information about an existing evaluation test case, send a GET request to `/v2/gen-ai/evaluation_test_case/{test_case_uuid}`.
+     * To retrive information about an existing evaluation test case, send a GET request to
+     * `/v2/gen-ai/evaluation_test_case/{test_case_uuid}`.
      */
-    fun genaiGetEvaluationTestCase(clientConfig: ClientConfig, testCaseUuid: String, evaluationTestCaseVersion: Long? = null, options: RequestOptions? = null): ApiGetEvaluationTestCaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationTestCaseOperation.genaiGetEvaluationTestCase(
-            clientConfig,
-            testCaseUuid,
-            evaluationTestCaseVersion,
-            options,
-        )
+    fun genaiGetEvaluationTestCase(
+        clientConfig: ClientConfig,
+        testCaseUuid: String,
+        evaluationTestCaseVersion: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationTestCaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetEvaluationTestCaseOperation
+            .genaiGetEvaluationTestCase(
+                clientConfig,
+                testCaseUuid,
+                evaluationTestCaseVersion,
+                options,
+            )
 
     /**
-     * Replaces the configuration of an evaluation test case. Use the `test_case_uuid` path parameter to select the test case, and provide any configuration fields to update, such as its name, dataset, metrics, or star metric. A 200 response returns the test case UUID and its new version.
+     * Replaces the configuration of an evaluation test case. Use the `test_case_uuid` path
+     * parameter to select the test case, and provide any configuration fields to update, such as
+     * its name, dataset, metrics, or star metric. A 200 response returns the test case UUID and its
+     * new version.
      */
-    fun genaiUpdateEvaluationTestCase(clientConfig: ClientConfig, request: GenaiUpdateEvaluationTestCaseRequest, options: RequestOptions? = null): ApiUpdateEvaluationTestCaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateEvaluationTestCaseOperation.genaiUpdateEvaluationTestCase(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateEvaluationTestCase(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateEvaluationTestCaseRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateEvaluationTestCaseOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateEvaluationTestCaseOperation
+            .genaiUpdateEvaluationTestCase(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
+     * To list all indexing jobs for a knowledge base, send a GET request to
+     * `/v2/gen-ai/indexing_jobs`.
      */
-    fun genaiListIndexingJobs(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListKnowledgeBaseIndexingJobsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListIndexingJobsOperation.genaiListIndexingJobs(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiListIndexingJobs(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListKnowledgeBaseIndexingJobsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListIndexingJobsOperation
+            .genaiListIndexingJobs(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To start an indexing job for a knowledge base, send a POST request to `/v2/gen-ai/indexing_jobs`.
+     * To start an indexing job for a knowledge base, send a POST request to
+     * `/v2/gen-ai/indexing_jobs`.
      */
-    fun genaiCreateIndexingJob(clientConfig: ClientConfig, dataSourceUuids: List<String>? = null, knowledgeBaseUuid: String? = null, options: RequestOptions? = null): ApiStartKnowledgeBaseIndexingJobOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateIndexingJobOperation.genaiCreateIndexingJob(
-            clientConfig,
-            dataSourceUuids,
-            knowledgeBaseUuid,
-            options,
-        )
+    fun genaiCreateIndexingJob(
+        clientConfig: ClientConfig,
+        dataSourceUuids: List<String>? = null,
+        knowledgeBaseUuid: String? = null,
+        options: RequestOptions? = null,
+    ): ApiStartKnowledgeBaseIndexingJobOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateIndexingJobOperation
+            .genaiCreateIndexingJob(
+                clientConfig,
+                dataSourceUuids,
+                knowledgeBaseUuid,
+                options,
+            )
 
     /**
-     * To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
+     * To list all datasources for an indexing job, send a GET request to
+     * `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
      */
-    fun genaiListIndexingJobDataSources(clientConfig: ClientConfig, indexingJobUuid: String, options: RequestOptions? = null): ApiListIndexingJobDataSourcesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListIndexingJobDataSourcesOperation.genaiListIndexingJobDataSources(
-            clientConfig,
-            indexingJobUuid,
-            options,
-        )
+    fun genaiListIndexingJobDataSources(
+        clientConfig: ClientConfig,
+        indexingJobUuid: String,
+        options: RequestOptions? = null,
+    ): ApiListIndexingJobDataSourcesOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListIndexingJobDataSourcesOperation
+            .genaiListIndexingJobDataSources(
+                clientConfig,
+                indexingJobUuid,
+                options,
+            )
 
     /**
-     * To get a signed URL for indexing job details, send a GET request to `/v2/gen-ai/indexing_jobs/{uuid}/details_signed_url`.
+     * To get a signed URL for indexing job details, send a GET request to
+     * `/v2/gen-ai/indexing_jobs/{uuid}/details_signed_url`.
      */
-    fun genaiGetIndexingJobDetailsSignedUrl(clientConfig: ClientConfig, indexingJobUuid: String, options: RequestOptions? = null): ApiGetIndexingJobDetailsSignedURLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetIndexingJobDetailsSignedUrlOperation.genaiGetIndexingJobDetailsSignedUrl(
-            clientConfig,
-            indexingJobUuid,
-            options,
-        )
+    fun genaiGetIndexingJobDetailsSignedUrl(
+        clientConfig: ClientConfig,
+        indexingJobUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetIndexingJobDetailsSignedURLOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetIndexingJobDetailsSignedUrlOperation
+            .genaiGetIndexingJobDetailsSignedUrl(
+                clientConfig,
+                indexingJobUuid,
+                options,
+            )
 
     /**
-     * To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/{uuid}`.
+     * To get status of an indexing Job for a knowledge base, send a GET request to
+     * `/v2/gen-ai/indexing_jobs/{uuid}`.
      */
-    fun genaiGetIndexingJob(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetKnowledgeBaseIndexingJobOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetIndexingJobOperation.genaiGetIndexingJob(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiGetIndexingJob(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetKnowledgeBaseIndexingJobOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetIndexingJobOperation
+            .genaiGetIndexingJob(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
+     * To cancel an indexing job for a knowledge base, send a PUT request to
+     * `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
      */
-    fun genaiCancelIndexingJob(clientConfig: ClientConfig, uuid: String, uuid2: String? = null, options: RequestOptions? = null): ApiCancelKnowledgeBaseIndexingJobOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCancelIndexingJobOperation.genaiCancelIndexingJob(
-            clientConfig,
-            uuid,
-            uuid2,
-            options,
-        )
+    fun genaiCancelIndexingJob(
+        clientConfig: ClientConfig,
+        uuid: String,
+        uuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCancelKnowledgeBaseIndexingJobOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCancelIndexingJobOperation
+            .genaiCancelIndexingJob(
+                clientConfig,
+                uuid,
+                uuid2,
+                options,
+            )
+
+    /** To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`. */
+    fun genaiListKnowledgeBases(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListKnowledgeBasesOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListKnowledgeBasesOperation
+            .genaiListKnowledgeBases(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
+     * Creates a knowledge base in a specified region and project, optionally using an existing
+     * database. Configure its name, embedding model, size, tags, VPC, and retrieval reranking with
+     * the corresponding fields. You can attach data sources during creation or add them later.
      */
-    fun genaiListKnowledgeBases(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListKnowledgeBasesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListKnowledgeBasesOperation.genaiListKnowledgeBases(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiCreateKnowledgeBase(
+        clientConfig: ClientConfig,
+        request: GenaiCreateKnowledgeBaseRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateKnowledgeBaseOperation
+            .genaiCreateKnowledgeBase(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a knowledge base in a specified region and project, optionally using an existing database. Configure its name, embedding model, size, tags, VPC, and retrieval reranking with the corresponding fields. You can attach data sources during creation or add them later.
+     * To create presigned URLs for knowledge base data source file upload, send a POST request to
+     * `/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls`.
      */
-    fun genaiCreateKnowledgeBase(clientConfig: ClientConfig, request: GenaiCreateKnowledgeBaseRequest, options: RequestOptions? = null): ApiCreateKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateKnowledgeBaseOperation.genaiCreateKnowledgeBase(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateDataSourceFileUploadPresignedUrls(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateDataSourceFileUploadPresignedUrlsOperation
+            .genaiCreateDataSourceFileUploadPresignedUrls(
+                clientConfig,
+                files,
+                options,
+            )
 
     /**
-     * To create presigned URLs for knowledge base data source file upload, send a POST request to `/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls`.
+     * To list all data sources for a knowledge base, send a GET request to
+     * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
      */
-    fun genaiCreateDataSourceFileUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateDataSourceFileUploadPresignedUrlsOperation.genaiCreateDataSourceFileUploadPresignedUrls(
-            clientConfig,
-            files,
-            options,
-        )
+    fun genaiListKnowledgeBaseDataSources(
+        clientConfig: ClientConfig,
+        knowledgeBaseUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListKnowledgeBaseDataSourcesOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListKnowledgeBaseDataSourcesOperation
+            .genaiListKnowledgeBaseDataSources(
+                clientConfig,
+                knowledgeBaseUuid,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To list all data sources for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+     * Adds a data source configuration to a knowledge base. Supply the source-specific settings for
+     * an AWS S3 bucket, Spaces bucket, or web crawler, and optionally configure chunking. Use this
+     * operation to add sources after creating a knowledge base or to attach a source during a later
+     * update.
      */
-    fun genaiListKnowledgeBaseDataSources(clientConfig: ClientConfig, knowledgeBaseUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListKnowledgeBaseDataSourcesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListKnowledgeBaseDataSourcesOperation.genaiListKnowledgeBaseDataSources(
-            clientConfig,
-            knowledgeBaseUuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiCreateKnowledgeBaseDataSource(
+        clientConfig: ClientConfig,
+        request: GenaiCreateKnowledgeBaseDataSourceRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateKnowledgeBaseDataSourceOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateKnowledgeBaseDataSourceOperation
+            .genaiCreateKnowledgeBaseDataSource(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Adds a data source configuration to a knowledge base. Supply the source-specific settings for an AWS S3 bucket, Spaces bucket, or web crawler, and optionally configure chunking. Use this operation to add sources after creating a knowledge base or to attach a source during a later update.
+     * Replaces the chunking configuration for a data source in a knowledge base. Supply
+     * `chunking_algorithm` and `chunking_options` to configure how the source is divided for
+     * indexing. Use the path identifiers to select the knowledge base and data source to update.
      */
-    fun genaiCreateKnowledgeBaseDataSource(clientConfig: ClientConfig, request: GenaiCreateKnowledgeBaseDataSourceRequest, options: RequestOptions? = null): ApiCreateKnowledgeBaseDataSourceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateKnowledgeBaseDataSourceOperation.genaiCreateKnowledgeBaseDataSource(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateKnowledgeBaseDataSource(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateKnowledgeBaseDataSourceRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateKnowledgeBaseDataSourceOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateKnowledgeBaseDataSourceOperation
+            .genaiUpdateKnowledgeBaseDataSource(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Replaces the chunking configuration for a data source in a knowledge base. Supply `chunking_algorithm` and `chunking_options` to configure how the source is divided for indexing. Use the path identifiers to select the knowledge base and data source to update.
+     * To delete a data source from a knowledge base, send a DELETE request to
+     * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
      */
-    fun genaiUpdateKnowledgeBaseDataSource(clientConfig: ClientConfig, request: GenaiUpdateKnowledgeBaseDataSourceRequest, options: RequestOptions? = null): ApiUpdateKnowledgeBaseDataSourceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateKnowledgeBaseDataSourceOperation.genaiUpdateKnowledgeBaseDataSource(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiDeleteKnowledgeBaseDataSource(
+        clientConfig: ClientConfig,
+        knowledgeBaseUuid: String,
+        dataSourceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteKnowledgeBaseDataSourceOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteKnowledgeBaseDataSourceOperation
+            .genaiDeleteKnowledgeBaseDataSource(
+                clientConfig,
+                knowledgeBaseUuid,
+                dataSourceUuid,
+                options,
+            )
 
     /**
-     * To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+     * To list latest 15 indexing jobs for a knowledge base, send a GET request to
+     * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs`.
      */
-    fun genaiDeleteKnowledgeBaseDataSource(clientConfig: ClientConfig, knowledgeBaseUuid: String, dataSourceUuid: String, options: RequestOptions? = null): ApiDeleteKnowledgeBaseDataSourceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteKnowledgeBaseDataSourceOperation.genaiDeleteKnowledgeBaseDataSource(
-            clientConfig,
-            knowledgeBaseUuid,
-            dataSourceUuid,
-            options,
-        )
+    fun genaiListIndexingJobsByKnowledgeBase(
+        clientConfig: ClientConfig,
+        knowledgeBaseUuid: String,
+        options: RequestOptions? = null,
+    ): ApiListKnowledgeBaseIndexingJobsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListIndexingJobsByKnowledgeBaseOperation
+            .genaiListIndexingJobsByKnowledgeBase(
+                clientConfig,
+                knowledgeBaseUuid,
+                options,
+            )
 
     /**
-     * To list latest 15 indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs`.
+     * To retrive information about an existing knowledge base, send a GET request to
+     * `/v2/gen-ai/knowledge_bases/{uuid}`.
      */
-    fun genaiListIndexingJobsByKnowledgeBase(clientConfig: ClientConfig, knowledgeBaseUuid: String, options: RequestOptions? = null): ApiListKnowledgeBaseIndexingJobsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListIndexingJobsByKnowledgeBaseOperation.genaiListIndexingJobsByKnowledgeBase(
-            clientConfig,
-            knowledgeBaseUuid,
-            options,
-        )
+    fun genaiGetKnowledgeBase(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetKnowledgeBaseOperation
+            .genaiGetKnowledgeBase(
+                clientConfig,
+                uuid,
+                options,
+            )
+
+    /** To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`. */
+    fun genaiUpdateKnowledgeBase(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateKnowledgeBaseRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateKnowledgeBaseOperation
+            .genaiUpdateKnowledgeBase(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`. */
+    fun genaiDeleteKnowledgeBase(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteKnowledgeBaseOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteKnowledgeBaseOperation
+            .genaiDeleteKnowledgeBase(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+     * To create presigned URLs for model evaluation dataset file upload, send a POST request to
+     * `/v2/genai/model_evaluation/datasets/file_upload_presigned_urls`.
      */
-    fun genaiGetKnowledgeBase(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetKnowledgeBaseOperation.genaiGetKnowledgeBase(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiCreateModelEvalDatasetUploadPresignedUrls(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateModelEvalDatasetUploadPresignedUrlsOperation
+            .genaiCreateModelEvalDatasetUploadPresignedUrls(
+                clientConfig,
+                files,
+                options,
+            )
 
     /**
-     * To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+     * To list all available metrics for model evaluation, send a GET request to
+     * `/v2/genai/model_evaluation_metrics`.
      */
-    fun genaiUpdateKnowledgeBase(clientConfig: ClientConfig, request: GenaiUpdateKnowledgeBaseRequest, options: RequestOptions? = null): ApiUpdateKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateKnowledgeBaseOperation.genaiUpdateKnowledgeBase(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiListModelEvaluationMetrics(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListModelEvaluationMetricsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListModelEvaluationMetricsOperation
+            .genaiListModelEvaluationMetrics(
+                clientConfig,
+                options,
+            )
 
     /**
-     * To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+     * To list all saved model evaluation presets, send a GET request to
+     * `/v2/genai/model_evaluation_presets`.
      */
-    fun genaiDeleteKnowledgeBase(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteKnowledgeBaseOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteKnowledgeBaseOperation.genaiDeleteKnowledgeBase(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiListModelEvaluationPresets(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListModelEvaluationPresetsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListModelEvaluationPresetsOperation
+            .genaiListModelEvaluationPresets(
+                clientConfig,
+                options,
+            )
 
     /**
-     * To create presigned URLs for model evaluation dataset file upload, send a POST request to `/v2/genai/model_evaluation/datasets/file_upload_presigned_urls`.
+     * To retrieve a saved model evaluation preset, send a GET request to
+     * `/v2/genai/model_evaluation_presets/{eval_preset_uuid}`.
      */
-    fun genaiCreateModelEvalDatasetUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelEvalDatasetUploadPresignedUrlsOperation.genaiCreateModelEvalDatasetUploadPresignedUrls(
-            clientConfig,
-            files,
-            options,
-        )
+    fun genaiGetModelEvaluationPreset(
+        clientConfig: ClientConfig,
+        evalPresetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetModelEvaluationPresetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetModelEvaluationPresetOperation
+            .genaiGetModelEvaluationPreset(
+                clientConfig,
+                evalPresetUuid,
+                options,
+            )
 
     /**
-     * To list all available metrics for model evaluation, send a GET request to `/v2/genai/model_evaluation_metrics`.
+     * To delete a saved model evaluation preset, send a DELETE request to
+     * `/v2/gen-ai/model_evaluation_presets/{eval_preset_uuid}`.
      */
-    fun genaiListModelEvaluationMetrics(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListModelEvaluationMetricsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelEvaluationMetricsOperation.genaiListModelEvaluationMetrics(
-            clientConfig,
-            options,
-        )
+    fun genaiDeleteModelEvaluationPreset(
+        clientConfig: ClientConfig,
+        evalPresetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteModelEvaluationPresetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteModelEvaluationPresetOperation
+            .genaiDeleteModelEvaluationPreset(
+                clientConfig,
+                evalPresetUuid,
+                options,
+            )
+
+    /** To list model evaluation runs, send a GET request to `/v2/genai/model_evaluation_runs`. */
+    fun genaiListModelEvaluationRuns(
+        clientConfig: ClientConfig,
+        request: GenaiListModelEvaluationRunsRequest,
+        options: RequestOptions? = null,
+    ): ApiListModelEvaluationRunsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListModelEvaluationRunsOperation
+            .genaiListModelEvaluationRuns(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To list all saved model evaluation presets, send a GET request to `/v2/genai/model_evaluation_presets`.
+     * Creates a model evaluation run to score a candidate model against a dataset using selected
+     * metrics and a judge model. Configure the candidate, dataset, metrics, and judge with the
+     * corresponding fields; `candidate_model_source` defaults to the serverless model source, and
+     * `epochs` defaults to 1 and is capped at 3. A successful response returns the created run's
+     * `eval_run_uuid`.
      */
-    fun genaiListModelEvaluationPresets(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListModelEvaluationPresetsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelEvaluationPresetsOperation.genaiListModelEvaluationPresets(
-            clientConfig,
-            options,
-        )
+    fun genaiCreateModelEvaluationRun(
+        clientConfig: ClientConfig,
+        request: GenaiCreateModelEvaluationRunRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateModelEvaluationRunOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateModelEvaluationRunOperation
+            .genaiCreateModelEvaluationRun(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To retrieve a saved model evaluation preset, send a GET request to `/v2/genai/model_evaluation_presets/{eval_preset_uuid}`.
+     * To retrieve a model evaluation run, send a GET request to
+     * `/v2/genai/model_evaluation_runs/{eval_run_uuid}`.
      */
-    fun genaiGetModelEvaluationPreset(clientConfig: ClientConfig, evalPresetUuid: String, options: RequestOptions? = null): ApiGetModelEvaluationPresetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelEvaluationPresetOperation.genaiGetModelEvaluationPreset(
-            clientConfig,
-            evalPresetUuid,
-            options,
-        )
+    fun genaiGetModelEvaluationRun(
+        clientConfig: ClientConfig,
+        evalRunUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiGetModelEvaluationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelEvaluationRunOperation
+            .genaiGetModelEvaluationRun(
+                clientConfig,
+                evalRunUuid,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To delete a saved model evaluation preset, send a DELETE request to `/v2/gen-ai/model_evaluation_presets/{eval_preset_uuid}`.
+     * To delete a model evaluation run, send a DELETE request to
+     * `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}`. The run must be in a terminal status
+     * (`successful`, `partially_successful`, `failed`, or `cancelled`). For runs still in progress,
+     * either wait for the run to finish or cancel it, then retry the delete once the run reaches a
+     * terminal status.
      */
-    fun genaiDeleteModelEvaluationPreset(clientConfig: ClientConfig, evalPresetUuid: String, options: RequestOptions? = null): ApiDeleteModelEvaluationPresetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelEvaluationPresetOperation.genaiDeleteModelEvaluationPreset(
-            clientConfig,
-            evalPresetUuid,
-            options,
-        )
+    fun genaiDeleteModelEvaluationRun(
+        clientConfig: ClientConfig,
+        evalRunUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteModelEvaluationRunOutputPublic =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteModelEvaluationRunOperation
+            .genaiDeleteModelEvaluationRun(
+                clientConfig,
+                evalRunUuid,
+                options,
+            )
 
     /**
-     * To list model evaluation runs, send a GET request to `/v2/genai/model_evaluation_runs`.
+     * To update a model evaluation run's display name, send a PATCH request to
+     * `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}`.
      */
-    fun genaiListModelEvaluationRuns(clientConfig: ClientConfig, request: GenaiListModelEvaluationRunsRequest, options: RequestOptions? = null): ApiListModelEvaluationRunsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelEvaluationRunsOperation.genaiListModelEvaluationRuns(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiUpdateModelEvaluationRun(
+        clientConfig: ClientConfig,
+        evalRunUuid: String,
+        evalRunUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateModelEvaluationRunOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiUpdateModelEvaluationRunOperation
+            .genaiUpdateModelEvaluationRun(
+                clientConfig,
+                evalRunUuid,
+                evalRunUuid2,
+                name,
+                options,
+            )
 
     /**
-     * Creates a model evaluation run to score a candidate model against a dataset using selected metrics and a judge model. Configure the candidate, dataset, metrics, and judge with the corresponding fields; `candidate_model_source` defaults to the serverless model source, and `epochs` defaults to 1 and is capped at 3. A successful response returns the created run's `eval_run_uuid`.
+     * To cancel an in-progress model evaluation run, send a PUT request to
+     * `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/cancel`.
      */
-    fun genaiCreateModelEvaluationRun(clientConfig: ClientConfig, request: GenaiCreateModelEvaluationRunRequest, options: RequestOptions? = null): ApiCreateModelEvaluationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelEvaluationRunOperation.genaiCreateModelEvaluationRun(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCancelModelEvaluationRun(
+        clientConfig: ClientConfig,
+        evalRunUuid: String,
+        evalRunUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCancelModelEvaluationRunOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCancelModelEvaluationRunOperation
+            .genaiCancelModelEvaluationRun(
+                clientConfig,
+                evalRunUuid,
+                evalRunUuid2,
+                options,
+            )
 
     /**
-     * To retrieve a model evaluation run, send a GET request to `/v2/genai/model_evaluation_runs/{eval_run_uuid}`.
+     * To get a presigned download URL for model evaluation run results (gzip-compressed JSON), send
+     * a GET request to `/v2/genai/model_evaluation_runs/{eval_run_uuid}/results/download_url`.
      */
-    fun genaiGetModelEvaluationRun(clientConfig: ClientConfig, evalRunUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiGetModelEvaluationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelEvaluationRunOperation.genaiGetModelEvaluationRun(
-            clientConfig,
-            evalRunUuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiGetModelEvaluationRunResultsDownloadUrl(
+        clientConfig: ClientConfig,
+        evalRunUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetModelEvaluationRunResultsDownloadURLOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetModelEvaluationRunResultsDownloadUrlOperation
+            .genaiGetModelEvaluationRunResultsDownloadUrl(
+                clientConfig,
+                evalRunUuid,
+                options,
+            )
+
+    /** To list all models, send a GET request to `/v2/gen-ai/models`. */
+    fun genaiListModels(
+        clientConfig: ClientConfig,
+        usecases: List<GenaiListModelsParameterItemEnum>? = null,
+        publicOnly: Boolean? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListModelsOutputPublic =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelsOperation
+            .genaiListModels(
+                clientConfig,
+                usecases,
+                publicOnly,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`. */
+    fun genaiListModelApiKeys(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListModelAPIKeysOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelApiKeysOperation
+            .genaiListModelApiKeys(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To delete a model evaluation run, send a DELETE request to `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}`. The run must be in a terminal status (`successful`, `partially_successful`, `failed`, or `cancelled`). For runs still in progress, either wait for the run to finish or cancel it, then retry the delete once the run reaches a terminal status.
-     */
-    fun genaiDeleteModelEvaluationRun(clientConfig: ClientConfig, evalRunUuid: String, options: RequestOptions? = null): ApiDeleteModelEvaluationRunOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelEvaluationRunOperation.genaiDeleteModelEvaluationRun(
-            clientConfig,
-            evalRunUuid,
-            options,
-        )
-
-    /**
-     * To update a model evaluation run's display name, send a PATCH request to `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}`.
-     */
-    fun genaiUpdateModelEvaluationRun(clientConfig: ClientConfig, evalRunUuid: String, evalRunUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateModelEvaluationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateModelEvaluationRunOperation.genaiUpdateModelEvaluationRun(
-            clientConfig,
-            evalRunUuid,
-            evalRunUuid2,
-            name,
-            options,
-        )
-
-    /**
-     * To cancel an in-progress model evaluation run, send a PUT request to `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/cancel`.
-     */
-    fun genaiCancelModelEvaluationRun(clientConfig: ClientConfig, evalRunUuid: String, evalRunUuid2: String? = null, options: RequestOptions? = null): ApiCancelModelEvaluationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCancelModelEvaluationRunOperation.genaiCancelModelEvaluationRun(
-            clientConfig,
-            evalRunUuid,
-            evalRunUuid2,
-            options,
-        )
-
-    /**
-     * To get a presigned download URL for model evaluation run results (gzip-compressed JSON), send a GET request to `/v2/genai/model_evaluation_runs/{eval_run_uuid}/results/download_url`.
-     */
-    fun genaiGetModelEvaluationRunResultsDownloadUrl(clientConfig: ClientConfig, evalRunUuid: String, options: RequestOptions? = null): ApiGetModelEvaluationRunResultsDownloadURLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelEvaluationRunResultsDownloadUrlOperation.genaiGetModelEvaluationRunResultsDownloadUrl(
-            clientConfig,
-            evalRunUuid,
-            options,
-        )
-
-    /**
-     * To list all models, send a GET request to `/v2/gen-ai/models`.
-     */
-    fun genaiListModels(clientConfig: ClientConfig, usecases: List<GenaiListModelsParameterItemEnum>? = null, publicOnly: Boolean? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListModelsOutputPublic =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelsOperation.genaiListModels(
-            clientConfig,
-            usecases,
-            publicOnly,
-            page,
-            perPage,
-            options,
-        )
-
-    /**
-     * To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`.
-     */
-    fun genaiListModelApiKeys(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListModelAPIKeysOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelApiKeysOperation.genaiListModelApiKeys(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
-
-    /**
-     * **Note: This endpoint is deprecated and has been retired. All requests return a `410 gone` response.** Creating model API keys through this endpoint is no longer supported. To create a model access key, visit the manage page in the control panel. Previously, you could create a model API key by sending a POST request to `/v2/gen-ai/models/api_keys`.
+     * **Note: This endpoint is deprecated and has been retired. All requests return a `410 gone`
+     * response.** Creating model API keys through this endpoint is no longer supported. To create a
+     * model access key, visit the manage page in the control panel. Previously, you could create a
+     * model API key by sending a POST request to `/v2/gen-ai/models/api_keys`.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun genaiCreateModelApiKey(clientConfig: ClientConfig, name: String? = null, options: RequestOptions? = null): Error2 =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelApiKeyOperation.genaiCreateModelApiKey(
-            clientConfig,
-            name,
-            options,
-        )
+    fun genaiCreateModelApiKey(
+        clientConfig: ClientConfig,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): Error2 =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelApiKeyOperation
+            .genaiCreateModelApiKey(
+                clientConfig,
+                name,
+                options,
+            )
 
     /**
-     * Replaces the model API key resource identified by its UUID. Use `api_key_uuid` to select the key and provide `name` to set its display name; the request body is optional.
+     * Replaces the model API key resource identified by its UUID. Use `api_key_uuid` to select the
+     * key and provide `name` to set its display name; the request body is optional.
      */
-    fun genaiUpdateModelApiKey(clientConfig: ClientConfig, apiKeyUuid: String, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateModelAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateModelApiKeyOperation.genaiUpdateModelApiKey(
-            clientConfig,
-            apiKeyUuid,
-            apiKeyUuid2,
-            name,
-            options,
-        )
+    fun genaiUpdateModelApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateModelAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateModelApiKeyOperation
+            .genaiUpdateModelApiKey(
+                clientConfig,
+                apiKeyUuid,
+                apiKeyUuid2,
+                name,
+                options,
+            )
 
     /**
-     * To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
+     * To delete an API key for a model, send a DELETE request to
+     * `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
      */
-    fun genaiDeleteModelApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteModelAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelApiKeyOperation.genaiDeleteModelApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiDeleteModelApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteModelAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelApiKeyOperation
+            .genaiDeleteModelApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
+     * To regenerate a model API key, send a PUT request to
+     * `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
      */
-    fun genaiRegenerateModelApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiRegenerateModelAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRegenerateModelApiKeyOperation.genaiRegenerateModelApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiRegenerateModelApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiRegenerateModelAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiRegenerateModelApiKeyOperation
+            .genaiRegenerateModelApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * Lists models available in the model catalog with pagination, filtering, and sorting options. Use `search` and the model filters to narrow the results, and use `page` and `per_page` to paginate the results.
+     * Lists models available in the model catalog with pagination, filtering, and sorting options.
+     * Use `search` and the model filters to narrow the results, and use `page` and `per_page` to
+     * paginate the results.
      */
-    fun genaiListModelCatalog(clientConfig: ClientConfig, request: GenaiListModelCatalogRequest, options: RequestOptions? = null): ApiListModelCatalogOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelCatalogOperation.genaiListModelCatalog(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiListModelCatalog(
+        clientConfig: ClientConfig,
+        request: GenaiListModelCatalogRequest,
+        options: RequestOptions? = null,
+    ): ApiListModelCatalogOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelCatalogOperation
+            .genaiListModelCatalog(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Retrieves detailed information about a specific model in the catalog, including its capabilities, pricing, and code examples. Use the `id` path parameter to look up a catalog entry, or use `model_id` to look it up by the identifier used for API calls.
+     * Retrieves detailed information about a specific model in the catalog, including its
+     * capabilities, pricing, and code examples. Use the `id` path parameter to look up a catalog
+     * entry, or use `model_id` to look it up by the identifier used for API calls.
      */
-    fun genaiGetModelCatalogCard(clientConfig: ClientConfig, id: String, modelId: String? = null, options: RequestOptions? = null): ApiGetModelCatalogCardOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelCatalogCardOperation.genaiGetModelCatalogCard(
-            clientConfig,
-            id,
-            modelId,
-            options,
-        )
+    fun genaiGetModelCatalogCard(
+        clientConfig: ClientConfig,
+        id: String,
+        modelId: String? = null,
+        options: RequestOptions? = null,
+    ): ApiGetModelCatalogCardOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelCatalogCardOperation
+            .genaiGetModelCatalogCard(
+                clientConfig,
+                id,
+                modelId,
+                options,
+            )
+
+    /** To list model routers, send a GET request to `/v2/gen-ai/models/routers`. */
+    fun genaiListModelRouters(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListModelRoutersOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelRoutersOperation
+            .genaiListModelRouters(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To create a model router, send a POST request to `/v2/gen-ai/models/routers`. */
+    fun genaiCreateModelRouter(
+        clientConfig: ClientConfig,
+        description: String? = null,
+        fallbackModels: List<String>? = null,
+        name: String? = null,
+        policies: List<ApiModelRouterTaskPolicy>? = null,
+        regions: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateModelRouterOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelRouterOperation
+            .genaiCreateModelRouter(
+                clientConfig,
+                description,
+                fallbackModels,
+                name,
+                policies,
+                regions,
+                options,
+            )
+
+    /** To list model router presets, send a GET request to `/v2/gen-ai/models/routers/presets`. */
+    fun genaiListModelRouterPresets(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListModelRouterPresetsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelRouterPresetsOperation
+            .genaiListModelRouterPresets(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To list model routers, send a GET request to `/v2/gen-ai/models/routers`.
+     * To list model router task presets, send a GET request to
+     * `/v2/gen-ai/models/routers/tasks/presets`.
      */
-    fun genaiListModelRouters(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListModelRoutersOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelRoutersOperation.genaiListModelRouters(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiListModelRouterTaskPresets(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListModelRouterTaskPresetsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListModelRouterTaskPresetsOperation
+            .genaiListModelRouterTaskPresets(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To create a model router, send a POST request to `/v2/gen-ai/models/routers`.
+     * To retrieve details of a model router, send a GET request to
+     * `/v2/gen-ai/models/routers/{uuid}`.
      */
-    fun genaiCreateModelRouter(clientConfig: ClientConfig, description: String? = null, fallbackModels: List<String>? = null, name: String? = null, policies: List<ApiModelRouterTaskPolicy>? = null, regions: List<String>? = null, options: RequestOptions? = null): ApiCreateModelRouterOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateModelRouterOperation.genaiCreateModelRouter(
-            clientConfig,
-            description,
-            fallbackModels,
-            name,
-            policies,
-            regions,
-            options,
-        )
+    fun genaiGetModelRouter(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetModelRouterOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelRouterOperation
+            .genaiGetModelRouter(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To list model router presets, send a GET request to `/v2/gen-ai/models/routers/presets`.
+     * Replaces the configuration of a model router identified by its UUID. Supply any settings you
+     * want to update, such as `name`, `description`, or `policies`. The deprecated `regions` field
+     * does not affect deployment; omit it or set it to `["all"]`.
      */
-    fun genaiListModelRouterPresets(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListModelRouterPresetsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelRouterPresetsOperation.genaiListModelRouterPresets(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiUpdateModelRouter(
+        clientConfig: ClientConfig,
+        request: GenaiUpdateModelRouterRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateModelRouterOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateModelRouterOperation
+            .genaiUpdateModelRouter(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To delete a model router, send a DELETE request to `/v2/gen-ai/models/routers/{uuid}`. */
+    fun genaiDeleteModelRouter(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteModelRouterOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelRouterOperation
+            .genaiDeleteModelRouter(
+                clientConfig,
+                uuid,
+                options,
+            )
 
     /**
-     * To list model router task presets, send a GET request to `/v2/gen-ai/models/routers/tasks/presets`.
+     * To obtain the refresh token, needed for creation of data sources, send a GET request to
+     * `/v2/gen-ai/oauth2/dropbox/tokens`. Pass the code you obtrained from the oauth flow in the
+     * field 'code'
      */
-    fun genaiListModelRouterTaskPresets(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListModelRouterTaskPresetsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListModelRouterTaskPresetsOperation.genaiListModelRouterTaskPresets(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiCreateOauth2DropboxTokens(
+        clientConfig: ClientConfig,
+        code: String? = null,
+        redirectUrl: String? = null,
+        options: RequestOptions? = null,
+    ): ApiDropboxOauth2GetTokensOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateOauth2DropboxTokensOperation
+            .genaiCreateOauth2DropboxTokens(
+                clientConfig,
+                code,
+                redirectUrl,
+                options,
+            )
 
     /**
-     * To retrieve details of a model router, send a GET request to `/v2/gen-ai/models/routers/{uuid}`.
+     * To generate an Oauth2-URL for use with your localhost, send a GET request to
+     * `/v2/gen-ai/oauth2/url`. Pass 'http://localhost:3000 as redirect_url
      */
-    fun genaiGetModelRouter(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetModelRouterOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetModelRouterOperation.genaiGetModelRouter(
-            clientConfig,
-            uuid,
-            options,
-        )
+    fun genaiGetOauth2Url(
+        clientConfig: ClientConfig,
+        type: String? = null,
+        redirectUrl: String? = null,
+        options: RequestOptions? = null,
+    ): ApiGenerateOauth2URLOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetOauth2UrlOperation
+            .genaiGetOauth2Url(
+                clientConfig,
+                type,
+                redirectUrl,
+                options,
+            )
+
+    /** To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`. */
+    fun genaiListOpenaiApiKeys(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListOpenAIAPIKeysOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListOpenaiApiKeysOperation
+            .genaiListOpenaiApiKeys(
+                clientConfig,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`. */
+    fun genaiCreateOpenaiApiKey(
+        clientConfig: ClientConfig,
+        apiKey: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateOpenAIAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateOpenaiApiKeyOperation
+            .genaiCreateOpenaiApiKey(
+                clientConfig,
+                apiKey,
+                name,
+                options,
+            )
 
     /**
-     * Replaces the configuration of a model router identified by its UUID. Supply any settings you want to update, such as `name`, `description`, or `policies`. The deprecated `regions` field does not affect deployment; omit it or set it to `["all"]`.
+     * To retrieve details of an OpenAI API key, send a GET request to
+     * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
      */
-    fun genaiUpdateModelRouter(clientConfig: ClientConfig, request: GenaiUpdateModelRouterRequest, options: RequestOptions? = null): ApiUpdateModelRouterOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateModelRouterOperation.genaiUpdateModelRouter(
-            clientConfig,
-            request,
-            options,
-        )
-
-    /**
-     * To delete a model router, send a DELETE request to `/v2/gen-ai/models/routers/{uuid}`.
-     */
-    fun genaiDeleteModelRouter(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteModelRouterOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteModelRouterOperation.genaiDeleteModelRouter(
-            clientConfig,
-            uuid,
-            options,
-        )
-
-    /**
-     * To obtain the refresh token, needed for creation of data sources, send a GET request to `/v2/gen-ai/oauth2/dropbox/tokens`. Pass the code you obtrained from the oauth flow in the field 'code'
-     */
-    fun genaiCreateOauth2DropboxTokens(clientConfig: ClientConfig, code: String? = null, redirectUrl: String? = null, options: RequestOptions? = null): ApiDropboxOauth2GetTokensOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateOauth2DropboxTokensOperation.genaiCreateOauth2DropboxTokens(
-            clientConfig,
-            code,
-            redirectUrl,
-            options,
-        )
-
-    /**
-     * To generate an Oauth2-URL for use with your localhost, send a GET request to `/v2/gen-ai/oauth2/url`. Pass 'http://localhost:3000 as redirect_url
-     */
-    fun genaiGetOauth2Url(clientConfig: ClientConfig, type: String? = null, redirectUrl: String? = null, options: RequestOptions? = null): ApiGenerateOauth2URLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetOauth2UrlOperation.genaiGetOauth2Url(
-            clientConfig,
-            type,
-            redirectUrl,
-            options,
-        )
-
-    /**
-     * To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
-     */
-    fun genaiListOpenaiApiKeys(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListOpenAIAPIKeysOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListOpenaiApiKeysOperation.genaiListOpenaiApiKeys(
-            clientConfig,
-            page,
-            perPage,
-            options,
-        )
-
-    /**
-     * To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
-     */
-    fun genaiCreateOpenaiApiKey(clientConfig: ClientConfig, apiKey: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateOpenAIAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateOpenaiApiKeyOperation.genaiCreateOpenaiApiKey(
-            clientConfig,
-            apiKey,
-            name,
-            options,
-        )
-
-    /**
-     * To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
-     */
-    fun genaiGetOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiGetOpenAIAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetOpenaiApiKeyOperation.genaiGetOpenaiApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiGetOpenaiApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetOpenAIAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetOpenaiApiKeyOperation
+            .genaiGetOpenaiApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
      * To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
      */
-    fun genaiUpdateOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, apiKey: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateOpenAIAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateOpenaiApiKeyOperation.genaiUpdateOpenaiApiKey(
-            clientConfig,
-            apiKeyUuid,
-            apiKey,
-            apiKeyUuid2,
-            name,
-            options,
-        )
+    fun genaiUpdateOpenaiApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        apiKey: String? = null,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateOpenAIAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateOpenaiApiKeyOperation
+            .genaiUpdateOpenaiApiKey(
+                clientConfig,
+                apiKeyUuid,
+                apiKey,
+                apiKeyUuid2,
+                name,
+                options,
+            )
 
     /**
-     * To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+     * To delete an OpenAI API key, send a DELETE request to
+     * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
      */
-    fun genaiDeleteOpenaiApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteOpenAIAPIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteOpenaiApiKeyOperation.genaiDeleteOpenaiApiKey(
-            clientConfig,
-            apiKeyUuid,
-            options,
-        )
+    fun genaiDeleteOpenaiApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteOpenAIAPIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteOpenaiApiKeyOperation
+            .genaiDeleteOpenaiApiKey(
+                clientConfig,
+                apiKeyUuid,
+                options,
+            )
 
     /**
-     * Lists agents linked to a specific OpenAI key. Use `page` and `per_page` to paginate the results. The response includes pagination metadata and links to other pages.
+     * Lists agents linked to a specific OpenAI key. Use `page` and `per_page` to paginate the
+     * results. The response includes pagination metadata and links to other pages.
      */
-    fun genaiListAgentsByOpenaiKey(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByOpenAIKeyOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsByOpenaiKeyOperation.genaiListAgentsByOpenaiKey(
-            clientConfig,
-            uuid,
-            page,
-            perPage,
-            options,
-        )
+    fun genaiListAgentsByOpenaiKey(
+        clientConfig: ClientConfig,
+        uuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsByOpenAIKeyOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsByOpenaiKeyOperation
+            .genaiListAgentsByOpenaiKey(
+                clientConfig,
+                uuid,
+                page,
+                perPage,
+                options,
+            )
+
+    /** To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`. */
+    fun genaiListDatacenterRegions(
+        clientConfig: ClientConfig,
+        servesInference: Boolean? = null,
+        servesBatch: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ApiListRegionsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListDatacenterRegionsOperation
+            .genaiListDatacenterRegions(
+                clientConfig,
+                servesInference,
+                servesBatch,
+                options,
+            )
 
     /**
-     * To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
+     * To list the platform-curated Common Scenario & Goal Library, send a GET request to
+     * `/v2/gen-ai/scenario_library`.
      */
-    fun genaiListDatacenterRegions(clientConfig: ClientConfig, servesInference: Boolean? = null, servesBatch: Boolean? = null, options: RequestOptions? = null): ApiListRegionsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListDatacenterRegionsOperation.genaiListDatacenterRegions(
-            clientConfig,
-            servesInference,
-            servesBatch,
-            options,
-        )
+    fun genaiListScenarioLibrary(
+        clientConfig: ClientConfig,
+        request: GenaiListScenarioLibraryRequest,
+        options: RequestOptions? = null,
+    ): ApiListScenarioLibraryOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenarioLibraryOperation
+            .genaiListScenarioLibrary(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To list the platform-curated Common Scenario & Goal Library, send a GET request to `/v2/gen-ai/scenario_library`.
+     * To create a scenario set from a Common Scenario & Goal Library entry, send a POST request to
+     * `/v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set`. The library
+     * scenarios are copied into a new scenario set owned by the calling team. The new set is ready
+     * to use when creating a simulation run.
      */
-    fun genaiListScenarioLibrary(clientConfig: ClientConfig, request: GenaiListScenarioLibraryRequest, options: RequestOptions? = null): ApiListScenarioLibraryOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenarioLibraryOperation.genaiListScenarioLibrary(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateScenarioSetFromLibrary(
+        clientConfig: ClientConfig,
+        libraryScenarioUuid: String,
+        libraryScenarioUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateScenarioSetFromLibraryOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateScenarioSetFromLibraryOperation
+            .genaiCreateScenarioSetFromLibrary(
+                clientConfig,
+                libraryScenarioUuid,
+                libraryScenarioUuid2,
+                name,
+                options,
+            )
 
     /**
-     * To create a scenario set from a Common Scenario & Goal Library entry, send a POST request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set`. The library scenarios are copied into a new scenario set owned by the calling team. The new set is ready to use when creating a simulation run.
+     * To list the scenarios inside a Common Scenario & Goal Library entry without creating a
+     * team-owned scenario set, send a GET request to
+     * `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
      */
-    fun genaiCreateScenarioSetFromLibrary(clientConfig: ClientConfig, libraryScenarioUuid: String, libraryScenarioUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateScenarioSetFromLibraryOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateScenarioSetFromLibraryOperation.genaiCreateScenarioSetFromLibrary(
-            clientConfig,
-            libraryScenarioUuid,
-            libraryScenarioUuid2,
-            name,
-            options,
-        )
+    fun genaiListScenarioLibraryScenarios(
+        clientConfig: ClientConfig,
+        request: GenaiListScenarioLibraryScenariosRequest,
+        options: RequestOptions? = null,
+    ): ApiListScenariosOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListScenarioLibraryScenariosOperation
+            .genaiListScenarioLibraryScenarios(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To list scenario sets, send a GET request to `/v2/gen-ai/scenario_sets`. */
+    fun genaiListScenarioSets(
+        clientConfig: ClientConfig,
+        request: GenaiListScenarioSetsRequest,
+        options: RequestOptions? = null,
+    ): ApiListScenarioSetsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenarioSetsOperation
+            .genaiListScenarioSets(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To list the scenarios inside a Common Scenario & Goal Library entry without creating a team-owned scenario set, send a GET request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
+     * To create a scenario set, send a POST request to `/v2/gen-ai/scenario_sets`. Provide exactly
+     * one of `scenarios` or `file_upload_scenario_set`. The set is created in the ready state.
      */
-    fun genaiListScenarioLibraryScenarios(clientConfig: ClientConfig, request: GenaiListScenarioLibraryScenariosRequest, options: RequestOptions? = null): ApiListScenariosOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenarioLibraryScenariosOperation.genaiListScenarioLibraryScenarios(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateScenarioSet(
+        clientConfig: ClientConfig,
+        fileUploadScenarioSet: ApiFileUploadDataSource? = null,
+        name: String? = null,
+        scenarios: List<ApiScenario>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateScenarioSetOperation
+            .genaiCreateScenarioSet(
+                clientConfig,
+                fileUploadScenarioSet,
+                name,
+                scenarios,
+                options,
+            )
 
     /**
-     * To list scenario sets, send a GET request to `/v2/gen-ai/scenario_sets`.
+     * To create presigned URLs for uploading a scenario set file, send a POST request to
+     * `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`. After uploading, pass the stored
+     * object in Create Scenario Set as `file_upload_scenario_set`.
      */
-    fun genaiListScenarioSets(clientConfig: ClientConfig, request: GenaiListScenarioSetsRequest, options: RequestOptions? = null): ApiListScenarioSetsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenarioSetsOperation.genaiListScenarioSets(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateScenarioSetUploadPresignedUrls(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateScenarioSetUploadPresignedUrlsOperation
+            .genaiCreateScenarioSetUploadPresignedUrls(
+                clientConfig,
+                files,
+                options,
+            )
 
     /**
-     * To create a scenario set, send a POST request to `/v2/gen-ai/scenario_sets`. Provide exactly one of `scenarios` or `file_upload_scenario_set`. The set is created in the ready state.
+     * To dispatch goal-driven scenario generation, send a POST request to
+     * `/v2/gen-ai/scenario_sets/generate`. The scenario set is returned in the generating state.
+     * Poll the retrieve scenario set endpoint until the set reaches a ready, failed, or cancelled
+     * status.
      */
-    fun genaiCreateScenarioSet(clientConfig: ClientConfig, fileUploadScenarioSet: ApiFileUploadDataSource? = null, name: String? = null, scenarios: List<ApiScenario>? = null, options: RequestOptions? = null): ApiCreateScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateScenarioSetOperation.genaiCreateScenarioSet(
-            clientConfig,
-            fileUploadScenarioSet,
-            name,
-            scenarios,
-            options,
-        )
+    fun genaiCreateGeneratedScenarioSet(
+        clientConfig: ClientConfig,
+        generatorModelUuid: String? = null,
+        goalDescription: String? = null,
+        name: String? = null,
+        numScenarios: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiGenerateScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateGeneratedScenarioSetOperation
+            .genaiCreateGeneratedScenarioSet(
+                clientConfig,
+                generatorModelUuid,
+                goalDescription,
+                name,
+                numScenarios,
+                options,
+            )
 
     /**
-     * To create presigned URLs for uploading a scenario set file, send a POST request to `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`. After uploading, pass the stored object in Create Scenario Set as `file_upload_scenario_set`.
+     * To retrieve a scenario set, send a GET request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
      */
-    fun genaiCreateScenarioSetUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateScenarioSetUploadPresignedUrlsOperation.genaiCreateScenarioSetUploadPresignedUrls(
-            clientConfig,
-            files,
-            options,
-        )
+    fun genaiGetScenarioSet(
+        clientConfig: ClientConfig,
+        scenarioSetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetScenarioSetOperation
+            .genaiGetScenarioSet(
+                clientConfig,
+                scenarioSetUuid,
+                options,
+            )
 
     /**
-     * To dispatch goal-driven scenario generation, send a POST request to `/v2/gen-ai/scenario_sets/generate`. The scenario set is returned in the generating state. Poll the retrieve scenario set endpoint until the set reaches a ready, failed, or cancelled status.
+     * To update a scenario set in place, send a PUT request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. Provide a new `name` and/or replacement
+     * `scenarios`. At least one is required. Replacing contents keeps the same scenario set UUID,
+     * remints scenario UUIDs, and is rejected unless the set is ready and no simulation run
+     * references it. There is no file-upload path on update.
      */
-    fun genaiCreateGeneratedScenarioSet(clientConfig: ClientConfig, generatorModelUuid: String? = null, goalDescription: String? = null, name: String? = null, numScenarios: Long? = null, options: RequestOptions? = null): ApiGenerateScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateGeneratedScenarioSetOperation.genaiCreateGeneratedScenarioSet(
-            clientConfig,
-            generatorModelUuid,
-            goalDescription,
-            name,
-            numScenarios,
-            options,
-        )
+    fun genaiUpdateScenarioSet(
+        clientConfig: ClientConfig,
+        scenarioSetUuid: String,
+        name: String? = null,
+        scenarioSetUuid2: String? = null,
+        scenarios: List<ApiScenario>? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateScenarioSetOperation
+            .genaiUpdateScenarioSet(
+                clientConfig,
+                scenarioSetUuid,
+                name,
+                scenarioSetUuid2,
+                scenarios,
+                options,
+            )
 
     /**
-     * To retrieve a scenario set, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
+     * To delete a scenario set, send a DELETE request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. A scenario set that is referenced by a
+     * simulation run cannot be deleted.
      */
-    fun genaiGetScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiGetScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetScenarioSetOperation.genaiGetScenarioSet(
-            clientConfig,
-            scenarioSetUuid,
-            options,
-        )
+    fun genaiDeleteScenarioSet(
+        clientConfig: ClientConfig,
+        scenarioSetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteScenarioSetOperation
+            .genaiDeleteScenarioSet(
+                clientConfig,
+                scenarioSetUuid,
+                options,
+            )
 
     /**
-     * To update a scenario set in place, send a PUT request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. Provide a new `name` and/or replacement `scenarios`. At least one is required. Replacing contents keeps the same scenario set UUID, remints scenario UUIDs, and is rejected unless the set is ready and no simulation run references it. There is no file-upload path on update.
+     * To retrieve a presigned download URL for a scenario set file, send a GET request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
      */
-    fun genaiUpdateScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, name: String? = null, scenarioSetUuid2: String? = null, scenarios: List<ApiScenario>? = null, options: RequestOptions? = null): ApiUpdateScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateScenarioSetOperation.genaiUpdateScenarioSet(
-            clientConfig,
-            scenarioSetUuid,
-            name,
-            scenarioSetUuid2,
-            scenarios,
-            options,
-        )
+    fun genaiGetScenarioSetDownloadUrl(
+        clientConfig: ClientConfig,
+        scenarioSetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetScenarioSetDownloadURLOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetScenarioSetDownloadUrlOperation
+            .genaiGetScenarioSetDownloadUrl(
+                clientConfig,
+                scenarioSetUuid,
+                options,
+            )
 
     /**
-     * To delete a scenario set, send a DELETE request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`. A scenario set that is referenced by a simulation run cannot be deleted.
+     * To duplicate a scenario set, send a POST request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate`. The source set must be ready. The
+     * new set is named `{original name} duplicate` and contains a copy of the source scenarios.
      */
-    fun genaiDeleteScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiDeleteScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteScenarioSetOperation.genaiDeleteScenarioSet(
-            clientConfig,
-            scenarioSetUuid,
-            options,
-        )
+    fun genaiCreateDuplicateScenarioSet(
+        clientConfig: ClientConfig,
+        scenarioSetUuid: String,
+        scenarioSetUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiDuplicateScenarioSetOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateDuplicateScenarioSetOperation
+            .genaiCreateDuplicateScenarioSet(
+                clientConfig,
+                scenarioSetUuid,
+                scenarioSetUuid2,
+                options,
+            )
 
     /**
-     * To retrieve a presigned download URL for a scenario set file, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
+     * To list the scenarios in a scenario set, send a GET request to
+     * `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios`.
      */
-    fun genaiGetScenarioSetDownloadUrl(clientConfig: ClientConfig, scenarioSetUuid: String, options: RequestOptions? = null): ApiGetScenarioSetDownloadURLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetScenarioSetDownloadUrlOperation.genaiGetScenarioSetDownloadUrl(
-            clientConfig,
-            scenarioSetUuid,
-            options,
-        )
+    fun genaiListScenarios(
+        clientConfig: ClientConfig,
+        request: GenaiListScenariosRequest,
+        options: RequestOptions? = null,
+    ): ApiListScenariosOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenariosOperation
+            .genaiListScenarios(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To duplicate a scenario set, send a POST request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate`. The source set must be ready. The new set is named `{original name} duplicate` and contains a copy of the source scenarios.
+     * To create scheduled indexing for a knowledge base, send a POST request to
+     * `/v2/gen-ai/scheduled-indexing`.
      */
-    fun genaiCreateDuplicateScenarioSet(clientConfig: ClientConfig, scenarioSetUuid: String, scenarioSetUuid2: String? = null, options: RequestOptions? = null): ApiDuplicateScenarioSetOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateDuplicateScenarioSetOperation.genaiCreateDuplicateScenarioSet(
-            clientConfig,
-            scenarioSetUuid,
-            scenarioSetUuid2,
-            options,
-        )
+    fun genaiCreateScheduledIndexing(
+        clientConfig: ClientConfig,
+        days: List<Int>? = null,
+        knowledgeBaseUuid: String? = null,
+        time: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateScheduledIndexingOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiCreateScheduledIndexingOperation
+            .genaiCreateScheduledIndexing(
+                clientConfig,
+                days,
+                knowledgeBaseUuid,
+                time,
+                options,
+            )
 
     /**
-     * To list the scenarios in a scenario set, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios`.
+     * Get Scheduled Indexing for knowledge base using knoweldge base uuid, send a GET request to
+     * `/v2/gen-ai/scheduled-indexing/knowledge-base/{knowledge_base_uuid}`.
      */
-    fun genaiListScenarios(clientConfig: ClientConfig, request: GenaiListScenariosRequest, options: RequestOptions? = null): ApiListScenariosOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListScenariosOperation.genaiListScenarios(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiGetScheduledIndexing(
+        clientConfig: ClientConfig,
+        knowledgeBaseUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetScheduledIndexingOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetScheduledIndexingOperation
+            .genaiGetScheduledIndexing(
+                clientConfig,
+                knowledgeBaseUuid,
+                options,
+            )
 
     /**
-     * To create scheduled indexing for a knowledge base, send a POST request to `/v2/gen-ai/scheduled-indexing`.
+     * Delete Scheduled Indexing for knowledge base, send a DELETE request to
+     * `/v2/gen-ai/scheduled-indexing/{uuid}`.
      */
-    fun genaiCreateScheduledIndexing(clientConfig: ClientConfig, days: List<Int>? = null, knowledgeBaseUuid: String? = null, time: String? = null, options: RequestOptions? = null): ApiCreateScheduledIndexingOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateScheduledIndexingOperation.genaiCreateScheduledIndexing(
-            clientConfig,
-            days,
-            knowledgeBaseUuid,
-            time,
-            options,
-        )
+    fun genaiDeleteScheduledIndexing(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteScheduledIndexingOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiDeleteScheduledIndexingOperation
+            .genaiDeleteScheduledIndexing(
+                clientConfig,
+                uuid,
+                options,
+            )
+
+    /** To list simulation runs, send a GET request to `/v2/gen-ai/simulation_runs`. */
+    fun genaiListSimulationRuns(
+        clientConfig: ClientConfig,
+        request: GenaiListSimulationRunsRequest,
+        options: RequestOptions? = null,
+    ): ApiListSimulationRunsOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListSimulationRunsOperation
+            .genaiListSimulationRuns(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Get Scheduled Indexing for knowledge base using knoweldge base uuid, send a GET request to `/v2/gen-ai/scheduled-indexing/knowledge-base/{knowledge_base_uuid}`.
+     * To create a simulation run, send a POST request to `/v2/gen-ai/simulation_runs`. The scenario
+     * set must be ready. Judge and user simulator models are optional and use platform defaults
+     * when omitted. The run is returned in the pending state.
      */
-    fun genaiGetScheduledIndexing(clientConfig: ClientConfig, knowledgeBaseUuid: String, options: RequestOptions? = null): ApiGetScheduledIndexingOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetScheduledIndexingOperation.genaiGetScheduledIndexing(
-            clientConfig,
-            knowledgeBaseUuid,
-            options,
-        )
-
-    /**
-     * Delete Scheduled Indexing for knowledge base, send a DELETE request to `/v2/gen-ai/scheduled-indexing/{uuid}`.
-     */
-    fun genaiDeleteScheduledIndexing(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteScheduledIndexingOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteScheduledIndexingOperation.genaiDeleteScheduledIndexing(
-            clientConfig,
-            uuid,
-            options,
-        )
-
-    /**
-     * To list simulation runs, send a GET request to `/v2/gen-ai/simulation_runs`.
-     */
-    fun genaiListSimulationRuns(clientConfig: ClientConfig, request: GenaiListSimulationRunsRequest, options: RequestOptions? = null): ApiListSimulationRunsOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListSimulationRunsOperation.genaiListSimulationRuns(
-            clientConfig,
-            request,
-            options,
-        )
-
-    /**
-     * To create a simulation run, send a POST request to `/v2/gen-ai/simulation_runs`. The scenario set must be ready. Judge and user simulator models are optional and use platform defaults when omitted. The run is returned in the pending state.
-     */
-    fun genaiCreateSimulationRun(clientConfig: ClientConfig, request: GenaiCreateSimulationRunRequest, options: RequestOptions? = null): ApiCreateSimulationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateSimulationRunOperation.genaiCreateSimulationRun(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiCreateSimulationRun(
+        clientConfig: ClientConfig,
+        request: GenaiCreateSimulationRunRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateSimulationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateSimulationRunOperation
+            .genaiCreateSimulationRun(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
      * To retrieve a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}`.
      */
-    fun genaiGetSimulationRun(clientConfig: ClientConfig, runUuid: String, options: RequestOptions? = null): ApiGetSimulationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationRunOperation.genaiGetSimulationRun(
-            clientConfig,
-            runUuid,
-            options,
-        )
+    fun genaiGetSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationRunOperation
+            .genaiGetSimulationRun(
+                clientConfig,
+                runUuid,
+                options,
+            )
 
     /**
-     * To update a simulation run's display name, send a PUT request to `/v2/gen-ai/simulation_runs/{run_uuid}`. Only the name is mutable; run configuration and results are immutable.
+     * To update a simulation run's display name, send a PUT request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}`. Only the name is mutable; run configuration and
+     * results are immutable.
      */
-    fun genaiUpdateSimulationRun(clientConfig: ClientConfig, runUuid: String, name: String? = null, runUuid2: String? = null, options: RequestOptions? = null): ApiUpdateSimulationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateSimulationRunOperation.genaiUpdateSimulationRun(
-            clientConfig,
-            runUuid,
-            name,
-            runUuid2,
-            options,
-        )
+    fun genaiUpdateSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        name: String? = null,
+        runUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateSimulationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateSimulationRunOperation
+            .genaiUpdateSimulationRun(
+                clientConfig,
+                runUuid,
+                name,
+                runUuid2,
+                options,
+            )
 
     /**
-     * To delete a simulation run, send a DELETE request to `/v2/gen-ai/simulation_runs/{run_uuid}`. The run must be in a terminal status (`SIMULATION_RUN_STATUS_SUCCEEDED`, `SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL`, `SIMULATION_RUN_STATUS_FAILED`, or `SIMULATION_RUN_STATUS_CANCELLED`). For runs still in progress, cancel the run first, then retry the delete.
+     * To delete a simulation run, send a DELETE request to `/v2/gen-ai/simulation_runs/{run_uuid}`.
+     * The run must be in a terminal status (`SIMULATION_RUN_STATUS_SUCCEEDED`,
+     * `SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL`, `SIMULATION_RUN_STATUS_FAILED`, or
+     * `SIMULATION_RUN_STATUS_CANCELLED`). For runs still in progress, cancel the run first, then
+     * retry the delete.
      */
-    fun genaiDeleteSimulationRun(clientConfig: ClientConfig, runUuid: String, options: RequestOptions? = null): ApiDeleteSimulationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteSimulationRunOperation.genaiDeleteSimulationRun(
-            clientConfig,
-            runUuid,
-            options,
-        )
+    fun genaiDeleteSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteSimulationRunOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteSimulationRunOperation
+            .genaiDeleteSimulationRun(
+                clientConfig,
+                runUuid,
+                options,
+            )
 
     /**
-     * To cancel an in-progress simulation run, send a PATCH request to `/v2/gen-ai/simulation_runs/{run_uuid}/cancel`.
+     * To cancel an in-progress simulation run, send a PATCH request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/cancel`.
      */
-    fun genaiPatchCancelSimulationRun(clientConfig: ClientConfig, runUuid: String, runUuid2: String? = null, options: RequestOptions? = null): ApiCancelSimulationRunOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiPatchCancelSimulationRunOperation.genaiPatchCancelSimulationRun(
-            clientConfig,
-            runUuid,
-            runUuid2,
-            options,
-        )
+    fun genaiPatchCancelSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        runUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCancelSimulationRunOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiPatchCancelSimulationRunOperation
+            .genaiPatchCancelSimulationRun(
+                clientConfig,
+                runUuid,
+                runUuid2,
+                options,
+            )
 
     /**
-     * To list the episodes within a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes`.
+     * To list the episodes within a simulation run, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes`.
      */
-    fun genaiListSimulationEpisodes(clientConfig: ClientConfig, request: GenaiListSimulationEpisodesRequest, options: RequestOptions? = null): ApiListSimulationEpisodesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListSimulationEpisodesOperation.genaiListSimulationEpisodes(
-            clientConfig,
-            request,
-            options,
-        )
+    fun genaiListSimulationEpisodes(
+        clientConfig: ClientConfig,
+        request: GenaiListSimulationEpisodesRequest,
+        options: RequestOptions? = null,
+    ): ApiListSimulationEpisodesOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListSimulationEpisodesOperation
+            .genaiListSimulationEpisodes(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To retrieve a single episode, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}`.
+     * To retrieve a single episode, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}`.
      */
-    fun genaiGetSimulationEpisode(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationEpisodeOperation.genaiGetSimulationEpisode(
-            clientConfig,
-            runUuid,
-            episodeUuid,
-            options,
-        )
+    fun genaiGetSimulationEpisode(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationEpisodeOperation
+            .genaiGetSimulationEpisode(
+                clientConfig,
+                runUuid,
+                episodeUuid,
+                options,
+            )
 
     /**
-     * To retrieve an episode's live trajectory, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory`. Poll while the episode is running to watch turn-by-turn progress.
+     * To retrieve an episode's live trajectory, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory`. Poll while the
+     * episode is running to watch turn-by-turn progress.
      */
-    fun genaiGetSimulationEpisodeTrajectory(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeTrajectoryOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryOperation.genaiGetSimulationEpisodeTrajectory(
-            clientConfig,
-            runUuid,
-            episodeUuid,
-            options,
-        )
+    fun genaiGetSimulationEpisodeTrajectory(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeTrajectoryOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryOperation
+            .genaiGetSimulationEpisodeTrajectory(
+                clientConfig,
+                runUuid,
+                episodeUuid,
+                options,
+            )
 
     /**
-     * To retrieve a presigned download URL for an episode's trajectory, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url`.
+     * To retrieve a presigned download URL for an episode's trajectory, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url`.
      */
-    fun genaiGetSimulationEpisodeTrajectoryUrl(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeTrajectoryURLOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryUrlOperation.genaiGetSimulationEpisodeTrajectoryUrl(
-            clientConfig,
-            runUuid,
-            episodeUuid,
-            options,
-        )
+    fun genaiGetSimulationEpisodeTrajectoryUrl(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeTrajectoryURLOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryUrlOperation
+            .genaiGetSimulationEpisodeTrajectoryUrl(
+                clientConfig,
+                runUuid,
+                episodeUuid,
+                options,
+            )
+
+    /** To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`. */
+    fun genaiListWorkspaces(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListWorkspacesOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListWorkspacesOperation
+            .genaiListWorkspaces(
+                clientConfig,
+                options,
+            )
 
     /**
-     * To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
+     * To create a new workspace, send a POST request to `/v2/gen-ai/workspaces`. The response body
+     * contains a JSON object with the newly created workspace object.
      */
-    fun genaiListWorkspaces(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListWorkspacesOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListWorkspacesOperation.genaiListWorkspaces(
-            clientConfig,
-            options,
-        )
+    fun genaiCreateWorkspace(
+        clientConfig: ClientConfig,
+        agentUuids: List<String>? = null,
+        description: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateWorkspaceOperation
+            .genaiCreateWorkspace(
+                clientConfig,
+                agentUuids,
+                description,
+                name,
+                options,
+            )
 
     /**
-     * To create a new workspace, send a POST request to `/v2/gen-ai/workspaces`. The response body contains a JSON object with the newly created workspace object.
+     * To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/{workspace_uuid}`.
+     * The response body is a JSON object containing the workspace.
      */
-    fun genaiCreateWorkspace(clientConfig: ClientConfig, agentUuids: List<String>? = null, description: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiCreateWorkspaceOperation.genaiCreateWorkspace(
-            clientConfig,
-            agentUuids,
-            description,
-            name,
-            options,
-        )
+    fun genaiGetWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetWorkspaceOperation
+            .genaiGetWorkspace(
+                clientConfig,
+                workspaceUuid,
+                options,
+            )
 
     /**
-     * To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object containing the workspace.
+     * To update a workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The
+     * response body is a JSON object containing the workspace.
      */
-    fun genaiGetWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiGetWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiGetWorkspaceOperation.genaiGetWorkspace(
-            clientConfig,
-            workspaceUuid,
-            options,
-        )
+    fun genaiUpdateWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        description: String? = null,
+        name: String? = null,
+        workspaceUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateWorkspaceOperation
+            .genaiUpdateWorkspace(
+                clientConfig,
+                workspaceUuid,
+                description,
+                name,
+                workspaceUuid2,
+                options,
+            )
+
+    /** To delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/{workspace_uuid}`. */
+    fun genaiDeleteWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteWorkspaceOperation
+            .genaiDeleteWorkspace(
+                clientConfig,
+                workspaceUuid,
+                options,
+            )
 
     /**
-     * To update a workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object containing the workspace.
+     * To list all agents by a Workspace, send a GET request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
      */
-    fun genaiUpdateWorkspace(clientConfig: ClientConfig, workspaceUuid: String, description: String? = null, name: String? = null, workspaceUuid2: String? = null, options: RequestOptions? = null): ApiUpdateWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateWorkspaceOperation.genaiUpdateWorkspace(
-            clientConfig,
-            workspaceUuid,
-            description,
-            name,
-            workspaceUuid2,
-            options,
-        )
+    fun genaiListAgentsByWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        onlyDeployed: Boolean? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsByWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsByWorkspaceOperation
+            .genaiListAgentsByWorkspace(
+                clientConfig,
+                workspaceUuid,
+                onlyDeployed,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * To delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/{workspace_uuid}`.
+     * To move all listed agents a given workspace, send a PUT request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
      */
-    fun genaiDeleteWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiDeleteWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiDeleteWorkspaceOperation.genaiDeleteWorkspace(
-            clientConfig,
-            workspaceUuid,
-            options,
-        )
+    fun genaiUpdateAgentsWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        agentUuids: List<String>? = null,
+        workspaceUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiMoveAgentsToWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentsWorkspaceOperation
+            .genaiUpdateAgentsWorkspace(
+                clientConfig,
+                workspaceUuid,
+                agentUuids,
+                workspaceUuid2,
+                options,
+            )
 
     /**
-     * To list all agents by a Workspace, send a GET request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
+     * To list all evaluation test cases by a workspace, send a GET request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
      */
-    fun genaiListAgentsByWorkspace(clientConfig: ClientConfig, workspaceUuid: String, onlyDeployed: Boolean? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListAgentsByWorkspaceOperation.genaiListAgentsByWorkspace(
-            clientConfig,
-            workspaceUuid,
-            onlyDeployed,
-            page,
-            perPage,
-            options,
-        )
-
-    /**
-     * To move all listed agents a given workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
-     */
-    fun genaiUpdateAgentsWorkspace(clientConfig: ClientConfig, workspaceUuid: String, agentUuids: List<String>? = null, workspaceUuid2: String? = null, options: RequestOptions? = null): ApiMoveAgentsToWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiUpdateAgentsWorkspaceOperation.genaiUpdateAgentsWorkspace(
-            clientConfig,
-            workspaceUuid,
-            agentUuids,
-            workspaceUuid2,
-            options,
-        )
-
-    /**
-     * To list all evaluation test cases by a workspace, send a GET request to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-     */
-    fun genaiListEvaluationTestCasesByWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiListEvaluationTestCasesByWorkspaceOutput =
-        dev.octri.showcase.digitalocean.methods.AgentPlatformApiGenaiListEvaluationTestCasesByWorkspaceOperation.genaiListEvaluationTestCasesByWorkspace(
-            clientConfig,
-            workspaceUuid,
-            options,
-        )
+    fun genaiListEvaluationTestCasesByWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationTestCasesByWorkspaceOutput =
+        dev.octri.showcase.digitalocean.methods
+            .AgentPlatformApiGenaiListEvaluationTestCasesByWorkspaceOperation
+            .genaiListEvaluationTestCasesByWorkspace(
+                clientConfig,
+                workspaceUuid,
+                options,
+            )
 }

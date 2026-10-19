@@ -3,32 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Required API value serialized in the `meta` wire field.
- */
+/** Required API value serialized in the `meta` wire field. */
 data class MetaMeta(
-    /**
-     * Number of objects returned by the request.
-     */
+    /** Number of objects returned by the request. */
     val total: Long? = null
 )
 
-/**
- * Typed representation of the `Meta` API schema.
- */
+/** Typed representation of the `Meta` API schema. */
 data class Meta(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta
 )
 
-/**
- * Information about the response itself.
- */
+/** Information about the response itself. */
 data class MetaProperties(
-    /**
-     * Number of objects returned by the request.
-     */
+    /** Number of objects returned by the request. */
     val total: Long? = null
 )

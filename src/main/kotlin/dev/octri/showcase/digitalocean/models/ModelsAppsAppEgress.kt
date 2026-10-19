@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Specification for app egress configurations.
- */
+/** Specification for app egress configurations. */
 data class AppEgressSpec(
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
+    /** Optional enumerated value serialized in the `type` wire field. */
     val type: AppEgressTypeSpec? = null
 )

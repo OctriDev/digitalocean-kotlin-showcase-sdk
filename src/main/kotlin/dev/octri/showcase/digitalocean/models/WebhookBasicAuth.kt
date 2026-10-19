@@ -4,11 +4,11 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
+ * HTTP basic authentication credentials for a webhook create or update request. `password` is
+ * write-only: send the full value to set or rotate. Omit `password` on update to keep the existing
+ * password.
  */
 data class WebhookBasicAuth(
-    /**
-     * Basic auth username.
-     */
+    /** Basic auth username. */
     val username: String
 )

@@ -3,71 +3,161 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class BlockStorageNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the block storage volumes available on your account, send a GET request to `/v2/volumes`. ## Filtering Results ### By Region The `region` may be provided as query parameter in order to restrict results to volumes available in a specific region. For example: `/v2/volumes?region=nyc1` ### By Name It is also possible to list volumes on your account that match a specified name. To do so, send a GET request with the volume's name as a query parameter to…
+     * To list all of the block storage volumes available on your account, send a GET request to
+     * `/v2/volumes`. ## Filtering Results ### By Region The `region` may be provided as query
+     * parameter in order to restrict results to volumes available in a specific region. For
+     * example: `/v2/volumes?region=nyc1` ### By Name It is also possible to list volumes on your
+     * account that match a specified name. To do so, send a GET request with the volume's name as a
+     * query parameter to…
      */
-    fun volumesList(name: String? = null, region: RegionSlug? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Volumes {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesList(clientConfig, name, region, perPage, page, options)
+    fun volumesList(
+        name: String? = null,
+        region: RegionSlug? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Volumes {
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesList(
+            clientConfig,
+            name,
+            region,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * Creates a block storage volume, optionally from a snapshot. Set `filesystem_type` to format the volume automatically, and provide `snapshot_id` when creating from a snapshot. Pre-formatted volumes auto-mount only on supported Droplets created on or after April 26, 2018; attaching them to unsupported Droplets is not recommended.
+     * Creates a block storage volume, optionally from a snapshot. Set `filesystem_type` to format
+     * the volume automatically, and provide `snapshot_id` when creating from a snapshot.
+     * Pre-formatted volumes auto-mount only on supported Droplets created on or after April 26,
+     * 2018; attaching them to unsupported Droplets is not recommended.
      *
-     * To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type` attribute may be provided in order to automatically format the volume's filesystem. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to Droplets without support for auto-mounting is not recommended.
+     * To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type`
+     * attribute may be provided in order to automatically format the volume's filesystem.
+     * Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora,
+     * Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching
+     * pre-formatted volumes to Droplets without support for auto-mounting is not recommended.
      */
     fun volumesCreate(body: Any, options: RequestOptions? = null): Volume {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesCreate(clientConfig, body, options)
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesCreate(
+            clientConfig,
+            body,
+            options,
+        )
     }
 
     /**
-     * Block storage volumes may also be deleted by name by sending a DELETE request with the volume's **name** and the **region slug** for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * Block storage volumes may also be deleted by name by sending a DELETE request with the
+     * volume's **name** and the **region slug** for the region it is located in as query parameters
+     * to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`. No response body will be sent back, but the
+     * response code will indicate success. Specifically, the response code will be a 204, which
+     * means that the action was successful with no returned body data.
      */
-    fun volumesDeleteByName(name: String? = null, region: RegionSlug? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesDeleteByName(clientConfig, name, region, options)
+    fun volumesDeleteByName(
+        name: String? = null,
+        region: RegionSlug? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesDeleteByName(
+            clientConfig,
+            name,
+            region,
+            options,
+        )
     }
 
     /**
-     * To retrieve the details of a snapshot that has been created from a volume, send a GET request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
+     * To retrieve the details of a snapshot that has been created from a volume, send a GET request
+     * to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
      */
-    fun volumeSnapshotsGetById(snapshotId: String, options: RequestOptions? = null): VolumeSnapshot {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsGetById(clientConfig, snapshotId, options)
+    fun volumeSnapshotsGetById(
+        snapshotId: String,
+        options: RequestOptions? = null,
+    ): VolumeSnapshot {
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsGetById(
+            clientConfig,
+            snapshotId,
+            options,
+        )
     }
 
     /**
-     * To delete a volume snapshot, send a DELETE request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a volume snapshot, send a DELETE request to
+     * `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`. A status of 204 will be given. This indicates
+     * that the request was processed successfully, but that no response body is needed.
      */
     fun volumeSnapshotsDeleteById(snapshotId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsDeleteById(clientConfig, snapshotId, options)
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsDeleteById(
+            clientConfig,
+            snapshotId,
+            options,
+        )
     }
 
     /**
-     * To show information about a block storage volume, send a GET request to `/v2/volumes/$VOLUME_ID`.
+     * To show information about a block storage volume, send a GET request to
+     * `/v2/volumes/$VOLUME_ID`.
      */
     fun volumesGet(volumeId: String, options: RequestOptions? = null): Volume {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesGet(clientConfig, volumeId, options)
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesGet(
+            clientConfig,
+            volumeId,
+            options,
+        )
     }
 
     /**
-     * To delete a block storage volume, destroying all data and removing it from your account, send a DELETE request to `/v2/volumes/$VOLUME_ID`. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To delete a block storage volume, destroying all data and removing it from your account, send
+     * a DELETE request to `/v2/volumes/$VOLUME_ID`. No response body will be sent back, but the
+     * response code will indicate success. Specifically, the response code will be a 204, which
+     * means that the action was successful with no returned body data.
      */
     fun volumesDelete(volumeId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesDelete(clientConfig, volumeId, options)
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumesDelete(
+            clientConfig,
+            volumeId,
+            options,
+        )
     }
 
     /**
-     * To retrieve the snapshots that have been created from a volume, send a GET request to `/v2/volumes/$VOLUME_ID/snapshots`.
+     * To retrieve the snapshots that have been created from a volume, send a GET request to
+     * `/v2/volumes/$VOLUME_ID/snapshots`.
      */
-    fun volumeSnapshotsList(volumeId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeSnapshots {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsList(clientConfig, volumeId, perPage, page, options)
+    fun volumeSnapshotsList(
+        volumeId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VolumeSnapshots {
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsList(
+            clientConfig,
+            volumeId,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To create a snapshot from a volume, sent a POST request to `/v2/volumes/$VOLUME_ID/snapshots`.
+     * To create a snapshot from a volume, sent a POST request to
+     * `/v2/volumes/$VOLUME_ID/snapshots`.
      */
-    fun volumeSnapshotsCreate(volumeId: String, name: String, tags: SdkClient.SdkOptional<TagsArray?>? = null, options: RequestOptions? = null): VolumeSnapshot {
-        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsCreate(clientConfig, volumeId, name, tags, options)
+    fun volumeSnapshotsCreate(
+        volumeId: String,
+        name: String,
+        tags: SdkClient.SdkOptional<TagsArray?>? = null,
+        options: RequestOptions? = null,
+    ): VolumeSnapshot {
+        return dev.octri.showcase.digitalocean.methods.BlockStorage.volumeSnapshotsCreate(
+            clientConfig,
+            volumeId,
+            name,
+            tags,
+            options,
+        )
     }
-
 }

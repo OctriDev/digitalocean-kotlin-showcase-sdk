@@ -4,54 +4,36 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * One turn in the conversation. Roles are `user` or `assistant` (no `system` role; use the top-level `system` field). Content may be a string (equivalent to a single text block) or an array of content blocks.
+ * One turn in the conversation. Roles are `user` or `assistant` (no `system` role; use the
+ * top-level `system` field). Content may be a string (equivalent to a single text block) or an
+ * array of content blocks.
  */
 data class MessagesApiMessageParam(
-    /**
-     * Speaker role for this message.
-     */
+    /** Speaker role for this message. */
     val role: MessagesApiMessageParamRoleEnum,
-    /**
-     * Message body as plain text or structured blocks.
-     */
-    val content: Any
+    /** Message body as plain text or structured blocks. */
+    val content: Any,
 )
 
-/**
- * Required object value serialized in the `error` wire field.
- */
+/** Required object value serialized in the `error` wire field. */
 data class MessagesCreateErrorResponseError(
-    /**
-     * Machine-readable error code.
-     */
+    /** Machine-readable error code. */
     val type: String,
-    /**
-     * Human-readable error message.
-     */
-    val message: String
+    /** Human-readable error message. */
+    val message: String,
 )
 
-/**
- * Error envelope for some failures from this endpoint.
- */
+/** Error envelope for some failures from this endpoint. */
 data class MessagesCreateErrorResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesCreateErrorResponseTypeEnum,
-    /**
-     * Required object value serialized in the `error` wire field.
-     */
-    val error: MessagesCreateErrorResponseError
+    /** Required object value serialized in the `error` wire field. */
+    val error: MessagesCreateErrorResponseError,
 ) : dev.octri.showcase.digitalocean.ErrorBody
 
-/**
- * Optional request metadata.
- */
+/** Optional request metadata. */
 data class MessagesCreateRequestMetadata(
-    /**
-     * Opaque identifier for the end user (for example a UUID or hash). Do not include PII.
-     */
+    /** Opaque identifier for the end user (for example a UUID or hash). Do not include PII. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
 )
 
@@ -59,312 +41,308 @@ data class MessagesCreateRequestMetadata(
  * Request body for `POST /v1/messages`. Required fields are `model`, `messages`, and `max_tokens`.
  */
 data class MessagesCreateRequest(
-    /**
-     * Model ID (for example `claude-opus-4-6` or a serverless model id).
-     */
+    /** Model ID (for example `claude-opus-4-6` or a serverless model id). */
     val model: String,
-    /**
-     * Maximum tokens to generate before stopping.
-     */
+    /** Maximum tokens to generate before stopping. */
     @com.fasterxml.jackson.annotation.JsonProperty("max_tokens") val maxTokens: Long,
     /**
-     * Conversation turns. Each item has `role` `user` or `assistant` and `content` as a string or an array of content blocks.
+     * Conversation turns. Each item has `role` `user` or `assistant` and `content` as a string or
+     * an array of content blocks.
      */
     val messages: List<MessagesApiMessageParam>,
-    /**
-     * System prompt as plain text or as an array of text blocks.
-     */
+    /** System prompt as plain text or as an array of text blocks. */
     val system: Any? = null,
-    /**
-     * Custom strings that stop generation when produced.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stop_sequences") val stopSequences: List<String>? = null,
-    /**
-     * When true, the response is streamed using server-sent events (SSE).
-     */
+    /** Custom strings that stop generation when produced. */
+    @com.fasterxml.jackson.annotation.JsonProperty("stop_sequences")
+    val stopSequences: List<String>? = null,
+    /** When true, the response is streamed using server-sent events (SSE). */
     val stream: Boolean? = null,
-    /**
-     * Sampling temperature between 0.0 and 1.0.
-     */
+    /** Sampling temperature between 0.0 and 1.0. */
     val temperature: Double? = null,
-    /**
-     * Nucleus sampling; use either `temperature` or `top_p`, not both.
-     */
+    /** Nucleus sampling; use either `temperature` or `top_p`, not both. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * Top-K sampling cutoff.
-     */
+    /** Top-K sampling cutoff. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_k") val topK: Long? = null,
-    /**
-     * Tool definitions the model may invoke.
-     */
+    /** Tool definitions the model may invoke. */
     val tools: List<MessagesToolDefinitionParam>? = null,
     /**
-     * Controls how the model uses tools: automatic selection, require any tool, force a specific tool, or a string form accepted by the service.
+     * Controls how the model uses tools: automatic selection, require any tool, force a specific
+     * tool, or a string form accepted by the service.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: MessagesToolChoiceParam? = null,
-    /**
-     * Optional request metadata.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
+    val toolChoice: MessagesToolChoiceParam? = null,
+    /** Optional request metadata. */
     val metadata: MessagesCreateRequestMetadata? = null,
     /**
-     * DigitalOcean extension for reasoning-capable models. Ignored by executors that do not support it.
+     * DigitalOcean extension for reasoning-capable models. Ignored by executors that do not support
+     * it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: MessagesCreateRequestReasoningEffortEnum? = null,
-    /**
-     * DigitalOcean extension for preferred inference speed. Ignored when not supported.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: MessagesCreateRequestReasoningEffortEnum? = null,
+    /** DigitalOcean extension for preferred inference speed. Ignored when not supported. */
     val speed: MessagesCreateRequestSpeedEnum? = null,
     /**
-     * Extended thinking configuration. Executors that do not support thinking may ignore this field.
+     * Extended thinking configuration. Executors that do not support thinking may ignore this
+     * field.
      */
-    val thinking: MessagesThinkingConfigParam? = null
+    val thinking: MessagesThinkingConfigParam? = null,
 )
 
 /**
- * Non-streaming assistant message from `POST /v1/messages`. `type` is always `message` and `role` is always `assistant`.
+ * Non-streaming assistant message from `POST /v1/messages`. `type` is always `message` and `role`
+ * is always `assistant`.
  */
 data class MessagesCreateResponse(
-    /**
-     * Unique identifier for this message object.
-     */
+    /** Unique identifier for this message object. */
     val id: String,
-    /**
-     * Object type discriminator.
-     */
+    /** Object type discriminator. */
     val type: MessagesCreateResponseTypeEnum,
-    /**
-     * Always `assistant` for this response.
-     */
+    /** Always `assistant` for this response. */
     val role: MessagesCreateResponseRoleEnum,
-    /**
-     * Assistant output blocks (`text` and/or `tool_use`).
-     */
+    /** Assistant output blocks (`text` and/or `tool_use`). */
     val content: List<MessagesResponseContentBlock>,
-    /**
-     * Model that produced the message.
-     */
+    /** Model that produced the message. */
     val model: String,
-    /**
-     * Why generation stopped.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stop_reason", required = true) val stopReason: MessagesCreateResponseStopReasonEnum?,
-    /**
-     * Token usage for a non-streaming `POST /v1/messages` response.
-     */
+    /** Why generation stopped. */
+    @com.fasterxml.jackson.annotation.JsonProperty("stop_reason", required = true)
+    val stopReason: MessagesCreateResponseStopReasonEnum?,
+    /** Token usage for a non-streaming `POST /v1/messages` response. */
     val usage: MessagesUsage,
-    /**
-     * When `stop_reason` is `stop_sequence`, the sequence that matched.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stop_sequence") val stopSequence: String? = null
+    /** When `stop_reason` is `stop_sequence`, the sequence that matched. */
+    @com.fasterxml.jackson.annotation.JsonProperty("stop_sequence")
+    val stopSequence: String? = null,
 )
 
-/**
- * Image content block in a request message.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Image content block in a request message. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesImageBlockParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesImageBlockParamTypeEnum,
-    /**
-     * Image payload (for example base64-encoded bytes).
-     */
-    val source: MessagesImageSourceParam
+    /** Image payload (for example base64-encoded bytes). */
+    val source: MessagesImageSourceParam,
 ) : MessagesRequestContentBlockParam
 
-/**
- * Image payload (for example base64-encoded bytes).
- */
+/** Image payload (for example base64-encoded bytes). */
 data class MessagesImageSourceParam(
-    /**
-     * Source kind (for example `base64`).
-     */
+    /** Source kind (for example `base64`). */
     val type: String,
-    /**
-     * MIME type of the image (for example `image/jpeg`).
-     */
+    /** MIME type of the image (for example `image/jpeg`). */
     @com.fasterxml.jackson.annotation.JsonProperty("media_type") val mediaType: String,
-    /**
-     * Encoded image data.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String
+    /** Encoded image data. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
 )
 
 /**
- * Structured message content. Block `type` is one of `text`, `image`, `tool_use`, or `tool_result`. Some tool definitions may be rejected by server policy even when valid here.
+ * Structured message content. Block `type` is one of `text`, `image`, `tool_use`, or `tool_result`.
+ * Some tool definitions may be rejected by server policy even when valid here.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMessagesRequestContentBlockParam::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownMessagesRequestContentBlockParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesRequestTextBlockParam::class, name = "text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesImageBlockParam::class, name = "image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesToolUseBlockParam::class, name = "tool_use"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesToolResultBlockParam::class, name = "tool_result")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesRequestTextBlockParam::class,
+        name = "text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesImageBlockParam::class,
+        name = "image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesToolUseBlockParam::class,
+        name = "tool_use",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesToolResultBlockParam::class,
+        name = "tool_result",
+    ),
 )
 sealed interface MessagesRequestContentBlockParam
 
-/** A [MessagesRequestContentBlockParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownMessagesRequestContentBlockParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [MessagesRequestContentBlockParam] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownMessagesRequestContentBlockParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : MessagesRequestContentBlockParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A text content block in a request message.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A text content block in a request message. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesRequestTextBlockParam(
-    /**
-     * Block type identifier.
-     */
+    /** Block type identifier. */
     val type: MessagesRequestTextBlockParamTypeEnum,
-    /**
-     * Plain text for this block.
-     */
-    val text: String
+    /** Plain text for this block. */
+    val text: String,
 ) : MessagesRequestContentBlockParam
 
-/**
- * Assistant output block (text and tool calls).
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMessagesResponseContentBlock::class)
+/** Assistant output block (text and tool calls). */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownMessagesResponseContentBlock::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesResponseTextBlock::class, name = "text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessagesResponseToolUseBlock::class, name = "tool_use")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesResponseTextBlock::class,
+        name = "text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessagesResponseToolUseBlock::class,
+        name = "tool_use",
+    ),
 )
 sealed interface MessagesResponseContentBlock
 
-/** A [MessagesResponseContentBlock] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownMessagesResponseContentBlock @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [MessagesResponseContentBlock] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownMessagesResponseContentBlock
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : MessagesResponseContentBlock {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A text block in an assistant message in the response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A text block in an assistant message in the response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesResponseTextBlock(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesResponseTextBlockTypeEnum,
-    /**
-     * Generated text for this block.
-     */
-    val text: String
+    /** Generated text for this block. */
+    val text: String,
 ) : MessagesResponseContentBlock
 
-/**
- * Tool call emitted by the assistant in the response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Tool call emitted by the assistant in the response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesResponseToolUseBlock(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesResponseToolUseBlockTypeEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Arguments for the tool invocation.
-     */
-    val input: Map<String, Any>
+    /** Arguments for the tool invocation. */
+    val input: Map<String, Any>,
 ) : MessagesResponseContentBlock
 
-/**
- * Streamed usage (for example on `message_delta`).
- */
+/** Streamed usage (for example on `message_delta`). */
 data class MessagesStreamEventUsage(
-    /**
-     * Optional `integer` value serialized in the `output_tokens` wire field.
-     */
+    /** Optional `integer` value serialized in the `output_tokens` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long? = null,
-    /**
-     * Optional enumerated value serialized in the `speed` wire field.
-     */
-    val speed: MessagesStreamEventUsageSpeedEnum? = null
+    /** Optional enumerated value serialized in the `speed` wire field. */
+    val speed: MessagesStreamEventUsageSpeedEnum? = null,
 )
 
 /**
- * One server-sent event (SSE) JSON payload when `stream` is true. Each event line contains a JSON object after the `data:` prefix.
+ * One server-sent event (SSE) JSON payload when `stream` is true. Each event line contains a JSON
+ * object after the `data:` prefix.
  */
 data class MessagesStreamEvent(
-    /**
-     * SSE event type.
-     */
+    /** SSE event type. */
     val type: MessagesStreamEventTypeEnum,
-    /**
-     * Present on `message_start`; initial message metadata.
-     */
+    /** Present on `message_start`; initial message metadata. */
     val message: Map<String, Any>? = null,
-    /**
-     * Index of the content block this event refers to.
-     */
+    /** Index of the content block this event refers to. */
     val index: Long? = null,
-    /**
-     * Present on `content_block_start`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_block") val contentBlock: Map<String, Any>? = null,
-    /**
-     * Present on `content_block_delta` and `message_delta`.
-     */
+    /** Present on `content_block_start`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_block")
+    val contentBlock: Map<String, Any>? = null,
+    /** Present on `content_block_delta` and `message_delta`. */
     val delta: Map<String, Any>? = null,
-    /**
-     * Streamed usage (for example on `message_delta`).
-     */
-    val usage: MessagesStreamEventUsage? = null
+    /** Streamed usage (for example on `message_delta`). */
+    val usage: MessagesStreamEventUsage? = null,
 )
 
 /**
  * Extended thinking configuration. Executors that do not support thinking may ignore this field.
  */
 data class MessagesThinkingConfigParam(
-    /**
-     * Thinking mode discriminator (for example enabled or disabled).
-     */
+    /** Thinking mode discriminator (for example enabled or disabled). */
     val type: String
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesToolChoiceParamVariant1(
-    /**
-     * Tool selection mode.
-     */
+    /** Tool selection mode. */
     val type: MessagesToolChoiceParamVariant1TypeEnum,
-    /**
-     * When `type` is `tool`, the tool name to use.
-     */
-    val name: String? = null
+    /** When `type` is `tool`, the tool name to use. */
+    val name: String? = null,
 ) : MessagesToolChoiceParam
 
 /**
- * Controls how the model uses tools: automatic selection, require any tool, force a specific tool, or a string form accepted by the service.
+ * Controls how the model uses tools: automatic selection, require any tool, force a specific tool,
+ * or a string form accepted by the service.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = MessagesToolChoiceParam.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = MessagesToolChoiceParam.Deserializer::class
+)
 sealed interface MessagesToolChoiceParam {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<MessagesToolChoiceParam>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<MessagesToolChoiceParam>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): MessagesToolChoiceParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out MessagesToolChoiceParam>> = listOf(MessagesToolChoiceParamVariant1::class.java)
+            val objectTypes: List<Class<out MessagesToolChoiceParam>> =
+                listOf(MessagesToolChoiceParamVariant1::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -373,99 +351,91 @@ sealed interface MessagesToolChoiceParam {
                 }
             }
             return when {
-                node.isTextual -> StringMessagesToolChoiceParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, MessagesToolChoiceParam::class.java, "no MessagesToolChoiceParam branch accepts this payload")
+                node.isTextual ->
+                    StringMessagesToolChoiceParam(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        MessagesToolChoiceParam::class.java,
+                        "no MessagesToolChoiceParam branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringMessagesToolChoiceParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : MessagesToolChoiceParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringMessagesToolChoiceParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : MessagesToolChoiceParam
 
-/**
- * Tool definition the model may call (`name`, JSON Schema for `input`).
- */
+/** Tool definition the model may call (`name`, JSON Schema for `input`). */
 data class MessagesToolDefinitionParam(
-    /**
-     * Tool name referenced in `tool_use` blocks.
-     */
+    /** Tool name referenced in `tool_use` blocks. */
     val name: String,
-    /**
-     * JSON Schema (draft 2020-12 style) describing the tool input object.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_schema") val inputSchema: Map<String, Any>,
-    /**
-     * Human-readable description of what the tool does.
-     */
-    val description: String? = null
+    /** JSON Schema (draft 2020-12 style) describing the tool input object. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_schema")
+    val inputSchema: Map<String, Any>,
+    /** Human-readable description of what the tool does. */
+    val description: String? = null,
 )
 
-/**
- * Result for a prior `tool_use` block, returned to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Result for a prior `tool_use` block, returned to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesToolResultBlockParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesToolResultBlockParamTypeEnum,
-    /**
-     * Required `string` value serialized in the `tool_use_id` wire field.
-     */
+    /** Required `string` value serialized in the `tool_use_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_use_id") val toolUseId: String,
-    /**
-     * Tool output as plain text or structured objects.
-     */
-    val content: Any
+    /** Tool output as plain text or structured objects. */
+    val content: Any,
 ) : MessagesRequestContentBlockParam
 
-/**
- * Tool invocation block in a request message (from the model or a prior turn).
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Tool invocation block in a request message (from the model or a prior turn). */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessagesToolUseBlockParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MessagesToolUseBlockParamTypeEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * JSON object matching the tool's `input_schema`.
-     */
-    val input: Map<String, Any>
+    /** JSON object matching the tool's `input_schema`. */
+    val input: Map<String, Any>,
 ) : MessagesRequestContentBlockParam
 
-/**
- * Token usage for a non-streaming `POST /v1/messages` response.
- */
+/** Token usage for a non-streaming `POST /v1/messages` response. */
 data class MessagesUsage(
-    /**
-     * Number of input tokens billed for this request.
-     */
+    /** Number of input tokens billed for this request. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * Number of output tokens generated.
-     */
+    /** Number of output tokens generated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * Input tokens used to create a prompt cache entry, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_creation_input_tokens") val cacheCreationInputTokens: Long? = null,
-    /**
-     * Input tokens read from a prompt cache, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_read_input_tokens") val cacheReadInputTokens: Long? = null,
-    /**
-     * Inference speed tier reflected in billing or routing.
-     */
-    val speed: MessagesUsageSpeedEnum? = null
+    /** Input tokens used to create a prompt cache entry, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_creation_input_tokens")
+    val cacheCreationInputTokens: Long? = null,
+    /** Input tokens read from a prompt cache, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_read_input_tokens")
+    val cacheReadInputTokens: Long? = null,
+    /** Inference speed tier reflected in billing or routing. */
+    val speed: MessagesUsageSpeedEnum? = null,
 )

@@ -3,145 +3,141 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `CreateCheckpointRequest` API schema.
- */
+/** Typed representation of the `CreateCheckpointRequest` API schema. */
 data class CreateCheckpointRequest(
-    /**
-     * Optional human-readable label stored on the checkpoint; "" if omitted.
-     */
+    /** Optional human-readable label stored on the checkpoint; "" if omitted. */
     val label: String? = null
 )
 
 /**
- * Terminal result of the synchronous capture: checkpoint.status is READY on success. Failures are reported through the error envelope, never as a FAILED checkpoint here.
+ * Terminal result of the synchronous capture: checkpoint.status is READY on success. Failures are
+ * reported through the error envelope, never as a FAILED checkpoint here.
  */
 data class CreateCheckpointResponse(
     /**
-     * Checkpoint is a durable capture of a session's live sandbox machine state bound to the event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback. Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
+     * Checkpoint is a durable capture of a session's live sandbox machine state bound to the
+     * event-log cursor at the cut. READY checkpoints seed forks (ForkSession) and rollback.
+     * Internal fields (team_id, the substrate checkpoint id, event_seq) are never serialized.
      */
     val checkpoint: Checkpoint? = null
 )
 
-/**
- * cron block on create.
- */
+/** cron block on create. */
 data class CreateCronConfig(
-    /**
-     * Required `string` value serialized in the `cron_expr` wire field.
-     */
+    /** Required `string` value serialized in the `cron_expr` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("cron_expr") val cronExpr: String,
-    /**
-     * IANA timezone.
-     */
-    val timezone: String
+    /** IANA timezone. */
+    val timezone: String,
 )
 
 /**
- * Strict application/json CreateSession form. Loads config_id, resolves the config's single internal secret binding, and creates the session. Body capped at 16 KiB; no inline secrets.
+ * Strict application/json CreateSession form. Loads config_id, resolves the config's single
+ * internal secret binding, and creates the session. Body capped at 16 KiB; no inline secrets.
  */
 data class CreateSessionConfigRequest(
     /**
-     * Session name, independent of the config name. Must satisfy the existing environment-spec metadata.name rules and must not be UUID-shaped.
+     * Session name, independent of the config name. Must satisfy the existing environment-spec
+     * metadata.name rules and must not be UUID-shaped.
      */
     val name: String,
-    /**
-     * Required `uuid`-formatted value serialized in the `config_id` wire field.
-     */
+    /** Required `uuid`-formatted value serialized in the `config_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("config_id") val configId: String,
     /**
-     * Opt the new session in to automatic resumption when the team's prepayment balance is restored. Defaults to false. Session-scoped, not config-scoped: the referenced config never confers this, so one shared config cannot enrol every session created from it. Omit to leave the default (or to let the ?resume_on_topoff= query parameter supply it).
+     * Opt the new session in to automatic resumption when the team's prepayment balance is
+     * restored. Defaults to false. Session-scoped, not config-scoped: the referenced config never
+     * confers this, so one shared config cannot enrol every session created from it. Omit to leave
+     * the default (or to let the ?resume_on_topoff= query parameter supply it).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff") val resumeOnTopoff: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff")
+    val resumeOnTopoff: Boolean? = null,
 )
 
-/**
- * Typed representation of the `CreateTemplateRequest` API schema.
- */
+/** Typed representation of the `CreateTemplateRequest` API schema. */
 data class CreateTemplateRequest(
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
     /**
-     * Base template key. One of: coding-base, coding-claude-code, coding-codex, coding-hermes, coding-opencode, langgraph.
+     * Base template key. One of: coding-base, coding-claude-code, coding-codex, coding-hermes,
+     * coding-opencode, langgraph.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("base_template") val baseTemplate: String,
-    /**
-     * Required `string` value serialized in the `source_oci_ref` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_oci_ref") val sourceOciRef: String
+    /** Required `string` value serialized in the `source_oci_ref` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_oci_ref") val sourceOciRef: String,
 )
 
-/**
- * Typed representation of the `CreateTemplateResponse` API schema.
- */
+/** Typed representation of the `CreateTemplateResponse` API schema. */
 data class CreateTemplateResponse(
-    /**
-     * Optional object value serialized in the `template` wire field.
-     */
+    /** Optional object value serialized in the `template` wire field. */
     val template: SandboxTemplate? = null
 )
 
 /**
- * See the CreateTrigger operation description for the conditional-requirement matrix. team_id is NOT accepted here - it is derived from the authenticated principal.
+ * See the CreateTrigger operation description for the conditional-requirement matrix. team_id is
+ * NOT accepted here - it is derived from the authenticated principal.
  */
 data class CreateTriggerRequest(
     /**
-     * How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable after create.
+     * How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable after
+     * create.
      */
     val kind: TriggerKind,
     /**
-     * Team-unique (among non-deleted triggers) trigger name. Same rules as session names; not UUID-form.
+     * Team-unique (among non-deleted triggers) trigger name. Same rules as session names; not
+     * UUID-form.
      */
     val name: String,
     /**
-     * fresh = a new session is created from the trigger's spec on every firing and destroyed after. reuse = the trigger binds an existing PAUSED session, resumed on each firing and paused after; multiple triggers may bind one session.
+     * fresh = a new session is created from the trigger's spec on every firing and destroyed after.
+     * reuse = the trigger binds an existing PAUSED session, resumed on each firing and paused
+     * after; multiple triggers may bind one session.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_mode") val sessionMode: TriggerSessionMode,
+    @com.fasterxml.jackson.annotation.JsonProperty("session_mode")
+    val sessionMode: TriggerSessionMode,
     /**
-     * The prompt sent on each fire. For cron it must not contain payload-interpolation placeholders.
+     * The prompt sent on each fire. For cron it must not contain payload-interpolation
+     * placeholders.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt_template") val promptTemplate: String,
     /**
-     * Output-delivery configuration on create/update. Exactly one of email / slack is required for the matching mode and forbidden otherwise; destinations are stored encrypted and never returned.
+     * Output-delivery configuration on create/update. Exactly one of email / slack is required for
+     * the matching mode and forbidden otherwise; destinations are stored encrypted and never
+     * returned.
      */
     val output: TriggerOutputWrite,
     /**
-     * fresh only. Full agents.yaml Agent manifest (YAML or JSON). Any embedded env values are split out and encrypted server-side.
+     * fresh only. Full agents.yaml Agent manifest (YAML or JSON). Any embedded env values are split
+     * out and encrypted server-side.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_template") val sessionTemplate: String? = null,
-    /**
-     * reuse only. UUID of an existing session owned by the team.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bound_session_id") val boundSessionId: String? = null,
-    /**
-     * webhook block on create. Omitting provider defaults to custom.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_template")
+    val sessionTemplate: String? = null,
+    /** reuse only. UUID of an existing session owned by the team. */
+    @com.fasterxml.jackson.annotation.JsonProperty("bound_session_id")
+    val boundSessionId: String? = null,
+    /** webhook block on create. Omitting provider defaults to custom. */
     val webhook: CreateWebhookConfig? = null,
-    /**
-     * cron block on create.
-     */
-    val cron: CreateCronConfig? = null
+    /** cron block on create. */
+    val cron: CreateCronConfig? = null,
 )
 
-/**
- * Typed representation of the `CreateTriggerResponse` API schema.
- */
+/** Typed representation of the `CreateTriggerResponse` API schema. */
 data class CreateTriggerResponse(
     /**
-     * A single automation bound to exactly one agent/session (agent == session in v1). The nested block present depends on `kind` (webhook xor cron) and `session_mode` (fresh => session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the webhook secret, the output email address / Slack webhook URL, and any env values inside session_template are write-only and never returned.
+     * A single automation bound to exactly one agent/session (agent == session in v1). The nested
+     * block present depends on `kind` (webhook xor cron) and `session_mode` (fresh =>
+     * session_template; reuse => bound_session_id). `agent_kind` is read-only and derived; the
+     * webhook secret, the output email address / Slack webhook URL, and any env values inside
+     * session_template are write-only and never returned.
      */
     val trigger: Trigger? = null,
     /**
-     * The generated webhook secret. Present for webhook triggers only and shown EXACTLY ONCE - it is never returned again. Paste it into the external system's webhook configuration.
+     * The generated webhook secret. Present for webhook triggers only and shown EXACTLY ONCE - it
+     * is never returned again. Paste it into the external system's webhook configuration.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_secret") val webhookSecret: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_secret")
+    val webhookSecret: String? = null,
 )
 
-/**
- * webhook block on create. Omitting provider defaults to custom.
- */
+/** webhook block on create. Omitting provider defaults to custom. */
 data class CreateWebhookConfig(
     /**
      * Signature-verification scheme applied to a delivery. Omitted on create defaults to custom.

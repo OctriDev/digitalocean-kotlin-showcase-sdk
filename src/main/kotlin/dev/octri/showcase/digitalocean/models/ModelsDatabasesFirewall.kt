@@ -5,64 +5,46 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `FirewallRule` API schema.
- */
+/** Typed representation of the `FirewallRule` API schema. */
 data class FirewallRule(
-    /**
-     * The type of resource that the firewall rule allows to access the database cluster.
-     */
+    /** The type of resource that the firewall rule allows to access the database cluster. */
     val type: FirewallRuleTypeEnum,
     /**
-     * The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
+     * The ID of the specific resource, the name of a tag applied to a group of resources, or the IP
+     * address that the firewall rule allows to access the database cluster.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * A unique ID for the firewall rule itself.
-     */
+    /** A unique ID for the firewall rule itself. */
     val uuid: String? = null,
-    /**
-     * A unique ID for the database cluster to which the rule is applied.
-     */
+    /** A unique ID for the database cluster to which the rule is applied. */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_uuid") val clusterUuid: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the firewall rule was created.
+     * A time value given in ISO8601 combined date and time format that represents when the firewall
+     * rule was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * A human-readable description of the rule.
-     */
-    val description: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** A human-readable description of the rule. */
+    val description: String? = null,
 )
 
-/**
- * Typed representation of the `FirewallRuleRequest` API schema.
- */
+/** Typed representation of the `FirewallRuleRequest` API schema. */
 data class FirewallRuleRequest(
-    /**
-     * The type of resource that the firewall rule allows to access the database cluster.
-     */
+    /** The type of resource that the firewall rule allows to access the database cluster. */
     val type: FirewallRuleRequestTypeEnum,
     /**
-     * The ID of the specific resource, the name of a tag applied to a group of resources, or the IP address that the firewall rule allows to access the database cluster.
+     * The ID of the specific resource, the name of a tag applied to a group of resources, or the IP
+     * address that the firewall rule allows to access the database cluster.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * A unique ID for the firewall rule itself.
-     */
+    /** A unique ID for the firewall rule itself. */
     val uuid: String? = null,
-    /**
-     * A human-readable description of the rule.
-     */
-    val description: String? = null
+    /** A human-readable description of the rule. */
+    val description: String? = null,
 )
 
-/**
- * Typed representation of the `FirewallRulesResponse` API schema.
- */
+/** Typed representation of the `FirewallRulesResponse` API schema. */
 data class FirewallRulesResponse(
-    /**
-     * Optional array value serialized in the `rules` wire field.
-     */
+    /** Optional array value serialized in the `rules` wire field. */
     val rules: List<FirewallRule>? = null
 )

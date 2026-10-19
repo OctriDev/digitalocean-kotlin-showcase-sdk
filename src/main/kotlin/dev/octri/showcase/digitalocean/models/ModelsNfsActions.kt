@@ -3,162 +3,102 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Specifies the action that will be taken on the NFS share.
- */
+/** Specifies the action that will be taken on the NFS share. */
 data class NfsAction(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
-    val region: String? = null
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
+    val region: String? = null,
 )
 
 data class NfsActionAttachVariant1Params(
-    /**
-     * The ID of the VPC to which the NFS share will be attached
-     */
+    /** The ID of the VPC to which the NFS share will be attached */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_id") val vpcId: String
 )
 
-/**
- * Typed representation of the `NfsActionAttach` API schema.
- */
+/** Typed representation of the `NfsActionAttach` API schema. */
 data class NfsActionAttach(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionAttachVariant1Params? = null
+    val params: NfsActionAttachVariant1Params? = null,
 )
 
 data class NfsActionDetachVariant1Params(
-    /**
-     * The ID of the VPC from which the NFS share will be detached
-     */
+    /** The ID of the VPC from which the NFS share will be detached */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_id") val vpcId: String
 )
 
-/**
- * Typed representation of the `NfsActionDetach` API schema.
- */
+/** Typed representation of the `NfsActionDetach` API schema. */
 data class NfsActionDetach(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionDetachVariant1Params? = null
+    val params: NfsActionDetachVariant1Params? = null,
 )
 
 data class NfsActionReassignVariant1Params(
-    /**
-     * The ID of the VPC from which the NFS share will be reassigned
-     */
+    /** The ID of the VPC from which the NFS share will be reassigned */
     @com.fasterxml.jackson.annotation.JsonProperty("old_vpc_id") val oldVpcId: String,
-    /**
-     * The ID of the VPC to which the NFS share will be reassigned
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("new_vpc_id") val newVpcId: String
+    /** The ID of the VPC to which the NFS share will be reassigned */
+    @com.fasterxml.jackson.annotation.JsonProperty("new_vpc_id") val newVpcId: String,
 )
 
-/**
- * Typed representation of the `NfsActionReassign` API schema.
- */
+/** Typed representation of the `NfsActionReassign` API schema. */
 data class NfsActionReassign(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionReassignVariant1Params? = null
+    val params: NfsActionReassignVariant1Params? = null,
 )
 
 data class NfsActionResizeVariant1Params(
-    /**
-     * The new size for the NFS share.
-     */
+    /** The new size for the NFS share. */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gib") val sizeGib: Long
 )
 
-/**
- * Typed representation of the `NfsActionResize` API schema.
- */
+/** Typed representation of the `NfsActionResize` API schema. */
 data class NfsActionResize(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionResizeVariant1Params? = null
+    val params: NfsActionResizeVariant1Params? = null,
 )
 
 data class NfsActionSnapshotVariant1Params(
-    /**
-     * Snapshot name of the NFS share
-     */
+    /** Snapshot name of the NFS share */
     val name: String
 )
 
-/**
- * Typed representation of the `NfsActionSnapshot` API schema.
- */
+/** Typed representation of the `NfsActionSnapshot` API schema. */
 data class NfsActionSnapshot(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionSnapshotVariant1Params? = null
+    val params: NfsActionSnapshotVariant1Params? = null,
 )
 
-/**
- * Action response of an NFS share.
- */
+/** Action response of an NFS share. */
 data class NfsActionsResponse(
-    /**
-     * The action that was submitted.
-     */
+    /** The action that was submitted. */
     val action: NfsAction2
 )
 
 data class NfsActionSwitchPerformanceTierVariant1Params(
-    /**
-     * The performance tier to which the NFS share will be switched (e.g., standard, high).
-     */
+    /** The performance tier to which the NFS share will be switched (e.g., standard, high). */
     @com.fasterxml.jackson.annotation.JsonProperty("performance_tier") val performanceTier: String
 )
 
-/**
- * Typed representation of the `NfsActionSwitchPerformanceTier` API schema.
- */
+/** Typed representation of the `NfsActionSwitchPerformanceTier` API schema. */
 data class NfsActionSwitchPerformanceTier(
-    /**
-     * The type of action to initiate for the NFS share (such as resize or snapshot).
-     */
+    /** The type of action to initiate for the NFS share (such as resize or snapshot). */
     val type: NfsActionTypeEnum,
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
+    /** The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides. */
     val region: String? = null,
-    val params: NfsActionSwitchPerformanceTierVariant1Params? = null
+    val params: NfsActionSwitchPerformanceTierVariant1Params? = null,
 )

@@ -3,46 +3,32 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `NetworkV4` API schema.
- */
+/** Typed representation of the `NetworkV4` API schema. */
 data class NetworkV4(
-    /**
-     * The IP address of the IPv4 network interface.
-     */
+    /** The IP address of the IPv4 network interface. */
     @com.fasterxml.jackson.annotation.JsonProperty("ip_address") val ipAddress: String? = null,
-    /**
-     * The netmask of the IPv4 network interface.
-     */
+    /** The netmask of the IPv4 network interface. */
     val netmask: String? = null,
     /**
-     * The gateway of the specified IPv4 network interface. For private interfaces, a gateway is not provided. This is denoted by returning `nil` as its value.
+     * The gateway of the specified IPv4 network interface. For private interfaces, a gateway is not
+     * provided. This is denoted by returning `nil` as its value.
      */
     val gateway: String? = null,
-    /**
-     * The type of the IPv4 network interface.
-     */
-    val type: NetworkV4TypeEnum? = null
+    /** The type of the IPv4 network interface. */
+    val type: NetworkV4TypeEnum? = null,
 )
 
-/**
- * Typed representation of the `NetworkV6` API schema.
- */
+/** Typed representation of the `NetworkV6` API schema. */
 data class NetworkV6(
-    /**
-     * The IP address of the IPv6 network interface.
-     */
+    /** The IP address of the IPv6 network interface. */
     @com.fasterxml.jackson.annotation.JsonProperty("ip_address") val ipAddress: String? = null,
-    /**
-     * The netmask of the IPv6 network interface.
-     */
+    /** The netmask of the IPv6 network interface. */
     val netmask: Long? = null,
-    /**
-     * The gateway of the specified IPv6 network interface.
-     */
+    /** The gateway of the specified IPv6 network interface. */
     val gateway: String? = null,
     /**
-     * The type of the IPv6 network interface. **Note**: IPv6 private networking is not currently supported.
+     * The type of the IPv6 network interface. **Note**: IPv6 private networking is not currently
+     * supported.
      */
-    val type: NetworkV6TypeEnum? = null
+    val type: NetworkV6TypeEnum? = null,
 )

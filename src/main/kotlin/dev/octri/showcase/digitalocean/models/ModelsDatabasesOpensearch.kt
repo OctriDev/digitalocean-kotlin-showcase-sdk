@@ -5,107 +5,73 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `OpensearchConnection` API schema.
- */
+/** Typed representation of the `OpensearchConnection` API schema. */
 data class OpensearchConnection(
     /**
-     * This is provided as a convenience and should be able to be constructed by the other attributes.
+     * This is provided as a convenience and should be able to be constructed by the other
+     * attributes.
      */
     val uri: String? = null,
-    /**
-     * The FQDN pointing to the opensearch cluster's current primary node.
-     */
+    /** The FQDN pointing to the opensearch cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the opensearch dashboard is listening.
-     */
+    /** The port on which the opensearch dashboard is listening. */
     val port: Long? = null,
     /**
      * The default user for the opensearch dashboard. Requires `database:view_credentials` scope.
      */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Typed representation of the `OpensearchConnectionRequest` API schema.
- */
+/** Typed representation of the `OpensearchConnectionRequest` API schema. */
 class OpensearchConnectionRequest
 
-/**
- * Typed representation of the `OpensearchIndex` API schema.
- */
+/** Typed representation of the `OpensearchIndex` API schema. */
 data class OpensearchIndex(
-    /**
-     * The name of the opensearch index.
-     */
+    /** The name of the opensearch index. */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
-    /**
-     * The number of shards for the index.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("number_of_shards") val numberOfShards: Long? = null,
-    /**
-     * The number of replicas for the index.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("number_of_replicas") val numberOfReplicas: Long? = null,
-    /**
-     * The size of the index.
-     */
+    /** The number of shards for the index. */
+    @com.fasterxml.jackson.annotation.JsonProperty("number_of_shards")
+    val numberOfShards: Long? = null,
+    /** The number of replicas for the index. */
+    @com.fasterxml.jackson.annotation.JsonProperty("number_of_replicas")
+    val numberOfReplicas: Long? = null,
+    /** The size of the index. */
     val size: Long? = null,
-    /**
-     * The date and time the index was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_time") val createdTime: OffsetDateTime? = null,
-    /**
-     * The status of the OpenSearch index.
-     */
+    /** The date and time the index was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_time")
+    val createdTime: OffsetDateTime? = null,
+    /** The status of the OpenSearch index. */
     val status: OpensearchIndexVariant1StatusEnum? = null,
-    /**
-     * The health of the OpenSearch index.
-     */
-    val health: OpensearchIndexVariant1HealthEnum? = null
+    /** The health of the OpenSearch index. */
+    val health: OpensearchIndexVariant1HealthEnum? = null,
 )
 
-/**
- * Typed representation of the `OpensearchIndexBase` API schema.
- */
+/** Typed representation of the `OpensearchIndexBase` API schema. */
 data class OpensearchIndexBase(
-    /**
-     * The name of the opensearch index.
-     */
+    /** The name of the opensearch index. */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
-    /**
-     * The number of shards for the index.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("number_of_shards") val numberOfShards: Long? = null,
-    /**
-     * The number of replicas for the index.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("number_of_replicas") val numberOfReplicas: Long? = null,
-    /**
-     * The size of the index.
-     */
+    /** The number of shards for the index. */
+    @com.fasterxml.jackson.annotation.JsonProperty("number_of_shards")
+    val numberOfShards: Long? = null,
+    /** The number of replicas for the index. */
+    @com.fasterxml.jackson.annotation.JsonProperty("number_of_replicas")
+    val numberOfReplicas: Long? = null,
+    /** The size of the index. */
     val size: Long? = null,
-    /**
-     * The date and time the index was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_time") val createdTime: OffsetDateTime? = null
+    /** The date and time the index was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_time")
+    val createdTime: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `OpensearchIndexes` API schema.
- */
+/** Typed representation of the `OpensearchIndexes` API schema. */
 data class OpensearchIndexes(
-    /**
-     * Optional array value serialized in the `indexes` wire field.
-     */
+    /** Optional array value serialized in the `indexes` wire field. */
     val indexes: List<OpensearchIndex>? = null
 )

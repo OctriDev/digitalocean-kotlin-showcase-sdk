@@ -3,47 +3,33 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `KafkaSchemaVersionVerbose` API schema.
- */
+/** Typed representation of the `KafkaSchemaVersionVerbose` API schema. */
 data class KafkaSchemaVersionVerbose(
-    /**
-     * The id for schema.
-     */
+    /** The id for schema. */
     @com.fasterxml.jackson.annotation.JsonProperty("schema_id") val schemaId: Long? = null,
-    /**
-     * The version of the schema.
-     */
+    /** The version of the schema. */
     val version: String? = null,
-    /**
-     * The name of the schema subject.
-     */
+    /** The name of the schema subject. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject_name") val subjectName: String? = null,
-    /**
-     * The type of the schema.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("schema_type") val schemaType: KafkaSchemaVersionVerboseSchemaTypeEnum? = null,
-    /**
-     * The schema definition in the specified format.
-     */
-    val schema: String? = null
+    /** The type of the schema. */
+    @com.fasterxml.jackson.annotation.JsonProperty("schema_type")
+    val schemaType: KafkaSchemaVersionVerboseSchemaTypeEnum? = null,
+    /** The schema definition in the specified format. */
+    val schema: String? = null,
 )
 
-/**
- * Typed representation of the `KafkaTopicCreate` API schema.
- */
+/** Typed representation of the `KafkaTopicCreate` API schema. */
 data class KafkaTopicCreate(
-    /**
-     * The name of the Kafka topic.
-     */
+    /** The name of the Kafka topic. */
     val name: String? = null,
+    /** The number of nodes to replicate data across the cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("replication_factor")
+    val replicationFactor: Long? = null,
     /**
-     * The number of nodes to replicate data across the cluster.
+     * The number of partitions available for the topic. On update, this value can only be
+     * increased.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("replication_factor") val replicationFactor: Long? = null,
-    /**
-     * The number of partitions available for the topic. On update, this value can only be increased.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partition_count") val partitionCount: Long? = null,
-    val config: KafkaTopicConfig? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("partition_count")
+    val partitionCount: Long? = null,
+    val config: KafkaTopicConfig? = null,
 )

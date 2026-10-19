@@ -5,275 +5,209 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `VpcNatGateway` API schema.
- */
+/** Typed representation of the `VpcNatGateway` API schema. */
 data class VpcNatGateway(
-    /**
-     * Optional object value serialized in the `vpc_nat_gateway` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway") val vpcNatGateway: VpcNatGatewayGet? = null
+    /** Optional object value serialized in the `vpc_nat_gateway` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway")
+    val vpcNatGateway: VpcNatGatewayGet? = null
 )
 
-/**
- * Required object value serialized in the `vpcs[]` wire field.
- */
+/** Required object value serialized in the `vpcs[]` wire field. */
 data class VpcNatGatewayCreateVpcsItem(
-    /**
-     * The unique identifier of the VPC to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String,
-    /**
-     * The unique identifier of the VPC subnet to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC subnet to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
-    /**
-     * The classification of the NAT gateway as the default egress route for the VPC traffic.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway") val defaultGateway: Boolean? = null
+    /** The classification of the NAT gateway as the default egress route for the VPC traffic. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway")
+    val defaultGateway: Boolean? = null,
 )
 
 /**
- * Specify the address using either `ip` or `ipv4`. Both fields accept the same value and `ip` takes precedence if both are provided. The assigned address is returned in the `ipv4` field of GET and list responses.
+ * Specify the address using either `ip` or `ipv4`. Both fields accept the same value and `ip` takes
+ * precedence if both are provided. The assigned address is returned in the `ipv4` field of GET and
+ * list responses.
  */
 data class VpcNatGatewayCreateEgressesPublicGatewaysItem(
     /**
-     * The public egress IP address to assign to the VPC NAT gateway, and the preferred field for setting it. Provide an unassigned Bring Your Own IP (BYOIP) address on your account in the same region to use your own IP address. This field is only applied when creating the gateway and cannot be changed afterward. The assigned address is returned as `ipv4` in GET and list responses.
+     * The public egress IP address to assign to the VPC NAT gateway, and the preferred field for
+     * setting it. Provide an unassigned Bring Your Own IP (BYOIP) address on your account in the
+     * same region to use your own IP address. This field is only applied when creating the gateway
+     * and cannot be changed afterward. The assigned address is returned as `ipv4` in GET and list
+     * responses.
      */
     val ip: String? = null,
     /**
-     * An alternative to `ip` for setting the public egress IP address on create. Accepts the same value as `ip`, which takes precedence if both are provided. This field is only applied when creating the gateway and cannot be changed afterward.
+     * An alternative to `ip` for setting the public egress IP address on create. Accepts the same
+     * value as `ip`, which takes precedence if both are provided. This field is only applied when
+     * creating the gateway and cannot be changed afterward.
      */
-    val ipv4: String? = null
+    val ipv4: String? = null,
 )
 
 /**
- * An optional object specifying the public egress IP address to assign to the VPC NAT gateway. Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP address automatically.
+ * An optional object specifying the public egress IP address to assign to the VPC NAT gateway.
+ * Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP
+ * address automatically.
  */
 data class VpcNatGatewayCreateEgresses(
     /**
-     * An array containing a single public gateway object that sets the gateway's public egress IP address.
+     * An array containing a single public gateway object that sets the gateway's public egress IP
+     * address.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_gateways") val publicGateways: List<VpcNatGatewayCreateEgressesPublicGatewaysItem>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("public_gateways")
+    val publicGateways: List<VpcNatGatewayCreateEgressesPublicGatewaysItem>? = null
 )
 
-/**
- * Typed representation of the `VpcNatGatewayCreate` API schema.
- */
+/** Typed representation of the `VpcNatGatewayCreate` API schema. */
 data class VpcNatGatewayCreate(
-    /**
-     * The human-readable name of the VPC NAT gateway.
-     */
+    /** The human-readable name of the VPC NAT gateway. */
     val name: String,
-    /**
-     * The type of the VPC NAT gateway.
-     */
+    /** The type of the VPC NAT gateway. */
     val type: VpcNatGatewayCreateTypeEnum,
-    /**
-     * The region in which the VPC NAT gateway is created.
-     */
+    /** The region in which the VPC NAT gateway is created. */
     val region: VpcNatGatewayCreateRegionEnum,
-    /**
-     * The size of the VPC NAT gateway.
-     */
+    /** The size of the VPC NAT gateway. */
     val size: Long,
-    /**
-     * An array of VPCs associated with the VPC NAT gateway.
-     */
+    /** An array of VPCs associated with the VPC NAT gateway. */
     val vpcs: List<VpcNatGatewayCreateVpcsItem>,
+    /** The UDP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds")
+    val udpTimeoutSeconds: Long? = null,
+    /** The ICMP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds")
+    val icmpTimeoutSeconds: Long? = null,
+    /** The TCP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds")
+    val tcpTimeoutSeconds: Long? = null,
     /**
-     * The UDP timeout in seconds for the VPC NAT gateway.
+     * An optional object specifying the public egress IP address to assign to the VPC NAT gateway.
+     * Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP
+     * address automatically.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds") val udpTimeoutSeconds: Long? = null,
-    /**
-     * The ICMP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds") val icmpTimeoutSeconds: Long? = null,
-    /**
-     * The TCP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds") val tcpTimeoutSeconds: Long? = null,
-    /**
-     * An optional object specifying the public egress IP address to assign to the VPC NAT gateway. Provide this only to use a specific address. If omitted, DigitalOcean allocates a public IP address automatically.
-     */
-    val egresses: VpcNatGatewayCreateEgresses? = null
+    val egresses: VpcNatGatewayCreateEgresses? = null,
 )
 
-/**
- * Typed representation of the `VpcNatGatewayCreateResponse` API schema.
- */
+/** Typed representation of the `VpcNatGatewayCreateResponse` API schema. */
 data class VpcNatGatewayCreateResponse(
-    /**
-     * Optional object value serialized in the `vpc_nat_gateway` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway") val vpcNatGateway: VpcNatGatewayCreate? = null
+    /** Optional object value serialized in the `vpc_nat_gateway` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway")
+    val vpcNatGateway: VpcNatGatewayCreate? = null
 )
 
-/**
- * Required object value serialized in the `vpcs[]` wire field.
- */
+/** Required object value serialized in the `vpcs[]` wire field. */
 data class VpcNatGatewayGetVpcsItem(
-    /**
-     * The unique identifier of the VPC to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /**
-     * The unique identifier of the VPC subnet to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC subnet to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
-    /**
-     * The gateway IP address of the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("gateway_ip") val gatewayIp: String? = null
+    /** The gateway IP address of the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("gateway_ip") val gatewayIp: String? = null,
 )
 
-/**
- * Required object value serialized in the `public_gateways[]` wire field.
- */
+/** Required object value serialized in the `public_gateways[]` wire field. */
 data class VpcNatGatewayGetEgressesPublicGatewaysItem(
     /**
-     * The public egress IPv4 address of the VPC NAT gateway. This is the address assigned to the gateway, which you can optionally set when creating the gateway using the `ip` or `ipv4` field.
+     * The public egress IPv4 address of the VPC NAT gateway. This is the address assigned to the
+     * gateway, which you can optionally set when creating the gateway using the `ip` or `ipv4`
+     * field.
      */
     val ipv4: String? = null
 )
 
-/**
- * An object containing egress information for the VPC NAT gateway.
- */
+/** An object containing egress information for the VPC NAT gateway. */
 data class VpcNatGatewayGetEgresses(
-    /**
-     * An array of public gateway IP addresses for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_gateways") val publicGateways: List<VpcNatGatewayGetEgressesPublicGatewaysItem>? = null
+    /** An array of public gateway IP addresses for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_gateways")
+    val publicGateways: List<VpcNatGatewayGetEgressesPublicGatewaysItem>? = null
 )
 
-/**
- * Typed representation of the `VpcNatGatewayGet` API schema.
- */
+/** Typed representation of the `VpcNatGatewayGet` API schema. */
 data class VpcNatGatewayGet(
     /**
      * The unique identifier for the VPC NAT gateway. This is automatically generated upon creation.
      */
     val id: String? = null,
-    /**
-     * The human-readable name of the VPC NAT gateway.
-     */
+    /** The human-readable name of the VPC NAT gateway. */
     val name: String? = null,
-    /**
-     * The type of the VPC NAT gateway.
-     */
+    /** The type of the VPC NAT gateway. */
     val type: VpcNatGatewayGetTypeEnum? = null,
-    /**
-     * The current state of the VPC NAT gateway.
-     */
+    /** The current state of the VPC NAT gateway. */
     val state: VpcNatGatewayGetStateEnum? = null,
-    /**
-     * The region in which the VPC NAT gateway is created.
-     */
+    /** The region in which the VPC NAT gateway is created. */
     val region: VpcNatGatewayGetRegionEnum? = null,
-    /**
-     * The size of the VPC NAT gateway.
-     */
+    /** The size of the VPC NAT gateway. */
     val size: Long? = null,
-    /**
-     * An array of VPCs associated with the VPC NAT gateway.
-     */
+    /** An array of VPCs associated with the VPC NAT gateway. */
     val vpcs: List<VpcNatGatewayGetVpcsItem>? = null,
-    /**
-     * An object containing egress information for the VPC NAT gateway.
-     */
+    /** An object containing egress information for the VPC NAT gateway. */
     val egresses: VpcNatGatewayGetEgresses? = null,
+    /** The UDP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds")
+    val udpTimeoutSeconds: Long? = null,
+    /** The ICMP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds")
+    val icmpTimeoutSeconds: Long? = null,
+    /** The TCP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds")
+    val tcpTimeoutSeconds: Long? = null,
     /**
-     * The UDP timeout in seconds for the VPC NAT gateway.
+     * A time value given in ISO8601 combined date and time format that represents when the VPC NAT
+     * gateway was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds") val udpTimeoutSeconds: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
-     * The ICMP timeout in seconds for the VPC NAT gateway.
+     * A time value given in ISO8601 combined date and time format that represents when the VPC NAT
+     * gateway was last updated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds") val icmpTimeoutSeconds: Long? = null,
-    /**
-     * The TCP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds") val tcpTimeoutSeconds: Long? = null,
-    /**
-     * A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * A time value given in ISO8601 combined date and time format that represents when the VPC NAT gateway was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `VpcNatGateways` API schema.
- */
+/** Typed representation of the `VpcNatGateways` API schema. */
 data class VpcNatGateways(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateways") val vpcNatGateways: List<VpcNatGatewayGet>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateways")
+    val vpcNatGateways: List<VpcNatGatewayGet>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Required object value serialized in the `vpcs[]` wire field.
- */
+/** Required object value serialized in the `vpcs[]` wire field. */
 data class VpcNatGatewayUpdateVpcsItem(
-    /**
-     * The unique identifier of the VPC to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /**
-     * The unique identifier of the VPC subnet to which the NAT gateway is attached.
-     */
+    /** The unique identifier of the VPC subnet to which the NAT gateway is attached. */
     @com.fasterxml.jackson.annotation.JsonProperty("subnet_uuid") val subnetUuid: String? = null,
-    /**
-     * The classification of the NAT gateway as the default egress route for the VPC traffic.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway") val defaultGateway: Boolean? = null
+    /** The classification of the NAT gateway as the default egress route for the VPC traffic. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_gateway")
+    val defaultGateway: Boolean? = null,
 )
 
-/**
- * Typed representation of the `VpcNatGatewayUpdate` API schema.
- */
+/** Typed representation of the `VpcNatGatewayUpdate` API schema. */
 data class VpcNatGatewayUpdate(
-    /**
-     * The human-readable name of the VPC NAT gateway.
-     */
+    /** The human-readable name of the VPC NAT gateway. */
     val name: String,
-    /**
-     * The size of the VPC NAT gateway.
-     */
+    /** The size of the VPC NAT gateway. */
     val size: Long,
-    /**
-     * An array of VPCs associated with the VPC NAT gateway.
-     */
+    /** An array of VPCs associated with the VPC NAT gateway. */
     val vpcs: List<VpcNatGatewayUpdateVpcsItem>? = null,
-    /**
-     * The UDP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds") val udpTimeoutSeconds: Long? = null,
-    /**
-     * The ICMP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds") val icmpTimeoutSeconds: Long? = null,
-    /**
-     * The TCP timeout in seconds for the VPC NAT gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds") val tcpTimeoutSeconds: Long? = null
+    /** The UDP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("udp_timeout_seconds")
+    val udpTimeoutSeconds: Long? = null,
+    /** The ICMP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("icmp_timeout_seconds")
+    val icmpTimeoutSeconds: Long? = null,
+    /** The TCP timeout in seconds for the VPC NAT gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tcp_timeout_seconds")
+    val tcpTimeoutSeconds: Long? = null,
 )
 
-/**
- * Typed representation of the `VpcNatGatewayUpdateResponse` API schema.
- */
+/** Typed representation of the `VpcNatGatewayUpdateResponse` API schema. */
 data class VpcNatGatewayUpdateResponse(
-    /**
-     * Optional object value serialized in the `vpc_nat_gateway` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway") val vpcNatGateway: VpcNatGatewayUpdate? = null
+    /** Optional object value serialized in the `vpc_nat_gateway` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_nat_gateway")
+    val vpcNatGateway: VpcNatGatewayUpdate? = null
 )

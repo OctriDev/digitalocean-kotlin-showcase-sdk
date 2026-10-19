@@ -3,114 +3,92 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Required object value serialized in the `functions_component_health_metrics[]` wire field.
- */
+/** Required object value serialized in the `functions_component_health_metrics[]` wire field. */
 data class AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem(
-    /**
-     * Optional `string` value serialized in the `metric_label` wire field.
-     */
+    /** Optional `string` value serialized in the `metric_label` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_label") val metricLabel: String? = null,
-    /**
-     * Optional `double`-formatted value serialized in the `metric_value` wire field.
-     */
+    /** Optional `double`-formatted value serialized in the `metric_value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_value") val metricValue: Double? = null,
-    /**
-     * Optional `string` value serialized in the `time_window` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_window") val timeWindow: String? = null
+    /** Optional `string` value serialized in the `time_window` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_window") val timeWindow: String? = null,
 )
 
-/**
- * Typed representation of the `AppFunctionsComponentHealth` API schema.
- */
+/** Typed representation of the `AppFunctionsComponentHealth` API schema. */
 data class AppFunctionsComponentHealth(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional array value serialized in the `functions_component_health_metrics` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("functions_component_health_metrics") val functionsComponentHealthMetrics: List<AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem>? = null
+    /** Optional array value serialized in the `functions_component_health_metrics` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("functions_component_health_metrics")
+    val functionsComponentHealthMetrics:
+        List<AppFunctionsComponentHealthFunctionsComponentHealthMetricsItem>? =
+        null,
 )
 
-/**
- * Optional API value serialized in the `cors` wire field.
- */
+/** Optional API value serialized in the `cors` wire field. */
 data class AppFunctionsSpecCors(
-    /**
-     * The set of allowed CORS origins.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_origins") val allowOrigins: List<AppsStringMatch>? = null,
+    /** The set of allowed CORS origins. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_origins")
+    val allowOrigins: List<AppsStringMatch>? = null,
     /**
      * The set of allowed HTTP methods. This configures the `Access-Control-Allow-Methods` header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_methods") val allowMethods: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_methods")
+    val allowMethods: List<String>? = null,
     /**
-     * The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers` header.
+     * The set of allowed HTTP request headers. This configures the `Access-Control-Allow-Headers`
+     * header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_headers") val allowHeaders: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_headers")
+    val allowHeaders: List<String>? = null,
     /**
-     * The set of HTTP response headers that browsers are allowed to access. This configures the `Access-Control-Expose-Headers` header.
+     * The set of HTTP response headers that browsers are allowed to access. This configures the
+     * `Access-Control-Expose-Headers` header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expose_headers") val exposeHeaders: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expose_headers")
+    val exposeHeaders: List<String>? = null,
     /**
-     * An optional duration specifying how long browsers can cache the results of a preflight request. This configures the `Access-Control-Max-Age` header.
+     * An optional duration specifying how long browsers can cache the results of a preflight
+     * request. This configures the `Access-Control-Max-Age` header.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("max_age") val maxAge: String? = null,
     /**
-     * Whether browsers should expose the response to the client-side JavaScript code when the request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials` header.
+     * Whether browsers should expose the response to the client-side JavaScript code when the
+     * request’s credentials mode is include. This configures the `Access-Control-Allow-Credentials`
+     * header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_credentials") val allowCredentials: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_credentials")
+    val allowCredentials: Boolean? = null,
 )
 
-/**
- * Typed representation of the `AppFunctionsSpec` API schema.
- */
+/** Typed representation of the `AppFunctionsSpec` API schema. */
 data class AppFunctionsSpec(
-    /**
-     * The name. Must be unique across all components within the same app.
-     */
+    /** The name. Must be unique across all components within the same app. */
     val name: String,
-    /**
-     * Optional API value serialized in the `cors` wire field.
-     */
+    /** Optional API value serialized in the `cors` wire field. */
     val cors: AppFunctionsSpecCors? = null,
     /**
-     * (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this component.
+     * (Deprecated - Use Ingress Rules instead). A list of HTTP routes that should be routed to this
+     * component.
      */
     val routes: List<AppRouteSpec>? = null,
     /**
-     * An optional path to the working directory to use for the build. For Dockerfile builds, this will be used as the build context. Must be relative to the root of the repo.
+     * An optional path to the working directory to use for the build. For Dockerfile builds, this
+     * will be used as the build context. Must be relative to the root of the repo.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_dir") val sourceDir: String? = null,
-    /**
-     * Optional array value serialized in the `alerts` wire field.
-     */
+    /** Optional array value serialized in the `alerts` wire field. */
     val alerts: List<AppAlertSpec>? = null,
-    /**
-     * A list of environment variables made available to the component.
-     */
+    /** A list of environment variables made available to the component. */
     val envs: List<AppVariableDefinition>? = null,
-    /**
-     * Optional object value serialized in the `git` wire field.
-     */
+    /** Optional object value serialized in the `git` wire field. */
     val git: AppsGitSourceSpec? = null,
-    /**
-     * Optional object value serialized in the `github` wire field.
-     */
+    /** Optional object value serialized in the `github` wire field. */
     val github: AppsGithubSourceSpec? = null,
-    /**
-     * Optional object value serialized in the `gitlab` wire field.
-     */
+    /** Optional object value serialized in the `gitlab` wire field. */
     val gitlab: AppsGitlabSourceSpec? = null,
-    /**
-     * Optional object value serialized in the `bitbucket` wire field.
-     */
+    /** Optional object value serialized in the `bitbucket` wire field. */
     val bitbucket: AppsBitbucketSourceSpec? = null,
-    /**
-     * A list of configured log forwarding destinations.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("log_destinations") val logDestinations: List<AppLogDestinationDefinition>? = null
+    /** A list of configured log forwarding destinations. */
+    @com.fasterxml.jackson.annotation.JsonProperty("log_destinations")
+    val logDestinations: List<AppLogDestinationDefinition>? = null,
 )

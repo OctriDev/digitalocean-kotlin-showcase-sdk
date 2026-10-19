@@ -3,30 +3,19 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `DeleteCheckpointResponse` API schema.
- */
+/** Typed representation of the `DeleteCheckpointResponse` API schema. */
 data class DeleteCheckpointResponse(
-    /**
-     * Echo of the requested checkpoint id.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint_id") val checkpointId: String? = null,
-    /**
-     * Always true on 200 (delete is idempotent).
-     */
-    val deleted: Boolean? = null
+    /** Echo of the requested checkpoint id. */
+    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint_id")
+    val checkpointId: String? = null,
+    /** Always true on 200 (delete is idempotent). */
+    val deleted: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DeleteTemplateResponse` API schema.
- */
+/** Typed representation of the `DeleteTemplateResponse` API schema. */
 data class DeleteTemplateResponse(
-    /**
-     * Optional `uuid`-formatted value serialized in the `template_id` wire field.
-     */
+    /** Optional `uuid`-formatted value serialized in the `template_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String? = null,
-    /**
-     * Optional `boolean` value serialized in the `deleted` wire field.
-     */
-    val deleted: Boolean? = null
+    /** Optional `boolean` value serialized in the `deleted` wire field. */
+    val deleted: Boolean? = null,
 )

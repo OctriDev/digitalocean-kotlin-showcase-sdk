@@ -3,47 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ActiveVpcPeering` API schema.
- */
+/** Typed representation of the `ActiveVpcPeering` API schema. */
 data class ActiveVpcPeering(
-    /**
-     * Optional object value serialized in the `vpc_peering` wire field.
-     */
+    /** Optional object value serialized in the `vpc_peering` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_peering") val vpcPeering: VpcPeering? = null
 )
 
-/**
- * Typed representation of the `AllVpcPeerings` API schema.
- */
+/** Typed representation of the `AllVpcPeerings` API schema. */
 data class AllVpcPeerings(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_peerings") val vpcPeerings: List<VpcPeering>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_peerings")
+    val vpcPeerings: List<VpcPeering>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `DeletingVpcPeering` API schema.
- */
+/** Typed representation of the `DeletingVpcPeering` API schema. */
 data class DeletingVpcPeering(
-    /**
-     * Optional object value serialized in the `vpc_peering` wire field.
-     */
+    /** Optional object value serialized in the `vpc_peering` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_peering") val vpcPeering: VpcPeering? = null
 )
 
-/**
- * Typed representation of the `ProvisioningVpcPeering` API schema.
- */
+/** Typed representation of the `ProvisioningVpcPeering` API schema. */
 data class ProvisioningVpcPeering(
-    /**
-     * Optional object value serialized in the `vpc_peering` wire field.
-     */
+    /** Optional object value serialized in the `vpc_peering` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_peering") val vpcPeering: VpcPeering? = null
 )

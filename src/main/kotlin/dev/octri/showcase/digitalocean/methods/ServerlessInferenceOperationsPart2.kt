@@ -18,256 +18,406 @@ import dev.octri.showcase.digitalocean.VideoGeneration
 
 internal object ServerlessInferenceInferenceCreateResponseOperation {
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      *
-     * @param model The model ID of the model you want to use. Get the model ID using
-     *   `/v1/models` or on the available models page.
-     * @param input The prompt or input content you want the model to respond to. Can
-     *   be a simple text string or an array of message objects for conversation
-     *   context.
-     * @param maxOutputTokens The maximum number of tokens to generate in the
-     *   response.
-     * @param temperature A value between 0.0 and 2.0 to control randomness and
-     *   creativity. Lower values like 0.2 make the output more focused and
-     *   deterministic, while higher values like 0.8 make it more random.
+     * @param model The model ID of the model you want to use. Get the model ID using `/v1/models`
+     *   or on the available models page.
+     * @param input The prompt or input content you want the model to respond to. Can be a simple
+     *   text string or an array of message objects for conversation context.
+     * @param maxOutputTokens The maximum number of tokens to generate in the response.
+     * @param temperature A value between 0.0 and 2.0 to control randomness and creativity. Lower
+     *   values like 0.2 make the output more focused and deterministic, while higher values like
+     *   0.8 make it more random.
      * @param stream Set to true to stream partial responses as Server-Sent Events.
-     * @param instructions System-level instructions for the model. This sets the
-     *   behavior and context for the response generation.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
+     * @param instructions System-level instructions for the model. This sets the behavior and
+     *   context for the response generation.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
      * @param tools A list of tools the model may call.
      * @param toolChoice Controls which (if any) tool is called by the model.
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens.
+     * @param stop Up to 4 sequences where the API will stop generating further tokens.
      * @param metadata Set of key-value pairs that can be attached to the request.
      * @param user A unique identifier representing your end-user.
      */
-    fun inferenceCreateResponse(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateResponseRequest, options: RequestOptions? = null): CreateResponseResponse {
+    fun inferenceCreateResponse(
+        clientConfig: ClientConfig,
+        request: ServerlessInference.InferenceCreateResponseRequest,
+        options: RequestOptions? = null,
+    ): CreateResponseResponse {
         validateInferenceCreateResponseRequest(request)
 
-        return SdkClient.request<CreateResponseResponse>(SdkClient.RequestSpec("POST", "/v1/responses", config = clientConfig, body = buildInferenceCreateResponseBody(request), operationId = "inferenceCreateResponse", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<CreateResponseResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/responses",
+                    config = clientConfig,
+                    body = buildInferenceCreateResponseBody(request),
+                    operationId = "inferenceCreateResponse",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateInferenceCreateResponseRequest(request: ServerlessInference.InferenceCreateResponseRequest) {
+    private fun validateInferenceCreateResponseRequest(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ) {
         val maxOutputTokensValue = request.maxOutputTokens?.getOrNull()
-if (maxOutputTokensValue != null) {
-            Validation.validateRange("max_output_tokens", maxOutputTokensValue, Validation.RangeOpts(min = 1.0))
-}
-
-        val temperatureValue = request.temperature?.getOrNull()
-if (temperatureValue != null) {
-            Validation.validateRange("temperature", temperatureValue, Validation.RangeOpts(min = 0.0, max = 2.0))
-}
-
-        val topPValue = request.topP?.getOrNull()
-if (topPValue != null) {
-            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
-}
-
-        val stopValue = request.stop?.getOrNull()
-if (stopValue != null) {
-            Validation.validateItems("stop", stopValue, Validation.LengthOpts(min = 1, max = 4))
-}
-    }
-
-
-
-    private fun buildInferenceCreateResponseBody(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildInferenceCreateResponseBodyPart1(request))
-            putAll(buildInferenceCreateResponseBodyPart2(request))
+        if (maxOutputTokensValue != null) {
+            Validation.validateRange(
+                "max_output_tokens",
+                maxOutputTokensValue,
+                Validation.RangeOpts(min = 1.0),
+            )
         }
 
-    private fun buildInferenceCreateResponseBodyPart1(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
+        val temperatureValue = request.temperature?.getOrNull()
+        if (temperatureValue != null) {
+            Validation.validateRange(
+                "temperature",
+                temperatureValue,
+                Validation.RangeOpts(min = 0.0, max = 2.0),
+            )
+        }
+
+        val topPValue = request.topP?.getOrNull()
+        if (topPValue != null) {
+            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
+        }
+
+        val stopValue = request.stop?.getOrNull()
+        if (stopValue != null) {
+            Validation.validateItems("stop", stopValue, Validation.LengthOpts(min = 1, max = 4))
+        }
+    }
+
+    private fun buildInferenceCreateResponseBody(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildInferenceCreateResponseBodyPart1(request))
+        putAll(buildInferenceCreateResponseBodyPart2(request))
+    }
+
+    private fun buildInferenceCreateResponseBodyPart1(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "input" to (request.input),
-            "max_output_tokens" to
-    (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
-            "stream" to
-    (request.stream ?: SdkClient.SdkOptional.Omitted),
-            "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted),
+            "max_output_tokens" to (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "stream" to (request.stream ?: SdkClient.SdkOptional.Omitted),
+            "instructions" to (request.instructions ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
             "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
             "stop" to (request.stop ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildInferenceCreateResponseBodyPart2(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
-        SdkClient.bodyMap(
-            "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
-        )
+    private fun buildInferenceCreateResponseBodyPart2(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> =
+        SdkClient.bodyMap("user" to (request.user ?: SdkClient.SdkOptional.Omitted))
 }
 
 internal object ServerlessInferenceInferenceCreateResponseStreamOperation {
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      *
-     * @param model The model ID of the model you want to use. Get the model ID using
-     *   `/v1/models` or on the available models page.
-     * @param input The prompt or input content you want the model to respond to. Can
-     *   be a simple text string or an array of message objects for conversation
-     *   context.
+     * @param model The model ID of the model you want to use. Get the model ID using `/v1/models`
+     *   or on the available models page.
+     * @param input The prompt or input content you want the model to respond to. Can be a simple
+     *   text string or an array of message objects for conversation context.
      * @param stream Set to true to stream partial responses as Server-Sent Events.
-     * @param maxOutputTokens The maximum number of tokens to generate in the
-     *   response.
-     * @param temperature A value between 0.0 and 2.0 to control randomness and
-     *   creativity. Lower values like 0.2 make the output more focused and
-     *   deterministic, while higher values like 0.8 make it more random.
-     * @param instructions System-level instructions for the model. This sets the
-     *   behavior and context for the response generation.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
+     * @param maxOutputTokens The maximum number of tokens to generate in the response.
+     * @param temperature A value between 0.0 and 2.0 to control randomness and creativity. Lower
+     *   values like 0.2 make the output more focused and deterministic, while higher values like
+     *   0.8 make it more random.
+     * @param instructions System-level instructions for the model. This sets the behavior and
+     *   context for the response generation.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
      * @param tools A list of tools the model may call.
      * @param toolChoice Controls which (if any) tool is called by the model.
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens.
+     * @param stop Up to 4 sequences where the API will stop generating further tokens.
      * @param metadata Set of key-value pairs that can be attached to the request.
      * @param user A unique identifier representing your end-user.
      */
-    fun inferenceCreateResponseStream(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateResponseStreamRequest, options: RequestOptions? = null): Sequence<CreateResponseStreamResponse> {
+    fun inferenceCreateResponseStream(
+        clientConfig: ClientConfig,
+        request: ServerlessInference.InferenceCreateResponseStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateResponseStreamResponse> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v1/responses",
-                config = clientConfig,
-                body = buildInferenceCreateResponseStreamBody(request),
-                contentType = "application/json",
-                operationId = "inferenceCreateResponseStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/v1/responses",
+                        config = clientConfig,
+                        body = buildInferenceCreateResponseStreamBody(request),
+                        contentType = "application/json",
+                        operationId = "inferenceCreateResponseStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "401" to Error2::class.java,
+                                "429" to Error2::class.java,
+                                "500" to Error2::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, CreateResponseStreamResponse::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(
+                            _ev.data,
+                            CreateResponseStreamResponse::class.java,
+                        )
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
 
+    private fun buildInferenceCreateResponseStreamBody(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildInferenceCreateResponseStreamBodyPart1(request))
+        putAll(buildInferenceCreateResponseStreamBodyPart2(request))
+    }
 
-    private fun buildInferenceCreateResponseStreamBody(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildInferenceCreateResponseStreamBodyPart1(request))
-            putAll(buildInferenceCreateResponseStreamBodyPart2(request))
-        }
-
-    private fun buildInferenceCreateResponseStreamBodyPart1(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
+    private fun buildInferenceCreateResponseStreamBodyPart1(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "input" to (request.input),
             "stream" to (request.stream),
-            "max_output_tokens" to
-    (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
-            "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted),
+            "max_output_tokens" to (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "instructions" to (request.instructions ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
             "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
             "stop" to (request.stop ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildInferenceCreateResponseStreamBodyPart2(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
-        SdkClient.bodyMap(
-            "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
-        )
+    private fun buildInferenceCreateResponseStreamBodyPart2(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> =
+        SdkClient.bodyMap("user" to (request.user ?: SdkClient.SdkOptional.Omitted))
 }
 
 internal object ServerlessInferenceInferenceCreateAsyncInvokeOperation {
     /**
-     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an asynchronous job and returns a request_id. The job status is QUEUED initially. Use the request_id to poll for the result.
+     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an
+     * asynchronous job and returns a request_id. The job status is QUEUED initially. Use the
+     * request_id to poll for the result.
      *
      * @param modelId The ID of the model to invoke asynchronously.
-     * @param input The input parameters for the model invocation. Fields vary by
-     *   model type. For **image generation** models (e.g., `fal-ai/flux/schnell`,
-     *   `fal-ai/fast-sdxl`), use `prompt` along with optional image parameters like
-     *   `output_format`, `num_inference_steps`, `guidance_scale`, `num_images`, and
-     *   `enable_safety_checker`. For **audio generation** models (e.g.,
-     *   `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with
+     * @param input The input parameters for the model invocation. Fields vary by model type. For
+     *   **image generation** models (e.g., `fal-ai/flux/schnell`, `fal-ai/fast-sdxl`), use `prompt`
+     *   along with optional image parameters like `output_format`, `num_inference_steps`,
+     *   `guidance_scale`, `num_images`, and `enable_safety_checker`. For **audio generation**
+     *   models (e.g., `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with
      *   `seconds_total` to control the duration. For…
-     * @param tags An optional list of key-value tags to attach to the invocation
-     *   request for tracking or categorization.
+     * @param tags An optional list of key-value tags to attach to the invocation request for
+     *   tracking or categorization.
      */
-    fun inferenceCreateAsyncInvoke(clientConfig: ClientConfig, modelId: String, input: ServerlessInference.AsyncInvokeRequestInput, tags: SdkClient.SdkOptional<List<ServerlessInference.AsyncInvokeRequestTagsItem>?>? = null, options: RequestOptions? = null): AsyncInvokeResponse {
-        return SdkClient.request<AsyncInvokeResponse>(SdkClient.RequestSpec("POST", "/v1/async-invoke", config = clientConfig, body = SdkClient.bodyMap("model_id" to (modelId), "input" to (input), "tags" to (tags ?: SdkClient.SdkOptional.Omitted)), operationId = "inferenceCreateAsyncInvoke", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun inferenceCreateAsyncInvoke(
+        clientConfig: ClientConfig,
+        modelId: String,
+        input: ServerlessInference.AsyncInvokeRequestInput,
+        tags: SdkClient.SdkOptional<List<ServerlessInference.AsyncInvokeRequestTagsItem>?>? = null,
+        options: RequestOptions? = null,
+    ): AsyncInvokeResponse {
+        return SdkClient.request<AsyncInvokeResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/async-invoke",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model_id" to (modelId),
+                            "input" to (input),
+                            "tags" to (tags ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "inferenceCreateAsyncInvoke",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ServerlessInferenceInferenceCreateSpeechOperation {
     /**
-     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`, `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
+     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`,
+     * `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
      *
      * @param model The text-to-speech model to use.
      * @param input The text to convert to speech.
      * @param voice The voice to use for synthesis.
-     * @param responseFormat The audio format to return. Supported values include
-     *   `mp3` and `wav`. The API may return raw audio bytes or a JSON envelope with
-     *   base64-encoded audio.
-     * @param instructions Optional style or delivery instructions for the
-     *   synthesizer.
+     * @param responseFormat The audio format to return. Supported values include `mp3` and `wav`.
+     *   The API may return raw audio bytes or a JSON envelope with base64-encoded audio.
+     * @param instructions Optional style or delivery instructions for the synthesizer.
      */
-    fun inferenceCreateSpeech(clientConfig: ClientConfig, model: String, input: String, voice: String? = null, responseFormat: String? = null, instructions: String? = null, options: RequestOptions? = null): SpeechResponse {
+    fun inferenceCreateSpeech(
+        clientConfig: ClientConfig,
+        model: String,
+        input: String,
+        voice: String? = null,
+        responseFormat: String? = null,
+        instructions: String? = null,
+        options: RequestOptions? = null,
+    ): SpeechResponse {
         Validation.validateLength("input", input, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<SpeechResponse>(SdkClient.RequestSpec("POST", "/v1/audio/speech", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "input" to (input), "voice" to (SdkClient.omitIfNull(voice)), "response_format" to (SdkClient.omitIfNull(responseFormat)), "instructions" to (SdkClient.omitIfNull(instructions))), operationId = "inferenceCreateSpeech", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<SpeechResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/audio/speech",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (model),
+                            "input" to (input),
+                            "voice" to (SdkClient.omitIfNull(voice)),
+                            "response_format" to (SdkClient.omitIfNull(responseFormat)),
+                            "instructions" to (SdkClient.omitIfNull(instructions)),
+                        ),
+                    operationId = "inferenceCreateSpeech",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ServerlessInferenceInferenceCreateVideoOperation {
     /**
-     * Start an asynchronous video generation job from a text prompt. Poll `GET /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with `GET /v1/videos/{video_id}/content` or from `output.url` when present.
+     * Start an asynchronous video generation job from a text prompt. Poll `GET
+     * /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with
+     * `GET /v1/videos/{video_id}/content` or from `output.url` when present.
      *
      * @param model The video generation model to use.
      * @param prompt A text description of the desired video.
      * @param size The output resolution, for example `1280x720`.
      * @param fps Frames per second for the generated video.
      */
-    fun inferenceCreateVideo(clientConfig: ClientConfig, model: String, prompt: String, size: String? = null, fps: Long? = null, options: RequestOptions? = null): VideoGeneration {
+    fun inferenceCreateVideo(
+        clientConfig: ClientConfig,
+        model: String,
+        prompt: String,
+        size: String? = null,
+        fps: Long? = null,
+        options: RequestOptions? = null,
+    ): VideoGeneration {
         Validation.validateLength("prompt", prompt, Validation.LengthOpts(min = 1))
 
         if (fps != null) {
             Validation.validateRange("fps", fps, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<VideoGeneration>(SdkClient.RequestSpec("POST", "/v1/videos", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "prompt" to (prompt), "size" to (SdkClient.omitIfNull(size)), "fps" to (SdkClient.omitIfNull(fps))), operationId = "inferenceCreateVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<VideoGeneration>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/videos",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (model),
+                            "prompt" to (prompt),
+                            "size" to (SdkClient.omitIfNull(size)),
+                            "fps" to (SdkClient.omitIfNull(fps)),
+                        ),
+                    operationId = "inferenceCreateVideo",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ServerlessInferenceInferenceGetVideoOperation {
     /**
-     * Returns the current state of a video generation job. Poll until `status` reaches a terminal value such as `completed` or `failed`.
+     * Returns the current state of a video generation job. Poll until `status` reaches a terminal
+     * value such as `completed` or `failed`.
      *
      * @param videoId The video generation job identifier.
      */
-    fun inferenceGetVideo(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): VideoGeneration {
-        return SdkClient.request<VideoGeneration>(SdkClient.RequestSpec("GET", "/v1/videos/${SdkClient.encodePathSegment(videoId)}", config = clientConfig, operationId = "inferenceGetVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun inferenceGetVideo(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): VideoGeneration {
+        return SdkClient.request<VideoGeneration>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v1/videos/${SdkClient.encodePathSegment(videoId)}",
+                    config = clientConfig,
+                    operationId = "inferenceGetVideo",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -277,7 +427,29 @@ internal object ServerlessInferenceInferenceGetVideoContentOperation {
      *
      * @param videoId The video generation job identifier.
      */
-    fun inferenceGetVideoContent(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): ByteArray {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/v1/videos/${SdkClient.encodePathSegment(videoId)}/content", config = clientConfig, operationId = "inferenceGetVideoContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun inferenceGetVideoContent(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return SdkClient.request<ByteArray>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v1/videos/${SdkClient.encodePathSegment(videoId)}/content",
+                    config = clientConfig,
+                    operationId = "inferenceGetVideoContent",
+                    decoder = SdkClient.ResponseDecoder.BYTES,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

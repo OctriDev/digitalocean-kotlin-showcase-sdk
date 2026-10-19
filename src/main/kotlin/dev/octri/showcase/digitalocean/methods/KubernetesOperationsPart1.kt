@@ -28,555 +28,946 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object KubernetesListClustersOperation {
     /**
-     * To list all of the Kubernetes clusters on your account, send a GET request to `/v2/kubernetes/clusters`.
+     * To list all of the Kubernetes clusters on your account, send a GET request to
+     * `/v2/kubernetes/clusters`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun kubernetesListClusters(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllClusters {
+    fun kubernetesListClusters(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllClusters {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllClusters>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "kubernetesListClusters", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllClusters>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "kubernetesListClusters",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesCreateClusterOperation {
     /**
-     * To create a new Kubernetes cluster, send a POST request to `/v2/kubernetes/clusters`. The request must contain at least one node pool with at least one worker. The request may contain a maintenance window policy describing a time period when disruptive maintenance tasks may be carried out. Omitting the policy implies that a window will be chosen automatically. See here for details.
+     * To create a new Kubernetes cluster, send a POST request to `/v2/kubernetes/clusters`. The
+     * request must contain at least one node pool with at least one worker. The request may contain
+     * a maintenance window policy describing a time period when disruptive maintenance tasks may be
+     * carried out. Omitting the policy implies that a window will be chosen automatically. See here
+     * for details.
      *
      * @param name A human-readable name for a Kubernetes cluster.
-     * @param region The slug identifier for the region where the Kubernetes cluster
-     *   is located.
-     * @param version The slug identifier for the version of Kubernetes used for the
-     *   cluster. If set to a minor version (e.g. "1.14"), the latest version within it
-     *   will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest published
-     *   version will be used. See the `/v2/kubernetes/options` endpoint to find all
-     *   currently available versions.
-     * @param nodePools An object specifying the details of the worker nodes
-     *   available to the Kubernetes cluster.
-     * @param clusterSubnet The range of IP addresses for the overlay network of the
-     *   Kubernetes cluster in CIDR notation.
-     * @param serviceSubnet The range of assignable IP addresses for services running
-     *   in the Kubernetes cluster in CIDR notation.
-     * @param vpcUuid A string specifying the UUID of the VPC to which the Kubernetes
-     *   cluster is assigned. Requires `vpc:read` scope.
-     * @param workerSubnetUuid The UUID of the VPC subnet to attach worker nodes to.
-     *   When omitted on create, the default subnet for the VPC is used. This value
-     *   cannot be changed after the cluster is created. `vpc_uuid` must also be set.
-     *   Requires `vpc:read` scope.
-     * @param tags An array of tags to apply to the Kubernetes cluster. All clusters
-     *   are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read`
-     *   and `tag:create` scope, as well as `tag:delete` if existing tags are getting
-     *   removed.
-     * @param maintenancePolicy An object specifying the maintenance window policy
-     *   for the Kubernetes cluster.
-     * @param autoUpgrade A boolean value indicating whether the cluster will be
-     *   automatically upgraded to new patch releases during its maintenance window.
-     * @param isolatedWorkers A boolean value indicating whether worker nodes in the
-     *   cluster are not assigned public IP addresses. When omitted on create, the
-     *   default value is false. When enabled, a NAT gateway must exist in the VPC
-     *   where the cluster is created.
-     * @param gpuOperatorReady A boolean value indicating whether GPU nodes in the
-     *   cluster are launched with images that do not include pre-installed GPU
-     *   drivers, allowing GPU drivers to be managed by a GPU operator instead.
-     *   Mutually exclusive with other GPU-related cluster options, such as
-     *   `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create, the
-     *   default value is false.
-     * @param surgeUpgrade A boolean value indicating whether surge upgrade is
-     *   enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast
-     *   and reliable by bringing up new nodes before destroying the outdated nodes.
-     * @param ha A boolean value indicating whether the control plane is run in a
-     *   highly available configuration in the cluster. Highly available control planes
-     *   incur less downtime. The property cannot be disabled. When omitted on create,
-     *   the default is version-dependent; for DOKS 1.36.0 and later, the default is
-     *   true; for earlier versions, the default is false.
-     * @param controlPlaneFirewall An object specifying the control plane firewall
-     *   for the Kubernetes cluster. Control plane firewall is in early availability
-     *   (invite only).
-     * @param clusterAutoscalerConfiguration An object specifying custom cluster
-     *   autoscaler configuration.
-     * @param sso An object specifying Single Sign-On (SSO) configuration for the
+     * @param region The slug identifier for the region where the Kubernetes cluster is located.
+     * @param version The slug identifier for the version of Kubernetes used for the cluster. If set
+     *   to a minor version (e.g. "1.14"), the latest version within it will be used (e.g.
+     *   "1.14.6-do.1"); if set to "latest", the latest published version will be used. See the
+     *   `/v2/kubernetes/options` endpoint to find all currently available versions.
+     * @param nodePools An object specifying the details of the worker nodes available to the
      *   Kubernetes cluster.
-     * @param routingAgent An object specifying whether the routing-agent component
-     *   should be enabled for the Kubernetes cluster.
-     * @param p2pOciRegistryPlugin An object specifying whether the Peer-to-peer OCI
-     *   registry component should be enabled for the Kubernetes cluster.
-     * @param nfsCsiPlugin An object specifying whether the NFS CSI plugin should be
-     *   enabled for the Kubernetes cluster.
-     * @param amdGpuDevicePlugin An object specifying whether the AMD GPU Device
-     *   Plugin should be enabled in the Kubernetes cluster. It's enabled by default
-     *   for clusters with an AMD GPU node pool.
-     * @param amdGpuDeviceMetricsExporterPlugin An object specifying whether the AMD
-     *   Device Metrics Exporter should be enabled in the Kubernetes cluster.
-     * @param nvidiaGpuDevicePlugin An object specifying whether the Nvidia GPU
-     *   Device Plugin should be enabled in the Kubernetes cluster. It's enabled by
-     *   default for clusters with an Nvidia GPU node pool.
-     * @param nvidiaGpuDraDriver An object specifying whether the NVIDIA GPU DRA
-     *   Driver should be enabled in the Kubernetes cluster. Mutually exclusive with
-     *   `nvidia_gpu_device_plugin`.
-     * @param amdGpuDraDriver An object specifying whether the AMD GPU DRA Driver
-     *   should be enabled in the Kubernetes cluster. Mutually exclusive with
-     *   `amd_gpu_device_plugin`.
-     * @param rdmaSharedDevPlugin An object specifying whether the RDMA shared device
-     *   plugin should be enabled in the Kubernetes cluster.
-     * @param corednsAutoscaler An object specifying whether the Cluster Proportional
-     *   Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes
+     * @param clusterSubnet The range of IP addresses for the overlay network of the Kubernetes
+     *   cluster in CIDR notation.
+     * @param serviceSubnet The range of assignable IP addresses for services running in the
+     *   Kubernetes cluster in CIDR notation.
+     * @param vpcUuid A string specifying the UUID of the VPC to which the Kubernetes cluster is
+     *   assigned. Requires `vpc:read` scope.
+     * @param workerSubnetUuid The UUID of the VPC subnet to attach worker nodes to. When omitted on
+     *   create, the default subnet for the VPC is used. This value cannot be changed after the
+     *   cluster is created. `vpc_uuid` must also be set. Requires `vpc:read` scope.
+     * @param tags An array of tags to apply to the Kubernetes cluster. All clusters are
+     *   automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read` and `tag:create`
+     *   scope, as well as `tag:delete` if existing tags are getting removed.
+     * @param maintenancePolicy An object specifying the maintenance window policy for the
+     *   Kubernetes cluster.
+     * @param autoUpgrade A boolean value indicating whether the cluster will be automatically
+     *   upgraded to new patch releases during its maintenance window.
+     * @param isolatedWorkers A boolean value indicating whether worker nodes in the cluster are not
+     *   assigned public IP addresses. When omitted on create, the default value is false. When
+     *   enabled, a NAT gateway must exist in the VPC where the cluster is created.
+     * @param gpuOperatorReady A boolean value indicating whether GPU nodes in the cluster are
+     *   launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to
+     *   be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster
+     *   options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create,
+     *   the default value is false.
+     * @param surgeUpgrade A boolean value indicating whether surge upgrade is enabled/disabled for
+     *   the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new
+     *   nodes before destroying the outdated nodes.
+     * @param ha A boolean value indicating whether the control plane is run in a highly available
+     *   configuration in the cluster. Highly available control planes incur less downtime. The
+     *   property cannot be disabled. When omitted on create, the default is version-dependent; for
+     *   DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
+     * @param controlPlaneFirewall An object specifying the control plane firewall for the
+     *   Kubernetes cluster. Control plane firewall is in early availability (invite only).
+     * @param clusterAutoscalerConfiguration An object specifying custom cluster autoscaler
+     *   configuration.
+     * @param sso An object specifying Single Sign-On (SSO) configuration for the Kubernetes
      *   cluster.
+     * @param routingAgent An object specifying whether the routing-agent component should be
+     *   enabled for the Kubernetes cluster.
+     * @param p2pOciRegistryPlugin An object specifying whether the Peer-to-peer OCI registry
+     *   component should be enabled for the Kubernetes cluster.
+     * @param nfsCsiPlugin An object specifying whether the NFS CSI plugin should be enabled for the
+     *   Kubernetes cluster.
+     * @param amdGpuDevicePlugin An object specifying whether the AMD GPU Device Plugin should be
+     *   enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU
+     *   node pool.
+     * @param amdGpuDeviceMetricsExporterPlugin An object specifying whether the AMD Device Metrics
+     *   Exporter should be enabled in the Kubernetes cluster.
+     * @param nvidiaGpuDevicePlugin An object specifying whether the Nvidia GPU Device Plugin should
+     *   be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia
+     *   GPU node pool.
+     * @param nvidiaGpuDraDriver An object specifying whether the NVIDIA GPU DRA Driver should be
+     *   enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+     * @param amdGpuDraDriver An object specifying whether the AMD GPU DRA Driver should be enabled
+     *   in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+     * @param rdmaSharedDevPlugin An object specifying whether the RDMA shared device plugin should
+     *   be enabled in the Kubernetes cluster.
+     * @param corednsAutoscaler An object specifying whether the Cluster Proportional Autoscaler
+     *   (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
      */
-    fun kubernetesCreateCluster(clientConfig: ClientConfig, request: Kubernetes.KubernetesCreateClusterRequest, options: RequestOptions? = null): ClusterCreate {
+    fun kubernetesCreateCluster(
+        clientConfig: ClientConfig,
+        request: Kubernetes.KubernetesCreateClusterRequest,
+        options: RequestOptions? = null,
+    ): ClusterCreate {
         validateKubernetesCreateClusterRequest(request)
 
-        return SdkClient.request<ClusterCreate>(SdkClient.RequestSpec("POST", "/v2/kubernetes/clusters", config = clientConfig, body = buildKubernetesCreateClusterBody(request), operationId = "kubernetesCreateCluster", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ClusterCreate>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/kubernetes/clusters",
+                    config = clientConfig,
+                    body = buildKubernetesCreateClusterBody(request),
+                    operationId = "kubernetesCreateCluster",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateKubernetesCreateClusterRequest(request: Kubernetes.KubernetesCreateClusterRequest) {
+    private fun validateKubernetesCreateClusterRequest(
+        request: Kubernetes.KubernetesCreateClusterRequest
+    ) {
         if (request.vpcUuid != null) {
             Validation.validateUuid("vpc_uuid", request.vpcUuid)
-}
+        }
 
         if (request.workerSubnetUuid != null) {
             Validation.validateUuid("worker_subnet_uuid", request.workerSubnetUuid)
-}
+        }
     }
 
+    private fun buildKubernetesCreateClusterBody(
+        request: Kubernetes.KubernetesCreateClusterRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildKubernetesCreateClusterBodyPart1(request))
+        putAll(buildKubernetesCreateClusterBodyPart2(request))
+        putAll(buildKubernetesCreateClusterBodyPart3(request))
+    }
 
-
-    private fun buildKubernetesCreateClusterBody(request: Kubernetes.KubernetesCreateClusterRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildKubernetesCreateClusterBodyPart1(request))
-            putAll(buildKubernetesCreateClusterBodyPart2(request))
-            putAll(buildKubernetesCreateClusterBodyPart3(request))
-        }
-
-    private fun buildKubernetesCreateClusterBodyPart1(request: Kubernetes.KubernetesCreateClusterRequest): Map<String, Any?> =
+    private fun buildKubernetesCreateClusterBodyPart1(
+        request: Kubernetes.KubernetesCreateClusterRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (request.name),
             "region" to (request.region),
             "version" to (request.version),
             "node_pools" to (request.nodePools),
-            "cluster_subnet" to
-    (SdkClient.omitIfNull(request.clusterSubnet)),
-            "service_subnet" to
-    (SdkClient.omitIfNull(request.serviceSubnet)),
+            "cluster_subnet" to (SdkClient.omitIfNull(request.clusterSubnet)),
+            "service_subnet" to (SdkClient.omitIfNull(request.serviceSubnet)),
             "vpc_uuid" to (SdkClient.omitIfNull(request.vpcUuid)),
-            "worker_subnet_uuid" to
-    (SdkClient.omitIfNull(request.workerSubnetUuid)),
+            "worker_subnet_uuid" to (SdkClient.omitIfNull(request.workerSubnetUuid)),
             "tags" to (SdkClient.omitIfNull(request.tags)),
-            "maintenance_policy" to
-    (request.maintenancePolicy ?: SdkClient.SdkOptional.Omitted),
-            "auto_upgrade" to
-    (SdkClient.omitIfNull(request.autoUpgrade)),
-            "isolated_workers" to
-    (SdkClient.omitIfNull(request.isolatedWorkers)),
+            "maintenance_policy" to (request.maintenancePolicy ?: SdkClient.SdkOptional.Omitted),
+            "auto_upgrade" to (SdkClient.omitIfNull(request.autoUpgrade)),
+            "isolated_workers" to (SdkClient.omitIfNull(request.isolatedWorkers)),
         )
 
-    private fun buildKubernetesCreateClusterBodyPart2(request: Kubernetes.KubernetesCreateClusterRequest): Map<String, Any?> =
+    private fun buildKubernetesCreateClusterBodyPart2(
+        request: Kubernetes.KubernetesCreateClusterRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "gpu_operator_ready" to
-    (SdkClient.omitIfNull(request.gpuOperatorReady)),
-            "surge_upgrade" to
-    (SdkClient.omitIfNull(request.surgeUpgrade)),
+            "gpu_operator_ready" to (SdkClient.omitIfNull(request.gpuOperatorReady)),
+            "surge_upgrade" to (SdkClient.omitIfNull(request.surgeUpgrade)),
             "ha" to (SdkClient.omitIfNull(request.ha)),
             "control_plane_firewall" to
-    (request.controlPlaneFirewall ?: SdkClient.SdkOptional.Omitted),
+                (request.controlPlaneFirewall ?: SdkClient.SdkOptional.Omitted),
             "cluster_autoscaler_configuration" to
-    (request.clusterAutoscalerConfiguration ?: SdkClient.SdkOptional.Omitted),
+                (request.clusterAutoscalerConfiguration ?: SdkClient.SdkOptional.Omitted),
             "sso" to (request.sso ?: SdkClient.SdkOptional.Omitted),
-            "routing_agent" to
-    (request.routingAgent ?: SdkClient.SdkOptional.Omitted),
+            "routing_agent" to (request.routingAgent ?: SdkClient.SdkOptional.Omitted),
             "p2p_oci_registry_plugin" to
-    (request.p2pOciRegistryPlugin ?: SdkClient.SdkOptional.Omitted),
-            "nfs_csi_plugin" to
-    (request.nfsCsiPlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.p2pOciRegistryPlugin ?: SdkClient.SdkOptional.Omitted),
+            "nfs_csi_plugin" to (request.nfsCsiPlugin ?: SdkClient.SdkOptional.Omitted),
             "amd_gpu_device_plugin" to
-    (request.amdGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.amdGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
             "amd_gpu_device_metrics_exporter_plugin" to
-    (request.amdGpuDeviceMetricsExporterPlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.amdGpuDeviceMetricsExporterPlugin ?: SdkClient.SdkOptional.Omitted),
             "nvidia_gpu_device_plugin" to
-    (request.nvidiaGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.nvidiaGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildKubernetesCreateClusterBodyPart3(request: Kubernetes.KubernetesCreateClusterRequest): Map<String, Any?> =
+    private fun buildKubernetesCreateClusterBodyPart3(
+        request: Kubernetes.KubernetesCreateClusterRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "nvidia_gpu_dra_driver" to
-    (request.nvidiaGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
-            "amd_gpu_dra_driver" to
-    (request.amdGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
+                (request.nvidiaGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
+            "amd_gpu_dra_driver" to (request.amdGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
             "rdma_shared_dev_plugin" to
-    (request.rdmaSharedDevPlugin ?: SdkClient.SdkOptional.Omitted),
-            "coredns_autoscaler" to
-    (request.corednsAutoscaler ?: SdkClient.SdkOptional.Omitted),
+                (request.rdmaSharedDevPlugin ?: SdkClient.SdkOptional.Omitted),
+            "coredns_autoscaler" to (request.corednsAutoscaler ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object KubernetesGetClusterOperation {
     /**
-     * To show information about an existing Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
+     * To show information about an existing Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesGetCluster(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): ExistingCluster {
+    fun kubernetesGetCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): ExistingCluster {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<ExistingCluster>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}", config = clientConfig, operationId = "kubernetesGetCluster", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ExistingCluster>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}",
+                    config = clientConfig,
+                    operationId = "kubernetesGetCluster",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesUpdateClusterOperation {
     /**
-     * To update a Kubernetes cluster, send a PUT request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the attributes below.
+     * To update a Kubernetes cluster, send a PUT request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the attributes below.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      * @param name A human-readable name for a Kubernetes cluster.
-     * @param tags An array of tags applied to the Kubernetes cluster. All clusters
-     *   are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
-     * @param maintenancePolicy An object specifying the maintenance window policy
-     *   for the Kubernetes cluster.
-     * @param autoUpgrade A boolean value indicating whether the cluster will be
-     *   automatically upgraded to new patch releases during its maintenance window.
-     * @param surgeUpgrade A boolean value indicating whether surge upgrade is
-     *   enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast
-     *   and reliable by bringing up new nodes before destroying the outdated nodes.
-     * @param ha A boolean value indicating whether the control plane is run in a
-     *   highly available configuration in the cluster. Highly available control planes
-     *   incur less downtime. The property cannot be disabled. When omitted on create,
-     *   the default is version-dependent; for DOKS 1.36.0 and later, the default is
-     *   true; for earlier versions, the default is false.
-     * @param gpuOperatorReady A boolean value indicating whether GPU nodes in the
-     *   cluster are launched with images that do not include pre-installed GPU
-     *   drivers, allowing GPU drivers to be managed by a GPU operator instead.
-     *   Mutually exclusive with other GPU-related cluster options, such as
-     *   `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted, the current
-     *   value is left unchanged.
-     * @param controlPlaneFirewall An object specifying the control plane firewall
-     *   for the Kubernetes cluster. Control plane firewall is in early availability
-     *   (invite only).
-     * @param clusterAutoscalerConfiguration An object specifying custom cluster
-     *   autoscaler configuration.
-     * @param sso An object specifying Single Sign-On (SSO) configuration for the
+     * @param tags An array of tags applied to the Kubernetes cluster. All clusters are
+     *   automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
+     * @param maintenancePolicy An object specifying the maintenance window policy for the
      *   Kubernetes cluster.
-     * @param routingAgent An object specifying whether the routing-agent component
-     *   should be enabled for the Kubernetes cluster.
-     * @param p2pOciRegistryPlugin An object specifying whether the Peer-to-peer OCI
-     *   registry component should be enabled for the Kubernetes cluster.
-     * @param nfsCsiPlugin An object specifying whether the NFS CSI plugin should be
-     *   enabled for the Kubernetes cluster.
-     * @param amdGpuDevicePlugin An object specifying whether the AMD GPU Device
-     *   Plugin should be enabled in the Kubernetes cluster. It's enabled by default
-     *   for clusters with an AMD GPU node pool.
-     * @param amdGpuDeviceMetricsExporterPlugin An object specifying whether the AMD
-     *   Device Metrics Exporter should be enabled in the Kubernetes cluster.
-     * @param nvidiaGpuDevicePlugin An object specifying whether the Nvidia GPU
-     *   Device Plugin should be enabled in the Kubernetes cluster. It's enabled by
-     *   default for clusters with an Nvidia GPU node pool.
-     * @param nvidiaGpuDraDriver An object specifying whether the NVIDIA GPU DRA
-     *   Driver should be enabled in the Kubernetes cluster. Mutually exclusive with
-     *   `nvidia_gpu_device_plugin`.
-     * @param amdGpuDraDriver An object specifying whether the AMD GPU DRA Driver
-     *   should be enabled in the Kubernetes cluster. Mutually exclusive with
-     *   `amd_gpu_device_plugin`.
-     * @param rdmaSharedDevPlugin An object specifying whether the RDMA shared device
-     *   plugin should be enabled in the Kubernetes cluster.
-     * @param corednsAutoscaler An object specifying whether the Cluster Proportional
-     *   Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes
+     * @param autoUpgrade A boolean value indicating whether the cluster will be automatically
+     *   upgraded to new patch releases during its maintenance window.
+     * @param surgeUpgrade A boolean value indicating whether surge upgrade is enabled/disabled for
+     *   the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new
+     *   nodes before destroying the outdated nodes.
+     * @param ha A boolean value indicating whether the control plane is run in a highly available
+     *   configuration in the cluster. Highly available control planes incur less downtime. The
+     *   property cannot be disabled. When omitted on create, the default is version-dependent; for
+     *   DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
+     * @param gpuOperatorReady A boolean value indicating whether GPU nodes in the cluster are
+     *   launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to
+     *   be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster
+     *   options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted, the
+     *   current value is left unchanged.
+     * @param controlPlaneFirewall An object specifying the control plane firewall for the
+     *   Kubernetes cluster. Control plane firewall is in early availability (invite only).
+     * @param clusterAutoscalerConfiguration An object specifying custom cluster autoscaler
+     *   configuration.
+     * @param sso An object specifying Single Sign-On (SSO) configuration for the Kubernetes
      *   cluster.
+     * @param routingAgent An object specifying whether the routing-agent component should be
+     *   enabled for the Kubernetes cluster.
+     * @param p2pOciRegistryPlugin An object specifying whether the Peer-to-peer OCI registry
+     *   component should be enabled for the Kubernetes cluster.
+     * @param nfsCsiPlugin An object specifying whether the NFS CSI plugin should be enabled for the
+     *   Kubernetes cluster.
+     * @param amdGpuDevicePlugin An object specifying whether the AMD GPU Device Plugin should be
+     *   enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU
+     *   node pool.
+     * @param amdGpuDeviceMetricsExporterPlugin An object specifying whether the AMD Device Metrics
+     *   Exporter should be enabled in the Kubernetes cluster.
+     * @param nvidiaGpuDevicePlugin An object specifying whether the Nvidia GPU Device Plugin should
+     *   be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia
+     *   GPU node pool.
+     * @param nvidiaGpuDraDriver An object specifying whether the NVIDIA GPU DRA Driver should be
+     *   enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+     * @param amdGpuDraDriver An object specifying whether the AMD GPU DRA Driver should be enabled
+     *   in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+     * @param rdmaSharedDevPlugin An object specifying whether the RDMA shared device plugin should
+     *   be enabled in the Kubernetes cluster.
+     * @param corednsAutoscaler An object specifying whether the Cluster Proportional Autoscaler
+     *   (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
      */
-    fun kubernetesUpdateCluster(clientConfig: ClientConfig, request: Kubernetes.KubernetesUpdateClusterRequest, options: RequestOptions? = null): UpdatedCluster {
+    fun kubernetesUpdateCluster(
+        clientConfig: ClientConfig,
+        request: Kubernetes.KubernetesUpdateClusterRequest,
+        options: RequestOptions? = null,
+    ): UpdatedCluster {
         validateKubernetesUpdateClusterRequest(request)
 
-        return SdkClient.request<UpdatedCluster>(SdkClient.RequestSpec("PUT", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(request.clusterId)}", config = clientConfig, body = buildKubernetesUpdateClusterBody(request), operationId = "kubernetesUpdateCluster", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<UpdatedCluster>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(request.clusterId)}",
+                    config = clientConfig,
+                    body = buildKubernetesUpdateClusterBody(request),
+                    operationId = "kubernetesUpdateCluster",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateKubernetesUpdateClusterRequest(request: Kubernetes.KubernetesUpdateClusterRequest) {
+    private fun validateKubernetesUpdateClusterRequest(
+        request: Kubernetes.KubernetesUpdateClusterRequest
+    ) {
         Validation.validateUuid("cluster_id", request.clusterId)
     }
 
+    private fun buildKubernetesUpdateClusterBody(
+        request: Kubernetes.KubernetesUpdateClusterRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildKubernetesUpdateClusterBodyPart1(request))
+        putAll(buildKubernetesUpdateClusterBodyPart2(request))
+    }
 
-
-    private fun buildKubernetesUpdateClusterBody(request: Kubernetes.KubernetesUpdateClusterRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildKubernetesUpdateClusterBodyPart1(request))
-            putAll(buildKubernetesUpdateClusterBodyPart2(request))
-        }
-
-    private fun buildKubernetesUpdateClusterBodyPart1(request: Kubernetes.KubernetesUpdateClusterRequest): Map<String, Any?> =
+    private fun buildKubernetesUpdateClusterBodyPart1(
+        request: Kubernetes.KubernetesUpdateClusterRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (request.name),
             "tags" to (SdkClient.omitIfNull(request.tags)),
-            "maintenance_policy" to
-    (request.maintenancePolicy ?: SdkClient.SdkOptional.Omitted),
-            "auto_upgrade" to
-    (SdkClient.omitIfNull(request.autoUpgrade)),
-            "surge_upgrade" to
-    (SdkClient.omitIfNull(request.surgeUpgrade)),
+            "maintenance_policy" to (request.maintenancePolicy ?: SdkClient.SdkOptional.Omitted),
+            "auto_upgrade" to (SdkClient.omitIfNull(request.autoUpgrade)),
+            "surge_upgrade" to (SdkClient.omitIfNull(request.surgeUpgrade)),
             "ha" to (SdkClient.omitIfNull(request.ha)),
-            "gpu_operator_ready" to
-    (SdkClient.omitIfNull(request.gpuOperatorReady)),
+            "gpu_operator_ready" to (SdkClient.omitIfNull(request.gpuOperatorReady)),
             "control_plane_firewall" to
-    (request.controlPlaneFirewall ?: SdkClient.SdkOptional.Omitted),
+                (request.controlPlaneFirewall ?: SdkClient.SdkOptional.Omitted),
             "cluster_autoscaler_configuration" to
-    (request.clusterAutoscalerConfiguration ?: SdkClient.SdkOptional.Omitted),
+                (request.clusterAutoscalerConfiguration ?: SdkClient.SdkOptional.Omitted),
             "sso" to (request.sso ?: SdkClient.SdkOptional.Omitted),
-            "routing_agent" to
-    (request.routingAgent ?: SdkClient.SdkOptional.Omitted),
+            "routing_agent" to (request.routingAgent ?: SdkClient.SdkOptional.Omitted),
             "p2p_oci_registry_plugin" to
-    (request.p2pOciRegistryPlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.p2pOciRegistryPlugin ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildKubernetesUpdateClusterBodyPart2(request: Kubernetes.KubernetesUpdateClusterRequest): Map<String, Any?> =
+    private fun buildKubernetesUpdateClusterBodyPart2(
+        request: Kubernetes.KubernetesUpdateClusterRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "nfs_csi_plugin" to
-    (request.nfsCsiPlugin ?: SdkClient.SdkOptional.Omitted),
+            "nfs_csi_plugin" to (request.nfsCsiPlugin ?: SdkClient.SdkOptional.Omitted),
             "amd_gpu_device_plugin" to
-    (request.amdGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.amdGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
             "amd_gpu_device_metrics_exporter_plugin" to
-    (request.amdGpuDeviceMetricsExporterPlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.amdGpuDeviceMetricsExporterPlugin ?: SdkClient.SdkOptional.Omitted),
             "nvidia_gpu_device_plugin" to
-    (request.nvidiaGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
+                (request.nvidiaGpuDevicePlugin ?: SdkClient.SdkOptional.Omitted),
             "nvidia_gpu_dra_driver" to
-    (request.nvidiaGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
-            "amd_gpu_dra_driver" to
-    (request.amdGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
+                (request.nvidiaGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
+            "amd_gpu_dra_driver" to (request.amdGpuDraDriver ?: SdkClient.SdkOptional.Omitted),
             "rdma_shared_dev_plugin" to
-    (request.rdmaSharedDevPlugin ?: SdkClient.SdkOptional.Omitted),
-            "coredns_autoscaler" to
-    (request.corednsAutoscaler ?: SdkClient.SdkOptional.Omitted),
+                (request.rdmaSharedDevPlugin ?: SdkClient.SdkOptional.Omitted),
+            "coredns_autoscaler" to (request.corednsAutoscaler ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object KubernetesDeleteClusterOperation {
     /**
-     * To delete a Kubernetes cluster and all services deployed to it, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`. A 204 status code with no body will be returned in response to a successful request.
+     * To delete a Kubernetes cluster and all services deployed to it, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`. A 204 status code with no body will be returned in
+     * response to a successful request.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesDeleteCluster(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): Unit {
+    fun kubernetesDeleteCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}", config = clientConfig, operationId = "kubernetesDeleteCluster", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}",
+                config = clientConfig,
+                operationId = "kubernetesDeleteCluster",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesListAssociatedResourcesOperation {
     /**
-     * To list the associated billable resources that can be destroyed along with a cluster, send a GET request to the `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.
+     * To list the associated billable resources that can be destroyed along with a cluster, send a
+     * GET request to the
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesListAssociatedResources(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AssociatedKubernetesResources {
+    fun kubernetesListAssociatedResources(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AssociatedKubernetesResources {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<AssociatedKubernetesResources>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources", config = clientConfig, operationId = "kubernetesListAssociatedResources", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AssociatedKubernetesResources>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources",
+                    config = clientConfig,
+                    operationId = "kubernetesListAssociatedResources",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesDestroyAssociatedResourcesSelectiveOperation {
     /**
-     * To delete a Kubernetes cluster along with a subset of its associated resources, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`. The JSON body of the request should include `load_balancers`, `volumes`, or `volume_snapshots` keys each set to an array of IDs for the associated resources to be destroyed. The IDs can be found by querying the cluster's associated resources endpoint. Any associated resource not…
+     * To delete a Kubernetes cluster along with a subset of its associated resources, send a DELETE
+     * request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`. The
+     * JSON body of the request should include `load_balancers`, `volumes`, or `volume_snapshots`
+     * keys each set to an array of IDs for the associated resources to be destroyed. The IDs can be
+     * found by querying the cluster's associated resources endpoint. Any associated resource not…
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param loadBalancers A list of IDs for associated load balancers to destroy along with the
      *   cluster.
-     * @param loadBalancers A list of IDs for associated load balancers to destroy
-     *   along with the cluster.
-     * @param volumes A list of IDs for associated volumes to destroy along with the
-     *   cluster.
-     * @param volumeSnapshots A list of IDs for associated volume snapshots to
-     *   destroy along with the cluster.
+     * @param volumes A list of IDs for associated volumes to destroy along with the cluster.
+     * @param volumeSnapshots A list of IDs for associated volume snapshots to destroy along with
+     *   the cluster.
      */
-    fun kubernetesDestroyAssociatedResourcesSelective(clientConfig: ClientConfig, clusterId: String, loadBalancers: List<String>? = null, volumes: List<String>? = null, volumeSnapshots: List<String>? = null, options: RequestOptions? = null): Unit {
+    fun kubernetesDestroyAssociatedResourcesSelective(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        loadBalancers: List<String>? = null,
+        volumes: List<String>? = null,
+        volumeSnapshots: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources/selective", config = clientConfig, body = SdkClient.bodyMap("load_balancers" to (SdkClient.omitIfNull(loadBalancers)), "volumes" to (SdkClient.omitIfNull(volumes)), "volume_snapshots" to
-    (SdkClient.omitIfNull(volumeSnapshots))), operationId = "kubernetesDestroyAssociatedResourcesSelective", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources/selective",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "load_balancers" to (SdkClient.omitIfNull(loadBalancers)),
+                        "volumes" to (SdkClient.omitIfNull(volumes)),
+                        "volume_snapshots" to (SdkClient.omitIfNull(volumeSnapshots)),
+                    ),
+                operationId = "kubernetesDestroyAssociatedResourcesSelective",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesDestroyAssociatedResourcesDangerousOperation {
     /**
-     * To delete a Kubernetes cluster with all of its associated resources, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`. A 204 status code with no body will be returned in response to a successful request.
+     * To delete a Kubernetes cluster with all of its associated resources, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`. A 204
+     * status code with no body will be returned in response to a successful request.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesDestroyAssociatedResourcesDangerous(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): Unit {
+    fun kubernetesDestroyAssociatedResourcesDangerous(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources/dangerous", config = clientConfig, operationId = "kubernetesDestroyAssociatedResourcesDangerous", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/destroy_with_associated_resources/dangerous",
+                config = clientConfig,
+                operationId = "kubernetesDestroyAssociatedResourcesDangerous",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesGetKubeconfigOperation {
     /**
-     * This endpoint returns a kubeconfig file in YAML format. It can be used to connect to and administer the cluster using the Kubernetes command line tool, `kubectl`, or other programs supporting kubeconfig files (e.g., client libraries). The resulting kubeconfig file uses token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "How to Connect to a DigitalOcean Kubernetes…
+     * This endpoint returns a kubeconfig file in YAML format. It can be used to connect to and
+     * administer the cluster using the Kubernetes command line tool, `kubectl`, or other programs
+     * supporting kubeconfig files (e.g., client libraries). The resulting kubeconfig file uses
+     * token-based authentication for clusters supporting it, and certificate-based authentication
+     * otherwise. For a list of supported versions and more information, see "How to Connect to a
+     * DigitalOcean Kubernetes…
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param expirySeconds The duration in seconds that the returned Kubernetes
-     *   credentials will be valid. If not set or 0, the credentials will have a 7 day
-     *   expiry.
-     * @param type The type of credentials to return in the kubeconfig. When omitted,
-     *   the default credential type for the cluster is used: `sso` for clusters with
-     *   SSO enabled, `token` for clusters without SSO enabled.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param expirySeconds The duration in seconds that the returned Kubernetes credentials will be
+     *   valid. If not set or 0, the credentials will have a 7 day expiry.
+     * @param type The type of credentials to return in the kubeconfig. When omitted, the default
+     *   credential type for the cluster is used: `sso` for clusters with SSO enabled, `token` for
+     *   clusters without SSO enabled.
      */
-    fun kubernetesGetKubeconfig(clientConfig: ClientConfig, clusterId: String, expirySeconds: Long? = null, type: SchemaSchemaEnum7d904fbb? = null, options: RequestOptions? = null): Any {
+    fun kubernetesGetKubeconfig(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        expirySeconds: Long? = null,
+        type: SchemaSchemaEnum7d904fbb? = null,
+        options: RequestOptions? = null,
+    ): Any {
         Validation.validateUuid("cluster_id", clusterId)
 
         if (expirySeconds != null) {
-            Validation.validateRange("expiry_seconds", expirySeconds, Validation.RangeOpts(min = 0.0))
-}
+            Validation.validateRange(
+                "expiry_seconds",
+                expirySeconds,
+                Validation.RangeOpts(min = 0.0),
+            )
+        }
 
-        return SdkClient.request<Any>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/kubeconfig", config = clientConfig, query = mapOf("expiry_seconds" to
-    SdkClient.queryValue(expirySeconds, "form", true), "type" to SdkClient.queryValue(type, "form", true)), operationId = "kubernetesGetKubeconfig", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Any>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/kubeconfig",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "expiry_seconds" to SdkClient.queryValue(expirySeconds, "form", true),
+                            "type" to SdkClient.queryValue(type, "form", true),
+                        ),
+                    operationId = "kubernetesGetKubeconfig",
+                    decoder = SdkClient.ResponseDecoder.BYTES,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesGetCredentialsOperation {
     /**
-     * This endpoint returns a JSON object . It can be used to programmatically construct Kubernetes clients which cannot parse kubeconfig files. The resulting JSON object contains token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "How to Connect to a DigitalOcean Kubernetes Cluster". To retrieve credentials for accessing a Kubernetes cluster, send a GET request to…
+     * This endpoint returns a JSON object . It can be used to programmatically construct Kubernetes
+     * clients which cannot parse kubeconfig files. The resulting JSON object contains token-based
+     * authentication for clusters supporting it, and certificate-based authentication otherwise.
+     * For a list of supported versions and more information, see "How to Connect to a DigitalOcean
+     * Kubernetes Cluster". To retrieve credentials for accessing a Kubernetes cluster, send a GET
+     * request to…
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param expirySeconds The duration in seconds that the returned Kubernetes
-     *   credentials will be valid. If not set or 0, the credentials will have a 7 day
-     *   expiry.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param expirySeconds The duration in seconds that the returned Kubernetes credentials will be
+     *   valid. If not set or 0, the credentials will have a 7 day expiry.
      */
-    fun kubernetesGetCredentials(clientConfig: ClientConfig, clusterId: String, expirySeconds: Long? = null, options: RequestOptions? = null): Credentials {
+    fun kubernetesGetCredentials(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        expirySeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): Credentials {
         Validation.validateUuid("cluster_id", clusterId)
 
         if (expirySeconds != null) {
-            Validation.validateRange("expiry_seconds", expirySeconds, Validation.RangeOpts(min = 0.0))
-}
+            Validation.validateRange(
+                "expiry_seconds",
+                expirySeconds,
+                Validation.RangeOpts(min = 0.0),
+            )
+        }
 
-        return SdkClient.request<Credentials>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/credentials", config = clientConfig, query = mapOf("expiry_seconds" to
-    SdkClient.queryValue(expirySeconds, "form", true)), operationId = "kubernetesGetCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Credentials>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/credentials",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "expiry_seconds" to SdkClient.queryValue(expirySeconds, "form", true)
+                        ),
+                    operationId = "kubernetesGetCredentials",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesGetAvailableUpgradesOperation {
     /**
-     * To determine whether a cluster can be upgraded, and the versions to which it can be upgraded, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+     * To determine whether a cluster can be upgraded, and the versions to which it can be upgraded,
+     * send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesGetAvailableUpgrades(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AvailableUpgrades {
+    fun kubernetesGetAvailableUpgrades(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AvailableUpgrades {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<AvailableUpgrades>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/upgrades", config = clientConfig, operationId = "kubernetesGetAvailableUpgrades", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AvailableUpgrades>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/upgrades",
+                    config = clientConfig,
+                    operationId = "kubernetesGetAvailableUpgrades",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesUpgradeClusterOperation {
     /**
-     * To immediately upgrade a Kubernetes cluster to a newer patch release of Kubernetes, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`. The body of the request must specify a version attribute. Available upgrade versions for a cluster can be fetched from `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+     * To immediately upgrade a Kubernetes cluster to a newer patch release of Kubernetes, send a
+     * POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`. The body of the request
+     * must specify a version attribute. Available upgrade versions for a cluster can be fetched
+     * from `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param version The slug identifier for the version of Kubernetes that the
-     *   cluster will be upgraded to.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param version The slug identifier for the version of Kubernetes that the cluster will be
+     *   upgraded to.
      */
-    fun kubernetesUpgradeCluster(clientConfig: ClientConfig, clusterId: String, version: String? = null, options: RequestOptions? = null): Unit {
+    fun kubernetesUpgradeCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        version: String? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/upgrade", config = clientConfig, body = SdkClient.bodyMap("version" to (SdkClient.omitIfNull(version))), operationId = "kubernetesUpgradeCluster", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/upgrade",
+                config = clientConfig,
+                body = SdkClient.bodyMap("version" to (SdkClient.omitIfNull(version))),
+                operationId = "kubernetesUpgradeCluster",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesListNodePoolsOperation {
     /**
-     * To list all of the node pools in a Kubernetes clusters, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
+     * To list all of the node pools in a Kubernetes clusters, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesListNodePools(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AllNodePools {
+    fun kubernetesListNodePools(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AllNodePools {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<AllNodePools>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools", config = clientConfig, operationId = "kubernetesListNodePools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllNodePools>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools",
+                    config = clientConfig,
+                    operationId = "kubernetesListNodePools",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesAddNodePoolOperation {
     /**
-     * To add an additional node pool to a Kubernetes clusters, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following attributes.
+     * To add an additional node pool to a Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following attributes.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesAddNodePool(clientConfig: ClientConfig, clusterId: String, body: KubernetesNodePoolRequest, options: RequestOptions? = null): NodePoolCreate {
+    fun kubernetesAddNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        body: KubernetesNodePoolRequest,
+        options: RequestOptions? = null,
+    ): NodePoolCreate {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<NodePoolCreate>(SdkClient.RequestSpec("POST", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools", config = clientConfig, body = body, operationId = "kubernetesAddNodePool", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<NodePoolCreate>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "kubernetesAddNodePool",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesGetNodePoolOperation {
     /**
-     * To show information about a specific node pool in a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
+     * To show information about a specific node pool in a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node
-     *   pool.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node pool.
      */
-    fun kubernetesGetNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, options: RequestOptions? = null): ExistingNodePool {
+    fun kubernetesGetNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        options: RequestOptions? = null,
+    ): ExistingNodePool {
         Validation.validateUuid("cluster_id", clusterId)
 
         Validation.validateUuid("node_pool_id", nodePoolId)
 
-        return SdkClient.request<ExistingNodePool>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}", config = clientConfig, operationId = "kubernetesGetNodePool", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ExistingNodePool>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}",
+                    config = clientConfig,
+                    operationId = "kubernetesGetNodePool",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesUpdateNodePoolOperation {
     /**
-     * To update the name of a node pool, edit the tags applied to it, or adjust its number of nodes, send a PUT request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the following attributes.
+     * To update the name of a node pool, edit the tags applied to it, or adjust its number of
+     * nodes, send a PUT request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the following
+     * attributes.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node
-     *   pool.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node pool.
      * @param name A human-readable name for the node pool.
      * @param count The number of Droplet instances in the node pool.
-     * @param tags An array containing the tags applied to the node pool. All node
-     *   pools are automatically tagged `k8s`, `k8s-worker`, and `k8s:$K8S_CLUSTER_ID`.
-     *   Requires `tag:read` scope.
-     * @param labels An object of key/value mappings specifying labels to apply to
-     *   all nodes in a pool. Labels will automatically be applied to all existing
-     *   nodes and any subsequent nodes added to the pool. Note that when a label is
-     *   removed, it is not deleted from the nodes in the pool.
-     * @param taints An array of taints to apply to all nodes in a pool. Taints will
-     *   automatically be applied to all existing nodes and any subsequent nodes added
-     *   to the pool. When a taint is removed, it is deleted from all nodes in the
+     * @param tags An array containing the tags applied to the node pool. All node pools are
+     *   automatically tagged `k8s`, `k8s-worker`, and `k8s:$K8S_CLUSTER_ID`. Requires `tag:read`
+     *   scope.
+     * @param labels An object of key/value mappings specifying labels to apply to all nodes in a
+     *   pool. Labels will automatically be applied to all existing nodes and any subsequent nodes
+     *   added to the pool. Note that when a label is removed, it is not deleted from the nodes in
+     *   the pool.
+     * @param taints An array of taints to apply to all nodes in a pool. Taints will automatically
+     *   be applied to all existing nodes and any subsequent nodes added to the pool. When a taint
+     *   is removed, it is deleted from all nodes in the pool.
+     * @param autoScale A boolean value indicating whether auto-scaling is enabled for this node
      *   pool.
-     * @param autoScale A boolean value indicating whether auto-scaling is enabled
-     *   for this node pool.
-     * @param minNodes The minimum number of nodes that this node pool can be
-     *   auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.
-     * @param maxNodes The maximum number of nodes that this node pool can be
-     *   auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.
+     * @param minNodes The minimum number of nodes that this node pool can be auto-scaled to. The
+     *   value will be `0` if `auto_scale` is set to `false`.
+     * @param maxNodes The maximum number of nodes that this node pool can be auto-scaled to. The
+     *   value will be `0` if `auto_scale` is set to `false`.
      */
-    fun kubernetesUpdateNodePool(clientConfig: ClientConfig, request: Kubernetes.KubernetesUpdateNodePoolRequest, options: RequestOptions? = null): NodePoolUpdate {
+    fun kubernetesUpdateNodePool(
+        clientConfig: ClientConfig,
+        request: Kubernetes.KubernetesUpdateNodePoolRequest,
+        options: RequestOptions? = null,
+    ): NodePoolUpdate {
         validateKubernetesUpdateNodePoolRequest(request)
 
-        return SdkClient.request<NodePoolUpdate>(SdkClient.RequestSpec("PUT", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(request.clusterId)}/node_pools/${SdkClient.encodePathSegment(request.nodePoolId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "count" to (request.count), "tags" to (SdkClient.omitIfNull(request.tags)), "labels" to
-    (request.labels ?: SdkClient.SdkOptional.Omitted), "taints" to (SdkClient.omitIfNull(request.taints)), "auto_scale" to (SdkClient.omitIfNull(request.autoScale)), "min_nodes" to (SdkClient.omitIfNull(request.minNodes)), "max_nodes" to (SdkClient.omitIfNull(request.maxNodes))), operationId = "kubernetesUpdateNodePool", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<NodePoolUpdate>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(request.clusterId)}/node_pools/${SdkClient.encodePathSegment(request.nodePoolId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name),
+                            "count" to (request.count),
+                            "tags" to (SdkClient.omitIfNull(request.tags)),
+                            "labels" to (request.labels ?: SdkClient.SdkOptional.Omitted),
+                            "taints" to (SdkClient.omitIfNull(request.taints)),
+                            "auto_scale" to (SdkClient.omitIfNull(request.autoScale)),
+                            "min_nodes" to (SdkClient.omitIfNull(request.minNodes)),
+                            "max_nodes" to (SdkClient.omitIfNull(request.maxNodes)),
+                        ),
+                    operationId = "kubernetesUpdateNodePool",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateKubernetesUpdateNodePoolRequest(request: Kubernetes.KubernetesUpdateNodePoolRequest) {
+    private fun validateKubernetesUpdateNodePoolRequest(
+        request: Kubernetes.KubernetesUpdateNodePoolRequest
+    ) {
         Validation.validateUuid("cluster_id", request.clusterId)
 
         Validation.validateUuid("node_pool_id", request.nodePoolId)
@@ -585,42 +976,73 @@ internal object KubernetesUpdateNodePoolOperation {
 
 internal object KubernetesDeleteNodePoolOperation {
     /**
-     * To delete a node pool, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`. A 204 status code with no body will be returned in response to a successful request. Nodes in the pool will subsequently be drained and deleted.
+     * To delete a node pool, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`. A 204 status code with no
+     * body will be returned in response to a successful request. Nodes in the pool will
+     * subsequently be drained and deleted.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node
-     *   pool.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node pool.
      */
-    fun kubernetesDeleteNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, options: RequestOptions? = null): Unit {
+    fun kubernetesDeleteNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
         Validation.validateUuid("node_pool_id", nodePoolId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}", config = clientConfig, operationId = "kubernetesDeleteNodePool", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}",
+                config = clientConfig,
+                operationId = "kubernetesDeleteNodePool",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesDeleteNodeOperation {
     /**
-     * To delete a single node in a pool, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`. Appending the `skip_drain=1` query parameter to the request causes node draining to be skipped. Omitting the query parameter or setting its value to `0` carries out draining prior to deletion. Appending the `replace=1` query parameter to the request causes the node to be replaced by a new one after deletion. Omitting the query…
+     * To delete a single node in a pool, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`. Appending
+     * the `skip_drain=1` query parameter to the request causes node draining to be skipped.
+     * Omitting the query parameter or setting its value to `0` carries out draining prior to
+     * deletion. Appending the `replace=1` query parameter to the request causes the node to be
+     * replaced by a new one after deletion. Omitting the query…
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node
-     *   pool.
-     * @param nodeId A unique ID that can be used to reference a node in a Kubernetes
-     *   node pool.
-     * @param skipDrain Specifies whether or not to drain workloads from a node
-     *   before it is deleted. Setting it to `1` causes node draining to be skipped.
-     *   Omitting the query parameter or setting its value to `0` carries out draining
-     *   prior to deletion.
-     * @param replace Specifies whether or not to replace a node after it has been
-     *   deleted. Setting it to `1` causes the node to be replaced by a new one after
-     *   deletion. Omitting the query parameter or setting its value to `0` deletes
-     *   without replacement.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node pool.
+     * @param nodeId A unique ID that can be used to reference a node in a Kubernetes node pool.
+     * @param skipDrain Specifies whether or not to drain workloads from a node before it is
+     *   deleted. Setting it to `1` causes node draining to be skipped. Omitting the query parameter
+     *   or setting its value to `0` carries out draining prior to deletion.
+     * @param replace Specifies whether or not to replace a node after it has been deleted. Setting
+     *   it to `1` causes the node to be replaced by a new one after deletion. Omitting the query
+     *   parameter or setting its value to `0` deletes without replacement.
      */
-    fun kubernetesDeleteNode(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, nodeId: String, skipDrain: Long? = null, replace: Long? = null, options: RequestOptions? = null): Unit {
+    fun kubernetesDeleteNode(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        nodeId: String,
+        skipDrain: Long? = null,
+        replace: Long? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
         Validation.validateUuid("node_pool_id", nodePoolId)
@@ -628,122 +1050,323 @@ internal object KubernetesDeleteNodeOperation {
         Validation.validateUuid("node_id", nodeId)
 
         if (skipDrain != null) {
-            Validation.validateRange("skip_drain", skipDrain, Validation.RangeOpts(min = 0.0, max = 1.0))
-}
+            Validation.validateRange(
+                "skip_drain",
+                skipDrain,
+                Validation.RangeOpts(min = 0.0, max = 1.0),
+            )
+        }
 
         if (replace != null) {
             Validation.validateRange("replace", replace, Validation.RangeOpts(min = 0.0, max = 1.0))
-}
+        }
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}/nodes/${SdkClient.encodePathSegment(nodeId)}", config = clientConfig, query = mapOf("skip_drain" to
-    SdkClient.queryValue(skipDrain, "form", true), "replace" to SdkClient.queryValue(replace, "form", true)), operationId = "kubernetesDeleteNode", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}/nodes/${SdkClient.encodePathSegment(nodeId)}",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "skip_drain" to SdkClient.queryValue(skipDrain, "form", true),
+                        "replace" to SdkClient.queryValue(replace, "form", true),
+                    ),
+                operationId = "kubernetesDeleteNode",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesRecycleNodePoolOperation {
     /**
-     * Submits a request to recycle nodes in a Kubernetes node pool. This operation is closing down and will be removed on an unspecified date; use DELETE /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id} to remove an individual node instead.
+     * Submits a request to recycle nodes in a Kubernetes node pool. This operation is closing down
+     * and will be removed on an unspecified date; use DELETE
+     * /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id} to remove an
+     * individual node instead.
      *
-     * The endpoint has been deprecated. Please use the DELETE `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID` method instead.
+     * The endpoint has been deprecated. Please use the DELETE
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID` method
+     * instead.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node
-     *   pool.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param nodePoolId A unique ID that can be used to reference a Kubernetes node pool.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun kubernetesRecycleNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, nodes: List<String>? = null, options: RequestOptions? = null): Unit {
+    fun kubernetesRecycleNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        nodes: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("cluster_id", clusterId)
 
         Validation.validateUuid("node_pool_id", nodePoolId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}/recycle", config = clientConfig, body = SdkClient.bodyMap("nodes" to (SdkClient.omitIfNull(nodes))), operationId = "kubernetesRecycleNodePool", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/node_pools/${SdkClient.encodePathSegment(nodePoolId)}/recycle",
+                config = clientConfig,
+                body = SdkClient.bodyMap("nodes" to (SdkClient.omitIfNull(nodes))),
+                operationId = "kubernetesRecycleNodePool",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesGetClusterUserOperation {
     /**
-     * To show information the user associated with a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
+     * To show information the user associated with a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      */
-    fun kubernetesGetClusterUser(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): User2 {
+    fun kubernetesGetClusterUser(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): User2 {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<User2>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/user", config = clientConfig, operationId = "kubernetesGetClusterUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<User2>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/user",
+                    config = clientConfig,
+                    operationId = "kubernetesGetClusterUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesListOptionsOperation {
     /**
-     * To list the versions of Kubernetes available for use, the regions that support Kubernetes, and the available node sizes, send a GET request to `/v2/kubernetes/options`.
+     * To list the versions of Kubernetes available for use, the regions that support Kubernetes,
+     * and the available node sizes, send a GET request to `/v2/kubernetes/options`.
      */
-    fun kubernetesListOptions(clientConfig: ClientConfig, options: RequestOptions? = null): KubernetesOptions {
-        return SdkClient.request<KubernetesOptions>(SdkClient.RequestSpec("GET", "/v2/kubernetes/options", config = clientConfig, operationId = "kubernetesListOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun kubernetesListOptions(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): KubernetesOptions {
+        return SdkClient.request<KubernetesOptions>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/options",
+                    config = clientConfig,
+                    operationId = "kubernetesListOptions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesRunClusterLintOperation {
     /**
-     * Clusterlint helps operators conform to Kubernetes best practices around resources, security and reliability to avoid common problems while operating or upgrading the clusters. To request a clusterlint run on your cluster, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all checks present in the `doks` group by default, if a request body is not specified. Optionally specify the below attributes. For information about the available…
+     * Clusterlint helps operators conform to Kubernetes best practices around resources, security
+     * and reliability to avoid common problems while operating or upgrading the clusters. To
+     * request a clusterlint run on your cluster, send a POST request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all checks present in
+     * the `doks` group by default, if a request body is not specified. Optionally specify the below
+     * attributes. For information about the available…
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
-     * @param includeGroups An array of check groups that will be run when
-     *   clusterlint executes checks.
-     * @param includeChecks An array of checks that will be run when clusterlint
-     *   executes checks.
-     * @param excludeGroups An array of check groups that will be omitted when
-     *   clusterlint executes checks.
-     * @param excludeChecks An array of checks that will be run when clusterlint
-     *   executes checks.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
+     * @param includeGroups An array of check groups that will be run when clusterlint executes
+     *   checks.
+     * @param includeChecks An array of checks that will be run when clusterlint executes checks.
+     * @param excludeGroups An array of check groups that will be omitted when clusterlint executes
+     *   checks.
+     * @param excludeChecks An array of checks that will be run when clusterlint executes checks.
      */
-    fun kubernetesRunClusterLint(clientConfig: ClientConfig, clusterId: String, includeGroups: List<String>? = null, includeChecks: List<String>? = null, excludeGroups: List<String>? = null, excludeChecks: List<String>? = null, options: RequestOptions? = null): ClusterlintRun {
+    fun kubernetesRunClusterLint(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        includeGroups: List<String>? = null,
+        includeChecks: List<String>? = null,
+        excludeGroups: List<String>? = null,
+        excludeChecks: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ClusterlintRun {
         Validation.validateUuid("cluster_id", clusterId)
 
-        return SdkClient.request<ClusterlintRun>(SdkClient.RequestSpec("POST", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/clusterlint", config = clientConfig, body = SdkClient.bodyMap("include_groups" to (SdkClient.omitIfNull(includeGroups)), "include_checks" to (SdkClient.omitIfNull(includeChecks)), "exclude_groups" to (SdkClient.omitIfNull(excludeGroups)), "exclude_checks" to (SdkClient.omitIfNull(excludeChecks))), operationId = "kubernetesRunClusterLint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ClusterlintRun>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/clusterlint",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "include_groups" to (SdkClient.omitIfNull(includeGroups)),
+                            "include_checks" to (SdkClient.omitIfNull(includeChecks)),
+                            "exclude_groups" to (SdkClient.omitIfNull(excludeGroups)),
+                            "exclude_checks" to (SdkClient.omitIfNull(excludeChecks)),
+                        ),
+                    operationId = "kubernetesRunClusterLint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesGetClusterLintResultsOperation {
     /**
-     * To request clusterlint diagnostics for your cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query parameter is provided, then the diagnostics for the specific run is fetched. By default, the latest results are shown. To find out how to address clusterlint feedback, please refer to the clusterlint check documentation.
+     * To request clusterlint diagnostics for your cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query parameter is
+     * provided, then the diagnostics for the specific run is fetched. By default, the latest
+     * results are shown. To find out how to address clusterlint feedback, please refer to the
+     * clusterlint check documentation.
      *
-     * @param clusterId A unique ID that can be used to reference a Kubernetes
-     *   cluster.
+     * @param clusterId A unique ID that can be used to reference a Kubernetes cluster.
      * @param runId Specifies the clusterlint run whose results will be retrieved.
      */
-    fun kubernetesGetClusterLintResults(clientConfig: ClientConfig, clusterId: String, runId: String? = null, options: RequestOptions? = null): ClusterlintResults {
+    fun kubernetesGetClusterLintResults(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        runId: String? = null,
+        options: RequestOptions? = null,
+    ): ClusterlintResults {
         Validation.validateUuid("cluster_id", clusterId)
 
         if (runId != null) {
             Validation.validateUuid("run_id", runId)
-}
+        }
 
-        return SdkClient.request<ClusterlintResults>(SdkClient.RequestSpec("GET", "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/clusterlint", config = clientConfig, query = mapOf("run_id" to SdkClient.queryValue(runId, "form", true)), operationId = "kubernetesGetClusterLintResults", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ClusterlintResults>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/kubernetes/clusters/${SdkClient.encodePathSegment(clusterId)}/clusterlint",
+                    config = clientConfig,
+                    query = mapOf("run_id" to SdkClient.queryValue(runId, "form", true)),
+                    operationId = "kubernetesGetClusterLintResults",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object KubernetesAddRegistryOperation {
     /**
-     * To integrate the container registry with Kubernetes clusters, send a POST request to `/v2/kubernetes/registry`.
+     * To integrate the container registry with Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/registry`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      */
-    fun kubernetesAddRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/kubernetes/registry", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))), operationId = "kubernetesAddRegistry", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun kubernetesAddRegistry(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/kubernetes/registry",
+                config = clientConfig,
+                body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))),
+                operationId = "kubernetesAddRegistry",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesRemoveRegistryOperation {
     /**
-     * To remove the container registry from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registry`.
+     * To remove the container registry from Kubernetes clusters, send a DELETE request to
+     * `/v2/kubernetes/registry`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      */
-    fun kubernetesRemoveRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/registry", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))), operationId = "kubernetesRemoveRegistry", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun kubernetesRemoveRegistry(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/registry",
+                config = clientConfig,
+                body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))),
+                operationId = "kubernetesRemoveRegistry",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
