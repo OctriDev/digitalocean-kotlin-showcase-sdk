@@ -134,6 +134,10 @@ if (topLogprobsValue != null) {
             Validation.validateRange("top_logprobs", topLogprobsValue, Validation.RangeOpts(min = 0.0, max = 20.0))
 }
 
+        if (request.stop != null) {
+            Validation.validateItems("stop", request.stop, Validation.LengthOpts(min = 1, max = 4))
+}
+
         val nValue = request.n?.getOrNull()
 if (nValue != null) {
             Validation.validateRange("n", nValue, Validation.RangeOpts(min = 1.0, max = 128.0))
@@ -535,7 +539,9 @@ internal object ServerlessInferenceInferenceCreateEmbeddingOperation {
      * @param encodingFormat How embedding values are returned in each
      *   `data[].embedding` field.
      */
-    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: Any, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse {
+    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse {
+        Validation.validateItems("input", input, Validation.LengthOpts(min = 1, max = 2048))
+
         return SdkClient.request<EmbeddingsResponse>(SdkClient.RequestSpec("POST", "/v1/embeddings", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "input" to (input), "user" to (SdkClient.omitIfNull(user)), "encoding_format" to (SdkClient.omitIfNull(encodingFormat))), operationId = "inferenceCreateEmbedding", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

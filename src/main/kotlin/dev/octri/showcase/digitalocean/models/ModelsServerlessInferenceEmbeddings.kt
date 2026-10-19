@@ -14,7 +14,7 @@ data class EmbeddingsRequest(
     /**
      * A single string or 1–2048 strings; each string produces one row in `data`, in order.
      */
-    val input: Any,
+    val input: List<String>,
     /**
      * Optional end-user identifier to help with abuse monitoring.
      */

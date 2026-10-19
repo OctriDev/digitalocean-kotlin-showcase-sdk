@@ -157,7 +157,7 @@ data class AsyncInvokeRequestTagsItem(
         val tools: List<ChatCompletionTool>? = null,
         val toolChoice: ChatCompletionRequestToolChoice? = null,
         val stream: SdkClient.SdkOptional<Boolean?>? = null,
-        val stop: Any? = null,
+        val stop: List<String>? = null,
         val logitBias: SdkClient.SdkOptional<Map<String, Long>?>? = null,
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
@@ -181,7 +181,7 @@ data class AsyncInvokeRequestTagsItem(
         val topLogprobs: SdkClient.SdkOptional<Long?>? = null,
         val tools: List<ChatCompletionTool>? = null,
         val toolChoice: ChatCompletionRequestToolChoice? = null,
-        val stop: Any? = null,
+        val stop: List<String>? = null,
         val logitBias: SdkClient.SdkOptional<Map<String, Long>?>? = null,
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
@@ -274,7 +274,7 @@ data class AsyncInvokeRequestTagsItem(
         val streamOptions: SdkClient.SdkOptional<CreateResponseRequestStreamOptions?>? = null,
         val tools: SdkClient.SdkOptional<List<CreateResponseRequestToolsItem>?>? = null,
         val toolChoice: CreateResponseRequestToolChoice? = null,
-        val stop: SdkClient.SdkOptional<Any?>? = null,
+        val stop: SdkClient.SdkOptional<List<String>?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val user: SdkClient.SdkOptional<String?>? = null
     )
@@ -290,7 +290,7 @@ data class AsyncInvokeRequestTagsItem(
         val streamOptions: SdkClient.SdkOptional<CreateResponseRequestStreamOptions?>? = null,
         val tools: SdkClient.SdkOptional<List<CreateResponseRequestToolsItem>?>? = null,
         val toolChoice: CreateResponseRequestToolChoice? = null,
-        val stop: SdkClient.SdkOptional<Any?>? = null,
+        val stop: SdkClient.SdkOptional<List<String>?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val user: SdkClient.SdkOptional<String?>? = null
     )
@@ -338,7 +338,7 @@ data class AsyncInvokeRequestTagsItem(
     /**
      * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response. Unknown fields in the request body are rejected. There is no streaming response for this endpoint.
      */
-    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: Any, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse =
+    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse =
         dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateEmbeddingOperation.inferenceCreateEmbedding(
             clientConfig,
             model,

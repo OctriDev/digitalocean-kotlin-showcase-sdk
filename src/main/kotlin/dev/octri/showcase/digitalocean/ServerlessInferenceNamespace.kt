@@ -36,7 +36,7 @@ class ServerlessInferenceNamespace(private val clientConfig: ClientConfig) {
     /**
      * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response. Unknown fields in the request body are rejected. There is no streaming response for this endpoint.
      */
-    fun inferenceCreateEmbedding(model: String, input: Any, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse {
+    fun inferenceCreateEmbedding(model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse {
         return dev.octri.showcase.digitalocean.methods.ServerlessInference.inferenceCreateEmbedding(clientConfig, model, input, user, encodingFormat, options)
     }
 

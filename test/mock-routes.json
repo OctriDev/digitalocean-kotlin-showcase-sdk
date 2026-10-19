@@ -31634,8 +31634,8 @@
           },
           {
             "wireName": "stop",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -31737,7 +31737,9 @@
           ],
           "tool_choice": "none",
           "stream": false,
-          "stop": "stop",
+          "stop": [
+            "stop"
+          ],
           "logit_bias": null,
           "logprobs": false,
           "n": 1,
@@ -105663,8 +105665,8 @@
           },
           {
             "wireName": "stop",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -105766,7 +105768,9 @@
           ],
           "tool_choice": "none",
           "stream": false,
-          "stop": "stop",
+          "stop": [
+            "stop"
+          ],
           "logit_bias": null,
           "logprobs": false,
           "n": 1,
@@ -175918,8 +175922,8 @@
           },
           {
             "wireName": "input",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -175937,7 +175941,10 @@
         ],
         "example": {
           "model": "qwen3-embedding-0.6b",
-          "input": "hello world",
+          "input": [
+            "hello world",
+            "goodbye world"
+          ],
           "user": "user-1234",
           "encoding_format": "float"
         },
@@ -177329,8 +177336,8 @@
           },
           {
             "wireName": "stop",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {

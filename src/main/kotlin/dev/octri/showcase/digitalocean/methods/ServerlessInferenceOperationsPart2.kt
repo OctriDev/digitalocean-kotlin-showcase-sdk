@@ -67,6 +67,11 @@ if (temperatureValue != null) {
 if (topPValue != null) {
             Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
 }
+
+        val stopValue = request.stop?.getOrNull()
+if (stopValue != null) {
+            Validation.validateItems("stop", stopValue, Validation.LengthOpts(min = 1, max = 4))
+}
     }
 
 

@@ -150,7 +150,7 @@ data class CreateResponseRequest(
     /**
      * Up to 4 sequences where the API will stop generating further tokens.
      */
-    val stop: Any? = null,
+    val stop: List<String>? = null,
     /**
      * Set of key-value pairs that can be attached to the request.
      */
