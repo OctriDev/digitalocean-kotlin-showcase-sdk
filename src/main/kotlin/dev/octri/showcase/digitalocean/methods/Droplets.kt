@@ -333,7 +333,7 @@ object Droplets {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListBackupPolicies(
+    fun listAllBackupPolicies(
         clientConfig: ClientConfig,
         perPage: Long? = null,
         page: Long? = null,
@@ -361,7 +361,7 @@ object Droplets {
                             "per_page" to SdkClient.queryValue(perPage, "form", true),
                             "page" to SdkClient.queryValue(page, "form", true),
                         ),
-                    operationId = "dropletsListBackupPolicies",
+                    operationId = "listAllBackupPolicies",
                     decoder = SdkClient.ResponseDecoder.JSON,
                     options = options,
                     errors =
