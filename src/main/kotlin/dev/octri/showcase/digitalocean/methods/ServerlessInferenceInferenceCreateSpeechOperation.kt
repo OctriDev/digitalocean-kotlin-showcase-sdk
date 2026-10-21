@@ -12,20 +12,52 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ServerlessInferenceInferenceCreateSpeechOperation {
     /**
-     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`, `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
+     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`,
+     * `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
      *
      * @param model The text-to-speech model to use.
      * @param input The text to convert to speech.
      * @param voice The voice to use for synthesis.
-     * @param responseFormat The audio format to return. Supported values include
-     *   `mp3` and `wav`. The API may return raw audio bytes or a JSON envelope with
-     *   base64-encoded audio.
-     * @param instructions Optional style or delivery instructions for the
-     *   synthesizer.
+     * @param responseFormat The audio format to return. Supported values include `mp3` and `wav`.
+     *   The API may return raw audio bytes or a JSON envelope with base64-encoded audio.
+     * @param instructions Optional style or delivery instructions for the synthesizer.
      */
-    fun inferenceCreateSpeech(clientConfig: ClientConfig, model: String, input: String, voice: String? = null, responseFormat: String? = null, instructions: String? = null, options: RequestOptions? = null): SpeechResponse {
+    fun inferenceCreateSpeech(
+        clientConfig: ClientConfig,
+        model: String,
+        input: String,
+        voice: String? = null,
+        responseFormat: String? = null,
+        instructions: String? = null,
+        options: RequestOptions? = null,
+    ): SpeechResponse {
         Validation.validateLength("input", input, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<SpeechResponse>(SdkClient.RequestSpec("POST", "/v1/audio/speech", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "input" to (input), "voice" to (SdkClient.omitIfNull(voice)), "response_format" to (SdkClient.omitIfNull(responseFormat)), "instructions" to (SdkClient.omitIfNull(instructions))), operationId = "inferenceCreateSpeech", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<SpeechResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/audio/speech",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (model),
+                            "input" to (input),
+                            "voice" to (SdkClient.omitIfNull(voice)),
+                            "response_format" to (SdkClient.omitIfNull(responseFormat)),
+                            "instructions" to (SdkClient.omitIfNull(instructions)),
+                        ),
+                    operationId = "inferenceCreateSpeech",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

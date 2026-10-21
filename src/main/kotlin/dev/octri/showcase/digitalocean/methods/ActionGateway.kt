@@ -10,21 +10,21 @@ import dev.octri.showcase.digitalocean.DeleteConnectionResponse
 import dev.octri.showcase.digitalocean.EmptyResponse
 import dev.octri.showcase.digitalocean.GetActorLimitsResponse
 import dev.octri.showcase.digitalocean.GetConnectionResponse
-import dev.octri.showcase.digitalocean.GetToolbeltResponse
 import dev.octri.showcase.digitalocean.GetToolHealthResponse
+import dev.octri.showcase.digitalocean.GetToolbeltResponse
 import dev.octri.showcase.digitalocean.GetUserResponse
 import dev.octri.showcase.digitalocean.LimitCategory
 import dev.octri.showcase.digitalocean.LimitOverride
 import dev.octri.showcase.digitalocean.ListConnectionsResponse
-import dev.octri.showcase.digitalocean.ListMcpServersResponse
 import dev.octri.showcase.digitalocean.ListMcpServerToolsResponse
+import dev.octri.showcase.digitalocean.ListMcpServersResponse
 import dev.octri.showcase.digitalocean.ListOutputViewsResponse
 import dev.octri.showcase.digitalocean.ListProviderHealthResponse
 import dev.octri.showcase.digitalocean.ListProvidersResponse
 import dev.octri.showcase.digitalocean.ListSessionsResponse
-import dev.octri.showcase.digitalocean.ListToolbeltProvidersResponse
-import dev.octri.showcase.digitalocean.ListToolbeltProviderToolsResponse
 import dev.octri.showcase.digitalocean.ListToolHealthResponse
+import dev.octri.showcase.digitalocean.ListToolbeltProviderToolsResponse
+import dev.octri.showcase.digitalocean.ListToolbeltProvidersResponse
 import dev.octri.showcase.digitalocean.ListToolkitsResponse
 import dev.octri.showcase.digitalocean.ListToolsResponse
 import dev.octri.showcase.digitalocean.ListUsersResponse
@@ -52,79 +52,65 @@ import dev.octri.showcase.digitalocean.Session
 import dev.octri.showcase.digitalocean.SessionInsights
 import dev.octri.showcase.digitalocean.SessionNetwork
 import dev.octri.showcase.digitalocean.SessionPolicy
+import dev.octri.showcase.digitalocean.ToolSearchResult
 import dev.octri.showcase.digitalocean.ToolbeltResponse
-import dev.octri.showcase.digitalocean.ToolbeltsResponse
 import dev.octri.showcase.digitalocean.ToolbeltSummary
 import dev.octri.showcase.digitalocean.ToolbeltToolDetail
 import dev.octri.showcase.digitalocean.ToolbeltUpdateResponse
-import dev.octri.showcase.digitalocean.ToolSearchResult
+import dev.octri.showcase.digitalocean.ToolbeltsResponse
 
 object ActionGateway {
-/**
- * Use one of your team's provider credentials.
- */
-data class ConnectionCreateCredentialTeamCredential(
-    /**
-     * Required. ID of an active provider credential for the same provider that you can use.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_id") val credentialId: String? = null
-)
+    /** Use one of your team's provider credentials. */
+    data class ConnectionCreateCredentialTeamCredential(
+        /** Required. ID of an active provider credential for the same provider that you can use. */
+        @com.fasterxml.jackson.annotation.JsonProperty("credential_id")
+        val credentialId: String? = null
+    )
 
-/**
- * Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application.
- */
-data class ConnectionCreateCredential(
     /**
-     * Use DigitalOcean's shared OAuth application.
+     * Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("digitalocean_oauth") val digitaloceanOauth: Map<String, Any>? = null,
-    /**
-     * Use one of your team's provider credentials.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_credential") val teamCredential: ConnectionCreateCredentialTeamCredential? = null
-)
+    data class ConnectionCreateCredential(
+        /** Use DigitalOcean's shared OAuth application. */
+        @com.fasterxml.jackson.annotation.JsonProperty("digitalocean_oauth")
+        val digitaloceanOauth: Map<String, Any>? = null,
+        /** Use one of your team's provider credentials. */
+        @com.fasterxml.jackson.annotation.JsonProperty("team_credential")
+        val teamCredential: ConnectionCreateCredentialTeamCredential? = null,
+    )
 
-/**
- * Required object value serialized in the `destinations[]` wire field.
- */
-data class ConnectionCreateNetworkVpcDestinationsItem(
-    /**
-     * Host name or IP address. It must resolve only to private addresses.
-     */
-    val host: String? = null,
-    /**
-     * Port, 1 to 65535.
-     */
-    val port: Long? = null,
-    /**
-     * Optional CIDR ranges; when set, every address the host resolves to must fall within one of them.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs") val allowedIpCidrs: List<String>? = null
-)
+    /** Required object value serialized in the `destinations[]` wire field. */
+    data class ConnectionCreateNetworkVpcDestinationsItem(
+        /** Host name or IP address. It must resolve only to private addresses. */
+        val host: String? = null,
+        /** Port, 1 to 65535. */
+        val port: Long? = null,
+        /**
+         * Optional CIDR ranges; when set, every address the host resolves to must fall within one
+         * of them.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("allowed_ip_cidrs")
+        val allowedIpCidrs: List<String>? = null,
+    )
 
-/**
- * Route through a VPC.
- */
-data class ConnectionCreateNetworkVpc(
-    /**
-     * UUID of a VPC owned by your team.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
-    /**
-     * Private hosts the connection's calls may reach through the VPC. At least one is required.
-     */
-    val destinations: List<ConnectionCreateNetworkVpcDestinationsItem>? = null
-)
+    /** Route through a VPC. */
+    data class ConnectionCreateNetworkVpc(
+        /** UUID of a VPC owned by your team. */
+        @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
+        /**
+         * Private hosts the connection's calls may reach through the VPC. At least one is required.
+         */
+        val destinations: List<ConnectionCreateNetworkVpcDestinationsItem>? = null,
+    )
 
-/**
- * Optional private network for the connection's calls. Requires VPC networking to be enabled for your account (403 otherwise).
- */
-data class ConnectionCreateNetwork(
     /**
-     * Route through a VPC.
+     * Optional private network for the connection's calls. Requires VPC networking to be enabled
+     * for your account (403 otherwise).
      */
-    val vpc: ConnectionCreateNetworkVpc? = null
-)
+    data class ConnectionCreateNetwork(
+        /** Route through a VPC. */
+        val vpc: ConnectionCreateNetworkVpc? = null
+    )
 
     /** Parameters for [connectionsCreate]. */
     data class ConnectionsCreateRequest(
@@ -133,7 +119,7 @@ data class ConnectionCreateNetwork(
         val scopes: List<String>? = null,
         val connectionParameters: Map<String, Any>? = null,
         val credential: ConnectionCreateCredential? = null,
-        val network: ConnectionCreateNetwork? = null
+        val network: ConnectionCreateNetwork? = null,
     )
 
     /** Parameters for [connectionsList]. */
@@ -144,7 +130,7 @@ data class ConnectionCreateNetwork(
         val sort: SchemaSchemaEnum24a1c994? = null,
         val sortDirection: SchemaSchemaEnume3d6cfed? = null,
         val page: Long? = null,
-        val perPage: Long? = null
+        val perPage: Long? = null,
     )
 
     /** Parameters for [mcpServersCreate]. */
@@ -161,7 +147,7 @@ data class ConnectionCreateNetwork(
         val oauthAuthorizeUrl: String? = null,
         val oauthTokenUrl: String? = null,
         val oauthScopes: List<String>? = null,
-        val oauthAuthorizationTtlSeconds: String? = null
+        val oauthAuthorizationTtlSeconds: String? = null,
     )
 
     data class OutputViewsListPage(
@@ -178,7 +164,7 @@ data class ConnectionCreateNetwork(
         val tools: List<String>? = null,
         val config: Map<String, Any>? = null,
         val network: SessionNetwork? = null,
-        val insights: SessionInsights? = null
+        val insights: SessionInsights? = null,
     )
 
     data class SessionsListSearchPage(
@@ -206,7 +192,7 @@ data class ConnectionCreateNetwork(
         val version: String? = null,
         val page: Long? = null,
         val perPage: Long? = null,
-        val search: String? = null
+        val search: String? = null,
     )
 
     data class ToolsListSearchProvidersPage(
@@ -222,9 +208,15 @@ data class ConnectionCreateNetwork(
     )
 
     /**
-     * Returns the per-minute limits set for the actor and the limits in effect, each the lower of your team's limit and the actor's override. Returns 404 when the actor has no sessions, connections, or limit overrides.
+     * Returns the per-minute limits set for the actor and the limits in effect, each the lower of
+     * your team's limit and the actor's override. Returns 404 when the actor has no sessions,
+     * connections, or limit overrides.
      */
-    fun actorLimitsGet(clientConfig: ClientConfig, actorId: String, options: RequestOptions? = null): GetActorLimitsResponse =
+    fun actorLimitsGet(
+        clientConfig: ClientConfig,
+        actorId: String,
+        options: RequestOptions? = null,
+    ): GetActorLimitsResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayActorLimitsGetOperation.actorLimitsGet(
             clientConfig,
             actorId,
@@ -232,51 +224,92 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Removes the actor's overrides for the listed categories, which then follow your team's limits again. Clearing a category without an override succeeds.
+     * Removes the actor's overrides for the listed categories, which then follow your team's limits
+     * again. Clearing a category without an override succeeds.
      */
-    fun actorLimitsDelete(clientConfig: ClientConfig, actorId: String, categories: List<LimitCategory>, options: RequestOptions? = null): EmptyResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayActorLimitsDeleteOperation.actorLimitsDelete(
-            clientConfig,
-            actorId,
-            categories,
-            options,
-        )
+    fun actorLimitsDelete(
+        clientConfig: ClientConfig,
+        actorId: String,
+        categories: List<LimitCategory>,
+        options: RequestOptions? = null,
+    ): EmptyResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayActorLimitsDeleteOperation
+            .actorLimitsDelete(
+                clientConfig,
+                actorId,
+                categories,
+                options,
+            )
 
     /**
-     * Sets per-minute limits for the listed categories and leaves the others unchanged. A limit may not exceed your team's current limit for the category (400 otherwise), and 0 blocks every call in the category. The actor does not need to exist yet.
+     * Sets per-minute limits for the listed categories and leaves the others unchanged. A limit may
+     * not exceed your team's current limit for the category (400 otherwise), and 0 blocks every
+     * call in the category. The actor does not need to exist yet.
      */
-    fun actorLimitsUpdate(clientConfig: ClientConfig, actorId: String, overrides: List<LimitOverride>, options: RequestOptions? = null): EmptyResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayActorLimitsUpdateOperation.actorLimitsUpdate(
-            clientConfig,
-            actorId,
-            overrides,
-            options,
-        )
+    fun actorLimitsUpdate(
+        clientConfig: ClientConfig,
+        actorId: String,
+        overrides: List<LimitOverride>,
+        options: RequestOptions? = null,
+    ): EmptyResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayActorLimitsUpdateOperation
+            .actorLimitsUpdate(
+                clientConfig,
+                actorId,
+                overrides,
+                options,
+            )
 
     /**
-     * Connects one of your users, identified by `user_id`, to a provider so tools can act on their account. An OAuth connection starts pending, and authorization carries the URL to send the user to; read the connection until it is active or expired. A connection through a team API-key credential is active immediately. There is one connection per provider and `user_id` for each DigitalOcean user who creates connections. Repeating the request returns the existing connection when its scopes cover the request, reusing a pending connection's link, and restarts an expired or revoked connection under the same ID. Requesting scopes beyond an existing connection's, or a different credential, returns 400 until that connection is deleted.
+     * Connects one of your users, identified by `user_id`, to a provider so tools can act on their
+     * account. An OAuth connection starts pending, and authorization carries the URL to send the
+     * user to; read the connection until it is active or expired. A connection through a team
+     * API-key credential is active immediately. There is one connection per provider and `user_id`
+     * for each DigitalOcean user who creates connections. Repeating the request returns the
+     * existing connection when its scopes cover the request, reusing a pending connection's link,
+     * and restarts an expired or revoked connection under the same ID. Requesting scopes beyond an
+     * existing connection's, or a different credential, returns 400 until that connection is
+     * deleted.
      */
-    fun connectionsCreate(clientConfig: ClientConfig, request: ConnectionsCreateRequest, options: RequestOptions? = null): ConnectionResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsCreateOperation.connectionsCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun connectionsCreate(
+        clientConfig: ClientConfig,
+        request: ConnectionsCreateRequest,
+        options: RequestOptions? = null,
+    ): ConnectionResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsCreateOperation
+            .connectionsCreate(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Returns the connections you can see, excluding revoked ones. Offset-paged with page and `per_page`; filter by provider, `user_id`, and status.
+     * Returns the connections you can see, excluding revoked ones. Offset-paged with page and
+     * `per_page`; filter by provider, `user_id`, and status.
      */
-    fun connectionsList(clientConfig: ClientConfig, request: ConnectionsListRequest, options: RequestOptions? = null): ListConnectionsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsListOperation.connectionsList(
-            clientConfig,
-            request,
-            options,
-        )
+    fun connectionsList(
+        clientConfig: ClientConfig,
+        request: ConnectionsListRequest,
+        options: RequestOptions? = null,
+    ): ListConnectionsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsListOperation
+            .connectionsList(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Returns the connection and, while it is pending, the authorization the user still has to complete. Reading a pending connection picks up a completed authorization, and marks the connection expired once its link has lapsed. Returns 404 for an unknown connection or one you cannot see.
+     * Returns the connection and, while it is pending, the authorization the user still has to
+     * complete. Reading a pending connection picks up a completed authorization, and marks the
+     * connection expired once its link has lapsed. Returns 404 for an unknown connection or one you
+     * cannot see.
      */
-    fun connectionsGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetConnectionResponse =
+    fun connectionsGet(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): GetConnectionResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsGetOperation.connectionsGet(
             clientConfig,
             id,
@@ -284,29 +317,47 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Marks the connection revoked and returns it; for an OAuth connection, its stored tokens are deleted first. Creating a connection for the same provider and `user_id` later reuses the same ID. Only the user who created the connection can delete it; for anyone else it is 404.
+     * Marks the connection revoked and returns it; for an OAuth connection, its stored tokens are
+     * deleted first. Creating a connection for the same provider and `user_id` later reuses the
+     * same ID. Only the user who created the connection can delete it; for anyone else it is 404.
      */
-    fun connectionsDelete(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): DeleteConnectionResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsDeleteOperation.connectionsDelete(
-            clientConfig,
-            id,
-            options,
-        )
+    fun connectionsDelete(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): DeleteConnectionResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayConnectionsDeleteOperation
+            .connectionsDelete(
+                clientConfig,
+                id,
+                options,
+            )
 
     /**
-     * Registers a remote MCP server for your team, using the streamable HTTP transport. The server starts with `syncStatus` pending and no tools: discover its tools with `POST .../mcp-servers/{server_ref}/resync`, then choose which to enable with `PUT .../mcp-servers/{server_ref}/tools`. The endpoint must be HTTPS and resolve only to public IP addresses. The number of servers per team is limited (10 by default); registering beyond it returns 429. Returns 409 when `serverRef` is already in use.
+     * Registers a remote MCP server for your team, using the streamable HTTP transport. The server
+     * starts with `syncStatus` pending and no tools: discover its tools with `POST
+     * .../mcp-servers/{server_ref}/resync`, then choose which to enable with `PUT
+     * .../mcp-servers/{server_ref}/tools`. The endpoint must be HTTPS and resolve only to public IP
+     * addresses. The number of servers per team is limited (10 by default); registering beyond it
+     * returns 429. Returns 409 when `serverRef` is already in use.
      */
-    fun mcpServersCreate(clientConfig: ClientConfig, request: McpServersCreateRequest, options: RequestOptions? = null): McpServerResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersCreateOperation.mcpServersCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun mcpServersCreate(
+        clientConfig: ClientConfig,
+        request: McpServersCreateRequest,
+        options: RequestOptions? = null,
+    ): McpServerResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersCreateOperation
+            .mcpServersCreate(
+                clientConfig,
+                request,
+                options,
+            )
 
-    /**
-     * Returns every MCP server your team has registered, sorted by `serverRef`.
-     */
-    fun mcpServersList(clientConfig: ClientConfig, options: RequestOptions? = null): ListMcpServersResponse =
+    /** Returns every MCP server your team has registered, sorted by `serverRef`. */
+    fun mcpServersList(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListMcpServersResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersListOperation.mcpServersList(
             clientConfig,
             options,
@@ -315,7 +366,11 @@ data class ConnectionCreateNetwork(
     /**
      * Returns one of your team's MCP servers, or 404 when your team has none with this `serverRef`.
      */
-    fun mcpServersGet(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): McpServerResponse =
+    fun mcpServersGet(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        options: RequestOptions? = null,
+    ): McpServerResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersGetOperation.mcpServersGet(
             clientConfig,
             serverRef,
@@ -323,132 +378,244 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Updates the description of a registered MCP server, which appears on its catalog card immediately. Supply `description` to replace the stored text, or an empty value to clear it; the description can contain at most 1024 characters. You cannot change the server endpoint or credentials with this operation; delete the server and register it again to change them.
+     * Updates the description of a registered MCP server, which appears on its catalog card
+     * immediately. Supply `description` to replace the stored text, or an empty value to clear it;
+     * the description can contain at most 1024 characters. You cannot change the server endpoint or
+     * credentials with this operation; delete the server and register it again to change them.
      */
-    fun mcpServersPatch(clientConfig: ClientConfig, serverRef: String, description: String? = null, options: RequestOptions? = null): McpServerResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersPatchOperation.mcpServersPatch(
-            clientConfig,
-            serverRef,
-            description,
-            options,
-        )
+    fun mcpServersPatch(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        description: String? = null,
+        options: RequestOptions? = null,
+    ): McpServerResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersPatchOperation
+            .mcpServersPatch(
+                clientConfig,
+                serverRef,
+                description,
+                options,
+            )
 
     /**
-     * Disables all of the server's tools, removes them from your team's catalog, and deletes the server. An `api_key` supplied at registration is deleted; a `credentialRef` you supplied is left untouched. For a server registered with `credentialRefSource` connection, every user connection made through its OAuth client is revoked. Returns the deleted server, or 404 when it does not exist.
+     * Disables all of the server's tools, removes them from your team's catalog, and deletes the
+     * server. An `api_key` supplied at registration is deleted; a `credentialRef` you supplied is
+     * left untouched. For a server registered with `credentialRefSource` connection, every user
+     * connection made through its OAuth client is revoked. Returns the deleted server, or 404 when
+     * it does not exist.
      */
-    fun mcpServersDelete(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): McpServerResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersDeleteOperation.mcpServersDelete(
-            clientConfig,
-            serverRef,
-            options,
-        )
+    fun mcpServersDelete(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        options: RequestOptions? = null,
+    ): McpServerResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersDeleteOperation
+            .mcpServersDelete(
+                clientConfig,
+                serverRef,
+                options,
+            )
 
     /**
-     * Connects to the server, lists its tools, and records them. Discovered tools are not callable until you enable them. When discovery finishes in time, returns 200 with the server and its tools; a discovery failure is reported in `syncStatus` and `syncError` rather than as an error. Otherwise returns 202 with pending set while discovery continues: poll `GET .../mcp-servers/{server_ref}` until `lastSyncedAt` or `syncError` changes (`syncStatus` is not reset while discovery runs). For a server registered with `credentialRefSource` connection, `user_id` is required; if that user has not authorized the server yet, the response carries authorization with the URL to send them to. Resyncs are rate limited per team, and a team can run only a few discoveries at once; either limit returns 429.
+     * Connects to the server, lists its tools, and records them. Discovered tools are not callable
+     * until you enable them. When discovery finishes in time, returns 200 with the server and its
+     * tools; a discovery failure is reported in `syncStatus` and `syncError` rather than as an
+     * error. Otherwise returns 202 with pending set while discovery continues: poll `GET
+     * .../mcp-servers/{server_ref}` until `lastSyncedAt` or `syncError` changes (`syncStatus` is
+     * not reset while discovery runs). For a server registered with `credentialRefSource`
+     * connection, `user_id` is required; if that user has not authorized the server yet, the
+     * response carries authorization with the URL to send them to. Resyncs are rate limited per
+     * team, and a team can run only a few discoveries at once; either limit returns 429.
      */
-    fun mcpServersRunResync(clientConfig: ClientConfig, serverRef: String, userId: String? = null, options: RequestOptions? = null): ResyncMcpServerResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersRunResyncOperation.mcpServersRunResync(
-            clientConfig,
-            serverRef,
-            userId,
-            options,
-        )
+    fun mcpServersRunResync(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        userId: String? = null,
+        options: RequestOptions? = null,
+    ): ResyncMcpServerResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersRunResyncOperation
+            .mcpServersRunResync(
+                clientConfig,
+                serverRef,
+                userId,
+                options,
+            )
 
     /**
-     * Returns every tool discovered on the server, sorted by name, with whether each is enabled. Tools that have since disappeared from the server stay listed.
+     * Returns every tool discovered on the server, sorted by name, with whether each is enabled.
+     * Tools that have since disappeared from the server stay listed.
      */
-    fun mcpServersListTools(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): ListMcpServerToolsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersListToolsOperation.mcpServersListTools(
-            clientConfig,
-            serverRef,
-            options,
-        )
+    fun mcpServersListTools(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        options: RequestOptions? = null,
+    ): ListMcpServerToolsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersListToolsOperation
+            .mcpServersListTools(
+                clientConfig,
+                serverRef,
+                options,
+            )
 
     /**
-     * `enabledToolSlugs` is the complete set to enable; every other tool of the server is disabled. An enabled tool is added to your team's catalog at its latest discovered version, and a disabled one is removed from it. Repeating the same set changes nothing. Before changing anything, each tool being enabled, re-enabled, or moved to a newer discovered version is verified against the live server: it must still be listed there, with the same input schema as when it was discovered. If any check fails or the server cannot be reached, the request fails with 400 and nothing changes; resync and try again. An unknown tool slug is also rejected with 400. A request that needs verification counts against the resync rate limit (429). Returns the server's full tool list.
+     * `enabledToolSlugs` is the complete set to enable; every other tool of the server is disabled.
+     * An enabled tool is added to your team's catalog at its latest discovered version, and a
+     * disabled one is removed from it. Repeating the same set changes nothing. Before changing
+     * anything, each tool being enabled, re-enabled, or moved to a newer discovered version is
+     * verified against the live server: it must still be listed there, with the same input schema
+     * as when it was discovered. If any check fails or the server cannot be reached, the request
+     * fails with 400 and nothing changes; resync and try again. An unknown tool slug is also
+     * rejected with 400. A request that needs verification counts against the resync rate limit
+     * (429). Returns the server's full tool list.
      */
-    fun mcpServersUpdateTools(clientConfig: ClientConfig, serverRef: String, enabledToolSlugs: List<String>, userId: String? = null, options: RequestOptions? = null): ListMcpServerToolsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersUpdateToolsOperation.mcpServersUpdateTools(
-            clientConfig,
-            serverRef,
-            enabledToolSlugs,
-            userId,
-            options,
-        )
+    fun mcpServersUpdateTools(
+        clientConfig: ClientConfig,
+        serverRef: String,
+        enabledToolSlugs: List<String>,
+        userId: String? = null,
+        options: RequestOptions? = null,
+    ): ListMcpServerToolsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayMcpServersUpdateToolsOperation
+            .mcpServersUpdateTools(
+                clientConfig,
+                serverRef,
+                enabledToolSlugs,
+                userId,
+                options,
+            )
 
     /**
-     * An output view is a named projection of one tool version's output: tool calls that use it return only the listed fields, and its `output_schema` describes the result. The view is bound to the tool version your catalog currently releases. Returns 409 when your team already has a view with this name on the tool version, and 429 when your team already has the maximum of 20 views on it.
+     * An output view is a named projection of one tool version's output: tool calls that use it
+     * return only the listed fields, and its `output_schema` describes the result. The view is
+     * bound to the tool version your catalog currently releases. Returns 409 when your team already
+     * has a view with this name on the tool version, and 429 when your team already has the maximum
+     * of 20 views on it.
      */
-    fun outputViewsCreate(clientConfig: ClientConfig, name: String, fields: List<String>, tool: String? = null, toolId: String? = null, description: String? = null, options: RequestOptions? = null): OutputViewResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsCreateOperation.outputViewsCreate(
-            clientConfig,
-            name,
-            fields,
-            tool,
-            toolId,
-            description,
-            options,
-        )
+    fun outputViewsCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        fields: List<String>,
+        tool: String? = null,
+        toolId: String? = null,
+        description: String? = null,
+        options: RequestOptions? = null,
+    ): OutputViewResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsCreateOperation
+            .outputViewsCreate(
+                clientConfig,
+                name,
+                fields,
+                tool,
+                toolId,
+                description,
+                options,
+            )
 
     /**
-     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus
+     * your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun outputViewsList(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): ListOutputViewsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation.outputViewsList(
-            clientConfig,
-            tool,
-            toolId,
-            pageSize,
-            pageToken,
-            options,
-        )
+    fun outputViewsList(
+        clientConfig: ClientConfig,
+        tool: String? = null,
+        toolId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): ListOutputViewsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation
+            .outputViewsList(
+                clientConfig,
+                tool,
+                toolId,
+                pageSize,
+                pageToken,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Iterates through all pages: Returns the output views your team can use: views DigitalOcean
+     * publishes to every team, plus your team's own. Cursor-paged with `page_size` and
+     * `page_token`; no total is reported.
      */
-    fun outputViewsListPaginated(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (OutputView) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation.outputViewsListPaginated(
-            clientConfig,
-            tool,
-            toolId,
-            pageSize,
-            pageToken,
-            options,
-            yieldFn,
-        )
+    fun outputViewsListPaginated(
+        clientConfig: ClientConfig,
+        tool: String? = null,
+        toolId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (OutputView) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation
+            .outputViewsListPaginated(
+                clientConfig,
+                tool,
+                toolId,
+                pageSize,
+                pageToken,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus
+     * your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun outputViewsListPages(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (OutputViewsListPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation.outputViewsListPages(
-            clientConfig,
-            tool,
-            toolId,
-            pageSize,
-            pageToken,
-            options,
-            yieldPage,
-        )
+    fun outputViewsListPages(
+        clientConfig: ClientConfig,
+        tool: String? = null,
+        toolId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (OutputViewsListPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsListOperation
+            .outputViewsListPages(
+                clientConfig,
+                tool,
+                toolId,
+                pageSize,
+                pageToken,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Validates a projection exactly as create does and returns the view it would produce, including `output_schema`, without storing anything. name and description are optional here; name uniqueness and the per-tool-version limit are not checked.
+     * Validates a projection exactly as create does and returns the view it would produce,
+     * including `output_schema`, without storing anything. name and description are optional here;
+     * name uniqueness and the per-tool-version limit are not checked.
      */
-    fun outputViewsValidate(clientConfig: ClientConfig, fields: List<String>, tool: String? = null, toolId: String? = null, name: String? = null, description: String? = null, options: RequestOptions? = null): OutputViewResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsValidateOperation.outputViewsValidate(
-            clientConfig,
-            fields,
-            tool,
-            toolId,
-            name,
-            description,
-            options,
-        )
+    fun outputViewsValidate(
+        clientConfig: ClientConfig,
+        fields: List<String>,
+        tool: String? = null,
+        toolId: String? = null,
+        name: String? = null,
+        description: String? = null,
+        options: RequestOptions? = null,
+    ): OutputViewResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsValidateOperation
+            .outputViewsValidate(
+                clientConfig,
+                fields,
+                tool,
+                toolId,
+                name,
+                description,
+                options,
+            )
 
     /**
-     * Returns one of your team's views, or a published view on a tool version your catalog exposes. Returns 404 when the view does not exist, was deleted, or belongs to another team.
+     * Returns one of your team's views, or a published view on a tool version your catalog exposes.
+     * Returns 404 when the view does not exist, was deleted, or belongs to another team.
      */
-    fun outputViewsGet(clientConfig: ClientConfig, viewId: String, options: RequestOptions? = null): OutputViewResponse =
+    fun outputViewsGet(
+        clientConfig: ClientConfig,
+        viewId: String,
+        options: RequestOptions? = null,
+    ): OutputViewResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsGetOperation.outputViewsGet(
             clientConfig,
             viewId,
@@ -456,19 +623,32 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Deletes one of your team's views and returns it with audit.deleted_at set; it can no longer be used. Published views cannot be deleted. Returns 404 when the view does not exist, is already deleted, or is not your team's.
+     * Deletes one of your team's views and returns it with audit.deleted_at set; it can no longer
+     * be used. Published views cannot be deleted. Returns 404 when the view does not exist, is
+     * already deleted, or is not your team's.
      */
-    fun outputViewsDelete(clientConfig: ClientConfig, viewId: String, options: RequestOptions? = null): OutputViewResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsDeleteOperation.outputViewsDelete(
-            clientConfig,
-            viewId,
-            options,
-        )
+    fun outputViewsDelete(
+        clientConfig: ClientConfig,
+        viewId: String,
+        options: RequestOptions? = null,
+    ): OutputViewResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayOutputViewsDeleteOperation
+            .outputViewsDelete(
+                clientConfig,
+                viewId,
+                options,
+            )
 
     /**
-     * Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need approval, or are refused.
+     * Creates a session owned by your team, with a new session URN, and returns the MCP URL an
+     * agent connects to. tools selects the tools and toolbelts the session exposes, and policy
+     * decides which calls run, need approval, or are refused.
      */
-    fun sessionsCreate(clientConfig: ClientConfig, request: SessionsCreateRequest, options: RequestOptions? = null): CreateSessionResponse =
+    fun sessionsCreate(
+        clientConfig: ClientConfig,
+        request: SessionsCreateRequest,
+        options: RequestOptions? = null,
+    ): CreateSessionResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsCreateOperation.sessionsCreate(
             clientConfig,
             request,
@@ -476,9 +656,16 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns the sessions you can see, newest first. Offset-paged with page and `per_page`; `end_user_id` filters to one actor.
+     * Returns the sessions you can see, newest first. Offset-paged with page and `per_page`;
+     * `end_user_id` filters to one actor.
      */
-    fun sessionsList(clientConfig: ClientConfig, endUserId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListSessionsResponse =
+    fun sessionsList(
+        clientConfig: ClientConfig,
+        endUserId: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListSessionsResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListOperation.sessionsList(
             clientConfig,
             endUserId,
@@ -488,50 +675,88 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName`
+     * contains query, case-insensitively, ranked across the whole result set. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      */
-    fun sessionsListSearch(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchSessionsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation.sessionsListSearch(
-            clientConfig,
-            query,
-            endUserId,
-            pageSize,
-            pageToken,
-            options,
-        )
+    fun sessionsListSearch(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SearchSessionsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation
+            .sessionsListSearch(
+                clientConfig,
+                query,
+                endUserId,
+                pageSize,
+                pageToken,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Iterates through all pages: Returns the sessions you can see whose name, `actor_id`,
+     * `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole
+     * result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun sessionsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (Session) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation.sessionsListSearchPaginated(
-            clientConfig,
-            query,
-            endUserId,
-            pageSize,
-            pageToken,
-            options,
-            yieldFn,
-        )
+    fun sessionsListSearchPaginated(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Session) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation
+            .sessionsListSearchPaginated(
+                clientConfig,
+                query,
+                endUserId,
+                pageSize,
+                pageToken,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName`
+     * contains query, case-insensitively, ranked across the whole result set. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      */
-    fun sessionsListSearchPages(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (SessionsListSearchPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation.sessionsListSearchPages(
-            clientConfig,
-            query,
-            endUserId,
-            pageSize,
-            pageToken,
-            options,
-            yieldPage,
-        )
+    fun sessionsListSearchPages(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (SessionsListSearchPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsListSearchOperation
+            .sessionsListSearchPages(
+                clientConfig,
+                query,
+                endUserId,
+                pageSize,
+                pageToken,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Deletes the session and its policy. Succeeds without deleting anything when the session does not exist or you cannot delete it, so repeating a delete also succeeds. A malformed `session_urn` is rejected with 400.
+     * Deletes the session and its policy. Succeeds without deleting anything when the session does
+     * not exist or you cannot delete it, so repeating a delete also succeeds. A malformed
+     * `session_urn` is rejected with 400.
      */
-    fun sessionsDelete(clientConfig: ClientConfig, sessionUrn: String, options: RequestOptions? = null): EmptyResponse =
+    fun sessionsDelete(
+        clientConfig: ClientConfig,
+        sessionUrn: String,
+        options: RequestOptions? = null,
+    ): EmptyResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewaySessionsDeleteOperation.sessionsDelete(
             clientConfig,
             sessionUrn,
@@ -539,23 +764,42 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * A toolbelt is a named set of tools, each pinned to a version, that your team can attach to sessions as `toolbelt:<name>@<version>`. The first version is 1 unless version is set. Returns 409 if an active toolbelt with the same name exists. The name of a deleted toolbelt can be reused; its versions start again from the initial version.
+     * A toolbelt is a named set of tools, each pinned to a version, that your team can attach to
+     * sessions as `toolbelt:<name>@<version>`. The first version is 1 unless version is set.
+     * Returns 409 if an active toolbelt with the same name exists. The name of a deleted toolbelt
+     * can be reused; its versions start again from the initial version.
      */
-    fun toolbeltsCreate(clientConfig: ClientConfig, name: String, version: String? = null, displayName: String? = null, description: String? = null, tools: List<String>? = null, options: RequestOptions? = null): ToolbeltResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsCreateOperation.toolbeltsCreate(
-            clientConfig,
-            name,
-            version,
-            displayName,
-            description,
-            tools,
-            options,
-        )
+    fun toolbeltsCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        version: String? = null,
+        displayName: String? = null,
+        description: String? = null,
+        tools: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ToolbeltResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsCreateOperation
+            .toolbeltsCreate(
+                clientConfig,
+                name,
+                version,
+                displayName,
+                description,
+                tools,
+                options,
+            )
 
     /**
-     * Returns your team's toolbelts, one entry per name describing its latest version, sorted by name. Offset-paged with page and `per_page`; pagination reports the total.
+     * Returns your team's toolbelts, one entry per name describing its latest version, sorted by
+     * name. Offset-paged with page and `per_page`; pagination reports the total.
      */
-    fun toolbeltsList(clientConfig: ClientConfig, status: SchemaSchemaEnumdba9253b? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ToolbeltsResponse =
+    fun toolbeltsList(
+        clientConfig: ClientConfig,
+        status: SchemaSchemaEnumdba9253b? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ToolbeltsResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListOperation.toolbeltsList(
             clientConfig,
             status,
@@ -565,50 +809,92 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns your team's toolbelts whose name, display name, or description contains query,
+     * case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total
+     * is reported.
      */
-    fun toolbeltsListSearch(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchToolbeltsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation.toolbeltsListSearch(
-            clientConfig,
-            query,
-            status,
-            pageSize,
-            pageToken,
-            options,
-        )
+    fun toolbeltsListSearch(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        status: SchemaSchemaEnumdba9253b? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SearchToolbeltsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation
+            .toolbeltsListSearch(
+                clientConfig,
+                query,
+                status,
+                pageSize,
+                pageToken,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Iterates through all pages: Returns your team's toolbelts whose name, display name, or
+     * description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size`
+     * and `page_token`; no total is reported.
      */
-    fun toolbeltsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ToolbeltSummary) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation.toolbeltsListSearchPaginated(
-            clientConfig,
-            query,
-            status,
-            pageSize,
-            pageToken,
-            options,
-            yieldFn,
-        )
+    fun toolbeltsListSearchPaginated(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        status: SchemaSchemaEnumdba9253b? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ToolbeltSummary) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation
+            .toolbeltsListSearchPaginated(
+                clientConfig,
+                query,
+                status,
+                pageSize,
+                pageToken,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns your team's toolbelts whose name, display name, or description contains query,
+     * case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total
+     * is reported.
      */
-    fun toolbeltsListSearchPages(clientConfig: ClientConfig, query: String? = null, status: SchemaSchemaEnumdba9253b? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ToolbeltsListSearchPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation.toolbeltsListSearchPages(
-            clientConfig,
-            query,
-            status,
-            pageSize,
-            pageToken,
-            options,
-            yieldPage,
-        )
+    fun toolbeltsListSearchPages(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        status: SchemaSchemaEnumdba9253b? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ToolbeltsListSearchPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListSearchOperation
+            .toolbeltsListSearchPages(
+                clientConfig,
+                query,
+                status,
+                pageSize,
+                pageToken,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
+     * Returns the latest version of the named toolbelt, or the version requested, with catalog
+     * metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless
+     * a version is requested.
      */
-    fun toolbeltsGet(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null): GetToolbeltResponse =
+    fun toolbeltsGet(
+        clientConfig: ClientConfig,
+        name: String,
+        version: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        search: String? = null,
+        options: RequestOptions? = null,
+    ): GetToolbeltResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsGetOperation.toolbeltsGet(
             clientConfig,
             name,
@@ -620,95 +906,173 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Iterates through all pages: Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
+     * Iterates through all pages: Returns the latest version of the named toolbelt, or the version
+     * requested, with catalog metadata for one page of its members in `tool_details`. A deleted
+     * toolbelt returns 404 unless a version is requested.
      */
-    fun toolbeltsGetPaginated(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null, yieldFn: (ToolbeltToolDetail) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsGetOperation.toolbeltsGetPaginated(
-            clientConfig,
-            name,
-            version,
-            pageSize,
-            pageToken,
-            search,
-            options,
-            yieldFn,
-        )
+    fun toolbeltsGetPaginated(
+        clientConfig: ClientConfig,
+        name: String,
+        version: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        search: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ToolbeltToolDetail) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsGetOperation
+            .toolbeltsGetPaginated(
+                clientConfig,
+                name,
+                version,
+                pageSize,
+                pageToken,
+                search,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
+     * Returns the latest version of the named toolbelt, or the version requested, with catalog
+     * metadata for one page of its members in `tool_details`. A deleted toolbelt returns 404 unless
+     * a version is requested.
      */
-    fun toolbeltsGetPages(clientConfig: ClientConfig, name: String, version: String? = null, pageSize: Long? = null, pageToken: String? = null, search: String? = null, options: RequestOptions? = null, yieldPage: (ToolbeltsGetPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsGetOperation.toolbeltsGetPages(
-            clientConfig,
-            name,
-            version,
-            pageSize,
-            pageToken,
-            search,
-            options,
-            yieldPage,
-        )
+    fun toolbeltsGetPages(
+        clientConfig: ClientConfig,
+        name: String,
+        version: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        search: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ToolbeltsGetPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsGetOperation
+            .toolbeltsGetPages(
+                clientConfig,
+                name,
+                version,
+                pageSize,
+                pageToken,
+                search,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Marks the toolbelt deleted and returns its latest version with status deprecated. Its versions stay readable by explicit version until the name is reused. The name is free to reuse immediately; a new toolbelt with it starts a fresh version history. Returns 404 when the toolbelt does not exist or is already deleted.
+     * Marks the toolbelt deleted and returns its latest version with status deprecated. Its
+     * versions stay readable by explicit version until the name is reused. The name is free to
+     * reuse immediately; a new toolbelt with it starts a fresh version history. Returns 404 when
+     * the toolbelt does not exist or is already deleted.
      */
-    fun toolbeltsDelete(clientConfig: ClientConfig, name: String, options: RequestOptions? = null): ToolbeltUpdateResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsDeleteOperation.toolbeltsDelete(
-            clientConfig,
-            name,
-            options,
-        )
+    fun toolbeltsDelete(
+        clientConfig: ClientConfig,
+        name: String,
+        options: RequestOptions? = null,
+    ): ToolbeltUpdateResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsDeleteOperation
+            .toolbeltsDelete(
+                clientConfig,
+                name,
+                options,
+            )
 
     /**
-     * Returns the distinct providers of the toolbelt's members, each with its member count, sorted by provider ID. List one provider's members with `GET .../toolbelts/{name}/providers/{provider}/tools`.
+     * Returns the distinct providers of the toolbelt's members, each with its member count, sorted
+     * by provider ID. List one provider's members with `GET
+     * .../toolbelts/{name}/providers/{provider}/tools`.
      */
-    fun toolbeltsListProviders(clientConfig: ClientConfig, name: String, version: String? = null, page: Long? = null, perPage: Long? = null, search: String? = null, options: RequestOptions? = null): ListToolbeltProvidersResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListProvidersOperation.toolbeltsListProviders(
-            clientConfig,
-            name,
-            version,
-            page,
-            perPage,
-            search,
-            options,
-        )
+    fun toolbeltsListProviders(
+        clientConfig: ClientConfig,
+        name: String,
+        version: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        search: String? = null,
+        options: RequestOptions? = null,
+    ): ListToolbeltProvidersResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListProvidersOperation
+            .toolbeltsListProviders(
+                clientConfig,
+                name,
+                version,
+                page,
+                perPage,
+                search,
+                options,
+            )
 
     /**
-     * Returns a page of catalog metadata for the toolbelt's members from the named provider, sorted by tool slug. An unknown provider returns an empty page.
+     * Returns a page of catalog metadata for the toolbelt's members from the named provider, sorted
+     * by tool slug. An unknown provider returns an empty page.
      */
-    fun toolbeltsListProviderTools(clientConfig: ClientConfig, request: ToolbeltsListProviderToolsRequest, options: RequestOptions? = null): ListToolbeltProviderToolsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListProviderToolsOperation.toolbeltsListProviderTools(
-            clientConfig,
-            request,
-            options,
-        )
+    fun toolbeltsListProviderTools(
+        clientConfig: ClientConfig,
+        request: ToolbeltsListProviderToolsRequest,
+        options: RequestOptions? = null,
+    ): ListToolbeltProviderToolsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsListProviderToolsOperation
+            .toolbeltsListProviderTools(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Adds the listed tools and returns the toolbelt. When membership changes, this creates a new version that keeps the display name and description. Tools already in the toolbelt are left as they are, so a request that adds nothing new returns the current version unchanged. Returns 400 when a tool is not an active catalog tool, when a pin differs from the tool's current released version or from the version the toolbelt already holds, or when the toolbelt would exceed 500 tools. Returns 404 for an unknown or deleted toolbelt.
+     * Adds the listed tools and returns the toolbelt. When membership changes, this creates a new
+     * version that keeps the display name and description. Tools already in the toolbelt are left
+     * as they are, so a request that adds nothing new returns the current version unchanged.
+     * Returns 400 when a tool is not an active catalog tool, when a pin differs from the tool's
+     * current released version or from the version the toolbelt already holds, or when the toolbelt
+     * would exceed 500 tools. Returns 404 for an unknown or deleted toolbelt.
      */
-    fun toolbeltsAddTools(clientConfig: ClientConfig, name: String, tools: List<String>, options: RequestOptions? = null): ToolbeltUpdateResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsAddToolsOperation.toolbeltsAddTools(
-            clientConfig,
-            name,
-            tools,
-            options,
-        )
+    fun toolbeltsAddTools(
+        clientConfig: ClientConfig,
+        name: String,
+        tools: List<String>,
+        options: RequestOptions? = null,
+    ): ToolbeltUpdateResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsAddToolsOperation
+            .toolbeltsAddTools(
+                clientConfig,
+                name,
+                tools,
+                options,
+            )
 
     /**
-     * Removes the listed tools and returns the toolbelt. When membership changes, this creates a new version that keeps the display name and description. Tools that are not members are ignored, and removing every tool is allowed; deleting the toolbelt itself is a separate DELETE. Returns 400 when a pin differs from the version the toolbelt holds, and 404 for an unknown or deleted toolbelt.
+     * Removes the listed tools and returns the toolbelt. When membership changes, this creates a
+     * new version that keeps the display name and description. Tools that are not members are
+     * ignored, and removing every tool is allowed; deleting the toolbelt itself is a separate
+     * DELETE. Returns 400 when a pin differs from the version the toolbelt holds, and 404 for an
+     * unknown or deleted toolbelt.
      */
-    fun toolbeltsDeleteTools(clientConfig: ClientConfig, name: String, tools: List<String>, options: RequestOptions? = null): ToolbeltUpdateResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsDeleteToolsOperation.toolbeltsDeleteTools(
-            clientConfig,
-            name,
-            tools,
-            options,
-        )
+    fun toolbeltsDeleteTools(
+        clientConfig: ClientConfig,
+        name: String,
+        tools: List<String>,
+        options: RequestOptions? = null,
+    ): ToolbeltUpdateResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolbeltsDeleteToolsOperation
+            .toolbeltsDeleteTools(
+                clientConfig,
+                name,
+                tools,
+                options,
+            )
 
     /**
-     * Returns one page of the tools your team can use: released catalog tools plus the enabled tools of your team's MCP servers. definitions[i] describes tools[i]. Offset-paged with page and `per_page`; an unknown `toolkitId` returns an empty page.
+     * Returns one page of the tools your team can use: released catalog tools plus the enabled
+     * tools of your team's MCP servers. definitions[i] describes tools[i]. Offset-paged with page
+     * and `per_page`; an unknown `toolkitId` returns an empty page.
      */
-    fun toolsList(clientConfig: ClientConfig, toolkitId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListToolsResponse =
+    fun toolsList(
+        clientConfig: ClientConfig,
+        toolkitId: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListToolsResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListOperation.toolsList(
             clientConfig,
             toolkitId,
@@ -718,35 +1082,66 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns availability and latency for each catalog tool over the requested window, sorted by provider and then tool slug. A tool with no calls in the window is listed with `data_status` `HEALTH_DATA_STATUS_NO_DATA`. Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's MCP servers are not included. Offset-paged with page and `per_page`.
+     * Returns availability and latency for each catalog tool over the requested window, sorted by
+     * provider and then tool slug. A tool with no calls in the window is listed with `data_status`
+     * `HEALTH_DATA_STATUS_NO_DATA`. Metrics are aggregated across all customers; request volumes
+     * are not reported. Tools of your team's MCP servers are not included. Offset-paged with page
+     * and `per_page`.
      */
-    fun toolsListHealth(clientConfig: ClientConfig, provider: String? = null, window: SchemaSchemaEnume6ebae80? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListToolHealthResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListHealthOperation.toolsListHealth(
-            clientConfig,
-            provider,
-            window,
-            page,
-            perPage,
-            options,
-        )
+    fun toolsListHealth(
+        clientConfig: ClientConfig,
+        provider: String? = null,
+        window: SchemaSchemaEnume6ebae80? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListToolHealthResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListHealthOperation
+            .toolsListHealth(
+                clientConfig,
+                provider,
+                window,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * Returns availability and latency for each catalog provider over the requested window, sorted by provider ID. Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's MCP servers are not included. Offset-paged with page and `per_page`.
+     * Returns availability and latency for each catalog provider over the requested window, sorted
+     * by provider ID. Metrics are aggregated across all customers; request volumes are not
+     * reported. Tools of your team's MCP servers are not included. Offset-paged with page and
+     * `per_page`.
      */
-    fun toolsListHealthProviders(clientConfig: ClientConfig, provider: String? = null, window: SchemaSchemaEnume6ebae80? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListProviderHealthResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListHealthProvidersOperation.toolsListHealthProviders(
-            clientConfig,
-            provider,
-            window,
-            page,
-            perPage,
-            options,
-        )
+    fun toolsListHealthProviders(
+        clientConfig: ClientConfig,
+        provider: String? = null,
+        window: SchemaSchemaEnume6ebae80? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListProviderHealthResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListHealthProvidersOperation
+            .toolsListHealthProviders(
+                clientConfig,
+                provider,
+                window,
+                page,
+                perPage,
+                options,
+            )
 
     /**
-     * Returns availability and latency for one catalog tool over the requested window, optionally with a history series. Metrics are aggregated across all customers; request volumes are not reported. Returns 404 when `tool_slug` is not a catalog tool.
+     * Returns availability and latency for one catalog tool over the requested window, optionally
+     * with a history series. Metrics are aggregated across all customers; request volumes are not
+     * reported. Returns 404 when `tool_slug` is not a catalog tool.
      */
-    fun toolsGetHealth(clientConfig: ClientConfig, toolSlug: String, window: SchemaSchemaEnume6ebae80? = null, includeHistory: Boolean? = null, options: RequestOptions? = null): GetToolHealthResponse =
+    fun toolsGetHealth(
+        clientConfig: ClientConfig,
+        toolSlug: String,
+        window: SchemaSchemaEnume6ebae80? = null,
+        includeHistory: Boolean? = null,
+        options: RequestOptions? = null,
+    ): GetToolHealthResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayToolsGetHealthOperation.toolsGetHealth(
             clientConfig,
             toolSlug,
@@ -756,109 +1151,198 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns the active catalog providers with at least one released tool, sorted by display name, with the credential kinds each accepts and the parameters a connection or team credential needs. Your team's MCP servers are listed separately under `/v2/action-gateway/mcp-servers`.
+     * Returns the active catalog providers with at least one released tool, sorted by display name,
+     * with the credential kinds each accepts and the parameters a connection or team credential
+     * needs. Your team's MCP servers are listed separately under `/v2/action-gateway/mcp-servers`.
      */
-    fun toolsListProviders(clientConfig: ClientConfig, options: RequestOptions? = null): ListProvidersResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListProvidersOperation.toolsListProviders(
-            clientConfig,
-            options,
-        )
+    fun toolsListProviders(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListProvidersResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListProvidersOperation
+            .toolsListProviders(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name,
+     * or description contains query, case-insensitively, sorted by name. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      */
-    fun toolsListSearchProviders(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchProvidersResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation.toolsListSearchProviders(
-            clientConfig,
-            query,
-            pageSize,
-            pageToken,
-            options,
-        )
+    fun toolsListSearchProviders(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SearchProvidersResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation
+            .toolsListSearchProviders(
+                clientConfig,
+                query,
+                pageSize,
+                pageToken,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Iterates through all pages: Returns the providers of `GET /v2/action-gateway/tools/providers`
+     * whose name, display name, or description contains query, case-insensitively, sorted by name.
+     * Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun toolsListSearchProvidersPaginated(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ProviderSummary) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation.toolsListSearchProvidersPaginated(
-            clientConfig,
-            query,
-            pageSize,
-            pageToken,
-            options,
-            yieldFn,
-        )
+    fun toolsListSearchProvidersPaginated(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProviderSummary) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation
+            .toolsListSearchProvidersPaginated(
+                clientConfig,
+                query,
+                pageSize,
+                pageToken,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name, or description contains query, case-insensitively, sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the providers of `GET /v2/action-gateway/tools/providers` whose name, display name,
+     * or description contains query, case-insensitively, sorted by name. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      */
-    fun toolsListSearchProvidersPages(clientConfig: ClientConfig, query: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ToolsListSearchProvidersPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation.toolsListSearchProvidersPages(
-            clientConfig,
-            query,
-            pageSize,
-            pageToken,
-            options,
-            yieldPage,
-        )
+    fun toolsListSearchProvidersPages(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ToolsListSearchProvidersPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchProvidersOperation
+            .toolsListSearchProvidersPages(
+                clientConfig,
+                query,
+                pageSize,
+                pageToken,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the tools your team can use that match query, optionally restricted to some providers
+     * or to the members of one of your toolbelts. Results are ranked across the whole result set:
+     * exact tool name matches first, then name or title prefixes, then name or title substrings,
+     * then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun toolsListSearch(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchToolsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation.toolsListSearch(
-            clientConfig,
-            query,
-            provider,
-            toolbelt,
-            pageSize,
-            pageToken,
-            options,
-        )
+    fun toolsListSearch(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        provider: List<String>? = null,
+        toolbelt: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SearchToolsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation
+            .toolsListSearch(
+                clientConfig,
+                query,
+                provider,
+                toolbelt,
+                pageSize,
+                pageToken,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Iterates through all pages: Returns the tools your team can use that match query, optionally
+     * restricted to some providers or to the members of one of your toolbelts. Results are ranked
+     * across the whole result set: exact tool name matches first, then name or title prefixes, then
+     * name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`;
+     * no total is reported.
      */
-    fun toolsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ToolSearchResult) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation.toolsListSearchPaginated(
-            clientConfig,
-            query,
-            provider,
-            toolbelt,
-            pageSize,
-            pageToken,
-            options,
-            yieldFn,
-        )
+    fun toolsListSearchPaginated(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        provider: List<String>? = null,
+        toolbelt: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ToolSearchResult) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation
+            .toolsListSearchPaginated(
+                clientConfig,
+                query,
+                provider,
+                toolbelt,
+                pageSize,
+                pageToken,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Returns the tools your team can use that match query, optionally restricted to some providers or to the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the tools your team can use that match query, optionally restricted to some providers
+     * or to the members of one of your toolbelts. Results are ranked across the whole result set:
+     * exact tool name matches first, then name or title prefixes, then name or title substrings,
+     * then other matches. Cursor-paged with `page_size` and `page_token`; no total is reported.
      */
-    fun toolsListSearchPages(clientConfig: ClientConfig, query: String? = null, provider: List<String>? = null, toolbelt: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ToolsListSearchPage) -> Boolean) =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation.toolsListSearchPages(
-            clientConfig,
-            query,
-            provider,
-            toolbelt,
-            pageSize,
-            pageToken,
-            options,
-            yieldPage,
-        )
+    fun toolsListSearchPages(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        provider: List<String>? = null,
+        toolbelt: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ToolsListSearchPage) -> Boolean,
+    ) =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListSearchOperation
+            .toolsListSearchPages(
+                clientConfig,
+                query,
+                provider,
+                toolbelt,
+                pageSize,
+                pageToken,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Returns the providers (toolkits) whose tools your team can use: catalog providers with at least one released tool, plus your team's registered MCP servers.
+     * Returns the providers (toolkits) whose tools your team can use: catalog providers with at
+     * least one released tool, plus your team's registered MCP servers.
      */
-    fun toolsListToolkits(clientConfig: ClientConfig, options: RequestOptions? = null): ListToolkitsResponse =
-        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListToolkitsOperation.toolsListToolkits(
-            clientConfig,
-            options,
-        )
+    fun toolsListToolkits(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListToolkitsResponse =
+        dev.octri.showcase.digitalocean.methods.ActionGatewayToolsListToolkitsOperation
+            .toolsListToolkits(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of connections that are not revoked, and actors with limit overrides. Only sessions and connections you can see count. Offset-paged with page and `per_page`.
+     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of
+     * connections that are not revoked, and actors with limit overrides. Only sessions and
+     * connections you can see count. Offset-paged with page and `per_page`.
      */
-    fun usersList(clientConfig: ClientConfig, userId: String? = null, sort: SchemaSchemaEnumae407830? = null, sortDirection: SchemaSchemaEnum4a1468b2? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListUsersResponse =
+    fun usersList(
+        clientConfig: ClientConfig,
+        userId: String? = null,
+        sort: SchemaSchemaEnumae407830? = null,
+        sortDirection: SchemaSchemaEnum4a1468b2? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListUsersResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayUsersListOperation.usersList(
             clientConfig,
             userId,
@@ -870,9 +1354,14 @@ data class ConnectionCreateNetwork(
         )
 
     /**
-     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user has none you can see and no limit overrides.
+     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user
+     * has none you can see and no limit overrides.
      */
-    fun usersGet(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): GetUserResponse =
+    fun usersGet(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): GetUserResponse =
         dev.octri.showcase.digitalocean.methods.ActionGatewayUsersGetOperation.usersGet(
             clientConfig,
             userId,

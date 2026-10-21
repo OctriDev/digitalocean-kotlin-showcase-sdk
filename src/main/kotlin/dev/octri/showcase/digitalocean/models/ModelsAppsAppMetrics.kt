@@ -5,44 +5,31 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `AppMetricsBandwidthUsage` API schema.
- */
+/** Typed representation of the `AppMetricsBandwidthUsage` API schema. */
 data class AppMetricsBandwidthUsage(
-    /**
-     * A list of bandwidth usage details by app.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("app_bandwidth_usage") val appBandwidthUsage: List<AppMetricsBandwidthUsageDetails>? = null,
-    /**
-     * The date for the metrics data.
-     */
-    val date: OffsetDateTime? = null
+    /** A list of bandwidth usage details by app. */
+    @com.fasterxml.jackson.annotation.JsonProperty("app_bandwidth_usage")
+    val appBandwidthUsage: List<AppMetricsBandwidthUsageDetails>? = null,
+    /** The date for the metrics data. */
+    val date: OffsetDateTime? = null,
 )
 
-/**
- * Bandwidth usage for an app.
- */
+/** Bandwidth usage for an app. */
 data class AppMetricsBandwidthUsageDetails(
-    /**
-     * The ID of the app.
-     */
+    /** The ID of the app. */
     @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: String? = null,
-    /**
-     * The used bandwidth amount in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bandwidth_bytes") val bandwidthBytes: String? = null
+    /** The used bandwidth amount in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("bandwidth_bytes")
+    val bandwidthBytes: String? = null,
 )
 
-/**
- * Typed representation of the `AppMetricsBandwidthUsageRequest` API schema.
- */
+/** Typed representation of the `AppMetricsBandwidthUsageRequest` API schema. */
 data class AppMetricsBandwidthUsageRequest(
-    /**
-     * A list of app IDs to query bandwidth metrics for.
-     */
+    /** A list of app IDs to query bandwidth metrics for. */
     @com.fasterxml.jackson.annotation.JsonProperty("app_ids") val appIds: List<String>,
     /**
-     * Optional day to query. Only the date component of the timestamp will be considered. Default: yesterday.
+     * Optional day to query. Only the date component of the timestamp will be considered. Default:
+     * yesterday.
      */
-    val date: OffsetDateTime? = null
+    val date: OffsetDateTime? = null,
 )

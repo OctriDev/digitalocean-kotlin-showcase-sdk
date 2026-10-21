@@ -3,28 +3,19 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Description for a specific Region
- */
+/** Description for a specific Region */
 data class GenaiapiRegion(
-    /**
-     * Url for inference server
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("inference_url") val inferenceUrl: String? = null,
-    /**
-     * Region code
-     */
+    /** Url for inference server */
+    @com.fasterxml.jackson.annotation.JsonProperty("inference_url")
+    val inferenceUrl: String? = null,
+    /** Region code */
     val region: String? = null,
-    /**
-     * This datacenter is capable of running batch jobs
-     */
+    /** This datacenter is capable of running batch jobs */
     @com.fasterxml.jackson.annotation.JsonProperty("serves_batch") val servesBatch: Boolean? = null,
-    /**
-     * This datacenter is capable of serving inference
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("serves_inference") val servesInference: Boolean? = null,
-    /**
-     * The url for the inference streaming server
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_inference_url") val streamInferenceUrl: String? = null
+    /** This datacenter is capable of serving inference */
+    @com.fasterxml.jackson.annotation.JsonProperty("serves_inference")
+    val servesInference: Boolean? = null,
+    /** The url for the inference streaming server */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_inference_url")
+    val streamInferenceUrl: String? = null,
 )

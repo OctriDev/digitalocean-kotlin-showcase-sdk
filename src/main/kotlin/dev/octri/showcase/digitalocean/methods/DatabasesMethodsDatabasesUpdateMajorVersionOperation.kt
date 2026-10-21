@@ -12,15 +12,40 @@ import dev.octri.showcase.digitalocean.Version
 
 internal object DatabasesMethodsDatabasesUpdateMajorVersionOperation {
     /**
-     * To upgrade the major version of a database, send a PUT request to `/v2/databases/$DATABASE_ID/upgrade`, specifying the target version. A successful request will receive a 204 No Content status code with no body in response.
+     * To upgrade the major version of a database, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/upgrade`, specifying the target version. A successful request
+     * will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param version A string representing the version of the database engine in use
-     *   for the cluster.
+     * @param version A string representing the version of the database engine in use for the
+     *   cluster.
      */
-    fun databasesUpdateMajorVersion(clientConfig: ClientConfig, databaseClusterUuid: String, version: Version? = null, options: RequestOptions? = null): Unit {
+    fun databasesUpdateMajorVersion(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        version: Version? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/upgrade", config = clientConfig, body = SdkClient.bodyMap("version" to (SdkClient.omitIfNull(version))), operationId = "databasesUpdateMajorVersion", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/upgrade",
+                config = clientConfig,
+                body = SdkClient.bodyMap("version" to (SdkClient.omitIfNull(version))),
+                operationId = "databasesUpdateMajorVersion",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

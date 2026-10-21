@@ -4,21 +4,19 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
+ * An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes
+ * cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
  */
 data class NvidiaGpuDevicePlugin(
-    /**
-     * Indicates whether the Nvidia GPU Device Plugin is enabled.
-     */
+    /** Indicates whether the Nvidia GPU Device Plugin is enabled. */
     val enabled: Boolean? = null
 )
 
 /**
- * An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+ * An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes
+ * cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
  */
 data class NvidiaGpuDraDriver(
-    /**
-     * Indicates whether the NVIDIA GPU DRA Driver is enabled.
-     */
+    /** Indicates whether the NVIDIA GPU DRA Driver is enabled. */
     val enabled: Boolean? = null
 )

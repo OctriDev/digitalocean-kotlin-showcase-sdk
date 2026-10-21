@@ -5,108 +5,141 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `DefinitionsCreateSessionResponse` API schema.
- */
+/** Typed representation of the `DefinitionsCreateSessionResponse` API schema. */
 data class DefinitionsCreateSessionResponse(
-    /**
-     * Session is the user-facing record of a environment session + sandbox pair.
-     */
+    /** Session is the user-facing record of a environment session + sandbox pair. */
     val session: DefinitionsSession? = null
 )
 
-/**
- * Typed representation of the `DefinitionsListSessionsResponse` API schema.
- */
+/** Typed representation of the `DefinitionsListSessionsResponse` API schema. */
 data class DefinitionsListSessionsResponse(
-    /**
-     * Optional array value serialized in the `sessions` wire field.
-     */
+    /** Optional array value serialized in the `sessions` wire field. */
     val sessions: List<DefinitionsSession>? = null,
-    /**
-     * Opaque cursor for the next page. Empty when there are no further pages.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: String? = null
+    /** Opaque cursor for the next page. Empty when there are no further pages. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: String? = null,
 )
 
-/**
- * Session is the user-facing record of a environment session + sandbox pair.
- */
+/** Session is the user-facing record of a environment session + sandbox pair. */
 data class DefinitionsSession(
-    /**
-     * Optional `string` value serialized in the `session_id` wire field.
-     */
+    /** Optional `string` value serialized in the `session_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String? = null,
     /**
-     * User-assignable display name, unique per team among non-terminal sessions. Usable in place of session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name= filter; the {session_id} path stays UUID-only). Supplied via the environment-spec metadata.name, or auto-generated ("session-<agent-type>-<date-time>") when omitted.
+     * User-assignable display name, unique per team among non-terminal sessions. Usable in place of
+     * session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name=
+     * filter; the {session_id} path stays UUID-only). Supplied via the environment-spec
+     * metadata.name, or auto-generated ("session-<agent-type>-<date-time>") when omitted.
      */
     val name: String? = null,
     /**
-     * Lineage: id of the session this one was forked from. Omitted/empty for root (non-fork) sessions.
+     * Lineage: id of the session this one was forked from. Omitted/empty for root (non-fork)
+     * sessions.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_session_id") val parentSessionId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_session_id")
+    val parentSessionId: String? = null,
     /**
-     * Lineage: branch label assigned when this session was created by ForkSession (or rollback's internal fork). Omitted/empty for root sessions.
+     * Lineage: branch label assigned when this session was created by ForkSession (or rollback's
+     * internal fork). Omitted/empty for root sessions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("fork_id") val forkId: String? = null,
     /**
-     * Lineage: harness-api checkpoint id (cp_<hex>) the child booted from at fork time. Drives OHP inherited-history replay on attach. Omitted/empty for root sessions and legacy forks created before this field was persisted.
+     * Lineage: harness-api checkpoint id (cp_<hex>) the child booted from at fork time. Drives OHP
+     * inherited-history replay on attach. Omitted/empty for root sessions and legacy forks created
+     * before this field was persisted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("fork_from_checkpoint_id") val forkFromCheckpointId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("fork_from_checkpoint_id")
+    val forkFromCheckpointId: String? = null,
     /**
-     * AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
+     * AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE,
+     * OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is
+     * overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400.
+     * AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the
+     * agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter.
+     * AGENT_KIND_CREWAI is the CrewAI…
      */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_kind") val agentKind: AgentKind? = null,
     /**
-     * SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a ListSessions status-filter value only -- no session is ever actually in this status. SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing response.
+     * SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a
+     * ListSessions status-filter value only -- no session is ever actually in this status.
+     * SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing
+     * response.
      */
     val status: SessionStatus? = null,
     /**
-     * Sandbox identity for support / debugging. Informational; omitted until a sandbox is allocated.
+     * Sandbox identity for support / debugging. Informational; omitted until a sandbox is
+     * allocated.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("sandbox_id") val sandboxId: String? = null,
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
+     * Timestamp of the most recent event in this session's canonical stream. Drives the inactivity
+     * policy that destroys idle sessions.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_event_at")
+    val lastEventAt: OffsetDateTime? = null,
     /**
-     * Timestamp of the most recent event in this session's canonical stream. Drives the inactivity policy that destroys idle sessions.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_event_at") val lastEventAt: OffsetDateTime? = null,
-    /**
-     * Session is exempt from idle auto-pause (manifest keep_warm, or the agent-kind default: hermes sessions keep warm). Pause requests against such a session are rejected with 409. Omitted when false.
+     * Session is exempt from idle auto-pause (manifest keep_warm, or the agent-kind default: hermes
+     * sessions keep warm). Pause requests against such a session are rejected with 409. Omitted
+     * when false.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("keep_warm") val keepWarm: Boolean? = null,
     /**
-     * Session consents to being resumed automatically when the team's prepayment balance is restored after a low-balance pause. Defaults to false at create time; may be toggled later via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused with reason low_balance whose latest run did not complete is ever resumed automatically - a session the customer paused themselves, or one that idled out, stays paused regardless. Not an environment-spec field,…
+     * Session consents to being resumed automatically when the team's prepayment balance is
+     * restored after a low-balance pause. Defaults to false at create time; may be toggled later
+     * via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused
+     * with reason low_balance whose latest run did not complete is ever resumed automatically - a
+     * session the customer paused themselves, or one that idled out, stays paused regardless. Not
+     * an environment-spec field,…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff") val resumeOnTopoff: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff")
+    val resumeOnTopoff: Boolean? = null,
     /**
-     * Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted otherwise. Known values: manual (PauseSession RPC), idle (inactivity auto-pause), low_balance (prepay gate). Clients should treat an unrecognized value as an opaque reason string.
+     * Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted
+     * otherwise. Known values: manual (PauseSession RPC), idle (inactivity auto-pause), low_balance
+     * (prepay gate). Clients should treat an unrecognized value as an opaque reason string.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("pause_reason") val pauseReason: String? = null,
     /**
-     * This session's own idle-pause timeout (manifest idle_timeout). Omitted when the session uses the deployment-wide default.
+     * This session's own idle-pause timeout (manifest idle_timeout). Omitted when the session uses
+     * the deployment-wide default.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("idle_timeout_seconds") val idleTimeoutSeconds: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("idle_timeout_seconds")
+    val idleTimeoutSeconds: Long? = null,
     /**
-     * Optional repository hint supplied at session creation (first spec.workspace.repos entry of the manifest). Not authoritative; the agent may change repos in-session.
+     * Optional repository hint supplied at session creation (first spec.workspace.repos entry of
+     * the manifest). Not authoritative; the agent may change repos in-session.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("repo_hint") val repoHint: String? = null,
     /**
-     * Non-fatal advisories computed from the manifest at create time: one entry per populated accepted-but-not-yet-enforced section (flat names: secrets, model, tools, memory, budget, max_lifetime, mounts; legacy manifests get the corresponding spec.* paths), a deprecation entry when a legacy-envelope manifest or an adapter alias (codex-cli, cursor-cli) is used, and a heuristic entry per credential-looking spec.env value. Populated on the CreateSession response only.
+     * Non-fatal advisories computed from the manifest at create time: one entry per populated
+     * accepted-but-not-yet-enforced section (flat names: secrets, model, tools, memory, budget,
+     * max_lifetime, mounts; legacy manifests get the corresponding spec.* paths), a deprecation
+     * entry when a legacy-envelope manifest or an adapter alias (codex-cli, cursor-cli) is used,
+     * and a heuristic entry per credential-looking spec.env value. Populated on the CreateSession
+     * response only.
      */
     val warnings: List<String>? = null,
     /**
-     * Durable Environment Config UUID the session was created from (inline manifests persist a config too, named after the session). Persisted and returned on create/get/list; absent only for sessions created before config references were stored.
+     * Durable Environment Config UUID the session was created from (inline manifests persist a
+     * config too, named after the session). Persisted and returned on create/get/list; absent only
+     * for sessions created before config references were stored.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("config_id") val configId: String? = null,
     /**
-     * OpenAI Agents API session id (sess_…) this DO sandbox hosts. Populated only for AGENT_KIND_OPENAI_CODEX sessions (empty otherwise). Non-secret correlation metadata; a client (doctl agents attach) reads it to bridge to the OpenAI session. See docs/design/openai-sandbox-provider.md.
+     * OpenAI Agents API session id (sess_…) this DO sandbox hosts. Populated only for
+     * AGENT_KIND_OPENAI_CODEX sessions (empty otherwise). Non-secret correlation metadata; a client
+     * (doctl agents attach) reads it to bridge to the OpenAI session. See
+     * docs/design/openai-sandbox-provider.md.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("openai_session_id") val openaiSessionId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("openai_session_id")
+    val openaiSessionId: String? = null,
     /**
-     * OpenAI Agents API environment id (env_…), captured from the resolved CODEX_ENVIRONMENT_ID guest env value. Populated only for AGENT_KIND_OPENAI_CODEX sessions. Non-secret correlation metadata.
+     * OpenAI Agents API environment id (env_…), captured from the resolved CODEX_ENVIRONMENT_ID
+     * guest env value. Populated only for AGENT_KIND_OPENAI_CODEX sessions. Non-secret correlation
+     * metadata.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("openai_environment_id") val openaiEnvironmentId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("openai_environment_id")
+    val openaiEnvironmentId: String? = null,
 )

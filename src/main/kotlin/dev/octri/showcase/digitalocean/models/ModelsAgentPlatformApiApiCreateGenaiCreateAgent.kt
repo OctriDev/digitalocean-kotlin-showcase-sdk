@@ -3,94 +3,71 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Parameters for Agent Creation
- */
+/** Parameters for Agent Creation */
 data class ApiCreateAgentInputPublic(
-    /**
-     * Optional Anthropic API key ID to use with Anthropic models
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("anthropic_key_uuid") val anthropicKeyUuid: String? = null,
-    /**
-     * A text description of the agent, not used in inference
-     */
+    /** Optional Anthropic API key ID to use with Anthropic models */
+    @com.fasterxml.jackson.annotation.JsonProperty("anthropic_key_uuid")
+    val anthropicKeyUuid: String? = null,
+    /** A text description of the agent, not used in inference */
     val description: String? = null,
     /**
-     * Agent instruction. Instructions help your agent to perform its job effectively. See Write Effective Agent Instructions for best practices.
+     * Agent instruction. Instructions help your agent to perform its job effectively. See Write
+     * Effective Agent Instructions for best practices.
      */
     val instruction: String? = null,
-    /**
-     * Ids of the knowledge base(s) to attach to the agent
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid") val knowledgeBaseUuid: List<String>? = null,
-    /**
-     * MCP (Model Context Protocol) servers to attach to the agent
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("mcp_servers") val mcpServers: List<ApiMcpServer>? = null,
-    /**
-     * Optional `string` value serialized in the `model_provider_key_uuid` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_provider_key_uuid") val modelProviderKeyUuid: String? = null,
-    /**
-     * Optional `string` value serialized in the `model_router_uuid` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_router_uuid") val modelRouterUuid: String? = null,
-    /**
-     * Identifier for the foundation model.
-     */
+    /** Ids of the knowledge base(s) to attach to the agent */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid")
+    val knowledgeBaseUuid: List<String>? = null,
+    /** MCP (Model Context Protocol) servers to attach to the agent */
+    @com.fasterxml.jackson.annotation.JsonProperty("mcp_servers")
+    val mcpServers: List<ApiMcpServer>? = null,
+    /** Optional `string` value serialized in the `model_provider_key_uuid` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_provider_key_uuid")
+    val modelProviderKeyUuid: String? = null,
+    /** Optional `string` value serialized in the `model_router_uuid` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_router_uuid")
+    val modelRouterUuid: String? = null,
+    /** Identifier for the foundation model. */
     @com.fasterxml.jackson.annotation.JsonProperty("model_uuid") val modelUuid: String? = null,
-    /**
-     * Agent name
-     */
+    /** Agent name */
     val name: String? = null,
-    /**
-     * Optional OpenAI API key ID to use with OpenAI models
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("open_ai_key_uuid") val openAiKeyUuid: String? = null,
-    /**
-     * The id of the DigitalOcean project this agent will belong to
-     */
+    /** Optional OpenAI API key ID to use with OpenAI models */
+    @com.fasterxml.jackson.annotation.JsonProperty("open_ai_key_uuid")
+    val openAiKeyUuid: String? = null,
+    /** The id of the DigitalOcean project this agent will belong to */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * Optional `string` value serialized in the `reasoning_effort` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: String? = null,
-    /**
-     * The DigitalOcean region to deploy your agent in
-     */
+    /** Optional `string` value serialized in the `reasoning_effort` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: String? = null,
+    /** The DigitalOcean region to deploy your agent in */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `router_preset_slug` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("router_preset_slug") val routerPresetSlug: String? = null,
-    /**
-     * Agent tag to organize related resources
-     */
+    /** Optional `string` value serialized in the `router_preset_slug` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("router_preset_slug")
+    val routerPresetSlug: String? = null,
+    /** Agent tag to organize related resources */
     val tags: List<String>? = null,
+    /** Optional `int64`-formatted value serialized in the `thinking_token_budget` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("thinking_token_budget")
+    val thinkingTokenBudget: Long? = null,
     /**
-     * Optional `int64`-formatted value serialized in the `thinking_token_budget` wire field.
+     * Whether the agent can use the built-in web_fetch tool to retrieve content from public web
+     * pages.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("thinking_token_budget") val thinkingTokenBudget: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("web_fetch_enabled")
+    val webFetchEnabled: Boolean? = null,
     /**
-     * Whether the agent can use the built-in web_fetch tool to retrieve content from public web pages.
+     * Whether the agent can use the built-in web_search tool to search the public web for current
+     * information.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_fetch_enabled") val webFetchEnabled: Boolean? = null,
-    /**
-     * Whether the agent can use the built-in web_search tool to search the public web for current information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_search_enabled") val webSearchEnabled: Boolean? = null,
-    /**
-     * Identifier for the workspace
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid") val workspaceUuid: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("web_search_enabled")
+    val webSearchEnabled: Boolean? = null,
+    /** Identifier for the workspace */
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid")
+    val workspaceUuid: String? = null,
 )
 
-/**
- * Information about a newly created Agent
- */
+/** Information about a newly created Agent */
 data class ApiCreateAgentOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )

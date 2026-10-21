@@ -13,46 +13,111 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object MonitoringListAlertPolicyOperation {
     /**
-     * Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
+     * Returns all alert policies that are configured for the given account. To List all alert
+     * policies, send a GET request to `/v2/monitoring/alerts`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun monitoringListAlertPolicy(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): MonitoringListAlertPolicyResponse {
+    fun monitoringListAlertPolicy(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): MonitoringListAlertPolicyResponse {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<MonitoringListAlertPolicyResponse>(SdkClient.RequestSpec("GET", "/v2/monitoring/alerts", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "monitoringListAlertPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<MonitoringListAlertPolicyResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/monitoring/alerts",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "monitoringListAlertPolicy",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object MonitoringCreateAlertPolicyOperation {
     /**
-     * Creates an alert policy that monitors a selected metric for droplets, load balancers, databases, or autoscale pools. Set `type`, `entities`, and `tags` to define what the policy monitors; when both `entities` and `tags` are empty, it applies to all entities of the selected type in the account. A 200 response returns the alert policy, including its generated UUID.
+     * Creates an alert policy that monitors a selected metric for droplets, load balancers,
+     * databases, or autoscale pools. Set `type`, `entities`, and `tags` to define what the policy
+     * monitors; when both `entities` and `tags` are empty, it applies to all entities of the
+     * selected type in the account. A 200 response returns the alert policy, including its
+     * generated UUID.
      *
      * To create a new alert, send a POST request to `/v2/monitoring/alerts`.
      *
      * @param alerts Required object value serialized in the `alerts` wire field.
-     * @param compare Required enumerated value serialized in the `compare` wire
-     *   field.
-     * @param description Required `string` value serialized in the `description`
-     *   wire field.
-     * @param enabled Required `boolean` value serialized in the `enabled` wire
-     *   field.
+     * @param compare Required enumerated value serialized in the `compare` wire field.
+     * @param description Required `string` value serialized in the `description` wire field.
+     * @param enabled Required `boolean` value serialized in the `enabled` wire field.
      * @param entities Required array value serialized in the `entities` wire field.
      * @param tags Required array value serialized in the `tags` wire field.
      * @param type Required enumerated value serialized in the `type` wire field.
-     * @param value Required `float`-formatted value serialized in the `value` wire
-     *   field.
+     * @param value Required `float`-formatted value serialized in the `value` wire field.
      * @param window Required enumerated value serialized in the `window` wire field.
      */
-    fun monitoringCreateAlertPolicy(clientConfig: ClientConfig, request: Monitoring.MonitoringCreateAlertPolicyRequest, options: RequestOptions? = null): AlertPolicyResponse {
-        return SdkClient.request<AlertPolicyResponse>(SdkClient.RequestSpec("POST", "/v2/monitoring/alerts", config = clientConfig, body = SdkClient.bodyMap("alerts" to (request.alerts), "compare" to (request.compare), "description" to (request.description), "enabled" to (request.enabled), "entities" to (request.entities), "tags" to (request.tags), "type" to (request.type), "value" to (request.value), "window" to (request.window)), operationId = "monitoringCreateAlertPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun monitoringCreateAlertPolicy(
+        clientConfig: ClientConfig,
+        request: Monitoring.MonitoringCreateAlertPolicyRequest,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse {
+        return SdkClient.request<AlertPolicyResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/monitoring/alerts",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "alerts" to (request.alerts),
+                            "compare" to (request.compare),
+                            "description" to (request.description),
+                            "enabled" to (request.enabled),
+                            "entities" to (request.entities),
+                            "tags" to (request.tags),
+                            "type" to (request.type),
+                            "value" to (request.value),
+                            "window" to (request.window),
+                        ),
+                    operationId = "monitoringCreateAlertPolicy",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -62,34 +127,89 @@ internal object MonitoringGetAlertPolicyOperation {
      *
      * @param alertUuid A unique identifier for an alert policy.
      */
-    fun monitoringGetAlertPolicy(clientConfig: ClientConfig, alertUuid: String, options: RequestOptions? = null): AlertPolicyResponse {
-        return SdkClient.request<AlertPolicyResponse>(SdkClient.RequestSpec("GET", "/v2/monitoring/alerts/${SdkClient.encodePathSegment(alertUuid)}", config = clientConfig, operationId = "monitoringGetAlertPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun monitoringGetAlertPolicy(
+        clientConfig: ClientConfig,
+        alertUuid: String,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse {
+        return SdkClient.request<AlertPolicyResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/monitoring/alerts/${SdkClient.encodePathSegment(alertUuid)}",
+                    config = clientConfig,
+                    operationId = "monitoringGetAlertPolicy",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object MonitoringUpdateAlertPolicyOperation {
     /**
-     * Replaces the configuration of an existing alert policy identified by its UUID. Provide the complete policy configuration, including its metric type, threshold, evaluation window, monitored entities, tags, notifications, and enabled state. A 200 response returns the updated alert policy.
+     * Replaces the configuration of an existing alert policy identified by its UUID. Provide the
+     * complete policy configuration, including its metric type, threshold, evaluation window,
+     * monitored entities, tags, notifications, and enabled state. A 200 response returns the
+     * updated alert policy.
      *
      * To update en existing policy, send a PUT request to `v2/monitoring/alerts/{alert_uuid}`.
      *
      * @param alertUuid A unique identifier for an alert policy.
      * @param alerts Required object value serialized in the `alerts` wire field.
-     * @param compare Required enumerated value serialized in the `compare` wire
-     *   field.
-     * @param description Required `string` value serialized in the `description`
-     *   wire field.
-     * @param enabled Required `boolean` value serialized in the `enabled` wire
-     *   field.
+     * @param compare Required enumerated value serialized in the `compare` wire field.
+     * @param description Required `string` value serialized in the `description` wire field.
+     * @param enabled Required `boolean` value serialized in the `enabled` wire field.
      * @param entities Required array value serialized in the `entities` wire field.
      * @param tags Required array value serialized in the `tags` wire field.
      * @param type Required enumerated value serialized in the `type` wire field.
-     * @param value Required `float`-formatted value serialized in the `value` wire
-     *   field.
+     * @param value Required `float`-formatted value serialized in the `value` wire field.
      * @param window Required enumerated value serialized in the `window` wire field.
      */
-    fun monitoringUpdateAlertPolicy(clientConfig: ClientConfig, request: Monitoring.MonitoringUpdateAlertPolicyRequest, options: RequestOptions? = null): AlertPolicyResponse {
-        return SdkClient.request<AlertPolicyResponse>(SdkClient.RequestSpec("PUT", "/v2/monitoring/alerts/${SdkClient.encodePathSegment(request.alertUuid)}", config = clientConfig, body = SdkClient.bodyMap("alerts" to (request.alerts), "compare" to (request.compare), "description" to (request.description), "enabled" to (request.enabled), "entities" to (request.entities), "tags" to (request.tags), "type" to (request.type), "value" to (request.value), "window" to (request.window)), operationId = "monitoringUpdateAlertPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun monitoringUpdateAlertPolicy(
+        clientConfig: ClientConfig,
+        request: Monitoring.MonitoringUpdateAlertPolicyRequest,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse {
+        return SdkClient.request<AlertPolicyResponse>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/monitoring/alerts/${SdkClient.encodePathSegment(request.alertUuid)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "alerts" to (request.alerts),
+                            "compare" to (request.compare),
+                            "description" to (request.description),
+                            "enabled" to (request.enabled),
+                            "entities" to (request.entities),
+                            "tags" to (request.tags),
+                            "type" to (request.type),
+                            "value" to (request.value),
+                            "window" to (request.window),
+                        ),
+                    operationId = "monitoringUpdateAlertPolicy",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -99,7 +219,28 @@ internal object MonitoringDeleteAlertPolicyOperation {
      *
      * @param alertUuid A unique identifier for an alert policy.
      */
-    fun monitoringDeleteAlertPolicy(clientConfig: ClientConfig, alertUuid: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/monitoring/alerts/${SdkClient.encodePathSegment(alertUuid)}", config = clientConfig, operationId = "monitoringDeleteAlertPolicy", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun monitoringDeleteAlertPolicy(
+        clientConfig: ClientConfig,
+        alertUuid: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/monitoring/alerts/${SdkClient.encodePathSegment(alertUuid)}",
+                config = clientConfig,
+                operationId = "monitoringDeleteAlertPolicy",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

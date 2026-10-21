@@ -60,18 +60,22 @@ object Kubernetes {
         val surgeUpgrade: Boolean? = null,
         val ha: Boolean? = null,
         val controlPlaneFirewall: SdkClient.SdkOptional<ControlPlaneFirewall?>? = null,
-        val clusterAutoscalerConfiguration: SdkClient.SdkOptional<ClusterAutoscalerConfiguration?>? = null,
+        val clusterAutoscalerConfiguration:
+            SdkClient.SdkOptional<ClusterAutoscalerConfiguration?>? =
+            null,
         val sso: SdkClient.SdkOptional<Sso?>? = null,
         val routingAgent: SdkClient.SdkOptional<RoutingAgent?>? = null,
         val p2pOciRegistryPlugin: SdkClient.SdkOptional<P2pOciRegistryPlugin?>? = null,
         val nfsCsiPlugin: SdkClient.SdkOptional<NfsCsiPlugin?>? = null,
         val amdGpuDevicePlugin: SdkClient.SdkOptional<AmdGpuDevicePlugin?>? = null,
-        val amdGpuDeviceMetricsExporterPlugin: SdkClient.SdkOptional<AmdGpuDeviceMetricsExporterPlugin?>? = null,
+        val amdGpuDeviceMetricsExporterPlugin:
+            SdkClient.SdkOptional<AmdGpuDeviceMetricsExporterPlugin?>? =
+            null,
         val nvidiaGpuDevicePlugin: SdkClient.SdkOptional<NvidiaGpuDevicePlugin?>? = null,
         val nvidiaGpuDraDriver: SdkClient.SdkOptional<NvidiaGpuDraDriver?>? = null,
         val amdGpuDraDriver: SdkClient.SdkOptional<AmdGpuDraDriver?>? = null,
         val rdmaSharedDevPlugin: SdkClient.SdkOptional<RdmaSharedDevPlugin?>? = null,
-        val corednsAutoscaler: SdkClient.SdkOptional<CorednsAutoscaler?>? = null
+        val corednsAutoscaler: SdkClient.SdkOptional<CorednsAutoscaler?>? = null,
     )
 
     /** Parameters for [kubernetesUpdateCluster]. */
@@ -85,18 +89,22 @@ object Kubernetes {
         val ha: Boolean? = null,
         val gpuOperatorReady: Boolean? = null,
         val controlPlaneFirewall: SdkClient.SdkOptional<ControlPlaneFirewall?>? = null,
-        val clusterAutoscalerConfiguration: SdkClient.SdkOptional<ClusterAutoscalerConfiguration?>? = null,
+        val clusterAutoscalerConfiguration:
+            SdkClient.SdkOptional<ClusterAutoscalerConfiguration?>? =
+            null,
         val sso: SdkClient.SdkOptional<Sso?>? = null,
         val routingAgent: SdkClient.SdkOptional<RoutingAgent?>? = null,
         val p2pOciRegistryPlugin: SdkClient.SdkOptional<P2pOciRegistryPlugin?>? = null,
         val nfsCsiPlugin: SdkClient.SdkOptional<NfsCsiPlugin?>? = null,
         val amdGpuDevicePlugin: SdkClient.SdkOptional<AmdGpuDevicePlugin?>? = null,
-        val amdGpuDeviceMetricsExporterPlugin: SdkClient.SdkOptional<AmdGpuDeviceMetricsExporterPlugin?>? = null,
+        val amdGpuDeviceMetricsExporterPlugin:
+            SdkClient.SdkOptional<AmdGpuDeviceMetricsExporterPlugin?>? =
+            null,
         val nvidiaGpuDevicePlugin: SdkClient.SdkOptional<NvidiaGpuDevicePlugin?>? = null,
         val nvidiaGpuDraDriver: SdkClient.SdkOptional<NvidiaGpuDraDriver?>? = null,
         val amdGpuDraDriver: SdkClient.SdkOptional<AmdGpuDraDriver?>? = null,
         val rdmaSharedDevPlugin: SdkClient.SdkOptional<RdmaSharedDevPlugin?>? = null,
-        val corednsAutoscaler: SdkClient.SdkOptional<CorednsAutoscaler?>? = null
+        val corednsAutoscaler: SdkClient.SdkOptional<CorednsAutoscaler?>? = null,
     )
 
     /** Parameters for [kubernetesUpdateNodePool]. */
@@ -110,34 +118,56 @@ object Kubernetes {
         val taints: List<KubernetesNodePoolTaint>? = null,
         val autoScale: Boolean? = null,
         val minNodes: Long? = null,
-        val maxNodes: Long? = null
+        val maxNodes: Long? = null,
     )
 
     /**
-     * To list all of the Kubernetes clusters on your account, send a GET request to `/v2/kubernetes/clusters`.
+     * To list all of the Kubernetes clusters on your account, send a GET request to
+     * `/v2/kubernetes/clusters`.
      */
-    fun kubernetesListClusters(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllClusters =
-        dev.octri.showcase.digitalocean.methods.KubernetesListClustersOperation.kubernetesListClusters(
-            clientConfig,
-            perPage,
-            page,
-            options,
-        )
+    fun kubernetesListClusters(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllClusters =
+        dev.octri.showcase.digitalocean.methods.KubernetesListClustersOperation
+            .kubernetesListClusters(
+                clientConfig,
+                perPage,
+                page,
+                options,
+            )
 
     /**
-     * To create a new Kubernetes cluster, send a POST request to `/v2/kubernetes/clusters`. The request must contain at least one node pool with at least one worker. The request may contain a maintenance window policy describing a time period when disruptive maintenance tasks may be carried out. Omitting the policy implies that a window will be chosen automatically. See [here](https://docs.digitalocean.com/products/kubernetes/how-to/upgrade-cluster/) for details.
+     * To create a new Kubernetes cluster, send a POST request to `/v2/kubernetes/clusters`. The
+     * request must contain at least one node pool with at least one worker. The request may contain
+     * a maintenance window policy describing a time period when disruptive maintenance tasks may be
+     * carried out. Omitting the policy implies that a window will be chosen automatically. See
+     * [here](https://docs.digitalocean.com/products/kubernetes/how-to/upgrade-cluster/) for
+     * details.
      */
-    fun kubernetesCreateCluster(clientConfig: ClientConfig, request: KubernetesCreateClusterRequest, options: RequestOptions? = null): ClusterCreate =
-        dev.octri.showcase.digitalocean.methods.KubernetesCreateClusterOperation.kubernetesCreateCluster(
-            clientConfig,
-            request,
-            options,
-        )
+    fun kubernetesCreateCluster(
+        clientConfig: ClientConfig,
+        request: KubernetesCreateClusterRequest,
+        options: RequestOptions? = null,
+    ): ClusterCreate =
+        dev.octri.showcase.digitalocean.methods.KubernetesCreateClusterOperation
+            .kubernetesCreateCluster(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To show information about an existing Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
+     * To show information about an existing Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
      */
-    fun kubernetesGetCluster(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): ExistingCluster =
+    fun kubernetesGetCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): ExistingCluster =
         dev.octri.showcase.digitalocean.methods.KubernetesGetClusterOperation.kubernetesGetCluster(
             clientConfig,
             clusterId,
@@ -145,159 +175,310 @@ object Kubernetes {
         )
 
     /**
-     * To update a Kubernetes cluster, send a PUT request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the attributes below.
+     * To update a Kubernetes cluster, send a PUT request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the attributes below.
      */
-    fun kubernetesUpdateCluster(clientConfig: ClientConfig, request: KubernetesUpdateClusterRequest, options: RequestOptions? = null): UpdatedCluster =
-        dev.octri.showcase.digitalocean.methods.KubernetesUpdateClusterOperation.kubernetesUpdateCluster(
-            clientConfig,
-            request,
-            options,
-        )
+    fun kubernetesUpdateCluster(
+        clientConfig: ClientConfig,
+        request: KubernetesUpdateClusterRequest,
+        options: RequestOptions? = null,
+    ): UpdatedCluster =
+        dev.octri.showcase.digitalocean.methods.KubernetesUpdateClusterOperation
+            .kubernetesUpdateCluster(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To delete a Kubernetes cluster and all services deployed to it, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`. A 204 status code with no body will be returned in response to a successful request.
+     * To delete a Kubernetes cluster and all services deployed to it, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`. A 204 status code with no body will be returned in
+     * response to a successful request.
      */
-    fun kubernetesDeleteCluster(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesDeleteClusterOperation.kubernetesDeleteCluster(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesDeleteCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesDeleteClusterOperation
+            .kubernetesDeleteCluster(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * To list the associated billable resources that can be destroyed along with a cluster, send a GET request to the `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.
+     * To list the associated billable resources that can be destroyed along with a cluster, send a
+     * GET request to the
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.
      */
-    fun kubernetesListAssociatedResources(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AssociatedKubernetesResources =
-        dev.octri.showcase.digitalocean.methods.KubernetesListAssociatedResourcesOperation.kubernetesListAssociatedResources(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesListAssociatedResources(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AssociatedKubernetesResources =
+        dev.octri.showcase.digitalocean.methods.KubernetesListAssociatedResourcesOperation
+            .kubernetesListAssociatedResources(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * To delete a Kubernetes cluster along with a subset of its associated resources, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`. The JSON body of the request should include `load_balancers`, `volumes`, or `volume_snapshots` keys each set to an array of IDs for the associated resources to be destroyed. The IDs can be found by querying the cluster's associated resources endpoint. Any associated resource not included in the request will remain and continue to accrue changes on your account.
+     * To delete a Kubernetes cluster along with a subset of its associated resources, send a DELETE
+     * request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`. The
+     * JSON body of the request should include `load_balancers`, `volumes`, or `volume_snapshots`
+     * keys each set to an array of IDs for the associated resources to be destroyed. The IDs can be
+     * found by querying the cluster's associated resources endpoint. Any associated resource not
+     * included in the request will remain and continue to accrue changes on your account.
      */
-    fun kubernetesDestroyAssociatedResourcesSelective(clientConfig: ClientConfig, clusterId: String, loadBalancers: List<String>? = null, volumes: List<String>? = null, volumeSnapshots: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesDestroyAssociatedResourcesSelectiveOperation.kubernetesDestroyAssociatedResourcesSelective(
-            clientConfig,
-            clusterId,
-            loadBalancers,
-            volumes,
-            volumeSnapshots,
-            options,
-        )
+    fun kubernetesDestroyAssociatedResourcesSelective(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        loadBalancers: List<String>? = null,
+        volumes: List<String>? = null,
+        volumeSnapshots: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods
+            .KubernetesDestroyAssociatedResourcesSelectiveOperation
+            .kubernetesDestroyAssociatedResourcesSelective(
+                clientConfig,
+                clusterId,
+                loadBalancers,
+                volumes,
+                volumeSnapshots,
+                options,
+            )
 
     /**
-     * To delete a Kubernetes cluster with all of its associated resources, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`. A 204 status code with no body will be returned in response to a successful request.
+     * To delete a Kubernetes cluster with all of its associated resources, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`. A 204
+     * status code with no body will be returned in response to a successful request.
      */
-    fun kubernetesDestroyAssociatedResourcesDangerous(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesDestroyAssociatedResourcesDangerousOperation.kubernetesDestroyAssociatedResourcesDangerous(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesDestroyAssociatedResourcesDangerous(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods
+            .KubernetesDestroyAssociatedResourcesDangerousOperation
+            .kubernetesDestroyAssociatedResourcesDangerous(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * This endpoint returns a kubeconfig file in YAML format. It can be used to connect to and administer the cluster using the Kubernetes command line tool, `kubectl`, or other programs supporting kubeconfig files (e.g., client libraries). The resulting kubeconfig file uses token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "[How to Connect to a DigitalOcean Kubernetes Cluster](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)". To retrieve a kubeconfig file for use with a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig`. Clusters supporting token-based authentication may define an expiration by passing a duration in seconds as a query parameter to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig?expiry_seconds=$DURATION_IN_SECONDS`. If not set or 0, then the token will have a 7 day expiry. The query parameter has no impact for other kubeconfig types. Using an `sso` kubeconfig type requires `doctl` to be installed to handle the client side of the OAuth2 flow. Kubernetes Roles granted to a user are derived from that user's DigitalOcean role. Predefined roles (Owner, Member, Modifier etc.) have an automatic mapping to Kubernetes roles. Custom roles are not automatically mapped to any Kubernetes roles, and require [additional configuration](https://docs.digitalocean.com/products/kubernetes/how-to/set-up-custom-rolebindings/) by a cluster administrator.
+     * This endpoint returns a kubeconfig file in YAML format. It can be used to connect to and
+     * administer the cluster using the Kubernetes command line tool, `kubectl`, or other programs
+     * supporting kubeconfig files (e.g., client libraries). The resulting kubeconfig file uses
+     * token-based authentication for clusters supporting it, and certificate-based authentication
+     * otherwise. For a list of supported versions and more information, see "[How to Connect to a
+     * DigitalOcean Kubernetes
+     * Cluster](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)". To
+     * retrieve a kubeconfig file for use with a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig`. Clusters supporting token-based
+     * authentication may define an expiration by passing a duration in seconds as a query parameter
+     * to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig?expiry_seconds=$DURATION_IN_SECONDS`.
+     * If not set or 0, then the token will have a 7 day expiry. The query parameter has no impact
+     * for other kubeconfig types. Using an `sso` kubeconfig type requires `doctl` to be installed
+     * to handle the client side of the OAuth2 flow. Kubernetes Roles granted to a user are derived
+     * from that user's DigitalOcean role. Predefined roles (Owner, Member, Modifier etc.) have an
+     * automatic mapping to Kubernetes roles. Custom roles are not automatically mapped to any
+     * Kubernetes roles, and require
+     * [additional configuration](https://docs.digitalocean.com/products/kubernetes/how-to/set-up-custom-rolebindings/)
+     * by a cluster administrator.
      */
-    fun kubernetesGetKubeconfig(clientConfig: ClientConfig, clusterId: String, expirySeconds: Long? = null, type: SchemaSchemaEnum7d904fbb? = null, options: RequestOptions? = null): Any =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetKubeconfigOperation.kubernetesGetKubeconfig(
-            clientConfig,
-            clusterId,
-            expirySeconds,
-            type,
-            options,
-        )
+    fun kubernetesGetKubeconfig(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        expirySeconds: Long? = null,
+        type: SchemaSchemaEnum7d904fbb? = null,
+        options: RequestOptions? = null,
+    ): Any =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetKubeconfigOperation
+            .kubernetesGetKubeconfig(
+                clientConfig,
+                clusterId,
+                expirySeconds,
+                type,
+                options,
+            )
 
     /**
-     * This endpoint returns a JSON object . It can be used to programmatically construct Kubernetes clients which cannot parse kubeconfig files. The resulting JSON object contains token-based authentication for clusters supporting it, and certificate-based authentication otherwise. For a list of supported versions and more information, see "[How to Connect to a DigitalOcean Kubernetes Cluster](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)". To retrieve credentials for accessing a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials`. Clusters supporting token-based authentication may define an expiration by passing a duration in seconds as a query parameter to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials?expiry_seconds=$DURATION_IN_SECONDS`. If not set or 0, then the token will have a 7 day expiry. The query parameter has no impact in certificate-based authentication.
+     * This endpoint returns a JSON object . It can be used to programmatically construct Kubernetes
+     * clients which cannot parse kubeconfig files. The resulting JSON object contains token-based
+     * authentication for clusters supporting it, and certificate-based authentication otherwise.
+     * For a list of supported versions and more information, see "[How to Connect to a DigitalOcean
+     * Kubernetes
+     * Cluster](https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)". To
+     * retrieve credentials for accessing a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials`. Clusters supporting token-based
+     * authentication may define an expiration by passing a duration in seconds as a query parameter
+     * to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials?expiry_seconds=$DURATION_IN_SECONDS`.
+     * If not set or 0, then the token will have a 7 day expiry. The query parameter has no impact
+     * in certificate-based authentication.
      */
-    fun kubernetesGetCredentials(clientConfig: ClientConfig, clusterId: String, expirySeconds: Long? = null, options: RequestOptions? = null): Credentials =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetCredentialsOperation.kubernetesGetCredentials(
-            clientConfig,
-            clusterId,
-            expirySeconds,
-            options,
-        )
+    fun kubernetesGetCredentials(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        expirySeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): Credentials =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetCredentialsOperation
+            .kubernetesGetCredentials(
+                clientConfig,
+                clusterId,
+                expirySeconds,
+                options,
+            )
 
     /**
-     * To determine whether a cluster can be upgraded, and the versions to which it can be upgraded, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+     * To determine whether a cluster can be upgraded, and the versions to which it can be upgraded,
+     * send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
      */
-    fun kubernetesGetAvailableUpgrades(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AvailableUpgrades =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetAvailableUpgradesOperation.kubernetesGetAvailableUpgrades(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesGetAvailableUpgrades(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AvailableUpgrades =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetAvailableUpgradesOperation
+            .kubernetesGetAvailableUpgrades(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * To immediately upgrade a Kubernetes cluster to a newer patch release of Kubernetes, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`. The body of the request must specify a version attribute. Available upgrade versions for a cluster can be fetched from `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+     * To immediately upgrade a Kubernetes cluster to a newer patch release of Kubernetes, send a
+     * POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`. The body of the request
+     * must specify a version attribute. Available upgrade versions for a cluster can be fetched
+     * from `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
      */
-    fun kubernetesUpgradeCluster(clientConfig: ClientConfig, clusterId: String, version: String? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesUpgradeClusterOperation.kubernetesUpgradeCluster(
-            clientConfig,
-            clusterId,
-            version,
-            options,
-        )
+    fun kubernetesUpgradeCluster(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        version: String? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesUpgradeClusterOperation
+            .kubernetesUpgradeCluster(
+                clientConfig,
+                clusterId,
+                version,
+                options,
+            )
 
     /**
-     * To list all of the node pools in a Kubernetes clusters, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
+     * To list all of the node pools in a Kubernetes clusters, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
      */
-    fun kubernetesListNodePools(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): AllNodePools =
-        dev.octri.showcase.digitalocean.methods.KubernetesListNodePoolsOperation.kubernetesListNodePools(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesListNodePools(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): AllNodePools =
+        dev.octri.showcase.digitalocean.methods.KubernetesListNodePoolsOperation
+            .kubernetesListNodePools(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * To add an additional node pool to a Kubernetes clusters, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following attributes.
+     * To add an additional node pool to a Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following attributes.
      */
-    fun kubernetesAddNodePool(clientConfig: ClientConfig, clusterId: String, body: KubernetesNodePoolRequest, options: RequestOptions? = null): NodePoolCreate =
-        dev.octri.showcase.digitalocean.methods.KubernetesAddNodePoolOperation.kubernetesAddNodePool(
-            clientConfig,
-            clusterId,
-            body,
-            options,
-        )
+    fun kubernetesAddNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        body: KubernetesNodePoolRequest,
+        options: RequestOptions? = null,
+    ): NodePoolCreate =
+        dev.octri.showcase.digitalocean.methods.KubernetesAddNodePoolOperation
+            .kubernetesAddNodePool(
+                clientConfig,
+                clusterId,
+                body,
+                options,
+            )
 
     /**
-     * To show information about a specific node pool in a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
+     * To show information about a specific node pool in a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
      */
-    fun kubernetesGetNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, options: RequestOptions? = null): ExistingNodePool =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetNodePoolOperation.kubernetesGetNodePool(
-            clientConfig,
-            clusterId,
-            nodePoolId,
-            options,
-        )
+    fun kubernetesGetNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        options: RequestOptions? = null,
+    ): ExistingNodePool =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetNodePoolOperation
+            .kubernetesGetNodePool(
+                clientConfig,
+                clusterId,
+                nodePoolId,
+                options,
+            )
 
     /**
-     * To update the name of a node pool, edit the tags applied to it, or adjust its number of nodes, send a PUT request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the following attributes.
+     * To update the name of a node pool, edit the tags applied to it, or adjust its number of
+     * nodes, send a PUT request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the following
+     * attributes.
      */
-    fun kubernetesUpdateNodePool(clientConfig: ClientConfig, request: KubernetesUpdateNodePoolRequest, options: RequestOptions? = null): NodePoolUpdate =
-        dev.octri.showcase.digitalocean.methods.KubernetesUpdateNodePoolOperation.kubernetesUpdateNodePool(
-            clientConfig,
-            request,
-            options,
-        )
+    fun kubernetesUpdateNodePool(
+        clientConfig: ClientConfig,
+        request: KubernetesUpdateNodePoolRequest,
+        options: RequestOptions? = null,
+    ): NodePoolUpdate =
+        dev.octri.showcase.digitalocean.methods.KubernetesUpdateNodePoolOperation
+            .kubernetesUpdateNodePool(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * To delete a node pool, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`. A 204 status code with no body will be returned in response to a successful request. Nodes in the pool will subsequently be drained and deleted.
+     * To delete a node pool, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`. A 204 status code with no
+     * body will be returned in response to a successful request. Nodes in the pool will
+     * subsequently be drained and deleted.
      */
-    fun kubernetesDeleteNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesDeleteNodePoolOperation.kubernetesDeleteNodePool(
-            clientConfig,
-            clusterId,
-            nodePoolId,
-            options,
-        )
+    fun kubernetesDeleteNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesDeleteNodePoolOperation
+            .kubernetesDeleteNodePool(
+                clientConfig,
+                clusterId,
+                nodePoolId,
+                options,
+            )
 
     /**
-     * To delete a single node in a pool, send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`. Appending the `skip_drain=1` query parameter to the request causes node draining to be skipped. Omitting the query parameter or setting its value to `0` carries out draining prior to deletion. Appending the `replace=1` query parameter to the request causes the node to be replaced by a new one after deletion. Omitting the query parameter or setting its value to `0` deletes without replacement.
+     * To delete a single node in a pool, send a DELETE request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`. Appending
+     * the `skip_drain=1` query parameter to the request causes node draining to be skipped.
+     * Omitting the query parameter or setting its value to `0` carries out draining prior to
+     * deletion. Appending the `replace=1` query parameter to the request causes the node to be
+     * replaced by a new one after deletion. Omitting the query parameter or setting its value to
+     * `0` deletes without replacement.
      */
-    fun kubernetesDeleteNode(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, nodeId: String, skipDrain: Long? = null, replace: Long? = null, options: RequestOptions? = null): Unit =
+    fun kubernetesDeleteNode(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        nodeId: String,
+        skipDrain: Long? = null,
+        replace: Long? = null,
+        options: RequestOptions? = null,
+    ): Unit =
         dev.octri.showcase.digitalocean.methods.KubernetesDeleteNodeOperation.kubernetesDeleteNode(
             clientConfig,
             clusterId,
@@ -309,114 +490,193 @@ object Kubernetes {
         )
 
     /**
-     * Submits a request to recycle nodes in a Kubernetes node pool. This operation is closing down and will be removed on an unspecified date; use DELETE /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id} to remove an individual node instead.
+     * Submits a request to recycle nodes in a Kubernetes node pool. This operation is closing down
+     * and will be removed on an unspecified date; use DELETE
+     * /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id} to remove an
+     * individual node instead.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun kubernetesRecycleNodePool(clientConfig: ClientConfig, clusterId: String, nodePoolId: String, nodes: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesRecycleNodePoolOperation.kubernetesRecycleNodePool(
-            clientConfig,
-            clusterId,
-            nodePoolId,
-            nodes,
-            options,
-        )
+    fun kubernetesRecycleNodePool(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        nodePoolId: String,
+        nodes: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesRecycleNodePoolOperation
+            .kubernetesRecycleNodePool(
+                clientConfig,
+                clusterId,
+                nodePoolId,
+                nodes,
+                options,
+            )
 
     /**
-     * To show information the user associated with a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
+     * To show information the user associated with a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
      */
-    fun kubernetesGetClusterUser(clientConfig: ClientConfig, clusterId: String, options: RequestOptions? = null): User2 =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetClusterUserOperation.kubernetesGetClusterUser(
-            clientConfig,
-            clusterId,
-            options,
-        )
+    fun kubernetesGetClusterUser(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        options: RequestOptions? = null,
+    ): User2 =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetClusterUserOperation
+            .kubernetesGetClusterUser(
+                clientConfig,
+                clusterId,
+                options,
+            )
 
     /**
-     * To list the versions of Kubernetes available for use, the regions that support Kubernetes, and the available node sizes, send a GET request to `/v2/kubernetes/options`.
+     * To list the versions of Kubernetes available for use, the regions that support Kubernetes,
+     * and the available node sizes, send a GET request to `/v2/kubernetes/options`.
      */
-    fun kubernetesListOptions(clientConfig: ClientConfig, options: RequestOptions? = null): KubernetesOptions =
-        dev.octri.showcase.digitalocean.methods.KubernetesListOptionsOperation.kubernetesListOptions(
-            clientConfig,
-            options,
-        )
+    fun kubernetesListOptions(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): KubernetesOptions =
+        dev.octri.showcase.digitalocean.methods.KubernetesListOptionsOperation
+            .kubernetesListOptions(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Clusterlint helps operators conform to Kubernetes best practices around resources, security and reliability to avoid common problems while operating or upgrading the clusters. To request a clusterlint run on your cluster, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all checks present in the `doks` group by default, if a request body is not specified. Optionally specify the below attributes. For information about the available checks, please refer to [the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).
+     * Clusterlint helps operators conform to Kubernetes best practices around resources, security
+     * and reliability to avoid common problems while operating or upgrading the clusters. To
+     * request a clusterlint run on your cluster, send a POST request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all checks present in
+     * the `doks` group by default, if a request body is not specified. Optionally specify the below
+     * attributes. For information about the available checks, please refer to
+     * [the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).
      */
-    fun kubernetesRunClusterLint(clientConfig: ClientConfig, clusterId: String, includeGroups: List<String>? = null, includeChecks: List<String>? = null, excludeGroups: List<String>? = null, excludeChecks: List<String>? = null, options: RequestOptions? = null): ClusterlintRun =
-        dev.octri.showcase.digitalocean.methods.KubernetesRunClusterLintOperation.kubernetesRunClusterLint(
-            clientConfig,
-            clusterId,
-            includeGroups,
-            includeChecks,
-            excludeGroups,
-            excludeChecks,
-            options,
-        )
+    fun kubernetesRunClusterLint(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        includeGroups: List<String>? = null,
+        includeChecks: List<String>? = null,
+        excludeGroups: List<String>? = null,
+        excludeChecks: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ClusterlintRun =
+        dev.octri.showcase.digitalocean.methods.KubernetesRunClusterLintOperation
+            .kubernetesRunClusterLint(
+                clientConfig,
+                clusterId,
+                includeGroups,
+                includeChecks,
+                excludeGroups,
+                excludeChecks,
+                options,
+            )
 
     /**
-     * To request clusterlint diagnostics for your cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query parameter is provided, then the diagnostics for the specific run is fetched. By default, the latest results are shown. To find out how to address clusterlint feedback, please refer to [the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).
+     * To request clusterlint diagnostics for your cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query parameter is
+     * provided, then the diagnostics for the specific run is fetched. By default, the latest
+     * results are shown. To find out how to address clusterlint feedback, please refer to
+     * [the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).
      */
-    fun kubernetesGetClusterLintResults(clientConfig: ClientConfig, clusterId: String, runId: String? = null, options: RequestOptions? = null): ClusterlintResults =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetClusterLintResultsOperation.kubernetesGetClusterLintResults(
-            clientConfig,
-            clusterId,
-            runId,
-            options,
-        )
+    fun kubernetesGetClusterLintResults(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        runId: String? = null,
+        options: RequestOptions? = null,
+    ): ClusterlintResults =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetClusterLintResultsOperation
+            .kubernetesGetClusterLintResults(
+                clientConfig,
+                clusterId,
+                runId,
+                options,
+            )
 
     /**
-     * To integrate the container registry with Kubernetes clusters, send a POST request to `/v2/kubernetes/registry`.
+     * To integrate the container registry with Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/registry`.
      */
-    fun kubernetesAddRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesAddRegistryOperation.kubernetesAddRegistry(
-            clientConfig,
-            clusterUuids,
-            options,
-        )
+    fun kubernetesAddRegistry(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesAddRegistryOperation
+            .kubernetesAddRegistry(
+                clientConfig,
+                clusterUuids,
+                options,
+            )
 
     /**
-     * To remove the container registry from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registry`.
+     * To remove the container registry from Kubernetes clusters, send a DELETE request to
+     * `/v2/kubernetes/registry`.
      */
-    fun kubernetesRemoveRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesRemoveRegistryOperation.kubernetesRemoveRegistry(
-            clientConfig,
-            clusterUuids,
-            options,
-        )
+    fun kubernetesRemoveRegistry(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesRemoveRegistryOperation
+            .kubernetesRemoveRegistry(
+                clientConfig,
+                clusterUuids,
+                options,
+            )
 
     /**
-     * To integrate the container registries with Kubernetes clusters, send a POST request to `/v2/kubernetes/registries`.
+     * To integrate the container registries with Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/registries`.
      */
-    fun kubernetesAddRegistries(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesAddRegistriesOperation.kubernetesAddRegistries(
-            clientConfig,
-            clusterUuids,
-            registries,
-            options,
-        )
+    fun kubernetesAddRegistries(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesAddRegistriesOperation
+            .kubernetesAddRegistries(
+                clientConfig,
+                clusterUuids,
+                registries,
+                options,
+            )
 
     /**
-     * To remove the container registries from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registries`.
+     * To remove the container registries from Kubernetes clusters, send a DELETE request to
+     * `/v2/kubernetes/registries`.
      */
-    fun kubernetesRemoveRegistries(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.KubernetesRemoveRegistriesOperation.kubernetesRemoveRegistries(
-            clientConfig,
-            clusterUuids,
-            registries,
-            options,
-        )
+    fun kubernetesRemoveRegistries(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.KubernetesRemoveRegistriesOperation
+            .kubernetesRemoveRegistries(
+                clientConfig,
+                clusterUuids,
+                registries,
+                options,
+            )
 
     /**
-     * To retrieve status messages for a Kubernetes cluster, send a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/status_messages`. Status messages inform users of any issues that come up during the cluster lifecycle.
+     * To retrieve status messages for a Kubernetes cluster, send a GET request to
+     * `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/status_messages`. Status messages inform users of
+     * any issues that come up during the cluster lifecycle.
      */
-    fun kubernetesGetStatusMessages(clientConfig: ClientConfig, clusterId: String, since: OffsetDateTime? = null, options: RequestOptions? = null): StatusMessagesResponse =
-        dev.octri.showcase.digitalocean.methods.KubernetesGetStatusMessagesOperation.kubernetesGetStatusMessages(
-            clientConfig,
-            clusterId,
-            since,
-            options,
-        )
+    fun kubernetesGetStatusMessages(
+        clientConfig: ClientConfig,
+        clusterId: String,
+        since: OffsetDateTime? = null,
+        options: RequestOptions? = null,
+    ): StatusMessagesResponse =
+        dev.octri.showcase.digitalocean.methods.KubernetesGetStatusMessagesOperation
+            .kubernetesGetStatusMessages(
+                clientConfig,
+                clusterId,
+                since,
+                options,
+            )
 }

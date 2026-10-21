@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Public request for presigned upload URLs for model evaluation dataset files.
- */
+/** Public request for presigned upload URLs for model evaluation dataset files. */
 data class ApiCreateModelEvalDatasetUploadPresignedUrlsInputPublic(
-    /**
-     * A list of files to generate presigned URLs for.
-     */
+    /** A list of files to generate presigned URLs for. */
     val files: List<ApiPresignedUrlFile>? = null
 )

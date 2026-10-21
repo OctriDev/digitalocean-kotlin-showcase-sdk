@@ -27,38 +27,66 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AgentPlatformApiGenaiCreateSimulationRunOperation {
     /**
-     * To create a simulation run, send a POST request to `/v2/gen-ai/simulation_runs`. The scenario set must be ready. Judge and user simulator models are optional and use platform defaults when omitted. The run is returned in the pending state.
+     * To create a simulation run, send a POST request to `/v2/gen-ai/simulation_runs`. The scenario
+     * set must be ready. Judge and user simulator models are optional and use platform defaults
+     * when omitted. The run is returned in the pending state.
      *
-     * @param agentConfig Configuration of the candidate agent under test for a
-     *   simulation run.
-     * @param evaluationConfig Optional configuration that opts a simulation run into
-     *   an evaluation. When included on the create-run request, the platform reserves
-     *   a model_evaluation_run linked to this simulation run and dispatches the
-     *   evaluation automatically after the simulation finishes. The evaluation reuses
-     *   the simulation run's judge_model_uuid.
-     * @param explorationBudget Optional run-level episodes-per-scenario override.
-     *   When set, overrides each scenario's exploration_budget.
-     * @param judgeModelUuid Optional model override for the judge. Platform default
-     *   when unset.
-     * @param maxTurns Optional run-level turn budget. When set, overrides each
-     *   scenario's max_turns.
+     * @param agentConfig Configuration of the candidate agent under test for a simulation run.
+     * @param evaluationConfig Optional configuration that opts a simulation run into an evaluation.
+     *   When included on the create-run request, the platform reserves a model_evaluation_run
+     *   linked to this simulation run and dispatches the evaluation automatically after the
+     *   simulation finishes. The evaluation reuses the simulation run's judge_model_uuid.
+     * @param explorationBudget Optional run-level episodes-per-scenario override. When set,
+     *   overrides each scenario's exploration_budget.
+     * @param judgeModelUuid Optional model override for the judge. Platform default when unset.
+     * @param maxTurns Optional run-level turn budget. When set, overrides each scenario's
+     *   max_turns.
      * @param name Optional run name.
-     * @param scenarioSetUuid UUID of the existing scenario set to execute. The set
-     *   must be ready.
-     * @param userSimulatorConfig Optional user simulator model settings such as
-     *   temperature and max_tokens.
-     * @param userSimulatorModelUuid Optional model override for the user simulator.
-     *   Platform default when unset.
+     * @param scenarioSetUuid UUID of the existing scenario set to execute. The set must be ready.
+     * @param userSimulatorConfig Optional user simulator model settings such as temperature and
+     *   max_tokens.
+     * @param userSimulatorModelUuid Optional model override for the user simulator. Platform
+     *   default when unset.
      */
-    fun genaiCreateSimulationRun(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiCreateSimulationRunRequest, options: RequestOptions? = null): ApiCreateSimulationRunOutput {
-        return SdkClient.request<ApiCreateSimulationRunOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/simulation_runs", config = clientConfig, body = SdkClient.bodyMap("agent_config" to
-    (SdkClient.omitIfNull(request.agentConfig)), "evaluation_config" to
-    (SdkClient.omitIfNull(request.evaluationConfig)), "exploration_budget" to
-    (SdkClient.omitIfNull(request.explorationBudget)), "judge_model_uuid" to
-    (SdkClient.omitIfNull(request.judgeModelUuid)), "max_turns" to (SdkClient.omitIfNull(request.maxTurns)), "name" to (SdkClient.omitIfNull(request.name)), "scenario_set_uuid" to
-    (SdkClient.omitIfNull(request.scenarioSetUuid)), "user_simulator_config" to
-    (SdkClient.omitIfNull(request.userSimulatorConfig)), "user_simulator_model_uuid" to
-    (SdkClient.omitIfNull(request.userSimulatorModelUuid))), operationId = "genaiCreateSimulationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiCreateSimulationRun(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiCreateSimulationRunRequest,
+        options: RequestOptions? = null,
+    ): ApiCreateSimulationRunOutput {
+        return SdkClient.request<ApiCreateSimulationRunOutput>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/gen-ai/simulation_runs",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "agent_config" to (SdkClient.omitIfNull(request.agentConfig)),
+                            "evaluation_config" to (SdkClient.omitIfNull(request.evaluationConfig)),
+                            "exploration_budget" to
+                                (SdkClient.omitIfNull(request.explorationBudget)),
+                            "judge_model_uuid" to (SdkClient.omitIfNull(request.judgeModelUuid)),
+                            "max_turns" to (SdkClient.omitIfNull(request.maxTurns)),
+                            "name" to (SdkClient.omitIfNull(request.name)),
+                            "scenario_set_uuid" to (SdkClient.omitIfNull(request.scenarioSetUuid)),
+                            "user_simulator_config" to
+                                (SdkClient.omitIfNull(request.userSimulatorConfig)),
+                            "user_simulator_model_uuid" to
+                                (SdkClient.omitIfNull(request.userSimulatorModelUuid)),
+                        ),
+                    operationId = "genaiCreateSimulationRun",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -68,175 +96,484 @@ internal object AgentPlatformApiGenaiGetSimulationRunOperation {
      *
      * @param runUuid UUID of the simulation run.
      */
-    fun genaiGetSimulationRun(clientConfig: ClientConfig, runUuid: String, options: RequestOptions? = null): ApiGetSimulationRunOutput {
-        return SdkClient.request<ApiGetSimulationRunOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}", config = clientConfig, operationId = "genaiGetSimulationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiGetSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationRunOutput {
+        return SdkClient.request<ApiGetSimulationRunOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}",
+                    config = clientConfig,
+                    operationId = "genaiGetSimulationRun",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateSimulationRunOperation {
     /**
-     * To update a simulation run's display name, send a PUT request to `/v2/gen-ai/simulation_runs/{run_uuid}`. Only the name is mutable; run configuration and results are immutable.
+     * To update a simulation run's display name, send a PUT request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}`. Only the name is mutable; run configuration and
+     * results are immutable.
      *
-     * @param runUuid UUID of the simulation run to update. Returned by
-     *   `CreateSimulationRun` and listed via `ListSimulationRuns`.
+     * @param runUuid UUID of the simulation run to update. Returned by `CreateSimulationRun` and
+     *   listed via `ListSimulationRuns`.
      * @param name The new name of the run.
      * @param runUuid2 UUID of the run to update.
      */
-    fun genaiUpdateSimulationRun(clientConfig: ClientConfig, runUuid: String, name: String? = null, runUuid2: String? = null, options: RequestOptions? = null): ApiUpdateSimulationRunOutput {
-        return SdkClient.request<ApiUpdateSimulationRunOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "run_uuid" to (SdkClient.omitIfNull(runUuid2))), operationId = "genaiUpdateSimulationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiUpdateSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        name: String? = null,
+        runUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateSimulationRunOutput {
+        return SdkClient.request<ApiUpdateSimulationRunOutput>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "run_uuid" to (SdkClient.omitIfNull(runUuid2)),
+                        ),
+                    operationId = "genaiUpdateSimulationRun",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteSimulationRunOperation {
     /**
-     * To delete a simulation run, send a DELETE request to `/v2/gen-ai/simulation_runs/{run_uuid}`. The run must be in a terminal status (`SIMULATION_RUN_STATUS_SUCCEEDED`, `SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL`, `SIMULATION_RUN_STATUS_FAILED`, or `SIMULATION_RUN_STATUS_CANCELLED`). For runs still in progress, cancel the run first, then retry the delete.
+     * To delete a simulation run, send a DELETE request to `/v2/gen-ai/simulation_runs/{run_uuid}`.
+     * The run must be in a terminal status (`SIMULATION_RUN_STATUS_SUCCEEDED`,
+     * `SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL`, `SIMULATION_RUN_STATUS_FAILED`, or
+     * `SIMULATION_RUN_STATUS_CANCELLED`). For runs still in progress, cancel the run first, then
+     * retry the delete.
      *
-     * @param runUuid UUID of the simulation run to delete. The run must be in a
-     *   terminal status. For runs still in progress, cancel the run first, then retry
-     *   the delete.
+     * @param runUuid UUID of the simulation run to delete. The run must be in a terminal status.
+     *   For runs still in progress, cancel the run first, then retry the delete.
      */
-    fun genaiDeleteSimulationRun(clientConfig: ClientConfig, runUuid: String, options: RequestOptions? = null): ApiDeleteSimulationRunOutput {
-        return SdkClient.request<ApiDeleteSimulationRunOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}", config = clientConfig, operationId = "genaiDeleteSimulationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiDeleteSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteSimulationRunOutput {
+        return SdkClient.request<ApiDeleteSimulationRunOutput>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}",
+                    config = clientConfig,
+                    operationId = "genaiDeleteSimulationRun",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiPatchCancelSimulationRunOperation {
     /**
-     * To cancel an in-progress simulation run, send a PATCH request to `/v2/gen-ai/simulation_runs/{run_uuid}/cancel`.
+     * To cancel an in-progress simulation run, send a PATCH request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/cancel`.
      *
-     * @param runUuid UUID of the simulation run to cancel. Returned by
-     *   `CreateSimulationRun` and listed via `ListSimulationRuns`. The run must be in
-     *   a non-terminal status; already-terminal runs return an error.
+     * @param runUuid UUID of the simulation run to cancel. Returned by `CreateSimulationRun` and
+     *   listed via `ListSimulationRuns`. The run must be in a non-terminal status; already-terminal
+     *   runs return an error.
      * @param runUuid2 UUID of the run to cancel.
      */
-    fun genaiPatchCancelSimulationRun(clientConfig: ClientConfig, runUuid: String, runUuid2: String? = null, options: RequestOptions? = null): ApiCancelSimulationRunOutput {
-        return SdkClient.request<ApiCancelSimulationRunOutput>(SdkClient.RequestSpec("PATCH", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/cancel", config = clientConfig, body = SdkClient.bodyMap("run_uuid" to (SdkClient.omitIfNull(runUuid2))), operationId = "genaiPatchCancelSimulationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiPatchCancelSimulationRun(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        runUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCancelSimulationRunOutput {
+        return SdkClient.request<ApiCancelSimulationRunOutput>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/cancel",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("run_uuid" to (SdkClient.omitIfNull(runUuid2))),
+                    operationId = "genaiPatchCancelSimulationRun",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiListSimulationEpisodesOperation {
     /**
-     * To list the episodes within a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes`.
+     * To list the episodes within a simulation run, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes`.
      *
      * @param runUuid UUID of the run whose episodes to list.
      * @param scenarioUuid Optional filter by scenario.
      * @param page Page number.
      * @param perPage Items per page.
      * @param statuses Filter by one or more statuses. Empty means no status filter.
-     *   - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory
-     *   is available to retrieve. - SIMULATION_EPISODE_STATUS_FINISHED: The episode
-     *   reached a stop condition and produced a verdict. -
-     *   SIMULATION_EPISODE_STATUS_FAILED: The episode failed because of a cancel,
-     *   timeout, or error. - SIMULATION_EPISODE_STATUS_PREPARING: The episode is
-     *   allocated but its trajectory is not available yet.
+     *     - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory is
+     *       available to retrieve. - SIMULATION_EPISODE_STATUS_FINISHED: The episode reached a stop
+     *       condition and produced a verdict. - SIMULATION_EPISODE_STATUS_FAILED: The episode
+     *       failed because of a cancel, timeout, or error. - SIMULATION_EPISODE_STATUS_PREPARING:
+     *       The episode is allocated but its trajectory is not available yet.
+     *
      * @param verdicts Filter by one or more verdicts. Empty means no verdict filter.
-     *   - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the
-     *   scenario's stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The
-     *   candidate agent did not satisfy the stopping criteria. -
-     *   SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns
-     *   reached without the judge finishing).
-     * @param search Free-text search across scenario_uuid and session_id
-     *   (case-insensitive substring match). Empty means no search.
-     * @param sortBy Field to sort by. Defaults to scenario ordering when
-     *   unspecified. - SIMULATION_EPISODE_SORT_FIELD_SCENARIO: Sort by scenario_uuid
-     *   then episode_index. Default. - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT: Sort
-     *   by creation date. - SIMULATION_EPISODE_SORT_FIELD_STATUS: Sort by episode
-     *   status using lifecycle order. - SIMULATION_EPISODE_SORT_FIELD_VERDICT: Sort by
-     *   verdict (nulls last).
+     *     - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's
+     *       stopping criteria. - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not
+     *       satisfy the stopping criteria. - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive
+     *       verdict (e.g. max_turns reached without the judge finishing).
+     *
+     * @param search Free-text search across scenario_uuid and session_id (case-insensitive
+     *   substring match). Empty means no search.
+     * @param sortBy Field to sort by. Defaults to scenario ordering when unspecified. -
+     *   SIMULATION_EPISODE_SORT_FIELD_SCENARIO: Sort by scenario_uuid then episode_index.
+     *   Default. - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT: Sort by creation date. -
+     *   SIMULATION_EPISODE_SORT_FIELD_STATUS: Sort by episode status using lifecycle order. -
+     *   SIMULATION_EPISODE_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
      * @param sortDirection Sort direction. Defaults to ascending when unspecified.
      */
-    fun genaiListSimulationEpisodes(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiListSimulationEpisodesRequest, options: RequestOptions? = null): ApiListSimulationEpisodesOutput {
-        return SdkClient.request<ApiListSimulationEpisodesOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(request.runUuid)}/episodes", config = clientConfig, query = mapOf("scenario_uuid" to
-    SdkClient.queryValue(request.scenarioUuid, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
-    SdkClient.queryValue(request.perPage, "form", true), "statuses" to
-    SdkClient.queryValue(request.statuses, "form", true), "verdicts" to
-    SdkClient.queryValue(request.verdicts, "form", true), "search" to
-    SdkClient.queryValue(request.search, "form", true), "sort_by" to
-    SdkClient.queryValue(request.sortBy, "form", true), "sort_direction" to
-    SdkClient.queryValue(request.sortDirection, "form", true)), operationId = "genaiListSimulationEpisodes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiListSimulationEpisodes(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiListSimulationEpisodesRequest,
+        options: RequestOptions? = null,
+    ): ApiListSimulationEpisodesOutput {
+        return SdkClient.request<ApiListSimulationEpisodesOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(request.runUuid)}/episodes",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "scenario_uuid" to
+                                SdkClient.queryValue(request.scenarioUuid, "form", true),
+                            "page" to SdkClient.queryValue(request.page, "form", true),
+                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
+                            "statuses" to SdkClient.queryValue(request.statuses, "form", true),
+                            "verdicts" to SdkClient.queryValue(request.verdicts, "form", true),
+                            "search" to SdkClient.queryValue(request.search, "form", true),
+                            "sort_by" to SdkClient.queryValue(request.sortBy, "form", true),
+                            "sort_direction" to
+                                SdkClient.queryValue(request.sortDirection, "form", true),
+                        ),
+                    operationId = "genaiListSimulationEpisodes",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiGetSimulationEpisodeOperation {
     /**
-     * To retrieve a single episode, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}`.
+     * To retrieve a single episode, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}`.
      *
      * @param runUuid UUID of the run the episode belongs to.
      * @param episodeUuid UUID of the episode.
      */
-    fun genaiGetSimulationEpisode(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeOutput {
-        return SdkClient.request<ApiGetSimulationEpisodeOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}", config = clientConfig, operationId = "genaiGetSimulationEpisode", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiGetSimulationEpisode(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeOutput {
+        return SdkClient.request<ApiGetSimulationEpisodeOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}",
+                    config = clientConfig,
+                    operationId = "genaiGetSimulationEpisode",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryOperation {
     /**
-     * To retrieve an episode's live trajectory, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory`. Poll while the episode is running to watch turn-by-turn progress.
+     * To retrieve an episode's live trajectory, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory`. Poll while the
+     * episode is running to watch turn-by-turn progress.
      *
      * @param runUuid UUID of the run the episode belongs to.
      * @param episodeUuid UUID of the episode.
      */
-    fun genaiGetSimulationEpisodeTrajectory(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeTrajectoryOutput {
-        return SdkClient.request<ApiGetSimulationEpisodeTrajectoryOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}/trajectory", config = clientConfig, operationId = "genaiGetSimulationEpisodeTrajectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiGetSimulationEpisodeTrajectory(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeTrajectoryOutput {
+        return SdkClient.request<ApiGetSimulationEpisodeTrajectoryOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}/trajectory",
+                    config = clientConfig,
+                    operationId = "genaiGetSimulationEpisodeTrajectory",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiGetSimulationEpisodeTrajectoryUrlOperation {
     /**
-     * To retrieve a presigned download URL for an episode's trajectory, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url`.
+     * To retrieve a presigned download URL for an episode's trajectory, send a GET request to
+     * `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url`.
      *
      * @param runUuid UUID of the run the episode belongs to.
      * @param episodeUuid UUID of the episode.
      */
-    fun genaiGetSimulationEpisodeTrajectoryUrl(clientConfig: ClientConfig, runUuid: String, episodeUuid: String, options: RequestOptions? = null): ApiGetSimulationEpisodeTrajectoryURLOutput {
-        return SdkClient.request<ApiGetSimulationEpisodeTrajectoryURLOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}/trajectory_url", config = clientConfig, operationId = "genaiGetSimulationEpisodeTrajectoryUrl", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiGetSimulationEpisodeTrajectoryUrl(
+        clientConfig: ClientConfig,
+        runUuid: String,
+        episodeUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetSimulationEpisodeTrajectoryURLOutput {
+        return SdkClient.request<ApiGetSimulationEpisodeTrajectoryURLOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/simulation_runs/${SdkClient.encodePathSegment(runUuid)}/episodes/${SdkClient.encodePathSegment(episodeUuid)}/trajectory_url",
+                    config = clientConfig,
+                    operationId = "genaiGetSimulationEpisodeTrajectoryUrl",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiListWorkspacesOperation {
-    /**
-     * To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
-     */
-    fun genaiListWorkspaces(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListWorkspacesOutput {
-        return SdkClient.request<ApiListWorkspacesOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/workspaces", config = clientConfig, operationId = "genaiListWorkspaces", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    /** To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`. */
+    fun genaiListWorkspaces(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListWorkspacesOutput {
+        return SdkClient.request<ApiListWorkspacesOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/workspaces",
+                    config = clientConfig,
+                    operationId = "genaiListWorkspaces",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiCreateWorkspaceOperation {
     /**
-     * To create a new workspace, send a POST request to `/v2/gen-ai/workspaces`. The response body contains a JSON object with the newly created workspace object.
+     * To create a new workspace, send a POST request to `/v2/gen-ai/workspaces`. The response body
+     * contains a JSON object with the newly created workspace object.
      *
      * @param agentUuids Ids of the agents(s) to attach to the workspace
      * @param description Description of the workspace
      * @param name Name of the workspace
      */
-    fun genaiCreateWorkspace(clientConfig: ClientConfig, agentUuids: List<String>? = null, description: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateWorkspaceOutput {
-        return SdkClient.request<ApiCreateWorkspaceOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/workspaces", config = clientConfig, body = SdkClient.bodyMap("agent_uuids" to (SdkClient.omitIfNull(agentUuids)), "description" to (SdkClient.omitIfNull(description)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiCreateWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiCreateWorkspace(
+        clientConfig: ClientConfig,
+        agentUuids: List<String>? = null,
+        description: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateWorkspaceOutput {
+        return SdkClient.request<ApiCreateWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/gen-ai/workspaces",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "agent_uuids" to (SdkClient.omitIfNull(agentUuids)),
+                            "description" to (SdkClient.omitIfNull(description)),
+                            "name" to (SdkClient.omitIfNull(name)),
+                        ),
+                    operationId = "genaiCreateWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiGetWorkspaceOperation {
     /**
-     * To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object containing the workspace.
+     * To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/{workspace_uuid}`.
+     * The response body is a JSON object containing the workspace.
      *
      * @param workspaceUuid Workspace UUID.
      */
-    fun genaiGetWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiGetWorkspaceOutput {
-        return SdkClient.request<ApiGetWorkspaceOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}", config = clientConfig, operationId = "genaiGetWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiGetWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetWorkspaceOutput {
+        return SdkClient.request<ApiGetWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}",
+                    config = clientConfig,
+                    operationId = "genaiGetWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateWorkspaceOperation {
     /**
-     * To update a workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object containing the workspace.
+     * To update a workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}`. The
+     * response body is a JSON object containing the workspace.
      *
      * @param workspaceUuid Workspace UUID.
      * @param description The new description of the workspace
      * @param name The new name of the workspace
      * @param workspaceUuid2 Workspace UUID.
      */
-    fun genaiUpdateWorkspace(clientConfig: ClientConfig, workspaceUuid: String, description: String? = null, name: String? = null, workspaceUuid2: String? = null, options: RequestOptions? = null): ApiUpdateWorkspaceOutput {
-        return SdkClient.request<ApiUpdateWorkspaceOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}", config = clientConfig, body = SdkClient.bodyMap("description" to (SdkClient.omitIfNull(description)), "name" to (SdkClient.omitIfNull(name)), "workspace_uuid" to (SdkClient.omitIfNull(workspaceUuid2))), operationId = "genaiUpdateWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiUpdateWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        description: String? = null,
+        name: String? = null,
+        workspaceUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateWorkspaceOutput {
+        return SdkClient.request<ApiUpdateWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "description" to (SdkClient.omitIfNull(description)),
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "workspace_uuid" to (SdkClient.omitIfNull(workspaceUuid2)),
+                        ),
+                    operationId = "genaiUpdateWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -246,46 +583,152 @@ internal object AgentPlatformApiGenaiDeleteWorkspaceOperation {
      *
      * @param workspaceUuid Workspace UUID.
      */
-    fun genaiDeleteWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiDeleteWorkspaceOutput {
-        return SdkClient.request<ApiDeleteWorkspaceOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}", config = clientConfig, operationId = "genaiDeleteWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiDeleteWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteWorkspaceOutput {
+        return SdkClient.request<ApiDeleteWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}",
+                    config = clientConfig,
+                    operationId = "genaiDeleteWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiListAgentsByWorkspaceOperation {
     /**
-     * To list all agents by a Workspace, send a GET request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
+     * To list all agents by a Workspace, send a GET request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
      *
      * @param workspaceUuid Workspace UUID.
      * @param onlyDeployed Only list agents that are deployed.
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiListAgentsByWorkspace(clientConfig: ClientConfig, workspaceUuid: String, onlyDeployed: Boolean? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByWorkspaceOutput {
-        return SdkClient.request<ApiListAgentsByWorkspaceOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/agents", config = clientConfig, query = mapOf("only_deployed" to
-    SdkClient.queryValue(onlyDeployed, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiListAgentsByWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiListAgentsByWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        onlyDeployed: Boolean? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsByWorkspaceOutput {
+        return SdkClient.request<ApiListAgentsByWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/agents",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "only_deployed" to SdkClient.queryValue(onlyDeployed, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        ),
+                    operationId = "genaiListAgentsByWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateAgentsWorkspaceOperation {
     /**
-     * To move all listed agents a given workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
+     * To move all listed agents a given workspace, send a PUT request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
      *
      * @param workspaceUuid Workspace uuid to move agents to
      * @param agentUuids Agent uuids
      * @param workspaceUuid2 Workspace uuid to move agents to
      */
-    fun genaiUpdateAgentsWorkspace(clientConfig: ClientConfig, workspaceUuid: String, agentUuids: List<String>? = null, workspaceUuid2: String? = null, options: RequestOptions? = null): ApiMoveAgentsToWorkspaceOutput {
-        return SdkClient.request<ApiMoveAgentsToWorkspaceOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/agents", config = clientConfig, body = SdkClient.bodyMap("agent_uuids" to (SdkClient.omitIfNull(agentUuids)), "workspace_uuid" to (SdkClient.omitIfNull(workspaceUuid2))), operationId = "genaiUpdateAgentsWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiUpdateAgentsWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        agentUuids: List<String>? = null,
+        workspaceUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiMoveAgentsToWorkspaceOutput {
+        return SdkClient.request<ApiMoveAgentsToWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/agents",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "agent_uuids" to (SdkClient.omitIfNull(agentUuids)),
+                            "workspace_uuid" to (SdkClient.omitIfNull(workspaceUuid2)),
+                        ),
+                    operationId = "genaiUpdateAgentsWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AgentPlatformApiGenaiListEvaluationTestCasesByWorkspaceOperation {
     /**
-     * To list all evaluation test cases by a workspace, send a GET request to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
+     * To list all evaluation test cases by a workspace, send a GET request to
+     * `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
      *
      * @param workspaceUuid Workspace UUID.
      */
-    fun genaiListEvaluationTestCasesByWorkspace(clientConfig: ClientConfig, workspaceUuid: String, options: RequestOptions? = null): ApiListEvaluationTestCasesByWorkspaceOutput {
-        return SdkClient.request<ApiListEvaluationTestCasesByWorkspaceOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/evaluation_test_cases", config = clientConfig, operationId = "genaiListEvaluationTestCasesByWorkspace", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun genaiListEvaluationTestCasesByWorkspace(
+        clientConfig: ClientConfig,
+        workspaceUuid: String,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationTestCasesByWorkspaceOutput {
+        return SdkClient.request<ApiListEvaluationTestCasesByWorkspaceOutput>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/gen-ai/workspaces/${SdkClient.encodePathSegment(workspaceUuid)}/evaluation_test_cases",
+                    config = clientConfig,
+                    operationId = "genaiListEvaluationTestCasesByWorkspace",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

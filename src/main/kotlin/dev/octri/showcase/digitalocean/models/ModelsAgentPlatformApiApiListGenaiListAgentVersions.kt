@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * List of agent versions
- */
+/** List of agent versions */
 data class ApiListAgentVersionsOutput(
-    /**
-     * Agents
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_versions") val agentVersions: List<ApiAgentVersion>? = null,
-    /**
-     * Links to other pages
-     */
+    /** Agents */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_versions")
+    val agentVersions: List<ApiAgentVersion>? = null,
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
-    val meta: ApiMeta? = null
+    /** Meta information about the data set */
+    val meta: ApiMeta? = null,
 )

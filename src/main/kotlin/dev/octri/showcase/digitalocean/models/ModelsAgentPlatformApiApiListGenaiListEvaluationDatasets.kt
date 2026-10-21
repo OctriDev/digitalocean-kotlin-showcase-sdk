@@ -3,12 +3,9 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Output for listing evaluation datasets.
- */
+/** Output for listing evaluation datasets. */
 data class ApiListEvaluationDatasetsOutput(
-    /**
-     * The list of evaluation datasets.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_datasets") val evaluationDatasets: List<ApiEvaluationDataset>? = null
+    /** The list of evaluation datasets. */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_datasets")
+    val evaluationDatasets: List<ApiEvaluationDataset>? = null
 )

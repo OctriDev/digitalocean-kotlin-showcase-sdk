@@ -13,19 +13,50 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ServerlessInferenceInferenceCreateEmbeddingOperation {
     /**
-     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response. Unknown fields in the request body are rejected. There is no streaming response for this endpoint.
+     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response.
+     * Unknown fields in the request body are rejected. There is no streaming response for this
+     * endpoint.
      *
-     * @param model Model id to use for embeddings. Must match a model your account
-     *   can access.
-     * @param input A single string or 1–2048 strings; each string produces one row
-     *   in `data`, in order.
+     * @param model Model id to use for embeddings. Must match a model your account can access.
+     * @param input A single string or 1–2048 strings; each string produces one row in `data`, in
+     *   order.
      * @param user Optional end-user identifier to help with abuse monitoring.
-     * @param encodingFormat How embedding values are returned in each
-     *   `data[].embedding` field.
+     * @param encodingFormat How embedding values are returned in each `data[].embedding` field.
      */
-    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse {
+    fun inferenceCreateEmbedding(
+        clientConfig: ClientConfig,
+        model: String,
+        input: List<String>,
+        user: String? = null,
+        encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null,
+        options: RequestOptions? = null,
+    ): EmbeddingsResponse {
         Validation.validateItems("input", input, Validation.LengthOpts(min = 1, max = 2048))
 
-        return SdkClient.request<EmbeddingsResponse>(SdkClient.RequestSpec("POST", "/v1/embeddings", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "input" to (input), "user" to (SdkClient.omitIfNull(user)), "encoding_format" to (SdkClient.omitIfNull(encodingFormat))), operationId = "inferenceCreateEmbedding", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<EmbeddingsResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/embeddings",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (model),
+                            "input" to (input),
+                            "user" to (SdkClient.omitIfNull(user)),
+                            "encoding_format" to (SdkClient.omitIfNull(encodingFormat)),
+                        ),
+                    operationId = "inferenceCreateEmbedding",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

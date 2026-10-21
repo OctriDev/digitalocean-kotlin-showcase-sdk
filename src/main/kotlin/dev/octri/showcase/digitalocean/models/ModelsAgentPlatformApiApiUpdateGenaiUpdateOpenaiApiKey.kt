@@ -7,26 +7,17 @@ package dev.octri.showcase.digitalocean.models
  * UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI API key for a specific agent.
  */
 data class ApiUpdateOpenAIAPIKeyInputPublic(
-    /**
-     * OpenAI API key
-     */
+    /** OpenAI API key */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
-    /**
-     * API key ID
-     */
+    /** API key ID */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_uuid") val apiKeyUuid: String? = null,
-    /**
-     * Name of the key
-     */
-    val name: String? = null
+    /** Name of the key */
+    val name: String? = null,
 )
 
-/**
- * UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
- */
+/** UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key. */
 data class ApiUpdateOpenAIAPIKeyOutput(
-    /**
-     * OpenAI API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
+    /** OpenAI API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
 )

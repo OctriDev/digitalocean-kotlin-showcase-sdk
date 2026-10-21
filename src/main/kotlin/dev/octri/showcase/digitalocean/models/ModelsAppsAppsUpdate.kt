@@ -3,30 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `AppsUpdateAppRequest` API schema.
- */
+/** Typed representation of the `AppsUpdateAppRequest` API schema. */
 data class AppsUpdateAppRequest(
-    /**
-     * The desired configuration of an application.
-     */
+    /** The desired configuration of an application. */
     val spec: AppSpec,
     /**
-     * Whether or not to update the source versions (for example fetching a new commit or image digest) of all components. By default (when this is false) only newly added sources will be updated to avoid changes like updating the scale of a component from also updating the respective code.
+     * Whether or not to update the source versions (for example fetching a new commit or image
+     * digest) of all components. By default (when this is false) only newly added sources will be
+     * updated to avoid changes like updating the scale of a component from also updating the
+     * respective code.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("update_all_source_versions") val updateAllSourceVersions: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("update_all_source_versions")
+    val updateAllSourceVersions: Boolean? = null,
 )
 
-/**
- * Typed representation of the `AppsUpdateAppRequestRequest` API schema.
- */
+/** Typed representation of the `AppsUpdateAppRequestRequest` API schema. */
 data class AppsUpdateAppRequestRequest(
-    /**
-     * The desired configuration of an application.
-     */
+    /** The desired configuration of an application. */
     val spec: AppSpecRequest,
     /**
-     * Whether or not to update the source versions (for example fetching a new commit or image digest) of all components. By default (when this is false) only newly added sources will be updated to avoid changes like updating the scale of a component from also updating the respective code.
+     * Whether or not to update the source versions (for example fetching a new commit or image
+     * digest) of all components. By default (when this is false) only newly added sources will be
+     * updated to avoid changes like updating the scale of a component from also updating the
+     * respective code.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("update_all_source_versions") val updateAllSourceVersions: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("update_all_source_versions")
+    val updateAllSourceVersions: Boolean? = null,
 )

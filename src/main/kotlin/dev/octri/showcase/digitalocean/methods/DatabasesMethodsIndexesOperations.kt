@@ -12,27 +12,74 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListOpeasearchIndexesOperation {
     /**
-     * To list all of a OpenSearch cluster's indexes, send a GET request to `/v2/databases/$DATABASE_ID/indexes`. The result will be a JSON object with a `indexes` key.
+     * To list all of a OpenSearch cluster's indexes, send a GET request to
+     * `/v2/databases/$DATABASE_ID/indexes`. The result will be a JSON object with a `indexes` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListOpeasearchIndexes(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): OpensearchIndexes {
+    fun databasesListOpeasearchIndexes(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): OpensearchIndexes {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<OpensearchIndexes>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/indexes", config = clientConfig, operationId = "databasesListOpeasearchIndexes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<OpensearchIndexes>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/indexes",
+                    config = clientConfig,
+                    operationId = "databasesListOpeasearchIndexes",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteOpensearchIndexOperation {
     /**
-     * To delete a single index within OpenSearch cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/indexes/$INDEX_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a single index within OpenSearch cluster, send a DELETE request to
+     * `/v2/databases/$DATABASE_ID/indexes/$INDEX_NAME`. A status of 204 will be given. This
+     * indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param indexName The name of the OpenSearch index.
      */
-    fun databasesDeleteOpensearchIndex(clientConfig: ClientConfig, databaseClusterUuid: String, indexName: String, options: RequestOptions? = null): Unit {
+    fun databasesDeleteOpensearchIndex(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        indexName: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/indexes/${SdkClient.encodePathSegment(indexName)}", config = clientConfig, operationId = "databasesDeleteOpensearchIndex", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/indexes/${SdkClient.encodePathSegment(indexName)}",
+                config = clientConfig,
+                operationId = "databasesDeleteOpensearchIndex",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

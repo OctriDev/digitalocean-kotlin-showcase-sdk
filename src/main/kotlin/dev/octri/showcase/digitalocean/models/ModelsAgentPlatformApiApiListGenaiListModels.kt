@@ -3,20 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * A list of models
- */
+/** A list of models */
 data class ApiListModelsOutputPublic(
-    /**
-     * Links to other pages
-     */
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
+    /** Meta information about the data set */
     val meta: ApiMeta? = null,
-    /**
-     * The models
-     */
-    val models: List<ApiModelPublic>? = null
+    /** The models */
+    val models: List<ApiModelPublic>? = null,
 )

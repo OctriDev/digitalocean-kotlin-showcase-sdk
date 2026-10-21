@@ -11,9 +11,30 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object ServerlessInferenceInferenceListModelsOperation {
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+     * Lists the currently available models, and provides basic information about each one such as
+     * the owner and availability.
      */
-    fun inferenceListModels(clientConfig: ClientConfig, options: RequestOptions? = null): ListModelsResponse {
-        return SdkClient.request<ListModelsResponse>(SdkClient.RequestSpec("GET", "/v1/models", config = clientConfig, operationId = "inferenceListModels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun inferenceListModels(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListModelsResponse {
+        return SdkClient.request<ListModelsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v1/models",
+                    config = clientConfig,
+                    operationId = "inferenceListModels",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

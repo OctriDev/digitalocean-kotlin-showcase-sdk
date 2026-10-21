@@ -3,78 +3,74 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiCreateModelEvaluationRunInputPublic` API schema.
- */
+/** Typed representation of the `ApiCreateModelEvaluationRunInputPublic` API schema. */
 data class ApiCreateModelEvaluationRunInputPublic(
+    /** Inference configuration for the candidate model during evaluation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_inference_config")
+    val candidateInferenceConfig: ApiCandidateInferenceConfig? = null,
     /**
-     * Inference configuration for the candidate model during evaluation.
+     * Model slug used to call the candidate model API. For dedicated inference, this is the model
+     * slug from the deployment. For serverless, this should match the model's internal name.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_inference_config") val candidateInferenceConfig: ApiCandidateInferenceConfig? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_name")
+    val candidateModelName: String? = null,
     /**
-     * Model slug used to call the candidate model API. For dedicated inference, this is the model slug from the deployment. For serverless, this should match the model's internal name.
+     * Whether the candidate is a served model (serverless platform, a dedicated deployment, or a
+     * model router) or an OHS-hosted agent config.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_name") val candidateModelName: String? = null,
-    /**
-     * Whether the candidate is a served model (serverless platform, a dedicated deployment, or a model router) or an OHS-hosted agent config.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_source") val candidateModelSource: ApiCandidateModelSource? = null,
-    /**
-     * UUID of the candidate model to evaluate.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_uuid") val candidateModelUuid: String? = null,
-    /**
-     * UUID of the dataset to use for evaluation.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_source")
+    val candidateModelSource: ApiCandidateModelSource? = null,
+    /** UUID of the candidate model to evaluate. */
+    @com.fasterxml.jackson.annotation.JsonProperty("candidate_model_uuid")
+    val candidateModelUuid: String? = null,
+    /** UUID of the dataset to use for evaluation. */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_uuid") val datasetUuid: String? = null,
     /**
-     * Number of times to evaluate each dataset row (n-pass/epochs), so the result reports avg@k/pass@k/cons@k instead of a single score. Defaults to 1 when unset. Capped at 3 until throughput/sharding work lands, since each extra epoch roughly multiplies wall-clock run time. Not persisted on presets.
+     * Number of times to evaluate each dataset row (n-pass/epochs), so the result reports
+     * avg@k/pass@k/cons@k instead of a single score. Defaults to 1 when unset. Capped at 3 until
+     * throughput/sharding work lands, since each extra epoch roughly multiplies wall-clock run
+     * time. Not persisted on presets.
      */
     val epochs: Long? = null,
-    /**
-     * Optional `string` value serialized in the `eval_preset_uuid` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("eval_preset_uuid") val evalPresetUuid: String? = null,
-    /**
-     * UUID of the judge model used to score responses.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid") val judgeModelUuid: String? = null,
-    /**
-     * UUIDs of metrics to evaluate (selected from ListModelEvaluationMetrics).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_uuids") val metricUuids: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `eval_preset_uuid` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("eval_preset_uuid")
+    val evalPresetUuid: String? = null,
+    /** UUID of the judge model used to score responses. */
+    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_uuid")
+    val judgeModelUuid: String? = null,
+    /** UUIDs of metrics to evaluate (selected from ListModelEvaluationMetrics). */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_uuids")
+    val metricUuids: List<String>? = null,
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `preset_name` wire field.
-     */
+    /** Optional `string` value serialized in the `preset_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("preset_name") val presetName: String? = null,
     /**
-     * Which sections of this run's resolved configuration to persist as a reusable preset. Each selected section saves only its own fields; the remaining sections stay empty on the preset and must be supplied inline on future runs that reference it. Empty means do not save a preset (unless the deprecated `save_as_preset` boolean is true, in which case all sections are saved). Ignored when `eval_preset_uuid` is set. Use `preset_name` to label the saved preset.
+     * Which sections of this run's resolved configuration to persist as a reusable preset. Each
+     * selected section saves only its own fields; the remaining sections stay empty on the preset
+     * and must be supplied inline on future runs that reference it. Empty means do not save a
+     * preset (unless the deprecated `save_as_preset` boolean is true, in which case all sections
+     * are saved). Ignored when `eval_preset_uuid` is set. Use `preset_name` to label the saved
+     * preset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("preset_save_sections") val presetSaveSections: List<ApiPresetSaveSection>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("preset_save_sections")
+    val presetSaveSections: List<ApiPresetSaveSection>? = null,
     /**
-     * Deprecated: use `preset_save_sections`. When `true` and `preset_save_sections` is empty, all five sections of the resolved configuration are saved as a reusable preset (legacy behavior). Ignored when `eval_preset_uuid` is set.
+     * Deprecated: use `preset_save_sections`. When `true` and `preset_save_sections` is empty, all
+     * five sections of the resolved configuration are saved as a reusable preset (legacy behavior).
+     * Ignored when `eval_preset_uuid` is set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("save_as_preset") val saveAsPreset: Boolean? = null,
-    /**
-     * Source of the run creation (api, sdk, cli).
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("save_as_preset")
+    val saveAsPreset: Boolean? = null,
+    /** Source of the run creation (api, sdk, cli). */
     val source: String? = null,
-    /**
-     * Optional object value serialized in the `star_metric` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("star_metric") val starMetric: ApiStarMetric? = null
+    /** Optional object value serialized in the `star_metric` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("star_metric")
+    val starMetric: ApiStarMetric? = null,
 )
 
-/**
- * Typed representation of the `ApiCreateModelEvaluationRunOutput` API schema.
- */
+/** Typed representation of the `ApiCreateModelEvaluationRunOutput` API schema. */
 data class ApiCreateModelEvaluationRunOutput(
-    /**
-     * UUID of the created evaluation run.
-     */
+    /** UUID of the created evaluation run. */
     @com.fasterxml.jackson.annotation.JsonProperty("eval_run_uuid") val evalRunUuid: String? = null
 )

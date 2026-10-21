@@ -3,20 +3,30 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class AgentInferenceNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      */
-    fun createChatCompletion(request: dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest, options: RequestOptions? = null): ChatCompletionResponse {
-        return dev.octri.showcase.digitalocean.methods.AgentInference.agentInferenceCreateChatCompletion(clientConfig, request, options)
+    fun createChatCompletion(
+        request:
+            dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest,
+        options: RequestOptions? = null,
+    ): ChatCompletionResponse {
+        return dev.octri.showcase.digitalocean.methods.AgentInference
+            .agentInferenceCreateChatCompletion(clientConfig, request, options)
     }
 
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      */
-    fun createChatCompletionStream(request: dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionStreamRequest, options: RequestOptions? = null): Sequence<ChatCompletionChunk> {
-        return dev.octri.showcase.digitalocean.methods.AgentInference.agentInferenceCreateChatCompletionStream(clientConfig, request, options)
+    fun createChatCompletionStream(
+        request:
+            dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ChatCompletionChunk> {
+        return dev.octri.showcase.digitalocean.methods.AgentInference
+            .agentInferenceCreateChatCompletionStream(clientConfig, request, options)
     }
-
 }

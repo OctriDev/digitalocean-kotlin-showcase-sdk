@@ -15,74 +15,154 @@ import dev.octri.showcase.digitalocean.Validation
 
 object FloatingIps {
 
-
     /**
-     * To list all of the floating IPs available on your account, send a GET request to `/v2/floating_ips`.
+     * To list all of the floating IPs available on your account, send a GET request to
+     * `/v2/floating_ips`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun floatingIpsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): FloatingIpList {
+    fun floatingIpsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): FloatingIpList {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<FloatingIpList>(SdkClient.RequestSpec("GET", "/v2/floating_ips", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "floatingIpsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<FloatingIpList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/floating_ips",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "floatingIpsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a floating IP assigned to a Droplet or reserved to a region. Supply `droplet_id` to assign it to a Droplet, or supply `region` to reserve it; `project_id` can associate a region-reserved floating IP with a project. A 202 response returns the floating IP object and, when assigning it to a Droplet, links to the Droplet and assignment action.
+     * Creates a floating IP assigned to a Droplet or reserved to a region. Supply `droplet_id` to
+     * assign it to a Droplet, or supply `region` to reserve it; `project_id` can associate a
+     * region-reserved floating IP with a project. A 202 response returns the floating IP object
+     * and, when assigning it to a Droplet, links to the Droplet and assignment action.
      *
-     * On creation, a floating IP must be either assigned to a Droplet or reserved to a region. * To create a new floating IP assigned to a Droplet, send a POST request to `/v2/floating_ips` with the `droplet_id` attribute. * To create a new floating IP reserved to a region, send a POST request to `/v2/floating_ips` with the `region` attribute.
+     * On creation, a floating IP must be either assigned to a Droplet or reserved to a region. * To
+     * create a new floating IP assigned to a Droplet, send a POST request to `/v2/floating_ips`
+     * with the `droplet_id` attribute. * To create a new floating IP reserved to a region, send a
+     * POST request to `/v2/floating_ips` with the `region` attribute.
      */
-    fun floatingIpsCreate(clientConfig: ClientConfig, body: FloatingIpCreate, options: RequestOptions? = null): FloatingIpCreated {
-        return SdkClient.request<FloatingIpCreated>(SdkClient.RequestSpec("POST", "/v2/floating_ips", config = clientConfig, body = body, operationId = "floatingIpsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun floatingIpsCreate(
+        clientConfig: ClientConfig,
+        body: FloatingIpCreate,
+        options: RequestOptions? = null,
+    ): FloatingIpCreated {
+        return SdkClient.request<FloatingIpCreated>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/floating_ips",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "floatingIpsCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To show information about a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP_ADDR`.
+     * To show information about a floating IP, send a GET request to
+     * `/v2/floating_ips/$FLOATING_IP_ADDR`.
      *
      * @param floatingIp A floating IP address.
      */
-    fun floatingIpsGet(clientConfig: ClientConfig, floatingIp: String, options: RequestOptions? = null): FloatingIpResponse {
-        return SdkClient.request<FloatingIpResponse>(SdkClient.RequestSpec("GET", "/v2/floating_ips/${SdkClient.encodePathSegment(floatingIp)}", config = clientConfig, operationId = "floatingIpsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun floatingIpsGet(
+        clientConfig: ClientConfig,
+        floatingIp: String,
+        options: RequestOptions? = null,
+    ): FloatingIpResponse {
+        return SdkClient.request<FloatingIpResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/floating_ips/${SdkClient.encodePathSegment(floatingIp)}",
+                    config = clientConfig,
+                    operationId = "floatingIpsGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To delete a floating IP and remove it from your account, send a DELETE request to `/v2/floating_ips/$FLOATING_IP_ADDR`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
+     * To delete a floating IP and remove it from your account, send a DELETE request to
+     * `/v2/floating_ips/$FLOATING_IP_ADDR`. A successful request will receive a 204 status code
+     * with no body in response. This indicates that the request was processed successfully.
      *
      * @param floatingIp A floating IP address.
      */
-    fun floatingIpsDelete(clientConfig: ClientConfig, floatingIp: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/floating_ips/${SdkClient.encodePathSegment(floatingIp)}", config = clientConfig, operationId = "floatingIpsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun floatingIpsDelete(
+        clientConfig: ClientConfig,
+        floatingIp: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/floating_ips/${SdkClient.encodePathSegment(floatingIp)}",
+                config = clientConfig,
+                operationId = "floatingIpsDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

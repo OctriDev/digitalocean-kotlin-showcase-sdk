@@ -3,72 +3,42 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * The response from the image generation endpoint.
- */
+/** The response from the image generation endpoint. */
 data class ImagesResponse(
-    /**
-     * The Unix timestamp (in seconds) of when the images were created.
-     */
+    /** The Unix timestamp (in seconds) of when the images were created. */
     val created: Long,
-    /**
-     * The list of generated images.
-     */
+    /** The list of generated images. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<GeneratedImage>,
-    /**
-     * The background setting used for the image generation.
-     */
+    /** The background setting used for the image generation. */
     val background: String? = null,
-    /**
-     * The output format of the generated image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: String? = null,
-    /**
-     * The quality setting used for the image generation.
-     */
+    /** The output format of the generated image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: String? = null,
+    /** The quality setting used for the image generation. */
     val quality: String? = null,
-    /**
-     * The size of the generated image.
-     */
+    /** The size of the generated image. */
     val size: String? = null,
-    /**
-     * Usage statistics for the image generation request.
-     */
-    val usage: ImagesUsage? = null
+    /** Usage statistics for the image generation request. */
+    val usage: ImagesUsage? = null,
 )
 
-/**
- * Detailed breakdown of input tokens.
- */
+/** Detailed breakdown of input tokens. */
 data class ImagesUsageInputTokensDetails(
-    /**
-     * The number of text tokens in the input prompt.
-     */
+    /** The number of text tokens in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long,
-    /**
-     * The number of image tokens in the input prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long
+    /** The number of image tokens in the input prompt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long,
 )
 
-/**
- * Token usage information for the image generation.
- */
+/** Token usage information for the image generation. */
 data class ImagesUsage(
-    /**
-     * The total number of tokens (images and text) used for the image generation.
-     */
+    /** The total number of tokens (images and text) used for the image generation. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * The number of tokens (images and text) in the input prompt.
-     */
+    /** The number of tokens (images and text) in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * The number of image tokens in the output image.
-     */
+    /** The number of image tokens in the output image. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * Detailed breakdown of input tokens.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details") val inputTokensDetails: ImagesUsageInputTokensDetails
+    /** Detailed breakdown of input tokens. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details")
+    val inputTokensDetails: ImagesUsageInputTokensDetails,
 )

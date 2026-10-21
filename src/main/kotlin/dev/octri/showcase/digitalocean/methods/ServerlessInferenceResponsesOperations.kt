@@ -13,184 +13,216 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ServerlessInferenceInferenceCreateResponseOperation {
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      *
-     * @param model The model ID of the model you want to use. Get the model ID using
-     *   `/v1/models` or on the available models page.
-     * @param input The prompt or input content you want the model to respond to. Can
-     *   be a simple text string or an array of message objects for conversation
-     *   context.
-     * @param maxOutputTokens The maximum number of tokens to generate in the
-     *   response.
-     * @param temperature A value between 0.0 and 2.0 to control randomness and
-     *   creativity. Lower values like 0.2 make the output more focused and
-     *   deterministic, while higher values like 0.8 make it more random.
+     * @param model The model ID of the model you want to use. Get the model ID using `/v1/models`
+     *   or on the available models page.
+     * @param input The prompt or input content you want the model to respond to. Can be a simple
+     *   text string or an array of message objects for conversation context.
+     * @param maxOutputTokens The maximum number of tokens to generate in the response.
+     * @param temperature A value between 0.0 and 2.0 to control randomness and creativity. Lower
+     *   values like 0.2 make the output more focused and deterministic, while higher values like
+     *   0.8 make it more random.
      * @param stream Set to true to stream partial responses as Server-Sent Events.
-     * @param instructions System-level instructions for the model. This sets the
-     *   behavior and context for the response generation.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
+     * @param instructions System-level instructions for the model. This sets the behavior and
+     *   context for the response generation.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
      * @param tools A list of tools the model may call.
      * @param toolChoice Controls which (if any) tool is called by the model.
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens.
+     * @param stop Up to 4 sequences where the API will stop generating further tokens.
      * @param metadata Set of key-value pairs that can be attached to the request.
      * @param user A unique identifier representing your end-user.
      */
-    fun inferenceCreateResponse(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateResponseRequest, options: RequestOptions? = null): CreateResponseResponse {
+    fun inferenceCreateResponse(
+        clientConfig: ClientConfig,
+        request: ServerlessInference.InferenceCreateResponseRequest,
+        options: RequestOptions? = null,
+    ): CreateResponseResponse {
         validateInferenceCreateResponseRequest(request)
 
-        return SdkClient.request<CreateResponseResponse>(SdkClient.RequestSpec("POST", "/v1/responses", config = clientConfig, body = buildInferenceCreateResponseBody(request), operationId = "inferenceCreateResponse", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<CreateResponseResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/responses",
+                    config = clientConfig,
+                    body = buildInferenceCreateResponseBody(request),
+                    operationId = "inferenceCreateResponse",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateInferenceCreateResponseRequest(request: ServerlessInference.InferenceCreateResponseRequest) {
+    private fun validateInferenceCreateResponseRequest(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ) {
         val maxOutputTokensValue = request.maxOutputTokens?.getOrNull()
-if (maxOutputTokensValue != null) {
-            Validation.validateRange("max_output_tokens", maxOutputTokensValue, Validation.RangeOpts(min = 1.0))
-}
-
-        val temperatureValue = request.temperature?.getOrNull()
-if (temperatureValue != null) {
-            Validation.validateRange("temperature", temperatureValue, Validation.RangeOpts(min = 0.0, max = 2.0))
-}
-
-        val topPValue = request.topP?.getOrNull()
-if (topPValue != null) {
-            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
-}
-
-        val stopValue = request.stop?.getOrNull()
-if (stopValue != null) {
-            Validation.validateItems("stop", stopValue, Validation.LengthOpts(min = 1, max = 4))
-}
-    }
-
-
-
-    private fun buildInferenceCreateResponseBody(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildInferenceCreateResponseBodyPart1(request))
-            putAll(buildInferenceCreateResponseBodyPart2(request))
+        if (maxOutputTokensValue != null) {
+            Validation.validateRange(
+                "max_output_tokens",
+                maxOutputTokensValue,
+                Validation.RangeOpts(min = 1.0),
+            )
         }
 
-    private fun buildInferenceCreateResponseBodyPart1(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
+        val temperatureValue = request.temperature?.getOrNull()
+        if (temperatureValue != null) {
+            Validation.validateRange(
+                "temperature",
+                temperatureValue,
+                Validation.RangeOpts(min = 0.0, max = 2.0),
+            )
+        }
+
+        val topPValue = request.topP?.getOrNull()
+        if (topPValue != null) {
+            Validation.validateRange("top_p", topPValue, Validation.RangeOpts(min = 0.0, max = 1.0))
+        }
+
+        val stopValue = request.stop?.getOrNull()
+        if (stopValue != null) {
+            Validation.validateItems("stop", stopValue, Validation.LengthOpts(min = 1, max = 4))
+        }
+    }
+
+    private fun buildInferenceCreateResponseBody(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildInferenceCreateResponseBodyPart1(request))
+        putAll(buildInferenceCreateResponseBodyPart2(request))
+    }
+
+    private fun buildInferenceCreateResponseBodyPart1(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "input" to (request.input),
-            "max_output_tokens" to
-    (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
-            "stream" to
-    (request.stream ?: SdkClient.SdkOptional.Omitted),
-            "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted),
+            "max_output_tokens" to (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "stream" to (request.stream ?: SdkClient.SdkOptional.Omitted),
+            "instructions" to (request.instructions ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
             "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
             "stop" to (request.stop ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildInferenceCreateResponseBodyPart2(request: ServerlessInference.InferenceCreateResponseRequest): Map<String, Any?> =
-        SdkClient.bodyMap(
-            "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
-        )
+    private fun buildInferenceCreateResponseBodyPart2(
+        request: ServerlessInference.InferenceCreateResponseRequest
+    ): Map<String, Any?> =
+        SdkClient.bodyMap("user" to (request.user ?: SdkClient.SdkOptional.Omitted))
 }
 
 internal object ServerlessInferenceInferenceCreateResponseStreamOperation {
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      *
-     * @param model The model ID of the model you want to use. Get the model ID using
-     *   `/v1/models` or on the available models page.
-     * @param input The prompt or input content you want the model to respond to. Can
-     *   be a simple text string or an array of message objects for conversation
-     *   context.
+     * @param model The model ID of the model you want to use. Get the model ID using `/v1/models`
+     *   or on the available models page.
+     * @param input The prompt or input content you want the model to respond to. Can be a simple
+     *   text string or an array of message objects for conversation context.
      * @param stream Set to true to stream partial responses as Server-Sent Events.
-     * @param maxOutputTokens The maximum number of tokens to generate in the
-     *   response.
-     * @param temperature A value between 0.0 and 2.0 to control randomness and
-     *   creativity. Lower values like 0.2 make the output more focused and
-     *   deterministic, while higher values like 0.8 make it more random.
-     * @param instructions System-level instructions for the model. This sets the
-     *   behavior and context for the response generation.
-     * @param topP An alternative to sampling with temperature, called nucleus
-     *   sampling, where the model considers the results of the tokens with top_p
-     *   probability mass.
-     * @param streamOptions Options for streaming response. Only set this when you
-     *   set stream to true.
+     * @param maxOutputTokens The maximum number of tokens to generate in the response.
+     * @param temperature A value between 0.0 and 2.0 to control randomness and creativity. Lower
+     *   values like 0.2 make the output more focused and deterministic, while higher values like
+     *   0.8 make it more random.
+     * @param instructions System-level instructions for the model. This sets the behavior and
+     *   context for the response generation.
+     * @param topP An alternative to sampling with temperature, called nucleus sampling, where the
+     *   model considers the results of the tokens with top_p probability mass.
+     * @param streamOptions Options for streaming response. Only set this when you set stream to
+     *   true.
      * @param tools A list of tools the model may call.
      * @param toolChoice Controls which (if any) tool is called by the model.
-     * @param stop Up to 4 sequences where the API will stop generating further
-     *   tokens.
+     * @param stop Up to 4 sequences where the API will stop generating further tokens.
      * @param metadata Set of key-value pairs that can be attached to the request.
      * @param user A unique identifier representing your end-user.
      */
-    fun inferenceCreateResponseStream(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateResponseStreamRequest, options: RequestOptions? = null): Sequence<CreateResponseStreamResponse> {
+    fun inferenceCreateResponseStream(
+        clientConfig: ClientConfig,
+        request: ServerlessInference.InferenceCreateResponseStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateResponseStreamResponse> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v1/responses",
-                config = clientConfig,
-                body = buildInferenceCreateResponseStreamBody(request),
-                contentType = "application/json",
-                operationId = "inferenceCreateResponseStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/v1/responses",
+                        config = clientConfig,
+                        body = buildInferenceCreateResponseStreamBody(request),
+                        contentType = "application/json",
+                        operationId = "inferenceCreateResponseStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "401" to Error2::class.java,
+                                "429" to Error2::class.java,
+                                "500" to Error2::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, CreateResponseStreamResponse::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(
+                            _ev.data,
+                            CreateResponseStreamResponse::class.java,
+                        )
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
 
+    private fun buildInferenceCreateResponseStreamBody(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildInferenceCreateResponseStreamBodyPart1(request))
+        putAll(buildInferenceCreateResponseStreamBodyPart2(request))
+    }
 
-    private fun buildInferenceCreateResponseStreamBody(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildInferenceCreateResponseStreamBodyPart1(request))
-            putAll(buildInferenceCreateResponseStreamBodyPart2(request))
-        }
-
-    private fun buildInferenceCreateResponseStreamBodyPart1(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
+    private fun buildInferenceCreateResponseStreamBodyPart1(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "input" to (request.input),
             "stream" to (request.stream),
-            "max_output_tokens" to
-    (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
-            "temperature" to
-    (request.temperature ?: SdkClient.SdkOptional.Omitted),
-            "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted),
+            "max_output_tokens" to (request.maxOutputTokens ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "instructions" to (request.instructions ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
-            "stream_options" to
-    (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
+            "stream_options" to (request.streamOptions ?: SdkClient.SdkOptional.Omitted),
             "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
             "tool_choice" to (SdkClient.omitIfNull(request.toolChoice)),
             "stop" to (request.stop ?: SdkClient.SdkOptional.Omitted),
-            "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted),
+            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildInferenceCreateResponseStreamBodyPart2(request: ServerlessInference.InferenceCreateResponseStreamRequest): Map<String, Any?> =
-        SdkClient.bodyMap(
-            "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
-        )
+    private fun buildInferenceCreateResponseStreamBodyPart2(
+        request: ServerlessInference.InferenceCreateResponseStreamRequest
+    ): Map<String, Any?> =
+        SdkClient.bodyMap("user" to (request.user ?: SdkClient.SdkOptional.Omitted))
 }

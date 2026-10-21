@@ -39,7 +39,7 @@ object Monitoring {
         val tags: List<String>,
         val type: AlertPolicyRequestTypeEnum,
         val value: Float,
-        val window: AlertPolicyRequestWindowEnum
+        val window: AlertPolicyRequestWindowEnum,
     )
 
     /** Parameters for [monitoringUpdateAlertPolicy]. */
@@ -53,829 +53,1401 @@ object Monitoring {
         val tags: List<String>,
         val type: AlertPolicyRequestTypeEnum,
         val value: Float,
-        val window: AlertPolicyRequestWindowEnum
+        val window: AlertPolicyRequestWindowEnum,
     )
 
     /**
-     * Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
+     * Returns all alert policies that are configured for the given account. To List all alert
+     * policies, send a GET request to `/v2/monitoring/alerts`.
      */
-    fun monitoringListAlertPolicy(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): MonitoringListAlertPolicyResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringListAlertPolicyOperation.monitoringListAlertPolicy(
-            clientConfig,
-            perPage,
-            page,
-            options,
-        )
+    fun monitoringListAlertPolicy(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): MonitoringListAlertPolicyResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringListAlertPolicyOperation
+            .monitoringListAlertPolicy(
+                clientConfig,
+                perPage,
+                page,
+                options,
+            )
 
     /**
-     * Creates an alert policy that monitors a selected metric for droplets, load balancers, databases, or autoscale pools. Set `type`, `entities`, and `tags` to define what the policy monitors; when both `entities` and `tags` are empty, it applies to all entities of the selected type in the account. A 200 response returns the alert policy, including its generated UUID.
+     * Creates an alert policy that monitors a selected metric for droplets, load balancers,
+     * databases, or autoscale pools. Set `type`, `entities`, and `tags` to define what the policy
+     * monitors; when both `entities` and `tags` are empty, it applies to all entities of the
+     * selected type in the account. A 200 response returns the alert policy, including its
+     * generated UUID.
      */
-    fun monitoringCreateAlertPolicy(clientConfig: ClientConfig, request: MonitoringCreateAlertPolicyRequest, options: RequestOptions? = null): AlertPolicyResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringCreateAlertPolicyOperation.monitoringCreateAlertPolicy(
-            clientConfig,
-            request,
-            options,
-        )
+    fun monitoringCreateAlertPolicy(
+        clientConfig: ClientConfig,
+        request: MonitoringCreateAlertPolicyRequest,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringCreateAlertPolicyOperation
+            .monitoringCreateAlertPolicy(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
      * To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/{alert_uuid}`
      */
-    fun monitoringGetAlertPolicy(clientConfig: ClientConfig, alertUuid: String, options: RequestOptions? = null): AlertPolicyResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetAlertPolicyOperation.monitoringGetAlertPolicy(
-            clientConfig,
-            alertUuid,
-            options,
-        )
+    fun monitoringGetAlertPolicy(
+        clientConfig: ClientConfig,
+        alertUuid: String,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetAlertPolicyOperation
+            .monitoringGetAlertPolicy(
+                clientConfig,
+                alertUuid,
+                options,
+            )
 
     /**
-     * Replaces the configuration of an existing alert policy identified by its UUID. Provide the complete policy configuration, including its metric type, threshold, evaluation window, monitored entities, tags, notifications, and enabled state. A 200 response returns the updated alert policy.
+     * Replaces the configuration of an existing alert policy identified by its UUID. Provide the
+     * complete policy configuration, including its metric type, threshold, evaluation window,
+     * monitored entities, tags, notifications, and enabled state. A 200 response returns the
+     * updated alert policy.
      */
-    fun monitoringUpdateAlertPolicy(clientConfig: ClientConfig, request: MonitoringUpdateAlertPolicyRequest, options: RequestOptions? = null): AlertPolicyResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringUpdateAlertPolicyOperation.monitoringUpdateAlertPolicy(
-            clientConfig,
-            request,
-            options,
-        )
+    fun monitoringUpdateAlertPolicy(
+        clientConfig: ClientConfig,
+        request: MonitoringUpdateAlertPolicyRequest,
+        options: RequestOptions? = null,
+    ): AlertPolicyResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringUpdateAlertPolicyOperation
+            .monitoringUpdateAlertPolicy(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** To delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/{alert_uuid}` */
+    fun monitoringDeleteAlertPolicy(
+        clientConfig: ClientConfig,
+        alertUuid: String,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.MonitoringDeleteAlertPolicyOperation
+            .monitoringDeleteAlertPolicy(
+                clientConfig,
+                alertUuid,
+                options,
+            )
 
     /**
-     * To delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/{alert_uuid}`
+     * To retrieve bandwidth metrics for a given Droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/bandwidth`. Use the `interface` query parameter to specify if
+     * the results should be for the `private` or `public` interface. Use the `direction` query
+     * parameter to specify if the results should be for `inbound` or `outbound` traffic. The
+     * metrics in the response body are in megabits per second (Mbps).
      */
-    fun monitoringDeleteAlertPolicy(clientConfig: ClientConfig, alertUuid: String, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.MonitoringDeleteAlertPolicyOperation.monitoringDeleteAlertPolicy(
-            clientConfig,
-            alertUuid,
-            options,
-        )
+    fun monitoringGetDropletBandwidthMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        `interface`: SchemaSchemaEnum7f497bb5,
+        direction: SchemaSchemaEnume3cf095d,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletBandwidthMetricsOperation
+            .monitoringGetDropletBandwidthMetrics(
+                clientConfig,
+                hostId,
+                `interface`,
+                direction,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve bandwidth metrics for a given Droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`. Use the `interface` query parameter to specify if the results should be for the `private` or `public` interface. Use the `direction` query parameter to specify if the results should be for `inbound` or `outbound` traffic. The metrics in the response body are in megabits per second (Mbps).
+     * To retrieve CPU metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/cpu`.
      */
-    fun monitoringGetDropletBandwidthMetrics(clientConfig: ClientConfig, hostId: String, `interface`: SchemaSchemaEnum7f497bb5, direction: SchemaSchemaEnume3cf095d, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletBandwidthMetricsOperation.monitoringGetDropletBandwidthMetrics(
-            clientConfig,
-            hostId,
-            `interface`,
-            direction,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletCpuMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletCpuMetricsOperation
+            .monitoringGetDropletCpuMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve CPU metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/cpu`.
+     * To retrieve filesystem free metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/filesystem_free`.
      */
-    fun monitoringGetDropletCpuMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletCpuMetricsOperation.monitoringGetDropletCpuMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletFilesystemFreeMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletFilesystemFreeMetricsOperation
+            .monitoringGetDropletFilesystemFreeMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve filesystem free metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_free`.
+     * To retrieve filesystem size metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/filesystem_size`.
      */
-    fun monitoringGetDropletFilesystemFreeMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletFilesystemFreeMetricsOperation.monitoringGetDropletFilesystemFreeMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletFilesystemSizeMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletFilesystemSizeMetricsOperation
+            .monitoringGetDropletFilesystemSizeMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.
+     * To retrieve 1 minute load average metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/load_1`.
      */
-    fun monitoringGetDropletFilesystemSizeMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletFilesystemSizeMetricsOperation.monitoringGetDropletFilesystemSizeMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletLoad1Metrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad1MetricsOperation
+            .monitoringGetDropletLoad1Metrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.
+     * To retrieve 5 minute load average metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/load_5`.
      */
-    fun monitoringGetDropletLoad1Metrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad1MetricsOperation.monitoringGetDropletLoad1Metrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletLoad5Metrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad5MetricsOperation
+            .monitoringGetDropletLoad5Metrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve 5 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_5`.
+     * To retrieve 15 minute load average metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/load_15`.
      */
-    fun monitoringGetDropletLoad5Metrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad5MetricsOperation.monitoringGetDropletLoad5Metrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletLoad15Metrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad15MetricsOperation
+            .monitoringGetDropletLoad15Metrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.
+     * To retrieve cached memory metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/memory_cached`.
      */
-    fun monitoringGetDropletLoad15Metrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletLoad15MetricsOperation.monitoringGetDropletLoad15Metrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletMemoryCachedMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryCachedMetricsOperation
+            .monitoringGetDropletMemoryCachedMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.
+     * To retrieve free memory metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/memory_free`.
      */
-    fun monitoringGetDropletMemoryCachedMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryCachedMetricsOperation.monitoringGetDropletMemoryCachedMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletMemoryFreeMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryFreeMetricsOperation
+            .monitoringGetDropletMemoryFreeMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
+     * To retrieve total memory metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/memory_total`.
      */
-    fun monitoringGetDropletMemoryFreeMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryFreeMetricsOperation.monitoringGetDropletMemoryFreeMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletMemoryTotalMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryTotalMetricsOperation
+            .monitoringGetDropletMemoryTotalMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
+     * To retrieve available memory metrics for a given droplet, send a GET request to
+     * `/v2/monitoring/metrics/droplet/memory_available`.
      */
-    fun monitoringGetDropletMemoryTotalMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryTotalMetricsOperation.monitoringGetDropletMemoryTotalMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletMemoryAvailableMetrics(
+        clientConfig: ClientConfig,
+        hostId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryAvailableMetricsOperation
+            .monitoringGetDropletMemoryAvailableMetrics(
+                clientConfig,
+                hostId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.
+     * To retrieve memory percentage metrics for a given app, send a GET request to
+     * `/v2/monitoring/metrics/apps/memory_percentage`.
      */
-    fun monitoringGetDropletMemoryAvailableMetrics(clientConfig: ClientConfig, hostId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletMemoryAvailableMetricsOperation.monitoringGetDropletMemoryAvailableMetrics(
-            clientConfig,
-            hostId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetAppMemoryPercentageMetrics(
+        clientConfig: ClientConfig,
+        appId: String,
+        start: String,
+        end: String,
+        appComponent: String? = null,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetAppMemoryPercentageMetricsOperation
+            .monitoringGetAppMemoryPercentageMetrics(
+                clientConfig,
+                appId,
+                start,
+                end,
+                appComponent,
+                options,
+            )
 
     /**
-     * To retrieve memory percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/memory_percentage`.
+     * To retrieve cpu percentage metrics for a given app, send a GET request to
+     * `/v2/monitoring/metrics/apps/cpu_percentage`.
      */
-    fun monitoringGetAppMemoryPercentageMetrics(clientConfig: ClientConfig, appId: String, start: String, end: String, appComponent: String? = null, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetAppMemoryPercentageMetricsOperation.monitoringGetAppMemoryPercentageMetrics(
-            clientConfig,
-            appId,
-            start,
-            end,
-            appComponent,
-            options,
-        )
+    fun monitoringGetAppCpuPercentageMetrics(
+        clientConfig: ClientConfig,
+        appId: String,
+        start: String,
+        end: String,
+        appComponent: String? = null,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetAppCPUPercentageMetricsOperation
+            .monitoringGetAppCpuPercentageMetrics(
+                clientConfig,
+                appId,
+                start,
+                end,
+                appComponent,
+                options,
+            )
 
     /**
-     * To retrieve cpu percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/cpu_percentage`.
+     * To retrieve restart count metrics for a given app, send a GET request to
+     * `/v2/monitoring/metrics/apps/restart_count`.
      */
-    fun monitoringGetAppCpuPercentageMetrics(clientConfig: ClientConfig, appId: String, start: String, end: String, appComponent: String? = null, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetAppCPUPercentageMetricsOperation.monitoringGetAppCpuPercentageMetrics(
-            clientConfig,
-            appId,
-            start,
-            end,
-            appComponent,
-            options,
-        )
+    fun monitoringGetAppRestartCountMetricsYml(
+        clientConfig: ClientConfig,
+        appId: String,
+        start: String,
+        end: String,
+        appComponent: String? = null,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetAppRestartCountMetricsYmlOperation
+            .monitoringGetAppRestartCountMetricsYml(
+                clientConfig,
+                appId,
+                start,
+                end,
+                appComponent,
+                options,
+            )
 
     /**
-     * To retrieve restart count metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/restart_count`.
+     * To retrieve frontend total current active connections for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_connections_current`.
      */
-    fun monitoringGetAppRestartCountMetricsYml(clientConfig: ClientConfig, appId: String, start: String, end: String, appComponent: String? = null, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetAppRestartCountMetricsYmlOperation.monitoringGetAppRestartCountMetricsYml(
-            clientConfig,
-            appId,
-            start,
-            end,
-            appComponent,
-            options,
-        )
+    fun monitoringGetLbFrontendConnectionsCurrent(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendConnectionsCurrentOperation
+            .monitoringGetLbFrontendConnectionsCurrent(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend total current active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_current`.
+     * To retrieve frontend max connections limit for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/frontend_connections_limit`.
      */
-    fun monitoringGetLbFrontendConnectionsCurrent(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendConnectionsCurrentOperation.monitoringGetLbFrontendConnectionsCurrent(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendConnectionsLimit(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendConnectionsLimitOperation
+            .monitoringGetLbFrontendConnectionsLimit(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend max connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_limit`.
+     * To retrieve frontend average percentage CPU utilization for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization`.
      */
-    fun monitoringGetLbFrontendConnectionsLimit(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendConnectionsLimitOperation.monitoringGetLbFrontendConnectionsLimit(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendCpuUtilization(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendCpuUtilizationOperation
+            .monitoringGetLbFrontendCpuUtilization(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend average percentage CPU utilization for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization`.
+     * To retrieve firewall dropped bytes for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`. This is currently
+     * only supported for network load balancers.
      */
-    fun monitoringGetLbFrontendCpuUtilization(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendCpuUtilizationOperation.monitoringGetLbFrontendCpuUtilization(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendFirewallDroppedBytes(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendFirewallDroppedBytesOperation
+            .monitoringGetLbFrontendFirewallDroppedBytes(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve firewall dropped bytes for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`. This is currently only supported for network load balancers.
+     * To retrieve firewall dropped packets per second for a given load balancer, send a GET request
+     * to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets`. This is
+     * currently only supported for network load balancers.
      */
-    fun monitoringGetLbFrontendFirewallDroppedBytes(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendFirewallDroppedBytesOperation.monitoringGetLbFrontendFirewallDroppedBytes(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendFirewallDroppedPackets(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendFirewallDroppedPacketsOperation
+            .monitoringGetLbFrontendFirewallDroppedPackets(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve firewall dropped packets per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets`. This is currently only supported for network load balancers.
+     * To retrieve frontend HTTP rate of response code for a given load balancer, send a GET request
+     * to `/v2/monitoring/metrics/load_balancer/frontend_http_responses`.
      */
-    fun monitoringGetLbFrontendFirewallDroppedPackets(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendFirewallDroppedPacketsOperation.monitoringGetLbFrontendFirewallDroppedPackets(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendHttpResponses(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendHttpResponsesOperation
+            .monitoringGetLbFrontendHttpResponses(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_responses`.
+     * To retrieve frontend HTTP requests per second for a given load balancer, send a GET request
+     * to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
      */
-    fun monitoringGetLbFrontendHttpResponses(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendHttpResponsesOperation.monitoringGetLbFrontendHttpResponses(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendHttpRequestsPerSecond(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendHttpRequestsPerSecondOperation
+            .monitoringGetLbFrontendHttpRequestsPerSecond(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend HTTP requests per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
+     * To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a
+     * GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
      */
-    fun monitoringGetLbFrontendHttpRequestsPerSecond(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendHttpRequestsPerSecondOperation.monitoringGetLbFrontendHttpRequestsPerSecond(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendNetworkThroughputHttp(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendNetworkThroughputHttpOperation
+            .monitoringGetLbFrontendNetworkThroughputHttp(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
+     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
      */
-    fun monitoringGetLbFrontendNetworkThroughputHttp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNetworkThroughputHttpOperation.monitoringGetLbFrontendNetworkThroughputHttp(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendNetworkThroughputUdp(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNetworkThroughputUdpOperation
+            .monitoringGetLbFrontendNetworkThroughputUdp(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
+     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
      */
-    fun monitoringGetLbFrontendNetworkThroughputUdp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNetworkThroughputUdpOperation.monitoringGetLbFrontendNetworkThroughputUdp(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendNetworkThroughputTcp(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNetworkThroughputTcpOperation
+            .monitoringGetLbFrontendNetworkThroughputTcp(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
+     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
      */
-    fun monitoringGetLbFrontendNetworkThroughputTcp(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNetworkThroughputTcpOperation.monitoringGetLbFrontendNetworkThroughputTcp(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendNlbTcpNetworkThroughput(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendNlbTcpNetworkThroughputOperation
+            .monitoringGetLbFrontendNlbTcpNetworkThroughput(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
+     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
      */
-    fun monitoringGetLbFrontendNlbTcpNetworkThroughput(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNlbTcpNetworkThroughputOperation.monitoringGetLbFrontendNlbTcpNetworkThroughput(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendNlbUdpNetworkThroughput(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendNlbUdpNetworkThroughputOperation
+            .monitoringGetLbFrontendNlbUdpNetworkThroughput(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
+     * To retrieve frontend current TLS connections rate for a given load balancer, send a GET
+     * request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
      */
-    fun monitoringGetLbFrontendNlbUdpNetworkThroughput(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendNlbUdpNetworkThroughputOperation.monitoringGetLbFrontendNlbUdpNetworkThroughput(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendTlsConnectionsCurrent(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendTlsConnectionsCurrentOperation
+            .monitoringGetLbFrontendTlsConnectionsCurrent(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend current TLS connections rate for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
+     * To retrieve frontend max TLS connections limit for a given load balancer, send a GET request
+     * to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
      */
-    fun monitoringGetLbFrontendTlsConnectionsCurrent(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendTlsConnectionsCurrentOperation.monitoringGetLbFrontendTlsConnectionsCurrent(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendTlsConnectionsLimit(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendTlsConnectionsLimitOperation
+            .monitoringGetLbFrontendTlsConnectionsLimit(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend max TLS connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
+     * To retrieve frontend closed TLS connections for exceeded rate limit for a given load
+     * balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
      */
-    fun monitoringGetLbFrontendTlsConnectionsLimit(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendTlsConnectionsLimitOperation.monitoringGetLbFrontendTlsConnectionsLimit(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbFrontendTlsConnectionsExceedingRateLimitOperation
+            .monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve frontend closed TLS connections for exceeded rate limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
+     * To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send
+     * a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
      */
-    fun monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbFrontendTlsConnectionsExceedingRateLimitOperation.monitoringGetLbFrontendTlsConnectionsExceedingRateLimit(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpSessionDurationAvg(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbDropletsHttpSessionDurationAvgOperation
+            .monitoringGetLbDropletsHttpSessionDurationAvg(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
+     * To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load
+     * balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
      */
-    fun monitoringGetLbDropletsHttpSessionDurationAvg(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpSessionDurationAvgOperation.monitoringGetLbDropletsHttpSessionDurationAvg(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpSessionDuration50p(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbDropletsHttpSessionDuration50POperation
+            .monitoringGetLbDropletsHttpSessionDuration50p(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
+     * To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load
+     * balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
      */
-    fun monitoringGetLbDropletsHttpSessionDuration50p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpSessionDuration50POperation.monitoringGetLbDropletsHttpSessionDuration50p(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpSessionDuration95p(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetLbDropletsHttpSessionDuration95POperation
+            .monitoringGetLbDropletsHttpSessionDuration95p(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
+     * To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a
+     * GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
      */
-    fun monitoringGetLbDropletsHttpSessionDuration95p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpSessionDuration95POperation.monitoringGetLbDropletsHttpSessionDuration95p(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpResponseTimeAvg(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTimeAvgOperation
+            .monitoringGetLbDropletsHttpResponseTimeAvg(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
+     * To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer,
+     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
      */
-    fun monitoringGetLbDropletsHttpResponseTimeAvg(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTimeAvgOperation.monitoringGetLbDropletsHttpResponseTimeAvg(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpResponseTime50p(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime50POperation
+            .monitoringGetLbDropletsHttpResponseTime50p(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
+     * To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer,
+     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
      */
-    fun monitoringGetLbDropletsHttpResponseTime50p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime50POperation.monitoringGetLbDropletsHttpResponseTime50p(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpResponseTime95p(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime95POperation
+            .monitoringGetLbDropletsHttpResponseTime95p(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
+     * To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer,
+     * send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
      */
-    fun monitoringGetLbDropletsHttpResponseTime95p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime95POperation.monitoringGetLbDropletsHttpResponseTime95p(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpResponseTime99p(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime99POperation
+            .monitoringGetLbDropletsHttpResponseTime99p(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
+     * To retrieve Droplets queue size for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
      */
-    fun monitoringGetLbDropletsHttpResponseTime99p(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponseTime99POperation.monitoringGetLbDropletsHttpResponseTime99p(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsQueueSize(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsQueueSizeOperation
+            .monitoringGetLbDropletsQueueSize(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets queue size for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
+     * To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request
+     * to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
      */
-    fun monitoringGetLbDropletsQueueSize(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsQueueSizeOperation.monitoringGetLbDropletsQueueSize(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHttpResponses(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponsesOperation
+            .monitoringGetLbDropletsHttpResponses(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
+     * To retrieve Droplets active connections for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_connections`.
      */
-    fun monitoringGetLbDropletsHttpResponses(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHttpResponsesOperation.monitoringGetLbDropletsHttpResponses(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsConnections(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsConnectionsOperation
+            .monitoringGetLbDropletsConnections(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_connections`.
+     * To retrieve Droplets health check status for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
      */
-    fun monitoringGetLbDropletsConnections(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsConnectionsOperation.monitoringGetLbDropletsConnections(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsHealthChecks(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHealthChecksOperation
+            .monitoringGetLbDropletsHealthChecks(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets health check status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
+     * To retrieve Droplets downtime status for a given load balancer, send a GET request to
+     * `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
      */
-    fun monitoringGetLbDropletsHealthChecks(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsHealthChecksOperation.monitoringGetLbDropletsHealthChecks(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetLbDropletsDowntime(
+        clientConfig: ClientConfig,
+        lbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsDowntimeOperation
+            .monitoringGetLbDropletsDowntime(
+                clientConfig,
+                lbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve Droplets downtime status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
+     * To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to
+     * `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
      */
-    fun monitoringGetLbDropletsDowntime(clientConfig: ClientConfig, lbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetLbDropletsDowntimeOperation.monitoringGetLbDropletsDowntime(
-            clientConfig,
-            lbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleCurrentInstances(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleCurrentInstancesOperation
+            .monitoringGetDropletAutoscaleCurrentInstances(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
+     * To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to
+     * `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
      */
-    fun monitoringGetDropletAutoscaleCurrentInstances(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleCurrentInstancesOperation.monitoringGetDropletAutoscaleCurrentInstances(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleTargetInstances(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleTargetInstancesOperation
+            .monitoringGetDropletAutoscaleTargetInstances(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
+     * To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a
+     * GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
      */
-    fun monitoringGetDropletAutoscaleTargetInstances(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleTargetInstancesOperation.monitoringGetDropletAutoscaleTargetInstances(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleCurrentCpuUtilizationYmlOperation
+            .monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
+     * To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET
+     * request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
      */
-    fun monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleCurrentCpuUtilizationYmlOperation.monitoringGetDropletAutoscaleCurrentCpuUtilizationYml(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleTargetCpuUtilization(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleTargetCpuUtilizationOperation
+            .monitoringGetDropletAutoscaleTargetCpuUtilization(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
+     * To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a
+     * GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
      */
-    fun monitoringGetDropletAutoscaleTargetCpuUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleTargetCpuUtilizationOperation.monitoringGetDropletAutoscaleTargetCpuUtilization(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleCurrentMemoryUtilization(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleCurrentMemoryUtilizationOperation
+            .monitoringGetDropletAutoscaleCurrentMemoryUtilization(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
+     * To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a
+     * GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
      */
-    fun monitoringGetDropletAutoscaleCurrentMemoryUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleCurrentMemoryUtilizationOperation.monitoringGetDropletAutoscaleCurrentMemoryUtilization(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDropletAutoscaleTargetMemoryUtilization(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDropletAutoscaleTargetMemoryUtilizationOperation
+            .monitoringGetDropletAutoscaleTargetMemoryUtilization(
+                clientConfig,
+                autoscalePoolId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
+     * Retrieve CPU usage (percent) for a MySQL cluster. Response is a time series of cluster-level
+     * CPU usage. Use **aggregate** to get avg, max, or min over the range.
      */
-    fun monitoringGetDropletAutoscaleTargetMemoryUtilization(clientConfig: ClientConfig, autoscalePoolId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDropletAutoscaleTargetMemoryUtilizationOperation.monitoringGetDropletAutoscaleTargetMemoryUtilization(
-            clientConfig,
-            autoscalePoolId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlCpuUsage(
+        clientConfig: ClientConfig,
+        dbId: String,
+        aggregate: SchemaSchemaEnum0dce2982,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlCpuUsageOperation
+            .monitoringGetDatabaseMysqlCpuUsage(
+                clientConfig,
+                dbId,
+                aggregate,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve CPU usage (percent) for a MySQL cluster. Response is a time series of cluster-level CPU usage. Use **aggregate** to get avg, max, or min over the range.
+     * Retrieve load metrics for a MySQL cluster. Use **metric** for the window: **load1**
+     * (1-minute), **load5** (5-minute), or **load15** (15-minute). Use **aggregate** to get either
+     * the average (avg) or maximum (max) over that window over the time range.
      */
-    fun monitoringGetDatabaseMysqlCpuUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlCpuUsageOperation.monitoringGetDatabaseMysqlCpuUsage(
-            clientConfig,
-            dbId,
-            aggregate,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlLoad(
+        clientConfig: ClientConfig,
+        dbId: String,
+        metric: SchemaSchemaEnum1b18cc1a,
+        aggregate: SchemaSchemaEnum4cd6a9cb,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlLoadOperation
+            .monitoringGetDatabaseMysqlLoad(
+                clientConfig,
+                dbId,
+                metric,
+                aggregate,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve load metrics for a MySQL cluster. Use **metric** for the window: **load1** (1-minute), **load5** (5-minute), or **load15** (15-minute). Use **aggregate** to get either the average (avg) or maximum (max) over that window over the time range.
+     * Retrieve memory usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min)
+     * over the time range.
      */
-    fun monitoringGetDatabaseMysqlLoad(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum1b18cc1a, aggregate: SchemaSchemaEnum4cd6a9cb, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlLoadOperation.monitoringGetDatabaseMysqlLoad(
-            clientConfig,
-            dbId,
-            metric,
-            aggregate,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlMemoryUsage(
+        clientConfig: ClientConfig,
+        dbId: String,
+        aggregate: SchemaSchemaEnum0dce2982,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlMemoryUsageOperation
+            .monitoringGetDatabaseMysqlMemoryUsage(
+                clientConfig,
+                dbId,
+                aggregate,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve memory usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
+     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over
+     * the time range.
      */
-    fun monitoringGetDatabaseMysqlMemoryUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlMemoryUsageOperation.monitoringGetDatabaseMysqlMemoryUsage(
-            clientConfig,
-            dbId,
-            aggregate,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlDiskUsage(
+        clientConfig: ClientConfig,
+        dbId: String,
+        aggregate: SchemaSchemaEnum0dce2982,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlDiskUsageOperation
+            .monitoringGetDatabaseMysqlDiskUsage(
+                clientConfig,
+                dbId,
+                aggregate,
+                start,
+                end,
+                options,
+            )
+
+    /** Retrieve current threads connected for a MySQL service (gauge). */
+    fun monitoringGetDatabaseMysqlThreadsConnected(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlThreadsConnectedOperation
+            .monitoringGetDatabaseMysqlThreadsConnected(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+
+    /** Retrieve threads created rate for a MySQL service (per second). */
+    fun monitoringGetDatabaseMysqlThreadsCreatedRate(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDatabaseMysqlThreadsCreatedRateOperation
+            .monitoringGetDatabaseMysqlThreadsCreatedRate(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+
+    /** Retrieve active (running) threads for a MySQL service. */
+    fun monitoringGetDatabaseMysqlThreadsActive(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlThreadsActiveOperation
+            .monitoringGetDatabaseMysqlThreadsActive(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
+     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of
+     * reads using an index.
      */
-    fun monitoringGetDatabaseMysqlDiskUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlDiskUsageOperation.monitoringGetDatabaseMysqlDiskUsage(
-            clientConfig,
-            dbId,
-            aggregate,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods
+            .MonitoringGetDatabaseMysqlIndexVsSequentialReadsOperation
+            .monitoringGetDatabaseMysqlIndexVsSequentialReads(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve current threads connected for a MySQL service (gauge).
+     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select,
+     * insert, update, or delete.
      */
-    fun monitoringGetDatabaseMysqlThreadsConnected(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlThreadsConnectedOperation.monitoringGetDatabaseMysqlThreadsConnected(
-            clientConfig,
-            dbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlOpRates(
+        clientConfig: ClientConfig,
+        dbId: String,
+        metric: SchemaSchemaEnum92787d5e,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlOpRatesOperation
+            .monitoringGetDatabaseMysqlOpRates(
+                clientConfig,
+                dbId,
+                metric,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve threads created rate for a MySQL service (per second).
+     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and
+     * **metric** (insert, fetch, update, delete).
      */
-    fun monitoringGetDatabaseMysqlThreadsCreatedRate(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlThreadsCreatedRateOperation.monitoringGetDatabaseMysqlThreadsCreatedRate(
-            clientConfig,
-            dbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlSchemaThroughput(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlSchemaThroughputOperation
+            .monitoringGetDatabaseMysqlSchemaThroughput(
+                clientConfig,
+                dbId,
+                schema,
+                metric,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve active (running) threads for a MySQL service.
+     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric**
+     * (insert, fetch, update, delete).
      */
-    fun monitoringGetDatabaseMysqlThreadsActive(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlThreadsActiveOperation.monitoringGetDatabaseMysqlThreadsActive(
-            clientConfig,
-            dbId,
-            start,
-            end,
-            options,
-        )
+    fun monitoringGetDatabaseMysqlSchemaLatency(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlSchemaLatencyOperation
+            .monitoringGetDatabaseMysqlSchemaLatency(
+                clientConfig,
+                dbId,
+                schema,
+                metric,
+                start,
+                end,
+                options,
+            )
 
     /**
-     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of reads using an index.
+     * Creates a logging destination for sending logs to a managed or externally managed OpenSearch
+     * cluster. Supply `type` and `config`, including the cluster `endpoint`; include credentials
+     * unless you provide a managed cluster's `cluster_uuid`. A 200 response returns the created
+     * destination.
      */
-    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlIndexVsSequentialReadsOperation.monitoringGetDatabaseMysqlIndexVsSequentialReads(
-            clientConfig,
-            dbId,
-            start,
-            end,
-            options,
-        )
-
-    /**
-     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select, insert, update, or delete.
-     */
-    fun monitoringGetDatabaseMysqlOpRates(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum92787d5e, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlOpRatesOperation.monitoringGetDatabaseMysqlOpRates(
-            clientConfig,
-            dbId,
-            metric,
-            start,
-            end,
-            options,
-        )
-
-    /**
-     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
-     */
-    fun monitoringGetDatabaseMysqlSchemaThroughput(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlSchemaThroughputOperation.monitoringGetDatabaseMysqlSchemaThroughput(
-            clientConfig,
-            dbId,
-            schema,
-            metric,
-            start,
-            end,
-            options,
-        )
-
-    /**
-     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
-     */
-    fun monitoringGetDatabaseMysqlSchemaLatency(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDatabaseMysqlSchemaLatencyOperation.monitoringGetDatabaseMysqlSchemaLatency(
-            clientConfig,
-            dbId,
-            schema,
-            metric,
-            start,
-            end,
-            options,
-        )
-
-    /**
-     * Creates a logging destination for sending logs to a managed or externally managed OpenSearch cluster. Supply `type` and `config`, including the cluster `endpoint`; include credentials unless you provide a managed cluster's `cluster_uuid`. A 200 response returns the created destination.
-     */
-    fun monitoringCreateDestination(clientConfig: ClientConfig, type: DestinationRequestTypeEnum, config: OpensearchConfigRequest, name: String? = null, options: RequestOptions? = null): DestinationResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringCreateDestinationOperation.monitoringCreateDestination(
-            clientConfig,
-            type,
-            config,
-            name,
-            options,
-        )
+    fun monitoringCreateDestination(
+        clientConfig: ClientConfig,
+        type: DestinationRequestTypeEnum,
+        config: OpensearchConfigRequest,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): DestinationResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringCreateDestinationOperation
+            .monitoringCreateDestination(
+                clientConfig,
+                type,
+                config,
+                name,
+                options,
+            )
 
     /**
      * To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.
      */
-    fun monitoringListDestinations(clientConfig: ClientConfig, options: RequestOptions? = null): MonitoringListDestinations =
-        dev.octri.showcase.digitalocean.methods.MonitoringListDestinationsOperation.monitoringListDestinations(
-            clientConfig,
-            options,
-        )
+    fun monitoringListDestinations(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): MonitoringListDestinations =
+        dev.octri.showcase.digitalocean.methods.MonitoringListDestinationsOperation
+            .monitoringListDestinations(
+                clientConfig,
+                options,
+            )
 
     /**
-     * To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+     * To get the details of a destination, send a GET request to
+     * `/v2/monitoring/sinks/destinations/${destination_uuid}`.
      */
-    fun monitoringGetDestination(clientConfig: ClientConfig, destinationUuid: String, options: RequestOptions? = null): DestinationResponse =
-        dev.octri.showcase.digitalocean.methods.MonitoringGetDestinationOperation.monitoringGetDestination(
-            clientConfig,
-            destinationUuid,
-            options,
-        )
+    fun monitoringGetDestination(
+        clientConfig: ClientConfig,
+        destinationUuid: String,
+        options: RequestOptions? = null,
+    ): DestinationResponse =
+        dev.octri.showcase.digitalocean.methods.MonitoringGetDestinationOperation
+            .monitoringGetDestination(
+                clientConfig,
+                destinationUuid,
+                options,
+            )
 
     /**
-     * Updates the configuration of an existing logging destination. Identify it with `destination_uuid` and supply the required `type` and `config` fields, including the cluster `endpoint`; credentials are optional if you provide a managed cluster's `cluster_uuid`. A 204 response confirms the update and has no response body.
+     * Updates the configuration of an existing logging destination. Identify it with
+     * `destination_uuid` and supply the required `type` and `config` fields, including the cluster
+     * `endpoint`; credentials are optional if you provide a managed cluster's `cluster_uuid`. A 204
+     * response confirms the update and has no response body.
      */
-    fun monitoringUpdateDestination(clientConfig: ClientConfig, destinationUuid: String, type: DestinationRequestTypeEnum, config: OpensearchConfigRequest, name: String? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.MonitoringUpdateDestinationOperation.monitoringUpdateDestination(
-            clientConfig,
-            destinationUuid,
-            type,
-            config,
-            name,
-            options,
-        )
+    fun monitoringUpdateDestination(
+        clientConfig: ClientConfig,
+        destinationUuid: String,
+        type: DestinationRequestTypeEnum,
+        config: OpensearchConfigRequest,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.MonitoringUpdateDestinationOperation
+            .monitoringUpdateDestination(
+                clientConfig,
+                destinationUuid,
+                type,
+                config,
+                name,
+                options,
+            )
 
     /**
-     * To delete a destination and all associated sinks, send a DELETE request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+     * To delete a destination and all associated sinks, send a DELETE request to
+     * `/v2/monitoring/sinks/destinations/${destination_uuid}`.
      */
-    fun monitoringDeleteDestination(clientConfig: ClientConfig, destinationUuid: String, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.digitalocean.methods.MonitoringDeleteDestinationOperation.monitoringDeleteDestination(
-            clientConfig,
-            destinationUuid,
-            options,
-        )
+    fun monitoringDeleteDestination(
+        clientConfig: ClientConfig,
+        destinationUuid: String,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.digitalocean.methods.MonitoringDeleteDestinationOperation
+            .monitoringDeleteDestination(
+                clientConfig,
+                destinationUuid,
+                options,
+            )
 
     /**
-     * To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the resources identified in `resources` to the specified pre-existing destination.
+     * To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the
+     * resources identified in `resources` to the specified pre-existing destination.
      */
-    fun monitoringCreateSink(clientConfig: ClientConfig, destinationUuid: String? = null, resources: List<SinkResource>? = null, options: RequestOptions? = null): Unit =
+    fun monitoringCreateSink(
+        clientConfig: ClientConfig,
+        destinationUuid: String? = null,
+        resources: List<SinkResource>? = null,
+        options: RequestOptions? = null,
+    ): Unit =
         dev.octri.showcase.digitalocean.methods.MonitoringCreateSinkOperation.monitoringCreateSink(
             clientConfig,
             destinationUuid,
@@ -883,10 +1455,12 @@ object Monitoring {
             options,
         )
 
-    /**
-     * To list all sinks, send a GET request to `/v2/monitoring/sinks`.
-     */
-    fun monitoringListSinks(clientConfig: ClientConfig, resourceId: Urn? = null, options: RequestOptions? = null): ListSinks =
+    /** To list all sinks, send a GET request to `/v2/monitoring/sinks`. */
+    fun monitoringListSinks(
+        clientConfig: ClientConfig,
+        resourceId: Urn? = null,
+        options: RequestOptions? = null,
+    ): ListSinks =
         dev.octri.showcase.digitalocean.methods.MonitoringListSinksOperation.monitoringListSinks(
             clientConfig,
             resourceId,
@@ -894,19 +1468,26 @@ object Monitoring {
         )
 
     /**
-     * To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/${sink_uuid}`.
+     * To get the details of a sink (resources and destination), send a GET request to
+     * `/v2/monitoring/sinks/${sink_uuid}`.
      */
-    fun monitoringGetSink(clientConfig: ClientConfig, sinkUuid: String, options: RequestOptions? = null): Sinks =
+    fun monitoringGetSink(
+        clientConfig: ClientConfig,
+        sinkUuid: String,
+        options: RequestOptions? = null,
+    ): Sinks =
         dev.octri.showcase.digitalocean.methods.MonitoringGetSinkOperation.monitoringGetSink(
             clientConfig,
             sinkUuid,
             options,
         )
 
-    /**
-     * To delete a sink, send a DELETE request to `/v2/monitoring/sinks/${sink_uuid}`.
-     */
-    fun monitoringDeleteSink(clientConfig: ClientConfig, sinkUuid: String, options: RequestOptions? = null): Unit =
+    /** To delete a sink, send a DELETE request to `/v2/monitoring/sinks/${sink_uuid}`. */
+    fun monitoringDeleteSink(
+        clientConfig: ClientConfig,
+        sinkUuid: String,
+        options: RequestOptions? = null,
+    ): Unit =
         dev.octri.showcase.digitalocean.methods.MonitoringDeleteSinkOperation.monitoringDeleteSink(
             clientConfig,
             sinkUuid,

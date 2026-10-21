@@ -3,12 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `NeighborIds` API schema.
- */
+/** Typed representation of the `NeighborIds` API schema. */
 data class NeighborIds(
     /**
-     * An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a physical server.
+     * An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a
+     * physical server.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("neighbor_ids") val neighborIds: List<List<Long>>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("neighbor_ids")
+    val neighborIds: List<List<Long>>? = null
 )

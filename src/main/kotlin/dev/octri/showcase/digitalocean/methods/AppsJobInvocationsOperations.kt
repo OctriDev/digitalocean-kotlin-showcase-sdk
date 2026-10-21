@@ -14,7 +14,8 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object AppsListJobInvocationsOperation {
     /**
-     * Lists job invocations for a specific app. Filter the results by job names or deployment, and use `page` and `per_page` to paginate the results.
+     * Lists job invocations for a specific app. Filter the results by job names or deployment, and
+     * use `page` and `per_page` to paginate the results.
      *
      * List all job invocations for an app.
      *
@@ -24,23 +25,60 @@ internal object AppsListJobInvocationsOperation {
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page
      */
-    fun appsListJobInvocations(clientConfig: ClientConfig, appId: String, jobNames: List<Schema>? = null, deploymentId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): AppJobInvocations {
+    fun appsListJobInvocations(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobNames: List<Schema>? = null,
+        deploymentId: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocations {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
-        return SdkClient.request<AppJobInvocations>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations", config = clientConfig, query = mapOf("job_names" to SdkClient.queryValue(jobNames, "form", true), "deployment_id" to
-    SdkClient.queryValue(deploymentId, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "appsListJobInvocations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AppJobInvocations>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "job_names" to SdkClient.queryValue(jobNames, "form", true),
+                            "deployment_id" to SdkClient.queryValue(deploymentId, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        ),
+                    operationId = "appsListJobInvocations",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetJobInvocationOperation {
     /**
-     * Retrieves a specific job invocation for an app. Use `job_invocation_id` to select the invocation and optionally provide `job_name` to specify the job associated with it.
+     * Retrieves a specific job invocation for an app. Use `job_invocation_id` to select the
+     * invocation and optionally provide `job_name` to specify the job associated with it.
      *
      * Get a specific job invocation for an app.
      *
@@ -48,14 +86,41 @@ internal object AppsGetJobInvocationOperation {
      * @param jobInvocationId The ID of the job invocation to retrieve.
      * @param jobName The job name to list job invocations for.
      */
-    fun appsGetJobInvocation(clientConfig: ClientConfig, appId: String, jobInvocationId: String, jobName: String? = null, options: RequestOptions? = null): AppJobInvocation {
-        return SdkClient.request<AppJobInvocation>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations/${SdkClient.encodePathSegment(jobInvocationId)}", config = clientConfig, query = mapOf("job_name" to SdkClient.queryValue(jobName, "form", true)), operationId = "appsGetJobInvocation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetJobInvocation(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobInvocationId: String,
+        jobName: String? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocation {
+        return SdkClient.request<AppJobInvocation>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations/${SdkClient.encodePathSegment(jobInvocationId)}",
+                    config = clientConfig,
+                    query = mapOf("job_name" to SdkClient.queryValue(jobName, "form", true)),
+                    operationId = "appsGetJobInvocation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsCancelJobInvocationOperation {
     /**
-     * Cancels a job invocation for a specified app. Use `app_id` and `job_invocation_id` to identify the invocation, and provide `job_name` to identify the associated job when needed. The response includes the invocation's phase and lifecycle timestamps.
+     * Cancels a job invocation for a specified app. Use `app_id` and `job_invocation_id` to
+     * identify the invocation, and provide `job_name` to identify the associated job when needed.
+     * The response includes the invocation's phase and lifecycle timestamps.
      *
      * Cancel a specific job invocation for an app.
      *
@@ -63,7 +128,32 @@ internal object AppsCancelJobInvocationOperation {
      * @param jobInvocationId The ID of the job invocation to retrieve.
      * @param jobName The job name to list job invocations for.
      */
-    fun appsCancelJobInvocation(clientConfig: ClientConfig, appId: String, jobInvocationId: String, jobName: String? = null, options: RequestOptions? = null): AppJobInvocation {
-        return SdkClient.request<AppJobInvocation>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations/${SdkClient.encodePathSegment(jobInvocationId)}/cancel", config = clientConfig, query = mapOf("job_name" to SdkClient.queryValue(jobName, "form", true)), operationId = "appsCancelJobInvocation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsCancelJobInvocation(
+        clientConfig: ClientConfig,
+        appId: String,
+        jobInvocationId: String,
+        jobName: String? = null,
+        options: RequestOptions? = null,
+    ): AppJobInvocation {
+        return SdkClient.request<AppJobInvocation>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/job-invocations/${SdkClient.encodePathSegment(jobInvocationId)}/cancel",
+                    config = clientConfig,
+                    query = mapOf("job_name" to SdkClient.queryValue(jobName, "form", true)),
+                    operationId = "appsCancelJobInvocation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

@@ -3,28 +3,18 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Model router preset used to prefill new router configurations.
- */
+/** Model router preset used to prefill new router configurations. */
 data class ApiModelRouterPreset(
-    /**
-     * Optional object value serialized in the `config` wire field.
-     */
+    /** Optional object value serialized in the `config` wire field. */
     val config: ApiModelRouterConfig? = null,
-    /**
-     * Display name for UI surfaces
-     */
+    /** Display name for UI surfaces */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /**
-     * Long description for details views
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("long_description") val longDescription: String? = null,
-    /**
-     * Short description for list views
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("short_description") val shortDescription: String? = null,
-    /**
-     * Stable slug for routing usage
-     */
-    val slug: String? = null
+    /** Long description for details views */
+    @com.fasterxml.jackson.annotation.JsonProperty("long_description")
+    val longDescription: String? = null,
+    /** Short description for list views */
+    @com.fasterxml.jackson.annotation.JsonProperty("short_description")
+    val shortDescription: String? = null,
+    /** Stable slug for routing usage */
+    val slug: String? = null,
 )

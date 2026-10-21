@@ -3,58 +3,44 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Data to create a new knowledge base.
- */
+/** Data to create a new knowledge base. */
 data class ApiCreateKnowledgeBaseInputPublic(
     /**
-     * Identifier of the DigitalOcean OpenSearch database this knowledge base will use, optional. If not provided, we create a new database for the knowledge base in the same region as the knowledge base.
+     * Identifier of the DigitalOcean OpenSearch database this knowledge base will use, optional. If
+     * not provided, we create a new database for the knowledge base in the same region as the
+     * knowledge base.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("database_id") val databaseId: String? = null,
     /**
-     * Optional data sources to attach at creation. Omit or use an empty list to create the knowledge base without sources, then add sources (with chunking strategy and sizes) using Add a Data Source to a Knowledge Base. When provided, see Organize Data Sources for best practices.
+     * Optional data sources to attach at creation. Omit or use an empty list to create the
+     * knowledge base without sources, then add sources (with chunking strategy and sizes) using Add
+     * a Data Source to a Knowledge Base. When provided, see Organize Data Sources for best
+     * practices.
      */
     val datasources: List<ApiKBDataSource>? = null,
-    /**
-     * Identifier for the embedding model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("embedding_model_uuid") val embeddingModelUuid: String? = null,
-    /**
-     * Name of the knowledge base.
-     */
+    /** Identifier for the embedding model. */
+    @com.fasterxml.jackson.annotation.JsonProperty("embedding_model_uuid")
+    val embeddingModelUuid: String? = null,
+    /** Name of the knowledge base. */
     val name: String? = null,
-    /**
-     * Identifier of the DigitalOcean project this knowledge base will belong to.
-     */
+    /** Identifier of the DigitalOcean project this knowledge base will belong to. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * The datacenter region to deploy the knowledge base in.
-     */
+    /** The datacenter region to deploy the knowledge base in. */
     val region: String? = null,
-    /**
-     * Configuration for cross-encoder reranking during retrieval.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reranking_config") val rerankingConfig: ApiRerankingConfiguration? = null,
-    /**
-     * Optional enumerated value serialized in the `size` wire field.
-     */
+    /** Configuration for cross-encoder reranking during retrieval. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reranking_config")
+    val rerankingConfig: ApiRerankingConfiguration? = null,
+    /** Optional enumerated value serialized in the `size` wire field. */
     val size: ApiOpenSearchPlanSize? = null,
-    /**
-     * Tags to organize your knowledge base.
-     */
+    /** Tags to organize your knowledge base. */
     val tags: List<String>? = null,
-    /**
-     * The VPC to deploy the knowledge base database in
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null
+    /** The VPC to deploy the knowledge base database in */
+    @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
 )
 
-/**
- * Information about a newly created knowledge base
- */
+/** Information about a newly created knowledge base */
 data class ApiCreateKnowledgeBaseOutput(
-    /**
-     * Knowledgebase Description
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base") val knowledgeBase: ApiKnowledgeBase? = null
+    /** Knowledgebase Description */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base")
+    val knowledgeBase: ApiKnowledgeBase? = null
 )

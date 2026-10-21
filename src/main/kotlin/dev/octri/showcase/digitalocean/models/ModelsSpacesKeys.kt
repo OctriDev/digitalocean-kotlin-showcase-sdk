@@ -5,120 +5,76 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `Grant` API schema.
- */
+/** Typed representation of the `Grant` API schema. */
 data class Grant(
-    /**
-     * The name of the bucket.
-     */
+    /** The name of the bucket. */
     val bucket: String,
     /**
-     * The permission to grant to the user. Possible values are `read`, `readwrite`, `fullaccess`, or an empty string.
+     * The permission to grant to the user. Possible values are `read`, `readwrite`, `fullaccess`,
+     * or an empty string.
      */
-    val permission: String
+    val permission: String,
 )
 
-/**
- * Typed representation of the `Key` API schema.
- */
+/** Typed representation of the `Key` API schema. */
 data class Key(
-    /**
-     * The access key's name.
-     */
+    /** The access key's name. */
     val name: String? = null,
-    /**
-     * The list of permissions for the access key.
-     */
+    /** The list of permissions for the access key. */
     val grants: List<Grant>? = null,
-    /**
-     * The Access Key ID used to access a bucket.
-     */
+    /** The Access Key ID used to access a bucket. */
     @com.fasterxml.jackson.annotation.JsonProperty("access_key") val accessKey: String? = null,
-    /**
-     * The date and time the key was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null
+    /** The date and time the key was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `KeyCreate` API schema.
- */
+/** Typed representation of the `KeyCreate` API schema. */
 data class KeyCreate(
-    /**
-     * Optional API value serialized in the `key` wire field.
-     */
+    /** Optional API value serialized in the `key` wire field. */
     val key: KeyCreateResponse? = null
 )
 
-/**
- * Typed representation of the `KeyCreateResponse` API schema.
- */
+/** Typed representation of the `KeyCreateResponse` API schema. */
 data class KeyCreateResponse(
     /**
-     * The secret key used to access the bucket. We return secret keys only once upon creation. Make sure to copy the key and securely store it.
+     * The secret key used to access the bucket. We return secret keys only once upon creation. Make
+     * sure to copy the key and securely store it.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("secret_key") val secretKey: String? = null,
-    /**
-     * The access key's name.
-     */
+    /** The access key's name. */
     val name: String? = null,
-    /**
-     * The list of permissions for the access key.
-     */
+    /** The list of permissions for the access key. */
     val grants: List<Grant>? = null,
-    /**
-     * The Access Key ID used to access a bucket.
-     */
+    /** The Access Key ID used to access a bucket. */
     @com.fasterxml.jackson.annotation.JsonProperty("access_key") val accessKey: String? = null,
-    /**
-     * The date and time the key was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null
+    /** The date and time the key was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `KeyGet` API schema.
- */
-data class KeyGet(
-    val keys: List<Key>? = null
-)
+/** Typed representation of the `KeyGet` API schema. */
+data class KeyGet(val keys: List<Key>? = null)
 
-/**
- * Typed representation of the `KeyList` API schema.
- */
+/** Typed representation of the `KeyList` API schema. */
 data class KeyList(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
     val keys: List<Key>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `KeyRequest` API schema.
- */
+/** Typed representation of the `KeyRequest` API schema. */
 data class KeyRequest(
-    /**
-     * The access key's name.
-     */
+    /** The access key's name. */
     val name: String? = null,
-    /**
-     * The list of permissions for the access key.
-     */
-    val grants: List<Grant>? = null
+    /** The list of permissions for the access key. */
+    val grants: List<Grant>? = null,
 )
 
-/**
- * Typed representation of the `KeyUpdate` API schema.
- */
+/** Typed representation of the `KeyUpdate` API schema. */
 data class KeyUpdate(
-    /**
-     * Optional object value serialized in the `key` wire field.
-     */
+    /** Optional object value serialized in the `key` wire field. */
     val key: Key? = null
 )

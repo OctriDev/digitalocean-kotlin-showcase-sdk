@@ -19,174 +19,397 @@ import dev.octri.showcase.digitalocean.Validation
 
 object LoadBalancers {
 
-
     /**
-     * Creates a load balancer in the specified region and assigns Droplets to it. Provide either `droplet_ids` to select Droplets individually or `tag` to select Droplets by tag; these methods are mutually exclusive. A 202 response confirms acceptance and returns the load balancer object.
+     * Creates a load balancer in the specified region and assigns Droplets to it. Provide either
+     * `droplet_ids` to select Droplets individually or `tag` to select Droplets by tag; these
+     * methods are mutually exclusive. A 202 response confirms acceptance and returns the load
+     * balancer object.
      *
-     * To create a new load balancer instance, send a POST request to `/v2/load_balancers`. You can specify the Droplets that will sit behind the load balancer using one of two methods: * Set `droplet_ids` to a list of specific Droplet IDs. * Set `tag` to the name of a tag. All Droplets with this tag applied will be assigned to the load balancer. Additional Droplets will be automatically assigned as they are tagged. These methods are mutually exclusive.
+     * To create a new load balancer instance, send a POST request to `/v2/load_balancers`. You can
+     * specify the Droplets that will sit behind the load balancer using one of two methods: * Set
+     * `droplet_ids` to a list of specific Droplet IDs. * Set `tag` to the name of a tag. All
+     * Droplets with this tag applied will be assigned to the load balancer. Additional Droplets
+     * will be automatically assigned as they are tagged. These methods are mutually exclusive.
      */
-    fun loadBalancersCreate(clientConfig: ClientConfig, body: LoadBalancerCreateRequest, options: RequestOptions? = null): LoadBalancerCreateResponse {
-        return SdkClient.request<LoadBalancerCreateResponse>(SdkClient.RequestSpec("POST", "/v2/load_balancers", config = clientConfig, body = body, operationId = "loadBalancersCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun loadBalancersCreate(
+        clientConfig: ClientConfig,
+        body: LoadBalancerCreateRequest,
+        options: RequestOptions? = null,
+    ): LoadBalancerCreateResponse {
+        return SdkClient.request<LoadBalancerCreateResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/load_balancers",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "loadBalancersCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To list all of the load balancer instances on your account, send a GET request to `/v2/load_balancers`.
+     * To list all of the load balancer instances on your account, send a GET request to
+     * `/v2/load_balancers`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun loadBalancersList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllLoadBalancers {
+    fun loadBalancersList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllLoadBalancers {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllLoadBalancers>(SdkClient.RequestSpec("GET", "/v2/load_balancers", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "loadBalancersList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllLoadBalancers>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/load_balancers",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "loadBalancersList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To show information about a load balancer instance, send a GET request to `/v2/load_balancers/$LOAD_BALANCER_ID`.
+     * To show information about a load balancer instance, send a GET request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID`.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersGet(clientConfig: ClientConfig, lbId: String, options: RequestOptions? = null): ExistingLoadBalancer {
-        return SdkClient.request<ExistingLoadBalancer>(SdkClient.RequestSpec("GET", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}", config = clientConfig, operationId = "loadBalancersGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun loadBalancersGet(
+        clientConfig: ClientConfig,
+        lbId: String,
+        options: RequestOptions? = null,
+    ): ExistingLoadBalancer {
+        return SdkClient.request<ExistingLoadBalancer>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}",
+                    config = clientConfig,
+                    operationId = "loadBalancersGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Replaces the settings for a load balancer. Send a full representation, including existing attributes you want to retain; any omitted attribute is reset to its default value. Choose either `droplet_ids` or `tag` to assign Droplets, and include `region` and `forwarding_rules`.
+     * Replaces the settings for a load balancer. Send a full representation, including existing
+     * attributes you want to retain; any omitted attribute is reset to its default value. Choose
+     * either `droplet_ids` or `tag` to assign Droplets, and include `region` and
+     * `forwarding_rules`.
      *
-     * To update a load balancer's settings, send a PUT request to `/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full representation of the load balancer including existing attributes. It may contain _one of_ the `droplets_ids` or `tag` attributes as they are mutually exclusive. **Note that any attribute that is not provided will be reset to its default value.**
+     * To update a load balancer's settings, send a PUT request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full representation of
+     * the load balancer including existing attributes. It may contain _one of_ the `droplets_ids`
+     * or `tag` attributes as they are mutually exclusive. **Note that any attribute that is not
+     * provided will be reset to its default value.**
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersUpdate(clientConfig: ClientConfig, lbId: String, body: LoadBalancerUpdateRequest, options: RequestOptions? = null): UpdatedLoadBalancer {
-        return SdkClient.request<UpdatedLoadBalancer>(SdkClient.RequestSpec("PUT", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}", config = clientConfig, body = body, operationId = "loadBalancersUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun loadBalancersUpdate(
+        clientConfig: ClientConfig,
+        lbId: String,
+        body: LoadBalancerUpdateRequest,
+        options: RequestOptions? = null,
+    ): UpdatedLoadBalancer {
+        return SdkClient.request<UpdatedLoadBalancer>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "loadBalancersUpdate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To delete a load balancer instance, disassociating any Droplets assigned to it and removing it from your account, send a DELETE request to `/v2/load_balancers/$LOAD_BALANCER_ID`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
+     * To delete a load balancer instance, disassociating any Droplets assigned to it and removing
+     * it from your account, send a DELETE request to `/v2/load_balancers/$LOAD_BALANCER_ID`. A
+     * successful request will receive a 204 status code with no body in response. This indicates
+     * that the request was processed successfully.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersDelete(clientConfig: ClientConfig, lbId: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}", config = clientConfig, operationId = "loadBalancersDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun loadBalancersDelete(
+        clientConfig: ClientConfig,
+        lbId: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}",
+                config = clientConfig,
+                operationId = "loadBalancersDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * To delete a Global load balancer CDN cache, send a DELETE request to `/v2/load_balancers/$LOAD_BALANCER_ID/cache`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
+     * To delete a Global load balancer CDN cache, send a DELETE request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID/cache`. A successful request will receive a 204 status
+     * code with no body in response. This indicates that the request was processed successfully.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersDeleteCache(clientConfig: ClientConfig, lbId: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/cache", config = clientConfig, operationId = "loadBalancersDeleteCache", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun loadBalancersDeleteCache(
+        clientConfig: ClientConfig,
+        lbId: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/cache",
+                config = clientConfig,
+                operationId = "loadBalancersDeleteCache",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * To assign a Droplet to a load balancer instance, send a POST request to `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request, there should be a `droplet_ids` attribute containing a list of Droplet IDs. Individual Droplets can not be added to a load balancer configured with a Droplet tag. Attempting to do so will result in a "422 Unprocessable Entity" response from the API. No response body will be sent back, but the response code will indicate success.…
+     * To assign a Droplet to a load balancer instance, send a POST request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request, there should be
+     * a `droplet_ids` attribute containing a list of Droplet IDs. Individual Droplets can not be
+     * added to a load balancer configured with a Droplet tag. Attempting to do so will result in a
+     * "422 Unprocessable Entity" response from the API. No response body will be sent back, but the
+     * response code will indicate success.…
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersAddDroplets(clientConfig: ClientConfig, lbId: String, body: LoadBalancerDropletIds, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/droplets", config = clientConfig, body = body, operationId = "loadBalancersAddDroplets", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun loadBalancersAddDroplets(
+        clientConfig: ClientConfig,
+        lbId: String,
+        body: LoadBalancerDropletIds,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/droplets",
+                config = clientConfig,
+                body = body,
+                operationId = "loadBalancersAddDroplets",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * To remove a Droplet from a load balancer instance, send a DELETE request to `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request, there should be a `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To remove a Droplet from a load balancer instance, send a DELETE request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request, there should be
+     * a `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent
+     * back, but the response code will indicate success. Specifically, the response code will be a
+     * 204, which means that the action was successful with no returned body data.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersRemoveDroplets(clientConfig: ClientConfig, lbId: String, body: LoadBalancerDropletIds, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/droplets", config = clientConfig, body = body, operationId = "loadBalancersRemoveDroplets", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun loadBalancersRemoveDroplets(
+        clientConfig: ClientConfig,
+        lbId: String,
+        body: LoadBalancerDropletIds,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/droplets",
+                config = clientConfig,
+                body = body,
+                operationId = "loadBalancersRemoveDroplets",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Adds one or more forwarding rules to a load balancer. Provide at least one rule in `forwarding_rules`, with the required entry and target protocols and ports. A 204 response confirms the rules were added and returns no body.
+     * Adds one or more forwarding rules to a load balancer. Provide at least one rule in
+     * `forwarding_rules`, with the required entry and target protocols and ports. A 204 response
+     * confirms the rules were added and returns no body.
      *
-     * To add an additional forwarding rule to a load balancer instance, send a POST request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body of the request, there should be a `forwarding_rules` attribute containing an array of rules to be added. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To add an additional forwarding rule to a load balancer instance, send a POST request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body of the request, there
+     * should be a `forwarding_rules` attribute containing an array of rules to be added. No
+     * response body will be sent back, but the response code will indicate success. Specifically,
+     * the response code will be a 204, which means that the action was successful with no returned
+     * body data.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersAddForwardingRules(clientConfig: ClientConfig, lbId: String, forwardingRules: List<ForwardingRule>, options: RequestOptions? = null): Unit {
-        Validation.validateItems("forwarding_rules", forwardingRules, Validation.LengthOpts(min = 1))
+    fun loadBalancersAddForwardingRules(
+        clientConfig: ClientConfig,
+        lbId: String,
+        forwardingRules: List<ForwardingRule>,
+        options: RequestOptions? = null,
+    ): Unit {
+        Validation.validateItems(
+            "forwarding_rules",
+            forwardingRules,
+            Validation.LengthOpts(min = 1),
+        )
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/forwarding_rules", config = clientConfig, body = SdkClient.bodyMap("forwarding_rules" to (forwardingRules)), operationId = "loadBalancersAddForwardingRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/forwarding_rules",
+                config = clientConfig,
+                body = SdkClient.bodyMap("forwarding_rules" to (forwardingRules)),
+                operationId = "loadBalancersAddForwardingRules",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Removes one or more forwarding rules from a load balancer. Provide at least one rule in `forwarding_rules`, including each rule's entry and target protocols and ports. A 204 response confirms the rules were removed and returns no body.
+     * Removes one or more forwarding rules from a load balancer. Provide at least one rule in
+     * `forwarding_rules`, including each rule's entry and target protocols and ports. A 204
+     * response confirms the rules were removed and returns no body.
      *
-     * To remove forwarding rules from a load balancer instance, send a DELETE request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body of the request, there should be a `forwarding_rules` attribute containing an array of rules to be removed. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To remove forwarding rules from a load balancer instance, send a DELETE request to
+     * `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body of the request, there
+     * should be a `forwarding_rules` attribute containing an array of rules to be removed. No
+     * response body will be sent back, but the response code will indicate success. Specifically,
+     * the response code will be a 204, which means that the action was successful with no returned
+     * body data.
      *
      * @param lbId A unique identifier for a load balancer.
      */
-    fun loadBalancersRemoveForwardingRules(clientConfig: ClientConfig, lbId: String, forwardingRules: List<ForwardingRule>, options: RequestOptions? = null): Unit {
-        Validation.validateItems("forwarding_rules", forwardingRules, Validation.LengthOpts(min = 1))
+    fun loadBalancersRemoveForwardingRules(
+        clientConfig: ClientConfig,
+        lbId: String,
+        forwardingRules: List<ForwardingRule>,
+        options: RequestOptions? = null,
+    ): Unit {
+        Validation.validateItems(
+            "forwarding_rules",
+            forwardingRules,
+            Validation.LengthOpts(min = 1),
+        )
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/forwarding_rules", config = clientConfig, body = SdkClient.bodyMap("forwarding_rules" to (forwardingRules)), operationId = "loadBalancersRemoveForwardingRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/load_balancers/${SdkClient.encodePathSegment(lbId)}/forwarding_rules",
+                config = clientConfig,
+                body = SdkClient.bodyMap("forwarding_rules" to (forwardingRules)),
+                operationId = "loadBalancersRemoveForwardingRules",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

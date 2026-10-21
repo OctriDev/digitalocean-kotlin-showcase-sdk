@@ -3,22 +3,16 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiRegenerateAgentAPIKeyOutput` API schema.
- */
+/** Typed representation of the `ApiRegenerateAgentAPIKeyOutput` API schema. */
 data class ApiRegenerateAgentAPIKeyOutput(
-    /**
-     * Agent API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAgentAPIKeyInfo? = null
+    /** Agent API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiAgentAPIKeyInfo? = null
 )
 
-/**
- * Typed representation of the `ApiRegenerateModelAPIKeyOutput` API schema.
- */
+/** Typed representation of the `ApiRegenerateModelAPIKeyOutput` API schema. */
 data class ApiRegenerateModelAPIKeyOutput(
-    /**
-     * Model API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiModelAPIKeyInfo? = null
+    /** Model API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiModelAPIKeyInfo? = null
 )

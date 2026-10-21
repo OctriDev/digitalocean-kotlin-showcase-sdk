@@ -3,52 +3,37 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiKBDataSource` API schema.
- */
+/** Typed representation of the `ApiKBDataSource` API schema. */
 data class ApiKBDataSource(
-    /**
-     * AWS S3 Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("aws_data_source") val awsDataSource: ApiAWSDataSource? = null,
-    /**
-     * Deprecated, moved to data_source_details
-     */
+    /** AWS S3 Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("aws_data_source")
+    val awsDataSource: ApiAWSDataSource? = null,
+    /** Deprecated, moved to data_source_details */
     @com.fasterxml.jackson.annotation.JsonProperty("bucket_name") val bucketName: String? = null,
-    /**
-     * Deprecated, moved to data_source_details
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bucket_region") val bucketRegion: String? = null,
-    /**
-     * Optional enumerated value serialized in the `chunking_algorithm` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_algorithm") val chunkingAlgorithm: ApiChunkingAlgorithm? = null,
-    /**
-     * Optional object value serialized in the `chunking_options` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_options") val chunkingOptions: ApiChunkingOptions? = null,
-    /**
-     * Dropbox Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("dropbox_data_source") val dropboxDataSource: ApiDropboxDataSource? = null,
-    /**
-     * File to upload as data source for knowledge base.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_upload_data_source") val fileUploadDataSource: ApiFileUploadDataSource? = null,
-    /**
-     * Google Drive Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("google_drive_data_source") val googleDriveDataSource: ApiGoogleDriveDataSource? = null,
-    /**
-     * Optional `string` value serialized in the `item_path` wire field.
-     */
+    /** Deprecated, moved to data_source_details */
+    @com.fasterxml.jackson.annotation.JsonProperty("bucket_region")
+    val bucketRegion: String? = null,
+    /** Optional enumerated value serialized in the `chunking_algorithm` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_algorithm")
+    val chunkingAlgorithm: ApiChunkingAlgorithm? = null,
+    /** Optional object value serialized in the `chunking_options` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_options")
+    val chunkingOptions: ApiChunkingOptions? = null,
+    /** Dropbox Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("dropbox_data_source")
+    val dropboxDataSource: ApiDropboxDataSource? = null,
+    /** File to upload as data source for knowledge base. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_upload_data_source")
+    val fileUploadDataSource: ApiFileUploadDataSource? = null,
+    /** Google Drive Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("google_drive_data_source")
+    val googleDriveDataSource: ApiGoogleDriveDataSource? = null,
+    /** Optional `string` value serialized in the `item_path` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_path") val itemPath: String? = null,
-    /**
-     * Spaces Bucket Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("spaces_data_source") val spacesDataSource: ApiSpacesDataSource? = null,
-    /**
-     * WebCrawlerDataSource
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_crawler_data_source") val webCrawlerDataSource: ApiWebCrawlerDataSource? = null
+    /** Spaces Bucket Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("spaces_data_source")
+    val spacesDataSource: ApiSpacesDataSource? = null,
+    /** WebCrawlerDataSource */
+    @com.fasterxml.jackson.annotation.JsonProperty("web_crawler_data_source")
+    val webCrawlerDataSource: ApiWebCrawlerDataSource? = null,
 )

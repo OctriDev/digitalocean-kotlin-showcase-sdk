@@ -15,90 +15,188 @@ import dev.octri.showcase.digitalocean.Validation
 
 object DropletActions {
 
-
     /**
-     * To retrieve a list of all actions that have been executed for a Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/actions`. The results will be returned as a JSON object with an `actions` key. This will be set to an array filled with `action` objects containing the standard `action` attributes.
+     * To retrieve a list of all actions that have been executed for a Droplet, send a GET request
+     * to `/v2/droplets/$DROPLET_ID/actions`. The results will be returned as a JSON object with an
+     * `actions` key. This will be set to an array filled with `action` objects containing the
+     * standard `action` attributes.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletActionsList(clientConfig: ClientConfig, dropletId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletActions {
+    fun dropletActionsList(
+        clientConfig: ClientConfig,
+        dropletId: Long,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllDropletActions {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllDropletActions>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletActionsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllDropletActions>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "dropletActionsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Triggers an action on a specific Droplet, such as rebooting it, changing its size, or creating a snapshot. Supply the action `type` and any additional fields required for that action; restoring a Droplet requires a backup image of that Droplet. A 201 response includes an action object you can use to track the operation.
+     * Triggers an action on a specific Droplet, such as rebooting it, changing its size, or
+     * creating a snapshot. Supply the action `type` and any additional fields required for that
+     * action; restoring a Droplet requires a backup image of that Droplet. A 201 response includes
+     * an action object you can use to track the operation.
      *
-     * To initiate an action on a Droplet send a POST request to `/v2/droplets/$DROPLET_ID/actions`. In the JSON body to the request, set the `type` attribute to one of the supported action types: | Action | Details | Required Permissions | | ---------------------------------------- | ----------- | ----------- | | <nobr>`enable_backups`</nobr> | Enables backups for a Droplet | <nobr>`droplet:update`</nobr> | | <nobr>`disable_backups`</nobr> | Disables backups for a Droplet |…
+     * To initiate an action on a Droplet send a POST request to `/v2/droplets/$DROPLET_ID/actions`.
+     * In the JSON body to the request, set the `type` attribute to one of the supported action
+     * types: | Action | Details | Required Permissions | | ----------------------------------------
+     * | ----------- | ----------- | | <nobr>`enable_backups`</nobr> | Enables backups for a Droplet
+     * | <nobr>`droplet:update`</nobr> | | <nobr>`disable_backups`</nobr> | Disables backups for a
+     * Droplet |…
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletActionsPost(clientConfig: ClientConfig, dropletId: Long, body: Any? = null, options: RequestOptions? = null): DropletActionResponse {
+    fun dropletActionsPost(
+        clientConfig: ClientConfig,
+        dropletId: Long,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): DropletActionResponse {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<DropletActionResponse>(SdkClient.RequestSpec("POST", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions", config = clientConfig, body = body, operationId = "dropletActionsPost", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DropletActionResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "dropletActionsPost",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Triggers a supported action on Droplets that match a tag. Set the action `type` in the request body; bulk actions support power, shutdown, IPv6, backup, and snapshot operations, with IPv6 enablement requiring the Droplet to be powered off. A 201 response includes an action object for each affected Droplet.
+     * Triggers a supported action on Droplets that match a tag. Set the action `type` in the
+     * request body; bulk actions support power, shutdown, IPv6, backup, and snapshot operations,
+     * with IPv6 enablement requiring the Droplet to be powered off. A 201 response includes an
+     * action object for each affected Droplet.
      *
-     * Some actions can be performed in bulk on tagged Droplets. The actions can be initiated by sending a POST to `/v2/droplets/actions?tag_name=$TAG_NAME` with the action arguments. Only a sub-set of action types are supported: - `power_cycle` - `power_on` - `power_off` - `shutdown` - `enable_ipv6` (**Warning:** The Droplet must be powered off before enabling IPv6 on an existing Droplet.) - `enable_backups` - `disable_backups` - `snapshot` (also requires `image:create` permission)
+     * Some actions can be performed in bulk on tagged Droplets. The actions can be initiated by
+     * sending a POST to `/v2/droplets/actions?tag_name=$TAG_NAME` with the action arguments. Only a
+     * sub-set of action types are supported: - `power_cycle` - `power_on` - `power_off` -
+     * `shutdown` - `enable_ipv6` (**Warning:** The Droplet must be powered off before enabling IPv6
+     * on an existing Droplet.) - `enable_backups` - `disable_backups` - `snapshot` (also requires
+     * `image:create` permission)
      *
-     * @param tagName Used to filter Droplets by a specific tag. Can not be combined
-     *   with `name` or `type`. Requires `tag:read` scope.
+     * @param tagName Used to filter Droplets by a specific tag. Can not be combined with `name` or
+     *   `type`. Requires `tag:read` scope.
      */
-    fun dropletActionsPostByTag(clientConfig: ClientConfig, tagName: String? = null, body: Any? = null, options: RequestOptions? = null): DropletActionsResponse {
-        return SdkClient.request<DropletActionsResponse>(SdkClient.RequestSpec("POST", "/v2/droplets/actions", config = clientConfig, query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)), body = body, operationId = "dropletActionsPostByTag", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun dropletActionsPostByTag(
+        clientConfig: ClientConfig,
+        tagName: String? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): DropletActionsResponse {
+        return SdkClient.request<DropletActionsResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/droplets/actions",
+                    config = clientConfig,
+                    query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)),
+                    body = body,
+                    operationId = "dropletActionsPostByTag",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To retrieve a Droplet action, send a GET request to `/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`. The response will be a JSON object with a key called `action`. The value will be a Droplet action object.
+     * To retrieve a Droplet action, send a GET request to
+     * `/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`. The response will be a JSON object with a key
+     * called `action`. The value will be a Droplet action object.
      *
      * @param dropletId A unique identifier for a Droplet instance.
-     * @param actionId A unique numeric ID that can be used to identify and reference
-     *   an action.
+     * @param actionId A unique numeric ID that can be used to identify and reference an action.
      */
-    fun dropletActionsGet(clientConfig: ClientConfig, dropletId: Long, actionId: Long, options: RequestOptions? = null): ActionResponse {
+    fun dropletActionsGet(
+        clientConfig: ClientConfig,
+        dropletId: Long,
+        actionId: Long,
+        options: RequestOptions? = null,
+    ): ActionResponse {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         Validation.validateRange("action_id", actionId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<ActionResponse>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions/${SdkClient.encodePathSegment(actionId)}", config = clientConfig, operationId = "dropletActionsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ActionResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/actions/${SdkClient.encodePathSegment(actionId)}",
+                    config = clientConfig,
+                    operationId = "dropletActionsGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

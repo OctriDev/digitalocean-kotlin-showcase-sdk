@@ -3,36 +3,65 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class FloatingIpsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the floating IPs available on your account, send a GET request to `/v2/floating_ips`.
+     * To list all of the floating IPs available on your account, send a GET request to
+     * `/v2/floating_ips`.
      */
-    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): FloatingIpList {
-        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsList(clientConfig, perPage, page, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): FloatingIpList {
+        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * Creates a floating IP assigned to a Droplet or reserved to a region. Supply `droplet_id` to assign it to a Droplet, or supply `region` to reserve it; `project_id` can associate a region-reserved floating IP with a project. A 202 response returns the floating IP object and, when assigning it to a Droplet, links to the Droplet and assignment action.
+     * Creates a floating IP assigned to a Droplet or reserved to a region. Supply `droplet_id` to
+     * assign it to a Droplet, or supply `region` to reserve it; `project_id` can associate a
+     * region-reserved floating IP with a project. A 202 response returns the floating IP object
+     * and, when assigning it to a Droplet, links to the Droplet and assignment action.
      *
-     * On creation, a floating IP must be either assigned to a Droplet or reserved to a region. * To create a new floating IP assigned to a Droplet, send a POST request to `/v2/floating_ips` with the `droplet_id` attribute. * To create a new floating IP reserved to a region, send a POST request to `/v2/floating_ips` with the `region` attribute.
+     * On creation, a floating IP must be either assigned to a Droplet or reserved to a region. * To
+     * create a new floating IP assigned to a Droplet, send a POST request to `/v2/floating_ips`
+     * with the `droplet_id` attribute. * To create a new floating IP reserved to a region, send a
+     * POST request to `/v2/floating_ips` with the `region` attribute.
      */
     fun create(body: FloatingIpCreate, options: RequestOptions? = null): FloatingIpCreated {
-        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsCreate(clientConfig, body, options)
+        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsCreate(
+            clientConfig,
+            body,
+            options,
+        )
     }
 
     /**
-     * To show information about a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP_ADDR`.
+     * To show information about a floating IP, send a GET request to
+     * `/v2/floating_ips/$FLOATING_IP_ADDR`.
      */
     fun get(floatingIp: String, options: RequestOptions? = null): FloatingIpResponse {
-        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsGet(clientConfig, floatingIp, options)
+        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsGet(
+            clientConfig,
+            floatingIp,
+            options,
+        )
     }
 
     /**
-     * To delete a floating IP and remove it from your account, send a DELETE request to `/v2/floating_ips/$FLOATING_IP_ADDR`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
+     * To delete a floating IP and remove it from your account, send a DELETE request to
+     * `/v2/floating_ips/$FLOATING_IP_ADDR`. A successful request will receive a 204 status code
+     * with no body in response. This indicates that the request was processed successfully.
      */
     fun delete(floatingIp: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsDelete(clientConfig, floatingIp, options)
+        return dev.octri.showcase.digitalocean.methods.FloatingIps.floatingIpsDelete(
+            clientConfig,
+            floatingIp,
+            options,
+        )
     }
-
 }

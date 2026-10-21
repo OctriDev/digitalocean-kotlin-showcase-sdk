@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys for a specific agent.
- */
+/** ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys for a specific agent. */
 data class ApiListOpenAIAPIKeysOutput(
-    /**
-     * Api key infos
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiOpenAIAPIKeyInfo>? = null,
-    /**
-     * Links to other pages
-     */
+    /** Api key infos */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
+    val apiKeyInfos: List<ApiOpenAIAPIKeyInfo>? = null,
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
-    val meta: ApiMeta? = null
+    /** Meta information about the data set */
+    val meta: ApiMeta? = null,
 )

@@ -12,13 +12,38 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesGetCaOperation {
     /**
-     * To retrieve the public certificate used to secure the connection to the database cluster send a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a `ca` key. This will be set to an object containing the base64 encoding of the public key certificate.
+     * To retrieve the public certificate used to secure the connection to the database cluster send
+     * a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a
+     * `ca` key. This will be set to an object containing the base64 encoding of the public key
+     * certificate.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetCa(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): CaResponse {
+    fun databasesGetCa(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): CaResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<CaResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/ca", config = clientConfig, operationId = "databasesGetCa", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<CaResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/ca",
+                    config = clientConfig,
+                    operationId = "databasesGetCa",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

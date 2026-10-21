@@ -3,38 +3,28 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Optional object value serialized in the `scheduled_backup_time` wire field.
- */
+/** Optional object value serialized in the `scheduled_backup_time` wire field. */
 data class DatabaseBackupsScheduledBackupTime(
-    /**
-     * The hour of the day when the backup is scheduled (in UTC).
-     */
+    /** The hour of the day when the backup is scheduled (in UTC). */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_hour") val backupHour: Long? = null,
-    /**
-     * The minute of the hour when the backup is scheduled.
-     */
+    /** The minute of the hour when the backup is scheduled. */
     @com.fasterxml.jackson.annotation.JsonProperty("backup_minute") val backupMinute: Long? = null,
-    /**
-     * The frequency, in hours, at which backups are taken.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_interval_hours") val backupIntervalHours: Long? = null
+    /** The frequency, in hours, at which backups are taken. */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_interval_hours")
+    val backupIntervalHours: Long? = null,
 )
 
-/**
- * Typed representation of the `DatabaseBackups` API schema.
- */
+/** Typed representation of the `DatabaseBackups` API schema. */
 data class DatabaseBackups(
-    /**
-     * Required array value serialized in the `backups` wire field.
-     */
+    /** Required array value serialized in the `backups` wire field. */
     val backups: List<Backup>,
+    /** Optional object value serialized in the `scheduled_backup_time` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_backup_time")
+    val scheduledBackupTime: DatabaseBackupsScheduledBackupTime? = null,
     /**
-     * Optional object value serialized in the `scheduled_backup_time` wire field.
+     * If a backup is currently in progress, this attribute shows the percentage of completion. If
+     * no backup is in progress, this attribute will be hidden.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_backup_time") val scheduledBackupTime: DatabaseBackupsScheduledBackupTime? = null,
-    /**
-     * If a backup is currently in progress, this attribute shows the percentage of completion. If no backup is in progress, this attribute will be hidden.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_progress") val backupProgress: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_progress")
+    val backupProgress: String? = null,
 )

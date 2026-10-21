@@ -3,42 +3,37 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `AppDomainSpec` API schema.
- */
+/** Typed representation of the `AppDomainSpec` API schema. */
 data class AppDomainSpec(
-    /**
-     * The hostname for the domain
-     */
+    /** The hostname for the domain */
     val domain: String,
     /**
-     * - DEFAULT: The default `.ondigitalocean.app` domain assigned to this app - PRIMARY: The primary domain for this app that is displayed as the default in the control panel, used in bindable environment variables, and any other places that reference an app's live URL. Only one domain may be set as primary. - ALIAS: A non-primary domain
+     * - DEFAULT: The default `.ondigitalocean.app` domain assigned to this app - PRIMARY: The
+     *   primary domain for this app that is displayed as the default in the control panel, used in
+     *   bindable environment variables, and any other places that reference an app's live URL. Only
+     *   one domain may be set as primary. - ALIAS: A non-primary domain
      */
     val type: AppDomainSpecTypeEnum? = null,
-    /**
-     * Indicates whether the domain includes all sub-domains, in addition to the given domain
-     */
+    /** Indicates whether the domain includes all sub-domains, in addition to the given domain */
     val wildcard: Boolean? = null,
     /**
-     * Optional. If the domain uses DigitalOcean DNS and you would like App Platform to automatically manage it for you, set this to the name of the domain on your account. For example, If the domain you are adding is `app.domain.com`, the zone could be `domain.com`.
+     * Optional. If the domain uses DigitalOcean DNS and you would like App Platform to
+     * automatically manage it for you, set this to the name of the domain on your account. For
+     * example, If the domain you are adding is `app.domain.com`, the zone could be `domain.com`.
      */
     val zone: String? = null,
     /**
-     * The minimum version of TLS a client application can use to access resources for the domain. Must be one of the following values wrapped within quotations: `"1.2"` or `"1.3"`.
+     * The minimum version of TLS a client application can use to access resources for the domain.
+     * Must be one of the following values wrapped within quotations: `"1.2"` or `"1.3"`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("minimum_tls_version") val minimumTlsVersion: AppDomainSpecMinimumTlsVersionEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("minimum_tls_version")
+    val minimumTlsVersion: AppDomainSpecMinimumTlsVersionEnum? = null,
 )
 
-/**
- * Typed representation of the `AppDomainValidation` API schema.
- */
+/** Typed representation of the `AppDomainValidation` API schema. */
 data class AppDomainValidation(
-    /**
-     * Optional `string` value serialized in the `txt_name` wire field.
-     */
+    /** Optional `string` value serialized in the `txt_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("txt_name") val txtName: String? = null,
-    /**
-     * Optional `string` value serialized in the `txt_value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("txt_value") val txtValue: String? = null
+    /** Optional `string` value serialized in the `txt_value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("txt_value") val txtValue: String? = null,
 )

@@ -12,14 +12,43 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsValidateAppSpecOperation {
     /**
-     * To propose and validate a spec for a new or existing app, send a POST request to the `/v2/apps/propose` endpoint. The request returns some information about the proposed app, including app cost and upgrade cost. If an existing app ID is specified, the app spec is treated as a proposed update to the existing app.
+     * To propose and validate a spec for a new or existing app, send a POST request to the
+     * `/v2/apps/propose` endpoint. The request returns some information about the proposed app,
+     * including app cost and upgrade cost. If an existing app ID is specified, the app spec is
+     * treated as a proposed update to the existing app.
      *
      * @param spec The desired configuration of an application.
-     * @param appId An optional ID of an existing app. If set, the spec will be
-     *   treated as a proposed update to the specified app. The existing app is not
-     *   modified using this method.
+     * @param appId An optional ID of an existing app. If set, the spec will be treated as a
+     *   proposed update to the specified app. The existing app is not modified using this method.
      */
-    fun appsValidateAppSpec(clientConfig: ClientConfig, spec: AppSpecRequest, appId: String? = null, options: RequestOptions? = null): AppProposeResponse {
-        return SdkClient.request<AppProposeResponse>(SdkClient.RequestSpec("POST", "/v2/apps/propose", config = clientConfig, body = SdkClient.bodyMap("spec" to (spec), "app_id" to (SdkClient.omitIfNull(appId))), operationId = "appsValidateAppSpec", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsValidateAppSpec(
+        clientConfig: ClientConfig,
+        spec: AppSpecRequest,
+        appId: String? = null,
+        options: RequestOptions? = null,
+    ): AppProposeResponse {
+        return SdkClient.request<AppProposeResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/apps/propose",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "spec" to (spec),
+                            "app_id" to (SdkClient.omitIfNull(appId)),
+                        ),
+                    operationId = "appsValidateAppSpec",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

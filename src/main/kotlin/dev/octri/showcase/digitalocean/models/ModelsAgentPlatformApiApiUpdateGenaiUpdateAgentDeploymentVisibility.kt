@@ -3,26 +3,22 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * UpdateAgentDeploymentVisbilityOutput description
- */
+/** UpdateAgentDeploymentVisbilityOutput description */
 data class ApiUpdateAgentDeploymentVisbilityOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )
 
-/**
- * UpdateAgentDeploymentVisibilityInputPublic description
- */
+/** UpdateAgentDeploymentVisibilityInputPublic description */
 data class ApiUpdateAgentDeploymentVisibilityInputPublic(
-    /**
-     * Unique id
-     */
+    /** Unique id */
     val uuid: String? = null,
     /**
-     * - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
+     * - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The
+     *   deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND:
+     *   Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will
+     *   service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private
+     *   and will only service requests from other agents, or through API keys
      */
-    val visibility: ApiDeploymentVisibility? = null
+    val visibility: ApiDeploymentVisibility? = null,
 )

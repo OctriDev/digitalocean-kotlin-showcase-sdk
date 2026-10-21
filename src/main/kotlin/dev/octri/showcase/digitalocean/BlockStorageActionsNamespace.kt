@@ -3,38 +3,100 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class BlockStorageActionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Triggers an attach or detach action on a block storage volume identified by name. Set `type` to `attach` or `detach` and provide the volume, Droplet, and region details for the action. Use `page` and `per_page` to paginate the results.
+     * Triggers an attach or detach action on a block storage volume identified by name. Set `type`
+     * to `attach` or `detach` and provide the volume, Droplet, and region details for the action.
+     * Use `page` and `per_page` to paginate the results.
      *
-     * To initiate an action on a block storage volume by Name, send a POST request to `~/v2/volumes/actions`. The body should contain the appropriate attributes for the respective action. ## Attach a Block Storage Volume to a Droplet | Attribute | Details | | ----------- | ------------------------------------------------------------------- | | type | This must be `attach` | | volume_name | The name of the block storage volume | | droplet_id | Set to the Droplet's ID | | region |…
+     * To initiate an action on a block storage volume by Name, send a POST request to
+     * `~/v2/volumes/actions`. The body should contain the appropriate attributes for the respective
+     * action. ## Attach a Block Storage Volume to a Droplet | Attribute | Details | | ----------- |
+     * ------------------------------------------------------------------- | | type | This must be
+     * `attach` | | volume_name | The name of the block storage volume | | droplet_id | Set to the
+     * Droplet's ID | | region |…
      */
-    fun volumeActionsPost(body: Any, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeActionResponse {
-        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsPost(clientConfig, body, perPage, page, options)
+    fun volumeActionsPost(
+        body: Any,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VolumeActionResponse {
+        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsPost(
+            clientConfig,
+            body,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To retrieve all actions that have been executed on a volume, send a GET request to `/v2/volumes/$VOLUME_ID/actions`.
+     * To retrieve all actions that have been executed on a volume, send a GET request to
+     * `/v2/volumes/$VOLUME_ID/actions`.
      */
-    fun volumeActionsList(volumeId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeActions {
-        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsList(clientConfig, volumeId, perPage, page, options)
+    fun volumeActionsList(
+        volumeId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VolumeActions {
+        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsList(
+            clientConfig,
+            volumeId,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * Triggers an attach, detach, or resize action on a block storage volume identified by ID. Set `type` to the action to perform and provide the corresponding Droplet or size details, along with the volume's region. Use `page` and `per_page` to paginate the results.
+     * Triggers an attach, detach, or resize action on a block storage volume identified by ID. Set
+     * `type` to the action to perform and provide the corresponding Droplet or size details, along
+     * with the volume's region. Use `page` and `per_page` to paginate the results.
      *
-     * To initiate an action on a block storage volume by Id, send a POST request to `~/v2/volumes/$VOLUME_ID/actions`. The body should contain the appropriate attributes for the respective action. ## Attach a Block Storage Volume to a Droplet | Attribute | Details | | ---------- | ------------------------------------------------------------------- | | type | This must be `attach` | | droplet_id | Set to the Droplet's ID | | region | Set to the slug representing the region where…
+     * To initiate an action on a block storage volume by Id, send a POST request to
+     * `~/v2/volumes/$VOLUME_ID/actions`. The body should contain the appropriate attributes for the
+     * respective action. ## Attach a Block Storage Volume to a Droplet | Attribute | Details | |
+     * ---------- | ------------------------------------------------------------------- | | type |
+     * This must be `attach` | | droplet_id | Set to the Droplet's ID | | region | Set to the slug
+     * representing the region where…
      */
-    fun volumeActionsPostById(volumeId: String, body: Any, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeActionResponse {
-        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsPostById(clientConfig, volumeId, body, perPage, page, options)
+    fun volumeActionsPostById(
+        volumeId: String,
+        body: Any,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VolumeActionResponse {
+        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsPostById(
+            clientConfig,
+            volumeId,
+            body,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To retrieve the status of a volume action, send a GET request to `/v2/volumes/$VOLUME_ID/actions/$ACTION_ID`.
+     * To retrieve the status of a volume action, send a GET request to
+     * `/v2/volumes/$VOLUME_ID/actions/$ACTION_ID`.
      */
-    fun volumeActionsGet(volumeId: String, actionId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VolumeActionResponse {
-        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsGet(clientConfig, volumeId, actionId, perPage, page, options)
+    fun volumeActionsGet(
+        volumeId: String,
+        actionId: Long,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VolumeActionResponse {
+        return dev.octri.showcase.digitalocean.methods.BlockStorageActions.volumeActionsGet(
+            clientConfig,
+            volumeId,
+            actionId,
+            perPage,
+            page,
+            options,
+        )
     }
-
 }

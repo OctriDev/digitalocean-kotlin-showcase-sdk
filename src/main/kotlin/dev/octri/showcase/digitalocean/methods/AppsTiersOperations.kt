@@ -11,21 +11,62 @@ import dev.octri.showcase.digitalocean.RequestOptions
 import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsListInstanceSizesOperation {
-    /**
-     * List all instance sizes for `service`, `worker`, and `job` components.
-     */
-    fun appsListInstanceSizes(clientConfig: ClientConfig, options: RequestOptions? = null): AppsListInstanceSizesResponse {
-        return SdkClient.request<AppsListInstanceSizesResponse>(SdkClient.RequestSpec("GET", "/v2/apps/tiers/instance_sizes", config = clientConfig, operationId = "appsListInstanceSizes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    /** List all instance sizes for `service`, `worker`, and `job` components. */
+    fun appsListInstanceSizes(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): AppsListInstanceSizesResponse {
+        return SdkClient.request<AppsListInstanceSizesResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/tiers/instance_sizes",
+                    config = clientConfig,
+                    operationId = "appsListInstanceSizes",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetInstanceSizeOperation {
     /**
-     * Retrieve information about a specific instance size for `service`, `worker`, and `job` components.
+     * Retrieve information about a specific instance size for `service`, `worker`, and `job`
+     * components.
      *
      * @param slug The slug of the instance size
      */
-    fun appsGetInstanceSize(clientConfig: ClientConfig, slug: String, options: RequestOptions? = null): AppsGetInstanceSizeResponse {
-        return SdkClient.request<AppsGetInstanceSizeResponse>(SdkClient.RequestSpec("GET", "/v2/apps/tiers/instance_sizes/${SdkClient.encodePathSegment(slug)}", config = clientConfig, operationId = "appsGetInstanceSize", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetInstanceSize(
+        clientConfig: ClientConfig,
+        slug: String,
+        options: RequestOptions? = null,
+    ): AppsGetInstanceSizeResponse {
+        return SdkClient.request<AppsGetInstanceSizeResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/tiers/instance_sizes/${SdkClient.encodePathSegment(slug)}",
+                    config = clientConfig,
+                    operationId = "appsGetInstanceSize",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

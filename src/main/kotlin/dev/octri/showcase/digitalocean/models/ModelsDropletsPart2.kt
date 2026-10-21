@@ -3,64 +3,47 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `NeighborIds` API schema.
- */
+/** Typed representation of the `NeighborIds` API schema. */
 data class NeighborIds(
     /**
-     * An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a physical server.
+     * An array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a
+     * physical server.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("neighbor_ids") val neighborIds: List<List<Long>>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("neighbor_ids")
+    val neighborIds: List<List<Long>>? = null
 )
 
-/**
- * An object containing information about a resource to be scheduled for deletion.
- */
+/** An object containing information about a resource to be scheduled for deletion. */
 data class SelectiveDestroyAssociatedResource(
-    /**
-     * An array of unique identifiers for the floating IPs to be scheduled for deletion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips") val floatingIps: List<String>? = null,
-    /**
-     * An array of unique identifiers for the reserved IPs to be scheduled for deletion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips") val reservedIps: List<String>? = null,
-    /**
-     * An array of unique identifiers for the snapshots to be scheduled for deletion.
-     */
+    /** An array of unique identifiers for the floating IPs to be scheduled for deletion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips")
+    val floatingIps: List<String>? = null,
+    /** An array of unique identifiers for the reserved IPs to be scheduled for deletion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips")
+    val reservedIps: List<String>? = null,
+    /** An array of unique identifiers for the snapshots to be scheduled for deletion. */
     val snapshots: List<String>? = null,
-    /**
-     * An array of unique identifiers for the volumes to be scheduled for deletion.
-     */
+    /** An array of unique identifiers for the volumes to be scheduled for deletion. */
     val volumes: List<String>? = null,
-    /**
-     * An array of unique identifiers for the volume snapshots to be scheduled for deletion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots") val volumeSnapshots: List<String>? = null
+    /** An array of unique identifiers for the volume snapshots to be scheduled for deletion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots")
+    val volumeSnapshots: List<String>? = null,
 )
 
-/**
- * Typed representation of the `SupportedDropletBackupPolicy` API schema.
- */
+/** Typed representation of the `SupportedDropletBackupPolicy` API schema. */
 data class SupportedDropletBackupPolicy(
-    /**
-     * The name of the Droplet backup plan.
-     */
+    /** The name of the Droplet backup plan. */
     val name: String? = null,
-    /**
-     * An array of integers representing the hours of the day that a backup can start.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("possible_window_starts") val possibleWindowStarts: List<Long>? = null,
-    /**
-     * The number of hours that a backup window is open.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("window_length_hours") val windowLengthHours: Long? = null,
-    /**
-     * The number of days that a backup will be kept.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_period_days") val retentionPeriodDays: Long? = null,
-    /**
-     * The day of the week the backup will occur.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("possible_days") val possibleDays: List<String>? = null
+    /** An array of integers representing the hours of the day that a backup can start. */
+    @com.fasterxml.jackson.annotation.JsonProperty("possible_window_starts")
+    val possibleWindowStarts: List<Long>? = null,
+    /** The number of hours that a backup window is open. */
+    @com.fasterxml.jackson.annotation.JsonProperty("window_length_hours")
+    val windowLengthHours: Long? = null,
+    /** The number of days that a backup will be kept. */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_period_days")
+    val retentionPeriodDays: Long? = null,
+    /** The day of the week the backup will occur. */
+    @com.fasterxml.jackson.annotation.JsonProperty("possible_days")
+    val possibleDays: List<String>? = null,
 )

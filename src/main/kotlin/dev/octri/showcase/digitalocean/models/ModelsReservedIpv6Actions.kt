@@ -5,89 +5,63 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Optional object value serialized in the `action` wire field.
- */
+/** Optional object value serialized in the `action` wire field. */
 data class ReservedIpv6ActionAction(
-    /**
-     * A unique numeric ID that can be used to identify and reference an action.
-     */
+    /** A unique numeric ID that can be used to identify and reference an action. */
     val id: Long? = null,
-    /**
-     * The current status of the action. This can be "in-progress", "completed", or "errored".
-     */
+    /** The current status of the action. This can be "in-progress", "completed", or "errored". */
     val status: ReservedIpv6ActionActionStatusEnum? = null,
     /**
-     * This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
+     * This is the type of action that the object represents. For example, this could be "transfer"
+     * to represent the state of an image transfer action.
      */
     val type: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+     * A time value given in ISO8601 combined date and time format that represents when the action
+     * was initiated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at")
+    val startedAt: OffsetDateTime? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the action was completed.
+     * A time value given in ISO8601 combined date and time format that represents when the action
+     * was completed.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: OffsetDateTime? = null,
-    /**
-     * The ID of the resource that the action is being taken on.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at")
+    val completedAt: OffsetDateTime? = null,
+    /** The ID of the resource that the action is being taken on. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: Long? = null,
-    /**
-     * The type of resource that the action is being taken on.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
-    /**
-     * Optional object value serialized in the `region` wire field.
-     */
+    /** The type of resource that the action is being taken on. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
+    val resourceType: String? = null,
+    /** Optional object value serialized in the `region` wire field. */
     val region: Region? = null,
-    /**
-     * The slug identifier for the region the resource is located in.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null
+    /** The slug identifier for the region the resource is located in. */
+    @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpv6Action` API schema.
- */
+/** Typed representation of the `ReservedIpv6Action` API schema. */
 data class ReservedIpv6Action(
-    /**
-     * Optional object value serialized in the `action` wire field.
-     */
+    /** Optional object value serialized in the `action` wire field. */
     val action: ReservedIpv6ActionAction? = null
 )
 
-/**
- * Typed representation of the `ReservedIpv6ActionAssign` API schema.
- */
+/** Typed representation of the `ReservedIpv6ActionAssign` API schema. */
 data class ReservedIpv6ActionAssign(
-    /**
-     * The type of action to initiate for the reserved IPv6.
-     */
+    /** The type of action to initiate for the reserved IPv6. */
     val type: ReservedIpv6ActionTypeTypeEnum,
-    /**
-     * The ID of the Droplet that the reserved IPv6 will be assigned to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long
+    /** The ID of the Droplet that the reserved IPv6 will be assigned to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: Long,
 )
 
-/**
- * Typed representation of the `ReservedIpv6ActionType` API schema.
- */
+/** Typed representation of the `ReservedIpv6ActionType` API schema. */
 data class ReservedIpv6ActionType(
-    /**
-     * The type of action to initiate for the reserved IPv6.
-     */
+    /** The type of action to initiate for the reserved IPv6. */
     val type: ReservedIpv6ActionTypeTypeEnum
 )
 
-/**
- * Typed representation of the `ReservedIpv6ActionUnassign` API schema.
- */
+/** Typed representation of the `ReservedIpv6ActionUnassign` API schema. */
 data class ReservedIpv6ActionUnassign(
-    /**
-     * The type of action to initiate for the reserved IPv6.
-     */
+    /** The type of action to initiate for the reserved IPv6. */
     val type: ReservedIpv6ActionTypeTypeEnum
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter

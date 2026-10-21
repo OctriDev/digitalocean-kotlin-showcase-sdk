@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Region Codes
- */
+/** Region Codes */
 data class ApiListRegionsOutput(
-    /**
-     * Region code
-     */
+    /** Region code */
     val regions: List<GenaiapiRegion>? = null
 )

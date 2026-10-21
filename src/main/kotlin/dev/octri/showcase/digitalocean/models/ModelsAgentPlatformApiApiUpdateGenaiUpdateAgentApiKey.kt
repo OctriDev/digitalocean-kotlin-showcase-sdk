@@ -3,30 +3,19 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiUpdateAgentAPIKeyInputPublic` API schema.
- */
+/** Typed representation of the `ApiUpdateAgentAPIKeyInputPublic` API schema. */
 data class ApiUpdateAgentAPIKeyInputPublic(
-    /**
-     * Agent id
-     */
+    /** Agent id */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_uuid") val agentUuid: String? = null,
-    /**
-     * API key ID
-     */
+    /** API key ID */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_uuid") val apiKeyUuid: String? = null,
-    /**
-     * Name
-     */
-    val name: String? = null
+    /** Name */
+    val name: String? = null,
 )
 
-/**
- * Typed representation of the `ApiUpdateAgentAPIKeyOutput` API schema.
- */
+/** Typed representation of the `ApiUpdateAgentAPIKeyOutput` API schema. */
 data class ApiUpdateAgentAPIKeyOutput(
-    /**
-     * Agent API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAgentAPIKeyInfo? = null
+    /** Agent API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiAgentAPIKeyInfo? = null
 )

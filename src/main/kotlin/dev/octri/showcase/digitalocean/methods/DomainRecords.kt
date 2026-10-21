@@ -15,68 +15,144 @@ import dev.octri.showcase.digitalocean.Validation
 
 object DomainRecords {
 
-
     /**
-     * To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`. The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to…
+     * To get a listing of all records configured for a domain, send a GET request to
+     * `/v2/domains/$DOMAIN_NAME/records`. The list of records returned can be filtered by using the
+     * `name` and `type` query parameters. For example, to only include A records for a domain, send
+     * a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified
+     * record name. For example, to only include records matching `sub.example.com`, send a GET
+     * request to…
      *
      * @param domainName The name of the domain itself.
-     * @param name A fully qualified record name. For example, to only include
-     *   records matching sub.example.com, send a GET request to
+     * @param name A fully qualified record name. For example, to only include records matching
+     *   sub.example.com, send a GET request to
      *   `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`.
      * @param type The type of the DNS record. For example: A, CNAME, TXT, ...
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun domainsListRecords(clientConfig: ClientConfig, domainName: String, name: String? = null, type: SchemaSchemaEnuma56b8627? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDomainRecordsResponse {
+    fun domainsListRecords(
+        clientConfig: ClientConfig,
+        domainName: String,
+        name: String? = null,
+        type: SchemaSchemaEnuma56b8627? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllDomainRecordsResponse {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllDomainRecordsResponse>(SdkClient.RequestSpec("GET", "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records", config = clientConfig, query = mapOf("name" to SdkClient.queryValue(name, "form", true), "type" to SdkClient.queryValue(type, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "domainsListRecords", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllDomainRecordsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "name" to SdkClient.queryValue(name, "form", true),
+                            "type" to SdkClient.queryValue(type, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "domainsListRecords",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a DNS record for the specified domain. Supply `type` and the attributes required for that record type, such as `name` and `data` where applicable. The response includes the created record with its generated `id`.
+     * Creates a DNS record for the specified domain. Supply `type` and the attributes required for
+     * that record type, such as `name` and `data` where applicable. The response includes the
+     * created record with its generated `id`.
      *
-     * To create a new record to a domain, send a POST request to `/v2/domains/$DOMAIN_NAME/records`. The request must include all of the required fields for the domain record type being added. See the attribute table for details regarding record types and their respective required attributes.
+     * To create a new record to a domain, send a POST request to
+     * `/v2/domains/$DOMAIN_NAME/records`. The request must include all of the required fields for
+     * the domain record type being added. See the attribute table for details regarding record
+     * types and their respective required attributes.
      *
      * @param domainName The name of the domain itself.
      */
-    fun domainsCreateRecord(clientConfig: ClientConfig, domainName: String, body: Any? = null, options: RequestOptions? = null): CreatedDomainRecord {
-        return SdkClient.request<CreatedDomainRecord>(SdkClient.RequestSpec("POST", "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records", config = clientConfig, body = body, operationId = "domainsCreateRecord", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun domainsCreateRecord(
+        clientConfig: ClientConfig,
+        domainName: String,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): CreatedDomainRecord {
+        return SdkClient.request<CreatedDomainRecord>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "domainsCreateRecord",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
+     * To retrieve a specific domain record, send a GET request to
+     * `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
      *
      * @param domainName The name of the domain itself.
      * @param domainRecordId The unique identifier of the domain record.
      */
-    fun domainsGetRecord(clientConfig: ClientConfig, domainName: String, domainRecordId: Long, options: RequestOptions? = null): DomainRecordResponse {
-        return SdkClient.request<DomainRecordResponse>(SdkClient.RequestSpec("GET", "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records/${SdkClient.encodePathSegment(domainRecordId)}", config = clientConfig, operationId = "domainsGetRecord", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun domainsGetRecord(
+        clientConfig: ClientConfig,
+        domainName: String,
+        domainRecordId: Long,
+        options: RequestOptions? = null,
+    ): DomainRecordResponse {
+        return SdkClient.request<DomainRecordResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records/${SdkClient.encodePathSegment(domainRecordId)}",
+                    config = clientConfig,
+                    operationId = "domainsGetRecord",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [domainsPatchRecord]. */
     data class DomainsPatchRecordRequest(
@@ -90,41 +166,68 @@ object DomainRecords {
         val ttl: Long? = null,
         val weight: SdkClient.SdkOptional<Long?>? = null,
         val flags: SdkClient.SdkOptional<Long?>? = null,
-        val tag: SdkClient.SdkOptional<String?>? = null
+        val tag: SdkClient.SdkOptional<String?>? = null,
     )
 
     /**
-     * To update an existing record, send a PATCH request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type can be set to a new value for the record. See the attribute table for details regarding record types and their respective attributes.
+     * To update an existing record, send a PATCH request to
+     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type
+     * can be set to a new value for the record. See the attribute table for details regarding
+     * record types and their respective attributes.
      *
      * @param domainName The name of the domain itself.
      * @param domainRecordId The unique identifier of the domain record.
      * @param type The type of the DNS record. For example: A, CNAME, TXT, ...
      * @param name The host name, alias, or service being defined by the record.
-     * @param data Variable data depending on record type. For example, the "data"
-     *   value for an A record would be the IPv4 address to which the domain will be
-     *   mapped. For a CAA record, it would contain the domain name of the CA being
-     *   granted permission to issue certificates.
+     * @param data Variable data depending on record type. For example, the "data" value for an A
+     *   record would be the IPv4 address to which the domain will be mapped. For a CAA record, it
+     *   would contain the domain name of the CA being granted permission to issue certificates.
      * @param priority The priority for SRV and MX records.
      * @param port The port for SRV records.
-     * @param ttl This value is the time to live for the record, in seconds. This
-     *   defines the time frame that clients can cache queried information before a
-     *   refresh should be requested.
+     * @param ttl This value is the time to live for the record, in seconds. This defines the time
+     *   frame that clients can cache queried information before a refresh should be requested.
      * @param weight The weight for SRV records.
      * @param flags An unsigned integer between 0-255 used for CAA records.
-     * @param tag The parameter tag for CAA records. Valid values are "issue",
-     *   "issuewild", or "iodef"
+     * @param tag The parameter tag for CAA records. Valid values are "issue", "issuewild", or
+     *   "iodef"
      */
-    fun domainsPatchRecord(clientConfig: ClientConfig, request: DomainsPatchRecordRequest, options: RequestOptions? = null): DomainRecordResponse {
-        return SdkClient.request<DomainRecordResponse>(SdkClient.RequestSpec("PATCH", "/v2/domains/${SdkClient.encodePathSegment(request.domainName)}/records/${SdkClient.encodePathSegment(request.domainRecordId)}", config = clientConfig, body = SdkClient.bodyMap("type" to (request.type), "name" to (SdkClient.omitIfNull(request.name)), "data" to (SdkClient.omitIfNull(request.data)), "priority" to
-    (request.priority ?: SdkClient.SdkOptional.Omitted), "port" to (request.port ?: SdkClient.SdkOptional.Omitted), "ttl" to (SdkClient.omitIfNull(request.ttl)), "weight" to
-    (request.weight ?: SdkClient.SdkOptional.Omitted), "flags" to (request.flags ?: SdkClient.SdkOptional.Omitted), "tag" to (request.tag ?: SdkClient.SdkOptional.Omitted)), operationId = "domainsPatchRecord", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun domainsPatchRecord(
+        clientConfig: ClientConfig,
+        request: DomainsPatchRecordRequest,
+        options: RequestOptions? = null,
+    ): DomainRecordResponse {
+        return SdkClient.request<DomainRecordResponse>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/v2/domains/${SdkClient.encodePathSegment(request.domainName)}/records/${SdkClient.encodePathSegment(request.domainRecordId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "type" to (request.type),
+                            "name" to (SdkClient.omitIfNull(request.name)),
+                            "data" to (SdkClient.omitIfNull(request.data)),
+                            "priority" to (request.priority ?: SdkClient.SdkOptional.Omitted),
+                            "port" to (request.port ?: SdkClient.SdkOptional.Omitted),
+                            "ttl" to (SdkClient.omitIfNull(request.ttl)),
+                            "weight" to (request.weight ?: SdkClient.SdkOptional.Omitted),
+                            "flags" to (request.flags ?: SdkClient.SdkOptional.Omitted),
+                            "tag" to (request.tag ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "domainsPatchRecord",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [domainsUpdateRecord]. */
     data class DomainsUpdateRecordRequest(
@@ -138,56 +241,100 @@ object DomainRecords {
         val ttl: Long? = null,
         val weight: SdkClient.SdkOptional<Long?>? = null,
         val flags: SdkClient.SdkOptional<Long?>? = null,
-        val tag: SdkClient.SdkOptional<String?>? = null
+        val tag: SdkClient.SdkOptional<String?>? = null,
     )
 
     /**
-     * To update an existing record, send a PUT request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type can be set to a new value for the record. See the attribute table for details regarding record types and their respective attributes.
+     * To update an existing record, send a PUT request to
+     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type
+     * can be set to a new value for the record. See the attribute table for details regarding
+     * record types and their respective attributes.
      *
      * @param domainName The name of the domain itself.
      * @param domainRecordId The unique identifier of the domain record.
      * @param type The type of the DNS record. For example: A, CNAME, TXT, ...
      * @param name The host name, alias, or service being defined by the record.
-     * @param data Variable data depending on record type. For example, the "data"
-     *   value for an A record would be the IPv4 address to which the domain will be
-     *   mapped. For a CAA record, it would contain the domain name of the CA being
-     *   granted permission to issue certificates.
+     * @param data Variable data depending on record type. For example, the "data" value for an A
+     *   record would be the IPv4 address to which the domain will be mapped. For a CAA record, it
+     *   would contain the domain name of the CA being granted permission to issue certificates.
      * @param priority The priority for SRV and MX records.
      * @param port The port for SRV records.
-     * @param ttl This value is the time to live for the record, in seconds. This
-     *   defines the time frame that clients can cache queried information before a
-     *   refresh should be requested.
+     * @param ttl This value is the time to live for the record, in seconds. This defines the time
+     *   frame that clients can cache queried information before a refresh should be requested.
      * @param weight The weight for SRV records.
      * @param flags An unsigned integer between 0-255 used for CAA records.
-     * @param tag The parameter tag for CAA records. Valid values are "issue",
-     *   "issuewild", or "iodef"
+     * @param tag The parameter tag for CAA records. Valid values are "issue", "issuewild", or
+     *   "iodef"
      */
-    fun domainsUpdateRecord(clientConfig: ClientConfig, request: DomainsUpdateRecordRequest, options: RequestOptions? = null): DomainRecordResponse {
-        return SdkClient.request<DomainRecordResponse>(SdkClient.RequestSpec("PUT", "/v2/domains/${SdkClient.encodePathSegment(request.domainName)}/records/${SdkClient.encodePathSegment(request.domainRecordId)}", config = clientConfig, body = SdkClient.bodyMap("type" to (request.type), "name" to (SdkClient.omitIfNull(request.name)), "data" to (SdkClient.omitIfNull(request.data)), "priority" to
-    (request.priority ?: SdkClient.SdkOptional.Omitted), "port" to (request.port ?: SdkClient.SdkOptional.Omitted), "ttl" to (SdkClient.omitIfNull(request.ttl)), "weight" to
-    (request.weight ?: SdkClient.SdkOptional.Omitted), "flags" to (request.flags ?: SdkClient.SdkOptional.Omitted), "tag" to (request.tag ?: SdkClient.SdkOptional.Omitted)), operationId = "domainsUpdateRecord", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun domainsUpdateRecord(
+        clientConfig: ClientConfig,
+        request: DomainsUpdateRecordRequest,
+        options: RequestOptions? = null,
+    ): DomainRecordResponse {
+        return SdkClient.request<DomainRecordResponse>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/domains/${SdkClient.encodePathSegment(request.domainName)}/records/${SdkClient.encodePathSegment(request.domainRecordId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "type" to (request.type),
+                            "name" to (SdkClient.omitIfNull(request.name)),
+                            "data" to (SdkClient.omitIfNull(request.data)),
+                            "priority" to (request.priority ?: SdkClient.SdkOptional.Omitted),
+                            "port" to (request.port ?: SdkClient.SdkOptional.Omitted),
+                            "ttl" to (SdkClient.omitIfNull(request.ttl)),
+                            "weight" to (request.weight ?: SdkClient.SdkOptional.Omitted),
+                            "flags" to (request.flags ?: SdkClient.SdkOptional.Omitted),
+                            "tag" to (request.tag ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "domainsUpdateRecord",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To delete a record for a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. The record will be deleted and the response status will be a 204. This indicates a successful request with no body returned.
+     * To delete a record for a domain, send a DELETE request to
+     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. The record will be deleted and the
+     * response status will be a 204. This indicates a successful request with no body returned.
      *
      * @param domainName The name of the domain itself.
      * @param domainRecordId The unique identifier of the domain record.
      */
-    fun domainsDeleteRecord(clientConfig: ClientConfig, domainName: String, domainRecordId: Long, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records/${SdkClient.encodePathSegment(domainRecordId)}", config = clientConfig, operationId = "domainsDeleteRecord", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun domainsDeleteRecord(
+        clientConfig: ClientConfig,
+        domainName: String,
+        domainRecordId: Long,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/domains/${SdkClient.encodePathSegment(domainName)}/records/${SdkClient.encodePathSegment(domainRecordId)}",
+                config = clientConfig,
+                operationId = "domainsDeleteRecord",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

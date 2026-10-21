@@ -3,46 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiCreateEvaluationTestCaseInputPublic` API schema.
- */
+/** Typed representation of the `ApiCreateEvaluationTestCaseInputPublic` API schema. */
 data class ApiCreateEvaluationTestCaseInputPublic(
-    /**
-     * Optional `string` value serialized in the `agent_workspace_name` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_workspace_name") val agentWorkspaceName: String? = null,
-    /**
-     * Dataset against which the test‑case is executed.
-     */
+    /** Optional `string` value serialized in the `agent_workspace_name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_workspace_name")
+    val agentWorkspaceName: String? = null,
+    /** Dataset against which the test‑case is executed. */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_uuid") val datasetUuid: String? = null,
-    /**
-     * Description of the test case.
-     */
+    /** Description of the test case. */
     val description: String? = null,
-    /**
-     * Full metric list to use for evaluation test case.
-     */
+    /** Full metric list to use for evaluation test case. */
     val metrics: List<String>? = null,
-    /**
-     * Name of the test case.
-     */
+    /** Name of the test case. */
     val name: String? = null,
-    /**
-     * Optional object value serialized in the `star_metric` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("star_metric") val starMetric: ApiStarMetric? = null,
-    /**
-     * The workspace uuid.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid") val workspaceUuid: String? = null
+    /** Optional object value serialized in the `star_metric` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("star_metric")
+    val starMetric: ApiStarMetric? = null,
+    /** The workspace uuid. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid")
+    val workspaceUuid: String? = null,
 )
 
-/**
- * Typed representation of the `ApiCreateEvaluationTestCaseOutput` API schema.
- */
+/** Typed representation of the `ApiCreateEvaluationTestCaseOutput` API schema. */
 data class ApiCreateEvaluationTestCaseOutput(
-    /**
-     * Test‑case UUID.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid") val testCaseUuid: String? = null
+    /** Test‑case UUID. */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid")
+    val testCaseUuid: String? = null
 )
