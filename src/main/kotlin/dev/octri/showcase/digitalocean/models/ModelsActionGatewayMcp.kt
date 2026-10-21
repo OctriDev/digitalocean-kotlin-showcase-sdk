@@ -3,192 +3,204 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** MCP server registered by your team. It never contains secret material. */
+/**
+ * MCP server registered by your team. It never contains secret material.
+ */
 data class McpServer(
     /**
-     * Server identifier, unique within your team. The server's tool slugs are
-     * `<server_ref>_<name>`.
+     * Server identifier, unique within your team. The server's tool slugs are `<server_ref>_<name>`.
      */
     val serverRef: String? = null,
-    /** HTTPS URL of the server's MCP endpoint. */
+    /**
+     * HTTPS URL of the server's MCP endpoint.
+     */
     val endpoint: String? = null,
-    /** Always `streamable_http`. */
+    /**
+     * Always `streamable_http`.
+     */
     val transport: McpServerTransportEnum? = null,
     /**
-     * How requests to the server authenticate: none, secret (a key or token sent in the
-     * Authorization header), or connection (each user's own OAuth authorization).
+     * How requests to the server authenticate: none, secret (a key or token sent in the Authorization header), or connection (each user's own OAuth authorization).
      */
     val credentialRefSource: McpServerCredentialRefSourceEnum? = null,
     /**
-     * The secret reference supplied at registration when source=secret, or the team's OAuth
-     * credential ID when source=connection. Empty when the server was registered with an `api_key`,
-     * whose storage DigitalOcean manages.
+     * The secret reference supplied at registration when source=secret, or the team's OAuth credential ID when source=connection. Empty when the server was registered with an `api_key`, whose storage DigitalOcean manages.
      */
     val credentialRef: String? = null,
     /**
-     * Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or
-     * `unsupported_protocol`. It is not reset while a resync runs.
+     * Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or `unsupported_protocol`. It is not reset while a resync runs.
      */
     val syncStatus: McpServerSyncStatusEnum? = null,
-    /** Why the latest discovery failed; empty after a successful one. */
+    /**
+     * Why the latest discovery failed; empty after a successful one.
+     */
     val syncError: String? = null,
-    /** When discovery last succeeded, in RFC 3339 format; empty until the first success. */
+    /**
+     * When discovery last succeeded, in RFC 3339 format; empty until the first success.
+     */
     val lastSyncedAt: String? = null,
-    /** MCP protocol revision negotiated with the server. */
+    /**
+     * MCP protocol revision negotiated with the server.
+     */
     val protocolVersion: String? = null,
-    /** Number of tools discovered on the server, whether enabled or not. */
+    /**
+     * Number of tools discovered on the server, whether enabled or not.
+     */
     val toolCount: Int? = null,
-    /** When the server was registered, in RFC 3339 format. */
+    /**
+     * When the server was registered, in RFC 3339 format.
+     */
     val createdAt: String? = null,
-    /** When the server was last modified, in RFC 3339 format. */
+    /**
+     * When the server was last modified, in RFC 3339 format.
+     */
     val updatedAt: String? = null,
     /**
      * Team-authored description, shown on the server's catalog card. A resync does not replace it.
      */
     val description: String? = null,
     /**
-     * OAuth authorization endpoint. Set only when `credentialRefSource` is connection; the client
-     * secret is never returned.
+     * OAuth authorization endpoint. Set only when `credentialRefSource` is connection; the client secret is never returned.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url")
-    val oauthAuthorizeUrl: String? = null,
-    /** OAuth scopes requested from each user. Set only when `credentialRefSource` is connection. */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes")
-    val oauthScopes: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url") val oauthAuthorizeUrl: String? = null,
     /**
-     * How long a user's authorization is reused before re-consent. Echoed so a team can read the
-     * window without re-registering to discover it.
+     * OAuth scopes requested from each user. Set only when `credentialRefSource` is connection.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds")
-    val oauthAuthorizationTtlSeconds: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes") val oauthScopes: List<String>? = null,
+    /**
+     * How long a user's authorization is reused before re-consent. Echoed so a team can read the window without re-registering to discover it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds") val oauthAuthorizationTtlSeconds: String? = null
 )
 
-/** Describes an MCP server to register. */
+/**
+ * Describes an MCP server to register.
+ */
 data class McpServerCreateRequest(
     /**
-     * Identifier for the server, unique within your team. Must match
-     * `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
+     * Identifier for the server, unique within your team. Must match `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
      */
     val serverRef: String,
     /**
-     * HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses.
-     * Required.
+     * HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses. Required.
      */
     val endpoint: String,
-    /** Optional. `streamable_http`, the default and only accepted value. */
+    /**
+     * Optional. `streamable_http`, the default and only accepted value.
+     */
     val transport: McpServerCreateRequestTransportEnum? = null,
     /**
-     * How requests to the server authenticate: none (the default), secret, or connection. With
-     * secret, the value from `credentialRef` or `api_key` is sent in the Authorization header,
-     * prefixed with "Bearer " unless it already contains a space.
+     * How requests to the server authenticate: none (the default), secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer " unless it already contains a space.
      */
     val credentialRefSource: McpServerCreateRequestCredentialRefSourceEnum? = null,
-    /** Optional description shown on the server's catalog card. At most 1024 characters. */
+    /**
+     * Optional description shown on the server's catalog card. At most 1024 characters.
+     */
     val description: String? = null,
     /**
-     * For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean.
-     * Must match `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set exactly one of `credentialRef`
-     * and `api_key`.
+     * For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean. Must match `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set exactly one of `credentialRef` and `api_key`.
      */
     val credentialRef: String? = null,
     /**
-     * For `credentialRefSource` secret: the key or token itself. DigitalOcean stores it; it is
-     * write-only and no response returns it. Set exactly one of `credentialRef` and `api_key`.
+     * For `credentialRefSource` secret: the key or token itself. DigitalOcean stores it; it is write-only and no response returns it. Set exactly one of `credentialRef` and `api_key`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the client ID of your team's OAuth client for
-     * the server. Each user of the server then authorizes individually.
+     * Required for `credentialRefSource` connection: the client ID of your team's OAuth client for the server. Each user of the server then authorizes individually.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_id")
-    val oauthClientId: String? = null,
-    /** Required for `credentialRefSource` connection. Write-only; no response returns it. */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_secret")
-    val oauthClientSecret: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_id") val oauthClientId: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use
-     * the endpoint's scheme and port, on the endpoint's host or another host under the same
-     * registrable domain.
+     * Required for `credentialRefSource` connection. Write-only; no response returns it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url")
-    val oauthAuthorizeUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_secret") val oauthClientSecret: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules
-     * as `oauth_authorize_url`.
+     * Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use the endpoint's scheme and port, on the endpoint's host or another host under the same registrable domain.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_token_url")
-    val oauthTokenUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url") val oauthAuthorizeUrl: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64
-     * of them.
+     * Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules as `oauth_authorize_url`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes")
-    val oauthScopes: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_token_url") val oauthTokenUrl: String? = null,
     /**
-     * How long, in seconds, a user's authorization may be reused before they must consent again.
-     * Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed
-     * automatically, so this window, not the provider's token lifetime, decides how often a user is
-     * sent back through consent. Set it no longer than the provider's own token lifetime, so the
-     * prompt arrives before a tool call fails against an expired token.
+     * Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64 of them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds")
-    val oauthAuthorizationTtlSeconds: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes") val oauthScopes: List<String>? = null,
+    /**
+     * How long, in seconds, a user's authorization may be reused before they must consent again. Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed automatically, so this window, not the provider's token lifetime, decides how often a user is sent back through consent. Set it no longer than the provider's own token lifetime, so the prompt arrives before a tool call fails against an expired token.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds") val oauthAuthorizationTtlSeconds: String? = null
 )
 
-/** Returns one MCP server. */
+/**
+ * Returns one MCP server.
+ */
 data class McpServerResponse(
-    /** The MCP server. */
+    /**
+     * The MCP server.
+     */
     val mcpServer: McpServer? = null
 )
 
-/** Selects the server to discover. */
+/**
+ * Selects the server to discover.
+ */
 data class McpServerResync(
     /**
-     * Required for a server registered with `credentialRefSource` connection: discovery reaches the
-     * server as this user, through their connection, because such a server has no team-wide
-     * credential. Ignored otherwise.
+     * Required for a server registered with `credentialRefSource` connection: discovery reaches the server as this user, through their connection, because such a server has no team-wide credential. Ignored otherwise.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
 )
 
-/** One tool discovered on an MCP server. */
+/**
+ * One tool discovered on an MCP server.
+ */
 data class McpServerTool(
-    /** Tool name as the server reports it, normalized to the catalog's naming rules. */
+    /**
+     * Tool name as the server reports it, normalized to the catalog's naming rules.
+     */
     val name: String? = null,
     /**
      * `<server_ref>_<name>`: the tool's catalog slug, and the value to list in `enabledToolSlugs`.
      */
     val toolSlug: String? = null,
-    /** Tool description as the server reports it. */
+    /**
+     * Tool description as the server reports it.
+     */
     val description: String? = null,
-    /** Whether the tool is enabled in your team's catalog. */
+    /**
+     * Whether the tool is enabled in your team's catalog.
+     */
     val enabled: Boolean? = null,
     /**
-     * True when the enabled tool was suspended because it disappeared from the server or its input
-     * schema changed incompatibly. Calls to it fail until it is enabled again.
+     * True when the enabled tool was suspended because it disappeared from the server or its input schema changed incompatibly. Calls to it fail until it is enabled again.
      */
     val quarantined: Boolean? = null,
-    /** Why the tool was quarantined; empty otherwise. */
-    val quarantineReason: String? = null,
+    /**
+     * Why the tool was quarantined; empty otherwise.
+     */
+    val quarantineReason: String? = null
 )
 
-/** Complete set of a server's tools to enable. */
+/**
+ * Complete set of a server's tools to enable.
+ */
 data class McpServerToolsUpdate(
     /**
-     * The complete set of tool slugs (`<server_ref>_<name>`) to enable; every other tool of the
-     * server is disabled. Empty disables every tool.
+     * The complete set of tool slugs (`<server_ref>_<name>`) to enable; every other tool of the server is disabled. Empty disables every tool.
      */
     val enabledToolSlugs: List<String>,
     /**
-     * Required for a server registered with `credentialRefSource` connection when a tool needs
-     * verification against the live server, which can only be reached as a user who has authorized
-     * it. Ignored otherwise.
+     * Required for a server registered with `credentialRefSource` connection when a tool needs verification against the live server, which can only be reached as a user who has authorized it. Ignored otherwise.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
 )
 
-/** Carries the editable fields of a registered server. */
+/**
+ * Carries the editable fields of a registered server.
+ */
 data class McpServerUpdate(
-    /** Replaces the stored description; empty clears it. At most 1024 characters. */
+    /**
+     * Replaces the stored description; empty clears it. At most 1024 characters.
+     */
     val description: String? = null
 )

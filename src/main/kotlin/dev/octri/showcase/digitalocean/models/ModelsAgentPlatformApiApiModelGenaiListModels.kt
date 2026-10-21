@@ -5,77 +5,124 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** A machine learning model stored on the GenAI platform */
+/**
+ * A machine learning model stored on the GenAI platform
+ */
 data class ApiModelPublic(
-    /** Agreement Description */
+    /**
+     * Agreement Description
+     */
     val agreement: ApiAgreement? = null,
-    /** Benchmark scores for this model, stored as arbitrary JSON */
-    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score")
-    val benchmarkScore: Map<String, Any>? = null,
-    /** Model capabilities (inference, reasoning, vectorization, etc.) */
+    /**
+     * Benchmark scores for this model, stored as arbitrary JSON
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score") val benchmarkScore: Map<String, Any>? = null,
+    /**
+     * Model capabilities (inference, reasoning, vectorization, etc.)
+     */
     val capabilities: List<String>? = null,
-    /** Context window (maximum tokens) */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_window")
-    val contextWindow: String? = null,
-    /** Creation date / time */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Model description */
+    /**
+     * Context window (maximum tokens)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_window") val contextWindow: String? = null,
+    /**
+     * Creation date / time
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Model description
+     */
     val description: String? = null,
-    /** Available endpoints and their capabilities */
+    /**
+     * Available endpoints and their capabilities
+     */
     val endpoints: List<ApiModelEndpoint>? = null,
-    /** Human-readable model identifier */
+    /**
+     * Human-readable model identifier
+     */
     val id: String? = null,
-    /** True if it is a foundational model provided by do */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_foundational")
-    val isFoundational: Boolean? = null,
-    /** Default chunking size limit to show in UI */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_default_chunk_size")
-    val kbDefaultChunkSize: Long? = null,
-    /** Maximum chunk size limit of model */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_max_chunk_size")
-    val kbMaxChunkSize: Long? = null,
-    /** Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase */
-    @com.fasterxml.jackson.annotation.JsonProperty("kb_min_chunk_size")
-    val kbMinChunkSize: Long? = null,
-    /** Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life) */
-    @com.fasterxml.jackson.annotation.JsonProperty("lifecycle_status")
-    val lifecycleStatus: String? = null,
-    /** Input/output modalities */
+    /**
+     * True if it is a foundational model provided by do
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_foundational") val isFoundational: Boolean? = null,
+    /**
+     * Default chunking size limit to show in UI
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_default_chunk_size") val kbDefaultChunkSize: Long? = null,
+    /**
+     * Maximum chunk size limit of model
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_max_chunk_size") val kbMaxChunkSize: Long? = null,
+    /**
+     * Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kb_min_chunk_size") val kbMinChunkSize: Long? = null,
+    /**
+     * Lifecycle status of the model (internal, public-preview, active, deprecated, end_of_life)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("lifecycle_status") val lifecycleStatus: String? = null,
+    /**
+     * Input/output modalities
+     */
     val modalities: ApiModelModalities? = null,
-    /** Model availability (serverless, dedicated, etc.) */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_availability")
-    val modelAvailability: String? = null,
-    /** Display name of the model */
+    /**
+     * Model availability (serverless, dedicated, etc.)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_availability") val modelAvailability: String? = null,
+    /**
+     * Display name of the model
+     */
     val name: String? = null,
-    /** Parameter count in billions */
-    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count")
-    val parameterCount: Float? = null,
-    /** Unique id of the model, this model is based on */
+    /**
+     * Parameter count in billions
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count") val parameterCount: Float? = null,
+    /**
+     * Unique id of the model, this model is based on
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_uuid") val parentUuid: String? = null,
-    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    /**
+     * Pricing per million tokens (aligns with existing ModelPrice pattern)
+     */
     val pricing: ApiModelPricing? = null,
-    /** Optional enumerated value serialized in the `provider` wire field. */
+    /**
+     * Optional enumerated value serialized in the `provider` wire field.
+     */
     val provider: ApiModelProvider? = null,
-    /** Available reasoning efforts for this model */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_efforts")
-    val reasoningEfforts: List<String>? = null,
-    /** Playground settings derived from model metadata */
+    /**
+     * Available reasoning efforts for this model
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_efforts") val reasoningEfforts: List<String>? = null,
+    /**
+     * Playground settings derived from model metadata
+     */
     val settings: List<ApiModelSetting>? = null,
-    /** Whether this model supports extended thinking (Anthropic models) */
+    /**
+     * Whether this model supports extended thinking (Anthropic models)
+     */
     val thinking: Boolean? = null,
-    /** Model type (chat, embedding, image, reasoning, coding) */
+    /**
+     * Model type (chat, embedding, image, reasoning, coding)
+     */
     val type: String? = null,
-    /** Last modified */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** Model has been fully uploaded */
-    @com.fasterxml.jackson.annotation.JsonProperty("upload_complete")
-    val uploadComplete: Boolean? = null,
-    /** Download url */
+    /**
+     * Last modified
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * Model has been fully uploaded
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("upload_complete") val uploadComplete: Boolean? = null,
+    /**
+     * Download url
+     */
     val url: String? = null,
-    /** Unique id */
+    /**
+     * Unique id
+     */
     val uuid: String? = null,
-    /** Version Information about a Model */
-    val version: ApiModelVersion? = null,
+    /**
+     * Version Information about a Model
+     */
+    val version: ApiModelVersion? = null
 )

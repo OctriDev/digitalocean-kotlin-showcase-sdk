@@ -12,69 +12,20 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object DatabasesMethodsDatabasesGetClusterMetricsCredentialsOperation {
     /**
-     * To show the credentials for all database clusters' metrics endpoints, send a GET request to
-     * `/v2/databases/metrics/credentials`. The result will be a JSON object with a `credentials`
-     * key.
+     * To show the credentials for all database clusters' metrics endpoints, send a GET request to `/v2/databases/metrics/credentials`. The result will be a JSON object with a `credentials` key.
      */
-    fun databasesGetClusterMetricsCredentials(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): DatabaseMetricsAuth {
-        return SdkClient.request<DatabaseMetricsAuth>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/metrics/credentials",
-                    config = clientConfig,
-                    operationId = "databasesGetClusterMetricsCredentials",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun databasesGetClusterMetricsCredentials(clientConfig: ClientConfig, options: RequestOptions? = null): DatabaseMetricsAuth {
+        return SdkClient.request<DatabaseMetricsAuth>(SdkClient.RequestSpec("GET", "/v2/databases/metrics/credentials", config = clientConfig, operationId = "databasesGetClusterMetricsCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateClusterMetricsCredentialsOperation {
     /**
-     * Replaces the metrics endpoint credentials for all database clusters. Include `credentials` to
-     * set the basic-auth username and password using `basic_auth_username` and
-     * `basic_auth_password`; the request body is optional. A successful request returns 204 with no
-     * response body.
+     * Replaces the metrics endpoint credentials for all database clusters. Include `credentials` to set the basic-auth username and password using `basic_auth_username` and `basic_auth_password`; the request body is optional. A successful request returns 204 with no response body.
      *
-     * To update the credentials for all database clusters' metrics endpoints, send a PUT request to
-     * `/v2/databases/metrics/credentials`. A successful request will receive a 204 No Content
-     * status code with no body in response.
+     * To update the credentials for all database clusters' metrics endpoints, send a PUT request to `/v2/databases/metrics/credentials`. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun databasesUpdateClusterMetricsCredentials(
-        clientConfig: ClientConfig,
-        body: DatabaseMetricsCredentials? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/metrics/credentials",
-                config = clientConfig,
-                body = body,
-                operationId = "databasesUpdateClusterMetricsCredentials",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun databasesUpdateClusterMetricsCredentials(clientConfig: ClientConfig, body: DatabaseMetricsCredentials? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/metrics/credentials", config = clientConfig, body = body, operationId = "databasesUpdateClusterMetricsCredentials", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

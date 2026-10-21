@@ -3,113 +3,126 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Data to modify an existing Agent */
+/**
+ * Data to modify an existing Agent
+ */
 data class ApiUpdateAgentInputPublic(
-    /** Optional `boolean` value serialized in the `agent_log_insights_enabled` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_log_insights_enabled")
-    val agentLogInsightsEnabled: Boolean? = null,
     /**
-     * Optional list of allowed domains for the chatbot - Must use fully qualified domain name
-     * (FQDN) such as example.com
+     * Optional `boolean` value serialized in the `agent_log_insights_enabled` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
-    val allowedDomains: List<String>? = null,
-    /** Optional anthropic key uuid for use with anthropic models */
-    @com.fasterxml.jackson.annotation.JsonProperty("anthropic_key_uuid")
-    val anthropicKeyUuid: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_log_insights_enabled") val agentLogInsightsEnabled: Boolean? = null,
     /**
-     * When true, removes all MCP servers from the agent. Use this instead of sending an empty
-     * mcp_servers array.
+     * Optional list of allowed domains for the chatbot - Must use fully qualified domain name (FQDN) such as example.com
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("clear_mcp_servers")
-    val clearMcpServers: Boolean? = null,
-    /** Optional update of conversation logs enabled */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_logs_enabled")
-    val conversationLogsEnabled: Boolean? = null,
-    /** Agent description */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>? = null,
+    /**
+     * Optional anthropic key uuid for use with anthropic models
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("anthropic_key_uuid") val anthropicKeyUuid: String? = null,
+    /**
+     * When true, removes all MCP servers from the agent. Use this instead of sending an empty mcp_servers array.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("clear_mcp_servers") val clearMcpServers: Boolean? = null,
+    /**
+     * Optional update of conversation logs enabled
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_logs_enabled") val conversationLogsEnabled: Boolean? = null,
+    /**
+     * Agent description
+     */
     val description: String? = null,
     /**
-     * Agent instruction. Instructions help your agent to perform its job effectively. See Write
-     * Effective Agent Instructions for best practices.
+     * Agent instruction. Instructions help your agent to perform its job effectively. See Write Effective Agent Instructions for best practices.
      */
     val instruction: String? = null,
-    /** How many results should be considered from an attached knowledge base */
+    /**
+     * How many results should be considered from an attached knowledge base
+     */
     val k: Long? = null,
     /**
-     * Specifies the maximum number of tokens the model can process in a single input or output, set
-     * as a number between 1 and 512. This determines the length of each response.
+     * Specifies the maximum number of tokens the model can process in a single input or output, set as a number between 1 and 512. This determines the length of each response.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("max_tokens") val maxTokens: Long? = null,
-    /** MCP (Model Context Protocol) servers to attach to the agent */
-    @com.fasterxml.jackson.annotation.JsonProperty("mcp_servers")
-    val mcpServers: List<ApiMcpServer>? = null,
-    /** Optional Model Provider uuid for use with provider models */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_provider_key_uuid")
-    val modelProviderKeyUuid: String? = null,
-    /** Optional `string` value serialized in the `model_router_uuid` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_router_uuid")
-    val modelRouterUuid: String? = null,
-    /** Identifier for the foundation model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_uuid") val modelUuid: String? = null,
-    /** Agent name */
-    val name: String? = null,
-    /** Optional OpenAI key uuid for use with OpenAI models */
-    @com.fasterxml.jackson.annotation.JsonProperty("open_ai_key_uuid")
-    val openAiKeyUuid: String? = null,
-    /** The id of the DigitalOcean project this agent will belong to */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `boolean` value serialized in the `provide_citations` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("provide_citations")
-    val provideCitations: Boolean? = null,
-    /** Optional `string` value serialized in the `reasoning_effort` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
-    val reasoningEffort: String? = null,
     /**
-     * - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown - RETRIEVAL_METHOD_REWRITE: The
-     *   retrieval method is rewrite - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step
-     *   back - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries -
-     *   RETRIEVAL_METHOD_NONE: The retrieval method is none
+     * MCP (Model Context Protocol) servers to attach to the agent
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("retrieval_method")
-    val retrievalMethod: ApiRetrievalMethod? = null,
-    /** Optional `string` value serialized in the `router_preset_slug` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("router_preset_slug")
-    val routerPresetSlug: String? = null,
-    /** A set of abitrary tags to organize your agent */
+    @com.fasterxml.jackson.annotation.JsonProperty("mcp_servers") val mcpServers: List<ApiMcpServer>? = null,
+    /**
+     * Optional Model Provider uuid for use with provider models
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_provider_key_uuid") val modelProviderKeyUuid: String? = null,
+    /**
+     * Optional `string` value serialized in the `model_router_uuid` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_router_uuid") val modelRouterUuid: String? = null,
+    /**
+     * Identifier for the foundation model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_uuid") val modelUuid: String? = null,
+    /**
+     * Agent name
+     */
+    val name: String? = null,
+    /**
+     * Optional OpenAI key uuid for use with OpenAI models
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("open_ai_key_uuid") val openAiKeyUuid: String? = null,
+    /**
+     * The id of the DigitalOcean project this agent will belong to
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    /**
+     * Optional `boolean` value serialized in the `provide_citations` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("provide_citations") val provideCitations: Boolean? = null,
+    /**
+     * Optional `string` value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: String? = null,
+    /**
+     * - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries - RETRIEVAL_METHOD_NONE: The retrieval method is none
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("retrieval_method") val retrievalMethod: ApiRetrievalMethod? = null,
+    /**
+     * Optional `string` value serialized in the `router_preset_slug` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("router_preset_slug") val routerPresetSlug: String? = null,
+    /**
+     * A set of abitrary tags to organize your agent
+     */
     val tags: List<String>? = null,
     /**
-     * Controls the model’s creativity, specified as a number between 0 and 1. Lower values produce
-     * more predictable and conservative responses, while higher values encourage creativity and
-     * variation.
+     * Controls the model’s creativity, specified as a number between 0 and 1. Lower values produce more predictable and conservative responses, while higher values encourage creativity and variation.
      */
     val temperature: Float? = null,
-    /** Optional `int64`-formatted value serialized in the `thinking_token_budget` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("thinking_token_budget")
-    val thinkingTokenBudget: Long? = null,
     /**
-     * Defines the cumulative probability threshold for word selection, specified as a number
-     * between 0 and 1. Higher values allow for more diverse outputs, while lower values ensure
-     * focused and coherent responses.
+     * Optional `int64`-formatted value serialized in the `thinking_token_budget` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("thinking_token_budget") val thinkingTokenBudget: Long? = null,
+    /**
+     * Defines the cumulative probability threshold for word selection, specified as a number between 0 and 1. Higher values allow for more diverse outputs, while lower values ensure focused and coherent responses.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Float? = null,
-    /** Unique agent id */
+    /**
+     * Unique agent id
+     */
     val uuid: String? = null,
     /**
-     * Optional. Set to true to let the agent use the built-in web_fetch tool to retrieve content
-     * from public web pages, or false to disable it.
+     * Optional. Set to true to let the agent use the built-in web_fetch tool to retrieve content from public web pages, or false to disable it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_fetch_enabled")
-    val webFetchEnabled: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("web_fetch_enabled") val webFetchEnabled: Boolean? = null,
     /**
-     * Optional. Set to true to let the agent use the built-in web_search tool to search the public
-     * web for current information, or false to disable it.
+     * Optional. Set to true to let the agent use the built-in web_search tool to search the public web for current information, or false to disable it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_search_enabled")
-    val webSearchEnabled: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("web_search_enabled") val webSearchEnabled: Boolean? = null
 )
 
-/** Information about an updated agent */
+/**
+ * Information about an updated agent
+ */
 data class ApiUpdateAgentOutput(
-    /** An Agent */
+    /**
+     * An Agent
+     */
     val agent: ApiAgent? = null
 )

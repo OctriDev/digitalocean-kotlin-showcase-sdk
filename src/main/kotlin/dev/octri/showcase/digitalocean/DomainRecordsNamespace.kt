@@ -3,123 +3,50 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class DomainRecordsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To get a listing of all records configured for a domain, send a GET request to
-     * `/v2/domains/$DOMAIN_NAME/records`. The list of records returned can be filtered by using the
-     * `name` and `type` query parameters. For example, to only include A records for a domain, send
-     * a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified
-     * record name. For example, to only include records matching `sub.example.com`, send a GET
-     * request to…
+     * To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`. The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to…
      */
-    fun domainsListRecords(
-        domainName: String,
-        name: String? = null,
-        type: SchemaSchemaEnuma56b8627? = null,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllDomainRecordsResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsListRecords(
-            clientConfig,
-            domainName,
-            name,
-            type,
-            perPage,
-            page,
-            options,
-        )
+    fun domainsListRecords(domainName: String, name: String? = null, type: SchemaSchemaEnuma56b8627? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDomainRecordsResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsListRecords(clientConfig, domainName, name, type, perPage, page, options)
     }
 
     /**
-     * Creates a DNS record for the specified domain. Supply `type` and the attributes required for
-     * that record type, such as `name` and `data` where applicable. The response includes the
-     * created record with its generated `id`.
+     * Creates a DNS record for the specified domain. Supply `type` and the attributes required for that record type, such as `name` and `data` where applicable. The response includes the created record with its generated `id`.
      *
-     * To create a new record to a domain, send a POST request to
-     * `/v2/domains/$DOMAIN_NAME/records`. The request must include all of the required fields for
-     * the domain record type being added. See the attribute table for details regarding record
-     * types and their respective required attributes.
+     * To create a new record to a domain, send a POST request to `/v2/domains/$DOMAIN_NAME/records`. The request must include all of the required fields for the domain record type being added. See the attribute table for details regarding record types and their respective required attributes.
      */
-    fun domainsCreateRecord(
-        domainName: String,
-        body: Any? = null,
-        options: RequestOptions? = null,
-    ): CreatedDomainRecord {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsCreateRecord(
-            clientConfig,
-            domainName,
-            body,
-            options,
-        )
+    fun domainsCreateRecord(domainName: String, body: Any? = null, options: RequestOptions? = null): CreatedDomainRecord {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsCreateRecord(clientConfig, domainName, body, options)
     }
 
     /**
-     * To retrieve a specific domain record, send a GET request to
-     * `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
+     * To retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
      */
-    fun domainsGetRecord(
-        domainName: String,
-        domainRecordId: Long,
-        options: RequestOptions? = null,
-    ): DomainRecordResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsGetRecord(
-            clientConfig,
-            domainName,
-            domainRecordId,
-            options,
-        )
+    fun domainsGetRecord(domainName: String, domainRecordId: Long, options: RequestOptions? = null): DomainRecordResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsGetRecord(clientConfig, domainName, domainRecordId, options)
     }
 
     /**
-     * To update an existing record, send a PATCH request to
-     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type
-     * can be set to a new value for the record. See the attribute table for details regarding
-     * record types and their respective attributes.
+     * To update an existing record, send a PATCH request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type can be set to a new value for the record. See the attribute table for details regarding record types and their respective attributes.
      */
-    fun domainsPatchRecord(
-        request: dev.octri.showcase.digitalocean.methods.DomainRecords.DomainsPatchRecordRequest,
-        options: RequestOptions? = null,
-    ): DomainRecordResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsPatchRecord(
-            clientConfig,
-            request,
-            options,
-        )
+    fun domainsPatchRecord(request: dev.octri.showcase.digitalocean.methods.DomainRecords.DomainsPatchRecordRequest, options: RequestOptions? = null): DomainRecordResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsPatchRecord(clientConfig, request, options)
     }
 
     /**
-     * To update an existing record, send a PUT request to
-     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type
-     * can be set to a new value for the record. See the attribute table for details regarding
-     * record types and their respective attributes.
+     * To update an existing record, send a PUT request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for the record type can be set to a new value for the record. See the attribute table for details regarding record types and their respective attributes.
      */
-    fun domainsUpdateRecord(
-        request: dev.octri.showcase.digitalocean.methods.DomainRecords.DomainsUpdateRecordRequest,
-        options: RequestOptions? = null,
-    ): DomainRecordResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsUpdateRecord(
-            clientConfig,
-            request,
-            options,
-        )
+    fun domainsUpdateRecord(request: dev.octri.showcase.digitalocean.methods.DomainRecords.DomainsUpdateRecordRequest, options: RequestOptions? = null): DomainRecordResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsUpdateRecord(clientConfig, request, options)
     }
 
     /**
-     * To delete a record for a domain, send a DELETE request to
-     * `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. The record will be deleted and the
-     * response status will be a 204. This indicates a successful request with no body returned.
+     * To delete a record for a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. The record will be deleted and the response status will be a 204. This indicates a successful request with no body returned.
      */
-    fun domainsDeleteRecord(
-        domainName: String,
-        domainRecordId: Long,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsDeleteRecord(
-            clientConfig,
-            domainName,
-            domainRecordId,
-            options,
-        )
+    fun domainsDeleteRecord(domainName: String, domainRecordId: Long, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DomainRecords.domainsDeleteRecord(clientConfig, domainName, domainRecordId, options)
     }
+
 }

@@ -3,28 +3,15 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class ReservedIPv6ActionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Triggers an action on a reserved IPv6 address to assign it to a Droplet or unassign it. Set
-     * `type` to `assign` or `unassign`, and include `droplet_id` when assigning the address. A 201
-     * response returns the created action object.
+     * Triggers an action on a reserved IPv6 address to assign it to a Droplet or unassign it. Set `type` to `assign` or `unassign`, and include `droplet_id` when assigning the address. A 201 response returns the created action object.
      *
-     * To initiate an action on a reserved IPv6 send a POST request to
-     * `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request, set the `type`
-     * attribute to on of the supported action types: | Action | Details |------------|-------- |
-     * `assign` | Assigns a reserved IPv6 to a Droplet | `unassign` | Unassign a reserved IPv6 from
-     * a Droplet
+     * To initiate an action on a reserved IPv6 send a POST request to `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request, set the `type` attribute to on of the supported action types: | Action | Details |------------|-------- | `assign` | Assigns a reserved IPv6 to a Droplet | `unassign` | Unassign a reserved IPv6 from a Droplet
      */
-    fun post(
-        reservedIpv6: String,
-        body: Any? = null,
-        options: RequestOptions? = null,
-    ): ReservedIpv6Action {
-        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Actions.reservedIPv6ActionsPost(
-            clientConfig,
-            reservedIpv6,
-            body,
-            options,
-        )
+    fun post(reservedIpv6: String, body: Any? = null, options: RequestOptions? = null): ReservedIpv6Action {
+        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Actions.reservedIPv6ActionsPost(clientConfig, reservedIpv6, body, options)
     }
+
 }

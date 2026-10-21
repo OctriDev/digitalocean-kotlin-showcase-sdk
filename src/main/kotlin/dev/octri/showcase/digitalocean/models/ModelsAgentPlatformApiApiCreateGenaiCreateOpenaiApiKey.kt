@@ -3,17 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key for a specific agent. */
+/**
+ * CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key for a specific agent.
+ */
 data class ApiCreateOpenAIAPIKeyInputPublic(
-    /** OpenAI API key */
+    /**
+     * OpenAI API key
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
-    /** Name of the key */
-    val name: String? = null,
+    /**
+     * Name of the key
+     */
+    val name: String? = null
 )
 
-/** CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI API key. */
+/**
+ * CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI API key.
+ */
 data class ApiCreateOpenAIAPIKeyOutput(
-    /** OpenAI API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
+    /**
+     * OpenAI API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
 )

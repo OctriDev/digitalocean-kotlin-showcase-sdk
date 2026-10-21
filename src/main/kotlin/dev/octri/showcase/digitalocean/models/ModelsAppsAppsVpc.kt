@@ -3,17 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AppsVpc` API schema. */
+/**
+ * Typed representation of the `AppsVpc` API schema.
+ */
 data class AppsVpc(
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** Optional array value serialized in the `egress_ips` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("egress_ips")
-    val egressIps: List<AppsVpcEgressIp>? = null,
+    /**
+     * Optional array value serialized in the `egress_ips` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("egress_ips") val egressIps: List<AppsVpcEgressIp>? = null
 )
 
-/** Typed representation of the `AppsVpcEgressIp` API schema. */
+/**
+ * Typed representation of the `AppsVpcEgressIp` API schema.
+ */
 data class AppsVpcEgressIp(
-    /** Optional `string` value serialized in the `ip` wire field. */
+    /**
+     * Optional `string` value serialized in the `ip` wire field.
+     */
     val ip: String? = null
 )

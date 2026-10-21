@@ -13,81 +13,29 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesGetAutoscaleOperation {
     /**
-     * To retrieve the autoscale configuration for an existing database cluster, send a GET request
-     * to `/v2/databases/$DATABASE_ID/autoscale`. The response will be a JSON object with
-     * autoscaling configuration details.
+     * To retrieve the autoscale configuration for an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID/autoscale`. The response will be a JSON object with autoscaling configuration details.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetAutoscale(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): Autoscale {
+    fun databasesGetAutoscale(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Autoscale {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Autoscale>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/autoscale",
-                    config = clientConfig,
-                    operationId = "databasesGetAutoscale",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Autoscale>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/autoscale", config = clientConfig, operationId = "databasesGetAutoscale", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateAutoscaleOperation {
     /**
-     * Replaces the autoscaling configuration for an existing database cluster. Send the `storage`
-     * configuration to control storage autoscaling, including whether it is enabled. The successful
-     * response has no body.
+     * Replaces the autoscaling configuration for an existing database cluster. Send the `storage` configuration to control storage autoscaling, including whether it is enabled. The successful response has no body.
      *
-     * To configure autoscale settings for an existing database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/autoscale`, specifying the autoscale configuration. A successful
-     * request will receive a 204 No Content status code with no body in response.
+     * To configure autoscale settings for an existing database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/autoscale`, specifying the autoscale configuration. A successful request will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param storage Storage autoscaling configuration
      */
-    fun databasesUpdateAutoscale(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        storage: DatabaseStorageAutoscaleParams? = null,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateAutoscale(clientConfig: ClientConfig, databaseClusterUuid: String, storage: DatabaseStorageAutoscaleParams? = null, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/autoscale",
-                config = clientConfig,
-                body = SdkClient.bodyMap("storage" to (SdkClient.omitIfNull(storage))),
-                operationId = "databasesUpdateAutoscale",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "422" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/autoscale", config = clientConfig, body = SdkClient.bodyMap("storage" to (SdkClient.omitIfNull(storage))), operationId = "databasesUpdateAutoscale", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

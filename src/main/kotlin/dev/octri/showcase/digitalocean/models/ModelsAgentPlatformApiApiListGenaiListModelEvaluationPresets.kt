@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListModelEvaluationPresetsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelEvaluationPresetsOutput` API schema.
+ */
 data class ApiListModelEvaluationPresetsOutput(
-    /** List of explicitly saved evaluation presets (reusable configs). */
+    /**
+     * List of explicitly saved evaluation presets (reusable configs).
+     */
     val presets: List<ApiModelEvaluationPreset>? = null
 )

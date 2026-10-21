@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** List of knowledge bases */
+/**
+ * List of knowledge bases
+ */
 data class ApiListKnowledgeBasesOutput(
-    /** The knowledge bases */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_bases")
-    val knowledgeBases: List<ApiKnowledgeBase>? = null,
-    /** Links to other pages */
+    /**
+     * The knowledge bases
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_bases") val knowledgeBases: List<ApiKnowledgeBase>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )

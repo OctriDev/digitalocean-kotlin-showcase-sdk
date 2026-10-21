@@ -4,22 +4,25 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * One epoch's standalone score, computed the same way overall_score_percent is computed today (flat
- * pass rate over that epoch's rows).
+ * One epoch's standalone score, computed the same way overall_score_percent is computed today (flat pass rate over that epoch's rows).
  */
 data class ApiPerEpochResultSummary(
-    /** 1-indexed epoch number (1 = first pass). */
+    /**
+     * 1-indexed epoch number (1 = first pass).
+     */
     val epoch: Long? = null,
-    /** Optional `double`-formatted value serialized in the `overall_score_percent` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("overall_score_percent")
-    val overallScorePercent: Double? = null,
-    /** Optional `int64`-formatted value serialized in the `rows_scored` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("rows_scored") val rowsScored: Long? = null,
+    /**
+     * Optional `double`-formatted value serialized in the `overall_score_percent` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("overall_score_percent") val overallScorePercent: Double? = null,
+    /**
+     * Optional `int64`-formatted value serialized in the `rows_scored` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("rows_scored") val rowsScored: Long? = null
 )
 
 /**
- * Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying
- * model performed across the prompts that were routed to it.
+ * Per-model breakdown of an evaluation run. Set on router evaluations to show how each underlying model performed across the prompts that were routed to it.
  */
 data class ApiPerModelResultSummaries(
     /**
@@ -28,45 +31,56 @@ data class ApiPerModelResultSummaries(
     val summaries: List<ApiPerModelResultSummary>? = null
 )
 
-/** Aggregated evaluation results for a single underlying model in a router evaluation run. */
+/**
+ * Aggregated evaluation results for a single underlying model in a router evaluation run.
+ */
 data class ApiPerModelResultSummary(
-    /** Pass/fail rate for each metric, computed over only the prompts routed to this model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_summaries")
-    val metricSummaries: List<ApiMetricResultSummary>? = null,
-    /** The underlying model these results are for, such as `Llama 3.3 Instruct (70B)`. */
+    /**
+     * Pass/fail rate for each metric, computed over only the prompts routed to this model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_summaries") val metricSummaries: List<ApiMetricResultSummary>? = null,
+    /**
+     * The underlying model these results are for, such as `Llama 3.3 Instruct (70B)`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("model_name") val modelName: String? = null,
-    /** All performance metrics are for the candidate model unless noted otherwise. */
-    @com.fasterxml.jackson.annotation.JsonProperty("performance_metrics")
-    val performanceMetrics: ApiPerformanceMetrics? = null,
-    /** Number of prompts in the run that were routed to this model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_count") val promptCount: Long? = null,
+    /**
+     * All performance metrics are for the candidate model unless noted otherwise.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("performance_metrics") val performanceMetrics: ApiPerformanceMetrics? = null,
+    /**
+     * Number of prompts in the run that were routed to this model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_count") val promptCount: Long? = null
 )
 
 /**
- * Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task
- * category performed across the prompts that were classified into it.
+ * Per-task breakdown of an evaluation run. Set on router evaluations to show how each routing task category performed across the prompts that were classified into it.
  */
 data class ApiPerTaskResultSummaries(
     /**
-     * One entry per routing task category that received at least one prompt during the evaluation
-     * run.
+     * One entry per routing task category that received at least one prompt during the evaluation run.
      */
     val summaries: List<ApiPerTaskResultSummary>? = null
 )
 
-/** Aggregated evaluation results for a single routing task category in a router evaluation run. */
+/**
+ * Aggregated evaluation results for a single routing task category in a router evaluation run.
+ */
 data class ApiPerTaskResultSummary(
-    /** Pass/fail rate for each metric, computed over only the prompts in this task category. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_summaries")
-    val metricSummaries: List<ApiMetricResultSummary>? = null,
-    /** All performance metrics are for the candidate model unless noted otherwise. */
-    @com.fasterxml.jackson.annotation.JsonProperty("performance_metrics")
-    val performanceMetrics: ApiPerformanceMetrics? = null,
-    /** Number of prompts in the run that were classified into this task category. */
+    /**
+     * Pass/fail rate for each metric, computed over only the prompts in this task category.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_summaries") val metricSummaries: List<ApiMetricResultSummary>? = null,
+    /**
+     * All performance metrics are for the candidate model unless noted otherwise.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("performance_metrics") val performanceMetrics: ApiPerformanceMetrics? = null,
+    /**
+     * Number of prompts in the run that were classified into this task category.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt_count") val promptCount: Long? = null,
     /**
-     * The routing task category these results are for, such as `Coding & brainstorming` or
-     * `Summarization`.
+     * The routing task category these results are for, such as `Coding & brainstorming` or `Summarization`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("task_name") val taskName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("task_name") val taskName: String? = null
 )

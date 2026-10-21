@@ -3,1297 +3,531 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class DatabasesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the options available for the offered database engines, send a GET request to
-     * `/v2/databases/options`. The result will be a JSON object with an `options` key.
+     * To list all of the options available for the offered database engines, send a GET request to `/v2/databases/options`. The result will be a JSON object with an `options` key.
      */
     fun listOptions(options: RequestOptions? = null): Options {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListOptions(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListOptions(clientConfig, options)
     }
 
     /**
-     * To list all of the database clusters available on your account, send a GET request to
-     * `/v2/databases`. To limit the results to database clusters with a specific tag, include the
-     * `tag_name` query parameter set to the name of the tag. For example,
-     * `/v2/databases?tag_name=$TAG_NAME`. The result will be a JSON object with a `databases` key.
-     * This will be set to an array of database objects, each of which will contain the standard
-     * database attributes. The embedded `connection` and…
+     * To list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`. The result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes. The embedded `connection` and…
      */
     fun listClusters(tagName: String? = null, options: RequestOptions? = null): DatabaseClusters {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListClusters(
-            clientConfig,
-            tagName,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListClusters(clientConfig, tagName, options)
     }
 
     /**
-     * Creates a database cluster with the selected engine, size, region, and node count. Supply
-     * `name`, `engine`, `num_nodes`, `size`, and `region`; use `backup_restore` to create a cluster
-     * from an existing backup. The new cluster starts with a `creating` status and changes to
-     * `online` when ready to receive traffic.
+     * Creates a database cluster with the selected engine, size, region, and node count. Supply `name`, `engine`, `num_nodes`, `size`, and `region`; use `backup_restore` to create a cluster from an existing backup. The new cluster starts with a `creating` status and changes to `online` when ready to receive traffic.
      *
-     * To create a database cluster, send a POST request to `/v2/databases`. To see a list of
-     * options for each engine, such as available regions, size slugs, and versions, send a GET
-     * request to the `/v2/databases/options` endpoint. The available sizes for the
-     * `storage_size_mib` field depends on the cluster's size. To see a list of available sizes, see
-     * Managed Database Pricing. The create response returns a JSON object with a key called
-     * `database`. The value of this is an object…
+     * To create a database cluster, send a POST request to `/v2/databases`. To see a list of options for each engine, such as available regions, size slugs, and versions, send a GET request to the `/v2/databases/options` endpoint. The available sizes for the `storage_size_mib` field depends on the cluster's size. To see a list of available sizes, see Managed Database Pricing. The create response returns a JSON object with a key called `database`. The value of this is an object…
      */
-    fun createCluster(
-        body: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesCreateCluster,
-        options: RequestOptions? = null,
-    ): DatabaseClusterResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateCluster(
-            clientConfig,
-            body,
-            options,
-        )
+    fun createCluster(body: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesCreateCluster, options: RequestOptions? = null): DatabaseClusterResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateCluster(clientConfig, body, options)
     }
 
     /**
-     * To show information about an existing database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This
-     * will be set to an object containing the standard database cluster attributes. The embedded
-     * `connection` and `private_connection` objects will contain the information needed to access
-     * the database cluster. For multi-node clusters, the `standby_connection` and
-     * `standby_private_connection` objects contain the…
+     * To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`. The response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes. The embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster. For multi-node clusters, the `standby_connection` and `standby_private_connection` objects contain the…
      */
-    fun getCluster(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseClusterResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetCluster(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun getCluster(databaseClusterUuid: String, options: RequestOptions? = null): DatabaseClusterResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetCluster(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`. A
-     * status of 204 will be given. This indicates that the request was processed successfully, but
-     * that no response body is needed.
+     * To destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
     fun destroyCluster(databaseClusterUuid: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDestroyCluster(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDestroyCluster(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Shows configuration parameters for an existing database cluster by sending a GET request to
-     * `/v2/databases/$DATABASE_ID/config`. The response is a JSON object with a `config` key, which
-     * is set to an object containing any database configuration parameters.
+     * Shows configuration parameters for an existing database cluster by sending a GET request to `/v2/databases/$DATABASE_ID/config`. The response is a JSON object with a `config` key, which is set to an object containing any database configuration parameters.
      */
-    fun getConfig(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseConfigResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetConfig(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun getConfig(databaseClusterUuid: String, options: RequestOptions? = null): DatabaseConfigResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetConfig(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Updates configuration settings for an existing database cluster. Supply `config` with the
-     * settings you want to change; the available settings depend on the cluster's database engine.
-     * Use the cluster's UUID to target the configuration.
+     * Updates configuration settings for an existing database cluster. Supply `config` with the settings you want to change; the available settings depend on the cluster's database engine. Use the cluster's UUID to target the configuration.
      *
-     * To update the configuration for an existing database cluster, send a PATCH request to
-     * `/v2/databases/$DATABASE_ID/config`.
+     * To update the configuration for an existing database cluster, send a PATCH request to `/v2/databases/$DATABASE_ID/config`.
      */
-    fun patchConfig(
-        databaseClusterUuid: String,
-        config: DatabaseConfigConfig? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesPatchConfig(
-            clientConfig,
-            databaseClusterUuid,
-            config,
-            options,
-        )
+    fun patchConfig(databaseClusterUuid: String, config: DatabaseConfigConfig? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesPatchConfig(clientConfig, databaseClusterUuid, config, options)
     }
 
     /**
-     * To retrieve the public certificate used to secure the connection to the database cluster send
-     * a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a
-     * `ca` key. This will be set to an object containing the base64 encoding of the public key
-     * certificate.
+     * To retrieve the public certificate used to secure the connection to the database cluster send a GET request to `/v2/databases/$DATABASE_ID/ca`. The response will be a JSON object with a `ca` key. This will be set to an object containing the base64 encoding of the public key certificate.
      */
     fun getCa(databaseClusterUuid: String, options: RequestOptions? = null): CaResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetCa(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetCa(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To retrieve the status of the most recent online migration, send a GET request to
-     * `/v2/databases/$DATABASE_ID/online-migration`.
+     * To retrieve the status of the most recent online migration, send a GET request to `/v2/databases/$DATABASE_ID/online-migration`.
      */
-    fun getMigrationStatus(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): OnlineMigration {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetMigrationStatus(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun getMigrationStatus(databaseClusterUuid: String, options: RequestOptions? = null): OnlineMigration {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetMigrationStatus(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Submits an online migration that connects a database cluster to an existing source cluster
-     * and replicates its contents. Supply the source connection details in `source`; online
-     * migration is available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the source
-     * database continues to receive writes, migration can continue for up to two weeks unless you
-     * stop it manually.
+     * Submits an online migration that connects a database cluster to an existing source cluster and replicates its contents. Supply the source connection details in `source`; online migration is available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the source database continues to receive writes, migration can continue for up to two weeks unless you stop it manually.
      *
-     * To start an online migration, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster establishes a
-     * connection with an existing cluster and replicates its contents to the target cluster. Online
-     * migration is only available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the
-     * existing database is continuously being written to, the migration process will continue for
-     * up to two weeks unless it is manually stopped. Online migration…
+     * To start an online migration, send a PUT request to `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster establishes a connection with an existing cluster and replicates its contents to the target cluster. Online migration is only available for MySQL, PostgreSQL, Caching, and Valkey clusters. If the existing database is continuously being written to, the migration process will continue for up to two weeks unless it is manually stopped. Online migration…
      */
-    fun updateOnlineMigration(
-        databaseClusterUuid: String,
-        source: dev.octri.showcase.digitalocean.methods.DatabasesMethods.SourceDatabaseSource,
-        disableSsl: Boolean? = null,
-        ignoreDbs: List<String>? = null,
-        options: RequestOptions? = null,
-    ): OnlineMigration {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateOnlineMigration(
-                clientConfig,
-                databaseClusterUuid,
-                source,
-                disableSsl,
-                ignoreDbs,
-                options,
-            )
+    fun updateOnlineMigration(databaseClusterUuid: String, source: dev.octri.showcase.digitalocean.methods.DatabasesMethods.SourceDatabaseSource, disableSsl: Boolean? = null, ignoreDbs: List<String>? = null, options: RequestOptions? = null): OnlineMigration {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateOnlineMigration(clientConfig, databaseClusterUuid, source, disableSsl, ignoreDbs, options)
     }
 
     /**
-     * To stop an online migration, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/online-migration/$MIGRATION_ID`. A status of 204 will be given.
-     * This indicates that the request was processed successfully, but that no response body is
-     * needed.
+     * To stop an online migration, send a DELETE request to `/v2/databases/$DATABASE_ID/online-migration/$MIGRATION_ID`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun deleteOnlineMigration(
-        databaseClusterUuid: String,
-        migrationId: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesDeleteOnlineMigration(clientConfig, databaseClusterUuid, migrationId, options)
+    fun deleteOnlineMigration(databaseClusterUuid: String, migrationId: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteOnlineMigration(clientConfig, databaseClusterUuid, migrationId, options)
     }
 
     /**
-     * To migrate a database cluster to a new region, send a `PUT` request to
-     * `/v2/databases/$DATABASE_ID/migrate`. The body of the request must specify a `region`
-     * attribute. A successful request will receive a 202 Accepted status code with no body in
-     * response. Querying the database cluster will show that its `status` attribute will now be set
-     * to `migrating`. This will transition back to `online` when the migration has completed.
+     * To migrate a database cluster to a new region, send a `PUT` request to `/v2/databases/$DATABASE_ID/migrate`. The body of the request must specify a `region` attribute. A successful request will receive a 202 Accepted status code with no body in response. Querying the database cluster will show that its `status` attribute will now be set to `migrating`. This will transition back to `online` when the migration has completed.
      */
-    fun updateRegion(
-        databaseClusterUuid: String,
-        region: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateRegion(
-            clientConfig,
-            databaseClusterUuid,
-            region,
-            options,
-        )
+    fun updateRegion(databaseClusterUuid: String, region: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateRegion(clientConfig, databaseClusterUuid, region, options)
     }
 
     /**
-     * To resize a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/resize`. The
-     * body of the request must specify both the size and num_nodes attributes. A successful request
-     * will receive a 202 Accepted status code with no body in response. Querying the database
-     * cluster will show that its status attribute will now be set to resizing. This will transition
-     * back to online when the resize operation has completed.
+     * To resize a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/resize`. The body of the request must specify both the size and num_nodes attributes. A successful request will receive a 202 Accepted status code with no body in response. Querying the database cluster will show that its status attribute will now be set to resizing. This will transition back to online when the resize operation has completed.
      */
-    fun updateClusterSize(
-        databaseClusterUuid: String,
-        size: String,
-        numNodes: Int,
-        storageSizeMib: Long? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateClusterSize(
-            clientConfig,
-            databaseClusterUuid,
-            size,
-            numNodes,
-            storageSizeMib,
-            options,
-        )
+    fun updateClusterSize(databaseClusterUuid: String, size: String, numNodes: Int, storageSizeMib: Long? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateClusterSize(clientConfig, databaseClusterUuid, size, numNodes, storageSizeMib, options)
     }
 
     /**
-     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a
-     * JSON object with a `rules` key.
+     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a JSON object with a `rules` key.
      */
-    fun listFirewallRules(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): FirewallRulesResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListFirewallRules(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun listFirewallRules(databaseClusterUuid: String, options: RequestOptions? = null): FirewallRulesResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListFirewallRules(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to
-     * specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The
-     * firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC
-     * network to limit database access instead.
+     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC network to limit database access instead.
      *
-     * To update a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which
-     * resources should be able to open connections to the database. You may limit connections to
-     * specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet
-     * or Kubernetes node with that tag applied to it will have access. The firewall is limited to
-     * 100 rules (or trusted…
+     * To update a database cluster's firewall rules (known as "trusted sources" in the control panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which resources should be able to open connections to the database. You may limit connections to specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet or Kubernetes node with that tag applied to it will have access. The firewall is limited to 100 rules (or trusted…
      */
-    fun updateFirewallRules(
-        databaseClusterUuid: String,
-        rules: List<FirewallRuleRequest>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateFirewallRules(clientConfig, databaseClusterUuid, rules, options)
+    fun updateFirewallRules(databaseClusterUuid: String, rules: List<FirewallRuleRequest>? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateFirewallRules(clientConfig, databaseClusterUuid, rules, options)
     }
 
     /**
-     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current
-     * `service_cnames` configuration.
+     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current `service_cnames` configuration.
      */
-    fun getDoSettings(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DoSettingsResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetDoSettings(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun getDoSettings(databaseClusterUuid: String, options: RequestOptions? = null): DoSettingsResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetDoSettings(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is
-     * `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the
-     * TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables
-     * TLS verification when connecting via a custom hostname. After updating, the database nodes
-     * will be replaced to apply…
+     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables TLS verification when connecting via a custom hostname. After updating, the database nodes will be replaced to apply…
      */
-    fun updateDoSettings(
-        databaseClusterUuid: String,
-        doSettings: DoSettings,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateDoSettings(
-            clientConfig,
-            databaseClusterUuid,
-            doSettings,
-            options,
-        )
+    fun updateDoSettings(databaseClusterUuid: String, doSettings: DoSettings, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateDoSettings(clientConfig, databaseClusterUuid, doSettings, options)
     }
 
     /**
-     * To configure the window when automatic maintenance should be performed for a database
-     * cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request
-     * will receive a 204 No Content status code with no body in response.
+     * To configure the window when automatic maintenance should be performed for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun updateMaintenanceWindow(
-        databaseClusterUuid: String,
-        day: String,
-        hour: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateMaintenanceWindow(clientConfig, databaseClusterUuid, day, hour, options)
+    fun updateMaintenanceWindow(databaseClusterUuid: String, day: String, hour: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateMaintenanceWindow(clientConfig, databaseClusterUuid, day, hour, options)
     }
 
     /**
-     * To start the installation of updates for a database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No
-     * Content status code with no body in response.
+     * To start the installation of updates for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No Content status code with no body in response.
      */
     fun installUpdate(databaseClusterUuid: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesInstallUpdate(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesInstallUpdate(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET
-     * request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for
-     * Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will
-     * be set to an array of backup objects, each of which will contain the size of the backup and
-     * the timestamp at which it was created.
+     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will be set to an array of backup objects, each of which will contain the size of the backup and the timestamp at which it was created.
      */
     fun listBackups(databaseClusterUuid: String, options: RequestOptions? = null): DatabaseBackups {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListBackups(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListBackups(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To list all of the read-only replicas associated with a database cluster, send a GET request
-     * to `/v2/databases/$DATABASE_ID/replicas`. **Note**: Read-only replicas are not supported for
-     * Caching or Valkey clusters. The result will be a JSON object with a `replicas` key. This will
-     * be set to an array of database replica objects, each of which will contain the standard
-     * database replica attributes.
+     * To list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.
      */
-    fun listReplicas(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseReplicas {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListReplicas(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun listReplicas(databaseClusterUuid: String, options: RequestOptions? = null): DatabaseReplicas {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListReplicas(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Creates a read-only replica for a PostgreSQL or MySQL database cluster. Supply `name` and
-     * `size`; `size` must be at least as large as the source cluster's node size, and `region`
-     * defaults to the cluster's region when omitted. The replica starts with a `status` of
-     * `forking` and transitions to `active` when it is ready to receive traffic.
+     * Creates a read-only replica for a PostgreSQL or MySQL database cluster. Supply `name` and `size`; `size` must be at least as large as the source cluster's node size, and `region` defaults to the cluster's region when omitted. The replica starts with a `status` of `forking` and transitions to `active` when it is ready to receive traffic.
      *
-     * To create a read-only replica for a PostgreSQL or MySQL database cluster, send a POST request
-     * to `/v2/databases/$DATABASE_ID/replicas` specifying the name it should be given, the size of
-     * the node to be used, and the region where it will be located. **Note**: Read-only replicas
-     * are not supported for Caching or Valkey clusters. The response will be a JSON object with a
-     * key called `replica`. The value of this will be an object that contains the standard
-     * attributes associated…
+     * To create a read-only replica for a PostgreSQL or MySQL database cluster, send a POST request to `/v2/databases/$DATABASE_ID/replicas` specifying the name it should be given, the size of the node to be used, and the region where it will be located. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The response will be a JSON object with a key called `replica`. The value of this will be an object that contains the standard attributes associated…
      */
-    fun createReplica(
-        request:
-            dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesCreateReplicaRequest,
-        options: RequestOptions? = null,
-    ): DatabaseReplicaResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateReplica(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createReplica(request: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesCreateReplicaRequest, options: RequestOptions? = null): DatabaseReplicaResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateReplica(clientConfig, request, options)
     }
 
     /**
-     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`.
-     * The result will be a JSON object with a `events` key.
+     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`. The result will be a JSON object with a `events` key.
      */
-    fun listEventsLogs(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): EventsLogsResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListEventsLogs(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun listEventsLogs(databaseClusterUuid: String, options: RequestOptions? = null): EventsLogsResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListEventsLogs(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To show information about an existing database replica, send a GET request to
-     * `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not
-     * supported for Caching or Valkey clusters. The response will be a JSON object with a `replica
-     * key`. This will be set to an object containing the standard database replica attributes.
+     * To show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. The response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.
      */
-    fun getReplica(
-        databaseClusterUuid: String,
-        replicaName: String,
-        options: RequestOptions? = null,
-    ): DatabaseReplicaResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetReplica(
-            clientConfig,
-            databaseClusterUuid,
-            replicaName,
-            options,
-        )
+    fun getReplica(databaseClusterUuid: String, replicaName: String, options: RequestOptions? = null): DatabaseReplicaResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetReplica(clientConfig, databaseClusterUuid, replicaName, options)
     }
 
     /**
-     * To destroy a specific read-only replica, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not
-     * supported for Caching or Valkey clusters. A status of 204 will be given. This indicates that
-     * the request was processed successfully, but that no response body is needed.
+     * To destroy a specific read-only replica, send a DELETE request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun destroyReplica(
-        databaseClusterUuid: String,
-        replicaName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDestroyReplica(
-            clientConfig,
-            databaseClusterUuid,
-            replicaName,
-            options,
-        )
+    fun destroyReplica(databaseClusterUuid: String, replicaName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDestroyReplica(clientConfig, databaseClusterUuid, replicaName, options)
     }
 
     /**
-     * To promote a specific read-only replica, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME/promote`. **Note**: Read-only replicas are
-     * not supported for Caching or Valkey clusters. A status of 204 will be given. This indicates
-     * that the request was processed successfully, but that no response body is needed.
+     * To promote a specific read-only replica, send a PUT request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME/promote`. **Note**: Read-only replicas are not supported for Caching or Valkey clusters. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun promoteReplica(
-        databaseClusterUuid: String,
-        replicaName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesPromoteReplica(
-            clientConfig,
-            databaseClusterUuid,
-            replicaName,
-            options,
-        )
+    fun promoteReplica(databaseClusterUuid: String, replicaName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesPromoteReplica(clientConfig, databaseClusterUuid, replicaName, options)
     }
 
     /**
-     * To list all of the users for your database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/users`. Note: User management is not supported for Caching or
-     * Valkey clusters. The result will be a JSON object with a `users` key. This will be set to an
-     * array of database user objects, each of which will contain the standard database user
-     * attributes. User passwords will not show without the `database:view_credentials` scope. For
-     * MySQL clusters, additional options will be…
+     * To list all of the users for your database cluster, send a GET request to `/v2/databases/$DATABASE_ID/users`. Note: User management is not supported for Caching or Valkey clusters. The result will be a JSON object with a `users` key. This will be set to an array of database user objects, each of which will contain the standard database user attributes. User passwords will not show without the `database:view_credentials` scope. For MySQL clusters, additional options will be…
      */
     fun listUsers(databaseClusterUuid: String, options: RequestOptions? = null): Users {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListUsers(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListUsers(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Creates a database user for a database cluster. Supply the required `name` and, where
-     * applicable, engine-specific options in `mysql_settings` or `settings`; PostgreSQL
-     * `pg_allow_replication` defaults to `false` when omitted. The response includes the new user
-     * and its randomly generated password, and user management is not supported for Caching or
-     * Valkey clusters.
+     * Creates a database user for a database cluster. Supply the required `name` and, where applicable, engine-specific options in `mysql_settings` or `settings`; PostgreSQL `pg_allow_replication` defaults to `false` when omitted. The response includes the new user and its randomly generated password, and user management is not supported for Caching or Valkey clusters.
      *
-     * To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users` with
-     * the desired username. Note: User management is not supported for Caching or Valkey clusters.
-     * When adding a user to a MySQL cluster, additional options can be configured in the
-     * `mysql_settings` object. When adding a user to a PostgreSQL cluster, additional options can
-     * be configured in the `settings` object (for example, `pg_allow_replication`). When
-     * `pg_allow_replication` is omitted, it…
+     * To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users` with the desired username. Note: User management is not supported for Caching or Valkey clusters. When adding a user to a MySQL cluster, additional options can be configured in the `mysql_settings` object. When adding a user to a PostgreSQL cluster, additional options can be configured in the `settings` object (for example, `pg_allow_replication`). When `pg_allow_replication` is omitted, it…
      */
-    fun addUser(
-        databaseClusterUuid: String,
-        body: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesAddUser,
-        options: RequestOptions? = null,
-    ): UserResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAddUser(
-            clientConfig,
-            databaseClusterUuid,
-            body,
-            options,
-        )
+    fun addUser(databaseClusterUuid: String, body: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesAddUser, options: RequestOptions? = null): UserResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAddUser(clientConfig, databaseClusterUuid, body, options)
     }
 
     /**
-     * To show information about an existing database user, send a GET request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME`. Note: User management is not supported for
-     * Caching or Valkey clusters. The response will be a JSON object with a `user` key. This will
-     * be set to an object containing the standard database user attributes. The user's password
-     * will not show up unless the `database:view_credentials` scope is present. For MySQL clusters,
-     * additional options will be contained in…
+     * To show information about an existing database user, send a GET request to `/v2/databases/$DATABASE_ID/users/$USERNAME`. Note: User management is not supported for Caching or Valkey clusters. The response will be a JSON object with a `user` key. This will be set to an object containing the standard database user attributes. The user's password will not show up unless the `database:view_credentials` scope is present. For MySQL clusters, additional options will be contained in…
      */
-    fun getUser(
-        databaseClusterUuid: String,
-        username: String,
-        options: RequestOptions? = null,
-    ): UserResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetUser(
-            clientConfig,
-            databaseClusterUuid,
-            username,
-            options,
-        )
+    fun getUser(databaseClusterUuid: String, username: String, options: RequestOptions? = null): UserResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetUser(clientConfig, databaseClusterUuid, username, options)
     }
 
     /**
-     * To remove a specific database user, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME`. A status of 204 will be given. This indicates
-     * that the request was processed successfully, but that no response body is needed. Note: User
-     * management is not supported for Caching or Valkey clusters.
+     * To remove a specific database user, send a DELETE request to `/v2/databases/$DATABASE_ID/users/$USERNAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed. Note: User management is not supported for Caching or Valkey clusters.
      */
-    fun deleteUser(
-        databaseClusterUuid: String,
-        username: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteUser(
-            clientConfig,
-            databaseClusterUuid,
-            username,
-            options,
-        )
+    fun deleteUser(databaseClusterUuid: String, username: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteUser(clientConfig, databaseClusterUuid, username, options)
     }
 
     /**
-     * To update an existing database user, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME` with the desired settings. **Note**: only
-     * `settings` can be updated via this type of request. If you wish to change the name of a user,
-     * you must recreate a new user. For PostgreSQL clusters, you can update
-     * `settings.pg_allow_replication` to enable or disable replication privileges for the user.
-     * When omitted, the value defaults to `false`. For Kafka and OpenSearch clusters,…
+     * To update an existing database user, send a PUT request to `/v2/databases/$DATABASE_ID/users/$USERNAME` with the desired settings. **Note**: only `settings` can be updated via this type of request. If you wish to change the name of a user, you must recreate a new user. For PostgreSQL clusters, you can update `settings.pg_allow_replication` to enable or disable replication privileges for the user. When omitted, the value defaults to `false`. For Kafka and OpenSearch clusters,…
      */
-    fun updateUser(
-        databaseClusterUuid: String,
-        username: String,
-        body: Map<String, Any>,
-        options: RequestOptions? = null,
-    ): UserResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateUser(
-            clientConfig,
-            databaseClusterUuid,
-            username,
-            body,
-            options,
-        )
+    fun updateUser(databaseClusterUuid: String, username: String, body: Map<String, Any>, options: RequestOptions? = null): UserResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateUser(clientConfig, databaseClusterUuid, username, body, options)
     }
 
     /**
-     * Resets the password or authentication method for a user in a database cluster. For MySQL
-     * users, supply `mysql_settings.auth_plugin` to choose the authentication method. The response
-     * includes the updated user object and its standard database user attributes.
+     * Resets the password or authentication method for a user in a database cluster. For MySQL users, supply `mysql_settings.auth_plugin` to choose the authentication method. The response includes the updated user object and its standard database user attributes.
      *
-     * To reset the password for a database user, send a POST request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`. For `mysql` databases, the
-     * authentication method can be specifying by including a key in the JSON body called
-     * `mysql_settings` with the `auth_plugin` value specified. The response will be a JSON object
-     * with a `user` key. This will be set to an object containing the standard database user
-     * attributes.
+     * To reset the password for a database user, send a POST request to `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`. For `mysql` databases, the authentication method can be specifying by including a key in the JSON body called `mysql_settings` with the `auth_plugin` value specified. The response will be a JSON object with a `user` key. This will be set to an object containing the standard database user attributes.
      */
-    fun resetAuth(
-        databaseClusterUuid: String,
-        username: String,
-        mysqlSettings: MysqlSettings? = null,
-        options: RequestOptions? = null,
-    ): UserResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesResetAuth(
-            clientConfig,
-            databaseClusterUuid,
-            username,
-            mysqlSettings,
-            options,
-        )
+    fun resetAuth(databaseClusterUuid: String, username: String, mysqlSettings: MysqlSettings? = null, options: RequestOptions? = null): UserResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesResetAuth(clientConfig, databaseClusterUuid, username, mysqlSettings, options)
     }
 
     /**
-     * To list all of the databases in a clusters, send a GET request to
-     * `/v2/databases/$DATABASE_ID/dbs`. The result will be a JSON object with a `dbs` key. This
-     * will be set to an array of database objects, each of which will contain the standard database
-     * attributes. Note: Database management is not supported for Caching or Valkey clusters.
+     * To list all of the databases in a clusters, send a GET request to `/v2/databases/$DATABASE_ID/dbs`. The result will be a JSON object with a `dbs` key. This will be set to an array of database objects, each of which will contain the standard database attributes. Note: Database management is not supported for Caching or Valkey clusters.
      */
     fun list(databaseClusterUuid: String, options: RequestOptions? = null): Databases {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesList(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesList(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To add a new database to an existing cluster, send a POST request to
-     * `/v2/databases/$DATABASE_ID/dbs`. Note: Database management is not supported for Caching or
-     * Valkey clusters. The response will be a JSON object with a key called `db`. The value of this
-     * will be an object that contains the standard attributes associated with a database.
+     * To add a new database to an existing cluster, send a POST request to `/v2/databases/$DATABASE_ID/dbs`. Note: Database management is not supported for Caching or Valkey clusters. The response will be a JSON object with a key called `db`. The value of this will be an object that contains the standard attributes associated with a database.
      */
-    fun add(
-        databaseClusterUuid: String,
-        name: String,
-        options: RequestOptions? = null,
-    ): DatabaseResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAdd(
-            clientConfig,
-            databaseClusterUuid,
-            name,
-            options,
-        )
+    fun add(databaseClusterUuid: String, name: String, options: RequestOptions? = null): DatabaseResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAdd(clientConfig, databaseClusterUuid, name, options)
     }
 
     /**
-     * To show information about an existing database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. Note: Database management is not supported for
-     * Caching or Valkey clusters. The response will be a JSON object with a `db` key. This will be
-     * set to an object containing the standard database attributes.
+     * To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. Note: Database management is not supported for Caching or Valkey clusters. The response will be a JSON object with a `db` key. This will be set to an object containing the standard database attributes.
      */
-    fun get(
-        databaseClusterUuid: String,
-        databaseName: String,
-        options: RequestOptions? = null,
-    ): DatabaseResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGet(
-            clientConfig,
-            databaseClusterUuid,
-            databaseName,
-            options,
-        )
+    fun get(databaseClusterUuid: String, databaseName: String, options: RequestOptions? = null): DatabaseResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGet(clientConfig, databaseClusterUuid, databaseName, options)
     }
 
     /**
-     * To delete a specific database, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. A status of 204 will be given. This indicates that
-     * the request was processed successfully, but that no response body is needed. Note: Database
-     * management is not supported for Caching or Valkey clusters.
+     * To delete a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed. Note: Database management is not supported for Caching or Valkey clusters.
      */
-    fun delete(
-        databaseClusterUuid: String,
-        databaseName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDelete(
-            clientConfig,
-            databaseClusterUuid,
-            databaseName,
-            options,
-        )
+    fun delete(databaseClusterUuid: String, databaseName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDelete(clientConfig, databaseClusterUuid, databaseName, options)
     }
 
     /**
-     * To list all of the connection pools available to a PostgreSQL database cluster, send a GET
-     * request to `/v2/databases/$DATABASE_ID/pools`. The result will be a JSON object with a
-     * `pools` key. This will be set to an array of connection pool objects.
+     * To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`. The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.
      */
-    fun listConnectionPools(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): ConnectionPools {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesListConnectionPools(clientConfig, databaseClusterUuid, options)
+    fun listConnectionPools(databaseClusterUuid: String, options: RequestOptions? = null): ConnectionPools {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListConnectionPools(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Creates a PgBouncer connection pool for a PostgreSQL database cluster. Supply `name`, `mode`,
-     * `size`, and `db`; choose a transaction mode supported by PgBouncer and set the pool size
-     * according to the primary node's capacity. The response includes the created pool and its
-     * connection details.
+     * Creates a PgBouncer connection pool for a PostgreSQL database cluster. Supply `name`, `mode`, `size`, and `db`; choose a transaction mode supported by PgBouncer and set the pool size according to the primary node's capacity. The response includes the created pool and its connection details.
      *
-     * For PostgreSQL database clusters, connection pools can be used to allow a database to share
-     * its idle connections. The popular PostgreSQL connection pooling utility PgBouncer is used to
-     * provide this service. See here for more information about how and why to use PgBouncer
-     * connection pooling including details about the available transaction modes. To add a new
-     * connection pool to a PostgreSQL database cluster, send a POST request to
-     * `/v2/databases/$DATABASE_ID/pools` specifying…
+     * For PostgreSQL database clusters, connection pools can be used to allow a database to share its idle connections. The popular PostgreSQL connection pooling utility PgBouncer is used to provide this service. See here for more information about how and why to use PgBouncer connection pooling including details about the available transaction modes. To add a new connection pool to a PostgreSQL database cluster, send a POST request to `/v2/databases/$DATABASE_ID/pools` specifying…
      */
-    fun addConnectionPool(
-        request:
-            dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesAddConnectionPoolRequest,
-        options: RequestOptions? = null,
-    ): ConnectionPoolResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAddConnectionPool(
-            clientConfig,
-            request,
-            options,
-        )
+    fun addConnectionPool(request: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesAddConnectionPoolRequest, options: RequestOptions? = null): ConnectionPoolResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesAddConnectionPool(clientConfig, request, options)
     }
 
     /**
-     * To show information about an existing connection pool for a PostgreSQL database cluster, send
-     * a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. The response will be a JSON
-     * object with a `pool` key.
+     * To show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. The response will be a JSON object with a `pool` key.
      */
-    fun getConnectionPool(
-        databaseClusterUuid: String,
-        poolName: String,
-        options: RequestOptions? = null,
-    ): ConnectionPoolResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetConnectionPool(
-            clientConfig,
-            databaseClusterUuid,
-            poolName,
-            options,
-        )
+    fun getConnectionPool(databaseClusterUuid: String, poolName: String, options: RequestOptions? = null): ConnectionPoolResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetConnectionPool(clientConfig, databaseClusterUuid, poolName, options)
     }
 
     /**
-     * To update a connection pool for a PostgreSQL database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.
+     * To update a connection pool for a PostgreSQL database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.
      */
-    fun updateConnectionPool(
-        request:
-            dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesUpdateConnectionPoolRequest,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateConnectionPool(clientConfig, request, options)
+    fun updateConnectionPool(request: dev.octri.showcase.digitalocean.methods.DatabasesMethods.DatabasesUpdateConnectionPoolRequest, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateConnectionPool(clientConfig, request, options)
     }
 
     /**
-     * To delete a specific connection pool for a PostgreSQL database cluster, send a DELETE request
-     * to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. A status of 204 will be given. This
-     * indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a specific connection pool for a PostgreSQL database cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun deleteConnectionPool(
-        databaseClusterUuid: String,
-        poolName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesDeleteConnectionPool(clientConfig, databaseClusterUuid, poolName, options)
+    fun deleteConnectionPool(databaseClusterUuid: String, poolName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteConnectionPool(clientConfig, databaseClusterUuid, poolName, options)
     }
 
     /**
-     * To retrieve the configured eviction policy for an existing Caching or Valkey cluster, send a
-     * GET request to `/v2/databases/$DATABASE_ID/eviction_policy`. The response will be a JSON
-     * object with an `eviction_policy` key. This will be set to a string representing the eviction
-     * policy.
+     * To retrieve the configured eviction policy for an existing Caching or Valkey cluster, send a GET request to `/v2/databases/$DATABASE_ID/eviction_policy`. The response will be a JSON object with an `eviction_policy` key. This will be set to a string representing the eviction policy.
      */
-    fun getEvictionPolicy(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): EvictionPolicyResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetEvictionPolicy(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun getEvictionPolicy(databaseClusterUuid: String, options: RequestOptions? = null): EvictionPolicyResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetEvictionPolicy(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To configure an eviction policy for an existing Caching or Valkey cluster, send a PUT request
-     * to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the desired policy.
+     * To configure an eviction policy for an existing Caching or Valkey cluster, send a PUT request to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the desired policy.
      */
-    fun updateEvictionPolicy(
-        databaseClusterUuid: String,
-        evictionPolicy: EvictionPolicyModel,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateEvictionPolicy(
-                clientConfig,
-                databaseClusterUuid,
-                evictionPolicy,
-                options,
-            )
+    fun updateEvictionPolicy(databaseClusterUuid: String, evictionPolicy: EvictionPolicyModel, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateEvictionPolicy(clientConfig, databaseClusterUuid, evictionPolicy, options)
     }
 
     /**
-     * To retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/sql_mode`. The response will be a JSON object with a `sql_mode`
-     * key. This will be set to a string representing the configured SQL modes.
+     * To retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to `/v2/databases/$DATABASE_ID/sql_mode`. The response will be a JSON object with a `sql_mode` key. This will be set to a string representing the configured SQL modes.
      */
     fun getSqlMode(databaseClusterUuid: String, options: RequestOptions? = null): SqlMode {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetSqlMode(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetSqlMode(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To configure the SQL modes for an existing MySQL cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/sql_mode` specifying the desired modes. See the official MySQL 8
-     * documentation for a full list of supported SQL modes. A successful request will receive a 204
-     * No Content status code with no body in response.
+     * To configure the SQL modes for an existing MySQL cluster, send a PUT request to `/v2/databases/$DATABASE_ID/sql_mode` specifying the desired modes. See the official MySQL 8 documentation for a full list of supported SQL modes. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun updateSqlMode(
-        databaseClusterUuid: String,
-        sqlMode: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateSqlMode(
-            clientConfig,
-            databaseClusterUuid,
-            sqlMode,
-            options,
-        )
+    fun updateSqlMode(databaseClusterUuid: String, sqlMode: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateSqlMode(clientConfig, databaseClusterUuid, sqlMode, options)
     }
 
     /**
-     * To upgrade the major version of a database, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/upgrade`, specifying the target version. A successful request
-     * will receive a 204 No Content status code with no body in response.
+     * To upgrade the major version of a database, send a PUT request to `/v2/databases/$DATABASE_ID/upgrade`, specifying the target version. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun updateMajorVersion(
-        databaseClusterUuid: String,
-        version: Version? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateMajorVersion(
-            clientConfig,
-            databaseClusterUuid,
-            version,
-            options,
-        )
+    fun updateMajorVersion(databaseClusterUuid: String, version: Version? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateMajorVersion(clientConfig, databaseClusterUuid, version, options)
     }
 
     /**
-     * To retrieve the autoscale configuration for an existing database cluster, send a GET request
-     * to `/v2/databases/$DATABASE_ID/autoscale`. The response will be a JSON object with
-     * autoscaling configuration details.
+     * To retrieve the autoscale configuration for an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID/autoscale`. The response will be a JSON object with autoscaling configuration details.
      */
     fun getAutoscale(databaseClusterUuid: String, options: RequestOptions? = null): Autoscale {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetAutoscale(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetAutoscale(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Replaces the autoscaling configuration for an existing database cluster. Send the `storage`
-     * configuration to control storage autoscaling, including whether it is enabled. The successful
-     * response has no body.
+     * Replaces the autoscaling configuration for an existing database cluster. Send the `storage` configuration to control storage autoscaling, including whether it is enabled. The successful response has no body.
      *
-     * To configure autoscale settings for an existing database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/autoscale`, specifying the autoscale configuration. A successful
-     * request will receive a 204 No Content status code with no body in response.
+     * To configure autoscale settings for an existing database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/autoscale`, specifying the autoscale configuration. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun updateAutoscale(
-        databaseClusterUuid: String,
-        storage: DatabaseStorageAutoscaleParams? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateAutoscale(
-            clientConfig,
-            databaseClusterUuid,
-            storage,
-            options,
-        )
+    fun updateAutoscale(databaseClusterUuid: String, storage: DatabaseStorageAutoscaleParams? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateAutoscale(clientConfig, databaseClusterUuid, storage, options)
     }
 
     /**
-     * To list all of a Kafka cluster's topics, send a GET request to
-     * `/v2/databases/$DATABASE_ID/topics`. The result will be a JSON object with a `topics` key.
+     * To list all of a Kafka cluster's topics, send a GET request to `/v2/databases/$DATABASE_ID/topics`. The result will be a JSON object with a `topics` key.
      */
     fun listKafkaTopics(databaseClusterUuid: String, options: RequestOptions? = null): KafkaTopics {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListKafkaTopics(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListKafkaTopics(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Creates a Kafka topic attached to a database cluster. Provide `name` in the request body, and
-     * optionally configure its replication factor, partition count, and topic settings. A 201
-     * response contains the created topic in a `topic` field.
+     * Creates a Kafka topic attached to a database cluster. Provide `name` in the request body, and optionally configure its replication factor, partition count, and topic settings. A 201 response contains the created topic in a `topic` field.
      *
-     * To create a topic attached to a Kafka cluster, send a POST request to
-     * `/v2/databases/$DATABASE_ID/topics`. The result will be a JSON object with a `topic` key.
+     * To create a topic attached to a Kafka cluster, send a POST request to `/v2/databases/$DATABASE_ID/topics`. The result will be a JSON object with a `topic` key.
      */
-    fun createKafkaTopic(
-        databaseClusterUuid: String,
-        name: String,
-        replicationFactor: Long? = null,
-        partitionCount: Long? = null,
-        config: KafkaTopicConfig? = null,
-        options: RequestOptions? = null,
-    ): KafkaTopicResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateKafkaTopic(
-            clientConfig,
-            databaseClusterUuid,
-            name,
-            replicationFactor,
-            partitionCount,
-            config,
-            options,
-        )
+    fun createKafkaTopic(databaseClusterUuid: String, name: String, replicationFactor: Long? = null, partitionCount: Long? = null, config: KafkaTopicConfig? = null, options: RequestOptions? = null): KafkaTopicResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateKafkaTopic(clientConfig, databaseClusterUuid, name, replicationFactor, partitionCount, config, options)
     }
 
     /**
-     * To retrieve a given topic by name from the set of a Kafka cluster's topics, send a GET
-     * request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. The result will be a JSON object
-     * with a `topic` key.
+     * To retrieve a given topic by name from the set of a Kafka cluster's topics, send a GET request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. The result will be a JSON object with a `topic` key.
      */
-    fun getKafkaTopic(
-        databaseClusterUuid: String,
-        topicName: String,
-        options: RequestOptions? = null,
-    ): KafkaTopicResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaTopic(
-            clientConfig,
-            databaseClusterUuid,
-            topicName,
-            options,
-        )
+    fun getKafkaTopic(databaseClusterUuid: String, topicName: String, options: RequestOptions? = null): KafkaTopicResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaTopic(clientConfig, databaseClusterUuid, topicName, options)
     }
 
     /**
-     * Updates a Kafka topic's replication factor, partition count, or configuration within a
-     * database cluster. Supply the cluster UUID and topic name in the path, and include only the
-     * topic settings you want to change. The partition count can only be increased.
+     * Updates a Kafka topic's replication factor, partition count, or configuration within a database cluster. Supply the cluster UUID and topic name in the path, and include only the topic settings you want to change. The partition count can only be increased.
      *
-     * To update a topic attached to a Kafka cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. The result will be a JSON object with a
-     * `topic` key.
+     * To update a topic attached to a Kafka cluster, send a PUT request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. The result will be a JSON object with a `topic` key.
      */
-    fun updateKafkaTopic(
-        databaseClusterUuid: String,
-        topicName: String,
-        body: KafkaTopicUpdate? = null,
-        options: RequestOptions? = null,
-    ): KafkaTopicResponse {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateKafkaTopic(
-            clientConfig,
-            databaseClusterUuid,
-            topicName,
-            body,
-            options,
-        )
+    fun updateKafkaTopic(databaseClusterUuid: String, topicName: String, body: KafkaTopicUpdate? = null, options: RequestOptions? = null): KafkaTopicResponse {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateKafkaTopic(clientConfig, databaseClusterUuid, topicName, body, options)
     }
 
     /**
-     * To delete a single topic within a Kafka cluster, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. A status of 204 will be given. This
-     * indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a single topic within a Kafka cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/topics/$TOPIC_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun deleteKafkaTopic(
-        databaseClusterUuid: String,
-        topicName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteKafkaTopic(
-            clientConfig,
-            databaseClusterUuid,
-            topicName,
-            options,
-        )
+    fun deleteKafkaTopic(databaseClusterUuid: String, topicName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteKafkaTopic(clientConfig, databaseClusterUuid, topicName, options)
     }
 
     /**
-     * To list logsinks for a database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/logsink`.
+     * To list logsinks for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/logsink`.
      */
     fun listLogsink(databaseClusterUuid: String, options: RequestOptions? = null): Logsinks {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListLogsink(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListLogsink(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * Creates a logsink for a database cluster to configure log delivery to an external
-     * destination. Provide `sink_name`, `sink_type`, and `config` to specify the logsink and its
-     * destination settings. A 201 response returns the created logsink.
+     * Creates a logsink for a database cluster to configure log delivery to an external destination. Provide `sink_name`, `sink_type`, and `config` to specify the logsink and its destination settings. A 201 response returns the created logsink.
      *
-     * To create logsink for a database cluster, send a POST request to
-     * `/v2/databases/$DATABASE_ID/logsink`.
+     * To create logsink for a database cluster, send a POST request to `/v2/databases/$DATABASE_ID/logsink`.
      */
-    fun createLogsink(
-        databaseClusterUuid: String,
-        sinkName: String,
-        sinkType: DatabasesCreateLogsinkSinkTypeEnum,
-        config: Any,
-        options: RequestOptions? = null,
-    ): Logsink {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateLogsink(
-            clientConfig,
-            databaseClusterUuid,
-            sinkName,
-            sinkType,
-            config,
-            options,
-        )
+    fun createLogsink(databaseClusterUuid: String, sinkName: String, sinkType: DatabasesCreateLogsinkSinkTypeEnum, config: Any, options: RequestOptions? = null): Logsink {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateLogsink(clientConfig, databaseClusterUuid, sinkName, sinkType, config, options)
     }
 
     /**
-     * To get a logsink for a database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To get a logsink for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      */
-    fun getLogsink(
-        databaseClusterUuid: String,
-        logsinkId: String,
-        options: RequestOptions? = null,
-    ): LogsinkSchema {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetLogsink(
-            clientConfig,
-            databaseClusterUuid,
-            logsinkId,
-            options,
-        )
+    fun getLogsink(databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): LogsinkSchema {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetLogsink(clientConfig, databaseClusterUuid, logsinkId, options)
     }
 
     /**
-     * Replaces the configuration for a logsink attached to a database cluster. Provide the cluster
-     * UUID and logsink ID in the path, and submit a `config` object matching the selected sink
-     * type. A 200 response confirms the update and has an empty body.
+     * Replaces the configuration for a logsink attached to a database cluster. Provide the cluster UUID and logsink ID in the path, and submit a `config` object matching the selected sink type. A 200 response confirms the update and has an empty body.
      *
-     * To update a logsink for a database cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To update a logsink for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      */
-    fun updateLogsink(
-        databaseClusterUuid: String,
-        logsinkId: String,
-        config: LogsinkUpdateConfig,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateLogsink(
-            clientConfig,
-            databaseClusterUuid,
-            logsinkId,
-            config,
-            options,
-        )
+    fun updateLogsink(databaseClusterUuid: String, logsinkId: String, config: LogsinkUpdateConfig, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateLogsink(clientConfig, databaseClusterUuid, logsinkId, config, options)
     }
 
     /**
-     * To delete a logsink for a database cluster, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To delete a logsink for a database cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      */
-    fun deleteLogsink(
-        databaseClusterUuid: String,
-        logsinkId: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteLogsink(
-            clientConfig,
-            databaseClusterUuid,
-            logsinkId,
-            options,
-        )
+    fun deleteLogsink(databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteLogsink(clientConfig, databaseClusterUuid, logsinkId, options)
     }
 
     /**
-     * To list all schemas for a Kafka cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/schema-registry`.
+     * To list all schemas for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry`.
      */
-    fun listKafkaSchemas(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): KafkaSchemas {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListKafkaSchemas(
-            clientConfig,
-            databaseClusterUuid,
-            options,
-        )
+    fun listKafkaSchemas(databaseClusterUuid: String, options: RequestOptions? = null): KafkaSchemas {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListKafkaSchemas(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To create a Kafka schema for a database cluster, send a POST request to
-     * `/v2/databases/$DATABASE_ID/schema-registry`.
+     * To create a Kafka schema for a database cluster, send a POST request to `/v2/databases/$DATABASE_ID/schema-registry`.
      */
-    fun createKafkaSchema(
-        databaseClusterUuid: String,
-        subjectName: String,
-        schemaType: DatabasesCreateKafkaSchemaSchemaTypeEnum,
-        schema: String,
-        options: RequestOptions? = null,
-    ): KafkaSchema {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateKafkaSchema(
-            clientConfig,
-            databaseClusterUuid,
-            subjectName,
-            schemaType,
-            schema,
-            options,
-        )
+    fun createKafkaSchema(databaseClusterUuid: String, subjectName: String, schemaType: DatabasesCreateKafkaSchemaSchemaTypeEnum, schema: String, options: RequestOptions? = null): KafkaSchema {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesCreateKafkaSchema(clientConfig, databaseClusterUuid, subjectName, schemaType, schema, options)
     }
 
     /**
-     * To get a specific schema by subject name for a Kafka cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
+     * To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
      */
-    fun getKafkaSchema(
-        databaseClusterUuid: String,
-        subjectName: String,
-        options: RequestOptions? = null,
-    ): KafkaSchemaVersion {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaSchema(
-            clientConfig,
-            databaseClusterUuid,
-            subjectName,
-            options,
-        )
+    fun getKafkaSchema(databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): KafkaSchemaVersion {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaSchema(clientConfig, databaseClusterUuid, subjectName, options)
     }
 
     /**
-     * To delete a specific schema by subject name for a Kafka cluster, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
+     * To delete a specific schema by subject name for a Kafka cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
      */
-    fun deleteKafkaSchema(
-        databaseClusterUuid: String,
-        subjectName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteKafkaSchema(
-            clientConfig,
-            databaseClusterUuid,
-            subjectName,
-            options,
-        )
+    fun deleteKafkaSchema(databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteKafkaSchema(clientConfig, databaseClusterUuid, subjectName, options)
     }
 
     /**
-     * To get a specific schema by subject name for a Kafka cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME/versions/$VERSION`.
+     * To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME/versions/$VERSION`.
      */
-    fun getKafkaSchemaVersion(
-        databaseClusterUuid: String,
-        subjectName: String,
-        version: String,
-        options: RequestOptions? = null,
-    ): KafkaSchemaVersion {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesGetKafkaSchemaVersion(
-                clientConfig,
-                databaseClusterUuid,
-                subjectName,
-                version,
-                options,
-            )
+    fun getKafkaSchemaVersion(databaseClusterUuid: String, subjectName: String, version: String, options: RequestOptions? = null): KafkaSchemaVersion {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaSchemaVersion(clientConfig, databaseClusterUuid, subjectName, version, options)
     }
 
     /**
-     * To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a
-     * `compatibility_level` key, which is set to an object containing any database configuration
-     * parameters.
+     * To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
      */
-    fun getKafkaSchemaConfig(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseSchemaRegistryConfig {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesGetKafkaSchemaConfig(clientConfig, databaseClusterUuid, options)
+    fun getKafkaSchemaConfig(databaseClusterUuid: String, options: RequestOptions? = null): DatabaseSchemaRegistryConfig {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaSchemaConfig(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To update the Schema Registry configuration for a Kafka cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a
-     * `compatibility_level` key, which is set to an object containing any database configuration
-     * parameters.
+     * To update the Schema Registry configuration for a Kafka cluster, send a PUT request to `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
      */
-    fun updateKafkaSchemaConfig(
-        databaseClusterUuid: String,
-        compatibilityLevel: DatabasesUpdateKafkaSchemaConfigCompatibilityLevelEnum,
-        options: RequestOptions? = null,
-    ): DatabaseSchemaRegistryConfig {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateKafkaSchemaConfig(
-                clientConfig,
-                databaseClusterUuid,
-                compatibilityLevel,
-                options,
-            )
+    fun updateKafkaSchemaConfig(databaseClusterUuid: String, compatibilityLevel: DatabasesUpdateKafkaSchemaConfigCompatibilityLevelEnum, options: RequestOptions? = null): DatabaseSchemaRegistryConfig {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateKafkaSchemaConfig(clientConfig, databaseClusterUuid, compatibilityLevel, options)
     }
 
     /**
-     * To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET
-     * request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is
-     * a JSON object with a `compatibility_level` key, which is set to an object containing any
-     * database configuration parameters.
+     * To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
      */
-    fun getKafkaSchemaSubjectConfig(
-        databaseClusterUuid: String,
-        subjectName: String,
-        options: RequestOptions? = null,
-    ): DatabaseSchemaRegistrySubjectConfig {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesGetKafkaSchemaSubjectConfig(
-                clientConfig,
-                databaseClusterUuid,
-                subjectName,
-                options,
-            )
+    fun getKafkaSchemaSubjectConfig(databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): DatabaseSchemaRegistrySubjectConfig {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetKafkaSchemaSubjectConfig(clientConfig, databaseClusterUuid, subjectName, options)
     }
 
     /**
-     * To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT
-     * request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is
-     * a JSON object with a `compatibility_level` key, which is set to an object containing any
-     * database configuration parameters.
+     * To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
      */
-    fun updateKafkaSchemaSubjectConfig(
-        databaseClusterUuid: String,
-        subjectName: String,
-        compatibilityLevel: DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevelEnum,
-        options: RequestOptions? = null,
-    ): DatabaseSchemaRegistrySubjectConfig {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateKafkaSchemaSubjectConfig(
-                clientConfig,
-                databaseClusterUuid,
-                subjectName,
-                compatibilityLevel,
-                options,
-            )
+    fun updateKafkaSchemaSubjectConfig(databaseClusterUuid: String, subjectName: String, compatibilityLevel: DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevelEnum, options: RequestOptions? = null): DatabaseSchemaRegistrySubjectConfig {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateKafkaSchemaSubjectConfig(clientConfig, databaseClusterUuid, subjectName, compatibilityLevel, options)
     }
 
     /**
-     * To show the credentials for all database clusters' metrics endpoints, send a GET request to
-     * `/v2/databases/metrics/credentials`. The result will be a JSON object with a `credentials`
-     * key.
+     * To show the credentials for all database clusters' metrics endpoints, send a GET request to `/v2/databases/metrics/credentials`. The result will be a JSON object with a `credentials` key.
      */
     fun getClusterMetricsCredentials(options: RequestOptions? = null): DatabaseMetricsAuth {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesGetClusterMetricsCredentials(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesGetClusterMetricsCredentials(clientConfig, options)
     }
 
     /**
-     * Replaces the metrics endpoint credentials for all database clusters. Include `credentials` to
-     * set the basic-auth username and password using `basic_auth_username` and
-     * `basic_auth_password`; the request body is optional. A successful request returns 204 with no
-     * response body.
+     * Replaces the metrics endpoint credentials for all database clusters. Include `credentials` to set the basic-auth username and password using `basic_auth_username` and `basic_auth_password`; the request body is optional. A successful request returns 204 with no response body.
      *
-     * To update the credentials for all database clusters' metrics endpoints, send a PUT request to
-     * `/v2/databases/metrics/credentials`. A successful request will receive a 204 No Content
-     * status code with no body in response.
+     * To update the credentials for all database clusters' metrics endpoints, send a PUT request to `/v2/databases/metrics/credentials`. A successful request will receive a 204 No Content status code with no body in response.
      */
-    fun updateClusterMetricsCredentials(
-        body: DatabaseMetricsCredentials? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesUpdateClusterMetricsCredentials(clientConfig, body, options)
+    fun updateClusterMetricsCredentials(body: DatabaseMetricsCredentials? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesUpdateClusterMetricsCredentials(clientConfig, body, options)
     }
 
     /**
-     * To list all of a OpenSearch cluster's indexes, send a GET request to
-     * `/v2/databases/$DATABASE_ID/indexes`. The result will be a JSON object with a `indexes` key.
+     * To list all of a OpenSearch cluster's indexes, send a GET request to `/v2/databases/$DATABASE_ID/indexes`. The result will be a JSON object with a `indexes` key.
      */
-    fun listOpeasearchIndexes(
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): OpensearchIndexes {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesListOpeasearchIndexes(clientConfig, databaseClusterUuid, options)
+    fun listOpeasearchIndexes(databaseClusterUuid: String, options: RequestOptions? = null): OpensearchIndexes {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesListOpeasearchIndexes(clientConfig, databaseClusterUuid, options)
     }
 
     /**
-     * To delete a single index within OpenSearch cluster, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/indexes/$INDEX_NAME`. A status of 204 will be given. This
-     * indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a single index within OpenSearch cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/indexes/$INDEX_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
      */
-    fun deleteOpensearchIndex(
-        databaseClusterUuid: String,
-        indexName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.DatabasesMethods
-            .databasesDeleteOpensearchIndex(clientConfig, databaseClusterUuid, indexName, options)
+    fun deleteOpensearchIndex(databaseClusterUuid: String, indexName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DatabasesMethods.databasesDeleteOpensearchIndex(clientConfig, databaseClusterUuid, indexName, options)
     }
+
 }

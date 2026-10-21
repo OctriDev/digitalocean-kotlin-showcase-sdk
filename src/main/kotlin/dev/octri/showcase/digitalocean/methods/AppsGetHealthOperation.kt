@@ -15,29 +15,7 @@ internal object AppsGetHealthOperation {
      *
      * @param appId The app ID
      */
-    fun appsGetHealth(
-        clientConfig: ClientConfig,
-        appId: String,
-        options: RequestOptions? = null,
-    ): AppHealthResponse {
-        return SdkClient.request<AppHealthResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/health",
-                    config = clientConfig,
-                    operationId = "appsGetHealth",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsGetHealth(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppHealthResponse {
+        return SdkClient.request<AppHealthResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/health", config = clientConfig, operationId = "appsGetHealth", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

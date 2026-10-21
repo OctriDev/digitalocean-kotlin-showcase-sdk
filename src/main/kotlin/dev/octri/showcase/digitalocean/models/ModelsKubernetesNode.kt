@@ -6,51 +6,61 @@ package dev.octri.showcase.digitalocean.models
 import java.time.OffsetDateTime
 
 /**
- * An object containing a `state` attribute whose value is set to a string indicating the current
- * status of the node.
+ * An object containing a `state` attribute whose value is set to a string indicating the current status of the node.
  */
 data class NodeStatus(
-    /** A string indicating the current status of the node. */
+    /**
+     * A string indicating the current status of the node.
+     */
     val state: NodeStatusStateEnum? = null
 )
 
-/** Typed representation of the `Node` API schema. */
+/**
+ * Typed representation of the `Node` API schema.
+ */
 data class Node(
-    /** A unique ID that can be used to identify and reference the node. */
+    /**
+     * A unique ID that can be used to identify and reference the node.
+     */
     val id: String? = null,
-    /** An automatically generated, human-readable name for the node. */
+    /**
+     * An automatically generated, human-readable name for the node.
+     */
     val name: String? = null,
     /**
-     * An object containing a `state` attribute whose value is set to a string indicating the
-     * current status of the node.
+     * An object containing a `state` attribute whose value is set to a string indicating the current status of the node.
      */
     val status: NodeStatus? = null,
-    /** The ID of the Droplet used for the worker node. */
+    /**
+     * The ID of the Droplet used for the worker node.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("droplet_id") val dropletId: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the node was
-     * created.
+     * A time value given in ISO8601 combined date and time format that represents when the node was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the node was
-     * last updated.
+     * A time value given in ISO8601 combined date and time format that represents when the node was last updated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `NodePoolCreate` API schema. */
+/**
+ * Typed representation of the `NodePoolCreate` API schema.
+ */
 data class NodePoolCreate(
-    /** Optional object value serialized in the `node_pool` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("node_pool")
-    val nodePool: KubernetesNodePool? = null
+    /**
+     * Optional object value serialized in the `node_pool` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("node_pool") val nodePool: KubernetesNodePool? = null
 )
 
-/** Typed representation of the `NodePoolUpdate` API schema. */
+/**
+ * Typed representation of the `NodePoolUpdate` API schema.
+ */
 data class NodePoolUpdate(
-    /** Optional object value serialized in the `node_pool` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("node_pool")
-    val nodePool: KubernetesNodePool? = null
+    /**
+     * Optional object value serialized in the `node_pool` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("node_pool") val nodePool: KubernetesNodePool? = null
 )

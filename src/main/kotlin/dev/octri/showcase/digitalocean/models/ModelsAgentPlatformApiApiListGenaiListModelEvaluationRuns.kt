@@ -3,23 +3,28 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListModelEvaluationRunsOutput` API schema. */
+/**
+ * Typed representation of the `ApiListModelEvaluationRunsOutput` API schema.
+ */
 data class ApiListModelEvaluationRunsOutput(
     /**
      * Full set of candidate model source types the FE can offer in the candidate-type filter UI.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_candidate_types")
-    val availableCandidateTypes: List<ApiCandidateModelSource>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("available_candidate_types") val availableCandidateTypes: List<ApiCandidateModelSource>? = null,
     /**
-     * Full set of statuses the FE can offer in the status filter UI. Returned on every list call so
-     * clients never need to hardcode the enum values.
+     * Full set of statuses the FE can offer in the status filter UI. Returned on every list call so clients never need to hardcode the enum values.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiModelEvaluationRunStatus>? = null,
-    /** Links to other pages */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiModelEvaluationRunStatus>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** Summary view of evaluation runs for the run history list. */
-    val runs: List<ApiModelEvaluationRunSummary>? = null,
+    /**
+     * Summary view of evaluation runs for the run history list.
+     */
+    val runs: List<ApiModelEvaluationRunSummary>? = null
 )

@@ -3,22 +3,32 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Output for listing simulation runs. */
+/**
+ * Output for listing simulation runs.
+ */
 data class ApiListSimulationRunsOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiSimulationRunSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Statuses available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiSimulationRunStatus>? = null,
-    /** Links to other pages */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiSimulationRunSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Statuses available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiSimulationRunStatus>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The simulation runs for the current page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("simulation_runs")
-    val simulationRuns: List<ApiSimulationRun>? = null,
+    /**
+     * The simulation runs for the current page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("simulation_runs") val simulationRuns: List<ApiSimulationRun>? = null
 )

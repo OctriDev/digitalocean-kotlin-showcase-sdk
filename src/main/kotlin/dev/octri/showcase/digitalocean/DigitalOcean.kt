@@ -3,6 +3,7 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class DigitalOcean(private val clientConfig: ClientConfig) {
     val actionGateway: ActionGatewayNamespace
     val actionGatewayDataPlane: ActionGatewayDataPlaneNamespace
@@ -67,7 +68,6 @@ class DigitalOcean(private val clientConfig: ClientConfig) {
     val serverlessInference: ServerlessInferenceNamespace
     val agentInference: AgentInferenceNamespace
     val batchInference: BatchInferenceNamespace
-
     init {
         actionGateway = ActionGatewayNamespace(clientConfig)
         actionGatewayDataPlane = ActionGatewayDataPlaneNamespace(clientConfig)
@@ -133,16 +133,17 @@ class DigitalOcean(private val clientConfig: ClientConfig) {
         agentInference = AgentInferenceNamespace(clientConfig)
         batchInference = BatchInferenceNamespace(clientConfig)
     }
-
     /**
-     * Turns SDK logging on and configures it. Logging is OFF by default — this SDK reports nothing
-     * until you call this (or construct the client with logging enabled). Reports go to the
-     * endpoint this build was generated with, or to the endpoint you set; with neither, nothing is
-     * sent. Set enabled = false in the block to turn it off.
+     * Turns SDK logging on and configures it. Logging is OFF by default — this
+     * SDK reports nothing until you call this (or construct the client with
+     * logging enabled). Reports go to the endpoint this build was generated with,
+     * or to the endpoint you set; with neither, nothing is sent. Set
+     * enabled = false in the block to turn it off.
      */
     fun setLoggingConfig(block: LoggingConfig.() -> Unit = {}): LoggingConfig {
         clientConfig.logging.enabled = true
         clientConfig.logging.block()
         return clientConfig.logging
     }
+
 }

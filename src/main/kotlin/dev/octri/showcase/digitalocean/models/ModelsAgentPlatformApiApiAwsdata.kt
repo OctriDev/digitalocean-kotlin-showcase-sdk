@@ -3,26 +3,46 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** AWS S3 Data Source */
+/**
+ * AWS S3 Data Source
+ */
 data class ApiAWSDataSource(
-    /** Spaces bucket name */
+    /**
+     * Spaces bucket name
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("bucket_name") val bucketName: String? = null,
-    /** Optional `string` value serialized in the `item_path` wire field. */
+    /**
+     * Optional `string` value serialized in the `item_path` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_path") val itemPath: String? = null,
-    /** The AWS Key ID */
+    /**
+     * The AWS Key ID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("key_id") val keyId: String? = null,
-    /** Region of bucket */
+    /**
+     * Region of bucket
+     */
     val region: String? = null,
-    /** The AWS Secret Key */
-    @com.fasterxml.jackson.annotation.JsonProperty("secret_key") val secretKey: String? = null,
+    /**
+     * The AWS Secret Key
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("secret_key") val secretKey: String? = null
 )
 
-/** AWS S3 Data Source for Display */
+/**
+ * AWS S3 Data Source for Display
+ */
 data class ApiAWSDataSourceDisplay(
-    /** Spaces bucket name */
+    /**
+     * Spaces bucket name
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("bucket_name") val bucketName: String? = null,
-    /** Optional `string` value serialized in the `item_path` wire field. */
+    /**
+     * Optional `string` value serialized in the `item_path` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_path") val itemPath: String? = null,
-    /** Region of bucket */
-    val region: String? = null,
+    /**
+     * Region of bucket
+     */
+    val region: String? = null
 )

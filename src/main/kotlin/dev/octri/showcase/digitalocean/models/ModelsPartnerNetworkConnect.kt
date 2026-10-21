@@ -5,145 +5,178 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AllPartnerAttachmentRemoteRoutes` API schema. */
+/**
+ * Typed representation of the `AllPartnerAttachmentRemoteRoutes` API schema.
+ */
 data class AllPartnerAttachmentRemoteRoutes(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("remote_routes")
-    val remoteRoutes: List<PartnerAttachmentRemoteRoute>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("remote_routes") val remoteRoutes: List<PartnerAttachmentRemoteRoute>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `AllPartnerAttachments` API schema. */
+/**
+ * Typed representation of the `AllPartnerAttachments` API schema.
+ */
 data class AllPartnerAttachments(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachments")
-    val partnerAttachments: List<PartnerAttachment>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachments") val partnerAttachments: List<PartnerAttachment>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** The BGP configuration for the partner attachment. */
+/**
+ * The BGP configuration for the partner attachment.
+ */
 data class PartnerAttachmentBgp(
-    /** ASN of the local router. */
+    /**
+     * ASN of the local router.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("local_asn") val localAsn: Long? = null,
-    /** ASN of the peer router */
+    /**
+     * ASN of the peer router
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("peer_asn") val peerAsn: Long? = null,
-    /** IP of the DigitalOcean router */
-    @com.fasterxml.jackson.annotation.JsonProperty("local_router_ip")
-    val localRouterIp: String? = null,
-    /** IP of the peer router */
-    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_ip")
-    val peerRouterIp: String? = null,
+    /**
+     * IP of the DigitalOcean router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("local_router_ip") val localRouterIp: String? = null,
+    /**
+     * IP of the peer router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_ip") val peerRouterIp: String? = null
 )
 
-/** Typed representation of the `PartnerAttachment` API schema. */
+/**
+ * Typed representation of the `PartnerAttachment` API schema.
+ */
 data class PartnerAttachment(
-    /** A unique ID that can be used to identify and reference the partner attachment. */
+    /**
+     * A unique ID that can be used to identify and reference the partner attachment.
+     */
     val id: String? = null,
     /**
-     * The name of the partner attachment. Must be unique and may only contain alphanumeric
-     * characters, dashes, and periods.
+     * The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods.
      */
     val name: String? = null,
-    /** The current operational state of the attachment. */
+    /**
+     * The current operational state of the attachment.
+     */
     val state: String? = null,
-    /** The bandwidth (in Mbps) of the connection. */
-    @com.fasterxml.jackson.annotation.JsonProperty("connection_bandwidth_in_mbps")
-    val connectionBandwidthInMbps: Long? = null,
-    /** The region where the partner attachment is located. */
+    /**
+     * The bandwidth (in Mbps) of the connection.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("connection_bandwidth_in_mbps") val connectionBandwidthInMbps: Long? = null,
+    /**
+     * The region where the partner attachment is located.
+     */
     val region: String? = null,
-    /** The Network as a Service (NaaS) provider for the partner attachment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("naas_provider")
-    val naasProvider: String? = null,
-    /** An array of VPC network IDs. */
+    /**
+     * The Network as a Service (NaaS) provider for the partner attachment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("naas_provider") val naasProvider: String? = null,
+    /**
+     * An array of VPC network IDs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_ids") val vpcIds: List<String>? = null,
-    /** The BGP configuration for the partner attachment. */
+    /**
+     * The BGP configuration for the partner attachment.
+     */
     val bgp: PartnerAttachmentBgp? = null,
-    /** A time value given in ISO8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Associated partner attachment UUID */
+    /**
+     * A time value given in ISO8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Associated partner attachment UUID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_uuid") val parentUuid: String? = null,
-    /** An array of associated partner attachment UUIDs. */
-    val children: List<String>? = null,
+    /**
+     * An array of associated partner attachment UUIDs.
+     */
+    val children: List<String>? = null
 )
 
-/** Typed representation of the `PartnerAttachmentRemoteRoute` API schema. */
+/**
+ * Typed representation of the `PartnerAttachmentRemoteRoute` API schema.
+ */
 data class PartnerAttachmentRemoteRoute(
-    /** A CIDR block representing a remote route. */
+    /**
+     * A CIDR block representing a remote route.
+     */
     val cidr: String? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class PartnerAttachmentUpdatableVariant0(
     /**
-     * The name of the partner attachment. Must be unique and may only contain alphanumeric
-     * characters, dashes, and periods.
+     * The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods.
      */
     val name: String
 ) : PartnerAttachmentUpdatable
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class PartnerAttachmentUpdatableVariant1(
-    /** An array of VPCs IDs. */
+    /**
+     * An array of VPCs IDs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_ids") val vpcIds: List<String>
 ) : PartnerAttachmentUpdatable
 
-/** BGP configurations */
+/**
+ * BGP configurations
+ */
 data class PartnerAttachmentUpdatableVariant2Bgp(
-    /** IP of the DO router */
+    /**
+     * IP of the DO router
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("local_router_ip") val localRouterIp: String,
-    /** IP of the NaaS provider router */
+    /**
+     * IP of the NaaS provider router
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("peer_router_ip") val peerRouterIp: String,
-    /** ASN of the peer router */
+    /**
+     * ASN of the peer router
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("peer_router_asn") val peerRouterAsn: Long,
-    /** BGP Auth Key */
-    @com.fasterxml.jackson.annotation.JsonProperty("auth_key") val authKey: String,
+    /**
+     * BGP Auth Key
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("auth_key") val authKey: String
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class PartnerAttachmentUpdatableVariant2(
-    /** BGP configurations */
+    /**
+     * BGP configurations
+     */
     val bgp: PartnerAttachmentUpdatableVariant2Bgp? = null
 ) : PartnerAttachmentUpdatable
 
-/** Typed representation of the `PartnerAttachmentUpdatable` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = PartnerAttachmentUpdatable.Deserializer::class
-)
+/**
+ * Typed representation of the `PartnerAttachmentUpdatable` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = PartnerAttachmentUpdatable.Deserializer::class)
 sealed interface PartnerAttachmentUpdatable {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<PartnerAttachmentUpdatable>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<PartnerAttachmentUpdatable>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): PartnerAttachmentUpdatable {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType =
-                PartnerAttachmentUpdatableOwnedTypes.firstOrNull { (keys, _) ->
-                        keys.any(node::has)
-                    }
-                    ?.second
+            val ownedType = PartnerAttachmentUpdatableOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -151,92 +184,106 @@ sealed interface PartnerAttachmentUpdatable {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out PartnerAttachmentUpdatable>> =
-                listOf(
-                    PartnerAttachmentUpdatableVariant0::class.java,
-                    PartnerAttachmentUpdatableVariant1::class.java,
-                    PartnerAttachmentUpdatableVariant2::class.java,
-                )
-            dev.octri.showcase.digitalocean.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out PartnerAttachmentUpdatable>> = listOf(PartnerAttachmentUpdatableVariant0::class.java, PartnerAttachmentUpdatableVariant1::class.java, PartnerAttachmentUpdatableVariant2::class.java)
+            dev.octri.showcase.digitalocean.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        PartnerAttachmentUpdatable::class.java,
-                        "no PartnerAttachmentUpdatable branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, PartnerAttachmentUpdatable::class.java, "no PartnerAttachmentUpdatable branch accepts this payload")
             }
         }
     }
 }
 
-internal val PartnerAttachmentUpdatableOwnedTypes:
-    List<Pair<List<String>, Class<out PartnerAttachmentUpdatable>>> =
-    listOf(
-        listOf("name") to PartnerAttachmentUpdatableVariant0::class.java,
-        listOf("vpc_ids") to PartnerAttachmentUpdatableVariant1::class.java,
-        listOf("bgp") to PartnerAttachmentUpdatableVariant2::class.java,
-    )
-
-/** Optional BGP configurations */
-data class PartnerAttachmentWritableBgp(
-    /** IP of the DO router */
-    @com.fasterxml.jackson.annotation.JsonProperty("local_router_ip") val localRouterIp: String,
-    /** IP of the Naas Provider router */
-    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_ip") val peerRouterIp: String,
-    /** ASN of the peer router */
-    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_asn") val peerRouterAsn: Long,
-    /** BGP Auth Key */
-    @com.fasterxml.jackson.annotation.JsonProperty("auth_key") val authKey: String,
+internal val PartnerAttachmentUpdatableOwnedTypes: List<Pair<List<String>, Class<out PartnerAttachmentUpdatable>>> = listOf(
+    listOf("name") to PartnerAttachmentUpdatableVariant0::class.java,
+    listOf("vpc_ids") to PartnerAttachmentUpdatableVariant1::class.java,
+    listOf("bgp") to PartnerAttachmentUpdatableVariant2::class.java,
 )
 
-/** Typed representation of the `PartnerAttachmentWritable` API schema. */
+/**
+ * Optional BGP configurations
+ */
+data class PartnerAttachmentWritableBgp(
+    /**
+     * IP of the DO router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("local_router_ip") val localRouterIp: String,
+    /**
+     * IP of the Naas Provider router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_ip") val peerRouterIp: String,
+    /**
+     * ASN of the peer router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("peer_router_asn") val peerRouterAsn: Long,
+    /**
+     * BGP Auth Key
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("auth_key") val authKey: String
+)
+
+/**
+ * Typed representation of the `PartnerAttachmentWritable` API schema.
+ */
 data class PartnerAttachmentWritable(
     /**
-     * The name of the partner attachment. Must be unique and may only contain alphanumeric
-     * characters, dashes, and periods.
+     * The name of the partner attachment. Must be unique and may only contain alphanumeric characters, dashes, and periods.
      */
     val name: String,
-    /** Bandwidth (in Mbps) of the connection. */
-    @com.fasterxml.jackson.annotation.JsonProperty("connection_bandwidth_in_mbps")
-    val connectionBandwidthInMbps: Long,
-    /** The region to create the partner attachment. */
+    /**
+     * Bandwidth (in Mbps) of the connection.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("connection_bandwidth_in_mbps") val connectionBandwidthInMbps: Long,
+    /**
+     * The region to create the partner attachment.
+     */
     val region: PartnerAttachmentWritableRegionEnum,
-    /** Required `string` value serialized in the `naas_provider` wire field. */
+    /**
+     * Required `string` value serialized in the `naas_provider` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("naas_provider") val naasProvider: String,
-    /** An array of VPCs IDs. */
+    /**
+     * An array of VPCs IDs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_ids") val vpcIds: List<String>,
-    /** Optional associated partner attachment UUID */
+    /**
+     * Optional associated partner attachment UUID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_uuid") val parentUuid: String? = null,
-    /** Optional BGP configurations */
+    /**
+     * Optional BGP configurations
+     */
     val bgp: PartnerAttachmentWritableBgp? = null,
-    /** Optional redundancy zone for the partner attachment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("redundancy_zone")
-    val redundancyZone: PartnerAttachmentWritableRedundancyZoneEnum? = null,
+    /**
+     * Optional redundancy zone for the partner attachment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redundancy_zone") val redundancyZone: PartnerAttachmentWritableRedundancyZoneEnum? = null
 )
 
-/** Typed representation of the `SinglePartnerAttachment` API schema. */
+/**
+ * Typed representation of the `SinglePartnerAttachment` API schema.
+ */
 data class SinglePartnerAttachment(
-    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachment")
-    val partnerAttachment: PartnerAttachment? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachment") val partnerAttachment: PartnerAttachment? = null
 )
 
-/** Typed representation of the `SinglePartnerAttachmentBgpAuthKey` API schema. */
+/**
+ * Typed representation of the `SinglePartnerAttachmentBgpAuthKey` API schema.
+ */
 data class SinglePartnerAttachmentBgpAuthKey(
-    @com.fasterxml.jackson.annotation.JsonProperty("bgp_auth_key")
-    val bgpAuthKey: Map<String, Any>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("bgp_auth_key") val bgpAuthKey: Map<String, Any>? = null
 )
 
-/** Typed representation of the `SinglePartnerAttachmentDeleting` API schema. */
+/**
+ * Typed representation of the `SinglePartnerAttachmentDeleting` API schema.
+ */
 data class SinglePartnerAttachmentDeleting(
-    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachment")
-    val partnerAttachment: PartnerAttachment? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("partner_attachment") val partnerAttachment: PartnerAttachment? = null
 )
 
-/** Typed representation of the `SinglePartnerAttachmentServiceKey` API schema. */
+/**
+ * Typed representation of the `SinglePartnerAttachmentServiceKey` API schema.
+ */
 data class SinglePartnerAttachmentServiceKey(
-    @com.fasterxml.jackson.annotation.JsonProperty("service_key")
-    val serviceKey: Map<String, Any>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("service_key") val serviceKey: Map<String, Any>? = null
 )

@@ -5,74 +5,66 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `Image` API schema. */
+/**
+ * Typed representation of the `Image` API schema.
+ */
 data class Image(
-    /** A unique number that can be used to identify and reference a specific image. */
+    /**
+     * A unique number that can be used to identify and reference a specific image.
+     */
     val id: Long? = null,
     /**
-     * The display name that has been given to an image. This is what is shown in the control panel
-     * and is generally a descriptive title for the image in question.
+     * The display name that has been given to an image. This is what is shown in the control panel and is generally a descriptive title for the image in question.
      */
     val name: ImageName? = null,
     /**
-     * Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or
-     * `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image,
-     * user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual
-     * machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
+     * Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
      */
     val type: ImageTypeEnum? = null,
     /**
-     * The name of a custom image's distribution. Currently, the valid values are `Arch Linux`,
-     * `CentOS`, `CoreOS`, `Debian`, `Fedora`, `Fedora Atomic`, `FreeBSD`, `Gentoo`, `openSUSE`,
-     * `RancherOS`, `Rocky Linux`, `Ubuntu`, and `Unknown`. Any other value will be accepted but
-     * ignored, and `Unknown` will be used in its place.
+     * The name of a custom image's distribution. Currently, the valid values are `Arch Linux`, `CentOS`, `CoreOS`, `Debian`, `Fedora`, `Fedora Atomic`, `FreeBSD`, `Gentoo`, `openSUSE`, `RancherOS`, `Rocky Linux`, `Ubuntu`, and `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be used in its place.
      */
     val distribution: Distribution? = null,
     /**
-     * A uniquely identifying string that is associated with each of the DigitalOcean-provided
-     * public images. These can be used to reference a public image as an alternative to the numeric
-     * id.
+     * A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
      */
     val slug: String? = null,
     /**
-     * This is a boolean value that indicates whether the image in question is public or not. An
-     * image that is public is available to all accounts. A non-public image is only accessible from
-     * your account.
+     * This is a boolean value that indicates whether the image in question is public or not. An image that is public is available to all accounts. A non-public image is only accessible from your account.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("public") val `public`: Boolean? = null,
     /**
-     * This attribute is an array of the regions that the image is available in. The regions are
-     * represented by their identifying slug values.
+     * This attribute is an array of the regions that the image is available in. The regions are represented by their identifying slug values.
      */
     val regions: RegionsArray? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the image
-     * was created.
+     * A time value given in ISO8601 combined date and time format that represents when the image was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The minimum disk size in GB required for a Droplet to use this image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The minimum disk size in GB required for a Droplet to use this image.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("min_disk_size") val minDiskSize: Long? = null,
-    /** The size of the image in gigabytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes")
-    val sizeGigabytes: Float? = null,
-    /** An optional free-form text field to describe an image. */
+    /**
+     * The size of the image in gigabytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Float? = null,
+    /**
+     * An optional free-form text field to describe an image.
+     */
     val description: ImageDescription? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
-     * either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
      */
     val tags: TagsArray? = null,
     /**
-     * A status string indicating the state of a custom image. This may be `NEW`, `available`,
-     * `pending`, `deleted`, or `retired`.
+     * A status string indicating the state of a custom image. This may be `NEW`, `available`, `pending`, `deleted`, or `retired`.
      */
     val status: ImageStatusEnum? = null,
     /**
      * A string containing information about errors that may occur when importing a custom image.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_message")
-    val errorMessage: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("error_message") val errorMessage: String? = null
 )
 
 typealias ImageDescription = String

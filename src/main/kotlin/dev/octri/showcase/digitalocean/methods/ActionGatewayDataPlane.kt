@@ -22,100 +22,53 @@ import dev.octri.showcase.digitalocean.Validation
 
 object ActionGatewayDataPlane {
 
+
     /**
-     * Lists the catalog tools that a session can call, ordered by name. The list applies the
-     * session's `tools` selection and omits tools that its policy always denies. Each page includes
-     * an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is
-     * unchanged.
+     * Lists the catalog tools that a session can call, ordered by name. The list applies the session's `tools` selection and omits tools that its policy always denies. Each page includes an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is unchanged.
      *
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
-     * @param pageSize The number of tools returned per page, from 1 to 100. Defaults to 20 when
-     *   omitted. Other values are rejected with 400.
-     * @param pageToken The `next_page_token` from the previous response. A token is only valid for
-     *   the session that received it.
-     * @param ifNoneMatch The `ETag` from a previous response for the same page. If the page is
-     *   unchanged, the response is `304 Not Modified` with no body.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
+     * @param pageSize The number of tools returned per page, from 1 to 100. Defaults
+     *   to 20 when omitted. Other values are rejected with 400.
+     * @param pageToken The `next_page_token` from the previous response. A token is
+     *   only valid for the session that received it.
+     * @param ifNoneMatch The `ETag` from a previous response for the same page. If
+     *   the page is unchanged, the response is `304 Not Modified` with no body.
      */
-    fun gatewayToolsList(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        ifNoneMatch: String? = null,
-        options: RequestOptions? = null,
-    ): ListSessionToolsResponse {
+    fun gatewayToolsList(clientConfig: ClientConfig, xSessionId: String, pageSize: Long? = null, pageToken: String? = null, ifNoneMatch: String? = null, options: RequestOptions? = null): ListSessionToolsResponse {
         Validation.validateUuid("X-Session-Id", xSessionId)
 
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListSessionToolsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/tools",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "gatewayToolsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "X-Session-Id" to SdkClient.headerValue(xSessionId, false),
-                            "If-None-Match" to SdkClient.headerValue(ifNoneMatch, false),
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Forbidden::class.java,
-                            "412" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListSessionToolsResponse>(SdkClient.RequestSpec("GET", "/tools", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "gatewayToolsList", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Session-Id" to SdkClient.headerValue(xSessionId, false), "If-None-Match" to SdkClient.headerValue(ifNoneMatch, false)), options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "403" to Forbidden::class.java, "412" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists the catalog tools that a session can call, ordered by name. The list applies the
-     * session's `tools` selection and omits tools that its policy always denies. Each page includes
-     * an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is
-     * unchanged.
+     * Lists the catalog tools that a session can call, ordered by name. The list applies the session's `tools` selection and omits tools that its policy always denies. Each page includes an `ETag` header. Send it in `If-None-Match` to receive `304 Not Modified` while the page is unchanged.
      *
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
-     * @param pageSize The number of tools returned per page, from 1 to 100. Defaults to 20 when
-     *   omitted. Other values are rejected with 400.
-     * @param pageToken The `next_page_token` from the previous response. A token is only valid for
-     *   the session that received it.
-     * @param ifNoneMatch The `ETag` from a previous response for the same page. If the page is
-     *   unchanged, the response is `304 Not Modified` with no body.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
+     * @param pageSize The number of tools returned per page, from 1 to 100. Defaults
+     *   to 20 when omitted. Other values are rejected with 400.
+     * @param pageToken The `next_page_token` from the previous response. A token is
+     *   only valid for the session that received it.
+     * @param ifNoneMatch The `ETag` from a previous response for the same page. If
+     *   the page is unchanged, the response is `304 Not Modified` with no body.
      */
-    fun gatewayToolsListPaginated(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        ifNoneMatch: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTool) -> Boolean,
-    ) {
+    fun gatewayToolsListPaginated(clientConfig: ClientConfig, xSessionId: String, pageSize: Long? = null, pageToken: String? = null, ifNoneMatch: String? = null, options: RequestOptions? = null, yieldFn: (SessionTool) -> Boolean) {
         var cursor = pageToken
         while (true) {
-            val page =
-                gatewayToolsList(clientConfig, xSessionId, pageSize, cursor, ifNoneMatch, options)
+            val page = gatewayToolsList(clientConfig, xSessionId, pageSize, cursor, ifNoneMatch, options)
             val items = page.tools.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -132,19 +85,10 @@ object ActionGatewayDataPlane {
         val hasMore: Boolean,
     )
 
-    fun gatewayToolsListPages(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        ifNoneMatch: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (GatewayToolsListPage) -> Boolean,
-    ) {
+    fun gatewayToolsListPages(clientConfig: ClientConfig, xSessionId: String, pageSize: Long? = null, pageToken: String? = null, ifNoneMatch: String? = null, options: RequestOptions? = null, yieldPage: (GatewayToolsListPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
-            val page =
-                gatewayToolsList(clientConfig, xSessionId, pageSize, cursor, ifNoneMatch, options)
+            val page = gatewayToolsList(clientConfig, xSessionId, pageSize, cursor, ifNoneMatch, options)
             val items = page.tools.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextPageToken
@@ -155,287 +99,132 @@ object ActionGatewayDataPlane {
         }
     }
 
+
+
     /**
-     * Finds the catalog tools that fit one or more use cases. This is the REST form of the
-     * `action_search` MCP tool. Each query is searched independently and returns its own result
-     * group, so you can see which tools serve which goal. Results include each tool's
-     * `inputSchema`, so you can call a tool with `POST /tools/invoke` without another lookup.
-     * Results include only tools that the session can call. If the session policy requires approval
-     * for `action_search`, the response is a…
+     * Finds the catalog tools that fit one or more use cases. This is the REST form of the `action_search` MCP tool. Each query is searched independently and returns its own result group, so you can see which tools serve which goal. Results include each tool's `inputSchema`, so you can call a tool with `POST /tools/invoke` without another lookup. Results include only tools that the session can call. If the session policy requires approval for `action_search`, the response is a…
      *
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
-     * @param queries Independent search queries. Split separate actions into separate queries. Each
-     *   query is searched on its own and gets its own result group.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
+     * @param queries Independent search queries. Split separate actions into
+     *   separate queries. Each query is searched on its own and gets its own result
+     *   group.
      * @param providers Restricts every query to these providers.
      * @param tags Restricts every query to tools with these tags.
-     * @param limit The maximum number of tools returned per query. Values above 50 are capped
-     *   at 50.
+     * @param limit The maximum number of tools returned per query. Values above 50
+     *   are capped at 50.
      */
-    fun gatewayToolsListSearch(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        queries: List<SearchQuery>,
-        providers: List<String>? = null,
-        tags: List<String>? = null,
-        limit: Long? = null,
-        options: RequestOptions? = null,
-    ): DataPlaneSearchToolsResponse {
+    fun gatewayToolsListSearch(clientConfig: ClientConfig, xSessionId: String, queries: List<SearchQuery>, providers: List<String>? = null, tags: List<String>? = null, limit: Long? = null, options: RequestOptions? = null): DataPlaneSearchToolsResponse {
         Validation.validateUuid("X-Session-Id", xSessionId)
 
         Validation.validateItems("queries", queries, Validation.LengthOpts(min = 1, max = 5))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<DataPlaneSearchToolsResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/tools/search",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "queries" to (queries),
-                            "providers" to (SdkClient.omitIfNull(providers)),
-                            "tags" to (SdkClient.omitIfNull(tags)),
-                            "limit" to (SdkClient.omitIfNull(limit)),
-                        ),
-                    operationId = "gatewayToolsListSearch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "X-Session-Id" to SdkClient.headerValue(xSessionId, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Forbidden::class.java,
-                            "412" to ToolResultError::class.java,
-                            "413" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DataPlaneSearchToolsResponse>(SdkClient.RequestSpec("POST", "/tools/search", config = clientConfig, body = SdkClient.bodyMap("queries" to (queries), "providers" to (SdkClient.omitIfNull(providers)), "tags" to (SdkClient.omitIfNull(tags)), "limit" to (SdkClient.omitIfNull(limit))), operationId = "gatewayToolsListSearch", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Session-Id" to SdkClient.headerValue(xSessionId, false)), options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "403" to Forbidden::class.java, "412" to ToolResultError::class.java, "413" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Runs 1 to 10 tool calls in parallel and returns one result per call, in request order. This
-     * is the REST form of the `action_invoke` MCP tool. Each call is checked against the session's
-     * tool selection and policy, uses the session actor's connections, and applies any output view
-     * bound to the tool in the session. A well-formed request returns `200` even when some calls
-     * fail. Check each item's `result.status`, and use `success_count` and `error_count` to branch
-     * without scanning…
+     * Runs 1 to 10 tool calls in parallel and returns one result per call, in request order. This is the REST form of the `action_invoke` MCP tool. Each call is checked against the session's tool selection and policy, uses the session actor's connections, and applies any output view bound to the tool in the session. A well-formed request returns `200` even when some calls fail. Check each item's `result.status`, and use `success_count` and `error_count` to branch without scanning…
      *
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
      * @param tools The tool calls to run in parallel.
-     * @param rationale One sentence explaining why the tools are being called. Values longer than
-     *   512 characters are truncated.
+     * @param rationale One sentence explaining why the tools are being called.
+     *   Values longer than 512 characters are truncated.
      */
-    fun gatewayToolsRun(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        tools: List<ToolCall>,
-        rationale: String? = null,
-        options: RequestOptions? = null,
-    ): InvokeToolsResponse {
+    fun gatewayToolsRun(clientConfig: ClientConfig, xSessionId: String, tools: List<ToolCall>, rationale: String? = null, options: RequestOptions? = null): InvokeToolsResponse {
         Validation.validateUuid("X-Session-Id", xSessionId)
 
         Validation.validateItems("tools", tools, Validation.LengthOpts(min = 1, max = 10))
 
-        return SdkClient.request<InvokeToolsResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/tools/invoke",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "tools" to (tools),
-                            "rationale" to (SdkClient.omitIfNull(rationale)),
-                        ),
-                    operationId = "gatewayToolsRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "X-Session-Id" to SdkClient.headerValue(xSessionId, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "402" to ToolResultError::class.java,
-                            "403" to Forbidden::class.java,
-                            "412" to ToolResultError::class.java,
-                            "413" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<InvokeToolsResponse>(SdkClient.RequestSpec("POST", "/tools/invoke", config = clientConfig, body = SdkClient.bodyMap("tools" to (tools), "rationale" to (SdkClient.omitIfNull(rationale))), operationId = "gatewayToolsRun", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Session-Id" to SdkClient.headerValue(xSessionId, false)), options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "402" to ToolResultError::class.java, "403" to Forbidden::class.java, "412" to ToolResultError::class.java, "413" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Runs Python code in an ephemeral sandbox and returns its `stdout`, `stderr`, and `exit_code`.
-     * This is the REST form of the `action_code` MCP tool. Use it for computation, parsing, and
-     * data processing, or to chain several catalog tools in one request. The sandbox provides
-     * `invoke_digitalocean_tool(name, arguments)`, which calls a catalog tool and returns a tool
-     * result. Those calls follow the session's tool selection and policy. Each request runs in a
-     * fresh sandbox, so state…
+     * Runs Python code in an ephemeral sandbox and returns its `stdout`, `stderr`, and `exit_code`. This is the REST form of the `action_code` MCP tool. Use it for computation, parsing, and data processing, or to chain several catalog tools in one request. The sandbox provides `invoke_digitalocean_tool(name, arguments)`, which calls a catalog tool and returns a tool result. Those calls follow the session's tool selection and policy. Each request runs in a fresh sandbox, so state…
      *
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
-     * @param code Python source to run. The sandbox provides `invoke_digitalocean_tool(name: str,
-     *   arguments: dict) -> dict`, which calls a catalog tool under the session's policy and
-     *   returns a tool result.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
+     * @param code Python source to run. The sandbox provides
+     *   `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which calls a
+     *   catalog tool under the session's policy and returns a tool result.
      */
-    fun gatewayCodeRun(
-        clientConfig: ClientConfig,
-        xSessionId: String,
-        code: String,
-        options: RequestOptions? = null,
-    ): ExecuteCodeResponse {
+    fun gatewayCodeRun(clientConfig: ClientConfig, xSessionId: String, code: String, options: RequestOptions? = null): ExecuteCodeResponse {
         Validation.validateUuid("X-Session-Id", xSessionId)
 
-        return SdkClient.request<ExecuteCodeResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/code/execute",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("code" to (code)),
-                    operationId = "gatewayCodeRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "X-Session-Id" to SdkClient.headerValue(xSessionId, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Forbidden::class.java,
-                            "412" to ToolResultError::class.java,
-                            "413" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                            "504" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExecuteCodeResponse>(SdkClient.RequestSpec("POST", "/code/execute", config = clientConfig, body = SdkClient.bodyMap("code" to (code)), operationId = "gatewayCodeRun", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Session-Id" to SdkClient.headerValue(xSessionId, false)), options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "403" to Forbidden::class.java, "412" to ToolResultError::class.java, "413" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java, "504" to ToolResultError::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Approves or denies a tool call that is waiting for approval. A tool result returns
-     * `_meta.status` set to `requires_approval` when the session policy sets `ask` for the call,
-     * and its `_meta.decide` gives this request's path. Send the decision with the session owner's
-     * token. Approval is a separate control request, not a tool, so an agent cannot approve its own
-     * calls. After approving, repeat the original call with the same arguments before `expires_at`.
-     * An approval applies only…
+     * Approves or denies a tool call that is waiting for approval. A tool result returns `_meta.status` set to `requires_approval` when the session policy sets `ask` for the call, and its `_meta.decide` gives this request's path. Send the decision with the session owner's token. Approval is a separate control request, not a tool, so an agent cannot approve its own calls. After approving, repeat the original call with the same arguments before `expires_at`. An approval applies only…
      *
-     * @param sessionId The session UUID: the value at the end of the session's `sessionUrn` and
-     *   `mcpUrl`. The session must belong to the authenticated user and team.
+     * @param sessionId The session UUID: the value at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
      * @param approvalId The `approval_id` from a tool result whose `_meta.status` is
      *   `requires_approval`.
      * @param decision Whether to let the pending call run.
      */
-    fun gatewaySessionApprovalsUpdate(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        approvalId: String,
-        decision: ApprovalDecisionDecisionEnum,
-        options: RequestOptions? = null,
-    ): ApprovalDecisionResponse {
+    fun gatewaySessionApprovalsUpdate(clientConfig: ClientConfig, sessionId: String, approvalId: String, decision: ApprovalDecisionDecisionEnum, options: RequestOptions? = null): ApprovalDecisionResponse {
         Validation.validateUuid("session_id", sessionId)
 
         Validation.validateUuid("approval_id", approvalId)
 
-        return SdkClient.request<ApprovalDecisionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/approvals/session/${SdkClient.encodePathSegment(sessionId)}/${SdkClient.encodePathSegment(approvalId)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("decision" to (decision)),
-                    operationId = "gatewaySessionApprovalsUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Forbidden::class.java,
-                            "404" to ToolResultError::class.java,
-                            "409" to ToolResultError::class.java,
-                            "412" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ApprovalDecisionResponse>(SdkClient.RequestSpec("POST", "/approvals/session/${SdkClient.encodePathSegment(sessionId)}/${SdkClient.encodePathSegment(approvalId)}", config = clientConfig, body = SdkClient.bodyMap("decision" to (decision)), operationId = "gatewaySessionApprovalsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "403" to Forbidden::class.java, "404" to ToolResultError::class.java, "409" to ToolResultError::class.java, "412" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Approves or denies a tool call that is waiting for approval, identifying the session with the
-     * `X-Session-Id` header. It behaves the same as `POST
-     * /approvals/session/{session_id}/{approval_id}`, which is the path returned in a result's
-     * `_meta.decide`.
+     * Approves or denies a tool call that is waiting for approval, identifying the session with the `X-Session-Id` header. It behaves the same as `POST /approvals/session/{session_id}/{approval_id}`, which is the path returned in a result's `_meta.decide`.
      *
      * @param approvalId The `approval_id` from a tool result whose `_meta.status` is
      *   `requires_approval`.
-     * @param xSessionId The session to act in: the UUID at the end of the session's `sessionUrn`
-     *   and `mcpUrl`. The session must belong to the authenticated user and team.
+     * @param xSessionId The session to act in: the UUID at the end of the session's
+     *   `sessionUrn` and `mcpUrl`. The session must belong to the authenticated user
+     *   and team.
      * @param decision Whether to let the pending call run.
      */
-    fun gatewayApprovalsUpdate(
-        clientConfig: ClientConfig,
-        approvalId: String,
-        xSessionId: String,
-        decision: ApprovalDecisionDecisionEnum,
-        options: RequestOptions? = null,
-    ): ApprovalDecisionResponse {
+    fun gatewayApprovalsUpdate(clientConfig: ClientConfig, approvalId: String, xSessionId: String, decision: ApprovalDecisionDecisionEnum, options: RequestOptions? = null): ApprovalDecisionResponse {
         Validation.validateUuid("approval_id", approvalId)
 
         Validation.validateUuid("X-Session-Id", xSessionId)
 
-        return SdkClient.request<ApprovalDecisionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/approvals/${SdkClient.encodePathSegment(approvalId)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("decision" to (decision)),
-                    operationId = "gatewayApprovalsUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "X-Session-Id" to SdkClient.headerValue(xSessionId, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ToolResultError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Forbidden::class.java,
-                            "404" to ToolResultError::class.java,
-                            "409" to ToolResultError::class.java,
-                            "412" to ToolResultError::class.java,
-                            "429" to ToolResultError::class.java,
-                            "500" to ToolResultError::class.java,
-                            "503" to ToolResultError::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ApprovalDecisionResponse>(SdkClient.RequestSpec("POST", "/approvals/${SdkClient.encodePathSegment(approvalId)}", config = clientConfig, body = SdkClient.bodyMap("decision" to (decision)), operationId = "gatewayApprovalsUpdate", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Session-Id" to SdkClient.headerValue(xSessionId, false)), options = options, errors = mapOf("400" to ToolResultError::class.java, "401" to Error2::class.java, "403" to Forbidden::class.java, "404" to ToolResultError::class.java, "409" to ToolResultError::class.java, "412" to ToolResultError::class.java, "429" to ToolResultError::class.java, "500" to ToolResultError::class.java, "503" to ToolResultError::class.java))).data
     }
+
+
+
+
+
+
+
 }

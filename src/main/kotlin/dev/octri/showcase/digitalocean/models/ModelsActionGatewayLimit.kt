@@ -3,11 +3,16 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Actor's limit for one category. */
+/**
+ * Actor's limit for one category.
+ */
 data class LimitOverride(
-    /** The category the limit applies to. */
+    /**
+     * The category the limit applies to.
+     */
     val category: LimitCategory,
-    /** Calls allowed per minute. 0 blocks every call in the category. */
-    @com.fasterxml.jackson.annotation.JsonProperty("requests_per_minute")
-    val requestsPerMinute: String,
+    /**
+     * Calls allowed per minute. 0 blocks every call in the category.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("requests_per_minute") val requestsPerMinute: String
 )

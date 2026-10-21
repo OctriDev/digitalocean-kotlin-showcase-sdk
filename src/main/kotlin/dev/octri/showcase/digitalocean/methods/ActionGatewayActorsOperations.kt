@@ -15,126 +15,48 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayActorLimitsGetOperation {
     /**
-     * Returns the per-minute limits set for the actor and the limits in effect, each the lower of
-     * your team's limit and the actor's override. Returns 404 when the actor has no sessions,
-     * connections, or limit overrides.
+     * Returns the per-minute limits set for the actor and the limits in effect, each the lower of your team's limit and the actor's override. Returns 404 when the actor has no sessions, connections, or limit overrides.
      *
-     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to 64 characters
-     *   from `[A-Za-z0-9._-]`.
+     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to
+     *   64 characters from `[A-Za-z0-9._-]`.
      */
-    fun actorLimitsGet(
-        clientConfig: ClientConfig,
-        actorId: String,
-        options: RequestOptions? = null,
-    ): GetActorLimitsResponse {
+    fun actorLimitsGet(clientConfig: ClientConfig, actorId: String, options: RequestOptions? = null): GetActorLimitsResponse {
         Validation.validatePattern("actor_id", actorId, "^[A-Za-z0-9._-]{1,64}$")
 
-        return SdkClient.request<GetActorLimitsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits",
-                    config = clientConfig,
-                    operationId = "actorLimitsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<GetActorLimitsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits", config = clientConfig, operationId = "actorLimitsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayActorLimitsDeleteOperation {
     /**
-     * Removes the actor's overrides for the listed categories, which then follow your team's limits
-     * again. Clearing a category without an override succeeds.
+     * Removes the actor's overrides for the listed categories, which then follow your team's limits again. Clearing a category without an override succeeds.
      *
-     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to 64 characters
-     *   from `[A-Za-z0-9._-]`.
+     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to
+     *   64 characters from `[A-Za-z0-9._-]`.
      * @param categories Required. Categories to clear, each at most once.
      */
-    fun actorLimitsDelete(
-        clientConfig: ClientConfig,
-        actorId: String,
-        categories: List<LimitCategory>,
-        options: RequestOptions? = null,
-    ): EmptyResponse {
+    fun actorLimitsDelete(clientConfig: ClientConfig, actorId: String, categories: List<LimitCategory>, options: RequestOptions? = null): EmptyResponse {
         Validation.validatePattern("actor_id", actorId, "^[A-Za-z0-9._-]{1,64}$")
 
         Validation.validateItems("categories", categories, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<EmptyResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits:clear",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("categories" to (categories)),
-                    operationId = "actorLimitsDelete",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EmptyResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits:clear", config = clientConfig, body = SdkClient.bodyMap("categories" to (categories)), operationId = "actorLimitsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayActorLimitsUpdateOperation {
     /**
-     * Sets per-minute limits for the listed categories and leaves the others unchanged. A limit may
-     * not exceed your team's current limit for the category (400 otherwise), and 0 blocks every
-     * call in the category. The actor does not need to exist yet.
+     * Sets per-minute limits for the listed categories and leaves the others unchanged. A limit may not exceed your team's current limit for the category (400 otherwise), and 0 blocks every call in the category. The actor does not need to exist yet.
      *
-     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to 64 characters
-     *   from `[A-Za-z0-9._-]`.
+     * @param actorId Actor ID: a session `actor_id` or a connection `user_id`, 1 to
+     *   64 characters from `[A-Za-z0-9._-]`.
      * @param overrides Required. Limits to set, at most one per category.
      */
-    fun actorLimitsUpdate(
-        clientConfig: ClientConfig,
-        actorId: String,
-        overrides: List<LimitOverride>,
-        options: RequestOptions? = null,
-    ): EmptyResponse {
+    fun actorLimitsUpdate(clientConfig: ClientConfig, actorId: String, overrides: List<LimitOverride>, options: RequestOptions? = null): EmptyResponse {
         Validation.validatePattern("actor_id", actorId, "^[A-Za-z0-9._-]{1,64}$")
 
         Validation.validateItems("overrides", overrides, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<EmptyResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits:set",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("overrides" to (overrides)),
-                    operationId = "actorLimitsUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EmptyResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/actors/${SdkClient.encodePathSegment(actorId)}/limits:set", config = clientConfig, body = SdkClient.bodyMap("overrides" to (overrides)), operationId = "actorLimitsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

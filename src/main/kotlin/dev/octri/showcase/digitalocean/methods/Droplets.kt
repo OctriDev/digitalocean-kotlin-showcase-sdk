@@ -5,12 +5,12 @@ package dev.octri.showcase.digitalocean.methods
 
 import dev.octri.showcase.digitalocean.AllDropletBackupPolicies
 import dev.octri.showcase.digitalocean.AllDropletBackups
-import dev.octri.showcase.digitalocean.AllDropletSnapshots
 import dev.octri.showcase.digitalocean.AllDroplets
+import dev.octri.showcase.digitalocean.AllDropletSnapshots
 import dev.octri.showcase.digitalocean.AllFirewalls
 import dev.octri.showcase.digitalocean.AllKernels
-import dev.octri.showcase.digitalocean.AssociatedResourceStatus
 import dev.octri.showcase.digitalocean.AssociatedResourcesList
+import dev.octri.showcase.digitalocean.AssociatedResourceStatus
 import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.DropletBackupPolicyResponse
 import dev.octri.showcase.digitalocean.DropletsCreateResponse
@@ -26,632 +26,297 @@ import dev.octri.showcase.digitalocean.Validation
 
 object Droplets {
 
+
     /**
-     * To list all Droplets in your account, send a GET request to `/v2/droplets`. The response body
-     * will be a JSON object with a key of `droplets`. This will be set to an array containing
-     * objects each representing a Droplet. These will contain the standard Droplet attributes. ###
-     * Filtering Results by Tag It's possible to request filtered results by including certain query
-     * parameters. To only list Droplets assigned to a specific tag, include the `tag_name` query
-     * parameter set to…
+     * To list all Droplets in your account, send a GET request to `/v2/droplets`. The response body will be a JSON object with a key of `droplets`. This will be set to an array containing objects each representing a Droplet. These will contain the standard Droplet attributes. ### Filtering Results by Tag It's possible to request filtered results by including certain query parameters. To only list Droplets assigned to a specific tag, include the `tag_name` query parameter set to…
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
-     * @param tagName Used to filter Droplets by a specific tag. Can not be combined with `name` or
-     *   `type`. Requires `tag:read` scope.
-     * @param name Used to filter list response by Droplet name returning only exact matches. It is
-     *   case-insensitive and can not be combined with `tag_name`.
-     * @param type When `type` is set to `gpus`, only GPU Droplets will be returned. By default,
-     *   only non-GPU Droplets are returned. Can not be combined with `tag_name`.
+     * @param tagName Used to filter Droplets by a specific tag. Can not be combined
+     *   with `name` or `type`. Requires `tag:read` scope.
+     * @param name Used to filter list response by Droplet name returning only exact
+     *   matches. It is case-insensitive and can not be combined with `tag_name`.
+     * @param type When `type` is set to `gpus`, only GPU Droplets will be returned.
+     *   By default, only non-GPU Droplets are returned. Can not be combined with
+     *   `tag_name`.
      */
-    fun dropletsList(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        tagName: String? = null,
-        name: String? = null,
-        type: SchemaSchemaEnuma84ef242? = null,
-        options: RequestOptions? = null,
-    ): AllDroplets {
+    fun dropletsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, tagName: String? = null, name: String? = null, type: SchemaSchemaEnuma84ef242? = null, options: RequestOptions? = null): AllDroplets {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllDroplets>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "tag_name" to SdkClient.queryValue(tagName, "form", true),
-                            "name" to SdkClient.queryValue(name, "form", true),
-                            "type" to SdkClient.queryValue(type, "form", true),
-                        ),
-                    operationId = "dropletsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllDroplets>(SdkClient.RequestSpec("GET", "/v2/droplets", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "tag_name" to SdkClient.queryValue(tagName, "form", true), "name" to SdkClient.queryValue(name, "form", true), "type" to SdkClient.queryValue(type, "form", true)), operationId = "dropletsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates one or more Droplets using the supplied configuration. Include `size` and `image`,
-     * and provide either `name` for one Droplet or `names` for multiple Droplets; `names` supports
-     * up to ten Droplets per request. The 202 response means the request was accepted for
-     * processing, not that creation is complete; use the returned `actions` links to check
-     * progress.
+     * Creates one or more Droplets using the supplied configuration. Include `size` and `image`, and provide either `name` for one Droplet or `names` for multiple Droplets; `names` supports up to ten Droplets per request. The 202 response means the request was accepted for processing, not that creation is complete; use the returned `actions` links to check progress.
      *
-     * To create a new Droplet, send a POST request to `/v2/droplets` setting the required
-     * attributes. A Droplet will be created using the provided information. The response body will
-     * contain a JSON object with a key called `droplet`. The value will be an object containing the
-     * standard attributes for your new Droplet. The response code, 202 Accepted, does not indicate
-     * the success or failure of the operation, just that the request has been accepted for
-     * processing. The `actions`…
+     * To create a new Droplet, send a POST request to `/v2/droplets` setting the required attributes. A Droplet will be created using the provided information. The response body will contain a JSON object with a key called `droplet`. The value will be an object containing the standard attributes for your new Droplet. The response code, 202 Accepted, does not indicate the success or failure of the operation, just that the request has been accepted for processing. The `actions`…
      */
-    fun dropletsCreate(
-        clientConfig: ClientConfig,
-        body: Any? = null,
-        options: RequestOptions? = null,
-    ): DropletsCreateResponse {
-        return SdkClient.request<DropletsCreateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/droplets",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "dropletsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun dropletsCreate(clientConfig: ClientConfig, body: Any? = null, options: RequestOptions? = null): DropletsCreateResponse {
+        return SdkClient.request<DropletsCreateResponse>(SdkClient.RequestSpec("POST", "/v2/droplets", config = clientConfig, body = body, operationId = "dropletsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete **all** Droplets assigned to a specific tag, include the `tag_name` query parameter
-     * set to the name of the tag in your DELETE request. For example,
-     * `/v2/droplets?tag_name=$TAG_NAME`. This endpoint requires `tag:read` scope. A successful
-     * request will receive a 204 status code with no body in response. This indicates that the
-     * request was processed successfully.
+     * To delete **all** Droplets assigned to a specific tag, include the `tag_name` query parameter set to the name of the tag in your DELETE request. For example, `/v2/droplets?tag_name=$TAG_NAME`. This endpoint requires `tag:read` scope. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      *
      * @param tagName Specifies Droplets to be deleted by tag.
      */
-    fun dropletsDestroyByTag(
-        clientConfig: ClientConfig,
-        tagName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/droplets",
-                config = clientConfig,
-                query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)),
-                operationId = "dropletsDestroyByTag",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun dropletsDestroyByTag(clientConfig: ClientConfig, tagName: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets", config = clientConfig, query = mapOf("tag_name" to SdkClient.queryValue(tagName, "form", true)), operationId = "dropletsDestroyByTag", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To show information about an individual Droplet, send a GET request to
-     * `/v2/droplets/$DROPLET_ID`.
+     * To show information about an individual Droplet, send a GET request to `/v2/droplets/$DROPLET_ID`.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsGet(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): ExistingDroplet {
+    fun dropletsGet(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): ExistingDroplet {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<ExistingDroplet>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}",
-                    config = clientConfig,
-                    operationId = "dropletsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExistingDroplet>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}", config = clientConfig, operationId = "dropletsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`. A successful
-     * request will receive a 204 status code with no body in response. This indicates that the
-     * request was processed successfully.
+     * To delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsDestroy(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun dropletsDestroy(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): Unit {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}",
-                config = clientConfig,
-                operationId = "dropletsDestroy",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}", config = clientConfig, operationId = "dropletsDestroy", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve any backups associated with a Droplet, send a GET request to
-     * `/v2/droplets/$DROPLET_ID/backups`. You will get back a JSON object that has a `backups` key.
-     * This will be set to an array of backup objects, each of which contain the standard Droplet
-     * backup attributes.
+     * To retrieve any backups associated with a Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/backups`. You will get back a JSON object that has a `backups` key. This will be set to an array of backup objects, each of which contain the standard Droplet backup attributes.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListBackups(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllDropletBackups {
+    fun dropletsListBackups(clientConfig: ClientConfig, dropletId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackups {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllDropletBackups>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/backups",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "dropletsListBackups",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllDropletBackups>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/backups", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletsListBackups", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To show information about an individual Droplet's backup policy, send a GET request to
-     * `/v2/droplets/$DROPLET_ID/backups/policy`.
+     * To show information about an individual Droplet's backup policy, send a GET request to `/v2/droplets/$DROPLET_ID/backups/policy`.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsGetBackupPolicy(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): DropletBackupPolicyResponse {
+    fun dropletsGetBackupPolicy(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): DropletBackupPolicyResponse {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<DropletBackupPolicyResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/backups/policy",
-                    config = clientConfig,
-                    operationId = "dropletsGetBackupPolicy",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DropletBackupPolicyResponse>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/backups/policy", config = clientConfig, operationId = "dropletsGetBackupPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list information about the backup policies for all Droplets in the account, send a GET
-     * request to `/v2/droplets/backups/policies`.
+     * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun listAllBackupPolicies(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllDropletBackupPolicies {
+    fun listAllBackupPolicies(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackupPolicies {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllDropletBackupPolicies>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/backups/policies",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "listAllBackupPolicies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllDropletBackupPolicies>(SdkClient.RequestSpec("GET", "/v2/droplets/backups/policies", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "listAllBackupPolicies", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a list of all supported Droplet backup policies, send a GET request to
-     * `/v2/droplets/backups/supported_policies`.
+     * To retrieve a list of all supported Droplet backup policies, send a GET request to `/v2/droplets/backups/supported_policies`.
      */
-    fun dropletsListSupportedBackupPolicies(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): DropletsSupportedBackupPolicies {
-        return SdkClient.request<DropletsSupportedBackupPolicies>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/backups/supported_policies",
-                    config = clientConfig,
-                    operationId = "dropletsListSupportedBackupPolicies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun dropletsListSupportedBackupPolicies(clientConfig: ClientConfig, options: RequestOptions? = null): DropletsSupportedBackupPolicies {
+        return SdkClient.request<DropletsSupportedBackupPolicies>(SdkClient.RequestSpec("GET", "/v2/droplets/backups/supported_policies", config = clientConfig, operationId = "dropletsListSupportedBackupPolicies", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve the snapshots that have been created from a Droplet, send a GET request to
-     * `/v2/droplets/$DROPLET_ID/snapshots`. You will get back a JSON object that has a `snapshots`
-     * key. This will be set to an array of snapshot objects, each of which contain the standard
-     * Droplet snapshot attributes.
+     * To retrieve the snapshots that have been created from a Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/snapshots`. You will get back a JSON object that has a `snapshots` key. This will be set to an array of snapshot objects, each of which contain the standard Droplet snapshot attributes.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListSnapshots(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllDropletSnapshots {
+    fun dropletsListSnapshots(clientConfig: ClientConfig, dropletId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletSnapshots {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllDropletSnapshots>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/snapshots",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "dropletsListSnapshots",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllDropletSnapshots>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/snapshots", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletsListSnapshots", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a list of all kernels available to a Droplet, send a GET request to
-     * `/v2/droplets/$DROPLET_ID/kernels` The response will be a JSON object that has a key called
-     * `kernels`. This will be set to an array of `kernel` objects, each of which contain the
-     * standard `kernel` attributes.
+     * To retrieve a list of all kernels available to a Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/kernels` The response will be a JSON object that has a key called `kernels`. This will be set to an array of `kernel` objects, each of which contain the standard `kernel` attributes.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListKernels(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllKernels {
+    fun dropletsListKernels(clientConfig: ClientConfig, dropletId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllKernels {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllKernels>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/kernels",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "dropletsListKernels",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllKernels>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/kernels", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletsListKernels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a list of all firewalls available to a Droplet, send a GET request to
-     * `/v2/droplets/$DROPLET_ID/firewalls` The response will be a JSON object that has a key called
-     * `firewalls`. This will be set to an array of `firewall` objects, each of which contain the
-     * standard `firewall` attributes.
+     * To retrieve a list of all firewalls available to a Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/firewalls` The response will be a JSON object that has a key called `firewalls`. This will be set to an array of `firewall` objects, each of which contain the standard `firewall` attributes.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListFirewalls(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllFirewalls {
+    fun dropletsListFirewalls(clientConfig: ClientConfig, dropletId: Long, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllFirewalls {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllFirewalls>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/firewalls",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "dropletsListFirewalls",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllFirewalls>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/firewalls", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletsListFirewalls", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a list of any "neighbors" (i.e. Droplets that are co-located on the same physical
-     * hardware) for a specific Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/neighbors`.
-     * The results will be returned as a JSON object with a key of `droplets`. This will be set to
-     * an array containing objects representing any other Droplets that share the same physical
-     * hardware. An empty array indicates that the Droplet is not co-located any other Droplets
-     * associated with your…
+     * To retrieve a list of any "neighbors" (i.e. Droplets that are co-located on the same physical hardware) for a specific Droplet, send a GET request to `/v2/droplets/$DROPLET_ID/neighbors`. The results will be returned as a JSON object with a key of `droplets`. This will be set to an array containing objects representing any other Droplets that share the same physical hardware. An empty array indicates that the Droplet is not co-located any other Droplets associated with your…
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsListNeighbors(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): NeighborDroplets {
+    fun dropletsListNeighbors(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): NeighborDroplets {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<NeighborDroplets>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/neighbors",
-                    config = clientConfig,
-                    operationId = "dropletsListNeighbors",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<NeighborDroplets>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/neighbors", config = clientConfig, operationId = "dropletsListNeighbors", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list the associated billable resources that can be destroyed along with a Droplet, send a
-     * GET request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources` endpoint.
-     * This endpoint will only return resources that you are authorized to see. For example, to see
-     * associated Reserved IPs, include the `reserved_ip:read` scope. The response will be a JSON
-     * object containing `snapshots`, `volumes`, and `volume_snapshots` keys. Each will be set to an
-     * array of objects…
+     * To list the associated billable resources that can be destroyed along with a Droplet, send a GET request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources` endpoint. This endpoint will only return resources that you are authorized to see. For example, to see associated Reserved IPs, include the `reserved_ip:read` scope. The response will be a JSON object containing `snapshots`, `volumes`, and `volume_snapshots` keys. Each will be set to an array of objects…
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsListAssociatedResources(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): AssociatedResourcesList {
+    fun dropletsListAssociatedResources(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): AssociatedResourcesList {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<AssociatedResourcesList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources",
-                    config = clientConfig,
-                    operationId = "dropletsListAssociatedResources",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AssociatedResourcesList>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources", config = clientConfig, operationId = "dropletsListAssociatedResources", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [dropletsDestroyWithAssociatedResourcesSelective]. */
     data class DropletsDestroyWithAssociatedResourcesSelectiveRequest(
@@ -660,214 +325,107 @@ object Droplets {
         val reservedIps: List<String>? = null,
         val snapshots: List<String>? = null,
         val volumes: List<String>? = null,
-        val volumeSnapshots: List<String>? = null,
+        val volumeSnapshots: List<String>? = null
     )
 
     /**
-     * To destroy a Droplet along with a sub-set of its associated resources, send a DELETE request
-     * to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/selective` endpoint. The
-     * JSON body of the request should include `reserved_ips`, `snapshots`, `volumes`, or
-     * `volume_snapshots` keys each set to an array of IDs for the associated resources to be
-     * destroyed. The IDs can be found by querying the Droplet's associated resources. Any
-     * associated resource not included in the…
+     * To destroy a Droplet along with a sub-set of its associated resources, send a DELETE request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/selective` endpoint. The JSON body of the request should include `reserved_ips`, `snapshots`, `volumes`, or `volume_snapshots` keys each set to an array of IDs for the associated resources to be destroyed. The IDs can be found by querying the Droplet's associated resources. Any associated resource not included in the…
      *
      * @param dropletId A unique identifier for a Droplet instance.
-     * @param floatingIps An array of unique identifiers for the floating IPs to be scheduled for
-     *   deletion.
-     * @param reservedIps An array of unique identifiers for the reserved IPs to be scheduled for
-     *   deletion.
-     * @param snapshots An array of unique identifiers for the snapshots to be scheduled for
-     *   deletion.
-     * @param volumes An array of unique identifiers for the volumes to be scheduled for deletion.
-     * @param volumeSnapshots An array of unique identifiers for the volume snapshots to be
+     * @param floatingIps An array of unique identifiers for the floating IPs to be
      *   scheduled for deletion.
+     * @param reservedIps An array of unique identifiers for the reserved IPs to be
+     *   scheduled for deletion.
+     * @param snapshots An array of unique identifiers for the snapshots to be
+     *   scheduled for deletion.
+     * @param volumes An array of unique identifiers for the volumes to be scheduled
+     *   for deletion.
+     * @param volumeSnapshots An array of unique identifiers for the volume snapshots
+     *   to be scheduled for deletion.
      */
-    fun dropletsDestroyWithAssociatedResourcesSelective(
-        clientConfig: ClientConfig,
-        request: DropletsDestroyWithAssociatedResourcesSelectiveRequest,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun dropletsDestroyWithAssociatedResourcesSelective(clientConfig: ClientConfig, request: DropletsDestroyWithAssociatedResourcesSelectiveRequest, options: RequestOptions? = null): Unit {
         validateDropletsDestroyWithAssociatedResourcesSelectiveRequest(request)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/droplets/${SdkClient.encodePathSegment(request.dropletId)}/destroy_with_associated_resources/selective",
-                config = clientConfig,
-                body =
-                    SdkClient.bodyMap(
-                        "floating_ips" to (SdkClient.omitIfNull(request.floatingIps)),
-                        "reserved_ips" to (SdkClient.omitIfNull(request.reservedIps)),
-                        "snapshots" to (SdkClient.omitIfNull(request.snapshots)),
-                        "volumes" to (SdkClient.omitIfNull(request.volumes)),
-                        "volume_snapshots" to (SdkClient.omitIfNull(request.volumeSnapshots)),
-                    ),
-                operationId = "dropletsDestroyWithAssociatedResourcesSelective",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets/${SdkClient.encodePathSegment(request.dropletId)}/destroy_with_associated_resources/selective", config = clientConfig, body = SdkClient.bodyMap("floating_ips" to
+    (SdkClient.omitIfNull(request.floatingIps)), "reserved_ips" to
+    (SdkClient.omitIfNull(request.reservedIps)), "snapshots" to (SdkClient.omitIfNull(request.snapshots)), "volumes" to (SdkClient.omitIfNull(request.volumes)), "volume_snapshots" to
+    (SdkClient.omitIfNull(request.volumeSnapshots))), operationId = "dropletsDestroyWithAssociatedResourcesSelective", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
-    private fun validateDropletsDestroyWithAssociatedResourcesSelectiveRequest(
-        request: DropletsDestroyWithAssociatedResourcesSelectiveRequest
-    ) {
+
+    private fun validateDropletsDestroyWithAssociatedResourcesSelectiveRequest(request: DropletsDestroyWithAssociatedResourcesSelectiveRequest) {
         Validation.validateRange("droplet_id", request.dropletId, Validation.RangeOpts(min = 1.0))
     }
 
+
+
+
+
+
     /**
-     * To destroy a Droplet along with all of its associated resources, send a DELETE request to the
-     * `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/dangerous` endpoint. The headers
-     * of this request must include an `X-Dangerous` key set to `true`. To preview which resources
-     * will be destroyed, first query the Droplet's associated resources. This operation _can not_
-     * be reverse and should be used with caution. A successful response will include a 202 response
-     * code and no…
+     * To destroy a Droplet along with all of its associated resources, send a DELETE request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/dangerous` endpoint. The headers of this request must include an `X-Dangerous` key set to `true`. To preview which resources will be destroyed, first query the Droplet's associated resources. This operation _can not_ be reverse and should be used with caution. A successful response will include a 202 response code and no…
      *
      * @param dropletId A unique identifier for a Droplet instance.
-     * @param xDangerous Acknowledge this action will destroy the Droplet and all associated
-     *   resources and _can not_ be reversed.
+     * @param xDangerous Acknowledge this action will destroy the Droplet and all
+     *   associated resources and _can not_ be reversed.
      */
-    fun dropletsDestroyWithAssociatedResourcesDangerous(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        xDangerous: Boolean,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun dropletsDestroyWithAssociatedResourcesDangerous(clientConfig: ClientConfig, dropletId: Long, xDangerous: Boolean, options: RequestOptions? = null): Unit {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/dangerous",
-                config = clientConfig,
-                operationId = "dropletsDestroyWithAssociatedResourcesDangerous",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                extraHeaders =
-                    SdkClient.headers("X-Dangerous" to SdkClient.headerValue(xDangerous, false)),
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/dangerous", config = clientConfig, operationId = "dropletsDestroyWithAssociatedResourcesDangerous", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("X-Dangerous" to SdkClient.headerValue(xDangerous, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To check on the status of a request to destroy a Droplet with its associated resources, send
-     * a GET request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status`
-     * endpoint.
+     * To check on the status of a request to destroy a Droplet with its associated resources, send a GET request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsGetDestroyAssociatedResourcesStatus(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): AssociatedResourceStatus {
+    fun dropletsGetDestroyAssociatedResourcesStatus(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): AssociatedResourceStatus {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<AssociatedResourceStatus>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/status",
-                    config = clientConfig,
-                    operationId = "dropletsGetDestroyAssociatedResourcesStatus",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AssociatedResourceStatus>(SdkClient.RequestSpec("GET", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/status", config = clientConfig, operationId = "dropletsGetDestroyAssociatedResourcesStatus", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * If the status of a request to destroy a Droplet with its associated resources reported any
-     * errors, it can be retried by sending a POST request to the
-     * `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/retry` endpoint. Only one destroy
-     * can be active at a time per Droplet. If a retry is issued while another destroy is in
-     * progress for the Droplet a 409 status code will be returned. A successful response will
-     * include a 202 response code and no content.
+     * If the status of a request to destroy a Droplet with its associated resources reported any errors, it can be retried by sending a POST request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/retry` endpoint. Only one destroy can be active at a time per Droplet. If a retry is issued while another destroy is in progress for the Droplet a 409 status code will be returned. A successful response will include a 202 response code and no content.
      *
      * @param dropletId A unique identifier for a Droplet instance.
      */
-    fun dropletsDestroyRetryWithAssociatedResources(
-        clientConfig: ClientConfig,
-        dropletId: Long,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun dropletsDestroyRetryWithAssociatedResources(clientConfig: ClientConfig, dropletId: Long, options: RequestOptions? = null): Unit {
         Validation.validateRange("droplet_id", dropletId, Validation.RangeOpts(min = 1.0))
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/retry",
-                config = clientConfig,
-                operationId = "dropletsDestroyRetryWithAssociatedResources",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "409" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/droplets/${SdkClient.encodePathSegment(dropletId)}/destroy_with_associated_resources/retry", config = clientConfig, operationId = "dropletsDestroyRetryWithAssociatedResources", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To retrieve a list of all Droplets that are co-located on the same physical hardware, send a
-     * GET request to `/v2/reports/droplet_neighbors_ids`. The results will be returned as a JSON
-     * object with a key of `neighbor_ids`. This will be set to an array of arrays. Each array will
-     * contain a set of Droplet IDs for Droplets that share a physical server. An empty array
-     * indicates that all Droplets associated with your account are located on separate physical
-     * hardware.
+     * To retrieve a list of all Droplets that are co-located on the same physical hardware, send a GET request to `/v2/reports/droplet_neighbors_ids`. The results will be returned as a JSON object with a key of `neighbor_ids`. This will be set to an array of arrays. Each array will contain a set of Droplet IDs for Droplets that share a physical server. An empty array indicates that all Droplets associated with your account are located on separate physical hardware.
      */
-    fun dropletsListNeighborsIds(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): NeighborIds {
-        return SdkClient.request<NeighborIds>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/reports/droplet_neighbors_ids",
-                    config = clientConfig,
-                    operationId = "dropletsListNeighborsIds",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun dropletsListNeighborsIds(clientConfig: ClientConfig, options: RequestOptions? = null): NeighborIds {
+        return SdkClient.request<NeighborIds>(SdkClient.RequestSpec("GET", "/v2/reports/droplet_neighbors_ids", config = clientConfig, operationId = "dropletsListNeighborsIds", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

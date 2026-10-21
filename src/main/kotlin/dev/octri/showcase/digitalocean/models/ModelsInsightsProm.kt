@@ -3,97 +3,136 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `PromError` API schema. */
+/**
+ * Typed representation of the `PromError` API schema.
+ */
 data class PromError(
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: PromErrorStatusEnum,
-    /** Prometheus error category. */
+    /**
+     * Prometheus error category.
+     */
     val errorType: PromErrorErrorTypeEnum,
-    /** Human-readable error message. */
-    val error: String,
+    /**
+     * Human-readable error message.
+     */
+    val error: String
 ) : dev.octri.showcase.digitalocean.ErrorBody
 
-/** Typed representation of the `PromMatrixData` API schema. */
+/**
+ * Typed representation of the `PromMatrixData` API schema.
+ */
 data class PromMatrixData(
-    /** Required enumerated value serialized in the `resultType` wire field. */
+    /**
+     * Required enumerated value serialized in the `resultType` wire field.
+     */
     val resultType: PromMatrixDataResultTypeEnum,
     /**
-     * One entry per matching series, each carrying the samples evaluated at every step across the
-     * requested range.
+     * One entry per matching series, each carrying the samples evaluated at every step across the requested range.
      */
-    val result: List<PromMatrixSample>,
+    val result: List<PromMatrixSample>
 )
 
-/** Typed representation of the `PromMatrixSample` API schema. */
+/**
+ * Typed representation of the `PromMatrixSample` API schema.
+ */
 data class PromMatrixSample(
     /**
-     * Metric labels as key/value pairs. By default, metric names in responses use Prometheus
-     * underscored spelling (for example `do_droplets_cpu_time`), even when the request used a
-     * dotted selector (for example `do.droplets.cpu_time`).
+     * Metric labels as key/value pairs. By default, metric names in responses use Prometheus underscored spelling (for example `do_droplets_cpu_time`), even when the request used a dotted selector (for example `do.droplets.cpu_time`).
      */
     val metric: PromMetricLabels,
-    /** Required array value serialized in the `values` wire field. */
-    val values: List<PromSample>,
+    /**
+     * Required array value serialized in the `values` wire field.
+     */
+    val values: List<PromSample>
 )
 
 typealias PromMetricLabels = Map<String, String>
 
-/** Typed representation of the `PromQueryData` API schema. */
+/**
+ * Typed representation of the `PromQueryData` API schema.
+ */
 data class PromQueryData(
-    /** Required enumerated value serialized in the `resultType` wire field. */
+    /**
+     * Required enumerated value serialized in the `resultType` wire field.
+     */
     val resultType: PromQueryDataResultTypeEnum,
     /**
-     * Result payload shape depends on `resultType`. `vector` and `matrix` are series arrays.
-     * `scalar` and `string` both use a `[timestamp, value]` sample pair.
+     * Result payload shape depends on `resultType`. `vector` and `matrix` are series arrays. `scalar` and `string` both use a `[timestamp, value]` sample pair.
      */
-    val result: Any,
+    val result: Any
 )
 
-/** Typed representation of the `PromQueryRangeResponse` API schema. */
+/**
+ * Typed representation of the `PromQueryRangeResponse` API schema.
+ */
 data class PromQueryRangeResponse(
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: PromQueryRangeResponseStatusEnum,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: PromMatrixData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: PromMatrixData
 )
 
-/** Typed representation of the `PromQueryResponse` API schema. */
+/**
+ * Typed representation of the `PromQueryResponse` API schema.
+ */
 data class PromQueryResponse(
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: PromQueryResponseStatusEnum,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: PromQueryData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: PromQueryData
 )
 
 typealias PromSample = List<Any>
 
-/** Typed representation of the `PromSeriesResponse` API schema. */
+/**
+ * Typed representation of the `PromSeriesResponse` API schema.
+ */
 data class PromSeriesResponse(
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: PromSeriesResponseStatusEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<PromMetricLabels>,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<PromMetricLabels>
 )
 
-/** Typed representation of the `PromStringListResponse` API schema. */
+/**
+ * Typed representation of the `PromStringListResponse` API schema.
+ */
 data class PromStringListResponse(
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: PromStringListResponseStatusEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<String>,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<String>
 )
 
-/** Typed representation of the `PromVectorSample` API schema. */
+/**
+ * Typed representation of the `PromVectorSample` API schema.
+ */
 data class PromVectorSample(
     /**
-     * Metric labels as key/value pairs. By default, metric names in responses use Prometheus
-     * underscored spelling (for example `do_droplets_cpu_time`), even when the request used a
-     * dotted selector (for example `do.droplets.cpu_time`).
+     * Metric labels as key/value pairs. By default, metric names in responses use Prometheus underscored spelling (for example `do_droplets_cpu_time`), even when the request used a dotted selector (for example `do.droplets.cpu_time`).
      */
     val metric: PromMetricLabels,
     /**
-     * A Prometheus sample as `[timestamp_seconds, value]`. The timestamp is a UNIX epoch float; the
-     * value is a string.
+     * A Prometheus sample as `[timestamp_seconds, value]`. The timestamp is a UNIX epoch float; the value is a string.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: PromSample,
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: PromSample
 )

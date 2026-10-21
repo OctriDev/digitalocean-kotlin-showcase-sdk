@@ -24,767 +24,359 @@ import dev.octri.showcase.digitalocean.Validation
 
 object ContainerRegistries {
 
-    /**
-     * To get information about any container registry in your account, send a GET request to
-     * `/v2/registries/`.
-     */
-    fun registriesList(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): AllRegistriesInfo {
-        return SdkClient.request<AllRegistriesInfo>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries",
-                    config = clientConfig,
-                    operationId = "registriesList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
-    }
 
     /**
-     * To create your container registry, send a POST request to `/v2/registries`. The `name`
-     * becomes part of the URL for images stored in the registry. For example, if your registry is
-     * called `example`, an image in it will have the URL
-     * `registry.digitalocean.com/example/image:tag`.
-     *
-     * @param name A globally unique name for the container registry. Must be lowercase and be
-     *   composed only of numbers, letters and `-`, up to a limit of 63 characters.
-     * @param subscriptionTierSlug The slug of the subscription tier to sign up for. Valid values
-     *   can be retrieved using the options endpoint.
-     * @param region Slug of the region where registry data is stored. When not provided, a region
-     *   will be selected.
+     * To get information about any container registry in your account, send a GET request to `/v2/registries/`.
      */
-    fun registriesCreate(
-        clientConfig: ClientConfig,
-        name: String,
-        subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null,
-        region: MultiregistryCreateRegionEnum? = null,
-        options: RequestOptions? = null,
-    ): MultiregistryInfo {
+    fun registriesList(clientConfig: ClientConfig, options: RequestOptions? = null): AllRegistriesInfo {
+        return SdkClient.request<AllRegistriesInfo>(SdkClient.RequestSpec("GET", "/v2/registries", config = clientConfig, operationId = "registriesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * To create your container registry, send a POST request to `/v2/registries`. The `name` becomes part of the URL for images stored in the registry. For example, if your registry is called `example`, an image in it will have the URL `registry.digitalocean.com/example/image:tag`.
+     *
+     * @param name A globally unique name for the container registry. Must be
+     *   lowercase and be composed only of numbers, letters and `-`, up to a limit of
+     *   63 characters.
+     * @param subscriptionTierSlug The slug of the subscription tier to sign up for.
+     *   Valid values can be retrieved using the options endpoint.
+     * @param region Slug of the region where registry data is stored. When not
+     *   provided, a region will be selected.
+     */
+    fun registriesCreate(clientConfig: ClientConfig, name: String, subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null, region: MultiregistryCreateRegionEnum? = null, options: RequestOptions? = null): MultiregistryInfo {
         Validation.validateLength("name", name, Validation.LengthOpts(max = 63))
         Validation.validatePattern("name", name, "^[a-z0-9-]{1,63}$")
 
-        return SdkClient.request<MultiregistryInfo>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/registries",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "subscription_tier_slug" to
-                                (SdkClient.omitIfNull(subscriptionTierSlug)),
-                            "region" to (SdkClient.omitIfNull(region)),
-                        ),
-                    operationId = "registriesCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MultiregistryInfo>(SdkClient.RequestSpec("POST", "/v2/registries", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "subscription_tier_slug" to
+    (SdkClient.omitIfNull(subscriptionTierSlug)), "region" to (SdkClient.omitIfNull(region))), operationId = "registriesCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To get information about any container registry in your account, send a GET request to
-     * `/v2/registries/{registry_name}`.
+     * To get information about any container registry in your account, send a GET request to `/v2/registries/{registry_name}`.
      *
      * @param registryName The name of a container registry.
      */
-    fun registriesGet(
-        clientConfig: ClientConfig,
-        registryName: String,
-        options: RequestOptions? = null,
-    ): MultiregistryInfo {
-        return SdkClient.request<MultiregistryInfo>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}",
-                    config = clientConfig,
-                    operationId = "registriesGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesGet(clientConfig: ClientConfig, registryName: String, options: RequestOptions? = null): MultiregistryInfo {
+        return SdkClient.request<MultiregistryInfo>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}", config = clientConfig, operationId = "registriesGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete your container registry, destroying all container image data stored in it, send a
-     * DELETE request to `/v2/registries/{registry_name}`.
+     * To delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registries/{registry_name}`.
      *
      * @param registryName The name of a container registry.
      */
-    fun registriesDelete(
-        clientConfig: ClientConfig,
-        registryName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/registries/${SdkClient.encodePathSegment(registryName)}",
-                config = clientConfig,
-                operationId = "registriesDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun registriesDelete(clientConfig: ClientConfig, registryName: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/registries/${SdkClient.encodePathSegment(registryName)}", config = clientConfig, operationId = "registriesDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * In order to access your container registry with the Docker client or from a Kubernetes
-     * cluster, you will need to configure authentication. The necessary JSON configuration can be
-     * retrieved by sending a GET request to `/v2/registries/{registry_name}/docker-credentials`.
-     * The response will be in the format of a Docker `config.json` file. To use the config in your
-     * Kubernetes cluster, create a Secret with: kubectl create secret generic docr \…
+     * In order to access your container registry with the Docker client or from a Kubernetes cluster, you will need to configure authentication. The necessary JSON configuration can be retrieved by sending a GET request to `/v2/registries/{registry_name}/docker-credentials`. The response will be in the format of a Docker `config.json` file. To use the config in your Kubernetes cluster, create a Secret with: kubectl create secret generic docr \…
      *
      * @param registryName The name of a container registry.
      */
-    fun registriesGetDockerCredentials(
-        clientConfig: ClientConfig,
-        registryName: String,
-        options: RequestOptions? = null,
-    ): DockerCredentials {
-        return SdkClient.request<DockerCredentials>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/docker-credentials",
-                    config = clientConfig,
-                    operationId = "registriesGetDockerCredentials",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesGetDockerCredentials(clientConfig: ClientConfig, registryName: String, options: RequestOptions? = null): DockerCredentials {
+        return SdkClient.request<DockerCredentials>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/docker-credentials", config = clientConfig, operationId = "registriesGetDockerCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * A subscription is automatically created when you configure your container registry. To get
-     * information about your subscription, send a GET request to `/v2/registries/subscription`. It
-     * is similar to GET `/v2/registry/subscription`.
+     * A subscription is automatically created when you configure your container registry. To get information about your subscription, send a GET request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription`.
      */
-    fun registriesGetSubscription(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): SubscriptionResponse {
-        return SdkClient.request<SubscriptionResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/subscription",
-                    config = clientConfig,
-                    operationId = "registriesGetSubscription",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesGetSubscription(clientConfig: ClientConfig, options: RequestOptions? = null): SubscriptionResponse {
+        return SdkClient.request<SubscriptionResponse>(SdkClient.RequestSpec("GET", "/v2/registries/subscription", config = clientConfig, operationId = "registriesGetSubscription", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * After creating your registry, you can switch to a different subscription tier to better suit
-     * your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar
-     * to POST `/v2/registry/subscription`.
+     * After creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar to POST `/v2/registry/subscription`.
      *
      * @param tierSlug The slug of the subscription tier to sign up for.
      */
-    fun registriesUpdateSubscription(
-        clientConfig: ClientConfig,
-        tierSlug: RegistriesUpdateSubscriptionTierSlugEnum? = null,
-        options: RequestOptions? = null,
-    ): SubscriptionResponse {
-        return SdkClient.request<SubscriptionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/registries/subscription",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("tier_slug" to (SdkClient.omitIfNull(tierSlug))),
-                    operationId = "registriesUpdateSubscription",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesUpdateSubscription(clientConfig: ClientConfig, tierSlug: RegistriesUpdateSubscriptionTierSlugEnum? = null, options: RequestOptions? = null): SubscriptionResponse {
+        return SdkClient.request<SubscriptionResponse>(SdkClient.RequestSpec("POST", "/v2/registries/subscription", config = clientConfig, body = SdkClient.bodyMap("tier_slug" to (SdkClient.omitIfNull(tierSlug))), operationId = "registriesUpdateSubscription", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * This endpoint serves to provide additional information as to which option values are
-     * available when creating a container registry. There are multiple subscription tiers available
-     * for container registry. Each tier allows a different number of image repositories to be
-     * created in your registry, and has a different amount of storage and transfer included. There
-     * are multiple regions available for container registry and controls where your data is stored.
-     * To list the available…
+     * This endpoint serves to provide additional information as to which option values are available when creating a container registry. There are multiple subscription tiers available for container registry. Each tier allows a different number of image repositories to be created in your registry, and has a different amount of storage and transfer included. There are multiple regions available for container registry and controls where your data is stored. To list the available…
      */
-    fun registriesGetOptions(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): RegistryOptionsResponse {
-        return SdkClient.request<RegistryOptionsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/options",
-                    config = clientConfig,
-                    operationId = "registriesGetOptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesGetOptions(clientConfig: ClientConfig, options: RequestOptions? = null): RegistryOptionsResponse {
+        return SdkClient.request<RegistryOptionsResponse>(SdkClient.RequestSpec("GET", "/v2/registries/options", config = clientConfig, operationId = "registriesGetOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To get information about the currently-active garbage collection for a registry, send a GET
-     * request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
+     * To get information about the currently-active garbage collection for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
      *
      * @param registryName The name of a container registry.
      */
-    fun registriesGetGarbageCollection(
-        clientConfig: ClientConfig,
-        registryName: String,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return SdkClient.request<GarbageCollectionResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection",
-                    config = clientConfig,
-                    operationId = "registriesGetGarbageCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesGetGarbageCollection(clientConfig: ClientConfig, registryName: String, options: RequestOptions? = null): GarbageCollectionResponse {
+        return SdkClient.request<GarbageCollectionResponse>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection", config = clientConfig, operationId = "registriesGetGarbageCollection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Garbage collection enables users to clear out unreferenced blobs (layer & manifest data)
-     * after deleting one or more manifests from a repository. If there are no unreferenced blobs
-     * resulting from the deletion of one or more manifests, garbage collection is effectively a
-     * noop. See here for more information about how and why you should clean up your container
-     * registry periodically. To request a garbage collection run on your registry, send a POST
-     * request to…
+     * Garbage collection enables users to clear out unreferenced blobs (layer & manifest data) after deleting one or more manifests from a repository. If there are no unreferenced blobs resulting from the deletion of one or more manifests, garbage collection is effectively a noop. See here for more information about how and why you should clean up your container registry periodically. To request a garbage collection run on your registry, send a POST request to…
      *
      * @param registryName The name of a container registry.
      */
-    fun registriesRunGarbageCollection(
-        clientConfig: ClientConfig,
-        registryName: String,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return SdkClient.request<GarbageCollectionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection",
-                    config = clientConfig,
-                    operationId = "registriesRunGarbageCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesRunGarbageCollection(clientConfig: ClientConfig, registryName: String, options: RequestOptions? = null): GarbageCollectionResponse {
+        return SdkClient.request<GarbageCollectionResponse>(SdkClient.RequestSpec("POST", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection", config = clientConfig, operationId = "registriesRunGarbageCollection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To get information about past garbage collections for a registry, send a GET request to
-     * `/v2/registry/$REGISTRY_NAME/garbage-collections`.
+     * To get information about past garbage collections for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
      *
      * @param registryName The name of a container registry.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun registriesListGarbageCollections(
-        clientConfig: ClientConfig,
-        registryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): GarbageCollections {
+    fun registriesListGarbageCollections(clientConfig: ClientConfig, registryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): GarbageCollections {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<GarbageCollections>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collections",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "registriesListGarbageCollections",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<GarbageCollections>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collections", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "registriesListGarbageCollections", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To cancel the currently-active garbage collection for a registry, send a PUT request to
-     * `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the
-     * attributes below. It is similar to PUT
-     * `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`.
+     * To cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`.
      *
      * @param registryName The name of a container registry.
      * @param garbageCollectionUuid The UUID of a garbage collection run.
-     * @param cancel A boolean value indicating that the garbage collection should be cancelled.
+     * @param cancel A boolean value indicating that the garbage collection should be
+     *   cancelled.
      */
-    fun registriesUpdateGarbageCollection(
-        clientConfig: ClientConfig,
-        registryName: String,
-        garbageCollectionUuid: String,
-        cancel: Boolean? = null,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return SdkClient.request<GarbageCollectionResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection/${SdkClient.encodePathSegment(garbageCollectionUuid)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("cancel" to (SdkClient.omitIfNull(cancel))),
-                    operationId = "registriesUpdateGarbageCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registriesUpdateGarbageCollection(clientConfig: ClientConfig, registryName: String, garbageCollectionUuid: String, cancel: Boolean? = null, options: RequestOptions? = null): GarbageCollectionResponse {
+        return SdkClient.request<GarbageCollectionResponse>(SdkClient.RequestSpec("PUT", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/garbage-collection/${SdkClient.encodePathSegment(garbageCollectionUuid)}", config = clientConfig, body = SdkClient.bodyMap("cancel" to (SdkClient.omitIfNull(cancel))), operationId = "registriesUpdateGarbageCollection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list all repositories in your container registry, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET
-     * `/v2/registry/$REGISTRY_NAME/repositoriesV2`.
+     * To list all repositories in your container registry, send a GET request to `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET `/v2/registry/$REGISTRY_NAME/repositoriesV2`.
      *
      * @param registryName The name of a container registry.
      * @param perPage Number of items returned per page
-     * @param page Which 'page' of paginated results to return. Ignored when 'page_token' is
-     *   provided.
-     * @param pageToken Token to retrieve of the next or previous set of results more quickly than
-     *   using 'page'.
+     * @param page Which 'page' of paginated results to return. Ignored when
+     *   'page_token' is provided.
+     * @param pageToken Token to retrieve of the next or previous set of results more
+     *   quickly than using 'page'.
      */
-    fun registriesListRepositoriesV2(
-        clientConfig: ClientConfig,
-        registryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): AllRepositoriesV2 {
+    fun registriesListRepositoriesV2(clientConfig: ClientConfig, registryName: String, perPage: Long? = null, page: Long? = null, pageToken: String? = null, options: RequestOptions? = null): AllRepositoriesV2 {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllRepositoriesV2>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositoriesV2",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "registriesListRepositoriesV2",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllRepositoriesV2>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositoriesV2", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "registriesListRepositoriesV2", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a container repository including all of its tags, send a DELETE request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`. A successful request will
-     * receive a 204 status code with no body in response. This indicates that the request was
-     * processed successfully.
+     * To delete a container repository including all of its tags, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      *
      * @param registryName The name of a container registry.
-     * @param repositoryName The name of a container registry repository. If the name contains `/`
-     *   characters, they must be URL-encoded, e.g. `%2F`.
+     * @param repositoryName The name of a container registry repository. If the name
+     *   contains `/` characters, they must be URL-encoded, e.g. `%2F`.
      */
-    fun registriesDeleteRepository(
-        clientConfig: ClientConfig,
-        registryName: String,
-        repositoryName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}",
-                config = clientConfig,
-                operationId = "registriesDeleteRepository",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun registriesDeleteRepository(clientConfig: ClientConfig, registryName: String, repositoryName: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}", config = clientConfig, operationId = "registriesDeleteRepository", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To list all tags in one of your container registry's repository, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to list tags for `registry.digitalocean.com/example/my/repo`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/tags`. It is similar to GET…
+     * To list all tags in one of your container registry's repository, send a GET request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to list tags for `registry.digitalocean.com/example/my/repo`, the path would be `/v2/registry/example/repositories/my%2Frepo/tags`. It is similar to GET…
      *
      * @param registryName The name of a container registry.
-     * @param repositoryName The name of a container registry repository. If the name contains `/`
-     *   characters, they must be URL-encoded, e.g. `%2F`.
+     * @param repositoryName The name of a container registry repository. If the name
+     *   contains `/` characters, they must be URL-encoded, e.g. `%2F`.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun registriesListRepositoryTags(
-        clientConfig: ClientConfig,
-        registryName: String,
-        repositoryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): RepositoryTags {
+    fun registriesListRepositoryTags(clientConfig: ClientConfig, registryName: String, repositoryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): RepositoryTags {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<RepositoryTags>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/tags",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "registriesListRepositoryTags",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<RepositoryTags>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/tags", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "registriesListRepositoryTags", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a container repository tag in on of our container registries, send a DELETE request
-     * to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to delete `registry.digitalocean.com/example/my/repo:mytag`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/tags/mytag`. A successful request will receive a
-     * 204 status code with…
+     * To delete a container repository tag in on of our container registries, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to delete `registry.digitalocean.com/example/my/repo:mytag`, the path would be `/v2/registry/example/repositories/my%2Frepo/tags/mytag`. A successful request will receive a 204 status code with…
      *
      * @param registryName The name of a container registry.
-     * @param repositoryName The name of a container registry repository. If the name contains `/`
-     *   characters, they must be URL-encoded, e.g. `%2F`.
+     * @param repositoryName The name of a container registry repository. If the name
+     *   contains `/` characters, they must be URL-encoded, e.g. `%2F`.
      * @param repositoryTag The name of a container registry repository tag.
      */
-    fun registriesDeleteRepositoryTag(
-        clientConfig: ClientConfig,
-        registryName: String,
-        repositoryName: String,
-        repositoryTag: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/tags/${SdkClient.encodePathSegment(repositoryTag)}",
-                config = clientConfig,
-                operationId = "registriesDeleteRepositoryTag",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun registriesDeleteRepositoryTag(clientConfig: ClientConfig, registryName: String, repositoryName: String, repositoryTag: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/tags/${SdkClient.encodePathSegment(repositoryTag)}", config = clientConfig, operationId = "registriesDeleteRepositoryTag", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To list all manifests in your container registry repository, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to list manifests for `registry.digitalocean.com/example/my/repo`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/digests`. It is similar to…
+     * To list all manifests in your container registry repository, send a GET request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to list manifests for `registry.digitalocean.com/example/my/repo`, the path would be `/v2/registry/example/repositories/my%2Frepo/digests`. It is similar to…
      *
      * @param registryName The name of a container registry.
-     * @param repositoryName The name of a container registry repository. If the name contains `/`
-     *   characters, they must be URL-encoded, e.g. `%2F`.
+     * @param repositoryName The name of a container registry repository. If the name
+     *   contains `/` characters, they must be URL-encoded, e.g. `%2F`.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun registriesListRepositoryManifests(
-        clientConfig: ClientConfig,
-        registryName: String,
-        repositoryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): RepositoryManifests {
+    fun registriesListRepositoryManifests(clientConfig: ClientConfig, registryName: String, repositoryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): RepositoryManifests {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<RepositoryManifests>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/digests",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "registriesListRepositoryManifests",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<RepositoryManifests>(SdkClient.RequestSpec("GET", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/digests", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "registriesListRepositoryManifests", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a container repository manifest by digest in one of your registries, send a DELETE
-     * request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`. Note
-     * that if your repository name contains `/` characters, it must be URL-encoded in the request
-     * URL. For example, to delete `registry.digitalocean.com/example/my/repo@sha256:abcd`, the path
-     * would be `/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`. A successful
-     * request…
+     * To delete a container repository manifest by digest in one of your registries, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to delete `registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be `/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`. A successful request…
      *
      * @param registryName The name of a container registry.
-     * @param repositoryName The name of a container registry repository. If the name contains `/`
-     *   characters, they must be URL-encoded, e.g. `%2F`.
-     * @param manifestDigest The manifest digest of a container registry repository tag.
+     * @param repositoryName The name of a container registry repository. If the name
+     *   contains `/` characters, they must be URL-encoded, e.g. `%2F`.
+     * @param manifestDigest The manifest digest of a container registry repository
+     *   tag.
      */
-    fun registriesDeleteRepositoryManifest(
-        clientConfig: ClientConfig,
-        registryName: String,
-        repositoryName: String,
-        manifestDigest: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/digests/${SdkClient.encodePathSegment(manifestDigest)}",
-                config = clientConfig,
-                operationId = "registriesDeleteRepositoryManifest",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun registriesDeleteRepositoryManifest(clientConfig: ClientConfig, registryName: String, repositoryName: String, manifestDigest: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/registries/${SdkClient.encodePathSegment(registryName)}/repositories/${SdkClient.encodePathSegment(repositoryName)}/digests/${SdkClient.encodePathSegment(manifestDigest)}", config = clientConfig, operationId = "registriesDeleteRepositoryManifest", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To validate that a container registry name is available for use, send a POST request to
-     * `/v2/registries/validate-name`. If the name is both formatted correctly and available, the
-     * response code will be 204 and contain no body. If the name is already in use, the response
-     * will be a 409 Conflict. It is similar to `/v2/registry/validate-name`.
+     * To validate that a container registry name is available for use, send a POST request to `/v2/registries/validate-name`. If the name is both formatted correctly and available, the response code will be 204 and contain no body. If the name is already in use, the response will be a 409 Conflict. It is similar to `/v2/registry/validate-name`.
      *
-     * @param name A globally unique name for the container registry. Must be lowercase and be
-     *   composed only of numbers, letters and `-`, up to a limit of 63 characters.
+     * @param name A globally unique name for the container registry. Must be
+     *   lowercase and be composed only of numbers, letters and `-`, up to a limit of
+     *   63 characters.
      */
-    fun registriesValidateName(
-        clientConfig: ClientConfig,
-        name: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun registriesValidateName(clientConfig: ClientConfig, name: String, options: RequestOptions? = null): Unit {
         Validation.validateLength("name", name, Validation.LengthOpts(max = 63))
         Validation.validatePattern("name", name, "^[a-z0-9-]{1,63}$")
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/registries/validate-name",
-                config = clientConfig,
-                body = SdkClient.bodyMap("name" to (name)),
-                operationId = "registriesValidateName",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "409" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/registries/validate-name", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "registriesValidateName", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }

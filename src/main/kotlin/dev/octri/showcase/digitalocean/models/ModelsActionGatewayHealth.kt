@@ -6,47 +6,41 @@ package dev.octri.showcase.digitalocean.models
 import java.time.OffsetDateTime
 
 /**
- * Availability and latency of a tool or provider over a window, aggregated across all customers.
- * Request volumes are not reported.
+ * Availability and latency of a tool or provider over a window, aggregated across all customers. Request volumes are not reported.
  */
 data class HealthMetrics(
     /**
-     * `HEALTH_DATA_STATUS_AVAILABLE` when the window has calls to measure;
-     * `HEALTH_DATA_STATUS_NO_DATA` when it has none, in which case the metrics are null. Do not
-     * treat no data as healthy.
+     * `HEALTH_DATA_STATUS_AVAILABLE` when the window has calls to measure; `HEALTH_DATA_STATUS_NO_DATA` when it has none, in which case the metrics are null. Do not treat no data as healthy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_status")
-    val dataStatus: HealthMetricsDataStatusEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data_status") val dataStatus: HealthMetricsDataStatusEnum? = null,
     /**
-     * Percentage of calls that did not fail because of the provider (an upstream error, timeout,
-     * rate limit, or unavailability). Calls that failed for other reasons are not counted.
+     * Percentage of calls that did not fail because of the provider (an upstream error, timeout, rate limit, or unavailability). Calls that failed for other reasons are not counted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("uptime_percentage")
-    val uptimePercentage: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("uptime_percentage") val uptimePercentage: Double? = null,
     /**
-     * Median duration of successful calls, in milliseconds. Durations above 40960 ms are reported
-     * as 40960.
+     * Median duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("latency_p50_ms")
-    val latencyP50Ms: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("latency_p50_ms") val latencyP50Ms: Double? = null,
     /**
-     * 95th-percentile duration of successful calls, in milliseconds. Durations above 40960 ms are
-     * reported as 40960.
+     * 95th-percentile duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("latency_p95_ms")
-    val latencyP95Ms: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("latency_p95_ms") val latencyP95Ms: Double? = null
 )
 
-/** Describes when health metrics were computed. */
+/**
+ * Describes when health metrics were computed.
+ */
 data class HealthSnapshot(
-    /** When the metrics were computed. They are recomputed at most every five minutes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("measured_at")
-    val measuredAt: OffsetDateTime? = null,
-    /** Length of the window the metrics cover, ending at `measured_at`. */
+    /**
+     * When the metrics were computed. They are recomputed at most every five minutes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("measured_at") val measuredAt: OffsetDateTime? = null,
+    /**
+     * Length of the window the metrics cover, ending at `measured_at`.
+     */
     val window: String? = null,
     /**
-     * True when the latest recomputation failed and earlier metrics, up to 30 minutes old, are
-     * returned instead.
+     * True when the latest recomputation failed and earlier metrics, up to 30 minutes old, are returned instead.
      */
-    val stale: Boolean? = null,
+    val stale: Boolean? = null
 )

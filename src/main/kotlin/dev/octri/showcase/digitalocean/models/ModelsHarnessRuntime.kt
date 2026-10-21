@@ -5,291 +5,316 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Present iff kind=cron. */
+/**
+ * Present iff kind=cron.
+ */
 data class CronConfig(
-    /** Cron expression; must parse with the scanner's cron library. */
+    /**
+     * Cron expression; must parse with the scanner's cron library.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cron_expr") val cronExpr: String? = null,
-    /** IANA timezone (e.g. "America/New_York"). */
+    /**
+     * IANA timezone (e.g. "America/New_York").
+     */
     val timezone: String? = null,
-    /** Read-only; server-computed next fire time. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at")
-    val nextRunAt: OffsetDateTime? = null,
+    /**
+     * Read-only; server-computed next fire time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_run_at") val nextRunAt: OffsetDateTime? = null
 )
 
 /**
- * Per-signal DigitalOcean Insights telemetry opt-in, mirroring the Insights-owned schema
- * insights.telemetry.opt_in. Each signal is independently optional and tri-state: omitted or null
- * records that the customer expressed no choice and falls back to the product default, which is NOT
- * equivalent to false.
+ * Per-signal DigitalOcean Insights telemetry opt-in, mirroring the Insights-owned schema insights.telemetry.opt_in. Each signal is independently optional and tri-state: omitted or null records that the customer expressed no choice and falls back to the product default, which is NOT equivalent to false.
  */
 data class InsightsOptIn(
     /**
-     * Accepted and stored for parity with the Insights schema, but metrics are always collected:
-     * unregistered metrics are dropped at ingest rather than opted out of here.
+     * Accepted and stored for parity with the Insights schema, but metrics are always collected: unregistered metrics are dropped at ingest rather than opted out of here.
      */
     val metrics: Boolean? = null,
-    /** Whether the agent's logs are sent to Insights. */
+    /**
+     * Whether the agent's logs are sent to Insights.
+     */
     val logs: Boolean? = null,
-    /** Whether the agent's traces are sent to Insights. */
-    val traces: Boolean? = null,
+    /**
+     * Whether the agent's traces are sent to Insights.
+     */
+    val traces: Boolean? = null
 )
 
 /**
- * PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped settings
- * (never environment-spec / config mutation). At least one property below must be present; {}
- * is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as
- * optional properties over time.
+ * PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped settings (never environment-spec / config mutation). At least one property below must be present; {} is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as optional properties over time.
  */
 data class PatchSessionRequest(
     /**
-     * When present, sets whether this session opts in to automatic resumption when the team's
-     * prepayment balance is restored after a low-balance pause. Session-scoped consent, not
-     * config-scoped. Omitted properties are not modified.
+     * When present, sets whether this session opts in to automatic resumption when the team's prepayment balance is restored after a low-balance pause. Session-scoped consent, not config-scoped. Omitted properties are not modified.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff")
-    val resumeOnTopoff: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("resume_on_topoff") val resumeOnTopoff: Boolean? = null
 )
 
 /**
- * Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy
- * engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the
- * (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in
- * default gating — no policy is shipped to the sandbox.
+ * Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
  */
 data class Permissions(
-    /** Disposition for tool calls that match no rule. Defaults to "ask" when omitted. */
+    /**
+     * Disposition for tool calls that match no rule. Defaults to "ask" when omitted.
+     */
     val defaultAction: PermissionsDefaultActionEnum? = null,
     /**
-     * Ordered match→action rules. Declared order is authoritative: the LAST matching rule wins
-     * (author-order last-match).
+     * Ordered match→action rules. Declared order is authoritative: the LAST matching rule wins (author-order last-match).
      */
     val rules: List<PermissionRule>? = null,
     /**
-     * Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots)
-     * for every agent.
+     * Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots) for every agent.
      */
     val filesystem: PermissionFilesystem? = null,
     /**
-     * Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses
-     * stay blocked by the broader egress policy.
+     * Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses stay blocked by the broader egress policy.
      */
-    val network: PermissionNetwork? = null,
+    val network: PermissionNetwork? = null
 )
 
-/** A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation. */
+/**
+ * A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
+ */
 data class ResolvedRule(
     /**
-     * Stable rule id assigned during resolution; correlates with the PolicyDenied event's matched
-     * rule.
+     * Stable rule id assigned during resolution; correlates with the PolicyDenied event's matched rule.
      */
     val id: String? = null,
-    /** Optional `string` value serialized in the `tool` wire field. */
+    /**
+     * Optional `string` value serialized in the `tool` wire field.
+     */
     val tool: String? = null,
-    /** Optional object value serialized in the `match` wire field. */
+    /**
+     * Optional object value serialized in the `match` wire field.
+     */
     val match: Map<String, String>? = null,
-    /** Optional enumerated value serialized in the `action` wire field. */
+    /**
+     * Optional enumerated value serialized in the `action` wire field.
+     */
     val action: ResolvedRuleActionEnum? = null,
-    /** Optional enumerated value serialized in the `enforcement` wire field. */
-    val enforcement: ResolvedRuleEnforcementEnum? = null,
+    /**
+     * Optional enumerated value serialized in the `enforcement` wire field.
+     */
+    val enforcement: ResolvedRuleEnforcementEnum? = null
 )
 
-/** Typed representation of the `ResolveHitlRequest` API schema. */
+/**
+ * Typed representation of the `ResolveHitlRequest` API schema.
+ */
 data class ResolveHitlRequest(
     /**
-     * HITLOutcome is the user's decision on a HITL request. DEFER backs off this attempt without
-     * treating it as a rejection.
+     * HITLOutcome is the user's decision on a HITL request. DEFER backs off this attempt without treating it as a rejection.
      */
     val outcome: HitlOutcome,
-    /** Optional free-text reason. Captured in the audit trail; not interpreted. */
+    /**
+     * Optional free-text reason. Captured in the audit trail; not interpreted.
+     */
     val reason: String? = null,
     /**
      * How a HITL resolution was triggered. Defaults to RESOLUTION_SOURCE_OUT_OF_BAND when omitted.
      */
-    val source: ResolutionSource? = null,
+    val source: ResolutionSource? = null
 )
 
 /**
- * The hosted-agents Session shape (subset), returned verbatim from an internal
- * ListSessions(status=PAUSED). Enum spellings match the sessions API.
+ * The hosted-agents Session shape (subset), returned verbatim from an internal ListSessions(status=PAUSED). Enum spellings match the sessions API.
  */
 data class ReusableSession(
-    /** Optional `string` value serialized in the `session_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `session_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String? = null,
-    /** Optional `string` value serialized in the `name` wire field. */
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
     val name: String? = null,
     /**
-     * AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE,
-     * OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is
-     * overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400.
-     * AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the
-     * agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter.
-     * AGENT_KIND_CREWAI is the CrewAI…
+     * AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE, OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400. AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter. AGENT_KIND_CREWAI is the CrewAI…
      */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_kind") val agentKind: AgentKind? = null,
     /**
-     * SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a
-     * ListSessions status-filter value only -- no session is ever actually in this status.
-     * SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing
-     * response.
+     * SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a ListSessions status-filter value only -- no session is ever actually in this status. SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing response.
      */
     val status: SessionStatus? = null,
-    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Optional `date-time`-formatted value serialized in the `last_event_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_event_at")
-    val lastEventAt: OffsetDateTime? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `last_event_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_event_at") val lastEventAt: OffsetDateTime? = null
 )
 
-/** The session after in-place rollback: same session_id, sandbox_id swapped to the restored VM. */
+/**
+ * The session after in-place rollback: same session_id, sandbox_id swapped to the restored VM.
+ */
 data class RollbackToCheckpointResponse(
-    /** Session is the user-facing record of a environment session + sandbox pair. */
+    /**
+     * Session is the user-facing record of a environment session + sandbox pair.
+     */
     val session: DefinitionsSession? = null
 )
 
-/** Typed representation of the `RotateSecretResponse` API schema. */
+/**
+ * Typed representation of the `RotateSecretResponse` API schema.
+ */
 data class RotateSecretResponse(
-    /** The new webhook secret, shown once. */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_secret")
-    val webhookSecret: String? = null,
     /**
-     * The instant the outgoing secret stops verifying deliveries. Omitted when
-     * grace_period_seconds=0.
+     * The new webhook secret, shown once.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_secret_expires_at")
-    val previousSecretExpiresAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_secret") val webhookSecret: String? = null,
     /**
-     * True when grace_period_seconds=0 retired the old secret on this call. Exactly one of this and
-     * previous_secret_expires_at is present.
+     * The instant the outgoing secret stops verifying deliveries. Omitted when grace_period_seconds=0.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_secret_revoked")
-    val previousSecretRevoked: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_secret_expires_at") val previousSecretExpiresAt: OffsetDateTime? = null,
+    /**
+     * True when grace_period_seconds=0 retired the old secret on this call. Exactly one of this and previous_secret_expires_at is present.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_secret_revoked") val previousSecretRevoked: Boolean? = null
 )
 
-/** Validation outcome for one resolved rule. */
+/**
+ * Validation outcome for one resolved rule.
+ */
 data class RuleVerdict(
     /**
      * A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
      */
     val rule: ResolvedRule? = null,
     /**
-     * exact — enforced precisely as written; degraded — renderable only in a more-restrictive form
-     * (deny→ask), warned; unsupported — cannot be enforced (strict ⇒ session reject); unverified —
-     * no descriptor available, rendered conservatively but unproven.
+     * exact — enforced precisely as written; degraded — renderable only in a more-restrictive form (deny→ask), warned; unsupported — cannot be enforced (strict ⇒ session reject); unverified — no descriptor available, rendered conservatively but unproven.
      */
     val verdict: RuleVerdictVerdictEnum? = null,
     /**
-     * The disposition the agent will actually enforce: the requested action when exact/unverified,
-     * the more-restrictive target when degraded, omitted when unsupported (cannot render).
+     * The disposition the agent will actually enforce: the requested action when exact/unverified, the more-restrictive target when degraded, omitted when unsupported (cannot render).
      */
     val rendered: RuleVerdictRenderedEnum? = null,
-    /** Human-readable explanation of the verdict. */
+    /**
+     * Human-readable explanation of the verdict.
+     */
     val reason: String? = null,
     /**
      * Optional actionable hint (e.g. "set enforcement: best-effort, or target a capable agent").
      */
-    val suggestion: String? = null,
+    val suggestion: String? = null
 )
 
 /**
- * Slack destination on create/update. webhook_url is required when mode=slack; must be
- * hooks.slack.com stored encrypted and never returned.
+ * Slack destination on create/update. webhook_url is required when mode=slack; must be hooks.slack.com stored encrypted and never returned.
  */
 data class SlackOutputWrite(
     /**
-     * Slack incoming webhook URL (hooks.slack.com). The channel is bound to this URL at install
-     * time.
+     * Slack incoming webhook URL (hooks.slack.com). The channel is bound to this URL at install time.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("webhook_url") val webhookUrl: String
 )
 
 /**
- * The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope). The
- * SSE `event:` field repeats `type`, and the `id:` field repeats `event_id`.
+ * The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope). The SSE `event:` field repeats `type`, and the `id:` field repeats `event_id`.
  */
 data class StreamEvent(
-    /** Optional `string` value serialized in the `event_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `event_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-    /** Optional `string` value serialized in the `run_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `run_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_id") val runId: String? = null,
-    /** DO Team ID rendered as a decimal string. */
+    /**
+     * DO Team ID rendered as a decimal string.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tenant_id") val tenantId: String? = null,
-    /** Optional `string` value serialized in the `session_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `session_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String? = null,
-    /** Optional `string` value serialized in the `trace_parent` wire field. */
+    /**
+     * Optional `string` value serialized in the `trace_parent` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("trace_parent") val traceParent: String? = null,
-    /** Optional `date-time`-formatted value serialized in the `timestamp` wire field. */
+    /**
+     * Optional `date-time`-formatted value serialized in the `timestamp` wire field.
+     */
     val timestamp: OffsetDateTime? = null,
     /**
-     * Producer-supplied sequence number; nonzero values increase monotonically within an ingress
-     * stream.
+     * Producer-supplied sequence number; nonzero values increase monotonically within an ingress stream.
      */
     val seq: Long? = null,
-    /** Optional `string` value serialized in the `source_event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_event_id")
-    val sourceEventId: String? = null,
-    /** Optional `string` value serialized in the `source_event_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_event_type")
-    val sourceEventType: String? = null,
-    /** Optional runtime-native tenant identifier; distinct from authoritative tenant_id. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_tenant_id")
-    val sourceTenantId: String? = null,
-    /** Server-assigned component that submitted the event. */
+    /**
+     * Optional `string` value serialized in the `source_event_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_event_id") val sourceEventId: String? = null,
+    /**
+     * Optional `string` value serialized in the `source_event_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_event_type") val sourceEventType: String? = null,
+    /**
+     * Optional runtime-native tenant identifier; distinct from authoritative tenant_id.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_tenant_id") val sourceTenantId: String? = null,
+    /**
+     * Server-assigned component that submitted the event.
+     */
     val producer: StreamEventProducerEnum? = null,
-    /** Optional `string` value serialized in the `definition_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("definition_id")
-    val definitionId: String? = null,
-    /** Optional `string` value serialized in the `revision_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `definition_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("definition_id") val definitionId: String? = null,
+    /**
+     * Optional `string` value serialized in the `revision_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("revision_id") val revisionId: String? = null,
-    /** Optional `string` value serialized in the `credential_binding_set_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_binding_set_id")
-    val credentialBindingSetId: String? = null,
-    /** Canonical SPI event type. The SSE `event:` field carries the same value. */
+    /**
+     * Optional `string` value serialized in the `credential_binding_set_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("credential_binding_set_id") val credentialBindingSetId: String? = null,
+    /**
+     * Canonical SPI event type. The SSE `event:` field carries the same value.
+     */
     val type: StreamEventTypeEnum? = null,
     /**
-     * Type-specific payload, discriminated by `type` (canonical SPI shapes; numeric fields are JSON
-     * numbers): - run.started: {agent} - run.token_delta: {text} - run.tool_call_started:
-     * {tool_call_id, name, input} - run.tool_call_completed: {tool_call_id, ok, duration_ms,
-     * summary} - run.human_input_requested: {hitl_id, payload} - run.human_input_received:
-     * {hitl_id, outcome, actor, reason} - run.completed: {total_tokens_in, total_tokens_out,
-     * run_cost_micros} - run.failed: {code,…
+     * Type-specific payload, discriminated by `type` (canonical SPI shapes; numeric fields are JSON numbers): - run.started: {agent} - run.token_delta: {text} - run.tool_call_started: {tool_call_id, name, input} - run.tool_call_completed: {tool_call_id, ok, duration_ms, summary} - run.human_input_requested: {hitl_id, payload} - run.human_input_received: {hitl_id, outcome, actor, reason} - run.completed: {total_tokens_in, total_tokens_out, run_cost_micros} - run.failed: {code,…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null
 )
 
 /**
- * Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent, version).
- * The same shape is persisted per session in session_policies.verdicts.
+ * Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent, version). The same shape is persisted per session in session_policies.verdicts.
  */
 data class ValidationResult(
-    /** Optional `string` value serialized in the `agent` wire field. */
+    /**
+     * Optional `string` value serialized in the `agent` wire field.
+     */
     val agent: String? = null,
-    /** Optional `string` value serialized in the `version` wire field. */
+    /**
+     * Optional `string` value serialized in the `version` wire field.
+     */
     val version: String? = null,
     /**
-     * False when any strict rule is unsupported or unverified — i.e. CreateSession would reject
-     * this policy for this (agent, version).
+     * False when any strict rule is unsupported or unverified — i.e. CreateSession would reject this policy for this (agent, version).
      */
     val ok: Boolean? = null,
     /**
-     * Catch-all disposition AS SHIPPED (after unverified allow→ask downgrade). When
-     * defaultActionVerdict is degraded, this remains the shipped value; see defaultActionRendered
-     * for what the agent will actually enforce.
+     * Catch-all disposition AS SHIPPED (after unverified allow→ask downgrade). When defaultActionVerdict is degraded, this remains the shipped value; see defaultActionRendered for what the agent will actually enforce.
      */
     val defaultAction: ValidationResultDefaultActionEnum? = null,
     /**
-     * exact — agent can enforce the catch-all as written; degraded — agent cannot enforce the
-     * requested defaultAction (warn-only; shipped value unchanged); omitted when no descriptor was
-     * available to classify against.
+     * exact — agent can enforce the catch-all as written; degraded — agent cannot enforce the requested defaultAction (warn-only; shipped value unchanged); omitted when no descriptor was available to classify against.
      */
     val defaultActionVerdict: ValidationResultDefaultActionVerdictEnum? = null,
     /**
-     * Disposition the agent will actually enforce as the catch-all: equals defaultAction when
-     * exact; the more-restrictive degrade target (usually ask) when degraded.
+     * Disposition the agent will actually enforce as the catch-all: equals defaultAction when exact; the more-restrictive degrade target (usually ask) when degraded.
      */
     val defaultActionRendered: ValidationResultDefaultActionRenderedEnum? = null,
-    /** Human-readable explanation when defaultActionVerdict is degraded. */
+    /**
+     * Human-readable explanation when defaultActionVerdict is degraded.
+     */
     val defaultActionReason: String? = null,
-    /** Optional array value serialized in the `verdicts` wire field. */
-    val verdicts: List<RuleVerdict>? = null,
+    /**
+     * Optional array value serialized in the `verdicts` wire field.
+     */
+    val verdicts: List<RuleVerdict>? = null
 )

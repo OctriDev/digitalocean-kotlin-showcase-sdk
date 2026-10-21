@@ -3,24 +3,36 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Output for listing the episodes within a simulation run. */
+/**
+ * Output for listing the episodes within a simulation run.
+ */
 data class ApiListSimulationEpisodesOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiSimulationEpisodeSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Statuses available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses")
-    val availableStatuses: List<ApiSimulationEpisodeStatus>? = null,
-    /** Verdicts available for filtering this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_verdicts")
-    val availableVerdicts: List<ApiSimulationEpisodeVerdict>? = null,
-    /** The episodes for the current page. */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiSimulationEpisodeSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Statuses available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_statuses") val availableStatuses: List<ApiSimulationEpisodeStatus>? = null,
+    /**
+     * Verdicts available for filtering this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_verdicts") val availableVerdicts: List<ApiSimulationEpisodeVerdict>? = null,
+    /**
+     * The episodes for the current page.
+     */
     val episodes: List<ApiSimulationEpisode>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )

@@ -3,28 +3,46 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Indexing jobs */
+/**
+ * Indexing jobs
+ */
 data class ApiListKnowledgeBaseIndexingJobsOutput(
-    /** The indexing jobs */
+    /**
+     * The indexing jobs
+     */
     val jobs: List<ApiIndexingJob>? = null,
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )
 
-/** Output for listing the scenarios in a scenario set. */
+/**
+ * Output for listing the scenarios in a scenario set.
+ */
 data class ApiListScenariosOutput(
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiScenarioSortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Links to other pages */
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiScenarioSortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The scenarios for the current page. */
-    val scenarios: List<ApiScenario>? = null,
+    /**
+     * The scenarios for the current page.
+     */
+    val scenarios: List<ApiScenario>? = null
 )

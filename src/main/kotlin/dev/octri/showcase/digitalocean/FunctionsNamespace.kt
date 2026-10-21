@@ -3,216 +3,97 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class FunctionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns a list of namespaces associated with the current user. To get all namespaces, send a
-     * GET request to `/v2/functions/namespaces`.
+     * Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.
      */
     fun listNamespaces(options: RequestOptions? = null): ListNamespaces {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsListNamespaces(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsListNamespaces(clientConfig, options)
     }
 
     /**
-     * Creates a new serverless functions namespace in the desired region and associates it with the
-     * provided label. A namespace is a collection of functions and their associated packages,
-     * triggers, and project specifications. To create a namespace, send a POST request to
-     * `/v2/functions/namespaces` with the `region` and `label` properties.
+     * Creates a new serverless functions namespace in the desired region and associates it with the provided label. A namespace is a collection of functions and their associated packages, triggers, and project specifications. To create a namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` properties.
      */
-    fun createNamespace(
-        region: String,
-        label: String,
-        options: RequestOptions? = null,
-    ): NamespaceCreated {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsCreateNamespace(
-            clientConfig,
-            region,
-            label,
-            options,
-        )
+    fun createNamespace(region: String, label: String, options: RequestOptions? = null): NamespaceCreated {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsCreateNamespace(clientConfig, region, label, options)
     }
 
     /**
-     * Gets the namespace details for the given namespace UUID. To get namespace details, send a GET
-     * request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
+     * Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
      */
     fun getNamespace(namespaceId: String, options: RequestOptions? = null): NamespaceCreated {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsGetNamespace(
-            clientConfig,
-            namespaceId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsGetNamespace(clientConfig, namespaceId, options)
     }
 
     /**
-     * Deletes the given namespace. When a namespace is deleted all assets, in the namespace are
-     * deleted, this includes packages, functions and triggers. Deleting a namespace is a
-     * destructive operation and assets in the namespace are not recoverable after deletion. Some
-     * metadata is retained, such as activations, or soft deleted for reporting purposes. To delete
-     * namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`. A successful
-     * deletion returns a 204 response.
+     * Deletes the given namespace. When a namespace is deleted all assets, in the namespace are deleted, this includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the namespace are not recoverable after deletion. Some metadata is retained, such as activations, or soft deleted for reporting purposes. To delete namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`. A successful deletion returns a 204 response.
      */
     fun deleteNamespace(namespaceId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsDeleteNamespace(
-            clientConfig,
-            namespaceId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsDeleteNamespace(clientConfig, namespaceId, options)
     }
 
     /**
-     * Returns a list of triggers associated with the current user and namespace. To get all
-     * triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
+     * Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
      */
     fun listTriggers(namespaceId: String, options: RequestOptions? = null): ListTriggers {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsListTriggers(
-            clientConfig,
-            namespaceId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsListTriggers(clientConfig, namespaceId, options)
     }
 
     /**
-     * Creates a new trigger for a given function in a namespace. To create a trigger, send a POST
-     * request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`,
-     * `type`, `is_enabled` and `scheduled_details` properties.
+     * Creates a new trigger for a given function in a namespace. To create a trigger, send a POST request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`, `type`, `is_enabled` and `scheduled_details` properties.
      */
-    fun createTrigger(
-        request: dev.octri.showcase.digitalocean.methods.Functions.FunctionsCreateTriggerRequest,
-        options: RequestOptions? = null,
-    ): TriggerResponse {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsCreateTrigger(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createTrigger(request: dev.octri.showcase.digitalocean.methods.Functions.FunctionsCreateTriggerRequest, options: RequestOptions? = null): TriggerResponse {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsCreateTrigger(clientConfig, request, options)
     }
 
     /**
-     * Gets the trigger details. To get the trigger details, send a GET request to
-     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
+     * Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
      */
-    fun getTrigger(
-        namespaceId: String,
-        triggerName: String,
-        options: RequestOptions? = null,
-    ): TriggerResponse {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsGetTrigger(
-            clientConfig,
-            namespaceId,
-            triggerName,
-            options,
-        )
+    fun getTrigger(namespaceId: String, triggerName: String, options: RequestOptions? = null): TriggerResponse {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsGetTrigger(clientConfig, namespaceId, triggerName, options)
     }
 
     /**
-     * Updates the details of the given trigger. To update a trigger, send a PUT request to
-     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the
-     * `is_enabled ` or `scheduled_details` properties.
+     * Updates the details of the given trigger. To update a trigger, send a PUT request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the `is_enabled ` or `scheduled_details` properties.
      */
-    fun updateTrigger(
-        namespaceId: String,
-        triggerName: String,
-        isEnabled: Boolean? = null,
-        scheduledDetails: ScheduledDetails? = null,
-        options: RequestOptions? = null,
-    ): TriggerResponse {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsUpdateTrigger(
-            clientConfig,
-            namespaceId,
-            triggerName,
-            isEnabled,
-            scheduledDetails,
-            options,
-        )
+    fun updateTrigger(namespaceId: String, triggerName: String, isEnabled: Boolean? = null, scheduledDetails: ScheduledDetails? = null, options: RequestOptions? = null): TriggerResponse {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsUpdateTrigger(clientConfig, namespaceId, triggerName, isEnabled, scheduledDetails, options)
     }
 
     /**
-     * Deletes the given trigger. To delete trigger, send a DELETE request to
-     * `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`. A successful deletion
-     * returns a 204 response.
+     * Deletes the given trigger. To delete trigger, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`. A successful deletion returns a 204 response.
      */
-    fun deleteTrigger(
-        namespaceId: String,
-        triggerName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsDeleteTrigger(
-            clientConfig,
-            namespaceId,
-            triggerName,
-            options,
-        )
+    fun deleteTrigger(namespaceId: String, triggerName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsDeleteTrigger(clientConfig, namespaceId, triggerName, options)
     }
 
     /**
-     * Lists all access keys for a serverless functions namespace. To list access keys, send a GET
-     * request to `/v2/functions/namespaces/{namespace_id}/keys`.
+     * Lists all access keys for a serverless functions namespace. To list access keys, send a GET request to `/v2/functions/namespaces/{namespace_id}/keys`.
      */
     fun accessKeyList(namespaceId: String, options: RequestOptions? = null): AccessKeyList {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyList(
-            clientConfig,
-            namespaceId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyList(clientConfig, namespaceId, options)
     }
 
     /**
-     * Creates a new access key for a serverless functions namespace. The access key can be used to
-     * authenticate requests to the namespace's functions. The secret key is only returned once upon
-     * creation. To create an access key, send a POST request to
-     * `/v2/functions/namespaces/{namespace_id}/keys`.
+     * Creates a new access key for a serverless functions namespace. The access key can be used to authenticate requests to the namespace's functions. The secret key is only returned once upon creation. To create an access key, send a POST request to `/v2/functions/namespaces/{namespace_id}/keys`.
      */
-    fun accessKeyCreate(
-        namespaceId: String,
-        name: String,
-        expiresIn: String? = null,
-        options: RequestOptions? = null,
-    ): AccessKeyCreate {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyCreate(
-            clientConfig,
-            namespaceId,
-            name,
-            expiresIn,
-            options,
-        )
+    fun accessKeyCreate(namespaceId: String, name: String, expiresIn: String? = null, options: RequestOptions? = null): AccessKeyCreate {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyCreate(clientConfig, namespaceId, name, expiresIn, options)
     }
 
     /**
-     * Updates the name of an access key for a serverless functions namespace. To update an access
-     * key, send a PUT request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
+     * Updates the name of an access key for a serverless functions namespace. To update an access key, send a PUT request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
      */
-    fun accessKeyUpdate(
-        namespaceId: String,
-        keyId: String,
-        name: String,
-        options: RequestOptions? = null,
-    ): AccessKeyUpdate {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyUpdate(
-            clientConfig,
-            namespaceId,
-            keyId,
-            name,
-            options,
-        )
+    fun accessKeyUpdate(namespaceId: String, keyId: String, name: String, options: RequestOptions? = null): AccessKeyUpdate {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyUpdate(clientConfig, namespaceId, keyId, name, options)
     }
 
     /**
-     * Deletes an access key for a serverless functions namespace. To delete an access key, send a
-     * DELETE request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
+     * Deletes an access key for a serverless functions namespace. To delete an access key, send a DELETE request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
      */
-    fun accessKeyDelete(
-        namespaceId: String,
-        keyId: String,
-        options: RequestOptions? = null,
-    ): Map<String, Any> {
-        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyDelete(
-            clientConfig,
-            namespaceId,
-            keyId,
-            options,
-        )
+    fun accessKeyDelete(namespaceId: String, keyId: String, options: RequestOptions? = null): Map<String, Any> {
+        return dev.octri.showcase.digitalocean.methods.Functions.functionsAccessKeyDelete(clientConfig, namespaceId, keyId, options)
     }
+
 }

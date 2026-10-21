@@ -3,12 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** List of model router task presets */
+/**
+ * List of model router task presets
+ */
 data class ApiListModelRouterTaskPresetsOutput(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The task presets */
-    val tasks: List<ApiModelRouterTaskPreset>? = null,
+    /**
+     * The task presets
+     */
+    val tasks: List<ApiModelRouterTaskPreset>? = null
 )

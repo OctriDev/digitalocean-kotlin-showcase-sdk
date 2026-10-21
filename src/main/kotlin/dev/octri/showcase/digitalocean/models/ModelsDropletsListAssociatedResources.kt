@@ -3,35 +3,46 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** An objects containing information about a resource associated with a Droplet. */
+/**
+ * An objects containing information about a resource associated with a Droplet.
+ */
 data class AssociatedResource(
-    /** The unique identifier for the resource associated with the Droplet. */
+    /**
+     * The unique identifier for the resource associated with the Droplet.
+     */
     val id: String? = null,
-    /** The name of the resource associated with the Droplet. */
+    /**
+     * The name of the resource associated with the Droplet.
+     */
     val name: String? = null,
     /**
-     * The cost of the resource in USD per month if the resource is retained after the Droplet is
-     * destroyed.
+     * The cost of the resource in USD per month if the resource is retained after the Droplet is destroyed.
      */
-    val cost: String? = null,
+    val cost: String? = null
 )
 
-/** Typed representation of the `AssociatedResourcesList` API schema. */
+/**
+ * Typed representation of the `AssociatedResourcesList` API schema.
+ */
 data class AssociatedResourcesList(
-    /** Reserved IPs that are associated with this Droplet. Requires `reserved_ip:read` scope. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips")
-    val reservedIps: List<AssociatedResource>? = null,
-    /** Floating IPs that are associated with this Droplet. Requires `reserved_ip:read` scope. */
-    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips")
-    val floatingIps: List<AssociatedResource>? = null,
-    /** Snapshots that are associated with this Droplet. Requires `image:read` scope. */
+    /**
+     * Reserved IPs that are associated with this Droplet. Requires `reserved_ip:read` scope.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ips") val reservedIps: List<AssociatedResource>? = null,
+    /**
+     * Floating IPs that are associated with this Droplet. Requires `reserved_ip:read` scope.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("floating_ips") val floatingIps: List<AssociatedResource>? = null,
+    /**
+     * Snapshots that are associated with this Droplet. Requires `image:read` scope.
+     */
     val snapshots: List<AssociatedResource>? = null,
-    /** Volumes that are associated with this Droplet. Requires `block_storage:read` scope. */
+    /**
+     * Volumes that are associated with this Droplet. Requires `block_storage:read` scope.
+     */
     val volumes: List<AssociatedResource>? = null,
     /**
-     * Volume Snapshots that are associated with this Droplet. Requires
-     * `block_storage_snapshot:read` scope.
+     * Volume Snapshots that are associated with this Droplet. Requires `block_storage_snapshot:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots")
-    val volumeSnapshots: List<AssociatedResource>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("volume_snapshots") val volumeSnapshots: List<AssociatedResource>? = null
 )

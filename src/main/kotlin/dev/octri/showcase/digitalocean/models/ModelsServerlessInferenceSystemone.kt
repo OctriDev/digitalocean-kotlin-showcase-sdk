@@ -4,86 +4,103 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * The evaluated answer for a single question. The fields that are populated depend on the
- * corresponding question's `type`.
+ * The evaluated answer for a single question. The fields that are populated depend on the corresponding question's `type`.
  */
 data class SystemoneAnswer(
-    /** Echoes the `type` of the question this answer corresponds to. */
+    /**
+     * Echoes the `type` of the question this answer corresponds to.
+     */
     val type: SystemoneAnswerTypeEnum,
-    /** Present when the question type is `noul`. A truth-likelihood value. */
+    /**
+     * Present when the question type is `noul`. A truth-likelihood value.
+     */
     val noul: Double? = null,
     /**
-     * Present when the question type is `choice`. The selected option name from the question's
-     * `criteria` map.
+     * Present when the question type is `choice`. The selected option name from the question's `criteria` map.
      */
     val choice: String? = null,
     /**
-     * Present when the question type is `score`. The numeric position along the ordered rubric
-     * levels supplied in the question's `criteria`.
+     * Present when the question type is `score`. The numeric position along the ordered rubric levels supplied in the question's `criteria`.
      */
     val score: Double? = null,
     /**
-     * Present when the question type is `score`. Maps rubric levels to their corresponding numeric
-     * positions.
+     * Present when the question type is `score`. Maps rubric levels to their corresponding numeric positions.
      */
     val legend: Map<String, Any>? = null,
-    /** Calibrated probability for each possible answer value. */
+    /**
+     * Calibrated probability for each possible answer value.
+     */
     val probabilities: Map<String, Double>? = null,
-    /** Overall calibrated confidence in the returned answer. */
-    val confidence: Double? = null,
+    /**
+     * Overall calibrated confidence in the returned answer.
+     */
+    val confidence: Double? = null
 )
 
 /**
- * A single question to evaluate against the provided state. The `type` field determines how
- * `criteria` should be shaped and how the corresponding answer is returned.
+ * A single question to evaluate against the provided state. The `type` field determines how `criteria` should be shaped and how the corresponding answer is returned.
  */
 data class SystemoneQuestion(
     /**
-     * Question discriminator. Use `noul` for a boolean-like true/false check, `choice` to select
-     * one option from a fixed set, and `score` to rate against an ordered rubric.
+     * Question discriminator. Use `noul` for a boolean-like true/false check, `choice` to select one option from a fixed set, and `score` to rate against an ordered rubric.
      */
     val type: SystemoneQuestionTypeEnum,
-    /** The prompt describing what the question is asking the model to evaluate. */
+    /**
+     * The prompt describing what the question is asking the model to evaluate.
+     */
     val instructions: String,
     /**
-     * Optional criteria payload. The expected shape depends on `type`: for `noul`, an optional
-     * object describing the true/false semantics; for `choice`, an object mapping each option name
-     * to a description of that option (minimum 2 options, maximum 255 options); for `score`, an
-     * ordered array of descriptive rubric levels (minimum 2, maximum 10 levels). Score levels must
-     * be descriptive labels, such as `["poor", "average", "excellent"]`, not numeric values.
+     * Optional criteria payload. The expected shape depends on `type`: for `noul`, an optional object describing the true/false semantics; for `choice`, an object mapping each option name to a description of that option (minimum 2 options, maximum 255 options); for `score`, an ordered array of descriptive rubric levels (minimum 2, maximum 10 levels). Score levels must be descriptive labels, such as `["poor", "average", "excellent"]`, not numeric values.
      */
-    val criteria: Any? = null,
+    val criteria: Any? = null
 )
 
-/** Request payload for a System One evaluation. */
+/**
+ * Request payload for a System One evaluation.
+ */
 data class SystemoneRequest(
-    /** The state to evaluate. */
+    /**
+     * The state to evaluate.
+     */
     val state: String,
-    /** Model ID used to evaluate the request. */
+    /**
+     * Model ID used to evaluate the request.
+     */
     val model: String,
     /**
-     * A map of question name to question definition. Each key becomes the corresponding key in the
-     * response's `answers` object.
+     * A map of question name to question definition. Each key becomes the corresponding key in the response's `answers` object.
      */
-    val questions: Map<String, SystemoneQuestion>,
+    val questions: Map<String, SystemoneQuestion>
 )
 
-/** Response returned by a System One evaluation. */
+/**
+ * Response returned by a System One evaluation.
+ */
 data class SystemoneResponse(
-    /** Model ID that produced the response. */
+    /**
+     * Model ID that produced the response.
+     */
     val model: String,
     /**
      * A map of question name to answer, using the same keys as the request's `questions` object.
      */
     val answers: Map<String, SystemoneAnswer>,
-    /** Token usage for the request. System One billing is input-token only. */
-    val usage: SystemoneUsage,
+    /**
+     * Token usage for the request. System One billing is input-token only.
+     */
+    val usage: SystemoneUsage
 )
 
-/** Token usage for the request. System One billing is input-token only. */
+/**
+ * Token usage for the request. System One billing is input-token only.
+ */
 data class SystemoneUsage(
-    /** Number of input tokens consumed by the request. */
+    /**
+     * Number of input tokens consumed by the request.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /** Number of output tokens consumed by the request. Always 0 for System One. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
+    /**
+     * Number of output tokens consumed by the request. Always 0 for System One.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long
 )

@@ -7,15 +7,22 @@ package dev.octri.showcase.digitalocean.models
  * CreateAnthropicAPIKeyInputPublic is used to create a new Anthropic API key for a specific agent.
  */
 data class ApiCreateAnthropicAPIKeyInputPublic(
-    /** Anthropic API key */
+    /**
+     * Anthropic API key
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
-    /** Name of the key */
-    val name: String? = null,
+    /**
+     * Name of the key
+     */
+    val name: String? = null
 )
 
-/** CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic API key. */
+/**
+ * CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic API key.
+ */
 data class ApiCreateAnthropicAPIKeyOutput(
-    /** Anthropic API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
+    /**
+     * Anthropic API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
 )

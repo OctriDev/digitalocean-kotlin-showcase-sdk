@@ -6,104 +6,111 @@ package dev.octri.showcase.digitalocean.models
 import java.time.OffsetDateTime
 
 /**
- * Immutable team-scoped Environment Config: one sanitized manifest per config. There is no update;
- * clone to a new config to change content.
+ * Immutable team-scoped Environment Config: one sanitized manifest per config. There is no update; clone to a new config to change content.
  */
 data class AgentConfig(
-    /** Required `uuid`-formatted value serialized in the `id` wire field. */
+    /**
+     * Required `uuid`-formatted value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
     /**
-     * The manifest contract the server accepted at create time: the manifest's own apiVersion for
-     * legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or
-     * agents.digitalocean.com/flat.v1 for flat-format parses.
+     * The manifest contract the server accepted at create time: the manifest's own apiVersion for legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or agents.digitalocean.com/flat.v1 for flat-format parses.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("agentspec_schema_version")
-    val agentspecSchemaVersion: String,
+    @com.fasterxml.jackson.annotation.JsonProperty("agentspec_schema_version") val agentspecSchemaVersion: String,
     /**
-     * Canonical runnable environment spec JSON, immutable after create. Validated non-secret
-     * spec.env and spec.permissions remain; spec.secrets retains name/source/provider but omits ref
-     * and the write-only value; metadata.name is cleared while safe metadata such as labels
-     * remains.
+     * Canonical runnable environment spec JSON, immutable after create. Validated non-secret spec.env and spec.permissions remain; spec.secrets retains name/source/provider but omits ref and the write-only value; metadata.name is cleared while safe metadata such as labels remains.
      */
     val manifest: AgentManifest,
-    /** Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON. */
+    /**
+     * Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_hash") val contentHash: String,
-    /** Authenticated user identity that created the config. */
+    /**
+     * Authenticated user identity that created the config.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String,
-    /** Required `date-time`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required `date-time`-formatted value serialized in the `updated_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `updated_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
     /**
-     * The per-signal telemetry opt-in recorded at create time. Absent when the customer expressed
-     * no choice. This echoes the create-time request only: a customer who later re-toggles a signal
-     * from the Insights settings page changes their enablement there, not here.
+     * The per-signal telemetry opt-in recorded at create time. Absent when the customer expressed no choice. This echoes the create-time request only: a customer who later re-toggles a signal from the Insights settings page changes their enablement there, not here.
      */
     val insights: InsightsOptIn? = null,
     /**
      * Redacted credential slot metadata (name/source/provider). Secret values are never included.
      */
-    val credentials: List<AgentConfigCredentialSlot>? = null,
+    val credentials: List<AgentConfigCredentialSlot>? = null
 )
 
 /**
- * Clone body: required new name plus write-only credentials for any declared slots. No lineage
- * field.
+ * Clone body: required new name plus write-only credentials for any declared slots. No lineage field.
  */
 data class AgentConfigCloneRequest(
-    /** New config name, unique among the team's active configs. */
+    /**
+     * New config name, unique among the team's active configs.
+     */
     val name: String,
     /**
-     * Write-only map from tenantSecret logical slot to plaintext. Required when the source declares
-     * those slots; never copied from the source.
+     * Write-only map from tenantSecret logical slot to plaintext. Required when the source declares those slots; never copied from the source.
      */
     val secrets: Map<String, String>? = null,
     /**
-     * Write-only map from oauth logical slot to an OAuth assignment UUID. Required when the source
-     * declares those slots; never copied from the source.
+     * Write-only map from oauth logical slot to an OAuth assignment UUID. Required when the source declares those slots; never copied from the source.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_assignments")
-    val oauthAssignments: Map<String, String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_assignments") val oauthAssignments: Map<String, String>? = null
 )
 
 /**
- * Environment Config create body. Credentials are not request fields: every secret is declared in
- * the environment spec under secrets (or legacy spec.secrets), with tenantSecret slots carrying
- * plaintext in a write-only value extracted into Secrets Manager and never returned.
+ * Environment Config create body. Credentials are not request fields: every secret is declared in the environment spec under secrets (or legacy spec.secrets), with tenantSecret slots carrying plaintext in a write-only value extracted into Secrets Manager and never returned.
  */
 data class AgentConfigCreateRequest(
-    /** Config name, case-insensitively unique among the team's active configs. */
+    /**
+     * Config name, case-insensitively unique among the team's active configs.
+     */
     val name: String,
     /**
-     * Customer environment-spec YAML text. The HTTP JSON body is capped at 1 MiB and this field is
-     * capped at 512 KiB.
+     * Customer environment-spec YAML text. The HTTP JSON body is capped at 1 MiB and this field is capped at 512 KiB.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("manifest_yaml") val manifestYaml: String,
     /**
-     * Optional per-signal Insights telemetry opt-in. Travels beside manifest_yaml, never inside it:
-     * the manifest is immutable and content-hashed, while this value can be changed later from the
-     * Insights settings page. When omitted, no choice is recorded and the product default applies.
+     * Optional per-signal Insights telemetry opt-in. Travels beside manifest_yaml, never inside it: the manifest is immutable and content-hashed, while this value can be changed later from the Insights settings page. When omitted, no choice is recorded and the product default applies.
      */
-    val insights: InsightsOptIn? = null,
+    val insights: InsightsOptIn? = null
 )
 
-/** Typed representation of the `AgentConfigCredentialSlot` API schema. */
+/**
+ * Typed representation of the `AgentConfigCredentialSlot` API schema.
+ */
 data class AgentConfigCredentialSlot(
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
-    /** Optional enumerated value serialized in the `source` wire field. */
+    /**
+     * Optional enumerated value serialized in the `source` wire field.
+     */
     val source: AgentConfigCredentialSlotSourceEnum? = null,
-    /** Optional `string` value serialized in the `provider` wire field. */
-    val provider: String? = null,
+    /**
+     * Optional `string` value serialized in the `provider` wire field.
+     */
+    val provider: String? = null
 )
 
-/** Typed representation of the `AgentConfigResponse` API schema. */
+/**
+ * Typed representation of the `AgentConfigResponse` API schema.
+ */
 data class AgentConfigResponse(
     /**
-     * Immutable team-scoped Environment Config: one sanitized manifest per config. There is no
-     * update; clone to a new config to change content.
+     * Immutable team-scoped Environment Config: one sanitized manifest per config. There is no update; clone to a new config to change content.
      */
     val config: AgentConfig? = null
 )
@@ -112,433 +119,490 @@ data class AgentConfigResponse(
  * Lightweight list representation; the manifest is available from config reads, not list responses.
  */
 data class AgentConfigSummary(
-    /** Required `uuid`-formatted value serialized in the `id` wire field. */
+    /**
+     * Required `uuid`-formatted value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
     /**
-     * The manifest contract the server accepted at create time: the manifest's own apiVersion for
-     * legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or
-     * agents.digitalocean.com/flat.v1 for flat-format parses.
+     * The manifest contract the server accepted at create time: the manifest's own apiVersion for legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or agents.digitalocean.com/flat.v1 for flat-format parses.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("agentspec_schema_version")
-    val agentspecSchemaVersion: String,
-    /** Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON. */
+    @com.fasterxml.jackson.annotation.JsonProperty("agentspec_schema_version") val agentspecSchemaVersion: String,
+    /**
+     * Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_hash") val contentHash: String,
-    /** Authenticated user identity that created the config. */
+    /**
+     * Authenticated user identity that created the config.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String,
-    /** Required `date-time`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required `date-time`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required `date-time`-formatted value serialized in the `updated_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-)
-
-/** Optional object value serialized in the `metadata` wire field. */
-data class AgentManifestMetadata(
     /**
-     * Optional team-unique session name: 1-64 chars of letters, digits, '-', '.', '_', starting and
-     * ending alphanumeric; case-insensitive; must not be UUID-shaped. Omit to have the control
-     * plane generate one ("session-<agent-type>-<date-time>"). Unique among the team's ACTIVE
-     * (non-terminal) sessions; destroying a session frees its name for reuse.
+     * Required `date-time`-formatted value serialized in the `updated_at` wire field.
      */
-    val name: String? = null,
-    /**
-     * Free-form description (max 1024 chars), stored and echoed back for Console / catalog
-     * surfaces.
-     */
-    val description: String? = null,
-    /** Optional object value serialized in the `labels` wire field. */
-    val labels: Map<String, String>? = null,
-)
-
-/** BYO container; requires adapter: custom. image is required and should be digest-pinned. */
-data class AgentManifestSpecRuntimeCustom(
-    /** Required `string` value serialized in the `image` wire field. */
-    val image: String,
-    /** Optional array value serialized in the `entrypoint` wire field. */
-    val entrypoint: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime
 )
 
 /**
- * Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi |
- * custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the
- * agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli and
- * cursor-cli are deprecated aliases (accepted with a create-time warning). The framework adapters
- * (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported;
- * CreateSession…
+ * Optional object value serialized in the `metadata` wire field.
  */
-data class AgentManifestSpecRuntime(
-    /** Required enumerated value serialized in the `adapter` wire field. */
-    val adapter: AgentManifestSpecRuntimeAdapterEnum,
-    /** BYO container; requires adapter: custom. image is required and should be digest-pinned. */
-    val custom: AgentManifestSpecRuntimeCustom? = null,
+data class AgentManifestMetadata(
     /**
-     * OPAQUE, provider-specific runtime config. Only for adapter: codex-agentapi today, where it is
-     * the OpenAI Agents API create-session body (agent/environment/input) that doctl forwards
-     * verbatim to OpenAI's POST /v1/agents/sessions; harness-api stores and echoes it but never
-     * parses or validates its contents (so DO stays forward-compatible as OpenAI's schema evolves).
-     * The OpenAI session_id is passed on the create call (the openai_session_id query parameter),
-     * not in this block.
+     * Optional team-unique session name: 1-64 chars of letters, digits, '-', '.', '_', starting and ending alphanumeric; case-insensitive; must not be UUID-shaped. Omit to have the control plane generate one ("session-<agent-type>-<date-time>"). Unique among the team's ACTIVE (non-terminal) sessions; destroying a session frees its name for reuse.
      */
-    val config: Map<String, Any>? = null,
+    val name: String? = null,
+    /**
+     * Free-form description (max 1024 chars), stored and echoed back for Console / catalog surfaces.
+     */
+    val description: String? = null,
+    /**
+     * Optional object value serialized in the `labels` wire field.
+     */
+    val labels: Map<String, String>? = null
 )
 
-/** Repositories the session works against. */
+/**
+ * BYO container; requires adapter: custom. image is required and should be digest-pinned.
+ */
+data class AgentManifestSpecRuntimeCustom(
+    /**
+     * Required `string` value serialized in the `image` wire field.
+     */
+    val image: String,
+    /**
+     * Optional array value serialized in the `entrypoint` wire field.
+     */
+    val entrypoint: List<String>? = null
+)
+
+/**
+ * Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi | custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported; CreateSession…
+ */
+data class AgentManifestSpecRuntime(
+    /**
+     * Required enumerated value serialized in the `adapter` wire field.
+     */
+    val adapter: AgentManifestSpecRuntimeAdapterEnum,
+    /**
+     * BYO container; requires adapter: custom. image is required and should be digest-pinned.
+     */
+    val custom: AgentManifestSpecRuntimeCustom? = null,
+    /**
+     * OPAQUE, provider-specific runtime config. Only for adapter: codex-agentapi today, where it is the OpenAI Agents API create-session body (agent/environment/input) that doctl forwards verbatim to OpenAI's POST /v1/agents/sessions; harness-api stores and echoes it but never parses or validates its contents (so DO stays forward-compatible as OpenAI's schema evolves). The OpenAI session_id is passed on the create call (the openai_session_id query parameter), not in this block.
+     */
+    val config: Map<String, Any>? = null
+)
+
+/**
+ * Repositories the session works against.
+ */
 data class AgentManifestSpecWorkspace(
     /**
-     * GitHub OWNER/REPO entries, unique. The first entry becomes the session's repo_hint; the full
-     * list is the forward shape for multi-repo sessions.
+     * GitHub OWNER/REPO entries, unique. The first entry becomes the session's repo_hint; the full list is the forward shape for multi-repo sessions.
      */
     val repos: List<String>? = null
 )
 
-/** Required object value serialized in the `mounts[]` wire field. */
+/**
+ * Required object value serialized in the `mounts[]` wire field.
+ */
 data class AgentManifestSpecSandboxMountsItem(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AgentManifestSpecSandboxMountsItemTypeEnum,
-    /** Absolute guest path the mount appears at. */
+    /**
+     * Absolute guest path the mount appears at.
+     */
     val path: String,
-    /** Required `string` value serialized in the `bucket` wire field. */
+    /**
+     * Required `string` value serialized in the `bucket` wire field.
+     */
     val bucket: String,
-    /** Names a declared tenantSecret slot in spec.secrets. */
+    /**
+     * Names a declared tenantSecret slot in spec.secrets.
+     */
     val accessKeyRef: String,
-    /** Names a declared tenantSecret slot in spec.secrets. */
+    /**
+     * Names a declared tenantSecret slot in spec.secrets.
+     */
     val secretKeyRef: String,
-    /** Optional storage endpoint override; https:// only. */
+    /**
+     * Optional storage endpoint override; https:// only.
+     */
     val endpoint: String? = null,
-    /** Optional `boolean` value serialized in the `readOnly` wire field. */
-    val readOnly: Boolean? = null,
+    /**
+     * Optional `boolean` value serialized in the `readOnly` wire field.
+     */
+    val readOnly: Boolean? = null
 )
 
-/** Required object value serialized in the `allow[]` wire field. */
+/**
+ * Required object value serialized in the `allow[]` wire field.
+ */
 data class AgentManifestSpecSandboxEgressAllowItem(
-    /** Required `string` value serialized in the `host` wire field. */
+    /**
+     * Required `string` value serialized in the `host` wire field.
+     */
     val host: String
 )
 
 /**
- * Requested egress policy (legacy envelope). unrestricted opts out of platform-default host
- * allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid. Absent or empty means
- * no destination ACL (same as unrestricted). Flat authors prefer egress: unrestricted (scalar), a
- * bare host list, or an object with allow_hosts / allow_ips / vpc_uuid / subnet_uuid. Platform host
- * defaults are unioned only when allow names something; allowIps does not trigger that union…
+ * Requested egress policy (legacy envelope). unrestricted opts out of platform-default host allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid. Absent or empty means no destination ACL (same as unrestricted). Flat authors prefer egress: unrestricted (scalar), a bare host list, or an object with allow_hosts / allow_ips / vpc_uuid / subnet_uuid. Platform host defaults are unioned only when allow names something; allowIps does not trigger that union…
  */
 data class AgentManifestSpecSandboxEgress(
-    /** Optional array value serialized in the `allow` wire field. */
+    /**
+     * Optional array value serialized in the `allow` wire field.
+     */
     val allow: List<AgentManifestSpecSandboxEgressAllowItem>? = null,
-    /** Exact IPv4/IPv6 literals (not CIDRs). */
+    /**
+     * Exact IPv4/IPv6 literals (not CIDRs).
+     */
     val allowIps: List<String>? = null,
-    /** Customer VPC UUID. Create-time immutable. */
+    /**
+     * Customer VPC UUID. Create-time immutable.
+     */
     val vpcUuid: String? = null,
-    /** Optional subnet within vpcUuid. */
+    /**
+     * Optional subnet within vpcUuid.
+     */
     val subnetUuid: String? = null,
     /**
-     * When true, opts out of the platform-default host allowlist union. Mutually exclusive with
-     * allow / allowIps / vpcUuid / subnetUuid.
+     * When true, opts out of the platform-default host allowlist union. Mutually exclusive with allow / allowIps / vpcUuid / subnetUuid.
      */
-    val unrestricted: Boolean? = null,
+    val unrestricted: Boolean? = null
 )
 
-/** Optional object value serialized in the `sandbox` wire field. */
+/**
+ * Optional object value serialized in the `sandbox` wire field.
+ */
 data class AgentManifestSpecSandbox(
     /**
-     * Optional sandbox template. Empty (or the legacy placeholder "coding") means "no preference":
-     * the template derives from the adapter.
+     * Optional sandbox template. Empty (or the legacy placeholder "coding") means "no preference": the template derives from the adapter.
      */
     val template: String? = null,
-    /** Optional `boolean` value serialized in the `persistentWorkspace` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `persistentWorkspace` wire field.
+     */
     val persistentWorkspace: Boolean? = null,
-    /** Inactivity suspend timeout. 0 means tenant policy default. */
+    /**
+     * Inactivity suspend timeout. 0 means tenant policy default.
+     */
     val idleTimeoutSeconds: Long? = null,
     /**
-     * Hard wall-clock ceiling for the whole session, independent of activity. Accepted, not yet
-     * enforced (returns a warning).
+     * Hard wall-clock ceiling for the whole session, independent of activity. Accepted, not yet enforced (returns a warning).
      */
     val maxLifetimeSeconds: Long? = null,
     /**
-     * Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty means the
-     * service default.
+     * Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty means the service default.
      */
     val sizeSlug: String? = null,
     /**
-     * Requested data mounts. Accepted, not yet enforced (returns a warning).
-     * accessKeyRef/secretKeyRef name declared tenantSecret slots in spec.secrets, validated at
-     * create; declare those slots with env: false so the keys stay mount-scoped and out of the
-     * guest env.
+     * Requested data mounts. Accepted, not yet enforced (returns a warning). accessKeyRef/secretKeyRef name declared tenantSecret slots in spec.secrets, validated at create; declare those slots with env: false so the keys stay mount-scoped and out of the guest env.
      */
     val mounts: List<AgentManifestSpecSandboxMountsItem>? = null,
     /**
-     * Requested egress policy (legacy envelope). unrestricted opts out of platform-default host
-     * allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid. Absent or empty
-     * means no destination ACL (same as unrestricted). Flat authors prefer egress: unrestricted
-     * (scalar), a bare host list, or an object with allow_hosts / allow_ips / vpc_uuid /
-     * subnet_uuid. Platform host defaults are unioned only when allow names something; allowIps
-     * does not trigger that union…
+     * Requested egress policy (legacy envelope). unrestricted opts out of platform-default host allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid. Absent or empty means no destination ACL (same as unrestricted). Flat authors prefer egress: unrestricted (scalar), a bare host list, or an object with allow_hosts / allow_ips / vpc_uuid / subnet_uuid. Platform host defaults are unioned only when allow names something; allowIps does not trigger that union…
      */
-    val egress: AgentManifestSpecSandboxEgress? = null,
+    val egress: AgentManifestSpecSandboxEgress? = null
 )
 
 /**
- * Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when
- * enforcement lands.
+ * Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when enforcement lands.
  */
 data class AgentManifestSpecModel(
-    /** Optional `string` value serialized in the `default` wire field. */
+    /**
+     * Optional `string` value serialized in the `default` wire field.
+     */
     val default: String? = null,
-    /** Optional `string` value serialized in the `routing` wire field. */
+    /**
+     * Optional `string` value serialized in the `routing` wire field.
+     */
     val routing: String? = null,
-    /** Optional `string` value serialized in the `profile` wire field. */
-    val profile: String? = null,
+    /**
+     * Optional `string` value serialized in the `profile` wire field.
+     */
+    val profile: String? = null
 )
 
 /**
- * Brokered credential for an INLINE server (invalid on the catalog form). secretRef names a
- * declared tenantSecret slot in spec.secrets, validated at create; the slot is resolved server-side
- * and sent as an HTTP header. Plaintext credentials are never accepted.
+ * Brokered credential for an INLINE server (invalid on the catalog form). secretRef names a declared tenantSecret slot in spec.secrets, validated at create; the slot is resolved server-side and sent as an HTTP header. Plaintext credentials are never accepted.
  */
 data class AgentManifestSpecToolsMcpServersItemAuth(
-    /** Tenant-vault secret name. */
+    /**
+     * Tenant-vault secret name.
+     */
     val secretRef: String,
-    /** HTTP header the credential is sent in. Defaults to Authorization. */
-    val header: String? = null,
+    /**
+     * HTTP header the credential is sent in. Defaults to Authorization.
+     */
+    val header: String? = null
 )
 
 /**
- * Exactly one form per entry: CATALOG (ref - do.* only, the reserved DO-owned namespace, e.g.
- * do.actions; there is no tenant-registered catalog) or INLINE (name + https url, optional brokered
- * auth - the path for any non-DO server). Mixing forms is a 400. tools entries are individual tool
- * names or toolbelt:<name>\[@<int>\] group references (catalog refs only) - selection only,
- * disposition stays in spec.permissions. Inline hosts are not auto-allowed for egress - list them
- * under…
+ * Exactly one form per entry: CATALOG (ref - do.* only, the reserved DO-owned namespace, e.g. do.actions; there is no tenant-registered catalog) or INLINE (name + https url, optional brokered auth - the path for any non-DO server). Mixing forms is a 400. tools entries are individual tool names or toolbelt:<name>\[@<int>\] group references (catalog refs only) - selection only, disposition stays in spec.permissions. Inline hosts are not auto-allowed for egress - list them under…
  */
 data class AgentManifestSpecToolsMcpServersItem(
     /**
-     * DO-owned catalog reference (catalog form); do.* only, e.g. do.actions. Mutually exclusive
-     * with name/url/auth.
+     * DO-owned catalog reference (catalog form); do.* only, e.g. do.actions. Mutually exclusive with name/url/auth.
      */
     val ref: String? = null,
     /**
-     * Inline server name (required with url): 1-64 chars of lowercase letters, digits, '-', '.',
-     * '_', starting/ending alphanumeric. Unique across the list. Must not start with do. (reserved
-     * for catalog refs).
+     * Inline server name (required with url): 1-64 chars of lowercase letters, digits, '-', '.', '_', starting/ending alphanumeric. Unique across the list. Must not start with do. (reserved for catalog refs).
      */
     val name: String? = null,
-    /** Inline server endpoint; https:// only. */
+    /**
+     * Inline server endpoint; https:// only.
+     */
     val url: String? = null,
     /**
-     * Optional selection allowlist; omitted means all tools the server advertises. Each entry is an
-     * individual tool name with an optional integer version pin (e.g. web_search, execute_code@3)
-     * or a toolbelt reference - a server-defined named tool group written toolbelt:<name>\[@<int>\]
-     * (e.g. toolbelt:read-only@1; catalog refs only). Versions are integer pins (no semver). The
-     * server owns belt expansion; a pinned tool or belt attaches exactly that version, an unpinned
-     * one resolves at…
+     * Optional selection allowlist; omitted means all tools the server advertises. Each entry is an individual tool name with an optional integer version pin (e.g. web_search, execute_code@3) or a toolbelt reference - a server-defined named tool group written toolbelt:<name>\[@<int>\] (e.g. toolbelt:read-only@1; catalog refs only). Versions are integer pins (no semver). The server owns belt expansion; a pinned tool or belt attaches exactly that version, an unpinned one resolves at…
      */
     val tools: List<String>? = null,
     /**
-     * Catalog form only. Individual tools (optional integer pin) advertised directly in the session
-     * MCP tools/list next to the action_search/action_invoke/action_code meta tools. Each entry
-     * must appear in tools when tools is set; toolbelt references are rejected. Every preloaded
-     * schema is in the model's context on every turn, so keep this to a handful of tools. Omitted
-     * means nothing is preloaded.
+     * Catalog form only. Individual tools (optional integer pin) advertised directly in the session MCP tools/list next to the action_search/action_invoke/action_code meta tools. Each entry must appear in tools when tools is set; toolbelt references are rejected. Every preloaded schema is in the model's context on every turn, so keep this to a handful of tools. Omitted means nothing is preloaded.
      */
     val preloadTools: List<String>? = null,
     /**
-     * Brokered credential for an INLINE server (invalid on the catalog form). secretRef names a
-     * declared tenantSecret slot in spec.secrets, validated at create; the slot is resolved
-     * server-side and sent as an HTTP header. Plaintext credentials are never accepted.
+     * Brokered credential for an INLINE server (invalid on the catalog form). secretRef names a declared tenantSecret slot in spec.secrets, validated at create; the slot is resolved server-side and sent as an HTTP header. Plaintext credentials are never accepted.
      */
-    val auth: AgentManifestSpecToolsMcpServersItemAuth? = null,
-)
-
-/** Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle. */
-data class AgentManifestSpecTools(
-    /** Optional array value serialized in the `mcpServers` wire field. */
-    val mcpServers: List<AgentManifestSpecToolsMcpServersItem>? = null,
-    /** Optional `string` value serialized in the `bundle` wire field. */
-    val bundle: String? = null,
-)
-
-/** Required object value serialized in the `skills[]` wire field. */
-data class AgentManifestSpecSkillsItem(
-    /**
-     * Unique across the list; 1-64 chars of lowercase letters, digits, and single hyphen
-     * separators - no consecutive hyphens, per the Agent Skills spec (safe as a directory name at
-     * materialization).
-     */
-    val name: String,
-    /**
-     * Load-bearing: the agent reads it to decide WHEN to load the skill (progressive disclosure);
-     * write it as "Use when ...". Max 1024 chars.
-     */
-    val description: String,
-    /** The markdown body (the content below the SKILL.md frontmatter). Max 32 KiB. */
-    val instructions: String,
-    /** Optional standard passthrough (e.g. Apache-2.0). */
-    val license: String? = null,
-    /** Optional string-map passthrough (e.g. author), rendered into the frontmatter verbatim. */
-    val metadata: Map<String, String>? = null,
-    /**
-     * Advisory scoping of which tools the skill expects to use (experimental in the skills
-     * standard). NOT a security boundary - spec.permissions remains the only enforcement surface.
-     */
-    val allowedTools: List<String>? = null,
-)
-
-/** Accepted, not yet enforced (returns a warning). */
-data class AgentManifestSpecMemory(
-    /** Required `string` value serialized in the `backend` wire field. */
-    val backend: String,
-    /** Optional enumerated value serialized in the `scope` wire field. */
-    val scope: AgentManifestSpecMemoryScopeEnum? = null,
-)
-
-/** Required object value serialized in the `secrets[]` wire field. */
-data class AgentManifestSpecSecretsItem(
-    /** Required `string` value serialized in the `name` wire field. */
-    val name: String,
-    /** Required enumerated value serialized in the `source` wire field. */
-    val source: AgentManifestSpecSecretsItemSourceEnum,
-    /** Optional `string` value serialized in the `provider` wire field. */
-    val provider: String? = null,
-    /** Optional `string` value serialized in the `ref` wire field. */
-    val ref: String? = null,
-    /** Write-only tenantSecret plaintext; never persisted or returned. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-    /**
-     * Whether the resolved credential is injected into the guest env. Omitted means true; false is
-     * for mount-only slots (tenantSecret only).
-     */
-    val env: Boolean? = null,
+    val auth: AgentManifestSpecToolsMcpServersItemAuth? = null
 )
 
 /**
- * Accepted, not yet enforced (returns a warning). Advisory per-run ceilings, clamped server-side to
- * tenant policy.
+ * Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle.
  */
-data class AgentManifestSpecDefaultsBudget(
-    /** Optional `number` value serialized in the `maxCostUSD` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("maxCostUSD") val maxCostUsd: Double? = null,
-    /** Optional `integer` value serialized in the `maxSteps` wire field. */
-    val maxSteps: Long? = null,
-    /** Optional `int64`-formatted value serialized in the `maxWallClockSeconds` wire field. */
-    val maxWallClockSeconds: Long? = null,
-    /** Optional enumerated value serialized in the `onBreach` wire field. */
-    val onBreach: AgentManifestSpecDefaultsBudgetOnBreachEnum? = null,
+data class AgentManifestSpecTools(
+    /**
+     * Optional array value serialized in the `mcpServers` wire field.
+     */
+    val mcpServers: List<AgentManifestSpecToolsMcpServersItem>? = null,
+    /**
+     * Optional `string` value serialized in the `bundle` wire field.
+     */
+    val bundle: String? = null
 )
 
-/** Optional object value serialized in the `defaults` wire field. */
+/**
+ * Required object value serialized in the `skills[]` wire field.
+ */
+data class AgentManifestSpecSkillsItem(
+    /**
+     * Unique across the list; 1-64 chars of lowercase letters, digits, and single hyphen separators - no consecutive hyphens, per the Agent Skills spec (safe as a directory name at materialization).
+     */
+    val name: String,
+    /**
+     * Load-bearing: the agent reads it to decide WHEN to load the skill (progressive disclosure); write it as "Use when ...". Max 1024 chars.
+     */
+    val description: String,
+    /**
+     * The markdown body (the content below the SKILL.md frontmatter). Max 32 KiB.
+     */
+    val instructions: String,
+    /**
+     * Optional standard passthrough (e.g. Apache-2.0).
+     */
+    val license: String? = null,
+    /**
+     * Optional string-map passthrough (e.g. author), rendered into the frontmatter verbatim.
+     */
+    val metadata: Map<String, String>? = null,
+    /**
+     * Advisory scoping of which tools the skill expects to use (experimental in the skills standard). NOT a security boundary - spec.permissions remains the only enforcement surface.
+     */
+    val allowedTools: List<String>? = null
+)
+
+/**
+ * Accepted, not yet enforced (returns a warning).
+ */
+data class AgentManifestSpecMemory(
+    /**
+     * Required `string` value serialized in the `backend` wire field.
+     */
+    val backend: String,
+    /**
+     * Optional enumerated value serialized in the `scope` wire field.
+     */
+    val scope: AgentManifestSpecMemoryScopeEnum? = null
+)
+
+/**
+ * Required object value serialized in the `secrets[]` wire field.
+ */
+data class AgentManifestSpecSecretsItem(
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    val name: String,
+    /**
+     * Required enumerated value serialized in the `source` wire field.
+     */
+    val source: AgentManifestSpecSecretsItemSourceEnum,
+    /**
+     * Optional `string` value serialized in the `provider` wire field.
+     */
+    val provider: String? = null,
+    /**
+     * Optional `string` value serialized in the `ref` wire field.
+     */
+    val ref: String? = null,
+    /**
+     * Write-only tenantSecret plaintext; never persisted or returned.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
+    /**
+     * Whether the resolved credential is injected into the guest env. Omitted means true; false is for mount-only slots (tenantSecret only).
+     */
+    val env: Boolean? = null
+)
+
+/**
+ * Accepted, not yet enforced (returns a warning). Advisory per-run ceilings, clamped server-side to tenant policy.
+ */
+data class AgentManifestSpecDefaultsBudget(
+    /**
+     * Optional `number` value serialized in the `maxCostUSD` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("maxCostUSD") val maxCostUsd: Double? = null,
+    /**
+     * Optional `integer` value serialized in the `maxSteps` wire field.
+     */
+    val maxSteps: Long? = null,
+    /**
+     * Optional `int64`-formatted value serialized in the `maxWallClockSeconds` wire field.
+     */
+    val maxWallClockSeconds: Long? = null,
+    /**
+     * Optional enumerated value serialized in the `onBreach` wire field.
+     */
+    val onBreach: AgentManifestSpecDefaultsBudgetOnBreachEnum? = null
+)
+
+/**
+ * Optional object value serialized in the `defaults` wire field.
+ */
 data class AgentManifestSpecDefaults(
     /**
-     * Accepted, not yet enforced (returns a warning). Advisory per-run ceilings, clamped
-     * server-side to tenant policy.
+     * Accepted, not yet enforced (returns a warning). Advisory per-run ceilings, clamped server-side to tenant policy.
      */
     val budget: AgentManifestSpecDefaultsBudget? = null
 )
 
-/** Optional object value serialized in the `scaleToZero` wire field. */
+/**
+ * Optional object value serialized in the `scaleToZero` wire field.
+ */
 data class AgentManifestSpecServingScaleToZero(
-    /** Optional `int64`-formatted value serialized in the `idleSeconds` wire field. */
+    /**
+     * Optional `int64`-formatted value serialized in the `idleSeconds` wire field.
+     */
     val idleSeconds: Long? = null
 )
 
-/** Present only when spec.mode is "served" (autoscaled fleet). */
+/**
+ * Present only when spec.mode is "served" (autoscaled fleet).
+ */
 data class AgentManifestSpecServing(
-    /** Optional `integer` value serialized in the `minReplicas` wire field. */
+    /**
+     * Optional `integer` value serialized in the `minReplicas` wire field.
+     */
     val minReplicas: Long? = null,
-    /** Optional `integer` value serialized in the `maxReplicas` wire field. */
+    /**
+     * Optional `integer` value serialized in the `maxReplicas` wire field.
+     */
     val maxReplicas: Long? = null,
-    /** Optional `integer` value serialized in the `targetConcurrency` wire field. */
+    /**
+     * Optional `integer` value serialized in the `targetConcurrency` wire field.
+     */
     val targetConcurrency: Long? = null,
-    /** Optional object value serialized in the `scaleToZero` wire field. */
-    val scaleToZero: AgentManifestSpecServingScaleToZero? = null,
-)
-
-/** Optional object value serialized in the `spec` wire field. */
-data class AgentManifestSpec(
     /**
-     * Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi |
-     * custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the
-     * agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli
-     * and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework
-     * adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet
-     * supported; CreateSession…
+     * Optional object value serialized in the `scaleToZero` wire field.
      */
-    val runtime: AgentManifestSpecRuntime,
-    /**
-     * Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the
-     * policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it
-     * against the (agent, version) capability descriptor. Absent or empty means the agent keeps its
-     * built-in default gating — no policy is shipped to the sandbox.
-     */
-    val permissions: Permissions? = null,
-    /**
-     * Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden);
-     * "served" requires spec.serving.
-     */
-    val mode: AgentManifestSpecModeEnum? = null,
-    /** Repositories the session works against. */
-    val workspace: AgentManifestSpecWorkspace? = null,
-    /** Optional object value serialized in the `sandbox` wire field. */
-    val sandbox: AgentManifestSpecSandbox? = null,
-    /**
-     * Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when
-     * enforcement lands.
-     */
-    val model: AgentManifestSpecModel? = null,
-    /** Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle. */
-    val tools: AgentManifestSpecTools? = null,
-    /**
-     * Inline agent skills (SKILL.md shape): reusable markdown instructions the agent loads on
-     * demand, selected by description. Accepted, not yet enforced (returns a warning). Max 32
-     * entries; instructions additionally capped at 256 KiB summed across the list so a valid
-     * manifest always fits the request-body limits. v0 is inline-only - remote skill sources come
-     * later as an additive field.
-     */
-    val skills: List<AgentManifestSpecSkillsItem>? = null,
-    /**
-     * Non-secret guest env (debug-readable - never put secrets here; use spec.secrets). Reserved
-     * platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE,
-     * SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are
-     * rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time
-     * warning.
-     */
-    val env: Map<String, String>? = null,
-    /** Accepted, not yet enforced (returns a warning). */
-    val memory: AgentManifestSpecMemory? = null,
-    /**
-     * Declared credential requirements. source tenantSecret is enforced today: value is write-only
-     * plaintext, extracted into Secrets Manager at create and never persisted or returned. source
-     * oauth requires provider, carries no value, and is accepted but not yet enforced. ref is
-     * legacy and ignored. env false keeps the resolved value out of the guest environment
-     * (mount-only slots).
-     */
-    val secrets: List<AgentManifestSpecSecretsItem>? = null,
-    /** Optional object value serialized in the `defaults` wire field. */
-    val defaults: AgentManifestSpecDefaults? = null,
-    /** Present only when spec.mode is "served" (autoscaled fleet). */
-    val serving: AgentManifestSpecServing? = null,
+    val scaleToZero: AgentManifestSpecServingScaleToZero? = null
 )
 
 /**
- * Customer-authored agents.yaml Agent manifest, sent as the CreateSession request body with a YAML
- * Content-Type. Two formats are accepted during the dual-format transition: the FLAT format
- * (primary - no envelope, snake_case, duration strings; authoritative published schema
- * contracts/agent.flat.schema.json, field reference docs/agent-manifest.md) and the legacy v1alpha1
- * envelope documented by the properties below (DEPRECATED; schema
- * contracts/agent.v1alpha1.schema.json; parses…
+ * Optional object value serialized in the `spec` wire field.
+ */
+data class AgentManifestSpec(
+    /**
+     * Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi | custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex exec-server; the agent loop lives at OpenAI) and pairs with the opaque spec.runtime.config block. codex-cli and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported; CreateSession…
+     */
+    val runtime: AgentManifestSpecRuntime,
+    /**
+     * Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default gating — no policy is shipped to the sandbox.
+     */
+    val permissions: Permissions? = null,
+    /**
+     * Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden); "served" requires spec.serving.
+     */
+    val mode: AgentManifestSpecModeEnum? = null,
+    /**
+     * Repositories the session works against.
+     */
+    val workspace: AgentManifestSpecWorkspace? = null,
+    /**
+     * Optional object value serialized in the `sandbox` wire field.
+     */
+    val sandbox: AgentManifestSpecSandbox? = null,
+    /**
+     * Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated when enforcement lands.
+     */
+    val model: AgentManifestSpecModel? = null,
+    /**
+     * Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle.
+     */
+    val tools: AgentManifestSpecTools? = null,
+    /**
+     * Inline agent skills (SKILL.md shape): reusable markdown instructions the agent loads on demand, selected by description. Accepted, not yet enforced (returns a warning). Max 32 entries; instructions additionally capped at 256 KiB summed across the list so a valid manifest always fits the request-body limits. v0 is inline-only - remote skill sources come later as an additive field.
+     */
+    val skills: List<AgentManifestSpecSkillsItem>? = null,
+    /**
+     * Non-secret guest env (debug-readable - never put secrets here; use spec.secrets). Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE, SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time warning.
+     */
+    val env: Map<String, String>? = null,
+    /**
+     * Accepted, not yet enforced (returns a warning).
+     */
+    val memory: AgentManifestSpecMemory? = null,
+    /**
+     * Declared credential requirements. source tenantSecret is enforced today: value is write-only plaintext, extracted into Secrets Manager at create and never persisted or returned. source oauth requires provider, carries no value, and is accepted but not yet enforced. ref is legacy and ignored. env false keeps the resolved value out of the guest environment (mount-only slots).
+     */
+    val secrets: List<AgentManifestSpecSecretsItem>? = null,
+    /**
+     * Optional object value serialized in the `defaults` wire field.
+     */
+    val defaults: AgentManifestSpecDefaults? = null,
+    /**
+     * Present only when spec.mode is "served" (autoscaled fleet).
+     */
+    val serving: AgentManifestSpecServing? = null
+)
+
+/**
+ * Customer-authored agents.yaml Agent manifest, sent as the CreateSession request body with a YAML Content-Type. Two formats are accepted during the dual-format transition: the FLAT format (primary - no envelope, snake_case, duration strings; authoritative published schema contracts/agent.flat.schema.json, field reference docs/agent-manifest.md) and the legacy v1alpha1 envelope documented by the properties below (DEPRECATED; schema contracts/agent.v1alpha1.schema.json; parses…
  */
 data class AgentManifest(
     /**
-     * Legacy envelope only - must be "agents.digitalocean.com/v1alpha1", and its presence is what
-     * routes the document to the deprecated legacy parser. Flat-format manifests carry no version
-     * key (the endpoint owns the contract); required, with kind and spec, when authoring the legacy
-     * format.
+     * Legacy envelope only - must be "agents.digitalocean.com/v1alpha1", and its presence is what routes the document to the deprecated legacy parser. Flat-format manifests carry no version key (the endpoint owns the contract); required, with kind and spec, when authoring the legacy format.
      */
     val apiVersion: AgentManifestApiVersionEnum? = null,
-    /** Must be "Agent". */
+    /**
+     * Must be "Agent".
+     */
     val kind: AgentManifestKindEnum? = null,
-    /** Optional object value serialized in the `metadata` wire field. */
+    /**
+     * Optional object value serialized in the `metadata` wire field.
+     */
     val metadata: AgentManifestMetadata? = null,
-    /** Optional object value serialized in the `spec` wire field. */
-    val spec: AgentManifestSpec? = null,
+    /**
+     * Optional object value serialized in the `spec` wire field.
+     */
+    val spec: AgentManifestSpec? = null
 )

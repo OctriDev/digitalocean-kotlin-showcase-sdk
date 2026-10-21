@@ -3,29 +3,42 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Information about updating a model router */
+/**
+ * Information about updating a model router
+ */
 data class ApiUpdateModelRouterInputPublic(
-    /** Model router description */
+    /**
+     * Model router description
+     */
     val description: String? = null,
-    /** Optional array value serialized in the `fallback_models` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models")
-    val fallbackModels: List<Map<String, Any>>? = null,
-    /** Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens */
+    /**
+     * Optional array value serialized in the `fallback_models` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models") val fallbackModels: List<Map<String, Any>>? = null,
+    /**
+     * Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens
+     */
     val name: String? = null,
-    /** Router policies */
+    /**
+     * Router policies
+     */
     val policies: List<ApiModelRouterTaskPolicy>? = null,
     /**
-     * DEPRECATED: this field does not affect deployment and model routers are always deployed to
-     * all regions. Must be omitted or set to \["all"\].
+     * DEPRECATED: this field does not affect deployment and model routers are always deployed to all regions. Must be omitted or set to \["all"\].
      */
     val regions: List<String>? = null,
-    /** Model router id */
-    val uuid: String? = null,
+    /**
+     * Model router id
+     */
+    val uuid: String? = null
 )
 
-/** Information about an updated model router */
+/**
+ * Information about an updated model router
+ */
 data class ApiUpdateModelRouterOutput(
-    /** Model router */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_router")
-    val modelRouter: ApiModelRouter? = null
+    /**
+     * Model router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_router") val modelRouter: ApiModelRouter? = null
 )

@@ -15,154 +15,74 @@ import dev.octri.showcase.digitalocean.Validation
 
 object ReservedIps {
 
+
     /**
-     * To list all of the reserved IPs available on your account, send a GET request to
-     * `/v2/reserved_ips`.
+     * To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun reservedIpsList(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): ReservedIpList {
+    fun reservedIpsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ReservedIpList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<ReservedIpList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/reserved_ips",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "reservedIpsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ReservedIpList>(SdkClient.RequestSpec("GET", "/v2/reserved_ips", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "reservedIpsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a reserved IP and either assigns it to a Droplet or reserves it to a region. Provide
-     * `droplet_id` for a Droplet assignment, or `region` to reserve the address to a region;
-     * `project_id` can optionally associate it with a project. When you assign the address during
-     * creation, the response includes links to the Droplet and the assignment action.
+     * Creates a reserved IP and either assigns it to a Droplet or reserves it to a region. Provide `droplet_id` for a Droplet assignment, or `region` to reserve the address to a region; `project_id` can optionally associate it with a project. When you assign the address during creation, the response includes links to the Droplet and the assignment action.
      *
-     * On creation, a reserved IP must be either assigned to a Droplet or reserved to a region. * To
-     * create a new reserved IP assigned to a Droplet, send a POST request to `/v2/reserved_ips`
-     * with the `droplet_id` attribute. * To create a new reserved IP reserved to a region, send a
-     * POST request to `/v2/reserved_ips` with the `region` attribute.
+     * On creation, a reserved IP must be either assigned to a Droplet or reserved to a region. * To create a new reserved IP assigned to a Droplet, send a POST request to `/v2/reserved_ips` with the `droplet_id` attribute. * To create a new reserved IP reserved to a region, send a POST request to `/v2/reserved_ips` with the `region` attribute.
      */
-    fun reservedIpsCreate(
-        clientConfig: ClientConfig,
-        body: ReservedIpCreate,
-        options: RequestOptions? = null,
-    ): ReservedIpCreated {
-        return SdkClient.request<ReservedIpCreated>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/reserved_ips",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "reservedIpsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun reservedIpsCreate(clientConfig: ClientConfig, body: ReservedIpCreate, options: RequestOptions? = null): ReservedIpCreated {
+        return SdkClient.request<ReservedIpCreated>(SdkClient.RequestSpec("POST", "/v2/reserved_ips", config = clientConfig, body = body, operationId = "reservedIpsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To show information about a reserved IP, send a GET request to
-     * `/v2/reserved_ips/$RESERVED_IP_ADDR`.
+     * To show information about a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP_ADDR`.
      *
      * @param reservedIp A reserved IP address.
      */
-    fun reservedIpsGet(
-        clientConfig: ClientConfig,
-        reservedIp: String,
-        options: RequestOptions? = null,
-    ): ReservedIpResponse {
-        return SdkClient.request<ReservedIpResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/reserved_ips/${SdkClient.encodePathSegment(reservedIp)}",
-                    config = clientConfig,
-                    operationId = "reservedIpsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun reservedIpsGet(clientConfig: ClientConfig, reservedIp: String, options: RequestOptions? = null): ReservedIpResponse {
+        return SdkClient.request<ReservedIpResponse>(SdkClient.RequestSpec("GET", "/v2/reserved_ips/${SdkClient.encodePathSegment(reservedIp)}", config = clientConfig, operationId = "reservedIpsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a reserved IP and remove it from your account, send a DELETE request to
-     * `/v2/reserved_ips/$RESERVED_IP_ADDR`. A successful request will receive a 204 status code
-     * with no body in response. This indicates that the request was processed successfully.
+     * To delete a reserved IP and remove it from your account, send a DELETE request to `/v2/reserved_ips/$RESERVED_IP_ADDR`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      *
      * @param reservedIp A reserved IP address.
      */
-    fun reservedIpsDelete(
-        clientConfig: ClientConfig,
-        reservedIp: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/reserved_ips/${SdkClient.encodePathSegment(reservedIp)}",
-                config = clientConfig,
-                operationId = "reservedIpsDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun reservedIpsDelete(clientConfig: ClientConfig, reservedIp: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/reserved_ips/${SdkClient.encodePathSegment(reservedIp)}", config = clientConfig, operationId = "reservedIpsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }

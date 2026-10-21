@@ -3,14 +3,24 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Code examples for using the model */
+/**
+ * Code examples for using the model
+ */
 data class ApiCodeSnippets(
-    /** Optional `string` value serialized in the `curl` wire field. */
+    /**
+     * Optional `string` value serialized in the `curl` wire field.
+     */
     val curl: String? = null,
-    /** Optional `string` value serialized in the `javascript` wire field. */
+    /**
+     * Optional `string` value serialized in the `javascript` wire field.
+     */
     val javascript: String? = null,
-    /** Optional `string` value serialized in the `python` wire field. */
+    /**
+     * Optional `string` value serialized in the `python` wire field.
+     */
     val python: String? = null,
-    /** Optional `string` value serialized in the `sdk` wire field. */
-    val sdk: String? = null,
+    /**
+     * Optional `string` value serialized in the `sdk` wire field.
+     */
+    val sdk: String? = null
 )

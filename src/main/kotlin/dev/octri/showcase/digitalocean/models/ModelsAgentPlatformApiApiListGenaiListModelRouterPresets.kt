@@ -3,12 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** List of model router presets */
+/**
+ * List of model router presets
+ */
 data class ApiListModelRouterPresetsOutput(
-    /** Links to other pages */
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The model router presets */
-    val presets: List<ApiModelRouterPreset>? = null,
+    /**
+     * The model router presets
+     */
+    val presets: List<ApiModelRouterPreset>? = null
 )

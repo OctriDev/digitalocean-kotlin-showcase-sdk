@@ -6,309 +6,467 @@ package dev.octri.showcase.digitalocean.models
 import java.time.LocalDate
 import java.time.OffsetDateTime
 
-/** Typed representation of the `Balance` API schema. */
+/**
+ * Typed representation of the `Balance` API schema.
+ */
 data class Balance(
     /**
-     * Balance as of the `generated_at` time. This value includes the `account_balance` and
-     * `month_to_date_usage`.
+     * Balance as of the `generated_at` time. This value includes the `account_balance` and `month_to_date_usage`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_balance")
-    val monthToDateBalance: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_balance") val monthToDateBalance: String? = null,
     /**
-     * Current balance of the customer's most recent billing activity. Does not reflect
-     * `month_to_date_usage`.
+     * Current balance of the customer's most recent billing activity. Does not reflect `month_to_date_usage`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("account_balance")
-    val accountBalance: String? = null,
-    /** Amount used in the current billing period as of the `generated_at` time. */
-    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_usage")
-    val monthToDateUsage: String? = null,
-    /** The time at which balances were most recently generated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("generated_at")
-    val generatedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("account_balance") val accountBalance: String? = null,
+    /**
+     * Amount used in the current billing period as of the `generated_at` time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_usage") val monthToDateUsage: String? = null,
+    /**
+     * The time at which balances were most recently generated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("generated_at") val generatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `BillingAddress` API schema. */
+/**
+ * Typed representation of the `BillingAddress` API schema.
+ */
 data class BillingAddress(
-    /** Street address line 1 */
-    @com.fasterxml.jackson.annotation.JsonProperty("address_line1")
-    val addressLine1: String? = null,
-    /** Street address line 2 */
-    @com.fasterxml.jackson.annotation.JsonProperty("address_line2")
-    val addressLine2: String? = null,
-    /** City */
+    /**
+     * Street address line 1
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("address_line1") val addressLine1: String? = null,
+    /**
+     * Street address line 2
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("address_line2") val addressLine2: String? = null,
+    /**
+     * City
+     */
     val city: String? = null,
-    /** Region */
+    /**
+     * Region
+     */
     val region: String? = null,
-    /** Postal code */
+    /**
+     * Postal code
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("postal_code") val postalCode: String? = null,
-    /** Country (ISO2) code */
-    @com.fasterxml.jackson.annotation.JsonProperty("country_iso2_code")
-    val countryIso2Code: String? = null,
-    /** Timestamp billing address was created */
+    /**
+     * Country (ISO2) code
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("country_iso2_code") val countryIso2Code: String? = null,
+    /**
+     * Timestamp billing address was created
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** Timestamp billing address was updated */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
+    /**
+     * Timestamp billing address was updated
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
 )
 
-/** Typed representation of the `BillingDataPoint` API schema. */
+/**
+ * Typed representation of the `BillingDataPoint` API schema.
+ */
 data class BillingDataPoint(
-    /** URN of the team that incurred the usage */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage_team_urn")
-    val usageTeamUrn: String? = null,
-    /** Start date of the billing data point in YYYY-MM-DD format */
+    /**
+     * URN of the team that incurred the usage
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage_team_urn") val usageTeamUrn: String? = null,
+    /**
+     * Start date of the billing data point in YYYY-MM-DD format
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("start_date") val startDate: LocalDate? = null,
-    /** Total amount for this data point in USD */
+    /**
+     * Total amount for this data point in USD
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_amount") val totalAmount: String? = null,
-    /** Region where the usage occurred */
+    /**
+     * Region where the usage occurred
+     */
     val region: String? = null,
-    /** Unique SKU identifier for the billed resource */
+    /**
+     * Unique SKU identifier for the billed resource
+     */
     val sku: String? = null,
-    /** Description of the billed resource or service as shown on an invoice item */
+    /**
+     * Description of the billed resource or service as shown on an invoice item
+     */
     val description: String? = null,
     /**
-     * Optional invoice item group name of the billed resource or service, blank when not part an
-     * invoice item group
+     * Optional invoice item group name of the billed resource or service, blank when not part an invoice item group
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("group_description")
-    val groupDescription: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("group_description") val groupDescription: String? = null
 )
 
-/** Typed representation of the `BillingHistory` API schema. */
+/**
+ * Typed representation of the `BillingHistory` API schema.
+ */
 data class BillingHistory(
-    /** Description of the billing history entry. */
+    /**
+     * Description of the billing history entry.
+     */
     val description: String? = null,
-    /** Amount of the billing history entry. */
+    /**
+     * Amount of the billing history entry.
+     */
     val amount: String? = null,
-    /** ID of the invoice associated with the billing history entry, if applicable. */
+    /**
+     * ID of the invoice associated with the billing history entry, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("invoice_id") val invoiceId: String? = null,
-    /** UUID of the invoice associated with the billing history entry, if applicable. */
+    /**
+     * UUID of the invoice associated with the billing history entry, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("invoice_uuid") val invoiceUuid: String? = null,
-    /** Time the billing history entry occurred. */
+    /**
+     * Time the billing history entry occurred.
+     */
     val date: OffsetDateTime? = null,
-    /** Type of billing history entry. */
-    val type: BillingHistoryTypeEnum? = null,
+    /**
+     * Type of billing history entry.
+     */
+    val type: BillingHistoryTypeEnum? = null
 )
 
-/** Typed representation of the `BillingHistoryResponse` API schema. */
+/**
+ * Typed representation of the `BillingHistoryResponse` API schema.
+ */
 data class BillingHistoryResponse(
-    /** Information about the response itself. */
+    /**
+     * Information about the response itself.
+     */
     val meta: MetaProperties,
-    @com.fasterxml.jackson.annotation.JsonProperty("billing_history")
-    val billingHistory: List<BillingHistory>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("billing_history") val billingHistory: List<BillingHistory>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `BillingInsights` API schema. */
+/**
+ * Typed representation of the `BillingInsights` API schema.
+ */
 data class BillingInsights(
     /**
-     * Array of billing data points, which are day-over-day changes in billing resource usage based
-     * on nightly invoice item estimates, for the requested period
+     * Array of billing data points, which are day-over-day changes in billing resource usage based on nightly invoice item estimates, for the requested period
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_points")
-    val dataPoints: List<BillingDataPoint>,
-    /** Total number of items available across all pages */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_points") val dataPoints: List<BillingDataPoint>,
+    /**
+     * Total number of items available across all pages
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_items") val totalItems: Long,
-    /** Total number of pages available */
+    /**
+     * Total number of pages available
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long,
-    /** Current page number */
-    @com.fasterxml.jackson.annotation.JsonProperty("current_page") val currentPage: Long,
+    /**
+     * Current page number
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("current_page") val currentPage: Long
 )
 
-/** Typed representation of the `Invoice` API schema. */
+/**
+ * Typed representation of the `Invoice` API schema.
+ */
 data class Invoice(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_items")
-    val invoiceItems: List<InvoiceItem>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_items") val invoiceItems: List<InvoiceItem>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `InvoiceItem` API schema. */
+/**
+ * Typed representation of the `InvoiceItem` API schema.
+ */
 data class InvoiceItem(
-    /** Name of the product being billed in the invoice item. */
+    /**
+     * Name of the product being billed in the invoice item.
+     */
     val product: String? = null,
-    /** UUID of the resource billing in the invoice item if available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid")
-    val resourceUuid: String? = null,
-    /** ID of the resource billing in the invoice item if available. */
+    /**
+     * UUID of the resource billing in the invoice item if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid") val resourceUuid: String? = null,
+    /**
+     * ID of the resource billing in the invoice item if available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
     /**
      * Description of the invoice item when it is a grouped set of usage, such as DOKS or databases.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("group_description")
-    val groupDescription: String? = null,
-    /** Description of the invoice item. */
-    val description: String? = null,
-    /** Billed amount of this invoice item. Billed in USD. */
-    val amount: String? = null,
-    /** Duration of time this invoice item was used and subsequently billed. */
-    val duration: String? = null,
-    /** Unit of time for duration. */
-    @com.fasterxml.jackson.annotation.JsonProperty("duration_unit")
-    val durationUnit: String? = null,
-    /** Time the invoice item began to be billed for usage. */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: String? = null,
-    /** Time the invoice item stopped being billed for usage. */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_time") val endTime: String? = null,
-    /** Name of the DigitalOcean Project this resource belongs to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_name") val projectName: String? = null,
-)
-
-/** The invoice preview. */
-data class InvoicePreview(
-    /** The UUID of the invoice. The canonical reference for the invoice. */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_uuid") val invoiceUuid: String? = null,
-    /** ID of the invoice. Listed on the face of the invoice PDF as the "Invoice number". */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_id") val invoiceId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("group_description") val groupDescription: String? = null,
     /**
-     * Total amount of the invoice, in USD. This will reflect month-to-date usage in the invoice
-     * preview.
+     * Description of the invoice item.
+     */
+    val description: String? = null,
+    /**
+     * Billed amount of this invoice item. Billed in USD.
      */
     val amount: String? = null,
-    /** Billing period of usage for which the invoice is issued, in `YYYY-MM` format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_period")
-    val invoicePeriod: String? = null,
-    /** Time the invoice was last updated. This is only included with the invoice preview. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
+    /**
+     * Duration of time this invoice item was used and subsequently billed.
+     */
+    val duration: String? = null,
+    /**
+     * Unit of time for duration.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("duration_unit") val durationUnit: String? = null,
+    /**
+     * Time the invoice item began to be billed for usage.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: String? = null,
+    /**
+     * Time the invoice item stopped being billed for usage.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("end_time") val endTime: String? = null,
+    /**
+     * Name of the DigitalOcean Project this resource belongs to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_name") val projectName: String? = null
 )
 
-/** Typed representation of the `Invoices` API schema. */
+/**
+ * The invoice preview.
+ */
+data class InvoicePreview(
+    /**
+     * The UUID of the invoice. The canonical reference for the invoice.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_uuid") val invoiceUuid: String? = null,
+    /**
+     * ID of the invoice. Listed on the face of the invoice PDF as the "Invoice number".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_id") val invoiceId: String? = null,
+    /**
+     * Total amount of the invoice, in USD. This will reflect month-to-date usage in the invoice preview.
+     */
+    val amount: String? = null,
+    /**
+     * Billing period of usage for which the invoice is issued, in `YYYY-MM` format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_period") val invoicePeriod: String? = null,
+    /**
+     * Time the invoice was last updated. This is only included with the invoice preview.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
+)
+
+/**
+ * Typed representation of the `Invoices` API schema.
+ */
 data class Invoices(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val invoices: List<InvoicePreview>? = null,
-    /** The invoice preview. */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_preview")
-    val invoicePreview: InvoicePreview? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * The invoice preview.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_preview") val invoicePreview: InvoicePreview? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `InvoiceSummary` API schema. */
+/**
+ * Typed representation of the `InvoiceSummary` API schema.
+ */
 data class InvoiceSummary(
-    /** UUID of the invoice */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_uuid") val invoiceUuid: String? = null,
-    /** ID of the invoice */
-    @com.fasterxml.jackson.annotation.JsonProperty("invoice_id") val invoiceId: String? = null,
-    /** Billing period of usage for which the invoice is issued, in `YYYY-MM` format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("billing_period")
-    val billingPeriod: String? = null,
     /**
-     * Total amount of the invoice, in USD. This will reflect month-to-date usage in the invoice
-     * preview.
+     * UUID of the invoice
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_uuid") val invoiceUuid: String? = null,
+    /**
+     * ID of the invoice
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invoice_id") val invoiceId: String? = null,
+    /**
+     * Billing period of usage for which the invoice is issued, in `YYYY-MM` format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("billing_period") val billingPeriod: String? = null,
+    /**
+     * Total amount of the invoice, in USD. This will reflect month-to-date usage in the invoice preview.
      */
     val amount: String? = null,
-    /** Name of the DigitalOcean customer being invoiced. */
+    /**
+     * Name of the DigitalOcean customer being invoiced.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_name") val userName: String? = null,
-    /** The billing address of the customer being invoiced. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_billing_address")
-    val userBillingAddress: BillingAddress? = null,
-    /** Company of the DigitalOcean customer being invoiced, if set. */
+    /**
+     * The billing address of the customer being invoiced.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_billing_address") val userBillingAddress: BillingAddress? = null,
+    /**
+     * Company of the DigitalOcean customer being invoiced, if set.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_company") val userCompany: String? = null,
-    /** Email of the DigitalOcean customer being invoiced. */
+    /**
+     * Email of the DigitalOcean customer being invoiced.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_email") val userEmail: String? = null,
     /**
-     * A summary of the product usage charges contributing to the invoice. This will include an
-     * amount, and grouped aggregates by resource type under the `items` key.
+     * A summary of the product usage charges contributing to the invoice. This will include an amount, and grouped aggregates by resource type under the `items` key.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("product_charges")
-    val productCharges: ProductUsageCharges? = null,
-    /** A summary of the overages contributing to the invoice. */
+    @com.fasterxml.jackson.annotation.JsonProperty("product_charges") val productCharges: ProductUsageCharges? = null,
+    /**
+     * A summary of the overages contributing to the invoice.
+     */
     val overages: SimpleCharge? = null,
-    /** A summary of the taxes contributing to the invoice. */
+    /**
+     * A summary of the taxes contributing to the invoice.
+     */
     val taxes: SimpleCharge? = null,
-    /** A summary of the credits and adjustments contributing to the invoice. */
-    @com.fasterxml.jackson.annotation.JsonProperty("credits_and_adjustments")
-    val creditsAndAdjustments: SimpleCharge? = null,
+    /**
+     * A summary of the credits and adjustments contributing to the invoice.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("credits_and_adjustments") val creditsAndAdjustments: SimpleCharge? = null
 )
 
-/** Typed representation of the `MetaOptionalTotal` API schema. */
+/**
+ * Typed representation of the `MetaOptionalTotal` API schema.
+ */
 data class MetaOptionalTotal(
-    /** Information about the response itself. */
+    /**
+     * Information about the response itself.
+     */
     val meta: MetaProperties
 )
 
-/** Typed representation of the `PrepaymentConfig` API schema. */
+/**
+ * Typed representation of the `PrepaymentConfig` API schema.
+ */
 data class PrepaymentConfig(
     /**
-     * Maximum spend allowed before the prepayment gate blocks usage. Decimal dollars, e.g.
-     * `"100.00"`.
+     * Maximum spend allowed before the prepayment gate blocks usage. Decimal dollars, e.g. `"100.00"`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("spend_limit") val spendLimit: String? = null,
-    /** Whether automatic prepayment top-up is enabled. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_auto_prepay_enabled")
-    val isAutoPrepayEnabled: Boolean? = null,
-    /** Amount to charge when auto top-up triggers. Decimal dollars, e.g. `"50.00"`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prepay_amount")
-    val prepayAmount: String? = null,
-    /** Balance threshold that triggers auto top-up. Decimal dollars, e.g. `"10.00"`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prepay_threshold")
-    val prepayThreshold: String? = null,
-    /** Time at which the prepayment configuration was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Time at which the prepayment configuration was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    /**
+     * Whether automatic prepayment top-up is enabled.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_auto_prepay_enabled") val isAutoPrepayEnabled: Boolean? = null,
+    /**
+     * Amount to charge when auto top-up triggers. Decimal dollars, e.g. `"50.00"`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prepay_amount") val prepayAmount: String? = null,
+    /**
+     * Balance threshold that triggers auto top-up. Decimal dollars, e.g. `"10.00"`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prepay_threshold") val prepayThreshold: String? = null,
+    /**
+     * Time at which the prepayment configuration was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Time at which the prepayment configuration was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `PrepaymentConfigResponse` API schema. */
+/**
+ * Typed representation of the `PrepaymentConfigResponse` API schema.
+ */
 data class PrepaymentConfigResponse(
-    /** Optional object value serialized in the `config` wire field. */
+    /**
+     * Optional object value serialized in the `config` wire field.
+     */
     val config: PrepaymentConfig? = null,
-    /** Optional object value serialized in the `status` wire field. */
-    val status: PrepaymentStatus? = null,
-)
-
-/** Typed representation of the `PrepaymentStatus` API schema. */
-data class PrepaymentStatus(
-    /** Current prepayment balance. Decimal dollars, e.g. `"25.00"`. */
-    val balance: String? = null,
-    /** Whether automatic prepayment top-up is enabled. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_auto_prepay_enabled")
-    val isAutoPrepayEnabled: Boolean? = null,
-    /** Whether the prepayment gate is currently blocking usage. */
-    val blocked: Boolean? = null,
-    /** Whether the account is eligible for the prepayment gate experience. */
-    val eligible: Boolean? = null,
-    /** Current account balance including month-to-date usage. Decimal dollars, e.g. `"75.00"`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_balance")
-    val monthToDateBalance: String? = null,
-)
-
-/** Typed representation of the `PrepaymentStatusResponse` API schema. */
-data class PrepaymentStatusResponse(
-    /** Optional object value serialized in the `status` wire field. */
+    /**
+     * Optional object value serialized in the `status` wire field.
+     */
     val status: PrepaymentStatus? = null
 )
 
-/** Typed representation of the `ProductChargeItem` API schema. */
+/**
+ * Typed representation of the `PrepaymentStatus` API schema.
+ */
+data class PrepaymentStatus(
+    /**
+     * Current prepayment balance. Decimal dollars, e.g. `"25.00"`.
+     */
+    val balance: String? = null,
+    /**
+     * Whether automatic prepayment top-up is enabled.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_auto_prepay_enabled") val isAutoPrepayEnabled: Boolean? = null,
+    /**
+     * Whether the prepayment gate is currently blocking usage.
+     */
+    val blocked: Boolean? = null,
+    /**
+     * Whether the account is eligible for the prepayment gate experience.
+     */
+    val eligible: Boolean? = null,
+    /**
+     * Current account balance including month-to-date usage. Decimal dollars, e.g. `"75.00"`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("month_to_date_balance") val monthToDateBalance: String? = null
+)
+
+/**
+ * Typed representation of the `PrepaymentStatusResponse` API schema.
+ */
+data class PrepaymentStatusResponse(
+    /**
+     * Optional object value serialized in the `status` wire field.
+     */
+    val status: PrepaymentStatus? = null
+)
+
+/**
+ * Typed representation of the `ProductChargeItem` API schema.
+ */
 data class ProductChargeItem(
-    /** Amount of the charge */
+    /**
+     * Amount of the charge
+     */
     val amount: String? = null,
-    /** Description of the charge */
+    /**
+     * Description of the charge
+     */
     val name: String? = null,
-    /** Number of times the charge was applied */
-    val count: String? = null,
+    /**
+     * Number of times the charge was applied
+     */
+    val count: String? = null
 )
 
-/** Typed representation of the `ProductUsageCharges` API schema. */
+/**
+ * Typed representation of the `ProductUsageCharges` API schema.
+ */
 data class ProductUsageCharges(
-    /** Description of usage charges */
+    /**
+     * Description of usage charges
+     */
     val name: String? = null,
-    /** Total amount charged */
+    /**
+     * Total amount charged
+     */
     val amount: String? = null,
-    /** List of amount, and grouped aggregates by resource type. */
-    val items: List<ProductChargeItem>? = null,
+    /**
+     * List of amount, and grouped aggregates by resource type.
+     */
+    val items: List<ProductChargeItem>? = null
 )
 
-/** Typed representation of the `SimpleCharge` API schema. */
+/**
+ * Typed representation of the `SimpleCharge` API schema.
+ */
 data class SimpleCharge(
-    /** Name of the charge */
+    /**
+     * Name of the charge
+     */
     val name: String? = null,
-    /** Total amount charged in USD */
-    val amount: String? = null,
+    /**
+     * Total amount charged in USD
+     */
+    val amount: String? = null
 )

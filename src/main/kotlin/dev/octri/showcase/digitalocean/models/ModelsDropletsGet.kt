@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ExistingDroplet` API schema. */
+/**
+ * Typed representation of the `ExistingDroplet` API schema.
+ */
 data class ExistingDroplet(
-    /** Optional object value serialized in the `droplet` wire field. */
+    /**
+     * Optional object value serialized in the `droplet` wire field.
+     */
     val droplet: Droplet? = null
 )

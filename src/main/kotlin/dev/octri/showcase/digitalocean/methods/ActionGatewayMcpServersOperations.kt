@@ -5,8 +5,8 @@ package dev.octri.showcase.digitalocean.methods
 
 import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.Error2
-import dev.octri.showcase.digitalocean.ListMcpServerToolsResponse
 import dev.octri.showcase.digitalocean.ListMcpServersResponse
+import dev.octri.showcase.digitalocean.ListMcpServerToolsResponse
 import dev.octri.showcase.digitalocean.McpServerResponse
 import dev.octri.showcase.digitalocean.RequestOptions
 import dev.octri.showcase.digitalocean.ResyncMcpServerResponse
@@ -15,147 +15,106 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayMcpServersCreateOperation {
     /**
-     * Registers a remote MCP server for your team, using the streamable HTTP transport. The server
-     * starts with `syncStatus` pending and no tools: discover its tools with `POST
-     * .../mcp-servers/{server_ref}/resync`, then choose which to enable with `PUT
-     * .../mcp-servers/{server_ref}/tools`. The endpoint must be HTTPS and resolve only to public IP
-     * addresses. The number of servers per team is limited (10 by default); registering beyond it
-     * returns 429. Returns 409 when `serverRef` is…
+     * Registers a remote MCP server for your team, using the streamable HTTP transport. The server starts with `syncStatus` pending and no tools: discover its tools with `POST .../mcp-servers/{server_ref}/resync`, then choose which to enable with `PUT .../mcp-servers/{server_ref}/tools`. The endpoint must be HTTPS and resolve only to public IP addresses. The number of servers per team is limited (10 by default); registering beyond it returns 429. Returns 409 when `serverRef` is…
      *
-     * @param serverRef Identifier for the server, unique within your team. Must match
-     *   `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
-     * @param endpoint HTTPS URL of the server's MCP endpoint. Its host must resolve only to public
-     *   IP addresses. Required.
-     * @param transport Optional. `streamable_http`, the default and only accepted value.
-     * @param credentialRefSource How requests to the server authenticate: none (the default),
-     *   secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in
-     *   the Authorization header, prefixed with "Bearer " unless it already contains a space.
-     * @param description Optional description shown on the server's catalog card. At most 1024
-     *   characters.
-     * @param credentialRef For `credentialRefSource` secret: a reference to a secret your team
-     *   stores with DigitalOcean. Must match `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set
+     * @param serverRef Identifier for the server, unique within your team. Must
+     *   match `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
+     * @param endpoint HTTPS URL of the server's MCP endpoint. Its host must resolve
+     *   only to public IP addresses. Required.
+     * @param transport Optional. `streamable_http`, the default and only accepted
+     *   value.
+     * @param credentialRefSource How requests to the server authenticate: none (the
+     *   default), secret, or connection. With secret, the value from `credentialRef`
+     *   or `api_key` is sent in the Authorization header, prefixed with "Bearer "
+     *   unless it already contains a space.
+     * @param description Optional description shown on the server's catalog card. At
+     *   most 1024 characters.
+     * @param credentialRef For `credentialRefSource` secret: a reference to a secret
+     *   your team stores with DigitalOcean. Must match
+     *   `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set exactly one of `credentialRef`
+     *   and `api_key`.
+     * @param apiKey For `credentialRefSource` secret: the key or token itself.
+     *   DigitalOcean stores it; it is write-only and no response returns it. Set
      *   exactly one of `credentialRef` and `api_key`.
-     * @param apiKey For `credentialRefSource` secret: the key or token itself. DigitalOcean stores
-     *   it; it is write-only and no response returns it. Set exactly one of `credentialRef` and
-     *   `api_key`.
-     * @param oauthClientId Required for `credentialRefSource` connection: the client ID of your
-     *   team's OAuth client for the server. Each user of the server then authorizes individually.
-     * @param oauthClientSecret Required for `credentialRefSource` connection. Write-only; no
-     *   response returns it.
-     * @param oauthAuthorizeUrl Required for `credentialRefSource` connection: the OAuth
-     *   authorization endpoint. It must use the endpoint's scheme and port, on the endpoint's host
-     *   or another host under the same registrable domain.
-     * @param oauthTokenUrl Required for `credentialRefSource` connection: the OAuth token endpoint,
-     *   under the same rules as `oauth_authorize_url`.
-     * @param oauthScopes Required for `credentialRefSource` connection: the scopes to request from
-     *   each user, 1 to 64 of them.
-     * @param oauthAuthorizationTtlSeconds How long, in seconds, a user's authorization may be
-     *   reused before they must consent again. Optional; 0 means 30 days, and the maximum is 100
-     *   years. Authorizations are not refreshed automatically, so this window, not the provider's
-     *   token lifetime, decides how often a user is sent back through consent. Set it no longer
-     *   than the provider's own token lifetime, so the prompt arrives before a tool call fails
+     * @param oauthClientId Required for `credentialRefSource` connection: the client
+     *   ID of your team's OAuth client for the server. Each user of the server then
+     *   authorizes individually.
+     * @param oauthClientSecret Required for `credentialRefSource` connection.
+     *   Write-only; no response returns it.
+     * @param oauthAuthorizeUrl Required for `credentialRefSource` connection: the
+     *   OAuth authorization endpoint. It must use the endpoint's scheme and port, on
+     *   the endpoint's host or another host under the same registrable domain.
+     * @param oauthTokenUrl Required for `credentialRefSource` connection: the OAuth
+     *   token endpoint, under the same rules as `oauth_authorize_url`.
+     * @param oauthScopes Required for `credentialRefSource` connection: the scopes
+     *   to request from each user, 1 to 64 of them.
+     * @param oauthAuthorizationTtlSeconds How long, in seconds, a user's
+     *   authorization may be reused before they must consent again. Optional; 0 means
+     *   30 days, and the maximum is 100 years. Authorizations are not refreshed
+     *   automatically, so this window, not the provider's token lifetime, decides how
+     *   often a user is sent back through consent. Set it no longer than the
+     *   provider's own token lifetime, so the prompt arrives before a tool call fails
      *   against an expired token.
      */
-    fun mcpServersCreate(
-        clientConfig: ClientConfig,
-        request: ActionGateway.McpServersCreateRequest,
-        options: RequestOptions? = null,
-    ): McpServerResponse {
+    fun mcpServersCreate(clientConfig: ClientConfig, request: ActionGateway.McpServersCreateRequest, options: RequestOptions? = null): McpServerResponse {
         validateMcpServersCreateRequest(request)
 
-        return SdkClient.request<McpServerResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/mcp-servers",
-                    config = clientConfig,
-                    body = buildMcpServersCreateBody(request),
-                    operationId = "mcpServersCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<McpServerResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/mcp-servers", config = clientConfig, body = buildMcpServersCreateBody(request), operationId = "mcpServersCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateMcpServersCreateRequest(request: ActionGateway.McpServersCreateRequest) {
         Validation.validatePattern("serverRef", request.serverRef, "^[a-z][a-z0-9-]{0,63}$")
 
         if (request.description != null) {
-            Validation.validateLength(
-                "description",
-                request.description,
-                Validation.LengthOpts(max = 1024),
-            )
+            Validation.validateLength("description", request.description, Validation.LengthOpts(max = 1024))
+}
+    }
+
+
+
+    private fun buildMcpServersCreateBody(request: ActionGateway.McpServersCreateRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildMcpServersCreateBodyPart1(request))
+            putAll(buildMcpServersCreateBodyPart2(request))
         }
-    }
 
-    private fun buildMcpServersCreateBody(
-        request: ActionGateway.McpServersCreateRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildMcpServersCreateBodyPart1(request))
-        putAll(buildMcpServersCreateBodyPart2(request))
-    }
-
-    private fun buildMcpServersCreateBodyPart1(
-        request: ActionGateway.McpServersCreateRequest
-    ): Map<String, Any?> =
+    private fun buildMcpServersCreateBodyPart1(request: ActionGateway.McpServersCreateRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "serverRef" to (request.serverRef),
             "endpoint" to (request.endpoint),
             "transport" to (SdkClient.omitIfNull(request.transport)),
-            "credentialRefSource" to (SdkClient.omitIfNull(request.credentialRefSource)),
+            "credentialRefSource" to
+    (SdkClient.omitIfNull(request.credentialRefSource)),
             "description" to (SdkClient.omitIfNull(request.description)),
-            "credentialRef" to (SdkClient.omitIfNull(request.credentialRef)),
+            "credentialRef" to
+    (SdkClient.omitIfNull(request.credentialRef)),
             "api_key" to (SdkClient.omitIfNull(request.apiKey)),
-            "oauth_client_id" to (SdkClient.omitIfNull(request.oauthClientId)),
-            "oauth_client_secret" to (SdkClient.omitIfNull(request.oauthClientSecret)),
-            "oauth_authorize_url" to (SdkClient.omitIfNull(request.oauthAuthorizeUrl)),
-            "oauth_token_url" to (SdkClient.omitIfNull(request.oauthTokenUrl)),
-            "oauth_scopes" to (SdkClient.omitIfNull(request.oauthScopes)),
+            "oauth_client_id" to
+    (SdkClient.omitIfNull(request.oauthClientId)),
+            "oauth_client_secret" to
+    (SdkClient.omitIfNull(request.oauthClientSecret)),
+            "oauth_authorize_url" to
+    (SdkClient.omitIfNull(request.oauthAuthorizeUrl)),
+            "oauth_token_url" to
+    (SdkClient.omitIfNull(request.oauthTokenUrl)),
+            "oauth_scopes" to
+    (SdkClient.omitIfNull(request.oauthScopes)),
         )
 
-    private fun buildMcpServersCreateBodyPart2(
-        request: ActionGateway.McpServersCreateRequest
-    ): Map<String, Any?> =
+    private fun buildMcpServersCreateBodyPart2(request: ActionGateway.McpServersCreateRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "oauth_authorization_ttl_seconds" to
-                (SdkClient.omitIfNull(request.oauthAuthorizationTtlSeconds))
+    (SdkClient.omitIfNull(request.oauthAuthorizationTtlSeconds)),
         )
 }
 
 internal object ActionGatewayMcpServersListOperation {
-    /** Returns every MCP server your team has registered, sorted by `serverRef`. */
-    fun mcpServersList(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): ListMcpServersResponse {
-        return SdkClient.request<ListMcpServersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/mcp-servers",
-                    config = clientConfig,
-                    operationId = "mcpServersList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    /**
+     * Returns every MCP server your team has registered, sorted by `serverRef`.
+     */
+    fun mcpServersList(clientConfig: ClientConfig, options: RequestOptions? = null): ListMcpServersResponse {
+        return SdkClient.request<ListMcpServersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/mcp-servers", config = clientConfig, operationId = "mcpServersList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
@@ -163,245 +122,88 @@ internal object ActionGatewayMcpServersGetOperation {
     /**
      * Returns one of your team's MCP servers, or 404 when your team has none with this `serverRef`.
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
      */
-    fun mcpServersGet(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        options: RequestOptions? = null,
-    ): McpServerResponse {
-        return SdkClient.request<McpServerResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}",
-                    config = clientConfig,
-                    operationId = "mcpServersGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun mcpServersGet(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): McpServerResponse {
+        return SdkClient.request<McpServerResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}", config = clientConfig, operationId = "mcpServersGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayMcpServersPatchOperation {
     /**
-     * Updates the description of a registered MCP server, which appears on its catalog card
-     * immediately. Supply `description` to replace the stored text, or an empty value to clear it;
-     * the description can contain at most 1024 characters. You cannot change the server endpoint or
-     * credentials with this operation; delete the server and register it again to change them.
+     * Updates the description of a registered MCP server, which appears on its catalog card immediately. Supply `description` to replace the stored text, or an empty value to clear it; the description can contain at most 1024 characters. You cannot change the server endpoint or credentials with this operation; delete the server and register it again to change them.
      *
-     * Changes the server's description, which is shown on its catalog card immediately. The
-     * endpoint and credentials cannot be changed; to change them, delete the server and register it
-     * again.
+     * Changes the server's description, which is shown on its catalog card immediately. The endpoint and credentials cannot be changed; to change them, delete the server and register it again.
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
-     * @param description Replaces the stored description; empty clears it. At most 1024 characters.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
+     * @param description Replaces the stored description; empty clears it. At most
+     *   1024 characters.
      */
-    fun mcpServersPatch(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        description: String? = null,
-        options: RequestOptions? = null,
-    ): McpServerResponse {
+    fun mcpServersPatch(clientConfig: ClientConfig, serverRef: String, description: String? = null, options: RequestOptions? = null): McpServerResponse {
         if (description != null) {
             Validation.validateLength("description", description, Validation.LengthOpts(max = 1024))
-        }
+}
 
-        return SdkClient.request<McpServerResponse>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("description" to (SdkClient.omitIfNull(description))),
-                    operationId = "mcpServersPatch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<McpServerResponse>(SdkClient.RequestSpec("PATCH", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}", config = clientConfig, body = SdkClient.bodyMap("description" to (SdkClient.omitIfNull(description))), operationId = "mcpServersPatch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayMcpServersDeleteOperation {
     /**
-     * Disables all of the server's tools, removes them from your team's catalog, and deletes the
-     * server. An `api_key` supplied at registration is deleted; a `credentialRef` you supplied is
-     * left untouched. For a server registered with `credentialRefSource` connection, every user
-     * connection made through its OAuth client is revoked. Returns the deleted server, or 404 when
-     * it does not exist.
+     * Disables all of the server's tools, removes them from your team's catalog, and deletes the server. An `api_key` supplied at registration is deleted; a `credentialRef` you supplied is left untouched. For a server registered with `credentialRefSource` connection, every user connection made through its OAuth client is revoked. Returns the deleted server, or 404 when it does not exist.
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
      */
-    fun mcpServersDelete(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        options: RequestOptions? = null,
-    ): McpServerResponse {
-        return SdkClient.request<McpServerResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}",
-                    config = clientConfig,
-                    operationId = "mcpServersDelete",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun mcpServersDelete(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): McpServerResponse {
+        return SdkClient.request<McpServerResponse>(SdkClient.RequestSpec("DELETE", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}", config = clientConfig, operationId = "mcpServersDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayMcpServersRunResyncOperation {
     /**
-     * Connects to the server, lists its tools, and records them. Discovered tools are not callable
-     * until you enable them. When discovery finishes in time, returns 200 with the server and its
-     * tools; a discovery failure is reported in `syncStatus` and `syncError` rather than as an
-     * error. Otherwise returns 202 with pending set while discovery continues: poll `GET
-     * .../mcp-servers/{server_ref}` until `lastSyncedAt` or `syncError` changes (`syncStatus` is
-     * not reset while discovery…
+     * Connects to the server, lists its tools, and records them. Discovered tools are not callable until you enable them. When discovery finishes in time, returns 200 with the server and its tools; a discovery failure is reported in `syncStatus` and `syncError` rather than as an error. Otherwise returns 202 with pending set while discovery continues: poll `GET .../mcp-servers/{server_ref}` until `lastSyncedAt` or `syncError` changes (`syncStatus` is not reset while discovery…
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
-     * @param userId Required for a server registered with `credentialRefSource` connection:
-     *   discovery reaches the server as this user, through their connection, because such a server
-     *   has no team-wide credential. Ignored otherwise.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
+     * @param userId Required for a server registered with `credentialRefSource`
+     *   connection: discovery reaches the server as this user, through their
+     *   connection, because such a server has no team-wide credential. Ignored
+     *   otherwise.
      */
-    fun mcpServersRunResync(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        userId: String? = null,
-        options: RequestOptions? = null,
-    ): ResyncMcpServerResponse {
-        return SdkClient.request<ResyncMcpServerResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/resync",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("user_id" to (SdkClient.omitIfNull(userId))),
-                    operationId = "mcpServersRunResync",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun mcpServersRunResync(clientConfig: ClientConfig, serverRef: String, userId: String? = null, options: RequestOptions? = null): ResyncMcpServerResponse {
+        return SdkClient.request<ResyncMcpServerResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/resync", config = clientConfig, body = SdkClient.bodyMap("user_id" to (SdkClient.omitIfNull(userId))), operationId = "mcpServersRunResync", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayMcpServersListToolsOperation {
     /**
-     * Returns every tool discovered on the server, sorted by name, with whether each is enabled.
-     * Tools that have since disappeared from the server stay listed.
+     * Returns every tool discovered on the server, sorted by name, with whether each is enabled. Tools that have since disappeared from the server stay listed.
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
      */
-    fun mcpServersListTools(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        options: RequestOptions? = null,
-    ): ListMcpServerToolsResponse {
-        return SdkClient.request<ListMcpServerToolsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/tools",
-                    config = clientConfig,
-                    operationId = "mcpServersListTools",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun mcpServersListTools(clientConfig: ClientConfig, serverRef: String, options: RequestOptions? = null): ListMcpServerToolsResponse {
+        return SdkClient.request<ListMcpServerToolsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/tools", config = clientConfig, operationId = "mcpServersListTools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayMcpServersUpdateToolsOperation {
     /**
-     * `enabledToolSlugs` is the complete set to enable; every other tool of the server is disabled.
-     * An enabled tool is added to your team's catalog at its latest discovered version, and a
-     * disabled one is removed from it. Repeating the same set changes nothing. Before changing
-     * anything, each tool being enabled, re-enabled, or moved to a newer discovered version is
-     * verified against the live server: it must still be listed there, with the same input schema
-     * as when it was discovered.…
+     * `enabledToolSlugs` is the complete set to enable; every other tool of the server is disabled. An enabled tool is added to your team's catalog at its latest discovered version, and a disabled one is removed from it. Repeating the same set changes nothing. Before changing anything, each tool being enabled, re-enabled, or moved to a newer discovered version is verified against the live server: it must still be listed there, with the same input schema as when it was discovered.…
      *
-     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP servers.
-     * @param enabledToolSlugs The complete set of tool slugs (`<server_ref>_<name>`) to enable;
-     *   every other tool of the server is disabled. Empty disables every tool.
-     * @param userId Required for a server registered with `credentialRefSource` connection when a
-     *   tool needs verification against the live server, which can only be reached as a user who
-     *   has authorized it. Ignored otherwise.
+     * @param serverRef Server identifier (`serverRef`) of one of your team's MCP
+     *   servers.
+     * @param enabledToolSlugs The complete set of tool slugs (`<server_ref>_<name>`)
+     *   to enable; every other tool of the server is disabled. Empty disables every
+     *   tool.
+     * @param userId Required for a server registered with `credentialRefSource`
+     *   connection when a tool needs verification against the live server, which can
+     *   only be reached as a user who has authorized it. Ignored otherwise.
      */
-    fun mcpServersUpdateTools(
-        clientConfig: ClientConfig,
-        serverRef: String,
-        enabledToolSlugs: List<String>,
-        userId: String? = null,
-        options: RequestOptions? = null,
-    ): ListMcpServerToolsResponse {
-        return SdkClient.request<ListMcpServerToolsResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/tools",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "enabledToolSlugs" to (enabledToolSlugs),
-                            "user_id" to (SdkClient.omitIfNull(userId)),
-                        ),
-                    operationId = "mcpServersUpdateTools",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun mcpServersUpdateTools(clientConfig: ClientConfig, serverRef: String, enabledToolSlugs: List<String>, userId: String? = null, options: RequestOptions? = null): ListMcpServerToolsResponse {
+        return SdkClient.request<ListMcpServerToolsResponse>(SdkClient.RequestSpec("PUT", "/v2/action-gateway/mcp-servers/${SdkClient.encodePathSegment(serverRef)}/tools", config = clientConfig, body = SdkClient.bodyMap("enabledToolSlugs" to (enabledToolSlugs), "user_id" to (SdkClient.omitIfNull(userId))), operationId = "mcpServersUpdateTools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

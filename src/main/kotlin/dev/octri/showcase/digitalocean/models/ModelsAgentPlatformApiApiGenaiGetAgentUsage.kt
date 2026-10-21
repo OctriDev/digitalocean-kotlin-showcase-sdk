@@ -5,23 +5,38 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Resource Usage Description */
+/**
+ * Resource Usage Description
+ */
 data class ApiResourceUsage(
-    /** Optional array value serialized in the `measurements` wire field. */
+    /**
+     * Optional array value serialized in the `measurements` wire field.
+     */
     val measurements: List<ApiUsageMeasurement>? = null,
-    /** Optional `string` value serialized in the `resource_uuid` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid")
-    val resourceUuid: String? = null,
-    /** Optional `date-time`-formatted value serialized in the `start` wire field. */
+    /**
+     * Optional `string` value serialized in the `resource_uuid` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_uuid") val resourceUuid: String? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `start` wire field.
+     */
     val start: OffsetDateTime? = null,
-    /** Optional `date-time`-formatted value serialized in the `stop` wire field. */
-    val stop: OffsetDateTime? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `stop` wire field.
+     */
+    val stop: OffsetDateTime? = null
 )
 
-/** Usage Measurement Description */
+/**
+ * Usage Measurement Description
+ */
 data class ApiUsageMeasurement(
-    /** Optional `int64`-formatted value serialized in the `tokens` wire field. */
+    /**
+     * Optional `int64`-formatted value serialized in the `tokens` wire field.
+     */
     val tokens: Long? = null,
-    /** Optional `string` value serialized in the `usage_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage_type") val usageType: String? = null,
+    /**
+     * Optional `string` value serialized in the `usage_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage_type") val usageType: String? = null
 )

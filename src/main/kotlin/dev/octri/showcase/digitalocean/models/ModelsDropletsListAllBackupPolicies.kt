@@ -3,15 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllDropletBackupPolicies` API schema. */
+/**
+ * Typed representation of the `AllDropletBackupPolicies` API schema.
+ */
 data class AllDropletBackupPolicies(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     /**
-     * A map where the keys are the Droplet IDs and the values are objects containing the backup
-     * policy information for each Droplet.
+     * A map where the keys are the Droplet IDs and the values are objects containing the backup policy information for each Droplet.
      */
     val policies: Map<String, DropletBackupPolicyRecord>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )

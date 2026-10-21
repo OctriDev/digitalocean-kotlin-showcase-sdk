@@ -3,27 +3,36 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AppsGetExecResponse` API schema. */
+/**
+ * Typed representation of the `AppsGetExecResponse` API schema.
+ */
 data class AppsGetExecResponse(
-    /** A websocket URL that allows sending/receiving console input and receiving console output. */
+    /**
+     * A websocket URL that allows sending/receiving console input and receiving console output.
+     */
     val url: String? = null
 )
 
-/** Typed representation of the `AppsGetInstanceSizeResponse` API schema. */
+/**
+ * Typed representation of the `AppsGetInstanceSizeResponse` API schema.
+ */
 data class AppsGetInstanceSizeResponse(
-    /** Optional object value serialized in the `instance_size` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("instance_size")
-    val instanceSize: AppsInstanceSize? = null
+    /**
+     * Optional object value serialized in the `instance_size` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("instance_size") val instanceSize: AppsInstanceSize? = null
 )
 
-/** Typed representation of the `AppsGetLogsResponse` API schema. */
+/**
+ * Typed representation of the `AppsGetLogsResponse` API schema.
+ */
 data class AppsGetLogsResponse(
-    /** Optional array value serialized in the `historic_urls` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("historic_urls")
-    val historicUrls: List<String>? = null,
     /**
-     * A URL of the real-time live logs. This URL may use either the `` or `wss://` protocols and
-     * will keep pushing live logs as they become available.
+     * Optional array value serialized in the `historic_urls` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("live_url") val liveUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("historic_urls") val historicUrls: List<String>? = null,
+    /**
+     * A URL of the real-time live logs. This URL may use either the `` or `wss://` protocols and will keep pushing live logs as they become available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("live_url") val liveUrl: String? = null
 )

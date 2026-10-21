@@ -3,145 +3,64 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class BatchInferenceNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a file record and returns a `file_id` plus a short-lived presigned `PUT` URL
-     * (typically valid for ~15 minutes). Upload the raw JSONL bytes to `upload_url` (see `PUT
-     * /{upload_path}`) before calling `POST /v1/batches`.
+     * Creates a file record and returns a `file_id` plus a short-lived presigned `PUT` URL (typically valid for ~15 minutes). Upload the raw JSONL bytes to `upload_url` (see `PUT /{upload_path}`) before calling `POST /v1/batches`.
      */
-    fun inferenceCreateBatchFile(
-        fileName: String,
-        options: RequestOptions? = null,
-    ): BatchFileCreateResponse {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCreateBatchFile(
-            clientConfig,
-            fileName,
-            options,
-        )
+    fun inferenceCreateBatchFile(fileName: String, options: RequestOptions? = null): BatchFileCreateResponse {
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCreateBatchFile(clientConfig, fileName, options)
     }
 
     /**
-     * Uploads raw JSONL bytes to the presigned URL returned by `POST /v1/batches/files`. Use the
-     * returned `upload_url` verbatim and send the bytes as `application/octet-stream` or omit
-     * `Content-Type` to avoid signature mismatches. The upload must complete before `POST
-     * /v1/batches` checks the object with a `HEAD` request.
+     * Uploads raw JSONL bytes to the presigned URL returned by `POST /v1/batches/files`. Use the returned `upload_url` verbatim and send the bytes as `application/octet-stream` or omit `Content-Type` to avoid signature mismatches. The upload must complete before `POST /v1/batches` checks the object with a `HEAD` request.
      *
-     * Uploads the raw JSONL bytes to the presigned `upload_url` returned by `POST
-     * /v1/batches/files`. **The URL is dynamic — do not construct it.** Use the `upload_url` value
-     * from the previous step verbatim. Its host, path, and query parameters are part of the
-     * short-lived (~15 minute) signature and change per request; the server and path shown here are
-     * illustrative. If the URL expires before the upload completes, create a new file intent and
-     * retry. `POST /v1/batches` performs a…
+     * Uploads the raw JSONL bytes to the presigned `upload_url` returned by `POST /v1/batches/files`. **The URL is dynamic — do not construct it.** Use the `upload_url` value from the previous step verbatim. Its host, path, and query parameters are part of the short-lived (~15 minute) signature and change per request; the server and path shown here are illustrative. If the URL expires before the upload completes, create a new file intent and retry. `POST /v1/batches` performs a…
      */
     fun inferenceUploadBatchFile(body: ByteArray, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceUploadBatchFile(
-            clientConfig,
-            body,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceUploadBatchFile(clientConfig, body, options)
     }
 
     /**
-     * Submits a batch job against a previously uploaded JSONL input file. The upload must have
-     * completed before this call; otherwise the request is rejected. Supply a unique `request_id`
-     * to make the submission idempotent — retries with the same value return the existing job. When
-     * `provider` is `openai`, the `url` on each JSONL line must match `endpoint`.
+     * Submits a batch job against a previously uploaded JSONL input file. The upload must have completed before this call; otherwise the request is rejected. Supply a unique `request_id` to make the submission idempotent — retries with the same value return the existing job. When `provider` is `openai`, the `url` on each JSONL line must match `endpoint`.
      */
-    fun inferenceCreateBatch(
-        request: dev.octri.showcase.digitalocean.methods.BatchInference.InferenceCreateBatchRequest,
-        options: RequestOptions? = null,
-    ): Batch {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCreateBatch(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateBatch(request: dev.octri.showcase.digitalocean.methods.BatchInference.InferenceCreateBatchRequest, options: RequestOptions? = null): Batch {
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCreateBatch(clientConfig, request, options)
     }
 
     /**
-     * Returns a cursor-paginated list of batch jobs, ordered newest first. Use `limit` to control
-     * page size and `after` to page forward using the `last_id` from the previous response.
+     * Returns a cursor-paginated list of batch jobs, ordered newest first. Use `limit` to control page size and `after` to page forward using the `last_id` from the previous response.
      */
-    fun inferenceListBatches(
-        after: String? = null,
-        limit: Long? = null,
-        status: InferenceListBatchesParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): BatchListResponse {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceListBatches(
-            clientConfig,
-            after,
-            limit,
-            status,
-            options,
-        )
+    fun inferenceListBatches(after: String? = null, limit: Long? = null, status: InferenceListBatchesParameterEnum? = null, options: RequestOptions? = null): BatchListResponse {
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceListBatches(clientConfig, after, limit, status, options)
     }
 
     /**
-     * Returns a cursor-paginated list of batch jobs, ordered newest first. Use `limit` to control
-     * page size and `after` to page forward using the `last_id` from the previous response.
+     * Returns a cursor-paginated list of batch jobs, ordered newest first. Use `limit` to control page size and `after` to page forward using the `last_id` from the previous response.
      */
-    fun inferenceListBatchesPaginated(
-        after: String? = null,
-        limit: Long? = null,
-        status: InferenceListBatchesParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (Batch) -> Boolean,
-    ) {
-        dev.octri.showcase.digitalocean.methods.BatchInference.inferenceListBatchesPaginated(
-            clientConfig,
-            after,
-            limit,
-            status,
-            options,
-            yieldFn,
-        )
+    fun inferenceListBatchesPaginated(after: String? = null, limit: Long? = null, status: InferenceListBatchesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (Batch) -> Boolean) {
+        dev.octri.showcase.digitalocean.methods.BatchInference.inferenceListBatchesPaginated(clientConfig, after, limit, status, options, yieldFn)
     }
 
     /**
-     * Returns the current state of a batch job. Poll until `status` reaches a terminal value
-     * (`completed`, `failed`, `expired`, or `cancelled`).
+     * Returns the current state of a batch job. Poll until `status` reaches a terminal value (`completed`, `failed`, `expired`, or `cancelled`).
      */
     fun inferenceGetBatch(batchId: String, options: RequestOptions? = null): Batch {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceGetBatch(
-            clientConfig,
-            batchId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceGetBatch(clientConfig, batchId, options)
     }
 
     /**
-     * Returns short-lived presigned download URLs for the output (and optional error sidecar) of a
-     * completed batch job. If results are not yet ready, the response sets `result_available:
-     * false` or returns `412 Precondition Failed`; in both cases, keep polling batch status and
-     * retry. Download the artifacts soon after fetching — the URLs are short-lived. Result files
-     * themselves are retained for up to 30 days after the job completes, after which they are
-     * deleted.
+     * Returns short-lived presigned download URLs for the output (and optional error sidecar) of a completed batch job. If results are not yet ready, the response sets `result_available: false` or returns `412 Precondition Failed`; in both cases, keep polling batch status and retry. Download the artifacts soon after fetching — the URLs are short-lived. Result files themselves are retained for up to 30 days after the job completes, after which they are deleted.
      */
-    fun inferenceGetBatchResults(
-        batchId: String,
-        options: RequestOptions? = null,
-    ): BatchResultsResponse {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceGetBatchResults(
-            clientConfig,
-            batchId,
-            options,
-        )
+    fun inferenceGetBatchResults(batchId: String, options: RequestOptions? = null): BatchResultsResponse {
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceGetBatchResults(clientConfig, batchId, options)
     }
 
     /**
-     * Requests cancellation of a batch job. The job transitions to `cancelling` and, once in-flight
-     * requests drain, to `cancelled`. Jobs already in a terminal state (`completed`, `failed`,
-     * `expired`, `cancelled`) cannot be cancelled and return `409 Conflict`. Cancellation is also
-     * rejected with `409 Conflict` while the job has not yet been submitted to the upstream
-     * provider — there is nothing to cancel until the provider batch id is assigned. Partial
-     * results produced before…
+     * Requests cancellation of a batch job. The job transitions to `cancelling` and, once in-flight requests drain, to `cancelled`. Jobs already in a terminal state (`completed`, `failed`, `expired`, `cancelled`) cannot be cancelled and return `409 Conflict`. Cancellation is also rejected with `409 Conflict` while the job has not yet been submitted to the upstream provider — there is nothing to cancel until the provider batch id is assigned. Partial results produced before…
      */
     fun inferenceCancelBatch(batchId: String, options: RequestOptions? = null): Batch {
-        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCancelBatch(
-            clientConfig,
-            batchId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.BatchInference.inferenceCancelBatch(clientConfig, batchId, options)
     }
+
 }

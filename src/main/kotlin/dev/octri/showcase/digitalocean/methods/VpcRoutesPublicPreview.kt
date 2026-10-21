@@ -14,266 +14,135 @@ import dev.octri.showcase.digitalocean.Validation
 
 object VpcRoutesPublicPreview {
 
+
     /**
-     * To list the read-only VPC-scoped routes for a VPC, send a GET request to
-     * `/v2/vpcs/$VPC_UUID/routes`. VPC-scoped routes cannot be created, updated, or deleted through
-     * the public API.
+     * To list the read-only VPC-scoped routes for a VPC, send a GET request to `/v2/vpcs/$VPC_UUID/routes`. VPC-scoped routes cannot be created, updated, or deleted through the public API.
      *
      * @param vpcUuid The unique identifier of the VPC.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun vpcRoutesList(
-        clientConfig: ClientConfig,
-        vpcUuid: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllVpcRoutes {
+    fun vpcRoutesList(clientConfig: ClientConfig, vpcUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllVpcRoutes {
         Validation.validateUuid("vpc_uuid", vpcUuid)
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllVpcRoutes>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/routes",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "vpcRoutesList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllVpcRoutes>(SdkClient.RequestSpec("GET", "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/routes", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "vpcRoutesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list routes for a VPC subnet, send a GET request to
-     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes`. The response includes VPC-scoped routes
-     * propagated into the subnet and subnet-scoped routes.
+     * To list routes for a VPC subnet, send a GET request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes`. The response includes VPC-scoped routes propagated into the subnet and subnet-scoped routes.
      *
      * @param vpcUuid The unique identifier of the VPC.
      * @param subnetUuid The unique identifier of the VPC subnet.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun vpcSubnetRoutesList(
-        clientConfig: ClientConfig,
-        vpcUuid: String,
-        subnetUuid: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): AllVpcSubnetRoutes {
+    fun vpcSubnetRoutesList(clientConfig: ClientConfig, vpcUuid: String, subnetUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllVpcSubnetRoutes {
         Validation.validateUuid("vpc_uuid", vpcUuid)
 
         Validation.validateUuid("subnet_uuid", subnetUuid)
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<AllVpcSubnetRoutes>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "vpcSubnetRoutesList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllVpcSubnetRoutes>(SdkClient.RequestSpec("GET", "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "vpcSubnetRoutesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To add a static route to a VPC subnet, send a POST request to
-     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes`. This route is additional to the routes the
-     * VPC already propagates to the subnet. The server assigns the route's `id` and `type`. Droplet
-     * targets must use a numeric ID. A Droplet UUID or another invalid `target_urns` value returns
-     * a 422 response.
+     * To add a static route to a VPC subnet, send a POST request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes`. This route is additional to the routes the VPC already propagates to the subnet. The server assigns the route's `id` and `type`. Droplet targets must use a numeric ID. A Droplet UUID or another invalid `target_urns` value returns a 422 response.
      *
      * @param vpcUuid The unique identifier of the VPC.
      * @param subnetUuid The unique identifier of the VPC subnet.
      * @param destinationCidr A valid IPv4 CIDR accepted by the VPC routing product.
-     * @param targetUrns The URNs of supported next-hop resources. Droplet targets must use a
-     *   numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the
-     *   format `do:nat_gateway:<uuid>`.
+     * @param targetUrns The URNs of supported next-hop resources. Droplet targets
+     *   must use a numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets
+     *   use a UUID in the format `do:nat_gateway:<uuid>`.
      */
-    fun vpcSubnetRoutesCreate(
-        clientConfig: ClientConfig,
-        vpcUuid: String,
-        subnetUuid: String,
-        destinationCidr: String,
-        targetUrns: List<String>,
-        options: RequestOptions? = null,
-    ): SingleRoute {
+    fun vpcSubnetRoutesCreate(clientConfig: ClientConfig, vpcUuid: String, subnetUuid: String, destinationCidr: String, targetUrns: List<String>, options: RequestOptions? = null): SingleRoute {
         Validation.validateUuid("vpc_uuid", vpcUuid)
 
         Validation.validateUuid("subnet_uuid", subnetUuid)
 
-        return SdkClient.request<SingleRoute>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "destination_cidr" to (destinationCidr),
-                            "target_urns" to (targetUrns),
-                        ),
-                    operationId = "vpcSubnetRoutesCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SingleRoute>(SdkClient.RequestSpec("POST", "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes", config = clientConfig, body = SdkClient.bodyMap("destination_cidr" to (destinationCidr), "target_urns" to (targetUrns)), operationId = "vpcSubnetRoutesCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To update the next hop for a user-defined VPC subnet route, send a PATCH request to
-     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. The `destination_cidr` cannot
-     * be changed. Droplet targets must use a numeric ID. A Droplet UUID or another invalid
-     * `target_urns` value returns a 422 response.
+     * To update the next hop for a user-defined VPC subnet route, send a PATCH request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. The `destination_cidr` cannot be changed. Droplet targets must use a numeric ID. A Droplet UUID or another invalid `target_urns` value returns a 422 response.
      *
      * @param vpcUuid The unique identifier of the VPC.
      * @param subnetUuid The unique identifier of the VPC subnet.
      * @param routeUuid The unique identifier of the route.
-     * @param targetUrns The URNs of supported next-hop resources. Droplet targets must use a
-     *   numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use a UUID in the
-     *   format `do:nat_gateway:<uuid>`.
+     * @param targetUrns The URNs of supported next-hop resources. Droplet targets
+     *   must use a numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets
+     *   use a UUID in the format `do:nat_gateway:<uuid>`.
      */
-    fun vpcSubnetRoutesUpdate(
-        clientConfig: ClientConfig,
-        vpcUuid: String,
-        subnetUuid: String,
-        routeUuid: String,
-        targetUrns: List<String>,
-        options: RequestOptions? = null,
-    ): SingleRoute {
+    fun vpcSubnetRoutesUpdate(clientConfig: ClientConfig, vpcUuid: String, subnetUuid: String, routeUuid: String, targetUrns: List<String>, options: RequestOptions? = null): SingleRoute {
         Validation.validateUuid("vpc_uuid", vpcUuid)
 
         Validation.validateUuid("subnet_uuid", subnetUuid)
 
         Validation.validateUuid("route_uuid", routeUuid)
 
-        return SdkClient.request<SingleRoute>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes/${SdkClient.encodePathSegment(routeUuid)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("target_urns" to (targetUrns)),
-                    operationId = "vpcSubnetRoutesUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SingleRoute>(SdkClient.RequestSpec("PATCH", "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes/${SdkClient.encodePathSegment(routeUuid)}", config = clientConfig, body = SdkClient.bodyMap("target_urns" to (targetUrns)), operationId = "vpcSubnetRoutesUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a user-defined VPC subnet route, send a DELETE request to
-     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. Managed routes cannot be
-     * deleted. A successful request returns a 204 status code with no response body.
+     * To delete a user-defined VPC subnet route, send a DELETE request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. Managed routes cannot be deleted. A successful request returns a 204 status code with no response body.
      *
      * @param vpcUuid The unique identifier of the VPC.
      * @param subnetUuid The unique identifier of the VPC subnet.
      * @param routeUuid The unique identifier of the route.
      */
-    fun vpcSubnetRoutesDelete(
-        clientConfig: ClientConfig,
-        vpcUuid: String,
-        subnetUuid: String,
-        routeUuid: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun vpcSubnetRoutesDelete(clientConfig: ClientConfig, vpcUuid: String, subnetUuid: String, routeUuid: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("vpc_uuid", vpcUuid)
 
         Validation.validateUuid("subnet_uuid", subnetUuid)
 
         Validation.validateUuid("route_uuid", routeUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes/${SdkClient.encodePathSegment(routeUuid)}",
-                config = clientConfig,
-                operationId = "vpcSubnetRoutesDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/vpcs/${SdkClient.encodePathSegment(vpcUuid)}/subnets/${SdkClient.encodePathSegment(subnetUuid)}/routes/${SdkClient.encodePathSegment(routeUuid)}", config = clientConfig, operationId = "vpcSubnetRoutesDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }

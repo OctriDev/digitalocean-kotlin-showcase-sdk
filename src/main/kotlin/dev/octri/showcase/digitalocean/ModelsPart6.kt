@@ -7,17 +7,13 @@ typealias Droplet = dev.octri.showcase.digitalocean.models.Droplet
 
 typealias DropletAction = dev.octri.showcase.digitalocean.models.DropletAction
 
-typealias DropletActionChangeBackupPolicy =
-    dev.octri.showcase.digitalocean.models.DropletActionChangeBackupPolicy
+typealias DropletActionChangeBackupPolicy = dev.octri.showcase.digitalocean.models.DropletActionChangeBackupPolicy
 
-typealias DropletActionChangeKernel =
-    dev.octri.showcase.digitalocean.models.DropletActionChangeKernel
+typealias DropletActionChangeKernel = dev.octri.showcase.digitalocean.models.DropletActionChangeKernel
 
-typealias DropletActionEnableBackups =
-    dev.octri.showcase.digitalocean.models.DropletActionEnableBackups
+typealias DropletActionEnableBackups = dev.octri.showcase.digitalocean.models.DropletActionEnableBackups
 
-typealias DropletActionEnableBackupsRequest =
-    dev.octri.showcase.digitalocean.models.DropletActionEnableBackupsRequest
+typealias DropletActionEnableBackupsRequest = dev.octri.showcase.digitalocean.models.DropletActionEnableBackupsRequest
 
 typealias DropletActionRebuild = dev.octri.showcase.digitalocean.models.DropletActionRebuild
 
@@ -37,32 +33,23 @@ typealias DropletActionTypeEnum = dev.octri.showcase.digitalocean.models.Droplet
 
 typealias DropletBackupPolicy = dev.octri.showcase.digitalocean.models.DropletBackupPolicy
 
-typealias DropletBackupPolicyHourEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyHourEnum
+typealias DropletBackupPolicyHourEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyHourEnum
 
-typealias DropletBackupPolicyPlanEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyPlanEnum
+typealias DropletBackupPolicyPlanEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyPlanEnum
 
-typealias DropletBackupPolicyRecord =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyRecord
+typealias DropletBackupPolicyRecord = dev.octri.showcase.digitalocean.models.DropletBackupPolicyRecord
 
-typealias DropletBackupPolicyRequest =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequest
+typealias DropletBackupPolicyRequest = dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequest
 
-typealias DropletBackupPolicyRequestHourEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestHourEnum
+typealias DropletBackupPolicyRequestHourEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestHourEnum
 
-typealias DropletBackupPolicyRequestPlanEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestPlanEnum
+typealias DropletBackupPolicyRequestPlanEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestPlanEnum
 
-typealias DropletBackupPolicyRequestWeekdayEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestWeekdayEnum
+typealias DropletBackupPolicyRequestWeekdayEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyRequestWeekdayEnum
 
-typealias DropletBackupPolicyResponse =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyResponse
+typealias DropletBackupPolicyResponse = dev.octri.showcase.digitalocean.models.DropletBackupPolicyResponse
 
-typealias DropletBackupPolicyWeekdayEnum =
-    dev.octri.showcase.digitalocean.models.DropletBackupPolicyWeekdayEnum
+typealias DropletBackupPolicyWeekdayEnum = dev.octri.showcase.digitalocean.models.DropletBackupPolicyWeekdayEnum
 
 typealias DropletCreate = dev.octri.showcase.digitalocean.models.DropletCreate
 
@@ -76,30 +63,23 @@ typealias DropletNextBackupWindow = dev.octri.showcase.digitalocean.models.Dropl
 
 typealias DropletsCreateResponse = dev.octri.showcase.digitalocean.models.DropletsCreateResponse
 
-typealias DropletsCreateResponseVariant0 =
-    dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant0
+typealias DropletsCreateResponseVariant0 = dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant0
 
-typealias DropletsCreateResponseVariant0Links =
-    dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant0Links
+typealias DropletsCreateResponseVariant0Links = dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant0Links
 
-typealias DropletsCreateResponseVariant1 =
-    dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant1
+typealias DropletsCreateResponseVariant1 = dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant1
 
-typealias DropletsCreateResponseVariant1Links =
-    dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant1Links
+typealias DropletsCreateResponseVariant1Links = dev.octri.showcase.digitalocean.models.DropletsCreateResponseVariant1Links
 
 typealias DropletSingleCreate = dev.octri.showcase.digitalocean.models.DropletSingleCreate
 
-typealias DropletSingleCreateRequest =
-    dev.octri.showcase.digitalocean.models.DropletSingleCreateRequest
+typealias DropletSingleCreateRequest = dev.octri.showcase.digitalocean.models.DropletSingleCreateRequest
 
 typealias DropletSnapshot = dev.octri.showcase.digitalocean.models.DropletSnapshot
 
-typealias DropletSnapshotVariant2TypeEnum =
-    dev.octri.showcase.digitalocean.models.DropletSnapshotVariant2TypeEnum
+typealias DropletSnapshotVariant2TypeEnum = dev.octri.showcase.digitalocean.models.DropletSnapshotVariant2TypeEnum
 
-typealias DropletsSupportedBackupPolicies =
-    dev.octri.showcase.digitalocean.models.DropletsSupportedBackupPolicies
+typealias DropletsSupportedBackupPolicies = dev.octri.showcase.digitalocean.models.DropletsSupportedBackupPolicies
 
 typealias DropletStatusEnum = dev.octri.showcase.digitalocean.models.DropletStatusEnum
 
@@ -109,18 +89,15 @@ typealias EmailNotificationConfig = dev.octri.showcase.digitalocean.models.Email
 
 typealias EmbeddingDataItem = dev.octri.showcase.digitalocean.models.EmbeddingDataItem
 
-typealias EmbeddingDataItemObjectEnum =
-    dev.octri.showcase.digitalocean.models.EmbeddingDataItemObjectEnum
+typealias EmbeddingDataItemObjectEnum = dev.octri.showcase.digitalocean.models.EmbeddingDataItemObjectEnum
 
 typealias EmbeddingsRequest = dev.octri.showcase.digitalocean.models.EmbeddingsRequest
 
-typealias EmbeddingsRequestEncodingFormatEnum =
-    dev.octri.showcase.digitalocean.models.EmbeddingsRequestEncodingFormatEnum
+typealias EmbeddingsRequestEncodingFormatEnum = dev.octri.showcase.digitalocean.models.EmbeddingsRequestEncodingFormatEnum
 
 typealias EmbeddingsResponse = dev.octri.showcase.digitalocean.models.EmbeddingsResponse
 
-typealias EmbeddingsResponseObjectEnum =
-    dev.octri.showcase.digitalocean.models.EmbeddingsResponseObjectEnum
+typealias EmbeddingsResponseObjectEnum = dev.octri.showcase.digitalocean.models.EmbeddingsResponseObjectEnum
 
 typealias EmbeddingsUsage = dev.octri.showcase.digitalocean.models.EmbeddingsUsage
 
@@ -132,8 +109,7 @@ typealias ErrorEnvelope = dev.octri.showcase.digitalocean.models.ErrorEnvelope
 
 typealias ErrorEnvelopeClassEnum = dev.octri.showcase.digitalocean.models.ErrorEnvelopeClassEnum
 
-typealias ErrorEnvelopeRecoveryHintEnum =
-    dev.octri.showcase.digitalocean.models.ErrorEnvelopeRecoveryHintEnum
+typealias ErrorEnvelopeRecoveryHintEnum = dev.octri.showcase.digitalocean.models.ErrorEnvelopeRecoveryHintEnum
 
 typealias ErrorWithRootCauses = dev.octri.showcase.digitalocean.models.ErrorWithRootCauses
 
@@ -159,8 +135,7 @@ typealias ExecuteCodeRequest = dev.octri.showcase.digitalocean.models.ExecuteCod
 
 typealias ExecuteCodeResponse = dev.octri.showcase.digitalocean.models.ExecuteCodeResponse
 
-typealias ExecuteCodeResponseVariant1Output =
-    dev.octri.showcase.digitalocean.models.ExecuteCodeResponseVariant1Output
+typealias ExecuteCodeResponseVariant1Output = dev.octri.showcase.digitalocean.models.ExecuteCodeResponseVariant1Output
 
 typealias ExistingAlert = dev.octri.showcase.digitalocean.models.ExistingAlert
 
@@ -214,36 +189,27 @@ typealias FirewallRule = dev.octri.showcase.digitalocean.models.FirewallRule
 
 typealias FirewallRuleBase = dev.octri.showcase.digitalocean.models.FirewallRuleBase
 
-typealias FirewallRuleBaseActionEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRuleBaseActionEnum
+typealias FirewallRuleBaseActionEnum = dev.octri.showcase.digitalocean.models.FirewallRuleBaseActionEnum
 
-typealias FirewallRuleBaseProtocolEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRuleBaseProtocolEnum
+typealias FirewallRuleBaseProtocolEnum = dev.octri.showcase.digitalocean.models.FirewallRuleBaseProtocolEnum
 
 typealias FirewallRuleRequest = dev.octri.showcase.digitalocean.models.FirewallRuleRequest
 
-typealias FirewallRuleRequestTypeEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRuleRequestTypeEnum
+typealias FirewallRuleRequestTypeEnum = dev.octri.showcase.digitalocean.models.FirewallRuleRequestTypeEnum
 
 typealias FirewallRules = dev.octri.showcase.digitalocean.models.FirewallRules
 
-typealias FirewallRulesInboundRulesItem =
-    dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItem
+typealias FirewallRulesInboundRulesItem = dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItem
 
-typealias FirewallRulesInboundRulesItemActionEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItemActionEnum
+typealias FirewallRulesInboundRulesItemActionEnum = dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItemActionEnum
 
-typealias FirewallRulesInboundRulesItemProtocolEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItemProtocolEnum
+typealias FirewallRulesInboundRulesItemProtocolEnum = dev.octri.showcase.digitalocean.models.FirewallRulesInboundRulesItemProtocolEnum
 
-typealias FirewallRulesOutboundRulesItem =
-    dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItem
+typealias FirewallRulesOutboundRulesItem = dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItem
 
-typealias FirewallRulesOutboundRulesItemActionEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItemActionEnum
+typealias FirewallRulesOutboundRulesItemActionEnum = dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItemActionEnum
 
-typealias FirewallRulesOutboundRulesItemProtocolEnum =
-    dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItemProtocolEnum
+typealias FirewallRulesOutboundRulesItemProtocolEnum = dev.octri.showcase.digitalocean.models.FirewallRulesOutboundRulesItemProtocolEnum
 
 typealias FirewallRulesResponse = dev.octri.showcase.digitalocean.models.FirewallRulesResponse
 
@@ -251,11 +217,9 @@ typealias FirewallRuleTarget = dev.octri.showcase.digitalocean.models.FirewallRu
 
 typealias FirewallRuleTypeEnum = dev.octri.showcase.digitalocean.models.FirewallRuleTypeEnum
 
-typealias FirewallVariant0PendingChangesItem =
-    dev.octri.showcase.digitalocean.models.FirewallVariant0PendingChangesItem
+typealias FirewallVariant0PendingChangesItem = dev.octri.showcase.digitalocean.models.FirewallVariant0PendingChangesItem
 
-typealias FirewallVariant0StatusEnum =
-    dev.octri.showcase.digitalocean.models.FirewallVariant0StatusEnum
+typealias FirewallVariant0StatusEnum = dev.octri.showcase.digitalocean.models.FirewallVariant0StatusEnum
 
 typealias FloatingIp = dev.octri.showcase.digitalocean.models.FloatingIp
 
@@ -263,8 +227,7 @@ typealias FloatingIpAction = dev.octri.showcase.digitalocean.models.FloatingIpAc
 
 typealias FloatingIpActionAction = dev.octri.showcase.digitalocean.models.FloatingIpActionAction
 
-typealias FloatingIpActionActionStatusEnum =
-    dev.octri.showcase.digitalocean.models.FloatingIpActionActionStatusEnum
+typealias FloatingIpActionActionStatusEnum = dev.octri.showcase.digitalocean.models.FloatingIpActionActionStatusEnum
 
 typealias FloatingIpActionAssign = dev.octri.showcase.digitalocean.models.FloatingIpActionAssign
 
@@ -292,8 +255,7 @@ typealias FloatingIpResponse = dev.octri.showcase.digitalocean.models.FloatingIp
 
 typealias FloatingIPsAction = dev.octri.showcase.digitalocean.models.FloatingIPsAction
 
-typealias FloatingIPsActionTypeEnum =
-    dev.octri.showcase.digitalocean.models.FloatingIPsActionTypeEnum
+typealias FloatingIPsActionTypeEnum = dev.octri.showcase.digitalocean.models.FloatingIPsActionTypeEnum
 
 typealias Forbidden = dev.octri.showcase.digitalocean.models.Forbidden
 
@@ -303,11 +265,9 @@ typealias ForkSessionResponse = dev.octri.showcase.digitalocean.models.ForkSessi
 
 typealias ForwardingRule = dev.octri.showcase.digitalocean.models.ForwardingRule
 
-typealias ForwardingRuleEntryProtocolEnum =
-    dev.octri.showcase.digitalocean.models.ForwardingRuleEntryProtocolEnum
+typealias ForwardingRuleEntryProtocolEnum = dev.octri.showcase.digitalocean.models.ForwardingRuleEntryProtocolEnum
 
-typealias ForwardingRuleTargetProtocolEnum =
-    dev.octri.showcase.digitalocean.models.ForwardingRuleTargetProtocolEnum
+typealias ForwardingRuleTargetProtocolEnum = dev.octri.showcase.digitalocean.models.ForwardingRuleTargetProtocolEnum
 
 typealias ForwardLinks = dev.octri.showcase.digitalocean.models.ForwardLinks
 
@@ -315,99 +275,69 @@ typealias FunctionObject = dev.octri.showcase.digitalocean.models.FunctionObject
 
 typealias GarbageCollection = dev.octri.showcase.digitalocean.models.GarbageCollection
 
-typealias GarbageCollectionResponse =
-    dev.octri.showcase.digitalocean.models.GarbageCollectionResponse
+typealias GarbageCollectionResponse = dev.octri.showcase.digitalocean.models.GarbageCollectionResponse
 
 typealias GarbageCollections = dev.octri.showcase.digitalocean.models.GarbageCollections
 
-typealias GarbageCollectionStatusEnum =
-    dev.octri.showcase.digitalocean.models.GarbageCollectionStatusEnum
+typealias GarbageCollectionStatusEnum = dev.octri.showcase.digitalocean.models.GarbageCollectionStatusEnum
 
 typealias GenaiapiRegion = dev.octri.showcase.digitalocean.models.GenaiapiRegion
 
-typealias GenaiListCustomModelsParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListCustomModelsParameterEnum
+typealias GenaiListCustomModelsParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListCustomModelsParameterEnum
 
-typealias GenaiListEvaluationDatasetsParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListEvaluationDatasetsParameterEnum
+typealias GenaiListEvaluationDatasetsParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListEvaluationDatasetsParameterEnum
 
-typealias GenaiListModelCatalogParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum
+typealias GenaiListModelCatalogParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum
 
-typealias GenaiListModelCatalogParameterEnum78dae3f5 =
-    dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum78dae3f5
+typealias GenaiListModelCatalogParameterEnum78dae3f5 = dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum78dae3f5
 
-typealias GenaiListModelCatalogParameterEnum87804d40 =
-    dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum87804d40
+typealias GenaiListModelCatalogParameterEnum87804d40 = dev.octri.showcase.digitalocean.models.GenaiListModelCatalogParameterEnum87804d40
 
-typealias GenaiListModelEvaluationRunsParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnum
+typealias GenaiListModelEvaluationRunsParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnum
 
-typealias GenaiListModelEvaluationRunsParameterEnum55e68c6e =
-    dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnum55e68c6e
+typealias GenaiListModelEvaluationRunsParameterEnum55e68c6e = dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnum55e68c6e
 
-typealias GenaiListModelEvaluationRunsParameterEnumd59ebfaf =
-    dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnumd59ebfaf
+typealias GenaiListModelEvaluationRunsParameterEnumd59ebfaf = dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterEnumd59ebfaf
 
-typealias GenaiListModelEvaluationRunsParameterItemEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterItemEnum
+typealias GenaiListModelEvaluationRunsParameterItemEnum = dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterItemEnum
 
-typealias GenaiListModelEvaluationRunsParameterItemEnum63bd63d3 =
-    dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterItemEnum63bd63d3
+typealias GenaiListModelEvaluationRunsParameterItemEnum63bd63d3 = dev.octri.showcase.digitalocean.models.GenaiListModelEvaluationRunsParameterItemEnum63bd63d3
 
-typealias GenaiListModelsParameterItemEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListModelsParameterItemEnum
+typealias GenaiListModelsParameterItemEnum = dev.octri.showcase.digitalocean.models.GenaiListModelsParameterItemEnum
 
-typealias GenaiListScenarioLibraryParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryParameterEnum
+typealias GenaiListScenarioLibraryParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryParameterEnum
 
-typealias GenaiListScenarioLibraryParameterEnum67de185e =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryParameterEnum67de185e
+typealias GenaiListScenarioLibraryParameterEnum67de185e = dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryParameterEnum67de185e
 
-typealias GenaiListScenarioLibraryScenariosParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryScenariosParameterEnum
+typealias GenaiListScenarioLibraryScenariosParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryScenariosParameterEnum
 
-typealias GenaiListScenarioLibraryScenariosParameterEnum41fc628a =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryScenariosParameterEnum41fc628a
+typealias GenaiListScenarioLibraryScenariosParameterEnum41fc628a = dev.octri.showcase.digitalocean.models.GenaiListScenarioLibraryScenariosParameterEnum41fc628a
 
-typealias GenaiListScenarioSetsParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterEnum
+typealias GenaiListScenarioSetsParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterEnum
 
-typealias GenaiListScenarioSetsParameterEnumed8b0d4b =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterEnumed8b0d4b
+typealias GenaiListScenarioSetsParameterEnumed8b0d4b = dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterEnumed8b0d4b
 
-typealias GenaiListScenarioSetsParameterItemEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterItemEnum
+typealias GenaiListScenarioSetsParameterItemEnum = dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterItemEnum
 
-typealias GenaiListScenarioSetsParameterItemEnuma4431f49 =
-    dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterItemEnuma4431f49
+typealias GenaiListScenarioSetsParameterItemEnuma4431f49 = dev.octri.showcase.digitalocean.models.GenaiListScenarioSetsParameterItemEnuma4431f49
 
-typealias GenaiListScenariosParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListScenariosParameterEnum
+typealias GenaiListScenariosParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListScenariosParameterEnum
 
-typealias GenaiListScenariosParameterEnum4d4369ed =
-    dev.octri.showcase.digitalocean.models.GenaiListScenariosParameterEnum4d4369ed
+typealias GenaiListScenariosParameterEnum4d4369ed = dev.octri.showcase.digitalocean.models.GenaiListScenariosParameterEnum4d4369ed
 
-typealias GenaiListSimulationEpisodesParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterEnum
+typealias GenaiListSimulationEpisodesParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterEnum
 
-typealias GenaiListSimulationEpisodesParameterEnumb5f03e8f =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterEnumb5f03e8f
+typealias GenaiListSimulationEpisodesParameterEnumb5f03e8f = dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterEnumb5f03e8f
 
-typealias GenaiListSimulationEpisodesParameterItemEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterItemEnum
+typealias GenaiListSimulationEpisodesParameterItemEnum = dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterItemEnum
 
-typealias GenaiListSimulationEpisodesParameterItemEnumcabd4d0f =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterItemEnumcabd4d0f
+typealias GenaiListSimulationEpisodesParameterItemEnumcabd4d0f = dev.octri.showcase.digitalocean.models.GenaiListSimulationEpisodesParameterItemEnumcabd4d0f
 
-typealias GenaiListSimulationRunsParameterEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterEnum
+typealias GenaiListSimulationRunsParameterEnum = dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterEnum
 
-typealias GenaiListSimulationRunsParameterEnum6e02f402 =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterEnum6e02f402
+typealias GenaiListSimulationRunsParameterEnum6e02f402 = dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterEnum6e02f402
 
-typealias GenaiListSimulationRunsParameterItemEnum =
-    dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterItemEnum
+typealias GenaiListSimulationRunsParameterItemEnum = dev.octri.showcase.digitalocean.models.GenaiListSimulationRunsParameterItemEnum
 
 typealias GeneratedImage = dev.octri.showcase.digitalocean.models.GeneratedImage
 
@@ -435,14 +365,11 @@ typealias GetToolbeltResponse = dev.octri.showcase.digitalocean.models.GetToolbe
 
 typealias GetToolHealthResponse = dev.octri.showcase.digitalocean.models.GetToolHealthResponse
 
-typealias GetToolHealthResponseHistory =
-    dev.octri.showcase.digitalocean.models.GetToolHealthResponseHistory
+typealias GetToolHealthResponseHistory = dev.octri.showcase.digitalocean.models.GetToolHealthResponseHistory
 
-typealias GetToolHealthResponseHistoryPointsItem =
-    dev.octri.showcase.digitalocean.models.GetToolHealthResponseHistoryPointsItem
+typealias GetToolHealthResponseHistoryPointsItem = dev.octri.showcase.digitalocean.models.GetToolHealthResponseHistoryPointsItem
 
-typealias GetTriggerExecutionResponse =
-    dev.octri.showcase.digitalocean.models.GetTriggerExecutionResponse
+typealias GetTriggerExecutionResponse = dev.octri.showcase.digitalocean.models.GetTriggerExecutionResponse
 
 typealias GetTriggerResponse = dev.octri.showcase.digitalocean.models.GetTriggerResponse
 
@@ -452,8 +379,7 @@ typealias GlbSettings = dev.octri.showcase.digitalocean.models.GlbSettings
 
 typealias GlbSettingsCdn = dev.octri.showcase.digitalocean.models.GlbSettingsCdn
 
-typealias GlbSettingsTargetProtocolEnum =
-    dev.octri.showcase.digitalocean.models.GlbSettingsTargetProtocolEnum
+typealias GlbSettingsTargetProtocolEnum = dev.octri.showcase.digitalocean.models.GlbSettingsTargetProtocolEnum
 
 typealias GpuInfo = dev.octri.showcase.digitalocean.models.GpuInfo
 
@@ -461,11 +387,9 @@ typealias GpuInfoVram = dev.octri.showcase.digitalocean.models.GpuInfoVram
 
 typealias Grant = dev.octri.showcase.digitalocean.models.Grant
 
-typealias HarnessCreateSessionWorkspaceTransferDirectionEnum =
-    dev.octri.showcase.digitalocean.models.HarnessCreateSessionWorkspaceTransferDirectionEnum
+typealias HarnessCreateSessionWorkspaceTransferDirectionEnum = dev.octri.showcase.digitalocean.models.HarnessCreateSessionWorkspaceTransferDirectionEnum
 
-typealias HarnessListConfigSessionsParameterEnum =
-    dev.octri.showcase.digitalocean.models.HarnessListConfigSessionsParameterEnum
+typealias HarnessListConfigSessionsParameterEnum = dev.octri.showcase.digitalocean.models.HarnessListConfigSessionsParameterEnum
 
 typealias HealthCheck = dev.octri.showcase.digitalocean.models.HealthCheck
 
@@ -473,8 +397,7 @@ typealias HealthCheckProtocolEnum = dev.octri.showcase.digitalocean.models.Healt
 
 typealias HealthMetrics = dev.octri.showcase.digitalocean.models.HealthMetrics
 
-typealias HealthMetricsDataStatusEnum =
-    dev.octri.showcase.digitalocean.models.HealthMetricsDataStatusEnum
+typealias HealthMetricsDataStatusEnum = dev.octri.showcase.digitalocean.models.HealthMetricsDataStatusEnum
 
 typealias HealthSnapshot = dev.octri.showcase.digitalocean.models.HealthSnapshot
 
@@ -498,23 +421,17 @@ typealias ImageActionTransfer = dev.octri.showcase.digitalocean.models.ImageActi
 
 typealias ImageDescription = dev.octri.showcase.digitalocean.models.ImageDescription
 
-typealias ImageGenPartialImageEvent =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEvent
+typealias ImageGenPartialImageEvent = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEvent
 
-typealias ImageGenPartialImageEventBackgroundEnum =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventBackgroundEnum
+typealias ImageGenPartialImageEventBackgroundEnum = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventBackgroundEnum
 
-typealias ImageGenPartialImageEventOutputFormatEnum =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventOutputFormatEnum
+typealias ImageGenPartialImageEventOutputFormatEnum = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventOutputFormatEnum
 
-typealias ImageGenPartialImageEventQualityEnum =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventQualityEnum
+typealias ImageGenPartialImageEventQualityEnum = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventQualityEnum
 
-typealias ImageGenPartialImageEventSizeEnum =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventSizeEnum
+typealias ImageGenPartialImageEventSizeEnum = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventSizeEnum
 
-typealias ImageGenPartialImageEventTypeEnum =
-    dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventTypeEnum
+typealias ImageGenPartialImageEventTypeEnum = dev.octri.showcase.digitalocean.models.ImageGenPartialImageEventTypeEnum
 
 typealias ImageName = dev.octri.showcase.digitalocean.models.ImageName
 

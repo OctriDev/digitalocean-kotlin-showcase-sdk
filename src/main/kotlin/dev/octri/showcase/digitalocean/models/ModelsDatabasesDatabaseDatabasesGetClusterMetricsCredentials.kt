@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `DatabaseMetricsAuth` API schema. */
+/**
+ * Typed representation of the `DatabaseMetricsAuth` API schema.
+ */
 data class DatabaseMetricsAuth(
-    /** Optional object value serialized in the `credentials` wire field. */
+    /**
+     * Optional object value serialized in the `credentials` wire field.
+     */
     val credentials: DatabaseMetricsCredentials? = null
 )

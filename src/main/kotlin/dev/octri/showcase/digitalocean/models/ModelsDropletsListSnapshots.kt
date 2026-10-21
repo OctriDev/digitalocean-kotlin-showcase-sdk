@@ -3,11 +3,17 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllDropletSnapshots` API schema. */
+/**
+ * Typed representation of the `AllDropletSnapshots` API schema.
+ */
 data class AllDropletSnapshots(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val snapshots: List<DropletSnapshot>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )

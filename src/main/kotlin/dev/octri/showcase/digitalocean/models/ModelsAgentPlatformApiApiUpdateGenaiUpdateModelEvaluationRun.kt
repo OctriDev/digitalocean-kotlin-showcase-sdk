@@ -3,19 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiUpdateModelEvaluationRunInputPublic` API schema. */
+/**
+ * Typed representation of the `ApiUpdateModelEvaluationRunInputPublic` API schema.
+ */
 data class ApiUpdateModelEvaluationRunInputPublic(
     /**
-     * UUID of the model evaluation run to update. Returned by `CreateModelEvaluationRun` and listed
-     * via `ListModelEvaluationRuns`.
+     * UUID of the model evaluation run to update. Returned by `CreateModelEvaluationRun` and listed via `ListModelEvaluationRuns`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("eval_run_uuid") val evalRunUuid: String? = null,
-    /** Optional new display name for the evaluation run (max 255 characters). */
-    val name: String? = null,
+    /**
+     * Optional new display name for the evaluation run (max 255 characters).
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `ApiUpdateModelEvaluationRunOutput` API schema. */
+/**
+ * Typed representation of the `ApiUpdateModelEvaluationRunOutput` API schema.
+ */
 data class ApiUpdateModelEvaluationRunOutput(
-    /** Model Evaluation Run Summary - lightweight view used in run history list. */
+    /**
+     * Model Evaluation Run Summary - lightweight view used in run history list.
+     */
     val run: ApiModelEvaluationRunSummary? = null
 )

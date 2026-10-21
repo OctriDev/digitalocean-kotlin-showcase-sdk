@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListWorkspacesOutput` API schema. */
+/**
+ * Typed representation of the `ApiListWorkspacesOutput` API schema.
+ */
 data class ApiListWorkspacesOutput(
-    /** Workspaces */
+    /**
+     * Workspaces
+     */
     val workspaces: List<ApiWorkspace>? = null
 )

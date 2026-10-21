@@ -10,66 +10,22 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object KubernetesAddRegistryOperation {
     /**
-     * To integrate the container registry with Kubernetes clusters, send a POST request to
-     * `/v2/kubernetes/registry`.
+     * To integrate the container registry with Kubernetes clusters, send a POST request to `/v2/kubernetes/registry`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      */
-    fun kubernetesAddRegistry(
-        clientConfig: ClientConfig,
-        clusterUuids: List<String>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/kubernetes/registry",
-                config = clientConfig,
-                body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))),
-                operationId = "kubernetesAddRegistry",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun kubernetesAddRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/kubernetes/registry", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))), operationId = "kubernetesAddRegistry", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object KubernetesRemoveRegistryOperation {
     /**
-     * To remove the container registry from Kubernetes clusters, send a DELETE request to
-     * `/v2/kubernetes/registry`.
+     * To remove the container registry from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registry`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      */
-    fun kubernetesRemoveRegistry(
-        clientConfig: ClientConfig,
-        clusterUuids: List<String>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/kubernetes/registry",
-                config = clientConfig,
-                body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))),
-                operationId = "kubernetesRemoveRegistry",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun kubernetesRemoveRegistry(clientConfig: ClientConfig, clusterUuids: List<String>? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/registry", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids))), operationId = "kubernetesRemoveRegistry", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

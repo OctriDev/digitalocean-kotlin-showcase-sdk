@@ -3,135 +3,69 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class ProjectsNamespace(private val clientConfig: ClientConfig) {
-    /** To list all your projects, send a GET request to `/v2/projects`. */
-    fun list(
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): ProjectsList {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsList(
-            clientConfig,
-            perPage,
-            page,
-            options,
-        )
-    }
-
-    /** To create a project, send a POST request to `/v2/projects`. */
-    fun create(
-        name: String,
-        purpose: String,
-        description: String? = null,
-        environment: ProjectsCreateEnvironmentEnum? = null,
-        options: RequestOptions? = null,
-    ): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsCreate(
-            clientConfig,
-            name,
-            purpose,
-            description,
-            environment,
-            options,
-        )
-    }
-
-    /** To get your default project, send a GET request to `/v2/projects/default`. */
-    fun getDefault(options: RequestOptions? = null): DefaultProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsGetDefault(
-            clientConfig,
-            options,
-        )
-    }
-
     /**
-     * To update you default project, send a PUT request to `/v2/projects/default`. All of the
-     * following attributes must be sent.
+     * To list all your projects, send a GET request to `/v2/projects`.
      */
-    fun updateDefault(
-        name: String,
-        description: String,
-        purpose: String,
-        environment: ProjectsUpdateDefaultEnvironmentEnum,
-        isDefault: Boolean,
-        options: RequestOptions? = null,
-    ): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsUpdateDefault(
-            clientConfig,
-            name,
-            description,
-            purpose,
-            environment,
-            isDefault,
-            options,
-        )
+    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ProjectsList {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsList(clientConfig, perPage, page, options)
     }
 
     /**
-     * To update only specific attributes of your default project, send a PATCH request to
-     * `/v2/projects/default`. At least one of the following attributes needs to be sent.
+     * To create a project, send a POST request to `/v2/projects`.
+     */
+    fun create(name: String, purpose: String, description: String? = null, environment: ProjectsCreateEnvironmentEnum? = null, options: RequestOptions? = null): ExistingProject {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsCreate(clientConfig, name, purpose, description, environment, options)
+    }
+
+    /**
+     * To get your default project, send a GET request to `/v2/projects/default`.
+     */
+    fun getDefault(options: RequestOptions? = null): DefaultProject {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsGetDefault(clientConfig, options)
+    }
+
+    /**
+     * To update you default project, send a PUT request to `/v2/projects/default`. All of the following attributes must be sent.
+     */
+    fun updateDefault(name: String, description: String, purpose: String, environment: ProjectsUpdateDefaultEnvironmentEnum, isDefault: Boolean, options: RequestOptions? = null): ExistingProject {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsUpdateDefault(clientConfig, name, description, purpose, environment, isDefault, options)
+    }
+
+    /**
+     * To update only specific attributes of your default project, send a PATCH request to `/v2/projects/default`. At least one of the following attributes needs to be sent.
      */
     fun patchDefault(body: ProjectRequest, options: RequestOptions? = null): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsPatchDefault(
-            clientConfig,
-            body,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsPatchDefault(clientConfig, body, options)
     }
 
-    /** To get a project, send a GET request to `/v2/projects/$PROJECT_ID`. */
+    /**
+     * To get a project, send a GET request to `/v2/projects/$PROJECT_ID`.
+     */
     fun get(projectId: String, options: RequestOptions? = null): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsGet(
-            clientConfig,
-            projectId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsGet(clientConfig, projectId, options)
     }
 
     /**
-     * To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`. All of the following
-     * attributes must be sent.
+     * To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`. All of the following attributes must be sent.
      */
-    fun update(
-        request: dev.octri.showcase.digitalocean.methods.Projects.ProjectsUpdateRequest,
-        options: RequestOptions? = null,
-    ): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsUpdate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.digitalocean.methods.Projects.ProjectsUpdateRequest, options: RequestOptions? = null): ExistingProject {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsUpdate(clientConfig, request, options)
     }
 
     /**
-     * To update only specific attributes of a project, send a PATCH request to
-     * `/v2/projects/$PROJECT_ID`. At least one of the following attributes needs to be sent.
+     * To update only specific attributes of a project, send a PATCH request to `/v2/projects/$PROJECT_ID`. At least one of the following attributes needs to be sent.
      */
-    fun patch(
-        projectId: String,
-        body: ProjectRequest,
-        options: RequestOptions? = null,
-    ): ExistingProject {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsPatch(
-            clientConfig,
-            projectId,
-            body,
-            options,
-        )
+    fun patch(projectId: String, body: ProjectRequest, options: RequestOptions? = null): ExistingProject {
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsPatch(clientConfig, projectId, body, options)
     }
 
     /**
-     * To delete a project, send a DELETE request to `/v2/projects/$PROJECT_ID`. To be deleted, a
-     * project must not have any resources assigned to it. Any existing resources must first be
-     * reassigned or destroyed, or you will receive a 412 error. A successful request will receive a
-     * 204 status code with no body in response. This indicates that the request was processed
-     * successfully.
+     * To delete a project, send a DELETE request to `/v2/projects/$PROJECT_ID`. To be deleted, a project must not have any resources assigned to it. Any existing resources must first be reassigned or destroyed, or you will receive a 412 error. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      */
     fun delete(projectId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.Projects.projectsDelete(
-            clientConfig,
-            projectId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Projects.projectsDelete(clientConfig, projectId, options)
     }
+
 }

@@ -3,67 +3,92 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Settings for scaling the component based on CPU utilization. */
+/**
+ * Settings for scaling the component based on CPU utilization.
+ */
 data class AppAutoscalingSpecMetricsCpu(
-    /** The average target CPU utilization for the component. */
+    /**
+     * The average target CPU utilization for the component.
+     */
     val percent: Long? = null
 )
 
-/** The metrics that the component is scaled on. */
+/**
+ * The metrics that the component is scaled on.
+ */
 data class AppAutoscalingSpecMetrics(
-    /** Settings for scaling the component based on CPU utilization. */
+    /**
+     * Settings for scaling the component based on CPU utilization.
+     */
     val cpu: AppAutoscalingSpecMetricsCpu? = null
 )
 
-/** Configuration for automatically scaling this component based on metrics. */
+/**
+ * Configuration for automatically scaling this component based on metrics.
+ */
 data class AppAutoscalingSpec(
-    /** The minimum amount of instances for this component. */
-    @com.fasterxml.jackson.annotation.JsonProperty("min_instance_count")
-    val minInstanceCount: Long? = null,
     /**
-     * The maximum amount of instances for this component. Maximum 250. Consider using a larger
-     * instance size if your application requires more than 250 instances.
+     * The minimum amount of instances for this component.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_instance_count")
-    val maxInstanceCount: Long? = null,
-    /** The metrics that the component is scaled on. */
-    val metrics: AppAutoscalingSpecMetrics? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("min_instance_count") val minInstanceCount: Long? = null,
+    /**
+     * The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_instance_count") val maxInstanceCount: Long? = null,
+    /**
+     * The metrics that the component is scaled on.
+     */
+    val metrics: AppAutoscalingSpecMetrics? = null
 )
 
-/** Settings for scaling the component based on requests per second. */
+/**
+ * Settings for scaling the component based on requests per second.
+ */
 data class AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond(
-    /** The target number of requests per second per instance for the component. */
+    /**
+     * The target number of requests per second per instance for the component.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_instance") val perInstance: Long? = null
 )
 
-/** Settings for scaling the component based on request duration. */
+/**
+ * Settings for scaling the component based on request duration.
+ */
 data class AppAutoscalingSpecServiceVariant1MetricsRequestDuration(
-    /** The p95 target request duration in milliseconds for the component. */
-    @com.fasterxml.jackson.annotation.JsonProperty("p95_milliseconds")
-    val p95Milliseconds: Long? = null
-)
-
-/** Optional object value serialized in the `metrics` wire field. */
-data class AppAutoscalingSpecServiceVariant1Metrics(
-    /** Settings for scaling the component based on requests per second. */
-    @com.fasterxml.jackson.annotation.JsonProperty("requests_per_second")
-    val requestsPerSecond: AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond? = null,
-    /** Settings for scaling the component based on request duration. */
-    @com.fasterxml.jackson.annotation.JsonProperty("request_duration")
-    val requestDuration: AppAutoscalingSpecServiceVariant1MetricsRequestDuration? = null,
-)
-
-/** Typed representation of the `AppAutoscalingSpecService` API schema. */
-data class AppAutoscalingSpecService(
-    /** The minimum amount of instances for this component. */
-    @com.fasterxml.jackson.annotation.JsonProperty("min_instance_count")
-    val minInstanceCount: Long? = null,
     /**
-     * The maximum amount of instances for this component. Maximum 250. Consider using a larger
-     * instance size if your application requires more than 250 instances.
+     * The p95 target request duration in milliseconds for the component.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_instance_count")
-    val maxInstanceCount: Long? = null,
-    /** Optional object value serialized in the `metrics` wire field. */
-    val metrics: AppAutoscalingSpecServiceVariant1Metrics? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("p95_milliseconds") val p95Milliseconds: Long? = null
+)
+
+/**
+ * Optional object value serialized in the `metrics` wire field.
+ */
+data class AppAutoscalingSpecServiceVariant1Metrics(
+    /**
+     * Settings for scaling the component based on requests per second.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("requests_per_second") val requestsPerSecond: AppAutoscalingSpecServiceVariant1MetricsRequestsPerSecond? = null,
+    /**
+     * Settings for scaling the component based on request duration.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("request_duration") val requestDuration: AppAutoscalingSpecServiceVariant1MetricsRequestDuration? = null
+)
+
+/**
+ * Typed representation of the `AppAutoscalingSpecService` API schema.
+ */
+data class AppAutoscalingSpecService(
+    /**
+     * The minimum amount of instances for this component.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("min_instance_count") val minInstanceCount: Long? = null,
+    /**
+     * The maximum amount of instances for this component. Maximum 250. Consider using a larger instance size if your application requires more than 250 instances.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_instance_count") val maxInstanceCount: Long? = null,
+    /**
+     * Optional object value serialized in the `metrics` wire field.
+     */
+    val metrics: AppAutoscalingSpecServiceVariant1Metrics? = null
 )

@@ -11,41 +11,16 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesUpdateMaintenanceWindowOperation {
     /**
-     * To configure the window when automatic maintenance should be performed for a database
-     * cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request
-     * will receive a 204 No Content status code with no body in response.
+     * To configure the window when automatic maintenance should be performed for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`. A successful request will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param day The day of the week on which to apply maintenance updates.
-     * @param hour The hour in UTC at which maintenance updates will be applied in 24 hour format.
+     * @param hour The hour in UTC at which maintenance updates will be applied in 24
+     *   hour format.
      */
-    fun databasesUpdateMaintenanceWindow(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        day: String,
-        hour: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateMaintenanceWindow(clientConfig: ClientConfig, databaseClusterUuid: String, day: String, hour: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/maintenance",
-                config = clientConfig,
-                body = SdkClient.bodyMap("day" to (day), "hour" to (hour)),
-                operationId = "databasesUpdateMaintenanceWindow",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/maintenance", config = clientConfig, body = SdkClient.bodyMap("day" to (day), "hour" to (hour)), operationId = "databasesUpdateMaintenanceWindow", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

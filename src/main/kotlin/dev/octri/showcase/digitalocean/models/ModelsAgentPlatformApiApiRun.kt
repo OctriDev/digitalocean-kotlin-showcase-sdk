@@ -3,24 +3,34 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Run an evaluation test case. */
+/**
+ * Run an evaluation test case.
+ */
 data class ApiRunEvaluationTestCaseInputPublic(
-    /** Agent deployment names to run the test case against. */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_deployment_names")
-    val agentDeploymentNames: List<String>? = null,
-    /** Agent UUIDs to run the test case against (legacy agents). */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids")
-    val agentUuids: List<String>? = null,
-    /** The name of the run. */
+    /**
+     * Agent deployment names to run the test case against.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_deployment_names") val agentDeploymentNames: List<String>? = null,
+    /**
+     * Agent UUIDs to run the test case against (legacy agents).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids") val agentUuids: List<String>? = null,
+    /**
+     * The name of the run.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_name") val runName: String? = null,
-    /** Test-case UUID to run */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid")
-    val testCaseUuid: String? = null,
+    /**
+     * Test-case UUID to run
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid") val testCaseUuid: String? = null
 )
 
-/** Typed representation of the `ApiRunEvaluationTestCaseOutput` API schema. */
+/**
+ * Typed representation of the `ApiRunEvaluationTestCaseOutput` API schema.
+ */
 data class ApiRunEvaluationTestCaseOutput(
-    /** Optional array value serialized in the `evaluation_run_uuids` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_run_uuids")
-    val evaluationRunUuids: List<String>? = null
+    /**
+     * Optional array value serialized in the `evaluation_run_uuids` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_run_uuids") val evaluationRunUuids: List<String>? = null
 )

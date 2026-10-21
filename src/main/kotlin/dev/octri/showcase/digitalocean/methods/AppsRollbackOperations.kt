@@ -12,167 +12,58 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsCreateRollbackOperation {
     /**
-     * Rollback an app to a previous deployment. A new deployment will be created to perform the
-     * rollback. The app will be pinned to the rollback deployment preventing any new deployments
-     * from being created, either manually or through Auto Deploy on Push webhooks. To resume
-     * deployments, the rollback must be either committed or reverted. It is recommended to use the
-     * Validate App Rollback endpoint to double check if the rollback is valid and if there are any
-     * warnings.
+     * Rollback an app to a previous deployment. A new deployment will be created to perform the rollback. The app will be pinned to the rollback deployment preventing any new deployments from being created, either manually or through Auto Deploy on Push webhooks. To resume deployments, the rollback must be either committed or reverted. It is recommended to use the Validate App Rollback endpoint to double check if the rollback is valid and if there are any warnings.
      *
      * @param appId The app ID
      * @param deploymentId The ID of the deployment to rollback to.
-     * @param skipPin Whether to skip pinning the rollback deployment. If false, the rollback
-     *   deployment will be pinned and any new deployments including Auto Deploy on Push hooks will
-     *   be disabled until the rollback is either manually committed or reverted via the
-     *   CommitAppRollback or RevertAppRollback endpoints respectively. If true, the rollback will
-     *   be immediately committed and the app will remain unpinned.
+     * @param skipPin Whether to skip pinning the rollback deployment. If false, the
+     *   rollback deployment will be pinned and any new deployments including Auto
+     *   Deploy on Push hooks will be disabled until the rollback is either manually
+     *   committed or reverted via the CommitAppRollback or RevertAppRollback endpoints
+     *   respectively. If true, the rollback will be immediately committed and the app
+     *   will remain unpinned.
      */
-    fun appsCreateRollback(
-        clientConfig: ClientConfig,
-        appId: String,
-        deploymentId: String? = null,
-        skipPin: Boolean? = null,
-        options: RequestOptions? = null,
-    ): AppsDeploymentResponse {
-        return SdkClient.request<AppsDeploymentResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "deployment_id" to (SdkClient.omitIfNull(deploymentId)),
-                            "skip_pin" to (SdkClient.omitIfNull(skipPin)),
-                        ),
-                    operationId = "appsCreateRollback",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsCreateRollback(clientConfig: ClientConfig, appId: String, deploymentId: String? = null, skipPin: Boolean? = null, options: RequestOptions? = null): AppsDeploymentResponse {
+        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback", config = clientConfig, body = SdkClient.bodyMap("deployment_id" to (SdkClient.omitIfNull(deploymentId)), "skip_pin" to (SdkClient.omitIfNull(skipPin))), operationId = "appsCreateRollback", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AppsValidateRollbackOperation {
     /**
-     * Check whether an app can be rolled back to a specific deployment. This endpoint can also be
-     * used to check if there are any warnings or validation conditions that will cause the rollback
-     * to proceed under unideal circumstances. For example, if a component must be rebuilt as part
-     * of the rollback causing it to take longer than usual.
+     * Check whether an app can be rolled back to a specific deployment. This endpoint can also be used to check if there are any warnings or validation conditions that will cause the rollback to proceed under unideal circumstances. For example, if a component must be rebuilt as part of the rollback causing it to take longer than usual.
      *
      * @param appId The app ID
      * @param deploymentId The ID of the deployment to rollback to.
-     * @param skipPin Whether to skip pinning the rollback deployment. If false, the rollback
-     *   deployment will be pinned and any new deployments including Auto Deploy on Push hooks will
-     *   be disabled until the rollback is either manually committed or reverted via the
-     *   CommitAppRollback or RevertAppRollback endpoints respectively. If true, the rollback will
-     *   be immediately committed and the app will remain unpinned.
+     * @param skipPin Whether to skip pinning the rollback deployment. If false, the
+     *   rollback deployment will be pinned and any new deployments including Auto
+     *   Deploy on Push hooks will be disabled until the rollback is either manually
+     *   committed or reverted via the CommitAppRollback or RevertAppRollback endpoints
+     *   respectively. If true, the rollback will be immediately committed and the app
+     *   will remain unpinned.
      */
-    fun appsValidateRollback(
-        clientConfig: ClientConfig,
-        appId: String,
-        deploymentId: String? = null,
-        skipPin: Boolean? = null,
-        options: RequestOptions? = null,
-    ): AppsValidateRollback {
-        return SdkClient.request<AppsValidateRollback>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/validate",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "deployment_id" to (SdkClient.omitIfNull(deploymentId)),
-                            "skip_pin" to (SdkClient.omitIfNull(skipPin)),
-                        ),
-                    operationId = "appsValidateRollback",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsValidateRollback(clientConfig: ClientConfig, appId: String, deploymentId: String? = null, skipPin: Boolean? = null, options: RequestOptions? = null): AppsValidateRollback {
+        return SdkClient.request<AppsValidateRollback>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/validate", config = clientConfig, body = SdkClient.bodyMap("deployment_id" to (SdkClient.omitIfNull(deploymentId)), "skip_pin" to (SdkClient.omitIfNull(skipPin))), operationId = "appsValidateRollback", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AppsCommitRollbackOperation {
     /**
-     * Commit an app rollback. This action permanently applies the rollback and unpins the app to
-     * resume new deployments.
+     * Commit an app rollback. This action permanently applies the rollback and unpins the app to resume new deployments.
      *
      * @param appId The app ID
      */
-    fun appsCommitRollback(
-        clientConfig: ClientConfig,
-        appId: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "POST",
-                "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/commit",
-                config = clientConfig,
-                operationId = "appsCommitRollback",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+    fun appsCommitRollback(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/commit", config = clientConfig, operationId = "appsCommitRollback", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object AppsRevertRollbackOperation {
     /**
-     * Revert an app rollback. This action reverts the active rollback by creating a new deployment
-     * from the latest app spec prior to the rollback and unpins the app to resume new deployments.
+     * Revert an app rollback. This action reverts the active rollback by creating a new deployment from the latest app spec prior to the rollback and unpins the app to resume new deployments.
      *
      * @param appId The app ID
      */
-    fun appsRevertRollback(
-        clientConfig: ClientConfig,
-        appId: String,
-        options: RequestOptions? = null,
-    ): AppsDeploymentResponse {
-        return SdkClient.request<AppsDeploymentResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/revert",
-                    config = clientConfig,
-                    operationId = "appsRevertRollback",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsRevertRollback(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppsDeploymentResponse {
+        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/rollback/revert", config = clientConfig, operationId = "appsRevertRollback", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

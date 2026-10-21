@@ -3,33 +3,20 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class OrganizationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To create a new team within an organization, send a POST request to `/v2/organizations/team`.
-     * This endpoint must be called in an organization context. Optionally include `invitations` to
-     * invite users to the new team. The `owner` role cannot be assigned via invitation.
+     * To create a new team within an organization, send a POST request to `/v2/organizations/team`. This endpoint must be called in an organization context. Optionally include `invitations` to invite users to the new team. The `owner` role cannot be assigned via invitation.
      */
-    fun createTeam(
-        name: String,
-        invitations: List<TeamInvitation>? = null,
-        options: RequestOptions? = null,
-    ): CreateTeamResponse {
-        return dev.octri.showcase.digitalocean.methods.Organizations.organizationsCreateTeam(
-            clientConfig,
-            name,
-            invitations,
-            options,
-        )
+    fun createTeam(name: String, invitations: List<TeamInvitation>? = null, options: RequestOptions? = null): CreateTeamResponse {
+        return dev.octri.showcase.digitalocean.methods.Organizations.organizationsCreateTeam(clientConfig, name, invitations, options)
     }
 
     /**
-     * To list all teams in an organization, send a GET request to `/v2/organizations/teams`. This
-     * endpoint must be called in an organization context.
+     * To list all teams in an organization, send a GET request to `/v2/organizations/teams`. This endpoint must be called in an organization context.
      */
     fun listTeams(options: RequestOptions? = null): ListTeams {
-        return dev.octri.showcase.digitalocean.methods.Organizations.organizationsListTeams(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.Organizations.organizationsListTeams(clientConfig, options)
     }
+
 }

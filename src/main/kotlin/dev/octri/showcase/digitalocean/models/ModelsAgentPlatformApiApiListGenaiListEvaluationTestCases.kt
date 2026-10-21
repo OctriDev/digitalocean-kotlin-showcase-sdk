@@ -3,12 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListEvaluationTestCasesOutput` API schema. */
+/**
+ * Typed representation of the `ApiListEvaluationTestCasesOutput` API schema.
+ */
 data class ApiListEvaluationTestCasesOutput(
     /**
-     * Alternative way of authentication for internal usage only - should not be exposed to public
-     * api
+     * Alternative way of authentication for internal usage only - should not be exposed to public api
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases")
-    val evaluationTestCases: List<ApiEvaluationTestCase>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases") val evaluationTestCases: List<ApiEvaluationTestCase>? = null
 )

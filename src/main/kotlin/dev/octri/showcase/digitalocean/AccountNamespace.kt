@@ -3,12 +3,13 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class AccountNamespace(private val clientConfig: ClientConfig) {
-    /** To show information about the current user account, send a GET request to `/v2/account`. */
+    /**
+     * To show information about the current user account, send a GET request to `/v2/account`.
+     */
     fun get(options: RequestOptions? = null): AccountResponse {
-        return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGet(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGet(clientConfig, options)
     }
+
 }

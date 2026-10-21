@@ -3,19 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Parameters for Update Workspace */
+/**
+ * Parameters for Update Workspace
+ */
 data class ApiUpdateWorkspaceInputPublic(
-    /** The new description of the workspace */
+    /**
+     * The new description of the workspace
+     */
     val description: String? = null,
-    /** The new name of the workspace */
+    /**
+     * The new name of the workspace
+     */
     val name: String? = null,
-    /** Workspace UUID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid")
-    val workspaceUuid: String? = null,
+    /**
+     * Workspace UUID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid") val workspaceUuid: String? = null
 )
 
-/** Typed representation of the `ApiUpdateWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiUpdateWorkspaceOutput` API schema.
+ */
 data class ApiUpdateWorkspaceOutput(
-    /** Optional object value serialized in the `workspace` wire field. */
+    /**
+     * Optional object value serialized in the `workspace` wire field.
+     */
     val workspace: ApiWorkspace? = null
 )

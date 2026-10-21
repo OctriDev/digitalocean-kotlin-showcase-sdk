@@ -15,99 +15,37 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayUsersListOperation {
     /**
-     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of
-     * connections that are not revoked, and actors with limit overrides. Only sessions and
-     * connections you can see count. Offset-paged with page and `per_page`.
+     * Returns the user IDs known for your team: session `actor_id` values, the `user_id` of connections that are not revoked, and actors with limit overrides. Only sessions and connections you can see count. Offset-paged with page and `per_page`.
      *
      * @param userId User ID prefix to return. An empty value returns all users.
-     * @param sort `user_id`|`created_at`|`session_count`|`connection_count`. `created_at` is the
-     *   earliest creation time among the user's sessions, connections, and limit overrides.
-     *   Defaults to `created_at`.
+     * @param sort `user_id`|`created_at`|`session_count`|`connection_count`.
+     *   `created_at` is the earliest creation time among the user's sessions,
+     *   connections, and limit overrides. Defaults to `created_at`.
      * @param sortDirection asc|desc. Defaults to desc.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun usersList(
-        clientConfig: ClientConfig,
-        userId: String? = null,
-        sort: SchemaSchemaEnumae407830? = null,
-        sortDirection: SchemaSchemaEnum4a1468b2? = null,
-        page: Long? = null,
-        perPage: Long? = null,
-        options: RequestOptions? = null,
-    ): ListUsersResponse {
+    fun usersList(clientConfig: ClientConfig, userId: String? = null, sort: SchemaSchemaEnumae407830? = null, sortDirection: SchemaSchemaEnum4a1468b2? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListUsersResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListUsersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/users",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "user_id" to SdkClient.queryValue(userId, "form", true),
-                            "sort" to SdkClient.queryValue(sort, "form", true),
-                            "sort_direction" to SdkClient.queryValue(sortDirection, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "usersList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListUsersResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/users", config = clientConfig, query = mapOf("user_id" to SdkClient.queryValue(userId, "form", true), "sort" to SdkClient.queryValue(sort, "form", true), "sort_direction" to
+    SdkClient.queryValue(sortDirection, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "usersList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayUsersGetOperation {
     /**
-     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user
-     * has none you can see and no limit overrides.
+     * Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user has none you can see and no limit overrides.
      *
      * @param userId User ID.
      */
-    fun usersGet(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GetUserResponse {
-        return SdkClient.request<GetUserResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/users/${SdkClient.encodePathSegment(userId)}",
-                    config = clientConfig,
-                    operationId = "usersGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun usersGet(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): GetUserResponse {
+        return SdkClient.request<GetUserResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "usersGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

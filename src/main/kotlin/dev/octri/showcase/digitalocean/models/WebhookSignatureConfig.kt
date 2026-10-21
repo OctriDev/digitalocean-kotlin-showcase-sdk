@@ -4,8 +4,6 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * Optional HMAC signature configuration for a webhook create or update request. `secret` is
- * write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing
- * secret.
+ * Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
  */
 class WebhookSignatureConfig

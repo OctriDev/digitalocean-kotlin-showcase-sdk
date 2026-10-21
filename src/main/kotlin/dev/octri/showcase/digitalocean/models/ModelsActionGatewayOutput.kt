@@ -5,99 +5,132 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Null on a preview, which stores nothing. */
+/**
+ * Null on a preview, which stores nothing.
+ */
 data class OutputViewAudit(
-    /** When the resource was created. */
+    /**
+     * When the resource was created.
+     */
     val createdAt: OffsetDateTime? = null,
-    /** When the resource was last modified. */
+    /**
+     * When the resource was last modified.
+     */
     val updatedAt: OffsetDateTime? = null,
-    /** Set once the resource is deleted. */
-    val deletedAt: OffsetDateTime? = null,
-)
-
-/** Output view as your team sees it. */
-data class OutputView(
-    /** Output view ID, for example `ov_` followed by 32 hex digits. Empty on a preview. */
-    @com.fasterxml.jackson.annotation.JsonProperty("view_id") val viewId: String? = null,
     /**
-     * The opaque identity of the exact tool version the view is bound to; tool and version are its
-     * readable coordinates.
+     * Set once the resource is deleted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
-    /** The provider-qualified tool slug, for example `exa_search`. */
-    val tool: String? = null,
-    /** The tool version, for example `v3`. */
-    val version: String? = null,
-    /**
-     * Your team's ID on your team's views, and empty for a view DigitalOcean publishes to every
-     * team.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_id") val teamId: String? = null,
-    /** View name, unique per tool version among its owner's views. */
-    val name: String? = null,
-    /** View description. */
-    val description: String? = null,
-    /** `OUTPUT_VIEW_KIND_PROJECTION` or `OUTPUT_VIEW_KIND_TRANSFORM`. */
-    val kind: OutputViewKindEnum? = null,
-    /**
-     * The dotted output paths a projection keeps; arrays are traversed element-wise. Empty for a
-     * transform.
-     */
-    val fields: List<String>? = null,
-    /** The JSON Schema every result of this view satisfies. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
-    val outputSchema: Map<String, Any>? = null,
-    /** Null on a preview, which stores nothing. */
-    val audit: OutputViewAudit? = null,
-)
-
-/** Describes a projection of one tool version's output. */
-data class OutputViewCreate(
-    /**
-     * View name. Must match `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$` and be unique per tool version within
-     * your team.
-     */
-    val name: String,
-    /**
-     * Output paths to keep, 1 to 64 of them. Each is a dotted path of up to 8 segments made of
-     * `[A-Za-z0-9_-]`, and must be declared by the tool's output schema; arrays are traversed
-     * element-wise. Paths may not repeat or be a prefix of one another. The tool version must
-     * declare an object output schema.
-     */
-    val fields: List<String>,
-    /**
-     * Exactly one of tool or `tool_id` selects the tool version. tool is a provider-qualified slug,
-     * optionally pinned as `<tool>@<version>`. You can bind only the released version your catalog
-     * exposes: an unpinned slug resolves it and the response echoes it as version; a pin must equal
-     * it, and a `tool_id` (the opaque identity from tool search) must be that version. Any other
-     * version returns 404.
-     */
-    val tool: String? = null,
-    /** Opaque ID of the tool version; see tool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
-    /** Optional description. At most 512 bytes. */
-    val description: String? = null,
+    val deletedAt: OffsetDateTime? = null
 )
 
 /**
- * Carries the same fields as CreateOutputViewRequest. name and description are optional here: when
- * present they are validated as on create, so a form can preview before the view is named.
+ * Output view as your team sees it.
  */
-data class OutputViewPreview(
-    /** Output paths to keep; as on create. */
-    val fields: List<String>,
-    /** Tool slug, optionally pinned; as on create. */
-    val tool: String? = null,
-    /** Opaque ID of the tool version; as on create. */
+data class OutputView(
+    /**
+     * Output view ID, for example `ov_` followed by 32 hex digits. Empty on a preview.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("view_id") val viewId: String? = null,
+    /**
+     * The opaque identity of the exact tool version the view is bound to; tool and version are its readable coordinates.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
-    /** Optional view name, validated as on create when present. */
+    /**
+     * The provider-qualified tool slug, for example `exa_search`.
+     */
+    val tool: String? = null,
+    /**
+     * The tool version, for example `v3`.
+     */
+    val version: String? = null,
+    /**
+     * Your team's ID on your team's views, and empty for a view DigitalOcean publishes to every team.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("team_id") val teamId: String? = null,
+    /**
+     * View name, unique per tool version among its owner's views.
+     */
     val name: String? = null,
-    /** Optional description, validated as on create when present. */
+    /**
+     * View description.
+     */
     val description: String? = null,
+    /**
+     * `OUTPUT_VIEW_KIND_PROJECTION` or `OUTPUT_VIEW_KIND_TRANSFORM`.
+     */
+    val kind: OutputViewKindEnum? = null,
+    /**
+     * The dotted output paths a projection keeps; arrays are traversed element-wise. Empty for a transform.
+     */
+    val fields: List<String>? = null,
+    /**
+     * The JSON Schema every result of this view satisfies.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null,
+    /**
+     * Null on a preview, which stores nothing.
+     */
+    val audit: OutputViewAudit? = null
 )
 
-/** Returns one output view. */
+/**
+ * Describes a projection of one tool version's output.
+ */
+data class OutputViewCreate(
+    /**
+     * View name. Must match `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$` and be unique per tool version within your team.
+     */
+    val name: String,
+    /**
+     * Output paths to keep, 1 to 64 of them. Each is a dotted path of up to 8 segments made of `[A-Za-z0-9_-]`, and must be declared by the tool's output schema; arrays are traversed element-wise. Paths may not repeat or be a prefix of one another. The tool version must declare an object output schema.
+     */
+    val fields: List<String>,
+    /**
+     * Exactly one of tool or `tool_id` selects the tool version. tool is a provider-qualified slug, optionally pinned as `<tool>@<version>`. You can bind only the released version your catalog exposes: an unpinned slug resolves it and the response echoes it as version; a pin must equal it, and a `tool_id` (the opaque identity from tool search) must be that version. Any other version returns 404.
+     */
+    val tool: String? = null,
+    /**
+     * Opaque ID of the tool version; see tool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
+    /**
+     * Optional description. At most 512 bytes.
+     */
+    val description: String? = null
+)
+
+/**
+ * Carries the same fields as CreateOutputViewRequest. name and description are optional here: when present they are validated as on create, so a form can preview before the view is named.
+ */
+data class OutputViewPreview(
+    /**
+     * Output paths to keep; as on create.
+     */
+    val fields: List<String>,
+    /**
+     * Tool slug, optionally pinned; as on create.
+     */
+    val tool: String? = null,
+    /**
+     * Opaque ID of the tool version; as on create.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_id") val toolId: String? = null,
+    /**
+     * Optional view name, validated as on create when present.
+     */
+    val name: String? = null,
+    /**
+     * Optional description, validated as on create when present.
+     */
+    val description: String? = null
+)
+
+/**
+ * Returns one output view.
+ */
 data class OutputViewResponse(
-    /** The output view. */
+    /**
+     * The output view.
+     */
     val view: OutputView? = null
 )

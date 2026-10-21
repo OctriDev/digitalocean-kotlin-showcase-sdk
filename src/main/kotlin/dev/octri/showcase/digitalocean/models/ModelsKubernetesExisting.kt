@@ -3,16 +3,22 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ExistingCluster` API schema. */
+/**
+ * Typed representation of the `ExistingCluster` API schema.
+ */
 data class ExistingCluster(
-    /** Optional object value serialized in the `kubernetes_cluster` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster")
-    val kubernetesCluster: ClusterRead? = null
+    /**
+     * Optional object value serialized in the `kubernetes_cluster` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_cluster") val kubernetesCluster: ClusterRead? = null
 )
 
-/** Typed representation of the `ExistingNodePool` API schema. */
+/**
+ * Typed representation of the `ExistingNodePool` API schema.
+ */
 data class ExistingNodePool(
-    /** Optional object value serialized in the `node_pool` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("node_pool")
-    val nodePool: KubernetesNodePool? = null
+    /**
+     * Optional object value serialized in the `node_pool` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("node_pool") val nodePool: KubernetesNodePool? = null
 )

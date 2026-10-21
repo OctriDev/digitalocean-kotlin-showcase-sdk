@@ -5,269 +5,390 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `ApiEvaluationDataset` API schema. */
+/**
+ * Typed representation of the `ApiEvaluationDataset` API schema.
+ */
 data class ApiEvaluationDataset(
-    /** Time created at. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Name of the dataset. */
+    /**
+     * Time created at.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Name of the dataset.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_name") val datasetName: String? = null,
     /**
-     * EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the surface in
-     * EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
+     * EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the surface in EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("dataset_paradigm")
-    val datasetParadigm: ApiEvaluationDatasetParadigm? = null,
-    /** Optional enumerated value serialized in the `dataset_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("dataset_type")
-    val datasetType: ApiEvaluationDatasetType? = null,
-    /** UUID of the dataset. */
+    @com.fasterxml.jackson.annotation.JsonProperty("dataset_paradigm") val datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+    /**
+     * Optional enumerated value serialized in the `dataset_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("dataset_type") val datasetType: ApiEvaluationDatasetType? = null,
+    /**
+     * UUID of the dataset.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_uuid") val datasetUuid: String? = null,
-    /** The size of the dataset uploaded file in bytes. */
+    /**
+     * The size of the dataset uploaded file in bytes.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_size") val fileSize: String? = null,
-    /** Does the dataset have a ground truth column? */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_ground_truth")
-    val hasGroundTruth: Boolean? = null,
-    /** Number of rows in the dataset. */
-    @com.fasterxml.jackson.annotation.JsonProperty("row_count") val rowCount: Long? = null,
+    /**
+     * Does the dataset have a ground truth column?
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_ground_truth") val hasGroundTruth: Boolean? = null,
+    /**
+     * Number of rows in the dataset.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("row_count") val rowCount: Long? = null
 )
 
-/** Typed representation of the `ApiEvaluationMetric` API schema. */
+/**
+ * Typed representation of the `ApiEvaluationMetric` API schema.
+ */
 data class ApiEvaluationMetric(
     /**
-     * Saved model evaluation presets that reference this metric. Populated for custom metrics when
-     * listing metrics so the dashboard can warn that deleting the metric will also delete these
-     * presets. Empty for built-in metrics.
+     * Saved model evaluation presets that reference this metric. Populated for custom metrics when listing metrics so the dashboard can warn that deleting the metric will also delete these presets. Empty for built-in metrics.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("associated_presets")
-    val associatedPresets: List<ApiAssociatedModelEvaluationPreset>? = null,
-    /** Optional enumerated value serialized in the `category` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("associated_presets") val associatedPresets: List<ApiAssociatedModelEvaluationPreset>? = null,
+    /**
+     * Optional enumerated value serialized in the `category` wire field.
+     */
     val category: ApiEvaluationMetricCategory? = null,
     /**
-     * Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model
-     * response are always included in the judge context.
+     * Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model response are always included in the judge context.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_eval_config")
-    val customEvalConfig: ApiCustomEvaluationMetricConfig? = null,
-    /** Optional `string` value serialized in the `description` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_eval_config") val customEvalConfig: ApiCustomEvaluationMetricConfig? = null,
+    /**
+     * Optional `string` value serialized in the `description` wire field.
+     */
     val description: String? = null,
     /**
-     * Scope that determines whether a metric belongs to agent evaluation or model evaluation. For
-     * backwards compatibility, UNSPECIFIED defaults to agent metrics only in list operations.
+     * Scope that determines whether a metric belongs to agent evaluation or model evaluation. For backwards compatibility, UNSPECIFIED defaults to agent metrics only in list operations.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_scope")
-    val evaluationScope: ApiEvaluationScope? = null,
-    /** If true, the metric is inverted, meaning that a lower value is better. */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_scope") val evaluationScope: ApiEvaluationScope? = null,
+    /**
+     * If true, the metric is inverted, meaning that a lower value is better.
+     */
     val inverted: Boolean? = null,
-    /** Optional `boolean` value serialized in the `is_metric_goal` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_metric_goal")
-    val isMetricGoal: Boolean? = null,
-    /** Optional `string` value serialized in the `metric_name` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `is_metric_goal` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_metric_goal") val isMetricGoal: Boolean? = null,
+    /**
+     * Optional `string` value serialized in the `metric_name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null,
-    /** Optional `int64`-formatted value serialized in the `metric_rank` wire field. */
+    /**
+     * Optional `int64`-formatted value serialized in the `metric_rank` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_rank") val metricRank: Long? = null,
-    /** Optional enumerated value serialized in the `metric_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_type")
-    val metricType: ApiEvaluationMetricType? = null,
-    /** Optional `string` value serialized in the `metric_uuid` wire field. */
+    /**
+     * Optional enumerated value serialized in the `metric_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_type") val metricType: ApiEvaluationMetricType? = null,
+    /**
+     * Optional `string` value serialized in the `metric_uuid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_uuid") val metricUuid: String? = null,
-    /** Optional enumerated value serialized in the `metric_value_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_value_type")
-    val metricValueType: ApiEvaluationMetricValueType? = null,
-    /** The maximum value for the metric. */
+    /**
+     * Optional enumerated value serialized in the `metric_value_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_value_type") val metricValueType: ApiEvaluationMetricValueType? = null,
+    /**
+     * The maximum value for the metric.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("range_max") val rangeMax: Float? = null,
-    /** The minimum value for the metric. */
+    /**
+     * The minimum value for the metric.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("range_min") val rangeMin: Float? = null,
-    /** Distinguishes platform catalog metrics from user-defined LLM-as-judge metrics. */
-    val source: ApiEvaluationMetricSource? = null,
+    /**
+     * Distinguishes platform catalog metrics from user-defined LLM-as-judge metrics.
+     */
+    val source: ApiEvaluationMetricSource? = null
 )
 
-/** Typed representation of the `ApiEvaluationMetricResult` API schema. */
+/**
+ * Typed representation of the `ApiEvaluationMetricResult` API schema.
+ */
 data class ApiEvaluationMetricResult(
-    /** Error description if the metric could not be calculated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_description")
-    val errorDescription: String? = null,
-    /** Metric name */
+    /**
+     * Error description if the metric could not be calculated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_description") val errorDescription: String? = null,
+    /**
+     * Metric name
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null,
-    /** Metric UUID (built-in or custom); stable key for results UI and aggregation. */
+    /**
+     * Metric UUID (built-in or custom); stable key for results UI and aggregation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("metric_uuid") val metricUuid: String? = null,
-    /** Optional enumerated value serialized in the `metric_value_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_value_type")
-    val metricValueType: ApiEvaluationMetricValueType? = null,
-    /** The value of the metric as a number. */
+    /**
+     * Optional enumerated value serialized in the `metric_value_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_value_type") val metricValueType: ApiEvaluationMetricValueType? = null,
+    /**
+     * The value of the metric as a number.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("number_value") val numberValue: Double? = null,
-    /** Reasoning of the metric result. */
+    /**
+     * Reasoning of the metric result.
+     */
     val reasoning: String? = null,
-    /** Outcome of scoring a single metric for one prompt or span. */
+    /**
+     * Outcome of scoring a single metric for one prompt or span.
+     */
     val status: ApiEvaluationMetricResultStatus? = null,
-    /** The value of the metric as a string. */
-    @com.fasterxml.jackson.annotation.JsonProperty("string_value") val stringValue: String? = null,
+    /**
+     * The value of the metric as a string.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("string_value") val stringValue: String? = null
 )
 
-/** Pricing breakdown for an evaluation run. */
+/**
+ * Pricing breakdown for an evaluation run.
+ */
 data class ApiEvaluationPricing(
-    /** Currency code (e.g., "USD"). */
+    /**
+     * Currency code (e.g., "USD").
+     */
     val currency: String? = null,
-    /** Token pricing breakdown for a single model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_pricing")
-    val judgeModelPricing: ApiTokenPricing? = null,
-    /** Pricing per candidate model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("per_candidate_model_pricing")
-    val perCandidateModelPricing: List<ApiModelPricingEntry>? = null,
-    /** Total cost of the evaluation run (all candidates + judge). */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_cost") val totalCost: Double? = null,
+    /**
+     * Token pricing breakdown for a single model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("judge_model_pricing") val judgeModelPricing: ApiTokenPricing? = null,
+    /**
+     * Pricing per candidate model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("per_candidate_model_pricing") val perCandidateModelPricing: List<ApiModelPricingEntry>? = null,
+    /**
+     * Total cost of the evaluation run (all candidates + judge).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_cost") val totalCost: Double? = null
 )
 
-/** Typed representation of the `ApiEvaluationRun` API schema. */
+/**
+ * Typed representation of the `ApiEvaluationRun` API schema.
+ */
 data class ApiEvaluationRun(
-    /** Whether agent is deleted */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_deleted")
-    val agentDeleted: Boolean? = null,
-    /** The agent deployment name */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_deployment_name")
-    val agentDeploymentName: String? = null,
-    /** Agent name */
+    /**
+     * Whether agent is deleted
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_deleted") val agentDeleted: Boolean? = null,
+    /**
+     * The agent deployment name
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_deployment_name") val agentDeploymentName: String? = null,
+    /**
+     * Agent name
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_name") val agentName: String? = null,
-    /** Agent UUID. */
+    /**
+     * Agent UUID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_uuid") val agentUuid: String? = null,
-    /** Version hash */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_version_hash")
-    val agentVersionHash: String? = null,
-    /** Agent workspace uuid */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_workspace_uuid")
-    val agentWorkspaceUuid: String? = null,
-    /** Optional `string` value serialized in the `created_by_user_email` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_email")
-    val createdByUserEmail: String? = null,
-    /** Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_id")
-    val createdByUserId: String? = null,
-    /** The error description */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_description")
-    val errorDescription: String? = null,
-    /** Evaluation run UUID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_run_uuid")
-    val evaluationRunUuid: String? = null,
-    /** Evaluation test case workspace uuid */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_case_workspace_uuid")
-    val evaluationTestCaseWorkspaceUuid: String? = null,
-    /** Run end time. */
-    @com.fasterxml.jackson.annotation.JsonProperty("finished_at")
-    val finishedAt: OffsetDateTime? = null,
-    /** The pass status of the evaluation run based on the star metric. */
+    /**
+     * Version hash
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_version_hash") val agentVersionHash: String? = null,
+    /**
+     * Agent workspace uuid
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_workspace_uuid") val agentWorkspaceUuid: String? = null,
+    /**
+     * Optional `string` value serialized in the `created_by_user_email` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_email") val createdByUserEmail: String? = null,
+    /**
+     * Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_id") val createdByUserId: String? = null,
+    /**
+     * The error description
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_description") val errorDescription: String? = null,
+    /**
+     * Evaluation run UUID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_run_uuid") val evaluationRunUuid: String? = null,
+    /**
+     * Evaluation test case workspace uuid
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_case_workspace_uuid") val evaluationTestCaseWorkspaceUuid: String? = null,
+    /**
+     * Run end time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("finished_at") val finishedAt: OffsetDateTime? = null,
+    /**
+     * The pass status of the evaluation run based on the star metric.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("pass_status") val passStatus: Boolean? = null,
-    /** Run queued time. */
-    @com.fasterxml.jackson.annotation.JsonProperty("queued_at")
-    val queuedAt: OffsetDateTime? = null,
-    /** Optional array value serialized in the `run_level_metric_results` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("run_level_metric_results")
-    val runLevelMetricResults: List<ApiEvaluationMetricResult>? = null,
-    /** Run name. */
+    /**
+     * Run queued time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("queued_at") val queuedAt: OffsetDateTime? = null,
+    /**
+     * Optional array value serialized in the `run_level_metric_results` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("run_level_metric_results") val runLevelMetricResults: List<ApiEvaluationMetricResult>? = null,
+    /**
+     * Run name.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_name") val runName: String? = null,
-    /** Optional object value serialized in the `star_metric_result` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("star_metric_result")
-    val starMetricResult: ApiEvaluationMetricResult? = null,
-    /** Run start time. */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at")
-    val startedAt: OffsetDateTime? = null,
-    /** Evaluation Run Statuses */
+    /**
+     * Optional object value serialized in the `star_metric_result` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("star_metric_result") val starMetricResult: ApiEvaluationMetricResult? = null,
+    /**
+     * Run start time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: OffsetDateTime? = null,
+    /**
+     * Evaluation Run Statuses
+     */
     val status: ApiEvaluationRunStatus? = null,
-    /** Test case description. */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_description")
-    val testCaseDescription: String? = null,
-    /** Test case name. */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_name")
-    val testCaseName: String? = null,
-    /** Test-case UUID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid")
-    val testCaseUuid: String? = null,
-    /** Test-case-version. */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_version")
-    val testCaseVersion: Long? = null,
+    /**
+     * Test case description.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_description") val testCaseDescription: String? = null,
+    /**
+     * Test case name.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_name") val testCaseName: String? = null,
+    /**
+     * Test-case UUID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid") val testCaseUuid: String? = null,
+    /**
+     * Test-case-version.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_version") val testCaseVersion: Long? = null
 )
 
-/** Typed representation of the `ApiEvaluationTestCase` API schema. */
+/**
+ * Typed representation of the `ApiEvaluationTestCase` API schema.
+ */
 data class ApiEvaluationTestCase(
-    /** Optional `date-time`-formatted value serialized in the `archived_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("archived_at")
-    val archivedAt: OffsetDateTime? = null,
-    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Optional `string` value serialized in the `created_by_user_email` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_email")
-    val createdByUserEmail: String? = null,
-    /** Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_id")
-    val createdByUserId: String? = null,
-    /** Optional object value serialized in the `dataset` wire field. */
+    /**
+     * Optional `date-time`-formatted value serialized in the `archived_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("archived_at") val archivedAt: OffsetDateTime? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Optional `string` value serialized in the `created_by_user_email` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_email") val createdByUserEmail: String? = null,
+    /**
+     * Optional `uint64`-formatted value serialized in the `created_by_user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_id") val createdByUserId: String? = null,
+    /**
+     * Optional object value serialized in the `dataset` wire field.
+     */
     val dataset: ApiEvaluationDataset? = null,
-    /** Optional `string` value serialized in the `dataset_name` wire field. */
+    /**
+     * Optional `string` value serialized in the `dataset_name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_name") val datasetName: String? = null,
-    /** Optional `string` value serialized in the `dataset_uuid` wire field. */
+    /**
+     * Optional `string` value serialized in the `dataset_uuid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("dataset_uuid") val datasetUuid: String? = null,
-    /** Optional `string` value serialized in the `description` wire field. */
+    /**
+     * Optional `string` value serialized in the `description` wire field.
+     */
     val description: String? = null,
     /**
-     * Optional `int32`-formatted value serialized in the `latest_version_number_of_runs` wire
-     * field.
+     * Optional `int32`-formatted value serialized in the `latest_version_number_of_runs` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("latest_version_number_of_runs")
-    val latestVersionNumberOfRuns: Int? = null,
-    /** Optional array value serialized in the `metrics` wire field. */
-    val metrics: List<ApiEvaluationMetric>? = null,
-    /** Optional `string` value serialized in the `name` wire field. */
-    val name: String? = null,
-    /** Optional object value serialized in the `star_metric` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("star_metric")
-    val starMetric: ApiStarMetric? = null,
-    /** Optional `string` value serialized in the `test_case_uuid` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid")
-    val testCaseUuid: String? = null,
-    /** Optional `int32`-formatted value serialized in the `total_runs` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_runs") val totalRuns: Int? = null,
-    /** Optional `date-time`-formatted value serialized in the `updated_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** Optional `string` value serialized in the `updated_by_user_email` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_user_email")
-    val updatedByUserEmail: String? = null,
-    /** Optional `uint64`-formatted value serialized in the `updated_by_user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_user_id")
-    val updatedByUserId: String? = null,
-    /** Optional `int64`-formatted value serialized in the `version` wire field. */
-    val version: Long? = null,
-)
-
-/** Typed representation of the `ApiEvaluationTestCaseMetricList` API schema. */
-data class ApiEvaluationTestCaseMetricList(
-    /** Optional array value serialized in the `metric_uuids` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_uuids")
-    val metricUuids: List<String>? = null
-)
-
-/** Represents a span within an evaluatioin trace (e.g., LLM call, tool call, etc.) */
-data class ApiEvaluationTraceSpan(
-    /** When the span was created */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Input data for the span (flexible structure - can be messages array, string, etc.) */
-    val input: Map<String, Any>? = null,
-    /** Name/identifier for the span */
-    val name: String? = null,
-    /** Output data from the span (flexible structure - can be message, string, etc.) */
-    val output: Map<String, Any>? = null,
-    /** Any retriever span chunks that were included as part of the span. */
-    @com.fasterxml.jackson.annotation.JsonProperty("retriever_chunks")
-    val retrieverChunks: List<ApiPromptChunk>? = null,
-    /** The span-level metric results. */
-    @com.fasterxml.jackson.annotation.JsonProperty("span_level_metric_results")
-    val spanLevelMetricResults: List<ApiEvaluationMetricResult>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("latest_version_number_of_runs") val latestVersionNumberOfRuns: Int? = null,
     /**
-     * Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever
-     * (not workflow)
+     * Optional array value serialized in the `metrics` wire field.
+     */
+    val metrics: List<ApiEvaluationMetric>? = null,
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
+    val name: String? = null,
+    /**
+     * Optional object value serialized in the `star_metric` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("star_metric") val starMetric: ApiStarMetric? = null,
+    /**
+     * Optional `string` value serialized in the `test_case_uuid` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("test_case_uuid") val testCaseUuid: String? = null,
+    /**
+     * Optional `int32`-formatted value serialized in the `total_runs` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_runs") val totalRuns: Int? = null,
+    /**
+     * Optional `date-time`-formatted value serialized in the `updated_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * Optional `string` value serialized in the `updated_by_user_email` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_user_email") val updatedByUserEmail: String? = null,
+    /**
+     * Optional `uint64`-formatted value serialized in the `updated_by_user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_user_id") val updatedByUserId: String? = null,
+    /**
+     * Optional `int64`-formatted value serialized in the `version` wire field.
+     */
+    val version: Long? = null
+)
+
+/**
+ * Typed representation of the `ApiEvaluationTestCaseMetricList` API schema.
+ */
+data class ApiEvaluationTestCaseMetricList(
+    /**
+     * Optional array value serialized in the `metric_uuids` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_uuids") val metricUuids: List<String>? = null
+)
+
+/**
+ * Represents a span within an evaluatioin trace (e.g., LLM call, tool call, etc.)
+ */
+data class ApiEvaluationTraceSpan(
+    /**
+     * When the span was created
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Input data for the span (flexible structure - can be messages array, string, etc.)
+     */
+    val input: Map<String, Any>? = null,
+    /**
+     * Name/identifier for the span
+     */
+    val name: String? = null,
+    /**
+     * Output data from the span (flexible structure - can be message, string, etc.)
+     */
+    val output: Map<String, Any>? = null,
+    /**
+     * Any retriever span chunks that were included as part of the span.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("retriever_chunks") val retrieverChunks: List<ApiPromptChunk>? = null,
+    /**
+     * The span-level metric results.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("span_level_metric_results") val spanLevelMetricResults: List<ApiEvaluationMetricResult>? = null,
+    /**
+     * Child spans - must contain between 1 and 999 spans Allowed types: agent, llm, tool, retriever (not workflow)
      */
     val spans: List<ApiTraceSpan>? = null,
-    /** Types of spans in a trace */
-    val type: ApiTraceSpanType? = null,
+    /**
+     * Types of spans in a trace
+     */
+    val type: ApiTraceSpanType? = null
 )

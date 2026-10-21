@@ -13,83 +13,28 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListFirewallRulesOperation {
     /**
-     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a
-     * JSON object with a `rules` key.
+     * To list all of a database cluster's firewall rules (known as "trusted sources" in the control panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`. The result will be a JSON object with a `rules` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListFirewallRules(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): FirewallRulesResponse {
+    fun databasesListFirewallRules(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): FirewallRulesResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<FirewallRulesResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall",
-                    config = clientConfig,
-                    operationId = "databasesListFirewallRules",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<FirewallRulesResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall", config = clientConfig, operationId = "databasesListFirewallRules", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateFirewallRulesOperation {
     /**
-     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to
-     * specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The
-     * firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC
-     * network to limit database access instead.
+     * Replaces the trusted-source firewall rules for a database cluster. Send the `rules` array to specify which Droplets, Kubernetes clusters, IP addresses, tags, or apps can connect. The firewall accepts at most 100 rules and does not support IPv6 addresses; consider using a VPC network to limit database access instead.
      *
-     * To update a database cluster's firewall rules (known as "trusted sources" in the control
-     * panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which
-     * resources should be able to open connections to the database. You may limit connections to
-     * specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet
-     * or Kubernetes node with that tag applied to it will have access. The firewall is limited to
-     * 100 rules (or trusted…
+     * To update a database cluster's firewall rules (known as "trusted sources" in the control panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which resources should be able to open connections to the database. You may limit connections to specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet or Kubernetes node with that tag applied to it will have access. The firewall is limited to 100 rules (or trusted…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesUpdateFirewallRules(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        rules: List<FirewallRuleRequest>? = null,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateFirewallRules(clientConfig: ClientConfig, databaseClusterUuid: String, rules: List<FirewallRuleRequest>? = null, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall",
-                config = clientConfig,
-                body = SdkClient.bodyMap("rules" to (SdkClient.omitIfNull(rules))),
-                operationId = "databasesUpdateFirewallRules",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/firewall", config = clientConfig, body = SdkClient.bodyMap("rules" to (SdkClient.omitIfNull(rules))), operationId = "databasesUpdateFirewallRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

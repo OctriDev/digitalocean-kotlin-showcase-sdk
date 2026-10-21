@@ -3,16 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Request for pre-signed URL's to upload files for KB Data Sources */
+/**
+ * Request for pre-signed URL's to upload files for KB Data Sources
+ */
 data class ApiCreateDataSourceFileUploadPresignedUrlsInputPublic(
-    /** A list of files to generate presigned URLs for. */
+    /**
+     * A list of files to generate presigned URLs for.
+     */
     val files: List<ApiPresignedUrlFile>? = null
 )
 
-/** Response with pre-signed urls to upload files. */
+/**
+ * Response with pre-signed urls to upload files.
+ */
 data class ApiCreateDataSourceFileUploadPresignedUrlsOutput(
-    /** The ID generated for the request for Presigned URLs. */
+    /**
+     * The ID generated for the request for Presigned URLs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String? = null,
-    /** A list of generated presigned URLs and object keys, one per file. */
-    val uploads: List<ApiFilePresignedUrlResponse>? = null,
+    /**
+     * A list of generated presigned URLs and object keys, one per file.
+     */
+    val uploads: List<ApiFilePresignedUrlResponse>? = null
 )

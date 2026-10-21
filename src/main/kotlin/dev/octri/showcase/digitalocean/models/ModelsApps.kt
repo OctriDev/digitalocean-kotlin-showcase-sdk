@@ -3,15 +3,23 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `CancelEvent` API schema. */
+/**
+ * Typed representation of the `CancelEvent` API schema.
+ */
 data class CancelEvent(
-    /** Optional object value serialized in the `event` wire field. */
+    /**
+     * Optional object value serialized in the `event` wire field.
+     */
     val event: AppEvent? = null
 )
 
-/** Typed representation of the `GetEvent` API schema. */
+/**
+ * Typed representation of the `GetEvent` API schema.
+ */
 data class GetEvent(
-    /** Optional object value serialized in the `event` wire field. */
+    /**
+     * Optional object value serialized in the `event` wire field.
+     */
     val event: AppEvent? = null
 )
 

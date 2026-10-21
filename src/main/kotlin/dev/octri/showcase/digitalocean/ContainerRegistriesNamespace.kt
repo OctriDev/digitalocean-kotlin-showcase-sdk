@@ -3,328 +3,139 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class ContainerRegistriesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To get information about any container registry in your account, send a GET request to
-     * `/v2/registries/`.
+     * To get information about any container registry in your account, send a GET request to `/v2/registries/`.
      */
     fun registriesList(options: RequestOptions? = null): AllRegistriesInfo {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesList(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesList(clientConfig, options)
     }
 
     /**
-     * To create your container registry, send a POST request to `/v2/registries`. The `name`
-     * becomes part of the URL for images stored in the registry. For example, if your registry is
-     * called `example`, an image in it will have the URL
-     * `registry.digitalocean.com/example/image:tag`.
+     * To create your container registry, send a POST request to `/v2/registries`. The `name` becomes part of the URL for images stored in the registry. For example, if your registry is called `example`, an image in it will have the URL `registry.digitalocean.com/example/image:tag`.
      */
-    fun registriesCreate(
-        name: String,
-        subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null,
-        region: MultiregistryCreateRegionEnum? = null,
-        options: RequestOptions? = null,
-    ): MultiregistryInfo {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesCreate(
-            clientConfig,
-            name,
-            subscriptionTierSlug,
-            region,
-            options,
-        )
+    fun registriesCreate(name: String, subscriptionTierSlug: MultiregistryCreateSubscriptionTierSlugEnum? = null, region: MultiregistryCreateRegionEnum? = null, options: RequestOptions? = null): MultiregistryInfo {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesCreate(clientConfig, name, subscriptionTierSlug, region, options)
     }
 
     /**
-     * To get information about any container registry in your account, send a GET request to
-     * `/v2/registries/{registry_name}`.
+     * To get information about any container registry in your account, send a GET request to `/v2/registries/{registry_name}`.
      */
     fun registriesGet(registryName: String, options: RequestOptions? = null): MultiregistryInfo {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGet(
-            clientConfig,
-            registryName,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGet(clientConfig, registryName, options)
     }
 
     /**
-     * To delete your container registry, destroying all container image data stored in it, send a
-     * DELETE request to `/v2/registries/{registry_name}`.
+     * To delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registries/{registry_name}`.
      */
     fun registriesDelete(registryName: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesDelete(
-            clientConfig,
-            registryName,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesDelete(clientConfig, registryName, options)
     }
 
     /**
-     * In order to access your container registry with the Docker client or from a Kubernetes
-     * cluster, you will need to configure authentication. The necessary JSON configuration can be
-     * retrieved by sending a GET request to `/v2/registries/{registry_name}/docker-credentials`.
-     * The response will be in the format of a Docker `config.json` file. To use the config in your
-     * Kubernetes cluster, create a Secret with: kubectl create secret generic docr \…
+     * In order to access your container registry with the Docker client or from a Kubernetes cluster, you will need to configure authentication. The necessary JSON configuration can be retrieved by sending a GET request to `/v2/registries/{registry_name}/docker-credentials`. The response will be in the format of a Docker `config.json` file. To use the config in your Kubernetes cluster, create a Secret with: kubectl create secret generic docr \…
      */
-    fun registriesGetDockerCredentials(
-        registryName: String,
-        options: RequestOptions? = null,
-    ): DockerCredentials {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesGetDockerCredentials(clientConfig, registryName, options)
+    fun registriesGetDockerCredentials(registryName: String, options: RequestOptions? = null): DockerCredentials {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGetDockerCredentials(clientConfig, registryName, options)
     }
 
     /**
-     * A subscription is automatically created when you configure your container registry. To get
-     * information about your subscription, send a GET request to `/v2/registries/subscription`. It
-     * is similar to GET `/v2/registry/subscription`.
+     * A subscription is automatically created when you configure your container registry. To get information about your subscription, send a GET request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription`.
      */
     fun registriesGetSubscription(options: RequestOptions? = null): SubscriptionResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesGetSubscription(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGetSubscription(clientConfig, options)
     }
 
     /**
-     * After creating your registry, you can switch to a different subscription tier to better suit
-     * your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar
-     * to POST `/v2/registry/subscription`.
+     * After creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar to POST `/v2/registry/subscription`.
      */
-    fun registriesUpdateSubscription(
-        tierSlug: RegistriesUpdateSubscriptionTierSlugEnum? = null,
-        options: RequestOptions? = null,
-    ): SubscriptionResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesUpdateSubscription(clientConfig, tierSlug, options)
+    fun registriesUpdateSubscription(tierSlug: RegistriesUpdateSubscriptionTierSlugEnum? = null, options: RequestOptions? = null): SubscriptionResponse {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesUpdateSubscription(clientConfig, tierSlug, options)
     }
 
     /**
-     * This endpoint serves to provide additional information as to which option values are
-     * available when creating a container registry. There are multiple subscription tiers available
-     * for container registry. Each tier allows a different number of image repositories to be
-     * created in your registry, and has a different amount of storage and transfer included. There
-     * are multiple regions available for container registry and controls where your data is stored.
-     * To list the available…
+     * This endpoint serves to provide additional information as to which option values are available when creating a container registry. There are multiple subscription tiers available for container registry. Each tier allows a different number of image repositories to be created in your registry, and has a different amount of storage and transfer included. There are multiple regions available for container registry and controls where your data is stored. To list the available…
      */
     fun registriesGetOptions(options: RequestOptions? = null): RegistryOptionsResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGetOptions(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGetOptions(clientConfig, options)
     }
 
     /**
-     * To get information about the currently-active garbage collection for a registry, send a GET
-     * request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
+     * To get information about the currently-active garbage collection for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
      */
-    fun registriesGetGarbageCollection(
-        registryName: String,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesGetGarbageCollection(clientConfig, registryName, options)
+    fun registriesGetGarbageCollection(registryName: String, options: RequestOptions? = null): GarbageCollectionResponse {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesGetGarbageCollection(clientConfig, registryName, options)
     }
 
     /**
-     * Garbage collection enables users to clear out unreferenced blobs (layer & manifest data)
-     * after deleting one or more manifests from a repository. If there are no unreferenced blobs
-     * resulting from the deletion of one or more manifests, garbage collection is effectively a
-     * noop. See here for more information about how and why you should clean up your container
-     * registry periodically. To request a garbage collection run on your registry, send a POST
-     * request to…
+     * Garbage collection enables users to clear out unreferenced blobs (layer & manifest data) after deleting one or more manifests from a repository. If there are no unreferenced blobs resulting from the deletion of one or more manifests, garbage collection is effectively a noop. See here for more information about how and why you should clean up your container registry periodically. To request a garbage collection run on your registry, send a POST request to…
      */
-    fun registriesRunGarbageCollection(
-        registryName: String,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesRunGarbageCollection(clientConfig, registryName, options)
+    fun registriesRunGarbageCollection(registryName: String, options: RequestOptions? = null): GarbageCollectionResponse {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesRunGarbageCollection(clientConfig, registryName, options)
     }
 
     /**
-     * To get information about past garbage collections for a registry, send a GET request to
-     * `/v2/registry/$REGISTRY_NAME/garbage-collections`.
+     * To get information about past garbage collections for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
      */
-    fun registriesListGarbageCollections(
-        registryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): GarbageCollections {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesListGarbageCollections(clientConfig, registryName, perPage, page, options)
+    fun registriesListGarbageCollections(registryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): GarbageCollections {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesListGarbageCollections(clientConfig, registryName, perPage, page, options)
     }
 
     /**
-     * To cancel the currently-active garbage collection for a registry, send a PUT request to
-     * `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the
-     * attributes below. It is similar to PUT
-     * `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`.
+     * To cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`.
      */
-    fun registriesUpdateGarbageCollection(
-        registryName: String,
-        garbageCollectionUuid: String,
-        cancel: Boolean? = null,
-        options: RequestOptions? = null,
-    ): GarbageCollectionResponse {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesUpdateGarbageCollection(
-                clientConfig,
-                registryName,
-                garbageCollectionUuid,
-                cancel,
-                options,
-            )
+    fun registriesUpdateGarbageCollection(registryName: String, garbageCollectionUuid: String, cancel: Boolean? = null, options: RequestOptions? = null): GarbageCollectionResponse {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesUpdateGarbageCollection(clientConfig, registryName, garbageCollectionUuid, cancel, options)
     }
 
     /**
-     * To list all repositories in your container registry, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET
-     * `/v2/registry/$REGISTRY_NAME/repositoriesV2`.
+     * To list all repositories in your container registry, send a GET request to `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET `/v2/registry/$REGISTRY_NAME/repositoriesV2`.
      */
-    fun registriesListRepositoriesV2(
-        registryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): AllRepositoriesV2 {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesListRepositoriesV2(
-                clientConfig,
-                registryName,
-                perPage,
-                page,
-                pageToken,
-                options,
-            )
+    fun registriesListRepositoriesV2(registryName: String, perPage: Long? = null, page: Long? = null, pageToken: String? = null, options: RequestOptions? = null): AllRepositoriesV2 {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesListRepositoriesV2(clientConfig, registryName, perPage, page, pageToken, options)
     }
 
     /**
-     * To delete a container repository including all of its tags, send a DELETE request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`. A successful request will
-     * receive a 204 status code with no body in response. This indicates that the request was
-     * processed successfully.
+     * To delete a container repository including all of its tags, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
      */
-    fun registriesDeleteRepository(
-        registryName: String,
-        repositoryName: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesDeleteRepository(clientConfig, registryName, repositoryName, options)
+    fun registriesDeleteRepository(registryName: String, repositoryName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesDeleteRepository(clientConfig, registryName, repositoryName, options)
     }
 
     /**
-     * To list all tags in one of your container registry's repository, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to list tags for `registry.digitalocean.com/example/my/repo`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/tags`. It is similar to GET…
+     * To list all tags in one of your container registry's repository, send a GET request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to list tags for `registry.digitalocean.com/example/my/repo`, the path would be `/v2/registry/example/repositories/my%2Frepo/tags`. It is similar to GET…
      */
-    fun registriesListRepositoryTags(
-        registryName: String,
-        repositoryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): RepositoryTags {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesListRepositoryTags(
-                clientConfig,
-                registryName,
-                repositoryName,
-                perPage,
-                page,
-                options,
-            )
+    fun registriesListRepositoryTags(registryName: String, repositoryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): RepositoryTags {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesListRepositoryTags(clientConfig, registryName, repositoryName, perPage, page, options)
     }
 
     /**
-     * To delete a container repository tag in on of our container registries, send a DELETE request
-     * to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to delete `registry.digitalocean.com/example/my/repo:mytag`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/tags/mytag`. A successful request will receive a
-     * 204 status code with…
+     * To delete a container repository tag in on of our container registries, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to delete `registry.digitalocean.com/example/my/repo:mytag`, the path would be `/v2/registry/example/repositories/my%2Frepo/tags/mytag`. A successful request will receive a 204 status code with…
      */
-    fun registriesDeleteRepositoryTag(
-        registryName: String,
-        repositoryName: String,
-        repositoryTag: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesDeleteRepositoryTag(
-                clientConfig,
-                registryName,
-                repositoryName,
-                repositoryTag,
-                options,
-            )
+    fun registriesDeleteRepositoryTag(registryName: String, repositoryName: String, repositoryTag: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesDeleteRepositoryTag(clientConfig, registryName, repositoryName, repositoryTag, options)
     }
 
     /**
-     * To list all manifests in your container registry repository, send a GET request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`. Note that if your
-     * repository name contains `/` characters, it must be URL-encoded in the request URL. For
-     * example, to list manifests for `registry.digitalocean.com/example/my/repo`, the path would be
-     * `/v2/registry/example/repositories/my%2Frepo/digests`. It is similar to…
+     * To list all manifests in your container registry repository, send a GET request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to list manifests for `registry.digitalocean.com/example/my/repo`, the path would be `/v2/registry/example/repositories/my%2Frepo/digests`. It is similar to…
      */
-    fun registriesListRepositoryManifests(
-        registryName: String,
-        repositoryName: String,
-        perPage: Long? = null,
-        page: Long? = null,
-        options: RequestOptions? = null,
-    ): RepositoryManifests {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesListRepositoryManifests(
-                clientConfig,
-                registryName,
-                repositoryName,
-                perPage,
-                page,
-                options,
-            )
+    fun registriesListRepositoryManifests(registryName: String, repositoryName: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): RepositoryManifests {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesListRepositoryManifests(clientConfig, registryName, repositoryName, perPage, page, options)
     }
 
     /**
-     * To delete a container repository manifest by digest in one of your registries, send a DELETE
-     * request to
-     * `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`. Note
-     * that if your repository name contains `/` characters, it must be URL-encoded in the request
-     * URL. For example, to delete `registry.digitalocean.com/example/my/repo@sha256:abcd`, the path
-     * would be `/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`. A successful
-     * request…
+     * To delete a container repository manifest by digest in one of your registries, send a DELETE request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`. Note that if your repository name contains `/` characters, it must be URL-encoded in the request URL. For example, to delete `registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be `/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`. A successful request…
      */
-    fun registriesDeleteRepositoryManifest(
-        registryName: String,
-        repositoryName: String,
-        manifestDigest: String,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries
-            .registriesDeleteRepositoryManifest(
-                clientConfig,
-                registryName,
-                repositoryName,
-                manifestDigest,
-                options,
-            )
+    fun registriesDeleteRepositoryManifest(registryName: String, repositoryName: String, manifestDigest: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesDeleteRepositoryManifest(clientConfig, registryName, repositoryName, manifestDigest, options)
     }
 
     /**
-     * To validate that a container registry name is available for use, send a POST request to
-     * `/v2/registries/validate-name`. If the name is both formatted correctly and available, the
-     * response code will be 204 and contain no body. If the name is already in use, the response
-     * will be a 409 Conflict. It is similar to `/v2/registry/validate-name`.
+     * To validate that a container registry name is available for use, send a POST request to `/v2/registries/validate-name`. If the name is both formatted correctly and available, the response code will be 204 and contain no body. If the name is already in use, the response will be a 409 Conflict. It is similar to `/v2/registry/validate-name`.
      */
     fun registriesValidateName(name: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesValidateName(
-            clientConfig,
-            name,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.ContainerRegistries.registriesValidateName(clientConfig, name, options)
     }
+
 }

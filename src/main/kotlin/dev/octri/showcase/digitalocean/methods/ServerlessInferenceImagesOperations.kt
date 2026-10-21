@@ -13,206 +13,175 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ServerlessInferenceInferenceCreateImageOperation {
     /**
-     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image
-     * generation model with automatic prompt optimization and enhanced visual capabilities.
+     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
      *
-     * @param prompt A text description of the desired image(s). Supports up to 32,000 characters
-     *   and provides automatic prompt optimization for best results.
+     * @param prompt A text description of the desired image(s). Supports up to
+     *   32,000 characters and provides automatic prompt optimization for best results.
      * @param model The model to use for image generation.
      * @param n The number of images to generate. Must be between 1 and 10.
-     * @param moderation The moderation setting for the image generation. Supported values: low,
-     *   auto.
-     * @param background The background setting for the image generation. Supported values:
-     *   transparent, opaque, auto.
-     * @param outputFormat The output format for the image generation. Supported values: png, webp,
-     *   jpeg.
-     * @param outputCompression The output compression level for the image generation (0-100).
-     * @param quality The quality of the image that will be generated. Supported values: auto, high,
-     *   medium, low.
-     * @param size The size of the generated images. GPT-IMAGE-1 supports: auto (automatically
-     *   select best size), 1536x1024 (landscape), 1024x1536 (portrait).
-     * @param stream If set to true, partial image data will be streamed as the image is being
-     *   generated. The response will be sent as server-sent events with partial image chunks. When
-     *   stream is true, partial_images must be greater than 0.
-     * @param partialImages The number of partial image chunks to return during streaming
-     *   generation. Defaults to 0. When stream=true, this must be greater than 0 to receive
-     *   progressive updates of the image as it is being generated.
-     * @param user A unique identifier representing your end-user, which can help DigitalOcean to
-     *   monitor and detect abuse.
+     * @param moderation The moderation setting for the image generation. Supported
+     *   values: low, auto.
+     * @param background The background setting for the image generation. Supported
+     *   values: transparent, opaque, auto.
+     * @param outputFormat The output format for the image generation. Supported
+     *   values: png, webp, jpeg.
+     * @param outputCompression The output compression level for the image generation
+     *   (0-100).
+     * @param quality The quality of the image that will be generated. Supported
+     *   values: auto, high, medium, low.
+     * @param size The size of the generated images. GPT-IMAGE-1 supports: auto
+     *   (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
+     * @param stream If set to true, partial image data will be streamed as the image
+     *   is being generated. The response will be sent as server-sent events with
+     *   partial image chunks. When stream is true, partial_images must be greater than
+     *   0.
+     * @param partialImages The number of partial image chunks to return during
+     *   streaming generation. Defaults to 0. When stream=true, this must be greater
+     *   than 0 to receive progressive updates of the image as it is being generated.
+     * @param user A unique identifier representing your end-user, which can help
+     *   DigitalOcean to monitor and detect abuse.
      */
-    fun inferenceCreateImage(
-        clientConfig: ClientConfig,
-        request: ServerlessInference.InferenceCreateImageRequest,
-        options: RequestOptions? = null,
-    ): ImagesResponse {
+    fun inferenceCreateImage(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateImageRequest, options: RequestOptions? = null): ImagesResponse {
         validateInferenceCreateImageRequest(request)
 
-        return SdkClient.request<ImagesResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v1/images/generations",
-                    config = clientConfig,
-                    body = buildInferenceCreateImageBody(request),
-                    operationId = "inferenceCreateImage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ImagesResponse>(SdkClient.RequestSpec("POST", "/v1/images/generations", config = clientConfig, body = buildInferenceCreateImageBody(request), operationId = "inferenceCreateImage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    private fun validateInferenceCreateImageRequest(
-        request: ServerlessInference.InferenceCreateImageRequest
-    ) {
+
+    private fun validateInferenceCreateImageRequest(request: ServerlessInference.InferenceCreateImageRequest) {
         Validation.validateLength("prompt", request.prompt, Validation.LengthOpts(min = 1))
 
         Validation.validateRange("n", request.n, Validation.RangeOpts(min = 1.0, max = 10.0))
 
         val outputCompressionValue = request.outputCompression?.getOrNull()
-        if (outputCompressionValue != null) {
-            Validation.validateRange(
-                "output_compression",
-                outputCompressionValue,
-                Validation.RangeOpts(min = 0.0),
-            )
-        }
+if (outputCompressionValue != null) {
+            Validation.validateRange("output_compression", outputCompressionValue, Validation.RangeOpts(min = 0.0))
+}
 
         val partialImagesValue = request.partialImages?.getOrNull()
-        if (partialImagesValue != null) {
-            Validation.validateRange(
-                "partial_images",
-                partialImagesValue,
-                Validation.RangeOpts(min = 0.0),
-            )
-        }
+if (partialImagesValue != null) {
+            Validation.validateRange("partial_images", partialImagesValue, Validation.RangeOpts(min = 0.0))
+}
 
         val userValue = request.user?.getOrNull()
-        if (userValue != null) {
+if (userValue != null) {
             Validation.validateLength("user", userValue, Validation.LengthOpts(max = 256))
+}
+    }
+
+
+
+    private fun buildInferenceCreateImageBody(request: ServerlessInference.InferenceCreateImageRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildInferenceCreateImageBodyPart1(request))
         }
-    }
 
-    private fun buildInferenceCreateImageBody(
-        request: ServerlessInference.InferenceCreateImageRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildInferenceCreateImageBodyPart1(request))
-    }
-
-    private fun buildInferenceCreateImageBodyPart1(
-        request: ServerlessInference.InferenceCreateImageRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateImageBodyPart1(request: ServerlessInference.InferenceCreateImageRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "prompt" to (request.prompt),
             "model" to (request.model),
             "n" to (request.n),
-            "moderation" to (request.moderation ?: SdkClient.SdkOptional.Omitted),
-            "background" to (request.background ?: SdkClient.SdkOptional.Omitted),
-            "output_format" to (request.outputFormat ?: SdkClient.SdkOptional.Omitted),
-            "output_compression" to (request.outputCompression ?: SdkClient.SdkOptional.Omitted),
-            "quality" to (request.quality ?: SdkClient.SdkOptional.Omitted),
+            "moderation" to
+    (request.moderation ?: SdkClient.SdkOptional.Omitted),
+            "background" to
+    (request.background ?: SdkClient.SdkOptional.Omitted),
+            "output_format" to
+    (request.outputFormat ?: SdkClient.SdkOptional.Omitted),
+            "output_compression" to
+    (request.outputCompression ?: SdkClient.SdkOptional.Omitted),
+            "quality" to
+    (request.quality ?: SdkClient.SdkOptional.Omitted),
             "size" to (SdkClient.omitIfNull(request.size)),
-            "stream" to (request.stream ?: SdkClient.SdkOptional.Omitted),
-            "partial_images" to (request.partialImages ?: SdkClient.SdkOptional.Omitted),
+            "stream" to
+    (request.stream ?: SdkClient.SdkOptional.Omitted),
+            "partial_images" to
+    (request.partialImages ?: SdkClient.SdkOptional.Omitted),
             "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object ServerlessInferenceInferenceCreateImageStreamOperation {
     /**
-     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image
-     * generation model with automatic prompt optimization and enhanced visual capabilities.
+     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
      *
-     * @param prompt A text description of the desired image(s). Supports up to 32,000 characters
-     *   and provides automatic prompt optimization for best results.
+     * @param prompt A text description of the desired image(s). Supports up to
+     *   32,000 characters and provides automatic prompt optimization for best results.
      * @param model The model to use for image generation.
      * @param n The number of images to generate. Must be between 1 and 10.
-     * @param stream If set to true, partial image data will be streamed as the image is being
-     *   generated. The response will be sent as server-sent events with partial image chunks. When
-     *   stream is true, partial_images must be greater than 0.
-     * @param moderation The moderation setting for the image generation. Supported values: low,
-     *   auto.
-     * @param background The background setting for the image generation. Supported values:
-     *   transparent, opaque, auto.
-     * @param outputFormat The output format for the image generation. Supported values: png, webp,
-     *   jpeg.
-     * @param outputCompression The output compression level for the image generation (0-100).
-     * @param quality The quality of the image that will be generated. Supported values: auto, high,
-     *   medium, low.
-     * @param size The size of the generated images. GPT-IMAGE-1 supports: auto (automatically
-     *   select best size), 1536x1024 (landscape), 1024x1536 (portrait).
-     * @param partialImages The number of partial image chunks to return during streaming
-     *   generation. Defaults to 0. When stream=true, this must be greater than 0 to receive
-     *   progressive updates of the image as it is being generated.
-     * @param user A unique identifier representing your end-user, which can help DigitalOcean to
-     *   monitor and detect abuse.
+     * @param stream If set to true, partial image data will be streamed as the image
+     *   is being generated. The response will be sent as server-sent events with
+     *   partial image chunks. When stream is true, partial_images must be greater than
+     *   0.
+     * @param moderation The moderation setting for the image generation. Supported
+     *   values: low, auto.
+     * @param background The background setting for the image generation. Supported
+     *   values: transparent, opaque, auto.
+     * @param outputFormat The output format for the image generation. Supported
+     *   values: png, webp, jpeg.
+     * @param outputCompression The output compression level for the image generation
+     *   (0-100).
+     * @param quality The quality of the image that will be generated. Supported
+     *   values: auto, high, medium, low.
+     * @param size The size of the generated images. GPT-IMAGE-1 supports: auto
+     *   (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
+     * @param partialImages The number of partial image chunks to return during
+     *   streaming generation. Defaults to 0. When stream=true, this must be greater
+     *   than 0 to receive progressive updates of the image as it is being generated.
+     * @param user A unique identifier representing your end-user, which can help
+     *   DigitalOcean to monitor and detect abuse.
      */
-    fun inferenceCreateImageStream(
-        clientConfig: ClientConfig,
-        request: ServerlessInference.InferenceCreateImageStreamRequest,
-        options: RequestOptions? = null,
-    ): Sequence<ImageGenPartialImageEvent> {
+    fun inferenceCreateImageStream(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateImageStreamRequest, options: RequestOptions? = null): Sequence<ImageGenPartialImageEvent> {
         return sequence {
-            for (_ev in
-                SdkClient.stream(
-                    SdkClient.RequestSpec(
-                        "POST",
-                        "/v1/images/generations",
-                        config = clientConfig,
-                        body = buildInferenceCreateImageStreamBody(request),
-                        contentType = "application/json",
-                        operationId = "inferenceCreateImageStream",
-                        streamFormat = "sse",
-                        streamMediaType = "text/event-stream",
-                        chunkDomain = "bytes",
-                        options = options,
-                        errors =
-                            mapOf(
-                                "401" to Error2::class.java,
-                                "429" to Error2::class.java,
-                                "500" to Error2::class.java,
-                            ),
-                    )
-                )) {
+            for (_ev in SdkClient.stream(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v1/images/generations",
+                config = clientConfig,
+                body = buildInferenceCreateImageStreamBody(request),
+                contentType = "application/json",
+                operationId = "inferenceCreateImageStream",
+                streamFormat = "sse",
+                streamMediaType = "text/event-stream",
+                chunkDomain = "bytes",
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)
+            )
+        )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(
-                    try {
-                        SdkClient.mapper.readValue(_ev.data, ImageGenPartialImageEvent::class.java)
-                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                        SdkClient.rethrowEventDecode(error, _ev.data)
-                    }
-                )
+                yield(try {
+                    SdkClient.mapper.readValue(_ev.data, ImageGenPartialImageEvent::class.java)
+                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                    SdkClient.rethrowEventDecode(error, _ev.data)
+                })
             }
         }
     }
 
-    private fun buildInferenceCreateImageStreamBody(
-        request: ServerlessInference.InferenceCreateImageStreamRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildInferenceCreateImageStreamBodyPart1(request))
-    }
 
-    private fun buildInferenceCreateImageStreamBodyPart1(
-        request: ServerlessInference.InferenceCreateImageStreamRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateImageStreamBody(request: ServerlessInference.InferenceCreateImageStreamRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildInferenceCreateImageStreamBodyPart1(request))
+        }
+
+    private fun buildInferenceCreateImageStreamBodyPart1(request: ServerlessInference.InferenceCreateImageStreamRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "prompt" to (request.prompt),
             "model" to (request.model),
             "n" to (request.n),
             "stream" to (request.stream),
-            "moderation" to (request.moderation ?: SdkClient.SdkOptional.Omitted),
-            "background" to (request.background ?: SdkClient.SdkOptional.Omitted),
-            "output_format" to (request.outputFormat ?: SdkClient.SdkOptional.Omitted),
-            "output_compression" to (request.outputCompression ?: SdkClient.SdkOptional.Omitted),
-            "quality" to (request.quality ?: SdkClient.SdkOptional.Omitted),
+            "moderation" to
+    (request.moderation ?: SdkClient.SdkOptional.Omitted),
+            "background" to
+    (request.background ?: SdkClient.SdkOptional.Omitted),
+            "output_format" to
+    (request.outputFormat ?: SdkClient.SdkOptional.Omitted),
+            "output_compression" to
+    (request.outputCompression ?: SdkClient.SdkOptional.Omitted),
+            "quality" to
+    (request.quality ?: SdkClient.SdkOptional.Omitted),
             "size" to (SdkClient.omitIfNull(request.size)),
-            "partial_images" to (request.partialImages ?: SdkClient.SdkOptional.Omitted),
+            "partial_images" to
+    (request.partialImages ?: SdkClient.SdkOptional.Omitted),
             "user" to (request.user ?: SdkClient.SdkOptional.Omitted),
         )
 }

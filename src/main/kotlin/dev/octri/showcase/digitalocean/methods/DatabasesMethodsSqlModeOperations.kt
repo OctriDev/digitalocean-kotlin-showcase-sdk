@@ -12,77 +12,28 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesGetSqlModeOperation {
     /**
-     * To retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/sql_mode`. The response will be a JSON object with a `sql_mode`
-     * key. This will be set to a string representing the configured SQL modes.
+     * To retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to `/v2/databases/$DATABASE_ID/sql_mode`. The response will be a JSON object with a `sql_mode` key. This will be set to a string representing the configured SQL modes.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetSqlMode(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): SqlMode {
+    fun databasesGetSqlMode(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): SqlMode {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<SqlMode>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/sql_mode",
-                    config = clientConfig,
-                    operationId = "databasesGetSqlMode",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SqlMode>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/sql_mode", config = clientConfig, operationId = "databasesGetSqlMode", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateSqlModeOperation {
     /**
-     * To configure the SQL modes for an existing MySQL cluster, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/sql_mode` specifying the desired modes. See the official MySQL 8
-     * documentation for a full list of supported SQL modes. A successful request will receive a 204
-     * No Content status code with no body in response.
+     * To configure the SQL modes for an existing MySQL cluster, send a PUT request to `/v2/databases/$DATABASE_ID/sql_mode` specifying the desired modes. See the official MySQL 8 documentation for a full list of supported SQL modes. A successful request will receive a 204 No Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param sqlMode A string specifying the configured SQL modes for the MySQL cluster.
+     * @param sqlMode A string specifying the configured SQL modes for the MySQL
+     *   cluster.
      */
-    fun databasesUpdateSqlMode(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        sqlMode: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesUpdateSqlMode(clientConfig: ClientConfig, databaseClusterUuid: String, sqlMode: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "PUT",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/sql_mode",
-                config = clientConfig,
-                body = SdkClient.bodyMap("sql_mode" to (sqlMode)),
-                operationId = "databasesUpdateSqlMode",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/sql_mode", config = clientConfig, body = SdkClient.bodyMap("sql_mode" to (sqlMode)), operationId = "databasesUpdateSqlMode", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }

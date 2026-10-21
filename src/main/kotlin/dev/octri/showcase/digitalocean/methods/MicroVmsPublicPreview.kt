@@ -10,9 +10,9 @@ import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.Error2
 import dev.octri.showcase.digitalocean.ExecResponse
 import dev.octri.showcase.digitalocean.MicrovmAutoPause
+import dev.octri.showcase.digitalocean.MicrovmCreated
 import dev.octri.showcase.digitalocean.MicrovmCreateRequestHttpProtocolEnum
 import dev.octri.showcase.digitalocean.MicrovmCreateRequestNetworkingEnum
-import dev.octri.showcase.digitalocean.MicrovmCreated
 import dev.octri.showcase.digitalocean.MicrovmError
 import dev.octri.showcase.digitalocean.MicrovmOptions
 import dev.octri.showcase.digitalocean.MicrovmResponse
@@ -24,65 +24,34 @@ import dev.octri.showcase.digitalocean.Validation
 
 object MicroVmsPublicPreview {
 
+
     /**
-     * To list all of the MicroVMs on your team, send a GET request to `/v2/microvms`. The `region`,
-     * `name`, and `tag_name` filters combine with AND.
+     * To list all of the MicroVMs on your team, send a GET request to `/v2/microvms`. The `region`, `name`, and `tag_name` filters combine with AND.
      *
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page.
      * @param region Only return MicroVMs in this region.
      * @param name Only return the MicroVM with this exact name.
-     * @param tagName Only return MicroVMs with this tag. A tag that matches no MicroVMs returns an
-     *   empty list.
+     * @param tagName Only return MicroVMs with this tag. A tag that matches no
+     *   MicroVMs returns an empty list.
      */
-    fun microvmsList(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        region: String? = null,
-        name: String? = null,
-        tagName: String? = null,
-        options: RequestOptions? = null,
-    ): AllMicrovms {
+    fun microvmsList(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, region: String? = null, name: String? = null, tagName: String? = null, options: RequestOptions? = null): AllMicrovms {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
-        return SdkClient.request<AllMicrovms>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "region" to SdkClient.queryValue(region, "form", true),
-                            "name" to SdkClient.queryValue(name, "form", true),
-                            "tag_name" to SdkClient.queryValue(tagName, "form", true),
-                        ),
-                    operationId = "microvmsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllMicrovms>(SdkClient.RequestSpec("GET", "/v2/microvms", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "region" to SdkClient.queryValue(region, "form", true), "name" to SdkClient.queryValue(name, "form", true), "tag_name" to SdkClient.queryValue(tagName, "form", true)), operationId = "microvmsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [microvmsCreate]. */
     data class MicrovmsCreateRequest(
@@ -98,85 +67,60 @@ object MicroVmsPublicPreview {
         val httpProtocol: MicrovmCreateRequestHttpProtocolEnum? = null,
         val ports: List<Long>? = null,
         val environment: Map<String, String>? = null,
-        val tags: List<String>? = null,
+        val tags: List<String>? = null
     )
 
     /**
-     * To create a MicroVM, send a POST request to `/v2/microvms`. `name` and `source` are required.
-     * Set `source.oci_ref` to create the MicroVM from a `linux/amd64` container image, or
-     * `source.checkpoint_id` to create it from a checkpoint. With `oci_ref`, `region` and `size`
-     * are also required. A MicroVM created from an image is returned with `state` set to
-     * `creating`. Poll `GET /v2/microvms/{microvm_id}` until `state` is `running`. A MicroVM
-     * created from a checkpoint is usually…
+     * To create a MicroVM, send a POST request to `/v2/microvms`. `name` and `source` are required. Set `source.oci_ref` to create the MicroVM from a `linux/amd64` container image, or `source.checkpoint_id` to create it from a checkpoint. With `oci_ref`, `region` and `size` are also required. A MicroVM created from an image is returned with `state` set to `creating`. Poll `GET /v2/microvms/{microvm_id}` until `state` is `running`. A MicroVM created from a checkpoint is usually…
      *
-     * @param name The name of the MicroVM. Must be unique in the region and contain 1 to 63
-     *   lowercase letters, digits, and hyphens.
-     * @param source What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
+     * @param name The name of the MicroVM. Must be unique in the region and contain
+     *   1 to 63 lowercase letters, digits, and hyphens.
+     * @param source What the MicroVM runs. Set exactly one of `oci_ref` or
+     *   `checkpoint_id`.
      * @param region The slug of the region to create the MicroVM in. Required with
      *   `source.oci_ref`.
-     * @param size The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`,
-     *   `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in
-     *   responses.
-     * @param networking `public` sends outbound traffic through a shared NAT gateway. `vpc` places
-     *   the MicroVM in the VPC network set by `vpc_uuid`.
-     * @param vpcUuid The ID of a VPC network in the same region that belongs to your team. Required
-     *   when `networking` is `vpc`.
-     * @param autoPause Automatic pause settings. A MicroVM always pauses after it is idle for
-     *   `idle_timeout`. Sending `enabled` set to `false` is rejected.
-     * @param autoResume Whether an HTTP request, command, or console session resumes the MicroVM
-     *   when it is paused. Set to `false` to require a manual resume.
-     * @param httpPort The guest port the workload serves HTTP on. Defaults to `8080`. Not returned
-     *   in responses. When creating from a checkpoint without `ports`, must be one of the
-     *   checkpoint's ports.
+     * @param size The MicroVM's size. `cpu` and `memory` must be one of the pairs
+     *   `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk,
+     *   which is returned in responses.
+     * @param networking `public` sends outbound traffic through a shared NAT
+     *   gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
+     * @param vpcUuid The ID of a VPC network in the same region that belongs to your
+     *   team. Required when `networking` is `vpc`.
+     * @param autoPause Automatic pause settings. A MicroVM always pauses after it is
+     *   idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
+     * @param autoResume Whether an HTTP request, command, or console session resumes
+     *   the MicroVM when it is paused. Set to `false` to require a manual resume.
+     * @param httpPort The guest port the workload serves HTTP on. Defaults to
+     *   `8080`. Not returned in responses. When creating from a checkpoint without
+     *   `ports`, must be one of the checkpoint's ports.
      * @param httpProtocol The protocol the HTTP port serves.
-     * @param ports The guest ports to declare, up to five. Must include `http_port`. Defaults to
-     *   only the HTTP port. During the public preview, only the HTTP port is reachable through the
-     *   MicroVM's endpoint.
-     * @param environment Environment variables passed into the MicroVM at boot, as key and value
-     *   pairs. Not returned in responses.
+     * @param ports The guest ports to declare, up to five. Must include `http_port`.
+     *   Defaults to only the HTTP port. During the public preview, only the HTTP port
+     *   is reachable through the MicroVM's endpoint.
+     * @param environment Environment variables passed into the MicroVM at boot, as
+     *   key and value pairs. Not returned in responses.
      * @param tags Tags to apply to the MicroVM.
      */
-    fun microvmsCreate(
-        clientConfig: ClientConfig,
-        request: MicrovmsCreateRequest,
-        options: RequestOptions? = null,
-    ): MicrovmCreated {
+    fun microvmsCreate(clientConfig: ClientConfig, request: MicrovmsCreateRequest, options: RequestOptions? = null): MicrovmCreated {
         validateMicrovmsCreateRequest(request)
 
-        return SdkClient.request<MicrovmCreated>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/microvms",
-                    config = clientConfig,
-                    body = buildMicrovmsCreateBody(request),
-                    operationId = "microvmsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MicrovmError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MicrovmCreated>(SdkClient.RequestSpec("POST", "/v2/microvms", config = clientConfig, body = buildMicrovmsCreateBody(request), operationId = "microvmsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "403" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateMicrovmsCreateRequest(request: MicrovmsCreateRequest) {
         Validation.validatePattern("name", request.name, "^[a-z0-9-]{1,63}$")
 
         if (request.vpcUuid != null) {
             Validation.validateUuid("vpc_uuid", request.vpcUuid)
-        }
+}
 
         if (request.ports != null) {
             Validation.validateItems("ports", request.ports, Validation.LengthOpts(max = 5))
-        }
+}
     }
+
+
 
     private fun buildMicrovmsCreateBody(request: MicrovmsCreateRequest): Map<String, Any?> =
         buildMap {
@@ -195,456 +139,230 @@ object MicroVmsPublicPreview {
             "auto_pause" to (SdkClient.omitIfNull(request.autoPause)),
             "auto_resume" to (SdkClient.omitIfNull(request.autoResume)),
             "http_port" to (SdkClient.omitIfNull(request.httpPort)),
-            "http_protocol" to (SdkClient.omitIfNull(request.httpProtocol)),
+            "http_protocol" to
+    (SdkClient.omitIfNull(request.httpProtocol)),
             "ports" to (SdkClient.omitIfNull(request.ports)),
             "environment" to (SdkClient.omitIfNull(request.environment)),
         )
 
     private fun buildMicrovmsCreateBodyPart2(request: MicrovmsCreateRequest): Map<String, Any?> =
-        SdkClient.bodyMap("tags" to (SdkClient.omitIfNull(request.tags)))
+        SdkClient.bodyMap(
+            "tags" to (SdkClient.omitIfNull(request.tags)),
+        )
+
+
+
 
     /**
-     * To list the default region, sizes, prices, account limits, and features available to your
-     * team, send a GET request to `/v2/microvms/options`.
+     * To list the default region, sizes, prices, account limits, and features available to your team, send a GET request to `/v2/microvms/options`.
      */
-    fun microvmsGetOptions(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): MicrovmOptions {
-        return SdkClient.request<MicrovmOptions>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms/options",
-                    config = clientConfig,
-                    operationId = "microvmsGetOptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun microvmsGetOptions(clientConfig: ClientConfig, options: RequestOptions? = null): MicrovmOptions {
+        return SdkClient.request<MicrovmOptions>(SdkClient.RequestSpec("GET", "/v2/microvms/options", config = clientConfig, operationId = "microvmsGetOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To list your team's checkpoints, newest first, send a GET request to
-     * `/v2/microvms/checkpoints`. To list one MicroVM's checkpoints, add the `microvm_id` query
-     * parameter.
+     * To list your team's checkpoints, newest first, send a GET request to `/v2/microvms/checkpoints`. To list one MicroVM's checkpoints, add the `microvm_id` query parameter.
      *
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page.
      * @param microvmId Only return checkpoints taken from this MicroVM.
      */
-    fun microvmCheckpointsList(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        microvmId: String? = null,
-        options: RequestOptions? = null,
-    ): AllCheckpoints {
+    fun microvmCheckpointsList(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, microvmId: String? = null, options: RequestOptions? = null): AllCheckpoints {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 200.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
+}
 
         if (microvmId != null) {
             Validation.validateUuid("microvm_id", microvmId)
-        }
+}
 
-        return SdkClient.request<AllCheckpoints>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms/checkpoints",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "microvm_id" to SdkClient.queryValue(microvmId, "form", true),
-                        ),
-                    operationId = "microvmCheckpointsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AllCheckpoints>(SdkClient.RequestSpec("GET", "/v2/microvms/checkpoints", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "microvm_id" to
+    SdkClient.queryValue(microvmId, "form", true)), operationId = "microvmCheckpointsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To show information about a checkpoint, send a GET request to
-     * `/v2/microvms/checkpoints/{checkpoint_id}`.
+     * To show information about a checkpoint, send a GET request to `/v2/microvms/checkpoints/{checkpoint_id}`.
      *
      * @param checkpointId The unique ID of the checkpoint.
      */
-    fun microvmCheckpointsGet(
-        clientConfig: ClientConfig,
-        checkpointId: String,
-        options: RequestOptions? = null,
-    ): CheckpointResponse {
+    fun microvmCheckpointsGet(clientConfig: ClientConfig, checkpointId: String, options: RequestOptions? = null): CheckpointResponse {
         Validation.validateUuid("checkpoint_id", checkpointId)
 
-        return SdkClient.request<CheckpointResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms/checkpoints/${SdkClient.encodePathSegment(checkpointId)}",
-                    config = clientConfig,
-                    operationId = "microvmCheckpointsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<CheckpointResponse>(SdkClient.RequestSpec("GET", "/v2/microvms/checkpoints/${SdkClient.encodePathSegment(checkpointId)}", config = clientConfig, operationId = "microvmCheckpointsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a checkpoint, send a DELETE request to `/v2/microvms/checkpoints/{checkpoint_id}`.
-     * You can no longer create MicroVMs from a deleted checkpoint. The request returns HTTP 400
-     * while the checkpoint is still being captured. A successful request returns a `204 No Content`
-     * status code.
+     * To delete a checkpoint, send a DELETE request to `/v2/microvms/checkpoints/{checkpoint_id}`. You can no longer create MicroVMs from a deleted checkpoint. The request returns HTTP 400 while the checkpoint is still being captured. A successful request returns a `204 No Content` status code.
      *
      * @param checkpointId The unique ID of the checkpoint.
      */
-    fun microvmCheckpointsDelete(
-        clientConfig: ClientConfig,
-        checkpointId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun microvmCheckpointsDelete(clientConfig: ClientConfig, checkpointId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("checkpoint_id", checkpointId)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/microvms/checkpoints/${SdkClient.encodePathSegment(checkpointId)}",
-                config = clientConfig,
-                operationId = "microvmCheckpointsDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "400" to MicrovmError::class.java,
-                        "401" to Error2::class.java,
-                        "404" to MicrovmError::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/microvms/checkpoints/${SdkClient.encodePathSegment(checkpointId)}", config = clientConfig, operationId = "microvmCheckpointsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To show information about a MicroVM, send a GET request to `/v2/microvms/{microvm_id}`. The
-     * endpoint is in the `urls` entry with `default` set to `true`. Its `hostname` is empty and its
-     * `status` is `PENDING` until provisioning finishes.
+     * To show information about a MicroVM, send a GET request to `/v2/microvms/{microvm_id}`. The endpoint is in the `urls` entry with `default` set to `true`. Its `hostname` is empty and its `status` is `PENDING` until provisioning finishes.
      *
      * @param microvmId The unique ID of the MicroVM.
      */
-    fun microvmsGet(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        options: RequestOptions? = null,
-    ): MicrovmResponse {
+    fun microvmsGet(clientConfig: ClientConfig, microvmId: String, options: RequestOptions? = null): MicrovmResponse {
         Validation.validateUuid("microvm_id", microvmId)
 
-        return SdkClient.request<MicrovmResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}",
-                    config = clientConfig,
-                    operationId = "microvmsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MicrovmResponse>(SdkClient.RequestSpec("GET", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}", config = clientConfig, operationId = "microvmsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To delete a MicroVM and the data on its disk, send a DELETE request to
-     * `/v2/microvms/{microvm_id}`. The MicroVM's checkpoints are not deleted. A successful request
-     * returns a `204 No Content` status code.
+     * To delete a MicroVM and the data on its disk, send a DELETE request to `/v2/microvms/{microvm_id}`. The MicroVM's checkpoints are not deleted. A successful request returns a `204 No Content` status code.
      *
      * @param microvmId The unique ID of the MicroVM.
      */
-    fun microvmsDelete(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun microvmsDelete(clientConfig: ClientConfig, microvmId: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("microvm_id", microvmId)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}",
-                config = clientConfig,
-                operationId = "microvmsDelete",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to MicrovmError::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}", config = clientConfig, operationId = "microvmsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 
+
+
+
+
+
+
     /**
-     * To pause a MicroVM, send a POST request to `/v2/microvms/{microvm_id}/pause`. Pausing
-     * suspends the MicroVM's processes and preserves its memory, files, and processes. A paused
-     * MicroVM incurs storage charges only. The request returns when the change completes. Pausing a
-     * MicroVM that is already paused succeeds. The request returns HTTP 400 when the MicroVM is
-     * `creating`, `terminated`, or `failed`.
+     * To pause a MicroVM, send a POST request to `/v2/microvms/{microvm_id}/pause`. Pausing suspends the MicroVM's processes and preserves its memory, files, and processes. A paused MicroVM incurs storage charges only. The request returns when the change completes. Pausing a MicroVM that is already paused succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or `failed`.
      *
      * @param microvmId The unique ID of the MicroVM.
      */
-    fun microvmsPostPause(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        options: RequestOptions? = null,
-    ): MicrovmResponse {
+    fun microvmsPostPause(clientConfig: ClientConfig, microvmId: String, options: RequestOptions? = null): MicrovmResponse {
         Validation.validateUuid("microvm_id", microvmId)
 
-        return SdkClient.request<MicrovmResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/pause",
-                    config = clientConfig,
-                    operationId = "microvmsPostPause",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MicrovmError::class.java,
-                            "401" to Error2::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MicrovmResponse>(SdkClient.RequestSpec("POST", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/pause", config = clientConfig, operationId = "microvmsPostPause", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To resume a paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/resume`. The
-     * request returns when the change completes. Resuming a MicroVM that is already running
-     * succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or
-     * `failed`.
+     * To resume a paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/resume`. The request returns when the change completes. Resuming a MicroVM that is already running succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or `failed`.
      *
      * @param microvmId The unique ID of the MicroVM.
      */
-    fun microvmsPostResume(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        options: RequestOptions? = null,
-    ): MicrovmResponse {
+    fun microvmsPostResume(clientConfig: ClientConfig, microvmId: String, options: RequestOptions? = null): MicrovmResponse {
         Validation.validateUuid("microvm_id", microvmId)
 
-        return SdkClient.request<MicrovmResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/resume",
-                    config = clientConfig,
-                    operationId = "microvmsPostResume",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MicrovmError::class.java,
-                            "401" to Error2::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MicrovmResponse>(SdkClient.RequestSpec("POST", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/resume", config = clientConfig, operationId = "microvmsPostResume", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To run a command in a MicroVM's workload container, send a POST request to
-     * `/v2/microvms/{microvm_id}/exec`. `argv` runs directly, not through a shell, with standard
-     * input closed. If the MicroVM is paused and auto-resume is on, the request resumes it and
-     * waits until it is running. A command has 60 seconds to finish. Your team can run 32 commands
-     * at once and 60 commands per minute. Rejected requests count toward the per-minute limit.
+     * To run a command in a MicroVM's workload container, send a POST request to `/v2/microvms/{microvm_id}/exec`. `argv` runs directly, not through a shell, with standard input closed. If the MicroVM is paused and auto-resume is on, the request resumes it and waits until it is running. A command has 60 seconds to finish. Your team can run 32 commands at once and 60 commands per minute. Rejected requests count toward the per-minute limit.
      *
      * @param microvmId The unique ID of the MicroVM.
      * @param argv The command and its arguments.
      * @param cwd The working directory to run the command in.
      */
-    fun microvmsRunCommand(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        argv: List<String>,
-        cwd: String? = null,
-        options: RequestOptions? = null,
-    ): ExecResponse {
+    fun microvmsRunCommand(clientConfig: ClientConfig, microvmId: String, argv: List<String>, cwd: String? = null, options: RequestOptions? = null): ExecResponse {
         Validation.validateUuid("microvm_id", microvmId)
 
         Validation.validateItems("argv", argv, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<ExecResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/exec",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap("argv" to (argv), "cwd" to (SdkClient.omitIfNull(cwd))),
-                    operationId = "microvmsRunCommand",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MicrovmError::class.java,
-                            "401" to Error2::class.java,
-                            "403" to MicrovmError::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "502" to MicrovmError::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ExecResponse>(SdkClient.RequestSpec("POST", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/exec", config = clientConfig, body = SdkClient.bodyMap("argv" to (argv), "cwd" to (SdkClient.omitIfNull(cwd))), operationId = "microvmsRunCommand", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "403" to MicrovmError::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "502" to MicrovmError::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To open an interactive `/bin/sh` console in a MicroVM's workload container, open a WebSocket
-     * connection to `wss://api.digitalocean.com/v2/microvms/{microvm_id}/console`. Send the API
-     * token in the `Authorization` header of the handshake. Browsers cannot set this header, so you
-     * cannot open the console from browser JavaScript. The image must include `/bin/sh`. A MicroVM
-     * can have four consoles open at a time. If the MicroVM is paused and auto-resume is on,
-     * opening a console…
+     * To open an interactive `/bin/sh` console in a MicroVM's workload container, open a WebSocket connection to `wss://api.digitalocean.com/v2/microvms/{microvm_id}/console`. Send the API token in the `Authorization` header of the handshake. Browsers cannot set this header, so you cannot open the console from browser JavaScript. The image must include `/bin/sh`. A MicroVM can have four consoles open at a time. If the MicroVM is paused and auto-resume is on, opening a console…
      *
      * @param microvmId The unique ID of the MicroVM.
      * @param rows The initial number of terminal rows.
      * @param cols The initial number of terminal columns.
      */
-    fun microvmsGetConsole(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        rows: Long? = null,
-        cols: Long? = null,
-        options: RequestOptions? = null,
-    ): Any {
+    fun microvmsGetConsole(clientConfig: ClientConfig, microvmId: String, rows: Long? = null, cols: Long? = null, options: RequestOptions? = null): Any {
         Validation.validateUuid("microvm_id", microvmId)
 
         if (rows != null) {
             Validation.validateRange("rows", rows, Validation.RangeOpts(min = 1.0, max = 65535.0))
-        }
+}
 
         if (cols != null) {
             Validation.validateRange("cols", cols, Validation.RangeOpts(min = 1.0, max = 65535.0))
-        }
+}
 
-        return SdkClient.request<Any>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/console",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "rows" to SdkClient.queryValue(rows, "form", true),
-                            "cols" to SdkClient.queryValue(cols, "form", true),
-                        ),
-                    operationId = "microvmsGetConsole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to MicrovmError::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Any>(SdkClient.RequestSpec("GET", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/console", config = clientConfig, query = mapOf("rows" to SdkClient.queryValue(rows, "form", true), "cols" to SdkClient.queryValue(cols, "form", true)), operationId = "microvmsGetConsole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to MicrovmError::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * To create a checkpoint of a running or paused MicroVM, send a POST request to
-     * `/v2/microvms/{microvm_id}/checkpoints`. The capture runs in the background and does not
-     * change the MicroVM's state. Poll `GET /v2/microvms/checkpoints/{checkpoint_id}` until
-     * `status` is `CHECKPOINT_AVAILABLE`.
+     * To create a checkpoint of a running or paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/checkpoints`. The capture runs in the background and does not change the MicroVM's state. Poll `GET /v2/microvms/checkpoints/{checkpoint_id}` until `status` is `CHECKPOINT_AVAILABLE`.
      *
      * @param microvmId The unique ID of the MicroVM.
      * @param name A name for the checkpoint. If you omit it, a name such as
      *   `checkpoint-20260929-143559` is generated.
      */
-    fun microvmCheckpointsCreate(
-        clientConfig: ClientConfig,
-        microvmId: String,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): CheckpointResponse {
+    fun microvmCheckpointsCreate(clientConfig: ClientConfig, microvmId: String, name: String? = null, options: RequestOptions? = null): CheckpointResponse {
         Validation.validateUuid("microvm_id", microvmId)
 
-        return SdkClient.request<CheckpointResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/checkpoints",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name))),
-                    operationId = "microvmCheckpointsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MicrovmError::class.java,
-                            "401" to Error2::class.java,
-                            "404" to MicrovmError::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<CheckpointResponse>(SdkClient.RequestSpec("POST", "/v2/microvms/${SdkClient.encodePathSegment(microvmId)}/checkpoints", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name))), operationId = "microvmCheckpointsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MicrovmError::class.java, "401" to Error2::class.java, "404" to MicrovmError::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

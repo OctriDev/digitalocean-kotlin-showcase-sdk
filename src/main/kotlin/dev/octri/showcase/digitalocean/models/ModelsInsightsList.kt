@@ -3,25 +3,37 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ListAlertInstancesResponse` API schema. */
+/**
+ * Typed representation of the `ListAlertInstancesResponse` API schema.
+ */
 data class ListAlertInstancesResponse(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("alert_instances")
-    val alertInstances: List<AlertInstance>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("alert_instances") val alertInstances: List<AlertInstance>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `ListAlertRules` API schema. */
+/**
+ * Typed representation of the `ListAlertRules` API schema.
+ */
 data class ListAlertRules(
-    /** Required array value serialized in the `alert_rules` wire field. */
+    /**
+     * Required array value serialized in the `alert_rules` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("alert_rules") val alertRules: List<AlertRule>
 )
 
-/** Typed representation of the `ListNotificationChannels` API schema. */
+/**
+ * Typed representation of the `ListNotificationChannels` API schema.
+ */
 data class ListNotificationChannels(
-    /** Required array value serialized in the `notification_channels` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channels")
-    val notificationChannels: List<NotificationChannel>
+    /**
+     * Required array value serialized in the `notification_channels` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channels") val notificationChannels: List<NotificationChannel>
 )

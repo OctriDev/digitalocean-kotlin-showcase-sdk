@@ -5,29 +5,42 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Detailed info about each presigned URL returned to the client. */
+/**
+ * Detailed info about each presigned URL returned to the client.
+ */
 data class ApiFilePresignedUrlResponse(
-    /** The time the url expires at. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
-    val expiresAt: OffsetDateTime? = null,
-    /** The unique object key to store the file as. */
+    /**
+     * The time the url expires at.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null,
+    /**
+     * The unique object key to store the file as.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object_key") val objectKey: String? = null,
-    /** The original file name. */
-    @com.fasterxml.jackson.annotation.JsonProperty("original_file_name")
-    val originalFileName: String? = null,
-    /** The actual presigned URL the client can use to upload the file directly. */
-    @com.fasterxml.jackson.annotation.JsonProperty("presigned_url")
-    val presignedUrl: String? = null,
+    /**
+     * The original file name.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("original_file_name") val originalFileName: String? = null,
+    /**
+     * The actual presigned URL the client can use to upload the file directly.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("presigned_url") val presignedUrl: String? = null
 )
 
-/** File to upload as data source for knowledge base. */
+/**
+ * File to upload as data source for knowledge base.
+ */
 data class ApiFileUploadDataSource(
-    /** The original file name */
-    @com.fasterxml.jackson.annotation.JsonProperty("original_file_name")
-    val originalFileName: String? = null,
-    /** The size of the file in bytes */
+    /**
+     * The original file name
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("original_file_name") val originalFileName: String? = null,
+    /**
+     * The size of the file in bytes
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("size_in_bytes") val sizeInBytes: String? = null,
-    /** The object key the file was stored as */
-    @com.fasterxml.jackson.annotation.JsonProperty("stored_object_key")
-    val storedObjectKey: String? = null,
+    /**
+     * The object key the file was stored as
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stored_object_key") val storedObjectKey: String? = null
 )

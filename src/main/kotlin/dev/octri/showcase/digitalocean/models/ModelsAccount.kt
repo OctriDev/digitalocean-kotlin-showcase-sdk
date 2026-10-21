@@ -3,44 +3,68 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** When authorized in a team context, includes information about the current team. */
+/**
+ * When authorized in a team context, includes information about the current team.
+ */
 data class AccountTeam(
-    /** The unique universal identifier for the current team. */
+    /**
+     * The unique universal identifier for the current team.
+     */
     val uuid: String? = null,
-    /** The name for the current team. */
-    val name: String? = null,
+    /**
+     * The name for the current team.
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `Account` API schema. */
+/**
+ * Typed representation of the `Account` API schema.
+ */
 data class Account(
     /**
-     * The total number of Droplets current user or team may have active at one time. Requires
-     * `droplet:read` scope.
+     * The total number of Droplets current user or team may have active at one time. Requires `droplet:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("droplet_limit") val dropletLimit: Long,
     /**
-     * The total number of Floating IPs the current user or team may have. Requires
-     * `reserved_ip:read` scope.
+     * The total number of Floating IPs the current user or team may have. Requires `reserved_ip:read` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("floating_ip_limit") val floatingIpLimit: Long,
-    /** The email address used by the current user to register for DigitalOcean. */
+    /**
+     * The email address used by the current user to register for DigitalOcean.
+     */
     val email: String,
-    /** The unique universal identifier for the current user. */
+    /**
+     * The unique universal identifier for the current user.
+     */
     val uuid: String,
-    /** If true, the user has verified their account via email. False otherwise. */
+    /**
+     * If true, the user has verified their account via email. False otherwise.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean,
-    /** This value is one of "active", "warning" or "locked". */
+    /**
+     * This value is one of "active", "warning" or "locked".
+     */
     val status: AccountStatusEnum,
-    /** A human-readable message giving more details about the status of the account. */
+    /**
+     * A human-readable message giving more details about the status of the account.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("status_message") val statusMessage: String,
-    /** The display name for the current user. */
+    /**
+     * The display name for the current user.
+     */
     val name: String? = null,
-    /** When authorized in a team context, includes information about the current team. */
-    val team: AccountTeam? = null,
+    /**
+     * When authorized in a team context, includes information about the current team.
+     */
+    val team: AccountTeam? = null
 )
 
-/** Typed representation of the `AccountResponse` API schema. */
+/**
+ * Typed representation of the `AccountResponse` API schema.
+ */
 data class AccountResponse(
-    /** Optional object value serialized in the `account` wire field. */
+    /**
+     * Optional object value serialized in the `account` wire field.
+     */
     val account: Account? = null
 )

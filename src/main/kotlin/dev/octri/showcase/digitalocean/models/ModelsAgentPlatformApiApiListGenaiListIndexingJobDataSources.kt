@@ -3,9 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiListIndexingJobDataSourcesOutput` API schema. */
+/**
+ * Typed representation of the `ApiListIndexingJobDataSourcesOutput` API schema.
+ */
 data class ApiListIndexingJobDataSourcesOutput(
-    /** Optional array value serialized in the `indexed_data_sources` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("indexed_data_sources")
-    val indexedDataSources: List<ApiIndexedDataSource>? = null
+    /**
+     * Optional array value serialized in the `indexed_data_sources` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("indexed_data_sources") val indexedDataSources: List<ApiIndexedDataSource>? = null
 )

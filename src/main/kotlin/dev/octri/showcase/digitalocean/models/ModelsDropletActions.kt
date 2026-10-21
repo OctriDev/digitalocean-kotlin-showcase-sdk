@@ -3,106 +3,163 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllDropletActions` API schema. */
+/**
+ * Typed representation of the `AllDropletActions` API schema.
+ */
 data class AllDropletActions(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
     val actions: List<Action>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Specifies the action that will be taken on the Droplet. */
+/**
+ * Specifies the action that will be taken on the Droplet.
+ */
 data class DropletAction(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum
 )
 
-/** Typed representation of the `DropletActionChangeBackupPolicy` API schema. */
+/**
+ * Typed representation of the `DropletActionChangeBackupPolicy` API schema.
+ */
 data class DropletActionChangeBackupPolicy(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum,
-    /** An object specifying the backup policy for the Droplet. */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
-    val backupPolicy: DropletBackupPolicy,
+    /**
+     * An object specifying the backup policy for the Droplet.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicy
 )
 
-/** Typed representation of the `DropletActionChangeKernel` API schema. */
+/**
+ * Typed representation of the `DropletActionChangeKernel` API schema.
+ */
 data class DropletActionChangeKernel(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum,
-    /** A unique number used to identify and reference a specific kernel. */
-    val kernel: Long? = null,
+    /**
+     * A unique number used to identify and reference a specific kernel.
+     */
+    val kernel: Long? = null
 )
 
-/** Typed representation of the `DropletActionEnableBackupsRequest` API schema. */
+/**
+ * Typed representation of the `DropletActionEnableBackupsRequest` API schema.
+ */
 data class DropletActionEnableBackupsRequest(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum,
     /**
-     * An object specifying the backup policy for the Droplet. If omitted, the backup plan will
-     * default to daily.
+     * An object specifying the backup policy for the Droplet. If omitted, the backup plan will default to daily.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy")
-    val backupPolicy: DropletBackupPolicyRequest? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_policy") val backupPolicy: DropletBackupPolicyRequest? = null
 )
 
-/** Typed representation of the `DropletActionRebuild` API schema. */
+/**
+ * Typed representation of the `DropletActionRebuild` API schema.
+ */
 data class DropletActionRebuild(
-    /** The type of action to initiate for the Droplet. */
-    val type: DropletActionTypeEnum,
     /**
-     * The image ID of a public or private image or the slug identifier for a public image. The
-     * Droplet will be rebuilt using this image as its base.
+     * The type of action to initiate for the Droplet.
      */
-    val image: Any? = null,
-)
-
-/** Typed representation of the `DropletActionRename` API schema. */
-data class DropletActionRename(
-    /** The type of action to initiate for the Droplet. */
-    val type: DropletActionTypeEnum,
-    /** The new name for the Droplet. */
-    val name: String? = null,
-)
-
-/** Typed representation of the `DropletActionResize` API schema. */
-data class DropletActionResize(
-    /** The type of action to initiate for the Droplet. */
     val type: DropletActionTypeEnum,
     /**
-     * When `true`, the Droplet's disk will be resized in addition to its RAM and CPU. This is a
-     * permanent change and cannot be reversed as a Droplet's disk size cannot be decreased.
+     * The image ID of a public or private image or the slug identifier for a public image. The Droplet will be rebuilt using this image as its base.
+     */
+    val image: Any? = null
+)
+
+/**
+ * Typed representation of the `DropletActionRename` API schema.
+ */
+data class DropletActionRename(
+    /**
+     * The type of action to initiate for the Droplet.
+     */
+    val type: DropletActionTypeEnum,
+    /**
+     * The new name for the Droplet.
+     */
+    val name: String? = null
+)
+
+/**
+ * Typed representation of the `DropletActionResize` API schema.
+ */
+data class DropletActionResize(
+    /**
+     * The type of action to initiate for the Droplet.
+     */
+    val type: DropletActionTypeEnum,
+    /**
+     * When `true`, the Droplet's disk will be resized in addition to its RAM and CPU. This is a permanent change and cannot be reversed as a Droplet's disk size cannot be decreased.
      */
     val disk: Boolean? = null,
-    /** The slug identifier for the size to which you wish to resize the Droplet. */
-    val size: String? = null,
+    /**
+     * The slug identifier for the size to which you wish to resize the Droplet.
+     */
+    val size: String? = null
 )
 
-/** Typed representation of the `DropletActionResponse` API schema. */
+/**
+ * Typed representation of the `DropletActionResponse` API schema.
+ */
 data class DropletActionResponse(
-    /** Optional object value serialized in the `action` wire field. */
+    /**
+     * Optional object value serialized in the `action` wire field.
+     */
     val action: Action? = null
 )
 
-/** Typed representation of the `DropletActionRestore` API schema. */
+/**
+ * Typed representation of the `DropletActionRestore` API schema.
+ */
 data class DropletActionRestore(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum,
-    /** The ID of a backup of the current Droplet instance to restore from. */
-    val image: Long? = null,
+    /**
+     * The ID of a backup of the current Droplet instance to restore from.
+     */
+    val image: Long? = null
 )
 
-/** Typed representation of the `DropletActionSnapshot` API schema. */
+/**
+ * Typed representation of the `DropletActionSnapshot` API schema.
+ */
 data class DropletActionSnapshot(
-    /** The type of action to initiate for the Droplet. */
+    /**
+     * The type of action to initiate for the Droplet.
+     */
     val type: DropletActionTypeEnum,
-    /** The name to give the new snapshot of the Droplet. */
-    val name: String? = null,
+    /**
+     * The name to give the new snapshot of the Droplet.
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `DropletActionsResponse` API schema. */
+/**
+ * Typed representation of the `DropletActionsResponse` API schema.
+ */
 data class DropletActionsResponse(
-    /** Optional array value serialized in the `actions` wire field. */
+    /**
+     * Optional array value serialized in the `actions` wire field.
+     */
     val actions: List<Action>? = null
 )

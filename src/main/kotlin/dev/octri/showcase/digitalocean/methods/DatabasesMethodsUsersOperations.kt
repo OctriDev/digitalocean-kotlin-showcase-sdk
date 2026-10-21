@@ -14,265 +14,86 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListUsersOperation {
     /**
-     * To list all of the users for your database cluster, send a GET request to
-     * `/v2/databases/$DATABASE_ID/users`. Note: User management is not supported for Caching or
-     * Valkey clusters. The result will be a JSON object with a `users` key. This will be set to an
-     * array of database user objects, each of which will contain the standard database user
-     * attributes. User passwords will not show without the `database:view_credentials` scope. For
-     * MySQL clusters, additional options will be…
+     * To list all of the users for your database cluster, send a GET request to `/v2/databases/$DATABASE_ID/users`. Note: User management is not supported for Caching or Valkey clusters. The result will be a JSON object with a `users` key. This will be set to an array of database user objects, each of which will contain the standard database user attributes. User passwords will not show without the `database:view_credentials` scope. For MySQL clusters, additional options will be…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListUsers(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): Users {
+    fun databasesListUsers(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Users {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Users>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users",
-                    config = clientConfig,
-                    operationId = "databasesListUsers",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Users>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users", config = clientConfig, operationId = "databasesListUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesAddUserOperation {
     /**
-     * Creates a database user for a database cluster. Supply the required `name` and, where
-     * applicable, engine-specific options in `mysql_settings` or `settings`; PostgreSQL
-     * `pg_allow_replication` defaults to `false` when omitted. The response includes the new user
-     * and its randomly generated password, and user management is not supported for Caching or
-     * Valkey clusters.
+     * Creates a database user for a database cluster. Supply the required `name` and, where applicable, engine-specific options in `mysql_settings` or `settings`; PostgreSQL `pg_allow_replication` defaults to `false` when omitted. The response includes the new user and its randomly generated password, and user management is not supported for Caching or Valkey clusters.
      *
-     * To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users` with
-     * the desired username. Note: User management is not supported for Caching or Valkey clusters.
-     * When adding a user to a MySQL cluster, additional options can be configured in the
-     * `mysql_settings` object. When adding a user to a PostgreSQL cluster, additional options can
-     * be configured in the `settings` object (for example, `pg_allow_replication`). When
-     * `pg_allow_replication` is omitted, it…
+     * To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users` with the desired username. Note: User management is not supported for Caching or Valkey clusters. When adding a user to a MySQL cluster, additional options can be configured in the `mysql_settings` object. When adding a user to a PostgreSQL cluster, additional options can be configured in the `settings` object (for example, `pg_allow_replication`). When `pg_allow_replication` is omitted, it…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesAddUser(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        body: DatabasesMethods.DatabasesAddUser,
-        options: RequestOptions? = null,
-    ): UserResponse {
+    fun databasesAddUser(clientConfig: ClientConfig, databaseClusterUuid: String, body: DatabasesMethods.DatabasesAddUser, options: RequestOptions? = null): UserResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<UserResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "databasesAddUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UserResponse>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users", config = clientConfig, body = body, operationId = "databasesAddUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetUserOperation {
     /**
-     * To show information about an existing database user, send a GET request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME`. Note: User management is not supported for
-     * Caching or Valkey clusters. The response will be a JSON object with a `user` key. This will
-     * be set to an object containing the standard database user attributes. The user's password
-     * will not show up unless the `database:view_credentials` scope is present. For MySQL clusters,
-     * additional options will be contained in…
+     * To show information about an existing database user, send a GET request to `/v2/databases/$DATABASE_ID/users/$USERNAME`. Note: User management is not supported for Caching or Valkey clusters. The response will be a JSON object with a `user` key. This will be set to an object containing the standard database user attributes. The user's password will not show up unless the `database:view_credentials` scope is present. For MySQL clusters, additional options will be contained in…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param username The name of the database user.
      */
-    fun databasesGetUser(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        username: String,
-        options: RequestOptions? = null,
-    ): UserResponse {
+    fun databasesGetUser(clientConfig: ClientConfig, databaseClusterUuid: String, username: String, options: RequestOptions? = null): UserResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<UserResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}",
-                    config = clientConfig,
-                    operationId = "databasesGetUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UserResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}", config = clientConfig, operationId = "databasesGetUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteUserOperation {
     /**
-     * To remove a specific database user, send a DELETE request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME`. A status of 204 will be given. This indicates
-     * that the request was processed successfully, but that no response body is needed. Note: User
-     * management is not supported for Caching or Valkey clusters.
+     * To remove a specific database user, send a DELETE request to `/v2/databases/$DATABASE_ID/users/$USERNAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed. Note: User management is not supported for Caching or Valkey clusters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param username The name of the database user.
      */
-    fun databasesDeleteUser(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        username: String,
-        options: RequestOptions? = null,
-    ): Unit {
+    fun databasesDeleteUser(clientConfig: ClientConfig, databaseClusterUuid: String, username: String, options: RequestOptions? = null): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}",
-                config = clientConfig,
-                operationId = "databasesDeleteUser",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-                errors =
-                    mapOf(
-                        "401" to Error2::class.java,
-                        "404" to Error2::class.java,
-                        "429" to Error2::class.java,
-                        "500" to Error2::class.java,
-                        "default" to Error2::class.java,
-                    ),
-            )
-        )
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}", config = clientConfig, operationId = "databasesDeleteUser", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateUserOperation {
     /**
-     * To update an existing database user, send a PUT request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME` with the desired settings. **Note**: only
-     * `settings` can be updated via this type of request. If you wish to change the name of a user,
-     * you must recreate a new user. For PostgreSQL clusters, you can update
-     * `settings.pg_allow_replication` to enable or disable replication privileges for the user.
-     * When omitted, the value defaults to `false`. For Kafka and OpenSearch clusters,…
+     * To update an existing database user, send a PUT request to `/v2/databases/$DATABASE_ID/users/$USERNAME` with the desired settings. **Note**: only `settings` can be updated via this type of request. If you wish to change the name of a user, you must recreate a new user. For PostgreSQL clusters, you can update `settings.pg_allow_replication` to enable or disable replication privileges for the user. When omitted, the value defaults to `false`. For Kafka and OpenSearch clusters,…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param username The name of the database user.
      */
-    fun databasesUpdateUser(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        username: String,
-        body: Map<String, Any>,
-        options: RequestOptions? = null,
-    ): UserResponse {
+    fun databasesUpdateUser(clientConfig: ClientConfig, databaseClusterUuid: String, username: String, body: Map<String, Any>, options: RequestOptions? = null): UserResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<UserResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "databasesUpdateUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UserResponse>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}", config = clientConfig, body = body, operationId = "databasesUpdateUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object DatabasesMethodsDatabasesResetAuthOperation {
     /**
-     * Resets the password or authentication method for a user in a database cluster. For MySQL
-     * users, supply `mysql_settings.auth_plugin` to choose the authentication method. The response
-     * includes the updated user object and its standard database user attributes.
+     * Resets the password or authentication method for a user in a database cluster. For MySQL users, supply `mysql_settings.auth_plugin` to choose the authentication method. The response includes the updated user object and its standard database user attributes.
      *
-     * To reset the password for a database user, send a POST request to
-     * `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`. For `mysql` databases, the
-     * authentication method can be specifying by including a key in the JSON body called
-     * `mysql_settings` with the `auth_plugin` value specified. The response will be a JSON object
-     * with a `user` key. This will be set to an object containing the standard database user
-     * attributes.
+     * To reset the password for a database user, send a POST request to `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`. For `mysql` databases, the authentication method can be specifying by including a key in the JSON body called `mysql_settings` with the `auth_plugin` value specified. The response will be a JSON object with a `user` key. This will be set to an object containing the standard database user attributes.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param username The name of the database user.
      */
-    fun databasesResetAuth(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        username: String,
-        mysqlSettings: MysqlSettings? = null,
-        options: RequestOptions? = null,
-    ): UserResponse {
+    fun databasesResetAuth(clientConfig: ClientConfig, databaseClusterUuid: String, username: String, mysqlSettings: MysqlSettings? = null, options: RequestOptions? = null): UserResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<UserResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}/reset_auth",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "mysql_settings" to (SdkClient.omitIfNull(mysqlSettings))
-                        ),
-                    operationId = "databasesResetAuth",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UserResponse>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/users/${SdkClient.encodePathSegment(username)}/reset_auth", config = clientConfig, body = SdkClient.bodyMap("mysql_settings" to (SdkClient.omitIfNull(mysqlSettings))), operationId = "databasesResetAuth", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

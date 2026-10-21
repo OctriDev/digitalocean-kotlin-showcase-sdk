@@ -15,64 +15,29 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayConnectionsCreateOperation {
     /**
-     * Connects one of your users, identified by `user_id`, to a provider so tools can act on their
-     * account. An OAuth connection starts pending, and authorization carries the URL to send the
-     * user to; read the connection until it is active or expired. A connection through a team
-     * API-key credential is active immediately. There is one connection per provider and `user_id`
-     * for each DigitalOcean user who creates connections. Repeating the request returns the
-     * existing connection when its…
+     * Connects one of your users, identified by `user_id`, to a provider so tools can act on their account. An OAuth connection starts pending, and authorization carries the URL to send the user to; read the connection until it is active or expired. A connection through a team API-key credential is active immediately. There is one connection per provider and `user_id` for each DigitalOcean user who creates connections. Repeating the request returns the existing connection when its…
      *
      * @param provider Required provider slug, from the provider list.
-     * @param userId Required. Your identifier for the user the connection acts for: 1 to 64
-     *   characters from `[A-Za-z0-9._-]`. A session whose `actor_id` equals it uses this
-     *   connection.
-     * @param scopes Optional OAuth scopes to request. Defaults to every scope the provider offers;
-     *   scopes outside that set are rejected. Ignored for API-key credentials.
-     * @param connectionParameters Values for the provider's `connection_parameters`, validated
-     *   against their specifications.
-     * @param credential Optional credential to connect through. Omitted uses DigitalOcean's shared
-     *   OAuth application.
-     * @param network Optional private network for the connection's calls. Requires VPC networking
-     *   to be enabled for your account (403 otherwise).
+     * @param userId Required. Your identifier for the user the connection acts for:
+     *   1 to 64 characters from `[A-Za-z0-9._-]`. A session whose `actor_id` equals it
+     *   uses this connection.
+     * @param scopes Optional OAuth scopes to request. Defaults to every scope the
+     *   provider offers; scopes outside that set are rejected. Ignored for API-key
+     *   credentials.
+     * @param connectionParameters Values for the provider's `connection_parameters`,
+     *   validated against their specifications.
+     * @param credential Optional credential to connect through. Omitted uses
+     *   DigitalOcean's shared OAuth application.
+     * @param network Optional private network for the connection's calls. Requires
+     *   VPC networking to be enabled for your account (403 otherwise).
      */
-    fun connectionsCreate(
-        clientConfig: ClientConfig,
-        request: ActionGateway.ConnectionsCreateRequest,
-        options: RequestOptions? = null,
-    ): ConnectionResponse {
+    fun connectionsCreate(clientConfig: ClientConfig, request: ActionGateway.ConnectionsCreateRequest, options: RequestOptions? = null): ConnectionResponse {
         validateConnectionsCreateRequest(request)
 
-        return SdkClient.request<ConnectionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/connections",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "provider" to (request.provider),
-                            "user_id" to (request.userId),
-                            "scopes" to (SdkClient.omitIfNull(request.scopes)),
-                            "connection_parameters" to
-                                (SdkClient.omitIfNull(request.connectionParameters)),
-                            "credential" to (SdkClient.omitIfNull(request.credential)),
-                            "network" to (SdkClient.omitIfNull(request.network)),
-                        ),
-                    operationId = "connectionsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ConnectionResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/connections", config = clientConfig, body = SdkClient.bodyMap("provider" to (request.provider), "user_id" to (request.userId), "scopes" to (SdkClient.omitIfNull(request.scopes)), "connection_parameters" to
+    (SdkClient.omitIfNull(request.connectionParameters)), "credential" to (SdkClient.omitIfNull(request.credential)), "network" to (SdkClient.omitIfNull(request.network))), operationId = "connectionsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateConnectionsCreateRequest(request: ActionGateway.ConnectionsCreateRequest) {
         Validation.validatePattern("user_id", request.userId, "^[A-Za-z0-9._-]{1,64}$")
@@ -81,141 +46,60 @@ internal object ActionGatewayConnectionsCreateOperation {
 
 internal object ActionGatewayConnectionsListOperation {
     /**
-     * Returns the connections you can see, excluding revoked ones. Offset-paged with page and
-     * `per_page`; filter by provider, `user_id`, and status.
+     * Returns the connections you can see, excluding revoked ones. Offset-paged with page and `per_page`; filter by provider, `user_id`, and status.
      *
      * @param provider Optional provider slug, matched exactly.
-     * @param userId Optional substring of `user_id`. It must use the `user_id` alphabet,
-     *   `[A-Za-z0-9._-]`.
-     * @param status pending|active|revoked|expired. List results always omit revoked connections,
-     *   including when this filter is revoked.
-     * @param sort `created_at`, provider, `user_id`, or status. Defaults to provider, then
-     *   `user_id`.
+     * @param userId Optional substring of `user_id`. It must use the `user_id`
+     *   alphabet, `[A-Za-z0-9._-]`.
+     * @param status pending|active|revoked|expired. List results always omit revoked
+     *   connections, including when this filter is revoked.
+     * @param sort `created_at`, provider, `user_id`, or status. Defaults to
+     *   provider, then `user_id`.
      * @param sortDirection asc (the default) or desc.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun connectionsList(
-        clientConfig: ClientConfig,
-        request: ActionGateway.ConnectionsListRequest,
-        options: RequestOptions? = null,
-    ): ListConnectionsResponse {
+    fun connectionsList(clientConfig: ClientConfig, request: ActionGateway.ConnectionsListRequest, options: RequestOptions? = null): ListConnectionsResponse {
         validateConnectionsListRequest(request)
 
-        return SdkClient.request<ListConnectionsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/connections",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "provider" to SdkClient.queryValue(request.provider, "form", true),
-                            "user_id" to SdkClient.queryValue(request.userId, "form", true),
-                            "status" to SdkClient.queryValue(request.status, "form", true),
-                            "sort" to SdkClient.queryValue(request.sort, "form", true),
-                            "sort_direction" to
-                                SdkClient.queryValue(request.sortDirection, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                        ),
-                    operationId = "connectionsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListConnectionsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/connections", config = clientConfig, query = mapOf("provider" to
+    SdkClient.queryValue(request.provider, "form", true), "user_id" to
+    SdkClient.queryValue(request.userId, "form", true), "status" to
+    SdkClient.queryValue(request.status, "form", true), "sort" to SdkClient.queryValue(request.sort, "form", true), "sort_direction" to
+    SdkClient.queryValue(request.sortDirection, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true)), operationId = "connectionsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
 
     private fun validateConnectionsListRequest(request: ActionGateway.ConnectionsListRequest) {
         if (request.page != null) {
             Validation.validateRange("page", request.page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
         if (request.perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                request.perPage,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
     }
 }
 
 internal object ActionGatewayConnectionsGetOperation {
     /**
-     * Returns the connection and, while it is pending, the authorization the user still has to
-     * complete. Reading a pending connection picks up a completed authorization, and marks the
-     * connection expired once its link has lapsed. Returns 404 for an unknown connection or one you
-     * cannot see.
+     * Returns the connection and, while it is pending, the authorization the user still has to complete. Reading a pending connection picks up a completed authorization, and marks the connection expired once its link has lapsed. Returns 404 for an unknown connection or one you cannot see.
      *
      * @param id Connection ID.
      */
-    fun connectionsGet(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): GetConnectionResponse {
-        return SdkClient.request<GetConnectionResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/connections/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "connectionsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun connectionsGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetConnectionResponse {
+        return SdkClient.request<GetConnectionResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/connections/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "connectionsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayConnectionsDeleteOperation {
     /**
-     * Marks the connection revoked and returns it; for an OAuth connection, its stored tokens are
-     * deleted first. Creating a connection for the same provider and `user_id` later reuses the
-     * same ID. Only the user who created the connection can delete it; for anyone else it is 404.
+     * Marks the connection revoked and returns it; for an OAuth connection, its stored tokens are deleted first. Creating a connection for the same provider and `user_id` later reuses the same ID. Only the user who created the connection can delete it; for anyone else it is 404.
      *
      * @param id Connection ID.
      */
-    fun connectionsDelete(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): DeleteConnectionResponse {
-        return SdkClient.request<DeleteConnectionResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/action-gateway/connections/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "connectionsDelete",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun connectionsDelete(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): DeleteConnectionResponse {
+        return SdkClient.request<DeleteConnectionResponse>(SdkClient.RequestSpec("DELETE", "/v2/action-gateway/connections/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "connectionsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

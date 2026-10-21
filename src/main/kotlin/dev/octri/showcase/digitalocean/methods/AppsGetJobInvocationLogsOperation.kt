@@ -11,10 +11,7 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsGetJobInvocationLogsOperation {
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is
-     * specified, the logs will be limited to only that component. If deployment is omitted the
-     * active deployment will be selected (if available). The response will include links to either
-     * real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. If deployment is omitted the active deployment will be selected (if available). The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
      *
      * @param appId The app ID
      * @param jobName The job name to list job invocations for.
@@ -22,43 +19,15 @@ internal object AppsGetJobInvocationLogsOperation {
      * @param type The type of logs to retrieve
      * @param deploymentId The deployment ID
      * @param follow Whether the logs should follow live updates.
-     * @param podConnectionTimeout An optional time duration to wait if the underlying component
-     *   instance is not immediately available. Default: `3m`.
+     * @param podConnectionTimeout An optional time duration to wait if the
+     *   underlying component instance is not immediately available. Default: `3m`.
      * @param tailLines The number of lines from the end of the logs to retrieve.
      */
-    fun appsGetJobInvocationLogs(
-        clientConfig: ClientConfig,
-        request: Apps.AppsGetJobInvocationLogsRequest,
-        options: RequestOptions? = null,
-    ): AppsGetLogsResponse {
-        return SdkClient.request<AppsGetLogsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/apps/${SdkClient.encodePathSegment(request.appId)}/jobs/${SdkClient.encodePathSegment(request.jobName)}/invocations/${SdkClient.encodePathSegment(request.jobInvocationId)}/logs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "type" to SdkClient.queryValue(request.type, "form", true),
-                            "deployment_id" to
-                                SdkClient.queryValue(request.deploymentId, "form", true),
-                            "follow" to SdkClient.queryValue(request.follow, "form", true),
-                            "pod_connection_timeout" to
-                                SdkClient.queryValue(request.podConnectionTimeout, "form", true),
-                            "tail_lines" to SdkClient.queryValue(request.tailLines, "form", true),
-                        ),
-                    operationId = "appsGetJobInvocationLogs",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsGetJobInvocationLogs(clientConfig: ClientConfig, request: Apps.AppsGetJobInvocationLogsRequest, options: RequestOptions? = null): AppsGetLogsResponse {
+        return SdkClient.request<AppsGetLogsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(request.appId)}/jobs/${SdkClient.encodePathSegment(request.jobName)}/invocations/${SdkClient.encodePathSegment(request.jobInvocationId)}/logs", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(request.type, "form", true), "deployment_id" to
+    SdkClient.queryValue(request.deploymentId, "form", true), "follow" to
+    SdkClient.queryValue(request.follow, "form", true), "pod_connection_timeout" to
+    SdkClient.queryValue(request.podConnectionTimeout, "form", true), "tail_lines" to
+    SdkClient.queryValue(request.tailLines, "form", true)), operationId = "appsGetJobInvocationLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

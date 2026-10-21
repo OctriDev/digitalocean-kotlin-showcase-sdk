@@ -5,76 +5,116 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** The team resource returned when a team is created in an organization. */
+/**
+ * The team resource returned when a team is created in an organization.
+ */
 data class CreateTeam(
-    /** A unique universal identifier for the newly created team. */
+    /**
+     * A unique universal identifier for the newly created team.
+     */
     val uuid: String,
-    /** The human-readable name for the newly created team. */
-    val name: String,
+    /**
+     * The human-readable name for the newly created team.
+     */
+    val name: String
 )
 
-/** Typed representation of the `CreateTeamRequest` API schema. */
+/**
+ * Typed representation of the `CreateTeamRequest` API schema.
+ */
 data class CreateTeamRequest(
-    /** The human-readable name for the team to create. */
+    /**
+     * The human-readable name for the team to create.
+     */
     val name: String,
     /**
-     * Optional invitations to send when creating the team. Each invitation includes an email
-     * address and a role. The `owner` role cannot be assigned via invitation.
+     * Optional invitations to send when creating the team. Each invitation includes an email address and a role. The `owner` role cannot be assigned via invitation.
      */
-    val invitations: List<TeamInvitation>? = null,
+    val invitations: List<TeamInvitation>? = null
 )
 
-/** Typed representation of the `CreateTeamResponse` API schema. */
+/**
+ * Typed representation of the `CreateTeamResponse` API schema.
+ */
 data class CreateTeamResponse(
-    /** The team resource returned when a team is created in an organization. */
+    /**
+     * The team resource returned when a team is created in an organization.
+     */
     val team: CreateTeam,
-    /** A map of invitee email addresses to invitation status results. */
-    val invitations: Map<String, TeamInvitationStatus>? = null,
+    /**
+     * A map of invitee email addresses to invitation status results.
+     */
+    val invitations: Map<String, TeamInvitationStatus>? = null
 )
 
-/** Typed representation of the `ListTeams` API schema. */
+/**
+ * Typed representation of the `ListTeams` API schema.
+ */
 data class ListTeams(
-    /** Required array value serialized in the `teams` wire field. */
+    /**
+     * Required array value serialized in the `teams` wire field.
+     */
     val teams: List<OrganizationTeam>
 )
 
-/** A team that belongs to an organization. */
+/**
+ * A team that belongs to an organization.
+ */
 data class OrganizationTeam(
-    /** A unique identifier for the team. */
+    /**
+     * A unique identifier for the team.
+     */
     val id: java.math.BigInteger? = null,
-    /** A unique universal identifier for the team. */
+    /**
+     * A unique universal identifier for the team.
+     */
     val uuid: String? = null,
-    /** The human-readable name for the team. */
+    /**
+     * The human-readable name for the team.
+     */
     val name: String? = null,
-    /** The email address associated with the team. */
+    /**
+     * The email address associated with the team.
+     */
     val email: String? = null,
-    /** The number of members on the team. */
-    @com.fasterxml.jackson.annotation.JsonProperty("member_count")
-    val memberCount: java.math.BigInteger? = null,
-    /** The team's membership status within the organization. */
+    /**
+     * The number of members on the team.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("member_count") val memberCount: java.math.BigInteger? = null,
+    /**
+     * The team's membership status within the organization.
+     */
     val status: OrganizationTeamStatusEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the team
-     * joined the organization.
+     * A time value given in ISO8601 combined date and time format that represents when the team joined the organization.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("joined_organization_at")
-    val joinedOrganizationAt: OffsetDateTime? = null,
-    /** The company name associated with the team, if set. */
-    val company: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("joined_organization_at") val joinedOrganizationAt: OffsetDateTime? = null,
+    /**
+     * The company name associated with the team, if set.
+     */
+    val company: String? = null
 )
 
-/** An invitation to join a newly created team. */
+/**
+ * An invitation to join a newly created team.
+ */
 data class TeamInvitation(
-    /** The email address of the user to invite. */
+    /**
+     * The email address of the user to invite.
+     */
     val email: String,
     /**
      * The role to assign to the invited user. The `owner` role cannot be assigned via invitation.
      */
-    val role: TeamInvitationRoleEnum,
+    val role: TeamInvitationRoleEnum
 )
 
-/** The result of attempting to send a team invitation. */
+/**
+ * The result of attempting to send a team invitation.
+ */
 data class TeamInvitationStatus(
-    /** The invitation delivery status for the email address. */
+    /**
+     * The invitation delivery status for the email address.
+     */
     val status: TeamInvitationStatusStatusEnum? = null
 )

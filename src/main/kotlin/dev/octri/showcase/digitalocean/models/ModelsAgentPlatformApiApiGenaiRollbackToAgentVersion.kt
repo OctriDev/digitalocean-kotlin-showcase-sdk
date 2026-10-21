@@ -3,21 +3,36 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** An alternative way to provide auth information. for internal use only. */
+/**
+ * An alternative way to provide auth information. for internal use only.
+ */
 data class ApiAuditHeader(
-    /** Optional `uint64`-formatted value serialized in the `actor_id` wire field. */
+    /**
+     * Optional `uint64`-formatted value serialized in the `actor_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("actor_id") val actorId: String? = null,
-    /** Optional `string` value serialized in the `actor_ip` wire field. */
+    /**
+     * Optional `string` value serialized in the `actor_ip` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("actor_ip") val actorIp: String? = null,
-    /** Optional `string` value serialized in the `actor_uuid` wire field. */
+    /**
+     * Optional `string` value serialized in the `actor_uuid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("actor_uuid") val actorUuid: String? = null,
-    /** Optional `string` value serialized in the `context_urn` wire field. */
+    /**
+     * Optional `string` value serialized in the `context_urn` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("context_urn") val contextUrn: String? = null,
-    /** Optional `string` value serialized in the `origin_application` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("origin_application")
-    val originApplication: String? = null,
-    /** Optional `uint64`-formatted value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `origin_application` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("origin_application") val originApplication: String? = null,
+    /**
+     * Optional `uint64`-formatted value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `user_uuid` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_uuid") val userUuid: String? = null,
+    /**
+     * Optional `string` value serialized in the `user_uuid` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_uuid") val userUuid: String? = null
 )

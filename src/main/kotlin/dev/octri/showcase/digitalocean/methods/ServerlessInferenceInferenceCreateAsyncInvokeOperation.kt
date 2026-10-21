@@ -13,50 +13,20 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object ServerlessInferenceInferenceCreateAsyncInvokeOperation {
     /**
-     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an
-     * asynchronous job and returns a request_id. The job status is QUEUED initially. Use the
-     * request_id to poll for the result.
+     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an asynchronous job and returns a request_id. The job status is QUEUED initially. Use the request_id to poll for the result.
      *
      * @param modelId The ID of the model to invoke asynchronously.
-     * @param input The input parameters for the model invocation. Fields vary by model type. For
-     *   **image generation** models (e.g., `fal-ai/flux/schnell`, `fal-ai/fast-sdxl`), use `prompt`
-     *   along with optional image parameters like `output_format`, `num_inference_steps`,
-     *   `guidance_scale`, `num_images`, and `enable_safety_checker`. For **audio generation**
-     *   models (e.g., `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with
+     * @param input The input parameters for the model invocation. Fields vary by
+     *   model type. For **image generation** models (e.g., `fal-ai/flux/schnell`,
+     *   `fal-ai/fast-sdxl`), use `prompt` along with optional image parameters like
+     *   `output_format`, `num_inference_steps`, `guidance_scale`, `num_images`, and
+     *   `enable_safety_checker`. For **audio generation** models (e.g.,
+     *   `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with
      *   `seconds_total` to control the duration. For…
-     * @param tags An optional list of key-value tags to attach to the invocation request for
-     *   tracking or categorization.
+     * @param tags An optional list of key-value tags to attach to the invocation
+     *   request for tracking or categorization.
      */
-    fun inferenceCreateAsyncInvoke(
-        clientConfig: ClientConfig,
-        modelId: String,
-        input: ServerlessInference.AsyncInvokeRequestInput,
-        tags: SdkClient.SdkOptional<List<ServerlessInference.AsyncInvokeRequestTagsItem>?>? = null,
-        options: RequestOptions? = null,
-    ): AsyncInvokeResponse {
-        return SdkClient.request<AsyncInvokeResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v1/async-invoke",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "model_id" to (modelId),
-                            "input" to (input),
-                            "tags" to (tags ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "inferenceCreateAsyncInvoke",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun inferenceCreateAsyncInvoke(clientConfig: ClientConfig, modelId: String, input: ServerlessInference.AsyncInvokeRequestInput, tags: SdkClient.SdkOptional<List<ServerlessInference.AsyncInvokeRequestTagsItem>?>? = null, options: RequestOptions? = null): AsyncInvokeResponse {
+        return SdkClient.request<AsyncInvokeResponse>(SdkClient.RequestSpec("POST", "/v1/async-invoke", config = clientConfig, body = SdkClient.bodyMap("model_id" to (modelId), "input" to (input), "tags" to (tags ?: SdkClient.SdkOptional.Omitted)), operationId = "inferenceCreateAsyncInvoke", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

@@ -5,175 +5,218 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** One version of a toolbelt. */
+/**
+ * One version of a toolbelt.
+ */
 data class Toolbelt(
-    /** Toolbelt name, unique among your team's active toolbelts. */
+    /**
+     * Toolbelt name, unique among your team's active toolbelts.
+     */
     val name: String? = null,
-    /** Version number of this toolbelt version, as a string, for example `3`. */
+    /**
+     * Version number of this toolbelt version, as a string, for example `3`.
+     */
     val version: String? = null,
-    /** Human-readable label. */
+    /**
+     * Human-readable label.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /** Team-authored description. */
+    /**
+     * Team-authored description.
+     */
     val description: String? = null,
     /**
-     * Members, sorted, each as `<tool_slug>@<version>`: the tool and the version this toolbelt
-     * version pins.
+     * Members, sorted, each as `<tool_slug>@<version>`: the tool and the version this toolbelt version pins.
      */
     val tools: List<String>? = null,
-    /** active, or deprecated once the toolbelt is deleted. */
+    /**
+     * active, or deprecated once the toolbelt is deleted.
+     */
     val status: ToolbeltStatusEnum? = null,
     /**
-     * `<name>@<version>`, identifying this exact version. Sessions reference it as
-     * `toolbelt:<name>@<version>`.
+     * `<name>@<version>`, identifying this exact version. Sessions reference it as `toolbelt:<name>@<version>`.
      */
     val reference: String? = null,
-    /** The toolbelt name, which refers to whichever version is latest. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reference_latest")
-    val referenceLatest: String? = null,
-    /** Number of entries in tools. */
+    /**
+     * The toolbelt name, which refers to whichever version is latest.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reference_latest") val referenceLatest: String? = null,
+    /**
+     * Number of entries in tools.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_count") val toolCount: Int? = null,
-    /** When this version was created, in RFC 3339 format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** When this version was last modified, in RFC 3339 format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-)
-
-/** Describes a new toolbelt. */
-data class ToolbeltCreate(
     /**
-     * Toolbelt name, unique among your team's active toolbelts. Must match
-     * `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$`; `search` is reserved.
+     * When this version was created, in RFC 3339 format.
      */
-    val name: String,
-    /** Optional initial version number, a positive integer such as `1`. Defaults to 1. */
-    val version: String? = null,
-    /** Optional human-readable label, separate from name. At most 128 bytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /** Optional description. At most 255 bytes. */
-    val description: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
     /**
-     * Optional initial members, as catalog tool slugs (`<provider>_<name>`). Each may be pinned as
-     * `<tool_slug>@<version>`; a pin must equal the tool's current released version, and an
-     * unpinned tool is pinned to that version. Every tool must be an active catalog tool.
-     * Duplicates are merged; at most 500 tools. Empty creates a toolbelt with no tools.
+     * When this version was last modified, in RFC 3339 format.
      */
-    val tools: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
 )
 
 /**
- * One provider represented in a toolbelt's membership. Its provider fields (ID, name, description,
- * `created_at`) match the toolkit entries of `GET /v2/action-gateway/tools/toolkits`, so a client
- * can render the same provider card without a second request.
+ * Describes a new toolbelt.
+ */
+data class ToolbeltCreate(
+    /**
+     * Toolbelt name, unique among your team's active toolbelts. Must match `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$`; `search` is reserved.
+     */
+    val name: String,
+    /**
+     * Optional initial version number, a positive integer such as `1`. Defaults to 1.
+     */
+    val version: String? = null,
+    /**
+     * Optional human-readable label, separate from name. At most 128 bytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
+    /**
+     * Optional description. At most 255 bytes.
+     */
+    val description: String? = null,
+    /**
+     * Optional initial members, as catalog tool slugs (`<provider>_<name>`). Each may be pinned as `<tool_slug>@<version>`; a pin must equal the tool's current released version, and an unpinned tool is pinned to that version. Every tool must be an active catalog tool. Duplicates are merged; at most 500 tools. Empty creates a toolbelt with no tools.
+     */
+    val tools: List<String>? = null
+)
+
+/**
+ * One provider represented in a toolbelt's membership. Its provider fields (ID, name, description, `created_at`) match the toolkit entries of `GET /v2/action-gateway/tools/toolkits`, so a client can render the same provider card without a second request.
  */
 data class ToolbeltProviderSummary(
     /**
-     * The provider ID. Members recorded without a provider are grouped under `_legacy`, which is
-     * also accepted in the provider path.
+     * The provider ID. Members recorded without a provider are grouped under `_legacy`, which is also accepted in the provider path.
      */
     val provider: String? = null,
-    /** How many toolbelt members belong to this provider. */
+    /**
+     * How many toolbelt members belong to this provider.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_count") val toolCount: Int? = null,
-    /** Equals provider; present so the entry has the same shape as a toolkit. */
+    /**
+     * Equals provider; present so the entry has the same shape as a toolkit.
+     */
     val id: String? = null,
-    /** The provider's display name. Empty for `_legacy`. */
+    /**
+     * The provider's display name. Empty for `_legacy`.
+     */
     val name: String? = null,
-    /** Provider description. Empty for `_legacy`. */
+    /**
+     * Provider description. Empty for `_legacy`.
+     */
     val description: String? = null,
     /**
-     * The distinct tool categories among this toolbelt's members for the provider (sorted). Empty
-     * for `_legacy` or when no member has a category.
+     * The distinct tool categories among this toolbelt's members for the provider (sorted). Empty for `_legacy` or when no member has a category.
      */
     val categories: List<String>? = null,
-    /** When the provider was added to the catalog. Unset for `_legacy`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-)
-
-/** Returns the created toolbelt. */
-data class ToolbeltResponse(
-    /** The first version of the new toolbelt. */
-    val toolbelt: Toolbelt? = null
-)
-
-/** Describes a toolbelt by its latest version, without the member list. */
-data class ToolbeltSummary(
-    /** Toolbelt name. */
-    val name: String? = null,
-    /** Human-readable label of the latest version. */
-    @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /** Description of the latest version. */
-    val description: String? = null,
-    /** Latest version number, as a string. */
-    @com.fasterxml.jackson.annotation.JsonProperty("latest_version")
-    val latestVersion: String? = null,
     /**
-     * Number of versions recorded under this name, including versions from before the toolbelt was
-     * deleted and the name reused.
+     * When the provider was added to the catalog. Unset for `_legacy`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_count") val versionCount: Int? = null,
-    /** Number of members in the latest version. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_count") val toolCount: Int? = null,
-    /** active, or deprecated once the toolbelt is deleted. */
-    val status: ToolbeltSummaryStatusEnum? = null,
-    /** The toolbelt name, which refers to whichever version is latest. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reference_latest")
-    val referenceLatest: String? = null,
-    /** When the latest version was last modified, in RFC 3339 format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null
 )
 
 /**
- * Catalog metadata for one toolbelt member, so a client can render a toolbelt without also fetching
- * the tool catalog. Input and output schemas are omitted; the tool catalog (`GET
- * /v2/action-gateway/tools`) carries them.
+ * Returns the created toolbelt.
+ */
+data class ToolbeltResponse(
+    /**
+     * The first version of the new toolbelt.
+     */
+    val toolbelt: Toolbelt? = null
+)
+
+/**
+ * Describes a toolbelt by its latest version, without the member list.
+ */
+data class ToolbeltSummary(
+    /**
+     * Toolbelt name.
+     */
+    val name: String? = null,
+    /**
+     * Human-readable label of the latest version.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
+    /**
+     * Description of the latest version.
+     */
+    val description: String? = null,
+    /**
+     * Latest version number, as a string.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("latest_version") val latestVersion: String? = null,
+    /**
+     * Number of versions recorded under this name, including versions from before the toolbelt was deleted and the name reused.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("version_count") val versionCount: Int? = null,
+    /**
+     * Number of members in the latest version.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_count") val toolCount: Int? = null,
+    /**
+     * active, or deprecated once the toolbelt is deleted.
+     */
+    val status: ToolbeltSummaryStatusEnum? = null,
+    /**
+     * The toolbelt name, which refers to whichever version is latest.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reference_latest") val referenceLatest: String? = null,
+    /**
+     * When the latest version was last modified, in RFC 3339 format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null
+)
+
+/**
+ * Catalog metadata for one toolbelt member, so a client can render a toolbelt without also fetching the tool catalog. Input and output schemas are omitted; the tool catalog (`GET /v2/action-gateway/tools`) carries them.
  */
 data class ToolbeltToolDetail(
     /**
-     * The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and
-     * pass it back verbatim.
+     * The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and pass it back verbatim.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_slug") val toolSlug: String? = null,
-    /** The unqualified tool name, without the provider prefix. */
+    /**
+     * The unqualified tool name, without the provider prefix.
+     */
     val name: String? = null,
-    /** Human-readable tool title. */
+    /**
+     * Human-readable tool title.
+     */
     val title: String? = null,
-    /** What the tool does. */
+    /**
+     * What the tool does.
+     */
     val description: String? = null,
     /**
-     * The ID of the provider that offers the tool, broken out so a client never has to split
-     * `tool_slug`.
+     * The ID of the provider that offers the tool, broken out so a client never has to split `tool_slug`.
      */
     val provider: String? = null,
     /**
-     * Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it
-     * being present.
+     * Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it being present.
      */
     val category: String? = null,
     /**
-     * The version this toolbelt version pins for the member, matching the `@<version>` suffix in
-     * the corresponding toolbelt.tools entry.
+     * The version this toolbelt version pins for the member, matching the `@<version>` suffix in the corresponding toolbelt.tools entry.
      */
-    val version: Int? = null,
+    val version: Int? = null
 )
 
-/** Lists the tools to add to or remove from a toolbelt. */
+/**
+ * Lists the tools to add to or remove from a toolbelt.
+ */
 data class ToolbeltTools(
     /**
-     * Tool slugs (`<provider>_<name>`) to add or remove, each optionally pinned as
-     * `<tool_slug>@<version>`. At least one is required. When adding, a pin must equal the tool's
-     * current released version.
+     * Tool slugs (`<provider>_<name>`) to add or remove, each optionally pinned as `<tool_slug>@<version>`. At least one is required. When adding, a pin must equal the tool's current released version.
      */
     val tools: List<String>
 )
 
-/** Returns a toolbelt after a change. */
+/**
+ * Returns a toolbelt after a change.
+ */
 data class ToolbeltUpdateResponse(
     /**
-     * After adding or removing tools: the new version, or the current version when membership did
-     * not change. After a delete: the latest version, with status deprecated.
+     * After adding or removing tools: the new version, or the current version when membership did not change. After a delete: the latest version, with status deprecated.
      */
     val toolbelt: Toolbelt? = null
 )

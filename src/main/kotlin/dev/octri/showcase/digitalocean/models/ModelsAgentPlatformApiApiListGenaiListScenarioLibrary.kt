@@ -3,21 +3,32 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Output for listing the Common Scenario & Goal Library. */
+/**
+ * Output for listing the Common Scenario & Goal Library.
+ */
 data class ApiListScenarioLibraryOutput(
-    /** Categories currently in use, for filtering library results. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_categories")
-    val availableCategories: List<String>? = null,
-    /** Sort-by values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by")
-    val availableSortBy: List<ApiScenarioLibrarySortField>? = null,
-    /** Sort-direction values available for this list request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions")
-    val availableSortDirections: List<ApiSortDirection>? = null,
-    /** Links to other pages */
+    /**
+     * Categories currently in use, for filtering library results.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_categories") val availableCategories: List<String>? = null,
+    /**
+     * Sort-by values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_by") val availableSortBy: List<ApiScenarioLibrarySortField>? = null,
+    /**
+     * Sort-direction values available for this list request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_sort_directions") val availableSortDirections: List<ApiSortDirection>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
+    /**
+     * Meta information about the data set
+     */
     val meta: ApiMeta? = null,
-    /** The library entries for the current page. */
-    val scenarios: List<ApiScenarioLibraryEntry>? = null,
+    /**
+     * The library entries for the current page.
+     */
+    val scenarios: List<ApiScenarioLibraryEntry>? = null
 )

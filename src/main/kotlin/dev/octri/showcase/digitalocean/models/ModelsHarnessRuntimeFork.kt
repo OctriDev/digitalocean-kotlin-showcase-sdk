@@ -3,26 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ForkSessionRequest` API schema. */
+/**
+ * Typed representation of the `ForkSessionRequest` API schema.
+ */
 data class ForkSessionRequest(
     /**
-     * Checkpoint to fork from; must be READY. Omitted/empty means capture an implicit checkpoint of
-     * the session "now" first and fork from that.
+     * Checkpoint to fork from; must be READY. Omitted/empty means capture an implicit checkpoint of the session "now" first and fork from that.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_checkpoint_id")
-    val fromCheckpointId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("from_checkpoint_id") val fromCheckpointId: String? = null,
     /**
-     * Number of child sessions to create, 1-4. Defaults to 1 when omitted; a value outside 1-4 is
-     * rejected with 400.
+     * Number of child sessions to create, 1-4. Defaults to 1 when omitted; a value outside 1-4 is rejected with 400.
      */
-    val count: Int? = null,
+    val count: Int? = null
 )
 
-/** Typed representation of the `ForkSessionResponse` API schema. */
+/**
+ * Typed representation of the `ForkSessionResponse` API schema.
+ */
 data class ForkSessionResponse(
     /**
-     * The created child sessions, each a full Session with parent_session_id and fork_id set
-     * (PROVISIONING -> READY) and drivable exactly like any other session.
+     * The created child sessions, each a full Session with parent_session_id and fork_id set (PROVISIONING -> READY) and drivable exactly like any other session.
      */
     val sessions: List<DefinitionsSession>? = null
 )

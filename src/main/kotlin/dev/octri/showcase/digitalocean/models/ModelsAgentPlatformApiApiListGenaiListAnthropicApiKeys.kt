@@ -7,11 +7,16 @@ package dev.octri.showcase.digitalocean.models
  * ListAnthropicAPIKeysOutput is used to return the list of Anthropic API keys for a specific agent.
  */
 data class ApiListAnthropicAPIKeysOutput(
-    /** Api key infos */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
-    val apiKeyInfos: List<ApiAnthropicAPIKeyInfo>? = null,
-    /** Links to other pages */
+    /**
+     * Api key infos
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiAnthropicAPIKeyInfo>? = null,
+    /**
+     * Links to other pages
+     */
     val links: ApiLinks? = null,
-    /** Meta information about the data set */
-    val meta: ApiMeta? = null,
+    /**
+     * Meta information about the data set
+     */
+    val meta: ApiMeta? = null
 )

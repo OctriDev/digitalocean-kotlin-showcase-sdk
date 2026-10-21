@@ -3,12 +3,17 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AllLoadBalancers` API schema. */
+/**
+ * Typed representation of the `AllLoadBalancers` API schema.
+ */
 data class AllLoadBalancers(
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers")
-    val loadBalancers: List<LoadBalancer>? = null,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("load_balancers") val loadBalancers: List<LoadBalancer>? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )

@@ -5,433 +5,415 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AddonsResourceNew` API schema. */
+/**
+ * Typed representation of the `AddonsResourceNew` API schema.
+ */
 data class AddonsResourceNew(
-    /** The slug identifier for the application associated with the resource. */
+    /**
+     * The slug identifier for the application associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_slug") val appSlug: String,
-    /** The slug identifier for the plan associated with the resource. */
+    /**
+     * The slug identifier for the plan associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("plan_slug") val planSlug: String,
-    /** The name of the addon resource. */
+    /**
+     * The name of the addon resource.
+     */
     val name: String,
     /**
-     * Metadata associated with the resource, set by the user. Metadata expected varies per app, and
-     * can be verified with a GET request to "/v2/add-ons/apps/{app_slug}/metadata"
+     * Metadata associated with the resource, set by the user. Metadata expected varies per app, and can be verified with a GET request to "/v2/add-ons/apps/{app_slug}/metadata"
      */
     val metadata: List<AddonsResourceMetadata>,
-    /** ID of the droplet to be linked to this resource, if applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("linked_droplet_id")
-    val linkedDropletId: Long? = null,
-    /** UUID of the fleet/project to which this resource will belong. */
-    @com.fasterxml.jackson.annotation.JsonProperty("fleet_uuid") val fleetUuid: String? = null,
+    /**
+     * ID of the droplet to be linked to this resource, if applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("linked_droplet_id") val linkedDropletId: Long? = null,
+    /**
+     * UUID of the fleet/project to which this resource will belong.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fleet_uuid") val fleetUuid: String? = null
 )
 
-/** Typed representation of the `AppPropose` API schema. */
+/**
+ * Typed representation of the `AppPropose` API schema.
+ */
 data class AppPropose(
-    /** The desired configuration of an application. */
+    /**
+     * The desired configuration of an application.
+     */
     val spec: AppSpec,
     /**
-     * An optional ID of an existing app. If set, the spec will be treated as a proposed update to
-     * the specified app. The existing app is not modified using this method.
+     * An optional ID of an existing app. If set, the spec will be treated as a proposed update to the specified app. The existing app is not modified using this method.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: String? = null
 )
 
-/** Typed representation of the `ClusterUpdate` API schema. */
+/**
+ * Typed representation of the `ClusterUpdate` API schema.
+ */
 data class ClusterUpdate(
-    /** A human-readable name for a Kubernetes cluster. */
+    /**
+     * A human-readable name for a Kubernetes cluster.
+     */
     val name: String,
     /**
-     * An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged
-     * `k8s` and `k8s:$K8S_CLUSTER_ID`.
+     * An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
      */
     val tags: List<String>? = null,
-    /** An object specifying the maintenance window policy for the Kubernetes cluster. */
-    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_policy")
-    val maintenancePolicy: MaintenancePolicy? = null,
     /**
-     * A boolean value indicating whether the cluster will be automatically upgraded to new patch
-     * releases during its maintenance window.
+     * An object specifying the maintenance window policy for the Kubernetes cluster.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_policy") val maintenancePolicy: MaintenancePolicy? = null,
+    /**
+     * A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("auto_upgrade") val autoUpgrade: Boolean? = null,
     /**
-     * A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge
-     * upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying
-     * the outdated nodes.
+     * A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("surge_upgrade")
-    val surgeUpgrade: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("surge_upgrade") val surgeUpgrade: Boolean? = null,
     /**
-     * A boolean value indicating whether the control plane is run in a highly available
-     * configuration in the cluster. Highly available control planes incur less downtime. The
-     * property cannot be disabled. When omitted on create, the default is version-dependent; for
-     * DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
+     * A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled. When omitted on create, the default is version-dependent; for DOKS 1.36.0 and later, the default is true; for earlier versions, the default is false.
      */
     val ha: Boolean? = null,
     /**
-     * A boolean value indicating whether GPU nodes in the cluster are launched with images that do
-     * not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator
-     * instead. Mutually exclusive with other GPU-related cluster options, such as
-     * `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted, the current value is left
-     * unchanged.
+     * A boolean value indicating whether GPU nodes in the cluster are launched with images that do not include pre-installed GPU drivers, allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other GPU-related cluster options, such as `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted, the current value is left unchanged.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("gpu_operator_ready")
-    val gpuOperatorReady: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("gpu_operator_ready") val gpuOperatorReady: Boolean? = null,
     /**
-     * An object specifying the control plane firewall for the Kubernetes cluster. Control plane
-     * firewall is in early availability (invite only).
+     * An object specifying the control plane firewall for the Kubernetes cluster. Control plane firewall is in early availability (invite only).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("control_plane_firewall")
-    val controlPlaneFirewall: ControlPlaneFirewall? = null,
-    /** An object specifying custom cluster autoscaler configuration. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cluster_autoscaler_configuration")
-    val clusterAutoscalerConfiguration: ClusterAutoscalerConfiguration? = null,
-    /** An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("control_plane_firewall") val controlPlaneFirewall: ControlPlaneFirewall? = null,
+    /**
+     * An object specifying custom cluster autoscaler configuration.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cluster_autoscaler_configuration") val clusterAutoscalerConfiguration: ClusterAutoscalerConfiguration? = null,
+    /**
+     * An object specifying Single Sign-On (SSO) configuration for the Kubernetes cluster.
+     */
     val sso: Sso? = null,
     /**
-     * An object specifying whether the routing-agent component should be enabled for the Kubernetes
-     * cluster.
+     * An object specifying whether the routing-agent component should be enabled for the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("routing_agent")
-    val routingAgent: RoutingAgent? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("routing_agent") val routingAgent: RoutingAgent? = null,
     /**
-     * An object specifying whether the Peer-to-peer OCI registry component should be enabled for
-     * the Kubernetes cluster.
+     * An object specifying whether the Peer-to-peer OCI registry component should be enabled for the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("p2p_oci_registry_plugin")
-    val p2pOciRegistryPlugin: P2pOciRegistryPlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("p2p_oci_registry_plugin") val p2pOciRegistryPlugin: P2pOciRegistryPlugin? = null,
     /**
      * An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("nfs_csi_plugin")
-    val nfsCsiPlugin: NfsCsiPlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("nfs_csi_plugin") val nfsCsiPlugin: NfsCsiPlugin? = null,
     /**
-     * An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes
-     * cluster. It's enabled by default for clusters with an AMD GPU node pool.
+     * An object specifying whether the AMD GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an AMD GPU node pool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_device_plugin")
-    val amdGpuDevicePlugin: AmdGpuDevicePlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_device_plugin") val amdGpuDevicePlugin: AmdGpuDevicePlugin? = null,
     /**
-     * An object specifying whether the AMD Device Metrics Exporter should be enabled in the
-     * Kubernetes cluster.
+     * An object specifying whether the AMD Device Metrics Exporter should be enabled in the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_device_metrics_exporter_plugin")
-    val amdGpuDeviceMetricsExporterPlugin: AmdGpuDeviceMetricsExporterPlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_device_metrics_exporter_plugin") val amdGpuDeviceMetricsExporterPlugin: AmdGpuDeviceMetricsExporterPlugin? = null,
     /**
-     * An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes
-     * cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
+     * An object specifying whether the Nvidia GPU Device Plugin should be enabled in the Kubernetes cluster. It's enabled by default for clusters with an Nvidia GPU node pool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("nvidia_gpu_device_plugin")
-    val nvidiaGpuDevicePlugin: NvidiaGpuDevicePlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("nvidia_gpu_device_plugin") val nvidiaGpuDevicePlugin: NvidiaGpuDevicePlugin? = null,
     /**
-     * An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes
-     * cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
+     * An object specifying whether the NVIDIA GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `nvidia_gpu_device_plugin`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("nvidia_gpu_dra_driver")
-    val nvidiaGpuDraDriver: NvidiaGpuDraDriver? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("nvidia_gpu_dra_driver") val nvidiaGpuDraDriver: NvidiaGpuDraDriver? = null,
     /**
-     * An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes
-     * cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+     * An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_dra_driver")
-    val amdGpuDraDriver: AmdGpuDraDriver? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("amd_gpu_dra_driver") val amdGpuDraDriver: AmdGpuDraDriver? = null,
     /**
-     * An object specifying whether the RDMA shared device plugin should be enabled in the
-     * Kubernetes cluster.
+     * An object specifying whether the RDMA shared device plugin should be enabled in the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("rdma_shared_dev_plugin")
-    val rdmaSharedDevPlugin: RdmaSharedDevPlugin? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("rdma_shared_dev_plugin") val rdmaSharedDevPlugin: RdmaSharedDevPlugin? = null,
     /**
-     * An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS
-     * should be enabled for the Kubernetes cluster.
+     * An object specifying whether the Cluster Proportional Autoscaler (CPA) add-on for CoreDNS should be enabled for the Kubernetes cluster.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("coredns_autoscaler")
-    val corednsAutoscaler: CorednsAutoscaler? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("coredns_autoscaler") val corednsAutoscaler: CorednsAutoscaler? = null
 )
 
-/** Typed representation of the `DomainRecordA` API schema. */
+/**
+ * Typed representation of the `DomainRecordA` API schema.
+ */
 data class DomainRecordA(
-    /** The type of the DNS record. For example: A, CNAME, TXT, ... */
+    /**
+     * The type of the DNS record. For example: A, CNAME, TXT, ...
+     */
     val type: String,
-    /** A unique identifier for each domain record. */
+    /**
+     * A unique identifier for each domain record.
+     */
     val id: Long? = null,
-    /** The host name, alias, or service being defined by the record. */
+    /**
+     * The host name, alias, or service being defined by the record.
+     */
     val name: String? = null,
     /**
-     * Variable data depending on record type. For example, the "data" value for an A record would
-     * be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain
-     * the domain name of the CA being granted permission to issue certificates.
+     * Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** The priority for SRV and MX records. */
+    /**
+     * The priority for SRV and MX records.
+     */
     val priority: Long? = null,
-    /** The port for SRV records. */
+    /**
+     * The port for SRV records.
+     */
     val port: Long? = null,
     /**
-     * This value is the time to live for the record, in seconds. This defines the time frame that
-     * clients can cache queried information before a refresh should be requested.
+     * This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested.
      */
     val ttl: Long? = null,
-    /** The weight for SRV records. */
+    /**
+     * The weight for SRV records.
+     */
     val weight: Long? = null,
-    /** An unsigned integer between 0-255 used for CAA records. */
+    /**
+     * An unsigned integer between 0-255 used for CAA records.
+     */
     val flags: Long? = null,
-    /** The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef" */
-    val tag: String? = null,
+    /**
+     * The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+     */
+    val tag: String? = null
 )
 
-/** Typed representation of the `FirewallRuleBase` API schema. */
+/**
+ * Typed representation of the `FirewallRuleBase` API schema.
+ */
 data class FirewallRuleBase(
-    /** The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`. */
+    /**
+     * The type of traffic to be allowed. This may be one of `tcp`, `udp`, or `icmp`.
+     */
     val protocol: FirewallRuleBaseProtocolEnum,
     /**
-     * The ports on which traffic will be allowed specified as a string containing a single port, a
-     * range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this
-     * parameter will always return "0".
+     * The ports on which traffic will be allowed specified as a string containing a single port, a range (e.g. "8000-9000"), or "0" when all ports are open for a protocol. For ICMP rules this parameter will always return "0".
      */
     val ports: String,
     /**
-     * The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`.
-     * For backward compatibility, this field is optional. When not set, it defaults to `allow`.
+     * The action to be taken when traffic matches the rule. This may be one of `allow` or `deny`. For backward compatibility, this field is optional. When not set, it defaults to `allow`.
      */
-    val action: FirewallRuleBaseActionEnum? = null,
+    val action: FirewallRuleBaseActionEnum? = null
 )
 
-/** Describes an MCP server to register. */
+/**
+ * Describes an MCP server to register.
+ */
 data class McpServerCreate(
     /**
-     * Identifier for the server, unique within your team. Must match
-     * `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
+     * Identifier for the server, unique within your team. Must match `^`\[a-z\]``\[a-z0-9-\]`{0,63}$`.
      */
     val serverRef: String,
     /**
-     * HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses.
-     * Required.
+     * HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses. Required.
      */
     val endpoint: String,
-    /** Optional. `streamable_http`, the default and only accepted value. */
+    /**
+     * Optional. `streamable_http`, the default and only accepted value.
+     */
     val transport: McpServerCreateTransportEnum? = null,
     /**
-     * How requests to the server authenticate: none (the default), secret, or connection. With
-     * secret, the value from `credentialRef` or `api_key` is sent in the Authorization header,
-     * prefixed with "Bearer " unless it already contains a space.
+     * How requests to the server authenticate: none (the default), secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer " unless it already contains a space.
      */
     val credentialRefSource: McpServerCreateCredentialRefSourceEnum? = null,
-    /** Optional description shown on the server's catalog card. At most 1024 characters. */
+    /**
+     * Optional description shown on the server's catalog card. At most 1024 characters.
+     */
     val description: String? = null,
     /**
-     * For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean.
-     * Must match `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set exactly one of `credentialRef`
-     * and `api_key`.
+     * For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean. Must match `^`\[A-Za-z0-9\]``\[A-Za-z0-9:/_.-\]`{0,254}$`. Set exactly one of `credentialRef` and `api_key`.
      */
     val credentialRef: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the client ID of your team's OAuth client for
-     * the server. Each user of the server then authorizes individually.
+     * Required for `credentialRefSource` connection: the client ID of your team's OAuth client for the server. Each user of the server then authorizes individually.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_id")
-    val oauthClientId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_client_id") val oauthClientId: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use
-     * the endpoint's scheme and port, on the endpoint's host or another host under the same
-     * registrable domain.
+     * Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use the endpoint's scheme and port, on the endpoint's host or another host under the same registrable domain.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url")
-    val oauthAuthorizeUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorize_url") val oauthAuthorizeUrl: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules
-     * as `oauth_authorize_url`.
+     * Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules as `oauth_authorize_url`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_token_url")
-    val oauthTokenUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_token_url") val oauthTokenUrl: String? = null,
     /**
-     * Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64
-     * of them.
+     * Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64 of them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes")
-    val oauthScopes: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_scopes") val oauthScopes: List<String>? = null,
     /**
-     * How long, in seconds, a user's authorization may be reused before they must consent again.
-     * Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed
-     * automatically, so this window, not the provider's token lifetime, decides how often a user is
-     * sent back through consent. Set it no longer than the provider's own token lifetime, so the
-     * prompt arrives before a tool call fails against an expired token.
+     * How long, in seconds, a user's authorization may be reused before they must consent again. Optional; 0 means 30 days, and the maximum is 100 years. Authorizations are not refreshed automatically, so this window, not the provider's token lifetime, decides how often a user is sent back through consent. Set it no longer than the provider's own token lifetime, so the prompt arrives before a tool call fails against an expired token.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds")
-    val oauthAuthorizationTtlSeconds: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_authorization_ttl_seconds") val oauthAuthorizationTtlSeconds: String? = null
 )
 
 /**
- * The request body for creating a MicroVM. With `source.oci_ref`, `region` and `size` are required.
- * With `source.checkpoint_id`, the MicroVM inherits the checkpoint's region, size, container image,
- * and environment variables, and a different `region` or `size`, or any `environment`, is rejected.
+ * The request body for creating a MicroVM. With `source.oci_ref`, `region` and `size` are required. With `source.checkpoint_id`, the MicroVM inherits the checkpoint's region, size, container image, and environment variables, and a different `region` or `size`, or any `environment`, is rejected.
  */
 data class MicrovmCreate(
     /**
-     * The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters,
-     * digits, and hyphens.
+     * The name of the MicroVM. Must be unique in the region and contain 1 to 63 lowercase letters, digits, and hyphens.
      */
     val name: String,
-    /** What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`. */
+    /**
+     * What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
+     */
     val source: MicrovmSource,
-    /** The slug of the region to create the MicroVM in. Required with `source.oci_ref`. */
+    /**
+     * The slug of the region to create the MicroVM in. Required with `source.oci_ref`.
+     */
     val region: String? = null,
     /**
-     * The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`,
-     * `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
+     * The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`, `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is returned in responses.
      */
     val size: MicrovmSize? = null,
     /**
-     * `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the
-     * VPC network set by `vpc_uuid`.
+     * `public` sends outbound traffic through a shared NAT gateway. `vpc` places the MicroVM in the VPC network set by `vpc_uuid`.
      */
     val networking: MicrovmCreateNetworkingEnum? = null,
     /**
-     * The ID of a VPC network in the same region that belongs to your team. Required when
-     * `networking` is `vpc`.
+     * The ID of a VPC network in the same region that belongs to your team. Required when `networking` is `vpc`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("vpc_uuid") val vpcUuid: String? = null,
     /**
-     * Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`.
-     * Sending `enabled` set to `false` is rejected.
+     * Automatic pause settings. A MicroVM always pauses after it is idle for `idle_timeout`. Sending `enabled` set to `false` is rejected.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("auto_pause")
-    val autoPause: MicrovmAutoPause? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("auto_pause") val autoPause: MicrovmAutoPause? = null,
     /**
-     * Whether an HTTP request, command, or console session resumes the MicroVM when it is paused.
-     * Set to `false` to require a manual resume.
+     * Whether an HTTP request, command, or console session resumes the MicroVM when it is paused. Set to `false` to require a manual resume.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("auto_resume") val autoResume: Boolean? = null,
     /**
-     * The guest port the workload serves HTTP on. Defaults to `8080`. Not returned in responses.
-     * When creating from a checkpoint without `ports`, must be one of the checkpoint's ports.
+     * The guest port the workload serves HTTP on. Defaults to `8080`. Not returned in responses. When creating from a checkpoint without `ports`, must be one of the checkpoint's ports.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("http_port") val httpPort: Long? = null,
-    /** The protocol the HTTP port serves. */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_protocol")
-    val httpProtocol: MicrovmCreateHttpProtocolEnum? = null,
     /**
-     * The guest ports to declare, up to five. Must include `http_port`. Defaults to only the HTTP
-     * port. During the public preview, only the HTTP port is reachable through the MicroVM's
-     * endpoint.
+     * The protocol the HTTP port serves.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_protocol") val httpProtocol: MicrovmCreateHttpProtocolEnum? = null,
+    /**
+     * The guest ports to declare, up to five. Must include `http_port`. Defaults to only the HTTP port. During the public preview, only the HTTP port is reachable through the MicroVM's endpoint.
      */
     val ports: List<Long>? = null,
     /**
-     * Environment variables passed into the MicroVM at boot, as key and value pairs. Not returned
-     * in responses.
+     * Environment variables passed into the MicroVM at boot, as key and value pairs. Not returned in responses.
      */
     val environment: Map<String, String>? = null,
-    /** Tags to apply to the MicroVM. */
-    val tags: List<String>? = null,
+    /**
+     * Tags to apply to the MicroVM.
+     */
+    val tags: List<String>? = null
 )
 
 /**
- * Create or update body for a notification channel. Provide a `name` and exactly one of `email`,
- * `slack`, or `webhook`. Secret fields are write-only: send the full value to set or rotate; omit
- * the field on update to keep the existing secret.
+ * Create or update body for a notification channel. Provide a `name` and exactly one of `email`, `slack`, or `webhook`. Secret fields are write-only: send the full value to set or rotate; omit the field on update to keep the existing secret.
  */
 data class NotificationChannelRequest(
-    /** A human-readable name for the notification channel. */
+    /**
+     * A human-readable name for the notification channel.
+     */
     val name: String,
     /**
-     * Email notification channel configuration. Recipients must be verified team member email
-     * addresses.
+     * Email notification channel configuration. Recipients must be verified team member email addresses.
      */
     val email: EmailNotificationConfig? = null,
     /**
-     * Slack notification channel configuration for create and update requests. `webhook_url` is
-     * write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the
-     * existing secret.
+     * Slack notification channel configuration for create and update requests. `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the existing secret.
      */
     val slack: SlackNotificationConfig? = null,
     /**
-     * Generic HTTPS webhook notification channel configuration for create and update requests. The
-     * URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or
-     * `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is
-     * returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`,
-     * `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field
-     * on update to…
+     * Generic HTTPS webhook notification channel configuration for create and update requests. The URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on update to…
      */
-    val webhook: WebhookNotificationConfig? = null,
-)
-
-/** Typed representation of the `PartnerAttachmentServiceKey` API schema. */
-data class PartnerAttachmentServiceKey(
-    /** Optional `string` value serialized in the `value` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-    /** A time value given in the ISO 8601 combined date and time format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Optional `string` value serialized in the `state` wire field. */
-    val state: String? = null,
+    val webhook: WebhookNotificationConfig? = null
 )
 
 /**
- * Slack notification channel configuration for create and update requests. `webhook_url` is
- * write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the
- * existing secret.
+ * Typed representation of the `PartnerAttachmentServiceKey` API schema.
+ */
+data class PartnerAttachmentServiceKey(
+    /**
+     * Optional `string` value serialized in the `value` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
+    /**
+     * A time value given in the ISO 8601 combined date and time format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Optional `string` value serialized in the `state` wire field.
+     */
+    val state: String? = null
+)
+
+/**
+ * Slack notification channel configuration for create and update requests. `webhook_url` is write-only: send the full value to set or rotate. Omit `webhook_url` on update to keep the existing secret.
  */
 data class SlackNotificationConfig(
-    /** The Slack channel name to notify. */
+    /**
+     * The Slack channel name to notify.
+     */
     val channel: String
 )
 
-/** Typed representation of the `SubscriptionTierExtended` API schema. */
+/**
+ * Typed representation of the `SubscriptionTierExtended` API schema.
+ */
 data class SubscriptionTierExtended(
-    /** A boolean indicating whether your account it eligible to use a certain subscription tier. */
+    /**
+     * A boolean indicating whether your account it eligible to use a certain subscription tier.
+     */
     val eligible: Boolean? = null,
     /**
-     * If your account is not eligible to use a certain subscription tier, this will include a list
-     * of reasons that prevent you from using the tier.
+     * If your account is not eligible to use a certain subscription tier, this will include a list of reasons that prevent you from using the tier.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("eligibility_reasons")
-    val eligibilityReasons: List<SubscriptionTierExtendedEligibilityReasonsItemEnum>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("eligibility_reasons") val eligibilityReasons: List<SubscriptionTierExtendedEligibilityReasonsItemEnum>? = null
 )
 
-/** Typed representation of the `VolumesExt4` API schema. */
+/**
+ * Typed representation of the `VolumesExt4` API schema.
+ */
 data class VolumesExt4(
     /**
-     * A human-readable name for the block storage volume. Must be lowercase and be composed only of
-     * numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
+     * A human-readable name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. The name must begin with a letter.
      */
     val name: String,
     /**
-     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating
-     * a volume from a snapshot.
+     * The size of the block storage volume in GiB (1024^3). This field does not apply when creating a volume from a snapshot.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("size_gigabytes") val sizeGigabytes: Long,
-    /** The slug identifier for the region where the resource will initially be available. */
+    /**
+     * The slug identifier for the region where the resource will initially be available.
+     */
     val region: RegionSlug,
-    /** The unique identifier for the block storage volume. */
+    /**
+     * The unique identifier for the block storage volume.
+     */
     val id: String? = null,
     /**
-     * An array containing the IDs of the Droplets the volume is attached to. Note that at this
-     * time, a volume can only be attached to a single Droplet.
+     * An array containing the IDs of the Droplets the volume is attached to. Note that at this time, a volume can only be attached to a single Droplet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids")
-    val dropletIds: List<Long>? = null,
-    /** An optional free-form text field to describe a block storage volume. */
+    @com.fasterxml.jackson.annotation.JsonProperty("droplet_ids") val dropletIds: List<Long>? = null,
+    /**
+     * An optional free-form text field to describe a block storage volume.
+     */
     val description: String? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the block
-     * storage volume was created.
+     * A time value given in ISO8601 combined date and time format that represents when the block storage volume was created.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
     /**
-     * A flat array of tag names as strings to be applied to the resource. Tag names may be for
-     * either existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to be applied to the resource. Tag names may be for either existing or new tags. Requires `tag:create` scope.
      */
     val tags: TagsArray? = null,
-    /** The unique identifier for the volume snapshot from which to create the volume. */
+    /**
+     * The unique identifier for the volume snapshot from which to create the volume.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("snapshot_id") val snapshotId: String? = null,
     /**
-     * The name of the filesystem type to be used on the volume. When provided, the volume will
-     * automatically be formatted to the specified filesystem type. Currently, the available options
-     * are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to
-     * Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
-     * 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
+     * The name of the filesystem type to be used on the volume. When provided, the volume will automatically be formatted to the specified filesystem type. Currently, the available options are `ext4` and `xfs`. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to other Droplets is not recommended.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type")
-    val filesystemType: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label")
-    val filesystemLabel: VolumeWriteFileSystemLabel? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_type") val filesystemType: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("filesystem_label") val filesystemLabel: VolumeWriteFileSystemLabel? = null
 )

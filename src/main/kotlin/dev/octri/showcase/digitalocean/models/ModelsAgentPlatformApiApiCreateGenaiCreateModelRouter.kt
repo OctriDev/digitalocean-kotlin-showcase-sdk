@@ -3,27 +3,38 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Create a model router */
+/**
+ * Create a model router
+ */
 data class ApiCreateModelRouterInputPublic(
-    /** Model router description */
+    /**
+     * Model router description
+     */
     val description: String? = null,
-    /** At least one fallback model is required; order defines failover priority */
-    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models")
-    val fallbackModels: List<String>? = null,
-    /** Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens */
+    /**
+     * At least one fallback model is required; order defines failover priority
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fallback_models") val fallbackModels: List<String>? = null,
+    /**
+     * Model router name: lowercase, at most 255 characters, only a-z, 0-9, and hyphens
+     */
     val name: String? = null,
-    /** Router policies */
+    /**
+     * Router policies
+     */
     val policies: List<ApiModelRouterTaskPolicy>? = null,
     /**
-     * DEPRECATED: this field does not affect deployment and model routers are always deployed to
-     * all regions. Must be omitted or set to \["all"\].
+     * DEPRECATED: this field does not affect deployment and model routers are always deployed to all regions. Must be omitted or set to \["all"\].
      */
-    val regions: List<String>? = null,
+    val regions: List<String>? = null
 )
 
-/** Information about a newly created model router */
+/**
+ * Information about a newly created model router
+ */
 data class ApiCreateModelRouterOutput(
-    /** Model router */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_router")
-    val modelRouter: ApiModelRouter? = null
+    /**
+     * Model router
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_router") val modelRouter: ApiModelRouter? = null
 )

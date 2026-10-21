@@ -3,219 +3,97 @@
 
 package dev.octri.showcase.digitalocean
 
+
 class MicroVmsPublicPreviewNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the MicroVMs on your team, send a GET request to `/v2/microvms`. The `region`,
-     * `name`, and `tag_name` filters combine with AND.
+     * To list all of the MicroVMs on your team, send a GET request to `/v2/microvms`. The `region`, `name`, and `tag_name` filters combine with AND.
      */
-    fun microvmsList(
-        page: Long? = null,
-        perPage: Long? = null,
-        region: String? = null,
-        name: String? = null,
-        tagName: String? = null,
-        options: RequestOptions? = null,
-    ): AllMicrovms {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsList(
-            clientConfig,
-            page,
-            perPage,
-            region,
-            name,
-            tagName,
-            options,
-        )
+    fun microvmsList(page: Long? = null, perPage: Long? = null, region: String? = null, name: String? = null, tagName: String? = null, options: RequestOptions? = null): AllMicrovms {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsList(clientConfig, page, perPage, region, name, tagName, options)
     }
 
     /**
-     * To create a MicroVM, send a POST request to `/v2/microvms`. `name` and `source` are required.
-     * Set `source.oci_ref` to create the MicroVM from a `linux/amd64` container image, or
-     * `source.checkpoint_id` to create it from a checkpoint. With `oci_ref`, `region` and `size`
-     * are also required. A MicroVM created from an image is returned with `state` set to
-     * `creating`. Poll `GET /v2/microvms/{microvm_id}` until `state` is `running`. A MicroVM
-     * created from a checkpoint is usually…
+     * To create a MicroVM, send a POST request to `/v2/microvms`. `name` and `source` are required. Set `source.oci_ref` to create the MicroVM from a `linux/amd64` container image, or `source.checkpoint_id` to create it from a checkpoint. With `oci_ref`, `region` and `size` are also required. A MicroVM created from an image is returned with `state` set to `creating`. Poll `GET /v2/microvms/{microvm_id}` until `state` is `running`. A MicroVM created from a checkpoint is usually…
      */
-    fun microvmsCreate(
-        request:
-            dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.MicrovmsCreateRequest,
-        options: RequestOptions? = null,
-    ): MicrovmCreated {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun microvmsCreate(request: dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.MicrovmsCreateRequest, options: RequestOptions? = null): MicrovmCreated {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsCreate(clientConfig, request, options)
     }
 
     /**
-     * To list the default region, sizes, prices, account limits, and features available to your
-     * team, send a GET request to `/v2/microvms/options`.
+     * To list the default region, sizes, prices, account limits, and features available to your team, send a GET request to `/v2/microvms/options`.
      */
     fun microvmsGetOptions(options: RequestOptions? = null): MicrovmOptions {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGetOptions(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGetOptions(clientConfig, options)
     }
 
     /**
-     * To list your team's checkpoints, newest first, send a GET request to
-     * `/v2/microvms/checkpoints`. To list one MicroVM's checkpoints, add the `microvm_id` query
-     * parameter.
+     * To list your team's checkpoints, newest first, send a GET request to `/v2/microvms/checkpoints`. To list one MicroVM's checkpoints, add the `microvm_id` query parameter.
      */
-    fun microvmCheckpointsList(
-        page: Long? = null,
-        perPage: Long? = null,
-        microvmId: String? = null,
-        options: RequestOptions? = null,
-    ): AllCheckpoints {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsList(
-            clientConfig,
-            page,
-            perPage,
-            microvmId,
-            options,
-        )
+    fun microvmCheckpointsList(page: Long? = null, perPage: Long? = null, microvmId: String? = null, options: RequestOptions? = null): AllCheckpoints {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsList(clientConfig, page, perPage, microvmId, options)
     }
 
     /**
-     * To show information about a checkpoint, send a GET request to
-     * `/v2/microvms/checkpoints/{checkpoint_id}`.
+     * To show information about a checkpoint, send a GET request to `/v2/microvms/checkpoints/{checkpoint_id}`.
      */
-    fun microvmCheckpointsGet(
-        checkpointId: String,
-        options: RequestOptions? = null,
-    ): CheckpointResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsGet(
-            clientConfig,
-            checkpointId,
-            options,
-        )
+    fun microvmCheckpointsGet(checkpointId: String, options: RequestOptions? = null): CheckpointResponse {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsGet(clientConfig, checkpointId, options)
     }
 
     /**
-     * To delete a checkpoint, send a DELETE request to `/v2/microvms/checkpoints/{checkpoint_id}`.
-     * You can no longer create MicroVMs from a deleted checkpoint. The request returns HTTP 400
-     * while the checkpoint is still being captured. A successful request returns a `204 No Content`
-     * status code.
+     * To delete a checkpoint, send a DELETE request to `/v2/microvms/checkpoints/{checkpoint_id}`. You can no longer create MicroVMs from a deleted checkpoint. The request returns HTTP 400 while the checkpoint is still being captured. A successful request returns a `204 No Content` status code.
      */
     fun microvmCheckpointsDelete(checkpointId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview
-            .microvmCheckpointsDelete(clientConfig, checkpointId, options)
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsDelete(clientConfig, checkpointId, options)
     }
 
     /**
-     * To show information about a MicroVM, send a GET request to `/v2/microvms/{microvm_id}`. The
-     * endpoint is in the `urls` entry with `default` set to `true`. Its `hostname` is empty and its
-     * `status` is `PENDING` until provisioning finishes.
+     * To show information about a MicroVM, send a GET request to `/v2/microvms/{microvm_id}`. The endpoint is in the `urls` entry with `default` set to `true`. Its `hostname` is empty and its `status` is `PENDING` until provisioning finishes.
      */
     fun microvmsGet(microvmId: String, options: RequestOptions? = null): MicrovmResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGet(
-            clientConfig,
-            microvmId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGet(clientConfig, microvmId, options)
     }
 
     /**
-     * To delete a MicroVM and the data on its disk, send a DELETE request to
-     * `/v2/microvms/{microvm_id}`. The MicroVM's checkpoints are not deleted. A successful request
-     * returns a `204 No Content` status code.
+     * To delete a MicroVM and the data on its disk, send a DELETE request to `/v2/microvms/{microvm_id}`. The MicroVM's checkpoints are not deleted. A successful request returns a `204 No Content` status code.
      */
     fun microvmsDelete(microvmId: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsDelete(
-            clientConfig,
-            microvmId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsDelete(clientConfig, microvmId, options)
     }
 
     /**
-     * To pause a MicroVM, send a POST request to `/v2/microvms/{microvm_id}/pause`. Pausing
-     * suspends the MicroVM's processes and preserves its memory, files, and processes. A paused
-     * MicroVM incurs storage charges only. The request returns when the change completes. Pausing a
-     * MicroVM that is already paused succeeds. The request returns HTTP 400 when the MicroVM is
-     * `creating`, `terminated`, or `failed`.
+     * To pause a MicroVM, send a POST request to `/v2/microvms/{microvm_id}/pause`. Pausing suspends the MicroVM's processes and preserves its memory, files, and processes. A paused MicroVM incurs storage charges only. The request returns when the change completes. Pausing a MicroVM that is already paused succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or `failed`.
      */
     fun microvmsPostPause(microvmId: String, options: RequestOptions? = null): MicrovmResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsPostPause(
-            clientConfig,
-            microvmId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsPostPause(clientConfig, microvmId, options)
     }
 
     /**
-     * To resume a paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/resume`. The
-     * request returns when the change completes. Resuming a MicroVM that is already running
-     * succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or
-     * `failed`.
+     * To resume a paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/resume`. The request returns when the change completes. Resuming a MicroVM that is already running succeeds. The request returns HTTP 400 when the MicroVM is `creating`, `terminated`, or `failed`.
      */
     fun microvmsPostResume(microvmId: String, options: RequestOptions? = null): MicrovmResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsPostResume(
-            clientConfig,
-            microvmId,
-            options,
-        )
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsPostResume(clientConfig, microvmId, options)
     }
 
     /**
-     * To run a command in a MicroVM's workload container, send a POST request to
-     * `/v2/microvms/{microvm_id}/exec`. `argv` runs directly, not through a shell, with standard
-     * input closed. If the MicroVM is paused and auto-resume is on, the request resumes it and
-     * waits until it is running. A command has 60 seconds to finish. Your team can run 32 commands
-     * at once and 60 commands per minute. Rejected requests count toward the per-minute limit.
+     * To run a command in a MicroVM's workload container, send a POST request to `/v2/microvms/{microvm_id}/exec`. `argv` runs directly, not through a shell, with standard input closed. If the MicroVM is paused and auto-resume is on, the request resumes it and waits until it is running. A command has 60 seconds to finish. Your team can run 32 commands at once and 60 commands per minute. Rejected requests count toward the per-minute limit.
      */
-    fun microvmsRunCommand(
-        microvmId: String,
-        argv: List<String>,
-        cwd: String? = null,
-        options: RequestOptions? = null,
-    ): ExecResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsRunCommand(
-            clientConfig,
-            microvmId,
-            argv,
-            cwd,
-            options,
-        )
+    fun microvmsRunCommand(microvmId: String, argv: List<String>, cwd: String? = null, options: RequestOptions? = null): ExecResponse {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsRunCommand(clientConfig, microvmId, argv, cwd, options)
     }
 
     /**
-     * To open an interactive `/bin/sh` console in a MicroVM's workload container, open a WebSocket
-     * connection to `wss://api.digitalocean.com/v2/microvms/{microvm_id}/console`. Send the API
-     * token in the `Authorization` header of the handshake. Browsers cannot set this header, so you
-     * cannot open the console from browser JavaScript. The image must include `/bin/sh`. A MicroVM
-     * can have four consoles open at a time. If the MicroVM is paused and auto-resume is on,
-     * opening a console…
+     * To open an interactive `/bin/sh` console in a MicroVM's workload container, open a WebSocket connection to `wss://api.digitalocean.com/v2/microvms/{microvm_id}/console`. Send the API token in the `Authorization` header of the handshake. Browsers cannot set this header, so you cannot open the console from browser JavaScript. The image must include `/bin/sh`. A MicroVM can have four consoles open at a time. If the MicroVM is paused and auto-resume is on, opening a console…
      */
-    fun microvmsGetConsole(
-        microvmId: String,
-        rows: Long? = null,
-        cols: Long? = null,
-        options: RequestOptions? = null,
-    ): Any {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGetConsole(
-            clientConfig,
-            microvmId,
-            rows,
-            cols,
-            options,
-        )
+    fun microvmsGetConsole(microvmId: String, rows: Long? = null, cols: Long? = null, options: RequestOptions? = null): Any {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmsGetConsole(clientConfig, microvmId, rows, cols, options)
     }
 
     /**
-     * To create a checkpoint of a running or paused MicroVM, send a POST request to
-     * `/v2/microvms/{microvm_id}/checkpoints`. The capture runs in the background and does not
-     * change the MicroVM's state. Poll `GET /v2/microvms/checkpoints/{checkpoint_id}` until
-     * `status` is `CHECKPOINT_AVAILABLE`.
+     * To create a checkpoint of a running or paused MicroVM, send a POST request to `/v2/microvms/{microvm_id}/checkpoints`. The capture runs in the background and does not change the MicroVM's state. Poll `GET /v2/microvms/checkpoints/{checkpoint_id}` until `status` is `CHECKPOINT_AVAILABLE`.
      */
-    fun microvmCheckpointsCreate(
-        microvmId: String,
-        name: String? = null,
-        options: RequestOptions? = null,
-    ): CheckpointResponse {
-        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview
-            .microvmCheckpointsCreate(clientConfig, microvmId, name, options)
+    fun microvmCheckpointsCreate(microvmId: String, name: String? = null, options: RequestOptions? = null): CheckpointResponse {
+        return dev.octri.showcase.digitalocean.methods.MicroVmsPublicPreview.microvmCheckpointsCreate(clientConfig, microvmId, name, options)
     }
+
 }

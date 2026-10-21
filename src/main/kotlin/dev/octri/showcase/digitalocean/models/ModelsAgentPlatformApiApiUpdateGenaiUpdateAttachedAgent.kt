@@ -3,32 +3,50 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Information about updating the linkage of an agent */
+/**
+ * Information about updating the linkage of an agent
+ */
 data class ApiUpdateLinkedAgentInputPublic(
-    /** Routed agent id */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid")
-    val childAgentUuid: String? = null,
-    /** Describes the case in which the child agent should be used */
+    /**
+     * Routed agent id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid") val childAgentUuid: String? = null,
+    /**
+     * Describes the case in which the child agent should be used
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("if_case") val ifCase: String? = null,
-    /** A unique identifier for the parent agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid")
-    val parentAgentUuid: String? = null,
-    /** Route name */
+    /**
+     * A unique identifier for the parent agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid") val parentAgentUuid: String? = null,
+    /**
+     * Route name
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("route_name") val routeName: String? = null,
-    /** Unique id of linkage */
-    val uuid: String? = null,
+    /**
+     * Unique id of linkage
+     */
+    val uuid: String? = null
 )
 
-/** Information about an updated linkage */
+/**
+ * Information about an updated linkage
+ */
 data class ApiUpdateLinkedAgentOutput(
-    /** Routed agent id */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid")
-    val childAgentUuid: String? = null,
-    /** A unique identifier for the parent agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid")
-    val parentAgentUuid: String? = null,
-    /** Optional `boolean` value serialized in the `rollback` wire field. */
+    /**
+     * Routed agent id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid") val childAgentUuid: String? = null,
+    /**
+     * A unique identifier for the parent agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid") val parentAgentUuid: String? = null,
+    /**
+     * Optional `boolean` value serialized in the `rollback` wire field.
+     */
     val rollback: Boolean? = null,
-    /** Unique id of linkage */
-    val uuid: String? = null,
+    /**
+     * Unique id of linkage
+     */
+    val uuid: String? = null
 )

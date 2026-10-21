@@ -14,99 +14,74 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ServerlessInferenceInferenceCreateMessagesOperation {
     /**
-     * Send a structured list of input messages with text and/or image content, and the model will
-     * generate the next message in the conversation.
+     * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
      *
-     * @param model Model ID (for example `claude-opus-4-6` or a serverless model id).
+     * @param model Model ID (for example `claude-opus-4-6` or a serverless model
+     *   id).
      * @param maxTokens Maximum tokens to generate before stopping.
-     * @param messages Conversation turns. Each item has `role` `user` or `assistant` and `content`
-     *   as a string or an array of content blocks.
+     * @param messages Conversation turns. Each item has `role` `user` or `assistant`
+     *   and `content` as a string or an array of content blocks.
      * @param system System prompt as plain text or as an array of text blocks.
      * @param stopSequences Custom strings that stop generation when produced.
-     * @param stream When true, the response is streamed using server-sent events (SSE).
+     * @param stream When true, the response is streamed using server-sent events
+     *   (SSE).
      * @param temperature Sampling temperature between 0.0 and 1.0.
      * @param topP Nucleus sampling; use either `temperature` or `top_p`, not both.
      * @param topK Top-K sampling cutoff.
      * @param tools Tool definitions the model may invoke.
-     * @param toolChoice Controls how the model uses tools: automatic selection, require any tool,
-     *   force a specific tool, or a string form accepted by the service.
+     * @param toolChoice Controls how the model uses tools: automatic selection,
+     *   require any tool, force a specific tool, or a string form accepted by the
+     *   service.
      * @param metadata Optional request metadata.
-     * @param reasoningEffort DigitalOcean extension for reasoning-capable models. Ignored by
-     *   executors that do not support it.
-     * @param speed DigitalOcean extension for preferred inference speed. Ignored when not
-     *   supported.
-     * @param thinking Extended thinking configuration. Executors that do not support thinking may
-     *   ignore this field.
+     * @param reasoningEffort DigitalOcean extension for reasoning-capable models.
+     *   Ignored by executors that do not support it.
+     * @param speed DigitalOcean extension for preferred inference speed. Ignored
+     *   when not supported.
+     * @param thinking Extended thinking configuration. Executors that do not support
+     *   thinking may ignore this field.
      */
-    fun inferenceCreateMessages(
-        clientConfig: ClientConfig,
-        request: ServerlessInference.InferenceCreateMessagesRequest,
-        options: RequestOptions? = null,
-    ): MessagesCreateResponse {
+    fun inferenceCreateMessages(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateMessagesRequest, options: RequestOptions? = null): MessagesCreateResponse {
         validateInferenceCreateMessagesRequest(request)
 
-        return SdkClient.request<MessagesCreateResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v1/messages",
-                    config = clientConfig,
-                    body = buildInferenceCreateMessagesBody(request),
-                    operationId = "inferenceCreateMessages",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to MessagesCreateErrorResponse::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MessagesCreateResponse>(SdkClient.RequestSpec("POST", "/v1/messages", config = clientConfig, body = buildInferenceCreateMessagesBody(request), operationId = "inferenceCreateMessages", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to MessagesCreateErrorResponse::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
-    private fun validateInferenceCreateMessagesRequest(
-        request: ServerlessInference.InferenceCreateMessagesRequest
-    ) {
+
+    private fun validateInferenceCreateMessagesRequest(request: ServerlessInference.InferenceCreateMessagesRequest) {
         Validation.validateRange("max_tokens", request.maxTokens, Validation.RangeOpts(min = 1.0))
 
         Validation.validateItems("messages", request.messages, Validation.LengthOpts(min = 1))
 
         val temperatureValue = request.temperature?.getOrNull()
-        if (temperatureValue != null) {
-            Validation.validateRange(
-                "temperature",
-                temperatureValue,
-                Validation.RangeOpts(min = 0.0, max = 1.0),
-            )
-        }
+if (temperatureValue != null) {
+            Validation.validateRange("temperature", temperatureValue, Validation.RangeOpts(min = 0.0, max = 1.0))
+}
 
         val topKValue = request.topK?.getOrNull()
-        if (topKValue != null) {
+if (topKValue != null) {
             Validation.validateRange("top_k", topKValue, Validation.RangeOpts(min = 0.0))
+}
+    }
+
+
+
+    private fun buildInferenceCreateMessagesBody(request: ServerlessInference.InferenceCreateMessagesRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildInferenceCreateMessagesBodyPart1(request))
+            putAll(buildInferenceCreateMessagesBodyPart2(request))
         }
-    }
 
-    private fun buildInferenceCreateMessagesBody(
-        request: ServerlessInference.InferenceCreateMessagesRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildInferenceCreateMessagesBodyPart1(request))
-        putAll(buildInferenceCreateMessagesBodyPart2(request))
-    }
-
-    private fun buildInferenceCreateMessagesBodyPart1(
-        request: ServerlessInference.InferenceCreateMessagesRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateMessagesBodyPart1(request: ServerlessInference.InferenceCreateMessagesRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "max_tokens" to (request.maxTokens),
             "messages" to (request.messages),
             "system" to (SdkClient.omitIfNull(request.system)),
-            "stop_sequences" to (SdkClient.omitIfNull(request.stopSequences)),
+            "stop_sequences" to
+    (SdkClient.omitIfNull(request.stopSequences)),
             "stream" to (SdkClient.omitIfNull(request.stream)),
-            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "temperature" to
+    (request.temperature ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
             "top_k" to (request.topK ?: SdkClient.SdkOptional.Omitted),
             "tools" to (SdkClient.omitIfNull(request.tools)),
@@ -114,100 +89,89 @@ internal object ServerlessInferenceInferenceCreateMessagesOperation {
             "metadata" to (SdkClient.omitIfNull(request.metadata)),
         )
 
-    private fun buildInferenceCreateMessagesBodyPart2(
-        request: ServerlessInference.InferenceCreateMessagesRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateMessagesBodyPart2(request: ServerlessInference.InferenceCreateMessagesRequest): Map<String, Any?> =
         SdkClient.bodyMap(
-            "reasoning_effort" to (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
+            "reasoning_effort" to
+    (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
             "speed" to (request.speed ?: SdkClient.SdkOptional.Omitted),
-            "thinking" to (request.thinking ?: SdkClient.SdkOptional.Omitted),
+            "thinking" to
+    (request.thinking ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object ServerlessInferenceInferenceCreateMessagesStreamOperation {
     /**
-     * Send a structured list of input messages with text and/or image content, and the model will
-     * generate the next message in the conversation.
+     * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
      *
-     * @param model Model ID (for example `claude-opus-4-6` or a serverless model id).
+     * @param model Model ID (for example `claude-opus-4-6` or a serverless model
+     *   id).
      * @param maxTokens Maximum tokens to generate before stopping.
-     * @param messages Conversation turns. Each item has `role` `user` or `assistant` and `content`
-     *   as a string or an array of content blocks.
-     * @param stream When true, the response is streamed using server-sent events (SSE).
+     * @param messages Conversation turns. Each item has `role` `user` or `assistant`
+     *   and `content` as a string or an array of content blocks.
+     * @param stream When true, the response is streamed using server-sent events
+     *   (SSE).
      * @param system System prompt as plain text or as an array of text blocks.
      * @param stopSequences Custom strings that stop generation when produced.
      * @param temperature Sampling temperature between 0.0 and 1.0.
      * @param topP Nucleus sampling; use either `temperature` or `top_p`, not both.
      * @param topK Top-K sampling cutoff.
      * @param tools Tool definitions the model may invoke.
-     * @param toolChoice Controls how the model uses tools: automatic selection, require any tool,
-     *   force a specific tool, or a string form accepted by the service.
+     * @param toolChoice Controls how the model uses tools: automatic selection,
+     *   require any tool, force a specific tool, or a string form accepted by the
+     *   service.
      * @param metadata Optional request metadata.
-     * @param reasoningEffort DigitalOcean extension for reasoning-capable models. Ignored by
-     *   executors that do not support it.
-     * @param speed DigitalOcean extension for preferred inference speed. Ignored when not
-     *   supported.
-     * @param thinking Extended thinking configuration. Executors that do not support thinking may
-     *   ignore this field.
+     * @param reasoningEffort DigitalOcean extension for reasoning-capable models.
+     *   Ignored by executors that do not support it.
+     * @param speed DigitalOcean extension for preferred inference speed. Ignored
+     *   when not supported.
+     * @param thinking Extended thinking configuration. Executors that do not support
+     *   thinking may ignore this field.
      */
-    fun inferenceCreateMessagesStream(
-        clientConfig: ClientConfig,
-        request: ServerlessInference.InferenceCreateMessagesStreamRequest,
-        options: RequestOptions? = null,
-    ): Sequence<MessagesStreamEvent> {
+    fun inferenceCreateMessagesStream(clientConfig: ClientConfig, request: ServerlessInference.InferenceCreateMessagesStreamRequest, options: RequestOptions? = null): Sequence<MessagesStreamEvent> {
         return sequence {
-            for (_ev in
-                SdkClient.stream(
-                    SdkClient.RequestSpec(
-                        "POST",
-                        "/v1/messages",
-                        config = clientConfig,
-                        body = buildInferenceCreateMessagesStreamBody(request),
-                        contentType = "application/json",
-                        operationId = "inferenceCreateMessagesStream",
-                        streamFormat = "sse",
-                        streamMediaType = "text/event-stream",
-                        chunkDomain = "bytes",
-                        options = options,
-                        errors =
-                            mapOf(
-                                "400" to MessagesCreateErrorResponse::class.java,
-                                "401" to Error2::class.java,
-                                "429" to Error2::class.java,
-                                "500" to Error2::class.java,
-                            ),
-                    )
-                )) {
+            for (_ev in SdkClient.stream(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v1/messages",
+                config = clientConfig,
+                body = buildInferenceCreateMessagesStreamBody(request),
+                contentType = "application/json",
+                operationId = "inferenceCreateMessagesStream",
+                streamFormat = "sse",
+                streamMediaType = "text/event-stream",
+                chunkDomain = "bytes",
+                options = options,
+                errors = mapOf("400" to MessagesCreateErrorResponse::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)
+            )
+        )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(
-                    try {
-                        SdkClient.mapper.readValue(_ev.data, MessagesStreamEvent::class.java)
-                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                        SdkClient.rethrowEventDecode(error, _ev.data)
-                    }
-                )
+                yield(try {
+                    SdkClient.mapper.readValue(_ev.data, MessagesStreamEvent::class.java)
+                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                    SdkClient.rethrowEventDecode(error, _ev.data)
+                })
             }
         }
     }
 
-    private fun buildInferenceCreateMessagesStreamBody(
-        request: ServerlessInference.InferenceCreateMessagesStreamRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildInferenceCreateMessagesStreamBodyPart1(request))
-        putAll(buildInferenceCreateMessagesStreamBodyPart2(request))
-    }
 
-    private fun buildInferenceCreateMessagesStreamBodyPart1(
-        request: ServerlessInference.InferenceCreateMessagesStreamRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateMessagesStreamBody(request: ServerlessInference.InferenceCreateMessagesStreamRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildInferenceCreateMessagesStreamBodyPart1(request))
+            putAll(buildInferenceCreateMessagesStreamBodyPart2(request))
+        }
+
+    private fun buildInferenceCreateMessagesStreamBodyPart1(request: ServerlessInference.InferenceCreateMessagesStreamRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "model" to (request.model),
             "max_tokens" to (request.maxTokens),
             "messages" to (request.messages),
             "stream" to (request.stream),
             "system" to (SdkClient.omitIfNull(request.system)),
-            "stop_sequences" to (SdkClient.omitIfNull(request.stopSequences)),
-            "temperature" to (request.temperature ?: SdkClient.SdkOptional.Omitted),
+            "stop_sequences" to
+    (SdkClient.omitIfNull(request.stopSequences)),
+            "temperature" to
+    (request.temperature ?: SdkClient.SdkOptional.Omitted),
             "top_p" to (request.topP ?: SdkClient.SdkOptional.Omitted),
             "top_k" to (request.topK ?: SdkClient.SdkOptional.Omitted),
             "tools" to (SdkClient.omitIfNull(request.tools)),
@@ -215,12 +179,12 @@ internal object ServerlessInferenceInferenceCreateMessagesStreamOperation {
             "metadata" to (SdkClient.omitIfNull(request.metadata)),
         )
 
-    private fun buildInferenceCreateMessagesStreamBodyPart2(
-        request: ServerlessInference.InferenceCreateMessagesStreamRequest
-    ): Map<String, Any?> =
+    private fun buildInferenceCreateMessagesStreamBodyPart2(request: ServerlessInference.InferenceCreateMessagesStreamRequest): Map<String, Any?> =
         SdkClient.bodyMap(
-            "reasoning_effort" to (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
+            "reasoning_effort" to
+    (request.reasoningEffort ?: SdkClient.SdkOptional.Omitted),
             "speed" to (request.speed ?: SdkClient.SdkOptional.Omitted),
-            "thinking" to (request.thinking ?: SdkClient.SdkOptional.Omitted),
+            "thinking" to
+    (request.thinking ?: SdkClient.SdkOptional.Omitted),
         )
 }

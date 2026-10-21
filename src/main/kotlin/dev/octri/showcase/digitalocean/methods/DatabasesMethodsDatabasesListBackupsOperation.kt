@@ -12,39 +12,13 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListBackupsOperation {
     /**
-     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET
-     * request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for
-     * Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will
-     * be set to an array of backup objects, each of which will contain the size of the backup and
-     * the timestamp at which it was created.
+     * To list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/backups`. **Note**: Backups are not supported for Caching or Valkey clusters. The result will be a JSON object with a `backups key`. This will be set to an array of backup objects, each of which will contain the size of the backup and the timestamp at which it was created.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListBackups(
-        clientConfig: ClientConfig,
-        databaseClusterUuid: String,
-        options: RequestOptions? = null,
-    ): DatabaseBackups {
+    fun databasesListBackups(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseBackups {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseBackups>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/backups",
-                    config = clientConfig,
-                    operationId = "databasesListBackups",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DatabaseBackups>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/backups", config = clientConfig, operationId = "databasesListBackups", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

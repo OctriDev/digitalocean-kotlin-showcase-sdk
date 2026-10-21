@@ -3,70 +3,98 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** DataDog configuration. */
+/**
+ * DataDog configuration.
+ */
 data class AppLogDestinationDatadogSpec(
-    /** Datadog API key. */
+    /**
+     * Datadog API key.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String,
-    /** Datadog HTTP log intake endpoint. */
-    val endpoint: String? = null,
+    /**
+     * Datadog HTTP log intake endpoint.
+     */
+    val endpoint: String? = null
 )
 
-/** Typed representation of the `AppLogDestinationDefinition` API schema. */
+/**
+ * Typed representation of the `AppLogDestinationDefinition` API schema.
+ */
 data class AppLogDestinationDefinition(
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
-    /** Papertrail configuration. */
+    /**
+     * Papertrail configuration.
+     */
     val papertrail: AppLogDestinationPapertrailSpec? = null,
-    /** DataDog configuration. */
+    /**
+     * DataDog configuration.
+     */
     val datadog: AppLogDestinationDatadogSpec? = null,
-    /** Logtail configuration. */
+    /**
+     * Logtail configuration.
+     */
     val logtail: AppLogDestinationLogtailSpec? = null,
-    /** OpenSearch configuration. */
-    @com.fasterxml.jackson.annotation.JsonProperty("open_search")
-    val openSearch: AppLogDestinationOpenSearchSpec? = null,
+    /**
+     * OpenSearch configuration.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("open_search") val openSearch: AppLogDestinationOpenSearchSpec? = null
 )
 
-/** Logtail configuration. */
+/**
+ * Logtail configuration.
+ */
 data class AppLogDestinationLogtailSpec(
-    /** Logtail token. */
+    /**
+     * Logtail token.
+     */
     val token: String? = null
 )
 
-/** OpenSearch configuration. */
+/**
+ * OpenSearch configuration.
+ */
 data class AppLogDestinationOpenSearchSpec(
     /**
-     * OpenSearch API Endpoint. Only HTTPS is supported. Format: <host>:<port>. Cannot be specified
-     * if `cluster_name` is also specified.
+     * OpenSearch API Endpoint. Only HTTPS is supported. Format: <host>:<port>. Cannot be specified if `cluster_name` is also specified.
      */
     val endpoint: String? = null,
-    /** Configure Username and/or Password for Basic authentication. */
-    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth")
-    val basicAuth: AppLogDestinationOpenSearchSpecBasicAuth? = null,
-    /** The index name to use for the logs. If not set, the default index name is "logs". */
+    /**
+     * Configure Username and/or Password for Basic authentication.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth") val basicAuth: AppLogDestinationOpenSearchSpecBasicAuth? = null,
+    /**
+     * The index name to use for the logs. If not set, the default index name is "logs".
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
     /**
-     * The name of a DigitalOcean DBaaS OpenSearch cluster to use as a log forwarding destination.
-     * Cannot be specified if `endpoint` is also specified.
+     * The name of a DigitalOcean DBaaS OpenSearch cluster to use as a log forwarding destination. Cannot be specified if `endpoint` is also specified.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null
 )
 
-/** Configure Username and/or Password for Basic authentication. */
+/**
+ * Configure Username and/or Password for Basic authentication.
+ */
 data class AppLogDestinationOpenSearchSpecBasicAuth(
     /**
-     * Username to authenticate with. Only required when `endpoint` is set. Defaults to `doadmin`
-     * when `cluster_name` is set.
+     * Username to authenticate with. Only required when `endpoint` is set. Defaults to `doadmin` when `cluster_name` is set.
      */
     val user: String? = null,
     /**
-     * Password for user defined in User. Is required when `endpoint` is set. Cannot be set if using
-     * a DigitalOcean DBaaS OpenSearch cluster.
+     * Password for user defined in User. Is required when `endpoint` is set. Cannot be set if using a DigitalOcean DBaaS OpenSearch cluster.
      */
-    val password: String? = null,
+    val password: String? = null
 )
 
-/** Papertrail configuration. */
+/**
+ * Papertrail configuration.
+ */
 data class AppLogDestinationPapertrailSpec(
-    /** Papertrail syslog endpoint. */
+    /**
+     * Papertrail syslog endpoint.
+     */
     val endpoint: String
 )

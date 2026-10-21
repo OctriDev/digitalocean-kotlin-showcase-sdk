@@ -5,116 +5,146 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `DatabaseBackup` API schema. */
+/**
+ * Typed representation of the `DatabaseBackup` API schema.
+ */
 data class DatabaseBackup(
-    /** The name of an existing database cluster from which the backup will be restored. */
+    /**
+     * The name of an existing database cluster from which the backup will be restored.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("database_name") val databaseName: String,
     /**
-     * The timestamp of an existing database cluster backup in ISO8601 combined date and time
-     * format. The most recent backup will be used if excluded.
+     * The timestamp of an existing database cluster backup in ISO8601 combined date and time format. The most recent backup will be used if excluded.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_created_at")
-    val backupCreatedAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_created_at") val backupCreatedAt: OffsetDateTime? = null
 )
 
-/** The connection details for OpenSearch dashboard. */
+/**
+ * The connection details for OpenSearch dashboard.
+ */
 class DatabaseClusterRequestUiConnection
 
-/** The connection details for Schema Registry. */
+/**
+ * The connection details for Schema Registry.
+ */
 class DatabaseClusterRequestSchemaRegistryConnection
 
-/** Optional API value serialized in the `connection` wire field. */
+/**
+ * Optional API value serialized in the `connection` wire field.
+ */
 class DatabaseClusterRequestConnection
 
-/** Optional API value serialized in the `private_connection` wire field. */
+/**
+ * Optional API value serialized in the `private_connection` wire field.
+ */
 class DatabaseClusterRequestPrivateConnection
 
-/** Optional API value serialized in the `standby_connection` wire field. */
+/**
+ * Optional API value serialized in the `standby_connection` wire field.
+ */
 class DatabaseClusterRequestStandbyConnection
 
-/** Optional API value serialized in the `standby_private_connection` wire field. */
+/**
+ * Optional API value serialized in the `standby_private_connection` wire field.
+ */
 class DatabaseClusterRequestStandbyPrivateConnection
 
-/** Optional API value serialized in the `maintenance_window` wire field. */
+/**
+ * Optional API value serialized in the `maintenance_window` wire field.
+ */
 data class DatabaseClusterRequestMaintenanceWindow(
-    /** The day of the week on which to apply maintenance updates. */
+    /**
+     * The day of the week on which to apply maintenance updates.
+     */
     val day: String,
-    /** The hour in UTC at which maintenance updates will be applied in 24 hour format. */
-    val hour: String,
+    /**
+     * The hour in UTC at which maintenance updates will be applied in 24 hour format.
+     */
+    val hour: String
 )
 
-/** Typed representation of the `DatabaseClusterRequest` API schema. */
+/**
+ * Typed representation of the `DatabaseClusterRequest` API schema.
+ */
 data class DatabaseClusterRequest(
-    /** A unique, human-readable name referring to a database cluster. */
+    /**
+     * A unique, human-readable name referring to a database cluster.
+     */
     val name: String,
     /**
-     * A slug representing the database engine used for the cluster. The possible values are: "pg"
-     * for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for
-     * Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for PostgreSQL
-     * Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced Edition engines
-     * are currently in public preview.
+     * A slug representing the database engine used for the cluster. The possible values are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for PostgreSQL Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced Edition engines are currently in public preview.
      */
     val engine: DatabaseClusterRequestEngineEnum,
-    /** The number of nodes in the database cluster. */
+    /**
+     * The number of nodes in the database cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_nodes") val numNodes: Long,
-    /** The slug identifier representing the size of the nodes in the database cluster. */
+    /**
+     * The slug identifier representing the size of the nodes in the database cluster.
+     */
     val size: String,
-    /** The slug identifier for the region where the database cluster is located. */
+    /**
+     * The slug identifier for the region where the database cluster is located.
+     */
     val region: String,
-    /** A string representing the version of the database engine in use for the cluster. */
+    /**
+     * A string representing the version of the database engine in use for the cluster.
+     */
     val version: String? = null,
     /**
-     * A string specifying the UUID of the VPC to which the database cluster will be assigned. If
-     * excluded, the cluster when creating a new database cluster, it will be assigned to your
-     * account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid")
-    val privateNetworkUuid: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid") val privateNetworkUuid: String? = null,
     /**
      * An array of tags (as strings) to apply to the database cluster. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
-    /** The connection details for OpenSearch dashboard. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ui_connection")
-    val uiConnection: DatabaseClusterRequestUiConnection? = null,
-    /** The connection details for Schema Registry. */
-    @com.fasterxml.jackson.annotation.JsonProperty("schema_registry_connection")
-    val schemaRegistryConnection: DatabaseClusterRequestSchemaRegistryConnection? = null,
-    /** Optional API value serialized in the `connection` wire field. */
-    val connection: DatabaseClusterRequestConnection? = null,
-    /** Optional API value serialized in the `private_connection` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_connection")
-    val privateConnection: DatabaseClusterRequestPrivateConnection? = null,
-    /** Optional API value serialized in the `standby_connection` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("standby_connection")
-    val standbyConnection: DatabaseClusterRequestStandbyConnection? = null,
-    /** Optional API value serialized in the `standby_private_connection` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("standby_private_connection")
-    val standbyPrivateConnection: DatabaseClusterRequestStandbyPrivateConnection? = null,
-    /** Optional API value serialized in the `maintenance_window` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_window")
-    val maintenanceWindow: DatabaseClusterRequestMaintenanceWindow? = null,
     /**
-     * The ID of the project that the database cluster is assigned to. If excluded when creating a
-     * new database cluster, it will be assigned to your default project. Requires
-     * `project:assign_resource` scope.
+     * The connection details for OpenSearch dashboard.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ui_connection") val uiConnection: DatabaseClusterRequestUiConnection? = null,
+    /**
+     * The connection details for Schema Registry.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("schema_registry_connection") val schemaRegistryConnection: DatabaseClusterRequestSchemaRegistryConnection? = null,
+    /**
+     * Optional API value serialized in the `connection` wire field.
+     */
+    val connection: DatabaseClusterRequestConnection? = null,
+    /**
+     * Optional API value serialized in the `private_connection` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("private_connection") val privateConnection: DatabaseClusterRequestPrivateConnection? = null,
+    /**
+     * Optional API value serialized in the `standby_connection` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("standby_connection") val standbyConnection: DatabaseClusterRequestStandbyConnection? = null,
+    /**
+     * Optional API value serialized in the `standby_private_connection` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("standby_private_connection") val standbyPrivateConnection: DatabaseClusterRequestStandbyPrivateConnection? = null,
+    /**
+     * Optional API value serialized in the `maintenance_window` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_window") val maintenanceWindow: DatabaseClusterRequestMaintenanceWindow? = null,
+    /**
+     * The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project. Requires `project:assign_resource` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional array value serialized in the `rules` wire field. */
+    /**
+     * Optional array value serialized in the `rules` wire field.
+     */
     val rules: List<FirewallRuleRequest>? = null,
     /**
-     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to
-     * the cluster, beyond what is provided as a base amount from the 'size' and any previously
-     * added additional storage.
+     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib")
-    val storageSizeMib: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib") val storageSizeMib: Long? = null,
     /**
-     * Autoscaling configuration for the database cluster. Currently only supports storage
-     * autoscaling. If null, autoscaling is not configured for the cluster.
+     * Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is not configured for the cluster.
      */
     val autoscale: DatabaseAutoscaleParams? = null,
-    /** DigitalOcean-specific settings for the database cluster, including custom service CNAMEs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("do_settings")
-    val doSettings: DoSettings? = null,
+    /**
+     * DigitalOcean-specific settings for the database cluster, including custom service CNAMEs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("do_settings") val doSettings: DoSettings? = null
 )

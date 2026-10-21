@@ -14,158 +14,78 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewayOutputViewsCreateOperation {
     /**
-     * An output view is a named projection of one tool version's output: tool calls that use it
-     * return only the listed fields, and its `output_schema` describes the result. The view is
-     * bound to the tool version your catalog currently releases. Returns 409 when your team already
-     * has a view with this name on the tool version, and 429 when your team already has the maximum
-     * of 20 views on it.
+     * An output view is a named projection of one tool version's output: tool calls that use it return only the listed fields, and its `output_schema` describes the result. The view is bound to the tool version your catalog currently releases. Returns 409 when your team already has a view with this name on the tool version, and 429 when your team already has the maximum of 20 views on it.
      *
-     * @param name View name. Must match `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$` and be unique per tool
-     *   version within your team.
-     * @param fields Output paths to keep, 1 to 64 of them. Each is a dotted path of up to 8
-     *   segments made of `[A-Za-z0-9_-]`, and must be declared by the tool's output schema; arrays
-     *   are traversed element-wise. Paths may not repeat or be a prefix of one another. The tool
-     *   version must declare an object output schema.
-     * @param tool Exactly one of tool or `tool_id` selects the tool version. tool is a
-     *   provider-qualified slug, optionally pinned as `<tool>@<version>`. You can bind only the
-     *   released version your catalog exposes: an unpinned slug resolves it and the response echoes
-     *   it as version; a pin must equal it, and a `tool_id` (the opaque identity from tool search)
-     *   must be that version. Any other version returns 404.
+     * @param name View name. Must match `^`\[a-z\]``\[a-z0-9_-\]`{0,63}$` and be unique
+     *   per tool version within your team.
+     * @param fields Output paths to keep, 1 to 64 of them. Each is a dotted path of
+     *   up to 8 segments made of `[A-Za-z0-9_-]`, and must be declared by the tool's
+     *   output schema; arrays are traversed element-wise. Paths may not repeat or be a
+     *   prefix of one another. The tool version must declare an object output schema.
+     * @param tool Exactly one of tool or `tool_id` selects the tool version. tool is
+     *   a provider-qualified slug, optionally pinned as `<tool>@<version>`. You can
+     *   bind only the released version your catalog exposes: an unpinned slug resolves
+     *   it and the response echoes it as version; a pin must equal it, and a `tool_id`
+     *   (the opaque identity from tool search) must be that version. Any other version
+     *   returns 404.
      * @param toolId Opaque ID of the tool version; see tool.
      * @param description Optional description. At most 512 bytes.
      */
-    fun outputViewsCreate(
-        clientConfig: ClientConfig,
-        name: String,
-        fields: List<String>,
-        tool: String? = null,
-        toolId: String? = null,
-        description: String? = null,
-        options: RequestOptions? = null,
-    ): OutputViewResponse {
+    fun outputViewsCreate(clientConfig: ClientConfig, name: String, fields: List<String>, tool: String? = null, toolId: String? = null, description: String? = null, options: RequestOptions? = null): OutputViewResponse {
         Validation.validatePattern("name", name, "^[a-z][a-z0-9_-]{0,63}$")
 
         Validation.validateItems("fields", fields, Validation.LengthOpts(min = 1, max = 64))
 
         if (description != null) {
             Validation.validateLength("description", description, Validation.LengthOpts(max = 512))
-        }
+}
 
-        return SdkClient.request<OutputViewResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/output-views",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "fields" to (fields),
-                            "tool" to (SdkClient.omitIfNull(tool)),
-                            "tool_id" to (SdkClient.omitIfNull(toolId)),
-                            "description" to (SdkClient.omitIfNull(description)),
-                        ),
-                    operationId = "outputViewsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OutputViewResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/output-views", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "fields" to (fields), "tool" to (SdkClient.omitIfNull(tool)), "tool_id" to (SdkClient.omitIfNull(toolId)), "description" to (SdkClient.omitIfNull(description))), operationId = "outputViewsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayOutputViewsListOperation {
     /**
-     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus
-     * your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param tool At most one of tool or `tool_id`, as on create. With one set, the list is the
-     *   published views plus your team's own on that tool version. With neither, it is every live
-     *   view your team owns plus every published view on a tool version your catalog exposes,
-     *   across tools.
+     * @param tool At most one of tool or `tool_id`, as on create. With one set, the
+     *   list is the published views plus your team's own on that tool version. With
+     *   neither, it is every live view your team owns plus every published view on a
+     *   tool version your catalog exposes, across tools.
      * @param toolId Opaque ID of the tool version; see tool.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same tool
-     *   selection; otherwise the request is rejected with 400.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same tool selection; otherwise the request is rejected with 400.
      */
-    fun outputViewsList(
-        clientConfig: ClientConfig,
-        tool: String? = null,
-        toolId: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-    ): ListOutputViewsResponse {
+    fun outputViewsList(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): ListOutputViewsResponse {
         if (pageSize != null) {
-            Validation.validateRange(
-                "page_size",
-                pageSize,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
-        return SdkClient.request<ListOutputViewsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/output-views",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "tool" to SdkClient.queryValue(tool, "form", true),
-                            "tool_id" to SdkClient.queryValue(toolId, "form", true),
-                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
-                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
-                        ),
-                    operationId = "outputViewsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ListOutputViewsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/output-views", config = clientConfig, query = mapOf("tool" to SdkClient.queryValue(tool, "form", true), "tool_id" to SdkClient.queryValue(toolId, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
+    SdkClient.queryValue(pageToken, "form", true)), operationId = "outputViewsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus
-     * your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's own. Cursor-paged with `page_size` and `page_token`; no total is reported.
      *
-     * @param tool At most one of tool or `tool_id`, as on create. With one set, the list is the
-     *   published views plus your team's own on that tool version. With neither, it is every live
-     *   view your team owns plus every published view on a tool version your catalog exposes,
-     *   across tools.
+     * @param tool At most one of tool or `tool_id`, as on create. With one set, the
+     *   list is the published views plus your team's own on that tool version. With
+     *   neither, it is every live view your team owns plus every published view on a
+     *   tool version your catalog exposes, across tools.
      * @param toolId Opaque ID of the tool version; see tool.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
-     *   rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with the same tool
-     *   selection; otherwise the request is rejected with 400.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
+     *   values are rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with
+     *   the same tool selection; otherwise the request is rejected with 400.
      */
-    fun outputViewsListPaginated(
-        clientConfig: ClientConfig,
-        tool: String? = null,
-        toolId: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (OutputView) -> Boolean,
-    ) {
+    fun outputViewsListPaginated(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (OutputView) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = outputViewsList(clientConfig, tool, toolId, pageSize, cursor, options)
@@ -179,15 +99,9 @@ internal object ActionGatewayOutputViewsListOperation {
         }
     }
 
-    fun outputViewsListPages(
-        clientConfig: ClientConfig,
-        tool: String? = null,
-        toolId: String? = null,
-        pageSize: Long? = null,
-        pageToken: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ActionGateway.OutputViewsListPage) -> Boolean,
-    ) {
+
+
+    fun outputViewsListPages(clientConfig: ClientConfig, tool: String? = null, toolId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.OutputViewsListPage) -> Boolean) {
         var cursor = pageToken
         while (true) {
             val page = outputViewsList(clientConfig, tool, toolId, pageSize, cursor, options)
@@ -204,9 +118,7 @@ internal object ActionGatewayOutputViewsListOperation {
 
 internal object ActionGatewayOutputViewsValidateOperation {
     /**
-     * Validates a projection exactly as create does and returns the view it would produce,
-     * including `output_schema`, without storing anything. name and description are optional here;
-     * name uniqueness and the per-tool-version limit are not checked.
+     * Validates a projection exactly as create does and returns the view it would produce, including `output_schema`, without storing anything. name and description are optional here; name uniqueness and the per-tool-version limit are not checked.
      *
      * @param fields Output paths to keep; as on create.
      * @param tool Tool slug, optionally pinned; as on create.
@@ -214,111 +126,29 @@ internal object ActionGatewayOutputViewsValidateOperation {
      * @param name Optional view name, validated as on create when present.
      * @param description Optional description, validated as on create when present.
      */
-    fun outputViewsValidate(
-        clientConfig: ClientConfig,
-        fields: List<String>,
-        tool: String? = null,
-        toolId: String? = null,
-        name: String? = null,
-        description: String? = null,
-        options: RequestOptions? = null,
-    ): OutputViewResponse {
-        return SdkClient.request<OutputViewResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/action-gateway/output-views/preview",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "fields" to (fields),
-                            "tool" to (SdkClient.omitIfNull(tool)),
-                            "tool_id" to (SdkClient.omitIfNull(toolId)),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "description" to (SdkClient.omitIfNull(description)),
-                        ),
-                    operationId = "outputViewsValidate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun outputViewsValidate(clientConfig: ClientConfig, fields: List<String>, tool: String? = null, toolId: String? = null, name: String? = null, description: String? = null, options: RequestOptions? = null): OutputViewResponse {
+        return SdkClient.request<OutputViewResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/output-views/preview", config = clientConfig, body = SdkClient.bodyMap("fields" to (fields), "tool" to (SdkClient.omitIfNull(tool)), "tool_id" to (SdkClient.omitIfNull(toolId)), "name" to (SdkClient.omitIfNull(name)), "description" to (SdkClient.omitIfNull(description))), operationId = "outputViewsValidate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayOutputViewsGetOperation {
     /**
-     * Returns one of your team's views, or a published view on a tool version your catalog exposes.
-     * Returns 404 when the view does not exist, was deleted, or belongs to another team.
+     * Returns one of your team's views, or a published view on a tool version your catalog exposes. Returns 404 when the view does not exist, was deleted, or belongs to another team.
      *
      * @param viewId Output view ID.
      */
-    fun outputViewsGet(
-        clientConfig: ClientConfig,
-        viewId: String,
-        options: RequestOptions? = null,
-    ): OutputViewResponse {
-        return SdkClient.request<OutputViewResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/action-gateway/output-views/${SdkClient.encodePathSegment(viewId)}",
-                    config = clientConfig,
-                    operationId = "outputViewsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun outputViewsGet(clientConfig: ClientConfig, viewId: String, options: RequestOptions? = null): OutputViewResponse {
+        return SdkClient.request<OutputViewResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/output-views/${SdkClient.encodePathSegment(viewId)}", config = clientConfig, operationId = "outputViewsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object ActionGatewayOutputViewsDeleteOperation {
     /**
-     * Deletes one of your team's views and returns it with audit.deleted_at set; it can no longer
-     * be used. Published views cannot be deleted. Returns 404 when the view does not exist, is
-     * already deleted, or is not your team's.
+     * Deletes one of your team's views and returns it with audit.deleted_at set; it can no longer be used. Published views cannot be deleted. Returns 404 when the view does not exist, is already deleted, or is not your team's.
      *
      * @param viewId Output view ID.
      */
-    fun outputViewsDelete(
-        clientConfig: ClientConfig,
-        viewId: String,
-        options: RequestOptions? = null,
-    ): OutputViewResponse {
-        return SdkClient.request<OutputViewResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/v2/action-gateway/output-views/${SdkClient.encodePathSegment(viewId)}",
-                    config = clientConfig,
-                    operationId = "outputViewsDelete",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun outputViewsDelete(clientConfig: ClientConfig, viewId: String, options: RequestOptions? = null): OutputViewResponse {
+        return SdkClient.request<OutputViewResponse>(SdkClient.RequestSpec("DELETE", "/v2/action-gateway/output-views/${SdkClient.encodePathSegment(viewId)}", config = clientConfig, operationId = "outputViewsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

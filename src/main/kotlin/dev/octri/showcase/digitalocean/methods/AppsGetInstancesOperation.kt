@@ -11,36 +11,11 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsGetInstancesOperation {
     /**
-     * Retrieve the list of running instances for a given application, including instance names and
-     * component types. Please note that these instances are ephemeral and may change over time. It
-     * is recommended not to make persistent changes or develop scripts that rely on their
-     * persistence.
+     * Retrieve the list of running instances for a given application, including instance names and component types. Please note that these instances are ephemeral and may change over time. It is recommended not to make persistent changes or develop scripts that rely on their persistence.
      *
      * @param appId The app ID
      */
-    fun appsGetInstances(
-        clientConfig: ClientConfig,
-        appId: String,
-        options: RequestOptions? = null,
-    ): AppInstances {
-        return SdkClient.request<AppInstances>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/instances",
-                    config = clientConfig,
-                    operationId = "appsGetInstances",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsGetInstances(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppInstances {
+        return SdkClient.request<AppInstances>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/instances", config = clientConfig, operationId = "appsGetInstances", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }

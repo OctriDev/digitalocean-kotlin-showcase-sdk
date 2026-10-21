@@ -3,732 +3,440 @@
 
 package dev.octri.showcase.digitalocean.models
 
-class GenaiListModelsParameterItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListModelsParameterItemEnum && value == other.value
-
+class GenaiListModelsParameterItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListModelsParameterItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val MODEL_USECASE_UNKNOWN = GenaiListModelsParameterItemEnum("MODEL_USECASE_UNKNOWN")
+        @JvmField val MODEL_USECASE_UNKNOWN = GenaiListModelsParameterItemEnum("MODEL_USECASE_UNKNOWN")
         @JvmField val MODEL_USECASE_AGENT = GenaiListModelsParameterItemEnum("MODEL_USECASE_AGENT")
-        @JvmField
-        val MODEL_USECASE_FINETUNED = GenaiListModelsParameterItemEnum("MODEL_USECASE_FINETUNED")
-        @JvmField
-        val MODEL_USECASE_KNOWLEDGEBASE =
-            GenaiListModelsParameterItemEnum("MODEL_USECASE_KNOWLEDGEBASE")
-        @JvmField
-        val MODEL_USECASE_GUARDRAIL = GenaiListModelsParameterItemEnum("MODEL_USECASE_GUARDRAIL")
-        @JvmField
-        val MODEL_USECASE_REASONING = GenaiListModelsParameterItemEnum("MODEL_USECASE_REASONING")
-        @JvmField
-        val MODEL_USECASE_SERVERLESS = GenaiListModelsParameterItemEnum("MODEL_USECASE_SERVERLESS")
+        @JvmField val MODEL_USECASE_FINETUNED = GenaiListModelsParameterItemEnum("MODEL_USECASE_FINETUNED")
+        @JvmField val MODEL_USECASE_KNOWLEDGEBASE = GenaiListModelsParameterItemEnum("MODEL_USECASE_KNOWLEDGEBASE")
+        @JvmField val MODEL_USECASE_GUARDRAIL = GenaiListModelsParameterItemEnum("MODEL_USECASE_GUARDRAIL")
+        @JvmField val MODEL_USECASE_REASONING = GenaiListModelsParameterItemEnum("MODEL_USECASE_REASONING")
+        @JvmField val MODEL_USECASE_SERVERLESS = GenaiListModelsParameterItemEnum("MODEL_USECASE_SERVERLESS")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListModelsParameterItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListModelsParameterItemEnum(value)
     }
 }
 
-class GenaiListModelCatalogParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListModelCatalogParameterEnum && value == other.value
-
+class GenaiListModelCatalogParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListModelCatalogParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_UNSPECIFIED =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_UNSPECIFIED")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_CODING =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_CODING")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_AGENTS =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_AGENTS")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_AUDIO =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_AUDIO")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_IMAGE =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_IMAGE")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_VIDEO =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_VIDEO")
-        @JvmField
-        val MODEL_CATALOG_USE_CASE_EMBEDDING =
-            GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_EMBEDDING")
+        @JvmField val MODEL_CATALOG_USE_CASE_UNSPECIFIED = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_UNSPECIFIED")
+        @JvmField val MODEL_CATALOG_USE_CASE_CODING = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_CODING")
+        @JvmField val MODEL_CATALOG_USE_CASE_AGENTS = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_AGENTS")
+        @JvmField val MODEL_CATALOG_USE_CASE_AUDIO = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_AUDIO")
+        @JvmField val MODEL_CATALOG_USE_CASE_IMAGE = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_IMAGE")
+        @JvmField val MODEL_CATALOG_USE_CASE_VIDEO = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_VIDEO")
+        @JvmField val MODEL_CATALOG_USE_CASE_EMBEDDING = GenaiListModelCatalogParameterEnum("MODEL_CATALOG_USE_CASE_EMBEDDING")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListModelCatalogParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListModelCatalogParameterEnum(value)
     }
 }
 
-class GenaiListModelCatalogParameterEnum78dae3f5
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListModelCatalogParameterEnum78dae3f5 && value == other.value
-
+class GenaiListModelCatalogParameterEnum78dae3f5 private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListModelCatalogParameterEnum78dae3f5 && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val MODEL_CATALOG_SORT_BY_CREATED_AT =
-            GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_CREATED_AT")
-        @JvmField
-        val MODEL_CATALOG_SORT_BY_NAME =
-            GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_NAME")
-        @JvmField
-        val MODEL_CATALOG_SORT_BY_PRICE =
-            GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_PRICE")
+        @JvmField val MODEL_CATALOG_SORT_BY_CREATED_AT = GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_CREATED_AT")
+        @JvmField val MODEL_CATALOG_SORT_BY_NAME = GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_NAME")
+        @JvmField val MODEL_CATALOG_SORT_BY_PRICE = GenaiListModelCatalogParameterEnum78dae3f5("MODEL_CATALOG_SORT_BY_PRICE")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListModelCatalogParameterEnum78dae3f5(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListModelCatalogParameterEnum78dae3f5(value)
     }
 }
 
-class GenaiListModelCatalogParameterEnum87804d40
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListModelCatalogParameterEnum87804d40 && value == other.value
-
+class GenaiListModelCatalogParameterEnum87804d40 private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListModelCatalogParameterEnum87804d40 && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC = GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC = GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListModelCatalogParameterEnum87804d40("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListModelCatalogParameterEnum87804d40(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListModelCatalogParameterEnum87804d40(value)
     }
 }
 
-class GenaiListScenarioLibraryParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioLibraryParameterEnum && value == other.value
-
+class GenaiListScenarioLibraryParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioLibraryParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED =
-            GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_LIBRARY_SORT_FIELD_NAME =
-            GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_NAME")
-        @JvmField
-        val SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT =
-            GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT")
+        @JvmField val SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED = GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SCENARIO_LIBRARY_SORT_FIELD_NAME = GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_NAME")
+        @JvmField val SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT = GenaiListScenarioLibraryParameterEnum("SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioLibraryParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioLibraryParameterEnum(value)
     }
 }
 
-class GenaiListScenarioLibraryParameterEnum67de185e
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioLibraryParameterEnum67de185e && value == other.value
-
+class GenaiListScenarioLibraryParameterEnum67de185e private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioLibraryParameterEnum67de185e && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC = GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC =
-            GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListScenarioLibraryParameterEnum67de185e("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioLibraryParameterEnum67de185e(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioLibraryParameterEnum67de185e(value)
     }
 }
 
-class GenaiListScenarioLibraryScenariosParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioLibraryScenariosParameterEnum && value == other.value
-
+class GenaiListScenarioLibraryScenariosParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioLibraryScenariosParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_SORT_FIELD_UNSPECIFIED =
-            GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_SORT_FIELD_FILE_ORDER =
-            GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_FILE_ORDER")
-        @JvmField
-        val SCENARIO_SORT_FIELD_NAME =
-            GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_NAME")
-        @JvmField
-        val SCENARIO_SORT_FIELD_DESCRIPTION =
-            GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_DESCRIPTION")
+        @JvmField val SCENARIO_SORT_FIELD_UNSPECIFIED = GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SCENARIO_SORT_FIELD_FILE_ORDER = GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_FILE_ORDER")
+        @JvmField val SCENARIO_SORT_FIELD_NAME = GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_NAME")
+        @JvmField val SCENARIO_SORT_FIELD_DESCRIPTION = GenaiListScenarioLibraryScenariosParameterEnum("SCENARIO_SORT_FIELD_DESCRIPTION")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioLibraryScenariosParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioLibraryScenariosParameterEnum(value)
     }
 }
 
-class GenaiListScenarioLibraryScenariosParameterEnum41fc628a
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioLibraryScenariosParameterEnum41fc628a && value == other.value
-
+class GenaiListScenarioLibraryScenariosParameterEnum41fc628a private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioLibraryScenariosParameterEnum41fc628a && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC =
-            GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC =
-            GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListScenarioLibraryScenariosParameterEnum41fc628a("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioLibraryScenariosParameterEnum41fc628a(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioLibraryScenariosParameterEnum41fc628a(value)
     }
 }
 
-class GenaiListScenarioSetsParameterItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioSetsParameterItemEnum && value == other.value
-
+class GenaiListScenarioSetsParameterItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioSetsParameterItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_SET_STATUS_UNSPECIFIED =
-            GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_SET_STATUS_GENERATING =
-            GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_GENERATING")
-        @JvmField
-        val SCENARIO_SET_STATUS_READY =
-            GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_READY")
-        @JvmField
-        val SCENARIO_SET_STATUS_FAILED =
-            GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_FAILED")
-        @JvmField
-        val SCENARIO_SET_STATUS_CANCELLED =
-            GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_CANCELLED")
+        @JvmField val SCENARIO_SET_STATUS_UNSPECIFIED = GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_UNSPECIFIED")
+        @JvmField val SCENARIO_SET_STATUS_GENERATING = GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_GENERATING")
+        @JvmField val SCENARIO_SET_STATUS_READY = GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_READY")
+        @JvmField val SCENARIO_SET_STATUS_FAILED = GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_FAILED")
+        @JvmField val SCENARIO_SET_STATUS_CANCELLED = GenaiListScenarioSetsParameterItemEnum("SCENARIO_SET_STATUS_CANCELLED")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioSetsParameterItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioSetsParameterItemEnum(value)
     }
 }
 
-class GenaiListScenarioSetsParameterItemEnuma4431f49
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioSetsParameterItemEnuma4431f49 && value == other.value
-
+class GenaiListScenarioSetsParameterItemEnuma4431f49 private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioSetsParameterItemEnuma4431f49 && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_SET_SOURCE_KIND_UNSPECIFIED =
-            GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_SET_SOURCE_KIND_USER_UPLOAD =
-            GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_USER_UPLOAD")
-        @JvmField
-        val SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED =
-            GenaiListScenarioSetsParameterItemEnuma4431f49(
-                "SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED"
-            )
-        @JvmField
-        val SCENARIO_SET_SOURCE_KIND_LIBRARY =
-            GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_LIBRARY")
-        @JvmField
-        val SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED =
-            GenaiListScenarioSetsParameterItemEnuma4431f49(
-                "SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED"
-            )
+        @JvmField val SCENARIO_SET_SOURCE_KIND_UNSPECIFIED = GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_UNSPECIFIED")
+        @JvmField val SCENARIO_SET_SOURCE_KIND_USER_UPLOAD = GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_USER_UPLOAD")
+        @JvmField val SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED = GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED")
+        @JvmField val SCENARIO_SET_SOURCE_KIND_LIBRARY = GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_LIBRARY")
+        @JvmField val SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED = GenaiListScenarioSetsParameterItemEnuma4431f49("SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioSetsParameterItemEnuma4431f49(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioSetsParameterItemEnuma4431f49(value)
     }
 }
 
-class GenaiListScenarioSetsParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioSetsParameterEnum && value == other.value
-
+class GenaiListScenarioSetsParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioSetsParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_UNSPECIFIED =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_CREATED_AT =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_CREATED_AT")
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_NAME =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_NAME")
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_STATUS =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_STATUS")
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT")
-        @JvmField
-        val SCENARIO_SET_SORT_FIELD_UPDATED_AT =
-            GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_UPDATED_AT")
+        @JvmField val SCENARIO_SET_SORT_FIELD_UNSPECIFIED = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SCENARIO_SET_SORT_FIELD_CREATED_AT = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_CREATED_AT")
+        @JvmField val SCENARIO_SET_SORT_FIELD_NAME = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_NAME")
+        @JvmField val SCENARIO_SET_SORT_FIELD_STATUS = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_STATUS")
+        @JvmField val SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT")
+        @JvmField val SCENARIO_SET_SORT_FIELD_UPDATED_AT = GenaiListScenarioSetsParameterEnum("SCENARIO_SET_SORT_FIELD_UPDATED_AT")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioSetsParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioSetsParameterEnum(value)
     }
 }
 
-class GenaiListScenarioSetsParameterEnumed8b0d4b
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenarioSetsParameterEnumed8b0d4b && value == other.value
-
+class GenaiListScenarioSetsParameterEnumed8b0d4b private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenarioSetsParameterEnumed8b0d4b && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC = GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC = GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListScenarioSetsParameterEnumed8b0d4b("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenarioSetsParameterEnumed8b0d4b(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenarioSetsParameterEnumed8b0d4b(value)
     }
 }
 
-class GenaiListScenariosParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenariosParameterEnum && value == other.value
-
+class GenaiListScenariosParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenariosParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SCENARIO_SORT_FIELD_UNSPECIFIED =
-            GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SCENARIO_SORT_FIELD_FILE_ORDER =
-            GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_FILE_ORDER")
-        @JvmField
-        val SCENARIO_SORT_FIELD_NAME = GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_NAME")
-        @JvmField
-        val SCENARIO_SORT_FIELD_DESCRIPTION =
-            GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_DESCRIPTION")
+        @JvmField val SCENARIO_SORT_FIELD_UNSPECIFIED = GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SCENARIO_SORT_FIELD_FILE_ORDER = GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_FILE_ORDER")
+        @JvmField val SCENARIO_SORT_FIELD_NAME = GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_NAME")
+        @JvmField val SCENARIO_SORT_FIELD_DESCRIPTION = GenaiListScenariosParameterEnum("SCENARIO_SORT_FIELD_DESCRIPTION")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenariosParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenariosParameterEnum(value)
     }
 }
 
-class GenaiListScenariosParameterEnum4d4369ed
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListScenariosParameterEnum4d4369ed && value == other.value
-
+class GenaiListScenariosParameterEnum4d4369ed private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListScenariosParameterEnum4d4369ed && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC = GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC = GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListScenariosParameterEnum4d4369ed("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListScenariosParameterEnum4d4369ed(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListScenariosParameterEnum4d4369ed(value)
     }
 }
 
-class GenaiListSimulationRunsParameterItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationRunsParameterItemEnum && value == other.value
-
+class GenaiListSimulationRunsParameterItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationRunsParameterItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SIMULATION_RUN_STATUS_UNSPECIFIED =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_UNSPECIFIED")
-        @JvmField
-        val SIMULATION_RUN_STATUS_PENDING =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_PENDING")
-        @JvmField
-        val SIMULATION_RUN_STATUS_RUNNING =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_RUNNING")
-        @JvmField
-        val SIMULATION_RUN_STATUS_SUCCEEDED =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_SUCCEEDED")
-        @JvmField
-        val SIMULATION_RUN_STATUS_FAILED =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_FAILED")
-        @JvmField
-        val SIMULATION_RUN_STATUS_CANCELLED =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_CANCELLED")
-        @JvmField
-        val SIMULATION_RUN_STATUS_EVALUATING =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_EVALUATING")
-        @JvmField
-        val SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL =
-            GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL")
+        @JvmField val SIMULATION_RUN_STATUS_UNSPECIFIED = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_UNSPECIFIED")
+        @JvmField val SIMULATION_RUN_STATUS_PENDING = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_PENDING")
+        @JvmField val SIMULATION_RUN_STATUS_RUNNING = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_RUNNING")
+        @JvmField val SIMULATION_RUN_STATUS_SUCCEEDED = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_SUCCEEDED")
+        @JvmField val SIMULATION_RUN_STATUS_FAILED = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_FAILED")
+        @JvmField val SIMULATION_RUN_STATUS_CANCELLED = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_CANCELLED")
+        @JvmField val SIMULATION_RUN_STATUS_EVALUATING = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_EVALUATING")
+        @JvmField val SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL = GenaiListSimulationRunsParameterItemEnum("SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationRunsParameterItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationRunsParameterItemEnum(value)
     }
 }
 
-class GenaiListSimulationRunsParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationRunsParameterEnum && value == other.value
-
+class GenaiListSimulationRunsParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationRunsParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SIMULATION_RUN_SORT_FIELD_UNSPECIFIED =
-            GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SIMULATION_RUN_SORT_FIELD_CREATED_AT =
-            GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_CREATED_AT")
-        @JvmField
-        val SIMULATION_RUN_SORT_FIELD_NAME =
-            GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_NAME")
-        @JvmField
-        val SIMULATION_RUN_SORT_FIELD_STATUS =
-            GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_STATUS")
-        @JvmField
-        val SIMULATION_RUN_SORT_FIELD_UPDATED_AT =
-            GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_UPDATED_AT")
+        @JvmField val SIMULATION_RUN_SORT_FIELD_UNSPECIFIED = GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SIMULATION_RUN_SORT_FIELD_CREATED_AT = GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_CREATED_AT")
+        @JvmField val SIMULATION_RUN_SORT_FIELD_NAME = GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_NAME")
+        @JvmField val SIMULATION_RUN_SORT_FIELD_STATUS = GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_STATUS")
+        @JvmField val SIMULATION_RUN_SORT_FIELD_UPDATED_AT = GenaiListSimulationRunsParameterEnum("SIMULATION_RUN_SORT_FIELD_UPDATED_AT")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationRunsParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationRunsParameterEnum(value)
     }
 }
 
-class GenaiListSimulationRunsParameterEnum6e02f402
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationRunsParameterEnum6e02f402 && value == other.value
-
+class GenaiListSimulationRunsParameterEnum6e02f402 private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationRunsParameterEnum6e02f402 && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC = GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC =
-            GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListSimulationRunsParameterEnum6e02f402("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationRunsParameterEnum6e02f402(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationRunsParameterEnum6e02f402(value)
     }
 }
 
-class GenaiListSimulationEpisodesParameterItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationEpisodesParameterItemEnum && value == other.value
-
+class GenaiListSimulationEpisodesParameterItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationEpisodesParameterItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SIMULATION_EPISODE_STATUS_UNSPECIFIED =
-            GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_UNSPECIFIED")
-        @JvmField
-        val SIMULATION_EPISODE_STATUS_RUNNING =
-            GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_RUNNING")
-        @JvmField
-        val SIMULATION_EPISODE_STATUS_FINISHED =
-            GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_FINISHED")
-        @JvmField
-        val SIMULATION_EPISODE_STATUS_FAILED =
-            GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_FAILED")
-        @JvmField
-        val SIMULATION_EPISODE_STATUS_PREPARING =
-            GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_PREPARING")
+        @JvmField val SIMULATION_EPISODE_STATUS_UNSPECIFIED = GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_UNSPECIFIED")
+        @JvmField val SIMULATION_EPISODE_STATUS_RUNNING = GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_RUNNING")
+        @JvmField val SIMULATION_EPISODE_STATUS_FINISHED = GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_FINISHED")
+        @JvmField val SIMULATION_EPISODE_STATUS_FAILED = GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_FAILED")
+        @JvmField val SIMULATION_EPISODE_STATUS_PREPARING = GenaiListSimulationEpisodesParameterItemEnum("SIMULATION_EPISODE_STATUS_PREPARING")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationEpisodesParameterItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationEpisodesParameterItemEnum(value)
     }
 }
 
-class GenaiListSimulationEpisodesParameterItemEnumcabd4d0f
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationEpisodesParameterItemEnumcabd4d0f && value == other.value
-
+class GenaiListSimulationEpisodesParameterItemEnumcabd4d0f private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationEpisodesParameterItemEnumcabd4d0f && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SIMULATION_EPISODE_VERDICT_UNSPECIFIED =
-            GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(
-                "SIMULATION_EPISODE_VERDICT_UNSPECIFIED"
-            )
-        @JvmField
-        val SIMULATION_EPISODE_VERDICT_SUCCESS =
-            GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(
-                "SIMULATION_EPISODE_VERDICT_SUCCESS"
-            )
-        @JvmField
-        val SIMULATION_EPISODE_VERDICT_FAILURE =
-            GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(
-                "SIMULATION_EPISODE_VERDICT_FAILURE"
-            )
-        @JvmField
-        val SIMULATION_EPISODE_VERDICT_INCONCLUSIVE =
-            GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(
-                "SIMULATION_EPISODE_VERDICT_INCONCLUSIVE"
-            )
+        @JvmField val SIMULATION_EPISODE_VERDICT_UNSPECIFIED = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f("SIMULATION_EPISODE_VERDICT_UNSPECIFIED")
+        @JvmField val SIMULATION_EPISODE_VERDICT_SUCCESS = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f("SIMULATION_EPISODE_VERDICT_SUCCESS")
+        @JvmField val SIMULATION_EPISODE_VERDICT_FAILURE = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f("SIMULATION_EPISODE_VERDICT_FAILURE")
+        @JvmField val SIMULATION_EPISODE_VERDICT_INCONCLUSIVE = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f("SIMULATION_EPISODE_VERDICT_INCONCLUSIVE")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationEpisodesParameterItemEnumcabd4d0f(value)
     }
 }
 
-class GenaiListSimulationEpisodesParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationEpisodesParameterEnum && value == other.value
-
+class GenaiListSimulationEpisodesParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationEpisodesParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED =
-            GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED")
-        @JvmField
-        val SIMULATION_EPISODE_SORT_FIELD_SCENARIO =
-            GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_SCENARIO")
-        @JvmField
-        val SIMULATION_EPISODE_SORT_FIELD_CREATED_AT =
-            GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_CREATED_AT")
-        @JvmField
-        val SIMULATION_EPISODE_SORT_FIELD_STATUS =
-            GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_STATUS")
-        @JvmField
-        val SIMULATION_EPISODE_SORT_FIELD_VERDICT =
-            GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_VERDICT")
+        @JvmField val SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED = GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED")
+        @JvmField val SIMULATION_EPISODE_SORT_FIELD_SCENARIO = GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_SCENARIO")
+        @JvmField val SIMULATION_EPISODE_SORT_FIELD_CREATED_AT = GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_CREATED_AT")
+        @JvmField val SIMULATION_EPISODE_SORT_FIELD_STATUS = GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_STATUS")
+        @JvmField val SIMULATION_EPISODE_SORT_FIELD_VERDICT = GenaiListSimulationEpisodesParameterEnum("SIMULATION_EPISODE_SORT_FIELD_VERDICT")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationEpisodesParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationEpisodesParameterEnum(value)
     }
 }
 
-class GenaiListSimulationEpisodesParameterEnumb5f03e8f
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GenaiListSimulationEpisodesParameterEnumb5f03e8f && value == other.value
-
+class GenaiListSimulationEpisodesParameterEnumb5f03e8f private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GenaiListSimulationEpisodesParameterEnumb5f03e8f && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SORT_DIRECTION_UNSPECIFIED =
-            GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_UNSPECIFIED")
-        @JvmField
-        val SORT_DIRECTION_ASC =
-            GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_ASC")
-        @JvmField
-        val SORT_DIRECTION_DESC =
-            GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_DESC")
+        @JvmField val SORT_DIRECTION_UNSPECIFIED = GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_UNSPECIFIED")
+        @JvmField val SORT_DIRECTION_ASC = GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_ASC")
+        @JvmField val SORT_DIRECTION_DESC = GenaiListSimulationEpisodesParameterEnumb5f03e8f("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GenaiListSimulationEpisodesParameterEnumb5f03e8f(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GenaiListSimulationEpisodesParameterEnumb5f03e8f(value)
     }
 }
 
-class NfsListAccessPointsParameterEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is NfsListAccessPointsParameterEnum && value == other.value
-
+class NfsListAccessPointsParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is NfsListAccessPointsParameterEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val ACCESS_POINT_CREATING = NfsListAccessPointsParameterEnum("ACCESS_POINT_CREATING")
+        @JvmField val ACCESS_POINT_CREATING = NfsListAccessPointsParameterEnum("ACCESS_POINT_CREATING")
         @JvmField val ACCESS_POINT_ACTIVE = NfsListAccessPointsParameterEnum("ACCESS_POINT_ACTIVE")
         @JvmField val ACCESS_POINT_FAILED = NfsListAccessPointsParameterEnum("ACCESS_POINT_FAILED")
-        @JvmField
-        val ACCESS_POINT_DELETED = NfsListAccessPointsParameterEnum("ACCESS_POINT_DELETED")
+        @JvmField val ACCESS_POINT_DELETED = NfsListAccessPointsParameterEnum("ACCESS_POINT_DELETED")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = NfsListAccessPointsParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = NfsListAccessPointsParameterEnum(value)
     }
 }
 
-/** The environment of the project's resources. */
-class ProjectsCreateEnvironmentEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ProjectsCreateEnvironmentEnum && value == other.value
-
+/**
+ * The environment of the project's resources.
+ */
+class ProjectsCreateEnvironmentEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ProjectsCreateEnvironmentEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -737,22 +445,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val STAGING = ProjectsCreateEnvironmentEnum("Staging")
         @JvmField val PRODUCTION = ProjectsCreateEnvironmentEnum("Production")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ProjectsCreateEnvironmentEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ProjectsCreateEnvironmentEnum(value)
     }
 }
 
-/** The environment of the project's resources. */
-class ProjectsUpdateEnvironmentEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ProjectsUpdateEnvironmentEnum && value == other.value
-
+/**
+ * The environment of the project's resources.
+ */
+class ProjectsUpdateEnvironmentEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ProjectsUpdateEnvironmentEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -761,22 +466,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val STAGING = ProjectsUpdateEnvironmentEnum("Staging")
         @JvmField val PRODUCTION = ProjectsUpdateEnvironmentEnum("Production")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ProjectsUpdateEnvironmentEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ProjectsUpdateEnvironmentEnum(value)
     }
 }
 
-/** The environment of the project's resources. */
-class ProjectsUpdateDefaultEnvironmentEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ProjectsUpdateDefaultEnvironmentEnum && value == other.value
-
+/**
+ * The environment of the project's resources.
+ */
+class ProjectsUpdateDefaultEnvironmentEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ProjectsUpdateDefaultEnvironmentEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -785,22 +487,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val STAGING = ProjectsUpdateDefaultEnvironmentEnum("Staging")
         @JvmField val PRODUCTION = ProjectsUpdateDefaultEnvironmentEnum("Production")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ProjectsUpdateDefaultEnvironmentEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ProjectsUpdateDefaultEnvironmentEnum(value)
     }
 }
 
-/** The slug of the subscription tier to sign up for. */
-class RegistriesUpdateSubscriptionTierSlugEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is RegistriesUpdateSubscriptionTierSlugEnum && value == other.value
-
+/**
+ * The slug of the subscription tier to sign up for.
+ */
+class RegistriesUpdateSubscriptionTierSlugEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is RegistriesUpdateSubscriptionTierSlugEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -809,22 +508,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val BASIC = RegistriesUpdateSubscriptionTierSlugEnum("basic")
         @JvmField val PROFESSIONAL = RegistriesUpdateSubscriptionTierSlugEnum("professional")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = RegistriesUpdateSubscriptionTierSlugEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = RegistriesUpdateSubscriptionTierSlugEnum(value)
     }
 }
 
-/** The slug of the subscription tier to sign up for. */
-class RegistryUpdateSubscriptionTierSlugEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is RegistryUpdateSubscriptionTierSlugEnum && value == other.value
-
+/**
+ * The slug of the subscription tier to sign up for.
+ */
+class RegistryUpdateSubscriptionTierSlugEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is RegistryUpdateSubscriptionTierSlugEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -833,22 +529,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val BASIC = RegistryUpdateSubscriptionTierSlugEnum("basic")
         @JvmField val PROFESSIONAL = RegistryUpdateSubscriptionTierSlugEnum("professional")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = RegistryUpdateSubscriptionTierSlugEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = RegistryUpdateSubscriptionTierSlugEnum(value)
     }
 }
 
-/** Required enumerated value serialized in the `regions[]` wire field. */
-class UptimeCreateCheckRegionsItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is UptimeCreateCheckRegionsItemEnum && value == other.value
-
+/**
+ * Required enumerated value serialized in the `regions[]` wire field.
+ */
+class UptimeCreateCheckRegionsItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is UptimeCreateCheckRegionsItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -858,22 +551,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val EU_WEST = UptimeCreateCheckRegionsItemEnum("eu_west")
         @JvmField val SE_ASIA = UptimeCreateCheckRegionsItemEnum("se_asia")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = UptimeCreateCheckRegionsItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = UptimeCreateCheckRegionsItemEnum(value)
     }
 }
 
-/** The type of health check to perform. */
-class UptimeCreateCheckTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is UptimeCreateCheckTypeEnum && value == other.value
-
+/**
+ * The type of health check to perform.
+ */
+class UptimeCreateCheckTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is UptimeCreateCheckTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -882,10 +572,7 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val HTTP = UptimeCreateCheckTypeEnum("http")
         @JvmField val HTTPS = UptimeCreateCheckTypeEnum("https")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = UptimeCreateCheckTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = UptimeCreateCheckTypeEnum(value)
     }
 }

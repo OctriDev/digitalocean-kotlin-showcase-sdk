@@ -5,183 +5,334 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `AddonsAppInfo` API schema. */
+/**
+ * Typed representation of the `AddonsAppInfo` API schema.
+ */
 data class AddonsAppInfo(
-    /** The slug identifier for the application associated with the resource. */
+    /**
+     * The slug identifier for the application associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_slug") val appSlug: String,
-    /** The Terms of Service URL for the resource. */
+    /**
+     * The Terms of Service URL for the resource.
+     */
     val tos: String,
-    /** The End User License Agreement URL for the resource. */
+    /**
+     * The End User License Agreement URL for the resource.
+     */
     val eula: String,
-    /** A list of plans available for the resource. */
-    val plans: List<AddonsPlan>,
+    /**
+     * A list of plans available for the resource.
+     */
+    val plans: List<AddonsPlan>
 )
 
-/** Typed representation of the `AddonsAppMetadata` API schema. */
+/**
+ * Typed representation of the `AddonsAppMetadata` API schema.
+ */
 data class AddonsAppMetadata(
-    /** Unique identifier for the addon metadata item. */
+    /**
+     * Unique identifier for the addon metadata item.
+     */
     val id: Long,
-    /** The name of the metadata item. */
+    /**
+     * The name of the metadata item.
+     */
     val name: String,
-    /** The display name of the metadata item. */
+    /**
+     * The display name of the metadata item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String,
-    /** A brief description of the metadata item. */
+    /**
+     * A brief description of the metadata item.
+     */
     val description: String,
-    /** The data type of the metadata value. */
+    /**
+     * The data type of the metadata value.
+     */
     val type: AddonsAppMetadataTypeEnum,
-    /** Optional array value serialized in the `options` wire field. */
-    val options: List<String>? = null,
+    /**
+     * Optional array value serialized in the `options` wire field.
+     */
+    val options: List<String>? = null
 )
 
-/** Typed representation of the `AddonsCreate` API schema. */
+/**
+ * Typed representation of the `AddonsCreate` API schema.
+ */
 data class AddonsCreate(
-    /** Optional object value serialized in the `resource` wire field. */
+    /**
+     * Optional object value serialized in the `resource` wire field.
+     */
     val resource: AddonsResource? = null
 )
 
-/** Typed representation of the `AddonsDimensionVolumeWithPrice` API schema. */
+/**
+ * Typed representation of the `AddonsDimensionVolumeWithPrice` API schema.
+ */
 data class AddonsDimensionVolumeWithPrice(
-    /** Unique identifier for the addon. */
+    /**
+     * Unique identifier for the addon.
+     */
     val id: Long,
-    /** The minimum volume for the volume pricing tier. */
+    /**
+     * The minimum volume for the volume pricing tier.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("low_volume") val lowVolume: Long,
-    /** The maximum volume for the volume pricing tier. */
+    /**
+     * The maximum volume for the volume pricing tier.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_volume") val maxVolume: Long,
-    /** The price per unit for the volume tier in US dollars. */
-    @com.fasterxml.jackson.annotation.JsonProperty("price_per_unit") val pricePerUnit: String,
+    /**
+     * The price per unit for the volume tier in US dollars.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("price_per_unit") val pricePerUnit: String
 )
 
-/** Typed representation of the `AddonsDimensionWithPrice` API schema. */
+/**
+ * Typed representation of the `AddonsDimensionWithPrice` API schema.
+ */
 data class AddonsDimensionWithPrice(
-    /** Unique identifier for the dimension. */
+    /**
+     * Unique identifier for the dimension.
+     */
     val id: Long,
-    /** Unique string identifier for the dimension, tied to a price. */
+    /**
+     * Unique string identifier for the dimension, tied to a price.
+     */
     val sku: String,
-    /** Slug identifier for the dimension. */
+    /**
+     * Slug identifier for the dimension.
+     */
     val slug: String,
-    /** Display name for the dimension. */
+    /**
+     * Display name for the dimension.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String,
-    /** Name of the feature associated with the dimension. */
+    /**
+     * Name of the feature associated with the dimension.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("feature_name") val featureName: String,
-    /** A list of volumes associated with the dimension, each with its own price. */
-    val volumes: List<AddonsDimensionVolumeWithPrice>,
+    /**
+     * A list of volumes associated with the dimension, each with its own price.
+     */
+    val volumes: List<AddonsDimensionVolumeWithPrice>
 )
 
-/** Typed representation of the `AddonsFeature` API schema. */
+/**
+ * Typed representation of the `AddonsFeature` API schema.
+ */
 data class AddonsFeature(
-    /** Unique identifier for the app feature. */
+    /**
+     * Unique identifier for the app feature.
+     */
     val id: Long,
-    /** Name of the feature. */
+    /**
+     * Name of the feature.
+     */
     val name: String,
-    /** Feature type, indicating the kind of data it holds. */
+    /**
+     * Feature type, indicating the kind of data it holds.
+     */
     val type: AddonsFeatureTypeEnum,
-    /** Value of the feature, which can vary based on the type. */
+    /**
+     * Value of the feature, which can vary based on the type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
-    /** Timestamp when the feature was created. */
+    /**
+     * Timestamp when the feature was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Timestamp when the feature was last updated. */
+    /**
+     * Timestamp when the feature was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** Unit of measurement for the feature, if applicable. Units apply to allowance features. */
-    val unit: AddonsFeatureUnitEnum? = null,
+    /**
+     * Unit of measurement for the feature, if applicable. Units apply to allowance features.
+     */
+    val unit: AddonsFeatureUnitEnum? = null
 )
 
-/** Typed representation of the `AddonsGet` API schema. */
+/**
+ * Typed representation of the `AddonsGet` API schema.
+ */
 data class AddonsGet(
-    /** Optional object value serialized in the `resource` wire field. */
+    /**
+     * Optional object value serialized in the `resource` wire field.
+     */
     val resource: AddonsResource? = null
 )
 
-/** Typed representation of the `AddonsGetApp` API schema. */
+/**
+ * Typed representation of the `AddonsGetApp` API schema.
+ */
 data class AddonsGetApp(
-    /** Optional array value serialized in the `apps` wire field. */
+    /**
+     * Optional array value serialized in the `apps` wire field.
+     */
     val apps: List<AddonsAppInfo>? = null
 )
 
-/** Typed representation of the `AddonsGetAppMetadata` API schema. */
+/**
+ * Typed representation of the `AddonsGetAppMetadata` API schema.
+ */
 data class AddonsGetAppMetadata(
-    /** Optional array value serialized in the `metadata` wire field. */
+    /**
+     * Optional array value serialized in the `metadata` wire field.
+     */
     val metadata: List<AddonsAppMetadata>? = null
 )
 
-/** Typed representation of the `AddonsList` API schema. */
+/**
+ * Typed representation of the `AddonsList` API schema.
+ */
 data class AddonsList(
-    /** Optional array value serialized in the `resources` wire field. */
+    /**
+     * Optional array value serialized in the `resources` wire field.
+     */
     val resources: List<AddonsResource>? = null
 )
 
-/** Typed representation of the `AddonsPlan` API schema. */
+/**
+ * Typed representation of the `AddonsPlan` API schema.
+ */
 data class AddonsPlan(
-    /** ID of a given plan. */
+    /**
+     * ID of a given plan.
+     */
     val id: Long,
-    /** ID of the app associated with this plan. */
+    /**
+     * ID of the app associated with this plan.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: Long,
-    /** Display name for a given plan. */
+    /**
+     * Display name for a given plan.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String,
-    /** Slug identifier for the plan. */
+    /**
+     * Slug identifier for the plan.
+     */
     val slug: String,
-    /** Price of a month's usage of the plan in US dollars. */
+    /**
+     * Price of a month's usage of the plan in US dollars.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("price_per_month") val pricePerMonth: Long,
-    /** Indicates if the plan is currently active. */
+    /**
+     * Indicates if the plan is currently active.
+     */
     val active: Boolean,
-    /** Current state of the plan. */
+    /**
+     * Current state of the plan.
+     */
     val state: AddonsPlanStateEnum,
-    /** Timestamp when the plan was created. */
+    /**
+     * Timestamp when the plan was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Timestamp when the plan was last updated. */
+    /**
+     * Timestamp when the plan was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /** Indicates if the plan is available for selection. */
+    /**
+     * Indicates if the plan is available for selection.
+     */
     val available: Boolean,
-    /** Unique identifier for the plan. */
+    /**
+     * Unique identifier for the plan.
+     */
     val uuid: String,
-    /** Indicates if this plan is the default option for the app. */
+    /**
+     * Indicates if this plan is the default option for the app.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("by_default") val byDefault: Boolean,
-    /** Description of an app plan. */
+    /**
+     * Description of an app plan.
+     */
     val description: String? = null,
-    /** List of features included in the plan. */
+    /**
+     * List of features included in the plan.
+     */
     val features: List<AddonsFeature>? = null,
-    /** List of dimensions associated with the plan, each with its own pricing. */
-    val dimensions: List<AddonsDimensionWithPrice>? = null,
+    /**
+     * List of dimensions associated with the plan, each with its own pricing.
+     */
+    val dimensions: List<AddonsDimensionWithPrice>? = null
 )
 
-/** Typed representation of the `AddonsResource` API schema. */
+/**
+ * Typed representation of the `AddonsResource` API schema.
+ */
 data class AddonsResource(
-    /** The unique identifier for the addon resource. */
+    /**
+     * The unique identifier for the addon resource.
+     */
     val uuid: String,
-    /** The name of the addon resource. */
+    /**
+     * The name of the addon resource.
+     */
     val name: String,
-    /** The state the resource is currently in. */
+    /**
+     * The state the resource is currently in.
+     */
     val state: AddonsResourceStateEnum,
-    /** The slug identifier for the application associated with the resource. */
+    /**
+     * The slug identifier for the application associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_slug") val appSlug: String,
-    /** The slug identifier for the plan associated with the resource. */
+    /**
+     * The slug identifier for the plan associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("plan_slug") val planSlug: String,
-    /** Indicates if the resource has configuration values set by the vendor. */
+    /**
+     * Indicates if the resource has configuration values set by the vendor.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_config") val hasConfig: Boolean,
-    /** The name of the application associated with the resource. */
+    /**
+     * The name of the application associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("app_name") val appName: String? = null,
-    /** The name of the plan associated with the resource. */
+    /**
+     * The name of the plan associated with the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("plan_name") val planName: String? = null,
-    /** The price of the plan per month in US dollars. */
-    @com.fasterxml.jackson.annotation.JsonProperty("plan_price_per_month")
-    val planPricePerMonth: Long? = null,
-    /** Metadata associated with the resource, set by the user. */
+    /**
+     * The price of the plan per month in US dollars.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("plan_price_per_month") val planPricePerMonth: Long? = null,
+    /**
+     * Metadata associated with the resource, set by the user.
+     */
     val metadata: List<AddonsResourceMetadata>? = null,
-    /** The Single Sign-On URL for the resource, if applicable. */
+    /**
+     * The Single Sign-On URL for the resource, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sso_url") val ssoUrl: String? = null,
-    /** A message related to the resource, if applicable. */
-    val message: String? = null,
+    /**
+     * A message related to the resource, if applicable.
+     */
+    val message: String? = null
 )
 
-/** Typed representation of the `AddonsResourceMetadata` API schema. */
+/**
+ * Typed representation of the `AddonsResourceMetadata` API schema.
+ */
 data class AddonsResourceMetadata(
-    /** The name of the metadata item to be set. */
+    /**
+     * The name of the metadata item to be set.
+     */
     val name: String,
-    /** The value to be set for the metadata item, which can be a string or boolean. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
+    /**
+     * The value to be set for the metadata item, which can be a string or boolean.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any
 )
 
-/** Typed representation of the `AddonsUpdate` API schema. */
+/**
+ * Typed representation of the `AddonsUpdate` API schema.
+ */
 data class AddonsUpdate(
-    /** Optional object value serialized in the `resource` wire field. */
+    /**
+     * Optional object value serialized in the `resource` wire field.
+     */
     val resource: AddonsResource? = null
 )

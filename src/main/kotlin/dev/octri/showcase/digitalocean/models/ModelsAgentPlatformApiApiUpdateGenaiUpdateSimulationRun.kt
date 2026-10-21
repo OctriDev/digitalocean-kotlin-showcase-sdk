@@ -3,17 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Public parameters for updating a simulation run. */
+/**
+ * Public parameters for updating a simulation run.
+ */
 data class ApiUpdateSimulationRunInputPublic(
-    /** The new name of the run. */
+    /**
+     * The new name of the run.
+     */
     val name: String? = null,
-    /** UUID of the run to update. */
-    @com.fasterxml.jackson.annotation.JsonProperty("run_uuid") val runUuid: String? = null,
+    /**
+     * UUID of the run to update.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("run_uuid") val runUuid: String? = null
 )
 
-/** Output for updating a simulation run. */
+/**
+ * Output for updating a simulation run.
+ */
 data class ApiUpdateSimulationRunOutput(
-    /** One execution of a scenario set against a candidate agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run")
-    val simulationRun: ApiSimulationRun? = null
+    /**
+     * One execution of a scenario set against a candidate agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("simulation_run") val simulationRun: ApiSimulationRun? = null
 )

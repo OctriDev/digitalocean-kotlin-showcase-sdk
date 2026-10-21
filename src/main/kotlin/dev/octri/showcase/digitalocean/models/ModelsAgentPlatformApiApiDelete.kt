@@ -3,122 +3,181 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `ApiDeleteAgentAPIKeyOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteAgentAPIKeyOutput` API schema.
+ */
 data class ApiDeleteAgentAPIKeyOutput(
-    /** Agent API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiAgentAPIKeyInfo? = null
+    /**
+     * Agent API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAgentAPIKeyInfo? = null
 )
 
-/** Info about a deleted agent */
+/**
+ * Info about a deleted agent
+ */
 data class ApiDeleteAgentOutput(
-    /** An Agent */
+    /**
+     * An Agent
+     */
     val agent: ApiAgent? = null
 )
 
-/** DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key. */
+/**
+ * DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key.
+ */
 data class ApiDeleteAnthropicAPIKeyOutput(
-    /** Anthropic API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
+    /**
+     * Anthropic API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
 )
 
-/** Typed representation of the `ApiDeleteCustomEvaluationMetricOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteCustomEvaluationMetricOutput` API schema.
+ */
 class ApiDeleteCustomEvaluationMetricOutput {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** Response containing delete operation status (public) */
+/**
+ * Response containing delete operation status (public)
+ */
 data class ApiDeleteCustomModelOutputPublic(
-    /** Error message if deletion failed */
+    /**
+     * Error message if deletion failed
+     */
     val error: String? = null,
-    /** Status of delete operation */
-    val status: ApiDeleteCustomModelStatus? = null,
+    /**
+     * Status of delete operation
+     */
+    val status: ApiDeleteCustomModelStatus? = null
 )
 
-/** Response for a delete evaluation dataset request. */
+/**
+ * Response for a delete evaluation dataset request.
+ */
 class ApiDeleteEvaluationDatasetOutput {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** Information about a newly deleted knowledge base data source */
+/**
+ * Information about a newly deleted knowledge base data source
+ */
 data class ApiDeleteKnowledgeBaseDataSourceOutput(
-    /** Data source id */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_source_uuid")
-    val dataSourceUuid: String? = null,
-    /** Knowledge base id */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid")
-    val knowledgeBaseUuid: String? = null,
+    /**
+     * Data source id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_source_uuid") val dataSourceUuid: String? = null,
+    /**
+     * Knowledge base id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid") val knowledgeBaseUuid: String? = null
 )
 
-/** Information about a deleted knowledge base */
+/**
+ * Information about a deleted knowledge base
+ */
 data class ApiDeleteKnowledgeBaseOutput(
-    /** The id of the deleted knowledge base */
+    /**
+     * The id of the deleted knowledge base
+     */
     val uuid: String? = null
 )
 
-/** Typed representation of the `ApiDeleteModelAPIKeyOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteModelAPIKeyOutput` API schema.
+ */
 data class ApiDeleteModelAPIKeyOutput(
-    /** Model API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiModelAPIKeyInfo? = null
+    /**
+     * Model API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiModelAPIKeyInfo? = null
 )
 
-/** Typed representation of the `ApiDeleteModelEvaluationPresetOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteModelEvaluationPresetOutput` API schema.
+ */
 class ApiDeleteModelEvaluationPresetOutput {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** Typed representation of the `ApiDeleteModelEvaluationRunOutputPublic` API schema. */
+/**
+ * Typed representation of the `ApiDeleteModelEvaluationRunOutputPublic` API schema.
+ */
 data class ApiDeleteModelEvaluationRunOutputPublic(
-    /** Error message if deletion failed */
+    /**
+     * Error message if deletion failed
+     */
     val error: String? = null,
-    /** Status of delete operation */
-    val status: ApiDeleteModelEvaluationRunStatus? = null,
+    /**
+     * Status of delete operation
+     */
+    val status: ApiDeleteModelEvaluationRunStatus? = null
 )
 
-/** Information about a deleted model router */
+/**
+ * Information about a deleted model router
+ */
 data class ApiDeleteModelRouterOutput(
-    /** The id of the deleted model router */
+    /**
+     * The id of the deleted model router
+     */
     val uuid: String? = null
 )
 
-/** DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key. */
+/**
+ * DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
+ */
 data class ApiDeleteOpenAIAPIKeyOutput(
-    /** OpenAI API Key Info */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
-    val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
+    /**
+     * OpenAI API Key Info
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiOpenAIAPIKeyInfo? = null
 )
 
-/** Output for deleting a scenario set. */
+/**
+ * Output for deleting a scenario set.
+ */
 data class ApiDeleteScenarioSetOutput(
-    /** UUID of the deleted scenario set. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid")
-    val scenarioSetUuid: String? = null
+    /**
+     * UUID of the deleted scenario set.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid") val scenarioSetUuid: String? = null
 )
 
-/** Typed representation of the `ApiDeleteScheduledIndexingOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteScheduledIndexingOutput` API schema.
+ */
 data class ApiDeleteScheduledIndexingOutput(
-    /** Metadata for scheduled indexing entries */
-    @com.fasterxml.jackson.annotation.JsonProperty("indexing_info")
-    val indexingInfo: ApiScheduledIndexingInfo? = null
+    /**
+     * Metadata for scheduled indexing entries
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("indexing_info") val indexingInfo: ApiScheduledIndexingInfo? = null
 )
 
-/** Output for deleting a simulation run. */
+/**
+ * Output for deleting a simulation run.
+ */
 data class ApiDeleteSimulationRunOutput(
-    /** UUID of the deleted run. */
+    /**
+     * UUID of the deleted run.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("run_uuid") val runUuid: String? = null
 )
 
-/** Typed representation of the `ApiDeleteWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiDeleteWorkspaceOutput` API schema.
+ */
 data class ApiDeleteWorkspaceOutput(
-    /** Workspace */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid")
-    val workspaceUuid: String? = null
+    /**
+     * Workspace
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid") val workspaceUuid: String? = null
 )

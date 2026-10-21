@@ -3,269 +3,450 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Typed representation of the `AlertPolicy` API schema. */
+/**
+ * Typed representation of the `AlertPolicy` API schema.
+ */
 data class AlertPolicy(
-    /** Required object value serialized in the `alerts` wire field. */
+    /**
+     * Required object value serialized in the `alerts` wire field.
+     */
     val alerts: Alerts,
-    /** Required enumerated value serialized in the `compare` wire field. */
+    /**
+     * Required enumerated value serialized in the `compare` wire field.
+     */
     val compare: AlertPolicyCompareEnum,
-    /** Required `string` value serialized in the `description` wire field. */
+    /**
+     * Required `string` value serialized in the `description` wire field.
+     */
     val description: String,
-    /** Required `boolean` value serialized in the `enabled` wire field. */
+    /**
+     * Required `boolean` value serialized in the `enabled` wire field.
+     */
     val enabled: Boolean,
-    /** Required array value serialized in the `entities` wire field. */
+    /**
+     * Required array value serialized in the `entities` wire field.
+     */
     val entities: List<String>,
-    /** Required array value serialized in the `tags` wire field. */
+    /**
+     * Required array value serialized in the `tags` wire field.
+     */
     val tags: List<String>,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AlertPolicyTypeEnum,
-    /** Required `string` value serialized in the `uuid` wire field. */
+    /**
+     * Required `string` value serialized in the `uuid` wire field.
+     */
     val uuid: String,
-    /** Required `float`-formatted value serialized in the `value` wire field. */
+    /**
+     * Required `float`-formatted value serialized in the `value` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Float,
-    /** Required enumerated value serialized in the `window` wire field. */
-    val window: AlertPolicyWindowEnum,
+    /**
+     * Required enumerated value serialized in the `window` wire field.
+     */
+    val window: AlertPolicyWindowEnum
 )
 
-/** Typed representation of the `AlertPolicyRequest` API schema. */
+/**
+ * Typed representation of the `AlertPolicyRequest` API schema.
+ */
 data class AlertPolicyRequest(
-    /** Required object value serialized in the `alerts` wire field. */
+    /**
+     * Required object value serialized in the `alerts` wire field.
+     */
     val alerts: Alerts,
-    /** Required enumerated value serialized in the `compare` wire field. */
+    /**
+     * Required enumerated value serialized in the `compare` wire field.
+     */
     val compare: AlertPolicyRequestCompareEnum,
-    /** Required `string` value serialized in the `description` wire field. */
+    /**
+     * Required `string` value serialized in the `description` wire field.
+     */
     val description: String,
-    /** Required `boolean` value serialized in the `enabled` wire field. */
+    /**
+     * Required `boolean` value serialized in the `enabled` wire field.
+     */
     val enabled: Boolean,
-    /** Required array value serialized in the `entities` wire field. */
+    /**
+     * Required array value serialized in the `entities` wire field.
+     */
     val entities: List<String>,
-    /** Required array value serialized in the `tags` wire field. */
+    /**
+     * Required array value serialized in the `tags` wire field.
+     */
     val tags: List<String>,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AlertPolicyRequestTypeEnum,
-    /** Required `float`-formatted value serialized in the `value` wire field. */
+    /**
+     * Required `float`-formatted value serialized in the `value` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Float,
-    /** Required enumerated value serialized in the `window` wire field. */
-    val window: AlertPolicyRequestWindowEnum,
+    /**
+     * Required enumerated value serialized in the `window` wire field.
+     */
+    val window: AlertPolicyRequestWindowEnum
 )
 
-/** Typed representation of the `AlertPolicyResponse` API schema. */
+/**
+ * Typed representation of the `AlertPolicyResponse` API schema.
+ */
 data class AlertPolicyResponse(
-    /** Optional object value serialized in the `policy` wire field. */
+    /**
+     * Optional object value serialized in the `policy` wire field.
+     */
     val policy: AlertPolicy? = null
 )
 
-/** Typed representation of the `Alerts` API schema. */
+/**
+ * Typed representation of the `Alerts` API schema.
+ */
 data class Alerts(
-    /** An email to notify on an alert trigger. */
-    val email: List<String>,
-    /** Slack integration details. */
-    val slack: List<SlackDetails>,
-)
-
-/** Typed representation of the `Destination` API schema. */
-data class Destination(
-    /** Required object value serialized in the `config` wire field. */
-    val config: OpensearchConfig,
-    /** A unique identifier for a destination. */
-    val id: String? = null,
-    /** destination name */
-    val name: String? = null,
     /**
-     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or
-     * `opensearch_ext` for an externally managed one.
+     * An email to notify on an alert trigger.
      */
-    val type: DestinationTypeEnum? = null,
+    val email: List<String>,
+    /**
+     * Slack integration details.
+     */
+    val slack: List<SlackDetails>
 )
 
-/** Typed representation of the `DestinationOmitCredentials` API schema. */
-data class DestinationOmitCredentials(
-    /** A unique identifier for a destination. */
+/**
+ * Typed representation of the `Destination` API schema.
+ */
+data class Destination(
+    /**
+     * Required object value serialized in the `config` wire field.
+     */
+    val config: OpensearchConfig,
+    /**
+     * A unique identifier for a destination.
+     */
     val id: String? = null,
-    /** destination name */
+    /**
+     * destination name
+     */
     val name: String? = null,
     /**
-     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or
-     * `opensearch_ext` for an externally managed one.
+     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or `opensearch_ext` for an externally managed one.
+     */
+    val type: DestinationTypeEnum? = null
+)
+
+/**
+ * Typed representation of the `DestinationOmitCredentials` API schema.
+ */
+data class DestinationOmitCredentials(
+    /**
+     * A unique identifier for a destination.
+     */
+    val id: String? = null,
+    /**
+     * destination name
+     */
+    val name: String? = null,
+    /**
+     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or `opensearch_ext` for an externally managed one.
      */
     val type: DestinationOmitCredentialsTypeEnum? = null,
-    /** OpenSearch destination configuration with `credentials` omitted. */
-    val config: OpensearchConfigOmitCredentials? = null,
+    /**
+     * OpenSearch destination configuration with `credentials` omitted.
+     */
+    val config: OpensearchConfigOmitCredentials? = null
 )
 
-/** Typed representation of the `DestinationRequest` API schema. */
+/**
+ * Typed representation of the `DestinationRequest` API schema.
+ */
 data class DestinationRequest(
     /**
-     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or
-     * `opensearch_ext` for an externally managed one.
+     * The destination type. `opensearch_dbaas` for a DigitalOcean managed OpenSearch cluster or `opensearch_ext` for an externally managed one.
      */
     val type: DestinationRequestTypeEnum,
-    /** Required object value serialized in the `config` wire field. */
+    /**
+     * Required object value serialized in the `config` wire field.
+     */
     val config: OpensearchConfigRequest,
-    /** destination name */
-    val name: String? = null,
+    /**
+     * destination name
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `DestinationResponse` API schema. */
+/**
+ * Typed representation of the `DestinationResponse` API schema.
+ */
 data class DestinationResponse(
-    /** Optional object value serialized in the `destination` wire field. */
+    /**
+     * Optional object value serialized in the `destination` wire field.
+     */
     val destination: DestinationOmitCredentials? = null
 )
 
-/** Typed representation of the `ListAlertPolicy` API schema. */
+/**
+ * Typed representation of the `ListAlertPolicy` API schema.
+ */
 data class ListAlertPolicy(
-    /** Required array value serialized in the `policies` wire field. */
+    /**
+     * Required array value serialized in the `policies` wire field.
+     */
     val policies: List<AlertPolicy>
 )
 
-/** Typed representation of the `ListSinks` API schema. */
+/**
+ * Typed representation of the `ListSinks` API schema.
+ */
 data class ListSinks(
-    /** List of sinks identified by their URNs. */
+    /**
+     * List of sinks identified by their URNs.
+     */
     val sinks: List<SinksResponse>? = null
 )
 
-/** Typed representation of the `Metrics` API schema. */
+/**
+ * Typed representation of the `Metrics` API schema.
+ */
 data class Metrics(
-    /** Required object value serialized in the `data` wire field. */
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MetricsData,
-    /** Required enumerated value serialized in the `status` wire field. */
-    val status: MetricsStatusEnum,
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: MetricsStatusEnum
 )
 
-/** Typed representation of the `MetricsData` API schema. */
+/**
+ * Typed representation of the `MetricsData` API schema.
+ */
 data class MetricsData(
-    /** Result of query. */
+    /**
+     * Result of query.
+     */
     val result: List<MetricsResult>,
-    /** Required enumerated value serialized in the `resultType` wire field. */
-    val resultType: MetricsDataResultTypeEnum,
+    /**
+     * Required enumerated value serialized in the `resultType` wire field.
+     */
+    val resultType: MetricsDataResultTypeEnum
 )
 
-/** Typed representation of the `MetricsResult` API schema. */
+/**
+ * Typed representation of the `MetricsResult` API schema.
+ */
 data class MetricsResult(
     /**
-     * An object containing the metric's labels. These labels are key/value pairs that vary
-     * depending on the metric being queried. For example, load balancer metrics contain a `lb_id`
-     * label, while Droplet metrics contain a `host_id` label, and App Platform metrics contain a
-     * `app_component` label.
+     * An object containing the metric's labels. These labels are key/value pairs that vary depending on the metric being queried. For example, load balancer metrics contain a `lb_id` label, while Droplet metrics contain a `host_id` label, and App Platform metrics contain a `app_component` label.
      */
     val metric: Map<String, String>,
-    /** An array of values for the metric. */
-    val values: List<List<Any>>,
+    /**
+     * An array of values for the metric.
+     */
+    val values: List<List<Any>>
 )
 
-/** Typed representation of the `MonitoringListAlertPolicyResponse` API schema. */
+/**
+ * Typed representation of the `MonitoringListAlertPolicyResponse` API schema.
+ */
 data class MonitoringListAlertPolicyResponse(
-    /** Required array value serialized in the `policies` wire field. */
+    /**
+     * Required array value serialized in the `policies` wire field.
+     */
     val policies: List<AlertPolicy>,
-    /** Required API value serialized in the `meta` wire field. */
+    /**
+     * Required API value serialized in the `meta` wire field.
+     */
     val meta: MetaMeta,
-    /** Optional object value serialized in the `links` wire field. */
-    val links: PageLinks? = null,
+    /**
+     * Optional object value serialized in the `links` wire field.
+     */
+    val links: PageLinks? = null
 )
 
-/** Typed representation of the `MonitoringListDestinations` API schema. */
+/**
+ * Typed representation of the `MonitoringListDestinations` API schema.
+ */
 data class MonitoringListDestinations(
-    /** Optional array value serialized in the `destinations` wire field. */
+    /**
+     * Optional array value serialized in the `destinations` wire field.
+     */
     val destinations: List<DestinationOmitCredentials>? = null
 )
 
-/** Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed. */
+/**
+ * Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed.
+ */
 data class OpensearchConfigCredentials(
-    /** Optional `string` value serialized in the `username` wire field. */
+    /**
+     * Optional `string` value serialized in the `username` wire field.
+     */
     val username: String? = null,
-    /** Optional `string` value serialized in the `password` wire field. */
-    val password: String? = null,
+    /**
+     * Optional `string` value serialized in the `password` wire field.
+     */
+    val password: String? = null
 )
 
-/** Typed representation of the `OpensearchConfig` API schema. */
+/**
+ * Typed representation of the `OpensearchConfig` API schema.
+ */
 data class OpensearchConfig(
-    /** host of the OpenSearch cluster */
+    /**
+     * host of the OpenSearch cluster
+     */
     val endpoint: String,
-    /** A unique identifier for a configuration. */
+    /**
+     * A unique identifier for a configuration.
+     */
     val id: String? = null,
-    /** Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed. */
+    /**
+     * Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed.
+     */
     val credentials: OpensearchConfigCredentials? = null,
-    /** A unique identifier for a managed OpenSearch cluster. */
+    /**
+     * A unique identifier for a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_uuid") val clusterUuid: String? = null,
-    /** Name of a managed OpenSearch cluster. */
+    /**
+     * Name of a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null,
-    /** OpenSearch index to send logs to. */
+    /**
+     * OpenSearch index to send logs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
-    /** Number of days to retain logs in OpenSearch (default: 14) */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_days")
-    val retentionDays: Long? = null,
+    /**
+     * Number of days to retain logs in OpenSearch (default: 14)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_days") val retentionDays: Long? = null
 )
 
-/** OpenSearch destination configuration with `credentials` omitted. */
+/**
+ * OpenSearch destination configuration with `credentials` omitted.
+ */
 data class OpensearchConfigOmitCredentials(
-    /** A unique identifier for a configuration. */
+    /**
+     * A unique identifier for a configuration.
+     */
     val id: String? = null,
-    /** host of the OpenSearch cluster */
+    /**
+     * host of the OpenSearch cluster
+     */
     val endpoint: String? = null,
-    /** A unique identifier for a managed OpenSearch cluster. */
+    /**
+     * A unique identifier for a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_uuid") val clusterUuid: String? = null,
-    /** Name of a managed OpenSearch cluster. */
+    /**
+     * Name of a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null,
-    /** OpenSearch index to send logs to. */
+    /**
+     * OpenSearch index to send logs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
-    /** Number of days to retain logs in OpenSearch. */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_days")
-    val retentionDays: Long? = null,
+    /**
+     * Number of days to retain logs in OpenSearch.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_days") val retentionDays: Long? = null
 )
 
-/** Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed. */
+/**
+ * Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed.
+ */
 data class OpensearchConfigRequestCredentials(
-    /** Optional `string` value serialized in the `username` wire field. */
+    /**
+     * Optional `string` value serialized in the `username` wire field.
+     */
     val username: String? = null,
-    /** Optional `string` value serialized in the `password` wire field. */
-    val password: String? = null,
+    /**
+     * Optional `string` value serialized in the `password` wire field.
+     */
+    val password: String? = null
 )
 
-/** Typed representation of the `OpensearchConfigRequest` API schema. */
+/**
+ * Typed representation of the `OpensearchConfigRequest` API schema.
+ */
 data class OpensearchConfigRequest(
-    /** host of the OpenSearch cluster */
+    /**
+     * host of the OpenSearch cluster
+     */
     val endpoint: String,
-    /** Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed. */
+    /**
+     * Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed.
+     */
     val credentials: OpensearchConfigRequestCredentials? = null,
-    /** A unique identifier for a managed OpenSearch cluster. */
+    /**
+     * A unique identifier for a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_uuid") val clusterUuid: String? = null,
-    /** Name of a managed OpenSearch cluster. */
+    /**
+     * Name of a managed OpenSearch cluster.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cluster_name") val clusterName: String? = null,
-    /** OpenSearch index to send logs to. */
+    /**
+     * OpenSearch index to send logs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("index_name") val indexName: String? = null,
-    /** Number of days to retain logs in an OpenSearch cluster. */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_days")
-    val retentionDays: Long? = null,
+    /**
+     * Number of days to retain logs in an OpenSearch cluster.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_days") val retentionDays: Long? = null
 )
 
-/** Typed representation of the `SinkResource` API schema. */
+/**
+ * Typed representation of the `SinkResource` API schema.
+ */
 data class SinkResource(
     /**
      * The uniform resource name (URN) for the resource in the format do:resource_type:resource_id.
      */
     val urn: String,
-    /** resource name */
-    val name: String? = null,
+    /**
+     * resource name
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `Sinks` API schema. */
+/**
+ * Typed representation of the `Sinks` API schema.
+ */
 data class Sinks(
-    /** Optional object value serialized in the `sink` wire field. */
+    /**
+     * Optional object value serialized in the `sink` wire field.
+     */
     val sink: SinksResponse? = null
 )
 
-/** Typed representation of the `SinksResponse` API schema. */
+/**
+ * Typed representation of the `SinksResponse` API schema.
+ */
 data class SinksResponse(
-    /** Optional object value serialized in the `destination` wire field. */
+    /**
+     * Optional object value serialized in the `destination` wire field.
+     */
     val destination: Destination? = null,
-    /** List of resources identified by their URNs. */
-    val resources: List<SinkResource>? = null,
+    /**
+     * List of resources identified by their URNs.
+     */
+    val resources: List<SinkResource>? = null
 )
 
-/** Typed representation of the `SlackDetails` API schema. */
+/**
+ * Typed representation of the `SlackDetails` API schema.
+ */
 data class SlackDetails(
-    /** Slack channel to notify of an alert trigger. */
+    /**
+     * Slack channel to notify of an alert trigger.
+     */
     val channel: String,
-    /** Slack Webhook URL. */
-    val url: String,
+    /**
+     * Slack Webhook URL.
+     */
+    val url: String
 )

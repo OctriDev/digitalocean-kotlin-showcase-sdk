@@ -3,19 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/** Parameters for Workspace Creation */
+/**
+ * Parameters for Workspace Creation
+ */
 data class ApiCreateWorkspaceInputPublic(
-    /** Ids of the agents(s) to attach to the workspace */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids")
-    val agentUuids: List<String>? = null,
-    /** Description of the workspace */
+    /**
+     * Ids of the agents(s) to attach to the workspace
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids") val agentUuids: List<String>? = null,
+    /**
+     * Description of the workspace
+     */
     val description: String? = null,
-    /** Name of the workspace */
-    val name: String? = null,
+    /**
+     * Name of the workspace
+     */
+    val name: String? = null
 )
 
-/** Typed representation of the `ApiCreateWorkspaceOutput` API schema. */
+/**
+ * Typed representation of the `ApiCreateWorkspaceOutput` API schema.
+ */
 data class ApiCreateWorkspaceOutput(
-    /** Optional object value serialized in the `workspace` wire field. */
+    /**
+     * Optional object value serialized in the `workspace` wire field.
+     */
     val workspace: ApiWorkspace? = null
 )

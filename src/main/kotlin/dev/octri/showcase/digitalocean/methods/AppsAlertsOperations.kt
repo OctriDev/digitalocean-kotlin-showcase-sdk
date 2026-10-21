@@ -14,83 +14,28 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsListAlertsOperation {
     /**
-     * List alerts associated to the app and any components. This includes configuration information
-     * about the alerts including emails, slack webhooks, and triggering events or conditions.
+     * List alerts associated to the app and any components. This includes configuration information about the alerts including emails, slack webhooks, and triggering events or conditions.
      *
      * @param appId The app ID
      */
-    fun appsListAlerts(
-        clientConfig: ClientConfig,
-        appId: String,
-        options: RequestOptions? = null,
-    ): AppsListAlertsResponse {
-        return SdkClient.request<AppsListAlertsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/alerts",
-                    config = clientConfig,
-                    operationId = "appsListAlerts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsListAlerts(clientConfig: ClientConfig, appId: String, options: RequestOptions? = null): AppsListAlertsResponse {
+        return SdkClient.request<AppsListAlertsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/alerts", config = clientConfig, operationId = "appsListAlerts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
 
 internal object AppsAssignAlertDestinationsOperation {
     /**
-     * Updates the email and Slack webhook destinations for an app alert. Supply destination details
-     * in `emails`, `slack_webhooks`, or both; each email address must be associated with a user who
-     * has access to the app. The response includes the updated alert object.
+     * Updates the email and Slack webhook destinations for an app alert. Supply destination details in `emails`, `slack_webhooks`, or both; each email address must be associated with a user who has access to the app. The response includes the updated alert object.
      *
-     * Updates the emails and slack webhook destinations for app alerts. Emails must be associated
-     * to a user with access to the app.
+     * Updates the emails and slack webhook destinations for app alerts. Emails must be associated to a user with access to the app.
      *
      * @param appId The app ID
      * @param alertId The alert ID
      * @param emails Optional array value serialized in the `emails` wire field.
-     * @param slackWebhooks Optional array value serialized in the `slack_webhooks` wire field.
+     * @param slackWebhooks Optional array value serialized in the `slack_webhooks`
+     *   wire field.
      */
-    fun appsAssignAlertDestinations(
-        clientConfig: ClientConfig,
-        appId: String,
-        alertId: String,
-        emails: List<AppAlertEmail>? = null,
-        slackWebhooks: List<AppAlertSlackWebhook>? = null,
-        options: RequestOptions? = null,
-    ): AppsAlertResponse {
-        return SdkClient.request<AppsAlertResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/alerts/${SdkClient.encodePathSegment(alertId)}/destinations",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "emails" to (SdkClient.omitIfNull(emails)),
-                            "slack_webhooks" to (SdkClient.omitIfNull(slackWebhooks)),
-                        ),
-                    operationId = "appsAssignAlertDestinations",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "429" to Error2::class.java,
-                            "500" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun appsAssignAlertDestinations(clientConfig: ClientConfig, appId: String, alertId: String, emails: List<AppAlertEmail>? = null, slackWebhooks: List<AppAlertSlackWebhook>? = null, options: RequestOptions? = null): AppsAlertResponse {
+        return SdkClient.request<AppsAlertResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/alerts/${SdkClient.encodePathSegment(alertId)}/destinations", config = clientConfig, body = SdkClient.bodyMap("emails" to (SdkClient.omitIfNull(emails)), "slack_webhooks" to (SdkClient.omitIfNull(slackWebhooks))), operationId = "appsAssignAlertDestinations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 }
