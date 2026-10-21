@@ -172,7 +172,7 @@ object Droplets {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun dropletsListBackupPolicies(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackupPolicies {
+    fun listAllBackupPolicies(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackupPolicies {
         if (perPage != null) {
             Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
 }
@@ -181,7 +181,7 @@ object Droplets {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
 }
 
-        return SdkClient.request<AllDropletBackupPolicies>(SdkClient.RequestSpec("GET", "/v2/droplets/backups/policies", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "dropletsListBackupPolicies", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllDropletBackupPolicies>(SdkClient.RequestSpec("GET", "/v2/droplets/backups/policies", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "listAllBackupPolicies", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
 

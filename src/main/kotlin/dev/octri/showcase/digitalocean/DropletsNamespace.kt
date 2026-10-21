@@ -59,8 +59,8 @@ class DropletsNamespace(private val clientConfig: ClientConfig) {
     /**
      * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
      */
-    fun listBackupPolicies(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackupPolicies {
-        return dev.octri.showcase.digitalocean.methods.Droplets.dropletsListBackupPolicies(clientConfig, perPage, page, options)
+    fun listAllBackupPolicies(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDropletBackupPolicies {
+        return dev.octri.showcase.digitalocean.methods.Droplets.listAllBackupPolicies(clientConfig, perPage, page, options)
     }
 
     /**
