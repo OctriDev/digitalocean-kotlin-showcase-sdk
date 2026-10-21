@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `DropletBackupPolicyResponse` API schema.
- */
+/** Typed representation of the `DropletBackupPolicyResponse` API schema. */
 data class DropletBackupPolicyResponse(
-    /**
-     * Optional object value serialized in the `policy` wire field.
-     */
+    /** Optional object value serialized in the `policy` wire field. */
     val policy: DropletBackupPolicyRecord? = null
 )

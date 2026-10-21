@@ -3,30 +3,21 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiCreateCustomEvaluationMetricInputPublic` API schema.
- */
+/** Typed representation of the `ApiCreateCustomEvaluationMetricInputPublic` API schema. */
 data class ApiCreateCustomEvaluationMetricInputPublic(
     /**
-     * Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model response are always included in the judge context.
+     * Configuration for a custom model-evaluation metric scored by an LLM judge. Prompt and model
+     * response are always included in the judge context.
      */
     val config: ApiCustomEvaluationMetricConfig? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional `string` value serialized in the `metric_name` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null
+    /** Optional `string` value serialized in the `metric_name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("metric_name") val metricName: String? = null,
 )
 
-/**
- * Typed representation of the `ApiCreateCustomEvaluationMetricOutput` API schema.
- */
+/** Typed representation of the `ApiCreateCustomEvaluationMetricOutput` API schema. */
 data class ApiCreateCustomEvaluationMetricOutput(
-    /**
-     * Optional object value serialized in the `metric` wire field.
-     */
+    /** Optional object value serialized in the `metric` wire field. */
     val metric: ApiEvaluationMetric? = null
 )

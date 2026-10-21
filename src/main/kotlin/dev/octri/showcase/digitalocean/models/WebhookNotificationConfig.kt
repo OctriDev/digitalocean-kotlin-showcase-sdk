@@ -4,27 +4,38 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * Generic HTTPS webhook notification channel configuration for create and update requests. The URL must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on update to…
+ * Generic HTTPS webhook notification channel configuration for create and update requests. The URL
+ * must use HTTPS and must not include userinfo. Optionally configure either `basic_auth` or
+ * `bearer_token` (not both), custom headers, and a signing secret. `url` is not a secret and is
+ * returned in full on read. Credential fields (`basic_auth.password`, `bearer_token.token`,
+ * `signature.secret`) are write-only: send the full value to set or rotate. Omit a secret field on
+ * update to…
  */
 data class WebhookNotificationConfig(
-    /**
-     * HTTPS URL that receives webhook deliveries. Returned in full on read.
-     */
+    /** HTTPS URL that receives webhook deliveries. Returned in full on read. */
     val url: String,
     /**
-     * HTTP basic authentication credentials for a webhook create or update request. `password` is write-only: send the full value to set or rotate. Omit `password` on update to keep the existing password.
+     * HTTP basic authentication credentials for a webhook create or update request. `password` is
+     * write-only: send the full value to set or rotate. Omit `password` on update to keep the
+     * existing password.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth") val basicAuth: WebhookBasicAuth? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("basic_auth")
+    val basicAuth: WebhookBasicAuth? = null,
     /**
-     * Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
+     * Bearer token authentication for a webhook create or update request. `token` is write-only:
+     * send the full value to set or rotate. Omit `token` on update to keep the existing token.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("bearer_token") val bearerToken: WebhookBearerToken? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("bearer_token")
+    val bearerToken: WebhookBearerToken? = null,
     /**
-     * Optional custom HTTP headers to include on webhook deliveries. At most 20 headers are allowed. Reserved header names such as `host`, `content-type`, and `proxy-*` are rejected.
+     * Optional custom HTTP headers to include on webhook deliveries. At most 20 headers are
+     * allowed. Reserved header names such as `host`, `content-type`, and `proxy-*` are rejected.
      */
     val headers: Map<String, String>? = null,
     /**
-     * Optional HMAC signature configuration for a webhook create or update request. `secret` is write-only: send the full value to set or rotate. Omit `secret` on update to keep the existing secret.
+     * Optional HMAC signature configuration for a webhook create or update request. `secret` is
+     * write-only: send the full value to set or rotate. Omit `secret` on update to keep the
+     * existing secret.
      */
-    val signature: WebhookSignatureConfig? = null
+    val signature: WebhookSignatureConfig? = null,
 )

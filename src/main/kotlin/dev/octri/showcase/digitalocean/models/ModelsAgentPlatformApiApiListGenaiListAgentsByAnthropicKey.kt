@@ -3,20 +3,12 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * List of Agents that linked to a specific Anthropic Key
- */
+/** List of Agents that linked to a specific Anthropic Key */
 data class ApiListAgentsByAnthropicKeyOutput(
-    /**
-     * Optional array value serialized in the `agents` wire field.
-     */
+    /** Optional array value serialized in the `agents` wire field. */
     val agents: List<ApiAgent>? = null,
-    /**
-     * Links to other pages
-     */
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
-    val meta: ApiMeta? = null
+    /** Meta information about the data set */
+    val meta: ApiMeta? = null,
 )

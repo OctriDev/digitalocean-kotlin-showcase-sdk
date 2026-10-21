@@ -11,136 +11,366 @@ import dev.octri.showcase.digitalocean.DatabasesUpdateKafkaSchemaConfigCompatibi
 import dev.octri.showcase.digitalocean.DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevelEnum
 import dev.octri.showcase.digitalocean.Error2
 import dev.octri.showcase.digitalocean.KafkaSchema
-import dev.octri.showcase.digitalocean.KafkaSchemas
 import dev.octri.showcase.digitalocean.KafkaSchemaVersion
+import dev.octri.showcase.digitalocean.KafkaSchemas
 import dev.octri.showcase.digitalocean.RequestOptions
 import dev.octri.showcase.digitalocean.SdkClient
 import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListKafkaSchemasOperation {
     /**
-     * To list all schemas for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry`.
+     * To list all schemas for a Kafka cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/schema-registry`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListKafkaSchemas(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): KafkaSchemas {
+    fun databasesListKafkaSchemas(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): KafkaSchemas {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<KafkaSchemas>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry", config = clientConfig, operationId = "databasesListKafkaSchemas", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<KafkaSchemas>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry",
+                    config = clientConfig,
+                    operationId = "databasesListKafkaSchemas",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesCreateKafkaSchemaOperation {
     /**
-     * To create a Kafka schema for a database cluster, send a POST request to `/v2/databases/$DATABASE_ID/schema-registry`.
+     * To create a Kafka schema for a database cluster, send a POST request to
+     * `/v2/databases/$DATABASE_ID/schema-registry`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the schema subject.
      * @param schemaType The type of the schema.
      * @param schema The schema definition in the specified format.
      */
-    fun databasesCreateKafkaSchema(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, schemaType: DatabasesCreateKafkaSchemaSchemaTypeEnum, schema: String, options: RequestOptions? = null): KafkaSchema {
+    fun databasesCreateKafkaSchema(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        schemaType: DatabasesCreateKafkaSchemaSchemaTypeEnum,
+        schema: String,
+        options: RequestOptions? = null,
+    ): KafkaSchema {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<KafkaSchema>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry", config = clientConfig, body = SdkClient.bodyMap("subject_name" to (subjectName), "schema_type" to (schemaType), "schema" to (schema)), operationId = "databasesCreateKafkaSchema", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<KafkaSchema>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "subject_name" to (subjectName),
+                            "schema_type" to (schemaType),
+                            "schema" to (schema),
+                        ),
+                    operationId = "databasesCreateKafkaSchema",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetKafkaSchemaOperation {
     /**
-     * To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
+     * To get a specific schema by subject name for a Kafka cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the Kafka schema subject.
      */
-    fun databasesGetKafkaSchema(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): KafkaSchemaVersion {
+    fun databasesGetKafkaSchema(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        options: RequestOptions? = null,
+    ): KafkaSchemaVersion {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<KafkaSchemaVersion>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}", config = clientConfig, operationId = "databasesGetKafkaSchema", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java))).data
+        return SdkClient.request<KafkaSchemaVersion>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}",
+                    config = clientConfig,
+                    operationId = "databasesGetKafkaSchema",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteKafkaSchemaOperation {
     /**
-     * To delete a specific schema by subject name for a Kafka cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
+     * To delete a specific schema by subject name for a Kafka cluster, send a DELETE request to
+     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the Kafka schema subject.
      */
-    fun databasesDeleteKafkaSchema(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): Unit {
+    fun databasesDeleteKafkaSchema(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}", config = clientConfig, operationId = "databasesDeleteKafkaSchema", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}",
+                config = clientConfig,
+                operationId = "databasesDeleteKafkaSchema",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesGetKafkaSchemaVersionOperation {
     /**
-     * To get a specific schema by subject name for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME/versions/$VERSION`.
+     * To get a specific schema by subject name for a Kafka cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/schema-registry/$SUBJECT_NAME/versions/$VERSION`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the Kafka schema subject.
      * @param version The version of the Kafka schema subject.
      */
-    fun databasesGetKafkaSchemaVersion(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, version: String, options: RequestOptions? = null): KafkaSchemaVersion {
+    fun databasesGetKafkaSchemaVersion(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        version: String,
+        options: RequestOptions? = null,
+    ): KafkaSchemaVersion {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<KafkaSchemaVersion>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}/versions/${SdkClient.encodePathSegment(version)}", config = clientConfig, operationId = "databasesGetKafkaSchemaVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java))).data
+        return SdkClient.request<KafkaSchemaVersion>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/${SdkClient.encodePathSegment(subjectName)}/versions/${SdkClient.encodePathSegment(version)}",
+                    config = clientConfig,
+                    operationId = "databasesGetKafkaSchemaVersion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetKafkaSchemaConfigOperation {
     /**
-     * To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
+     * To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a
+     * `compatibility_level` key, which is set to an object containing any database configuration
+     * parameters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetKafkaSchemaConfig(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DatabaseSchemaRegistryConfig {
+    fun databasesGetKafkaSchemaConfig(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): DatabaseSchemaRegistryConfig {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseSchemaRegistryConfig>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config", config = clientConfig, operationId = "databasesGetKafkaSchemaConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseSchemaRegistryConfig>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config",
+                    config = clientConfig,
+                    operationId = "databasesGetKafkaSchemaConfig",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateKafkaSchemaConfigOperation {
     /**
-     * To update the Schema Registry configuration for a Kafka cluster, send a PUT request to `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
+     * To update the Schema Registry configuration for a Kafka cluster, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/schema-registry/config`. The response is a JSON object with a
+     * `compatibility_level` key, which is set to an object containing any database configuration
+     * parameters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param compatibilityLevel The compatibility level of the schema registry.
      */
-    fun databasesUpdateKafkaSchemaConfig(clientConfig: ClientConfig, databaseClusterUuid: String, compatibilityLevel: DatabasesUpdateKafkaSchemaConfigCompatibilityLevelEnum, options: RequestOptions? = null): DatabaseSchemaRegistryConfig {
+    fun databasesUpdateKafkaSchemaConfig(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        compatibilityLevel: DatabasesUpdateKafkaSchemaConfigCompatibilityLevelEnum,
+        options: RequestOptions? = null,
+    ): DatabaseSchemaRegistryConfig {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseSchemaRegistryConfig>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config", config = clientConfig, body = SdkClient.bodyMap("compatibility_level" to (compatibilityLevel)), operationId = "databasesUpdateKafkaSchemaConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseSchemaRegistryConfig>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("compatibility_level" to (compatibilityLevel)),
+                    operationId = "databasesUpdateKafkaSchemaConfig",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetKafkaSchemaSubjectConfigOperation {
     /**
-     * To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
+     * To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET
+     * request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is
+     * a JSON object with a `compatibility_level` key, which is set to an object containing any
+     * database configuration parameters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the Kafka schema subject.
      */
-    fun databasesGetKafkaSchemaSubjectConfig(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, options: RequestOptions? = null): DatabaseSchemaRegistrySubjectConfig {
+    fun databasesGetKafkaSchemaSubjectConfig(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        options: RequestOptions? = null,
+    ): DatabaseSchemaRegistrySubjectConfig {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseSchemaRegistrySubjectConfig>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config/${SdkClient.encodePathSegment(subjectName)}", config = clientConfig, operationId = "databasesGetKafkaSchemaSubjectConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseSchemaRegistrySubjectConfig>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config/${SdkClient.encodePathSegment(subjectName)}",
+                    config = clientConfig,
+                    operationId = "databasesGetKafkaSchemaSubjectConfig",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateKafkaSchemaSubjectConfigOperation {
     /**
-     * To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is a JSON object with a `compatibility_level` key, which is set to an object containing any database configuration parameters.
+     * To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT
+     * request to `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`. The response is
+     * a JSON object with a `compatibility_level` key, which is set to an object containing any
+     * database configuration parameters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param subjectName The name of the Kafka schema subject.
      * @param compatibilityLevel The compatibility level of the schema registry.
      */
-    fun databasesUpdateKafkaSchemaSubjectConfig(clientConfig: ClientConfig, databaseClusterUuid: String, subjectName: String, compatibilityLevel: DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevelEnum, options: RequestOptions? = null): DatabaseSchemaRegistrySubjectConfig {
+    fun databasesUpdateKafkaSchemaSubjectConfig(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        subjectName: String,
+        compatibilityLevel: DatabasesUpdateKafkaSchemaSubjectConfigCompatibilityLevelEnum,
+        options: RequestOptions? = null,
+    ): DatabaseSchemaRegistrySubjectConfig {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseSchemaRegistrySubjectConfig>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config/${SdkClient.encodePathSegment(subjectName)}", config = clientConfig, body = SdkClient.bodyMap("compatibility_level" to (compatibilityLevel)), operationId = "databasesUpdateKafkaSchemaSubjectConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseSchemaRegistrySubjectConfig>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/schema-registry/config/${SdkClient.encodePathSegment(subjectName)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("compatibility_level" to (compatibilityLevel)),
+                    operationId = "databasesUpdateKafkaSchemaSubjectConfig",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

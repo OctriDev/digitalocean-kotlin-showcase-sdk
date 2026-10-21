@@ -11,11 +11,32 @@ import dev.octri.showcase.digitalocean.SdkClient
 
 internal object AppsListRegionsOperation {
     /**
-     * Lists the regions supported by App Platform. Use the returned region slugs and availability details to choose a region when configuring an app.
+     * Lists the regions supported by App Platform. Use the returned region slugs and availability
+     * details to choose a region when configuring an app.
      *
      * List all regions supported by App Platform.
      */
-    fun appsListRegions(clientConfig: ClientConfig, options: RequestOptions? = null): AppsListRegionsResponse {
-        return SdkClient.request<AppsListRegionsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/regions", config = clientConfig, operationId = "appsListRegions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsListRegions(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): AppsListRegionsResponse {
+        return SdkClient.request<AppsListRegionsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/regions",
+                    config = clientConfig,
+                    operationId = "appsListRegions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

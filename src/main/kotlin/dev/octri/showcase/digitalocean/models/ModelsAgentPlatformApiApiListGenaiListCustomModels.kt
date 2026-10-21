@@ -3,24 +3,14 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Response containing a list of custom models (public)
- */
+/** Response containing a list of custom models (public) */
 data class ApiListCustomModelsOutputPublic(
-    /**
-     * Links to other pages
-     */
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Maximum number of custom models allowed for this team's tier
-     */
+    /** Maximum number of custom models allowed for this team's tier */
     @com.fasterxml.jackson.annotation.JsonProperty("max_threshold") val maxThreshold: Long? = null,
-    /**
-     * Meta information about the data set
-     */
+    /** Meta information about the data set */
     val meta: ApiMeta? = null,
-    /**
-     * List of custom models
-     */
-    val models: List<ApiCustomModel>? = null
+    /** List of custom models */
+    val models: List<ApiCustomModel>? = null,
 )

@@ -12,14 +12,51 @@ import dev.octri.showcase.digitalocean.SystemoneResponse
 
 internal object ServerlessInferenceInferenceCreateSystemoneOperation {
     /**
-     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model. Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score, a choice from a fixed set, or a numeric score, each paired with a calibrated probability, instead of free-form text.
+     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model.
+     * Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score,
+     * a choice from a fixed set, or a numeric score, each paired with a calibrated probability,
+     * instead of free-form text.
      *
      * @param state The state to evaluate.
      * @param model Model ID used to evaluate the request.
-     * @param questions A map of question name to question definition. Each key
-     *   becomes the corresponding key in the response's `answers` object.
+     * @param questions A map of question name to question definition. Each key becomes the
+     *   corresponding key in the response's `answers` object.
      */
-    fun inferenceCreateSystemone(clientConfig: ClientConfig, state: String, model: String, questions: Map<String, SystemoneQuestion>, options: RequestOptions? = null): SystemoneResponse {
-        return SdkClient.request<SystemoneResponse>(SdkClient.RequestSpec("POST", "/v1/systemone", config = clientConfig, body = SdkClient.bodyMap("state" to (state), "model" to (model), "questions" to (questions)), operationId = "inferenceCreateSystemone", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "422" to Error2::class.java, "424" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "502" to Error2::class.java, "default" to Error2::class.java))).data
+    fun inferenceCreateSystemone(
+        clientConfig: ClientConfig,
+        state: String,
+        model: String,
+        questions: Map<String, SystemoneQuestion>,
+        options: RequestOptions? = null,
+    ): SystemoneResponse {
+        return SdkClient.request<SystemoneResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v1/systemone",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "state" to (state),
+                            "model" to (model),
+                            "questions" to (questions),
+                        ),
+                    operationId = "inferenceCreateSystemone",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "422" to Error2::class.java,
+                            "424" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "502" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

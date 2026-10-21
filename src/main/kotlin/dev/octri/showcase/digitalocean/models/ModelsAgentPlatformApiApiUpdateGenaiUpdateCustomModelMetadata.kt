@@ -3,50 +3,36 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Request to update custom model metadata (public)
- */
+/** Request to update custom model metadata (public) */
 data class ApiUpdateCustomModelMetadataInputPublic(
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
     /**
-     * Optional new input modalities for the model (replaces existing list when non-empty). Spaces-imported models only.
+     * Optional new input modalities for the model (replaces existing list when non-empty).
+     * Spaces-imported models only.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_modalities") val inputModalities: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `license` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_modalities")
+    val inputModalities: List<String>? = null,
+    /** Optional `string` value serialized in the `license` wire field. */
     val license: String? = null,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
     /**
-     * Optional new output modalities for the model (replaces existing list when non-empty). Spaces-imported models only.
+     * Optional new output modalities for the model (replaces existing list when non-empty).
+     * Spaces-imported models only.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<String>? = null,
-    /**
-     * Optional `uint64`-formatted value serialized in the `parameters` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
+    val outputModalities: List<String>? = null,
+    /** Optional `uint64`-formatted value serialized in the `parameters` wire field. */
     val parameters: String? = null,
-    /**
-     * User-defined tags for organizing models
-     */
+    /** User-defined tags for organizing models */
     val tags: CustomModelTags? = null,
-    /**
-     * UUID of the custom model to update
-     */
-    val uuid: String? = null
+    /** UUID of the custom model to update */
+    val uuid: String? = null,
 )
 
-/**
- * Response containing the updated custom model (public)
- */
+/** Response containing the updated custom model (public) */
 data class ApiUpdateCustomModelMetadataOutputPublic(
-    /**
-     * Custom model - user-imported model from HuggingFace, Spaces, etc.
-     */
+    /** Custom model - user-imported model from HuggingFace, Spaces, etc. */
     val model: ApiCustomModel? = null
 )

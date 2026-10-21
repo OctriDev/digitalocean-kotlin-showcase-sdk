@@ -3,22 +3,18 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * DigitalOcean-specific settings for the database cluster.
- */
+/** DigitalOcean-specific settings for the database cluster. */
 data class DoSettings(
     /**
-     * An array of custom CNAMEs for the database cluster. Each CNAME must be a valid RFC 1123 hostname (e.g., "db.example.com"). Maximum of 16 CNAMEs allowed, each up to 253 characters.
+     * An array of custom CNAMEs for the database cluster. Each CNAME must be a valid RFC 1123
+     * hostname (e.g., "db.example.com"). Maximum of 16 CNAMEs allowed, each up to 253 characters.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_cnames") val serviceCnames: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("service_cnames")
+    val serviceCnames: List<String>? = null
 )
 
-/**
- * Typed representation of the `DoSettingsResponse` API schema.
- */
+/** Typed representation of the `DoSettingsResponse` API schema. */
 data class DoSettingsResponse(
-    /**
-     * DigitalOcean-specific settings for the database cluster.
-     */
+    /** DigitalOcean-specific settings for the database cluster. */
     @com.fasterxml.jackson.annotation.JsonProperty("do_settings") val doSettings: DoSettings
 )

@@ -12,13 +12,36 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListEventsLogsOperation {
     /**
-     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`. The result will be a JSON object with a `events` key.
+     * To list all of the cluster events, send a GET request to `/v2/databases/$DATABASE_ID/events`.
+     * The result will be a JSON object with a `events` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListEventsLogs(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): EventsLogsResponse {
+    fun databasesListEventsLogs(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): EventsLogsResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<EventsLogsResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/events", config = clientConfig, operationId = "databasesListEventsLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<EventsLogsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/events",
+                    config = clientConfig,
+                    operationId = "databasesListEventsLogs",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

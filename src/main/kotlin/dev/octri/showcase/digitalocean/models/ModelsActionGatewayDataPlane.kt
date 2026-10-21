@@ -5,429 +5,328 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `ApprovalDecision` API schema.
- */
+/** Typed representation of the `ApprovalDecision` API schema. */
 data class ApprovalDecision(
-    /**
-     * Whether to let the pending call run.
-     */
+    /** Whether to let the pending call run. */
     val decision: ApprovalDecisionDecisionEnum
 )
 
-/**
- * Typed representation of the `ApprovalDecisionResponse` API schema.
- */
+/** Typed representation of the `ApprovalDecisionResponse` API schema. */
 data class ApprovalDecisionResponse(
-    /**
-     * The approval ID.
-     */
+    /** The approval ID. */
     val id: String? = null,
-    /**
-     * Optional enumerated value serialized in the `status` wire field.
-     */
+    /** Optional enumerated value serialized in the `status` wire field. */
     val status: ApprovalDecisionResponseStatusEnum? = null,
-    /**
-     * Repeat an approved call with the same arguments before this time.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: OffsetDateTime? = null
+    /** Repeat an approved call with the same arguments before this time. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at")
+    val expiresAt: OffsetDateTime? = null,
 )
 
 data class DataPlaneSearchToolsResponseVariant1Output(
-    /**
-     * One result group per query, in request order.
-     */
+    /** One result group per query, in request order. */
     val results: List<SearchToolsGroup>? = null
 )
 
-/**
- * Typed representation of the `DataPlaneSearchToolsResponse` API schema.
- */
+/** Typed representation of the `DataPlaneSearchToolsResponse` API schema. */
 data class DataPlaneSearchToolsResponse(
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ToolResultStatusEnum,
-    /**
-     * A unique identifier for this call. Include it when contacting support.
-     */
+    /** A unique identifier for this call. Include it when contacting support. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
     val output: DataPlaneSearchToolsResponseVariant1Output? = null,
-    /**
-     * Describes why a request or tool call failed and whether retrying can help.
-     */
+    /** Describes why a request or tool call failed and whether retrying can help. */
     val error: ErrorEnvelope? = null,
     /**
-     * Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
+     * Additional result metadata. Keys include: - `status`: `requires_approval`,
+     * `requires_authorization`, or `requires_connection_configuration` when the call stopped before
+     * running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with
+     * `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request
+     * to send. Approve the call, then repeat it with the same arguments before `expires_at`. -
+     * `retry`: `{"attempt_count": N, "exhausted":…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null,
 )
 
-/**
- * Typed representation of the `Error2` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `Error2` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class Error2(
     /**
-     * A short identifier corresponding to the HTTP status code returned. For example, the ID for a response returning a 404 status code would be "not_found."
+     * A short identifier corresponding to the HTTP status code returned. For example, the ID for a
+     * response returning a 404 status code would be "not_found."
      */
     val id: String,
     /**
-     * A message providing additional information about the error, including details to help resolve it when possible.
+     * A message providing additional information about the error, including details to help resolve
+     * it when possible.
      */
     val message: String,
     /**
-     * Optionally, some endpoints may include a request ID that should be provided when reporting bugs or opening support tickets to help identify the issue.
+     * Optionally, some endpoints may include a request ID that should be provided when reporting
+     * bugs or opening support tickets to help identify the issue.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String? = null,
 ) : Forbidden, dev.octri.showcase.digitalocean.ErrorBody
 
-/**
- * Describes why a request or tool call failed and whether retrying can help.
- */
+/** Describes why a request or tool call failed and whether retrying can help. */
 data class ErrorEnvelope(
-    /**
-     * The failure class. Branch on this value rather than on `message`, which may change.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("class") val `class`: ErrorEnvelopeClassEnum? = null,
-    /**
-     * A human-readable explanation that is safe to show to an agent or end user.
-     */
+    /** The failure class. Branch on this value rather than on `message`, which may change. */
+    @com.fasterxml.jackson.annotation.JsonProperty("class")
+    val `class`: ErrorEnvelopeClassEnum? = null,
+    /** A human-readable explanation that is safe to show to an agent or end user. */
     val message: String? = null,
-    /**
-     * Whether retrying the same request later can succeed.
-     */
+    /** Whether retrying the same request later can succeed. */
     val retriable: Boolean? = null,
-    /**
-     * The suggested next step.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recovery_hint") val recoveryHint: ErrorEnvelopeRecoveryHintEnum? = null
+    /** The suggested next step. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recovery_hint")
+    val recoveryHint: ErrorEnvelopeRecoveryHintEnum? = null,
 )
 
-/**
- * Typed representation of the `ExecuteCodeRequest` API schema.
- */
+/** Typed representation of the `ExecuteCodeRequest` API schema. */
 data class ExecuteCodeRequest(
     /**
-     * Python source to run. The sandbox provides `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which calls a catalog tool under the session's policy and returns a tool result.
+     * Python source to run. The sandbox provides `invoke_digitalocean_tool(name: str, arguments:
+     * dict) -> dict`, which calls a catalog tool under the session's policy and returns a tool
+     * result.
      */
     val code: String
 )
 
 data class ExecuteCodeResponseVariant1Output(
     val stdout: String? = null,
-    /**
-     * Omitted when empty.
-     */
+    /** Omitted when empty. */
     val stderr: String? = null,
-    /**
-     * The process exit code. A nonzero exit code is still a succeeded result.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Int? = null
+    /** The process exit code. A nonzero exit code is still a succeeded result. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Int? = null,
 )
 
-/**
- * Typed representation of the `ExecuteCodeResponse` API schema.
- */
+/** Typed representation of the `ExecuteCodeResponse` API schema. */
 data class ExecuteCodeResponse(
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ToolResultStatusEnum,
-    /**
-     * A unique identifier for this call. Include it when contacting support.
-     */
+    /** A unique identifier for this call. Include it when contacting support. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
     val output: ExecuteCodeResponseVariant1Output? = null,
-    /**
-     * Describes why a request or tool call failed and whether retrying can help.
-     */
+    /** Describes why a request or tool call failed and whether retrying can help. */
     val error: ErrorEnvelope? = null,
     /**
-     * Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
+     * Additional result metadata. Keys include: - `status`: `requires_approval`,
+     * `requires_authorization`, or `requires_connection_configuration` when the call stopped before
+     * running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with
+     * `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request
+     * to send. Approve the call, then repeat it with the same arguments before `expires_at`. -
+     * `retry`: `{"attempt_count": N, "exhausted":…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null,
 )
 
-/**
- * Typed representation of the `Forbidden` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
+/** Typed representation of the `Forbidden` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ToolResultError::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Error2::class)
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Error2::class),
 )
 sealed interface Forbidden : dev.octri.showcase.digitalocean.ErrorBody
 
-/**
- * Typed representation of the `InvokeToolsItem` API schema.
- */
+/** Typed representation of the `InvokeToolsItem` API schema. */
 data class InvokeToolsItem(
-    /**
-     * The 0-based position of the call in the request.
-     */
+    /** The 0-based position of the call in the request. */
     val index: Long? = null,
-    /**
-     * The canonical tool name.
-     */
+    /** The canonical tool name. */
     val tool: String? = null,
-    /**
-     * The tool version that ran.
-     */
+    /** The tool version that ran. */
     val version: String? = null,
     /**
-     * The result of one tool call. Check `status` before reading `output`. A call that needs approval, authorization, or connection setup fails with a `_meta.status` that names the step to complete.
+     * The result of one tool call. Check `status` before reading `output`. A call that needs
+     * approval, authorization, or connection setup fails with a `_meta.status` that names the step
+     * to complete.
      */
-    val result: ToolResult? = null
+    val result: ToolResult? = null,
 )
 
-/**
- * Typed representation of the `InvokeToolsRequest` API schema.
- */
+/** Typed representation of the `InvokeToolsRequest` API schema. */
 data class InvokeToolsRequest(
-    /**
-     * The tool calls to run in parallel.
-     */
+    /** The tool calls to run in parallel. */
     val tools: List<ToolCall>,
     /**
-     * One sentence explaining why the tools are being called. Values longer than 512 characters are truncated.
+     * One sentence explaining why the tools are being called. Values longer than 512 characters are
+     * truncated.
      */
-    val rationale: String? = null
+    val rationale: String? = null,
 )
 
-/**
- * Typed representation of the `InvokeToolsResponse` API schema.
- */
+/** Typed representation of the `InvokeToolsResponse` API schema. */
 data class InvokeToolsResponse(
-    /**
-     * Optional `integer` value serialized in the `total_count` wire field.
-     */
+    /** Optional `integer` value serialized in the `total_count` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * Optional `integer` value serialized in the `success_count` wire field.
-     */
+    /** Optional `integer` value serialized in the `success_count` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("success_count") val successCount: Long? = null,
-    /**
-     * Optional `integer` value serialized in the `error_count` wire field.
-     */
+    /** Optional `integer` value serialized in the `error_count` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("error_count") val errorCount: Long? = null,
-    /**
-     * One result per call, in request order.
-     */
-    val results: List<InvokeToolsItem>? = null
+    /** One result per call, in request order. */
+    val results: List<InvokeToolsItem>? = null,
 )
 
-/**
- * Typed representation of the `ListSessionToolsResponse` API schema.
- */
+/** Typed representation of the `ListSessionToolsResponse` API schema. */
 data class ListSessionToolsResponse(
-    /**
-     * The catalog version.
-     */
+    /** The catalog version. */
     val version: String? = null,
-    /**
-     * Tools ordered by name.
-     */
+    /** Tools ordered by name. */
     val tools: List<SessionTool>? = null,
     /**
-     * An opaque cursor for the next page of results. Pass it back verbatim as `page_token`. It is empty on the last page.
+     * An opaque cursor for the next page of results. Pass it back verbatim as `page_token`. It is
+     * empty on the last page.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token") val nextPageToken: NextPageToken? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page_token")
+    val nextPageToken: NextPageToken? = null,
 )
 
-/**
- * Typed representation of the `SearchQuery` API schema.
- */
+/** Typed representation of the `SearchQuery` API schema. */
 data class SearchQuery(
     /**
-     * A normalized English description of one complete use case: the action and the intended outcome, including any app the user named. Put personal identifiers in `known_fields` instead. Up to 512 bytes and 32 search terms, with at least one letter or digit.
+     * A normalized English description of one complete use case: the action and the intended
+     * outcome, including any app the user named. Put personal identifiers in `known_fields`
+     * instead. Up to 512 bytes and 32 search terms, with at least one letter or digit.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("use_case") val useCase: String,
     /**
-     * Known workflow inputs as one string of comma-separated `key:value` pairs, such as identifiers or settings. Used as context, not for keyword matching.
+     * Known workflow inputs as one string of comma-separated `key:value` pairs, such as identifiers
+     * or settings. Used as context, not for keyword matching.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("known_fields") val knownFields: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("known_fields") val knownFields: String? = null,
 )
 
-/**
- * The results for one query, in request order.
- */
+/** The results for one query, in request order. */
 data class SearchToolsGroup(
-    /**
-     * The 1-based position of the query in the request.
-     */
+    /** The 1-based position of the query in the request. */
     val index: Long? = null,
-    /**
-     * The query's `use_case`.
-     */
+    /** The query's `use_case`. */
     @com.fasterxml.jackson.annotation.JsonProperty("use_case") val useCase: String? = null,
-    /**
-     * Optional array value serialized in the `results` wire field.
-     */
+    /** Optional array value serialized in the `results` wire field. */
     val results: List<SearchToolsResult>? = null,
-    /**
-     * A suggested next step. Present only when no tools matched.
-     */
-    val guidance: String? = null
+    /** A suggested next step. Present only when no tools matched. */
+    val guidance: String? = null,
 )
 
-/**
- * Typed representation of the `SearchToolsRequest` API schema.
- */
+/** Typed representation of the `SearchToolsRequest` API schema. */
 data class SearchToolsRequest(
     /**
-     * Independent search queries. Split separate actions into separate queries. Each query is searched on its own and gets its own result group.
+     * Independent search queries. Split separate actions into separate queries. Each query is
+     * searched on its own and gets its own result group.
      */
     val queries: List<SearchQuery>,
-    /**
-     * Restricts every query to these providers.
-     */
+    /** Restricts every query to these providers. */
     val providers: List<String>? = null,
-    /**
-     * Restricts every query to tools with these tags.
-     */
+    /** Restricts every query to tools with these tags. */
     val tags: List<String>? = null,
-    /**
-     * The maximum number of tools returned per query. Values above 50 are capped at 50.
-     */
-    val limit: Long? = null
+    /** The maximum number of tools returned per query. Values above 50 are capped at 50. */
+    val limit: Long? = null,
 )
 
-/**
- * A tool that matched a query.
- */
+/** A tool that matched a query. */
 data class SearchToolsResult(
-    /**
-     * The provider-qualified tool name. Pass it as `tool` to invoke the tool.
-     */
+    /** The provider-qualified tool name. Pass it as `tool` to invoke the tool. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `version` wire field.
-     */
+    /** Optional `string` value serialized in the `version` wire field. */
     val version: String? = null,
-    /**
-     * Optional `string` value serialized in the `title` wire field.
-     */
+    /** Optional `string` value serialized in the `title` wire field. */
     val title: String? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * The JSON Schema for the tool's `arguments`.
-     */
+    /** The JSON Schema for the tool's `arguments`. */
     val inputSchema: Map<String, Any>? = null,
-    /**
-     * The relevance score. Higher is more relevant.
-     */
-    val score: Double? = null
+    /** The relevance score. Higher is more relevant. */
+    val score: Double? = null,
 )
 
-/**
- * A catalog tool the session can call, in MCP tool format plus Action Gateway fields.
- */
+/** A catalog tool the session can call, in MCP tool format plus Action Gateway fields. */
 data class SessionTool(
-    /**
-     * The provider-qualified tool name. Pass it as `tool` to invoke the tool.
-     */
+    /** The provider-qualified tool name. Pass it as `tool` to invoke the tool. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `title` wire field.
-     */
+    /** Optional `string` value serialized in the `title` wire field. */
     val title: String? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * The JSON Schema for the tool's `arguments`.
-     */
+    /** The JSON Schema for the tool's `arguments`. */
     val inputSchema: Map<String, Any>? = null,
     /**
-     * The JSON Schema for the tool's output, or for the output view bound to the tool in the session.
+     * The JSON Schema for the tool's output, or for the output view bound to the tool in the
+     * session.
      */
     val outputSchema: Map<String, Any>? = null,
     /**
-     * Advisory hints about a tool's behavior, with the meaning of MCP tool annotations. Do not rely on them for security decisions.
+     * Advisory hints about a tool's behavior, with the meaning of MCP tool annotations. Do not rely
+     * on them for security decisions.
      */
     val annotations: ToolAnnotations? = null,
-    /**
-     * Additional tool metadata.
-     */
+    /** Additional tool metadata. */
     @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null,
-    /**
-     * The immutable tool version.
-     */
+    /** The immutable tool version. */
     val version: String? = null,
-    /**
-     * Whether the tool can run alongside other calls in one invoke request.
-     */
+    /** Whether the tool can run alongside other calls in one invoke request. */
     val parallelizable: Boolean? = null,
-    /**
-     * Optional `boolean` value serialized in the `streamingSafe` wire field.
-     */
-    val streamingSafe: Boolean? = null
+    /** Optional `boolean` value serialized in the `streamingSafe` wire field. */
+    val streamingSafe: Boolean? = null,
 )
 
-/**
- * Typed representation of the `ToolCall` API schema.
- */
+/** Typed representation of the `ToolCall` API schema. */
 data class ToolCall(
     /**
-     * The tool name, as returned by `GET /tools` or `POST /tools/search`. Names are case-insensitive.
+     * The tool name, as returned by `GET /tools` or `POST /tools/search`. Names are
+     * case-insensitive.
      */
     val tool: String,
-    /**
-     * An immutable tool version. Omit to use the released version.
-     */
+    /** An immutable tool version. Omit to use the released version. */
     val version: String? = null,
-    /**
-     * The tool's arguments, matching its `inputSchema`.
-     */
-    val arguments: Map<String, Any>? = null
+    /** The tool's arguments, matching its `inputSchema`. */
+    val arguments: Map<String, Any>? = null,
 )
 
 /**
- * The result of one tool call. Check `status` before reading `output`. A call that needs approval, authorization, or connection setup fails with a `_meta.status` that names the step to complete.
+ * The result of one tool call. Check `status` before reading `output`. A call that needs approval,
+ * authorization, or connection setup fails with a `_meta.status` that names the step to complete.
  */
 data class ToolResult(
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ToolResultStatusEnum,
-    /**
-     * A unique identifier for this call. Include it when contacting support.
-     */
+    /** A unique identifier for this call. Include it when contacting support. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
     /**
-     * The tool's JSON output. Present when `status` is `succeeded`. Its shape is the tool's output schema, or the output view bound to the tool in the session.
+     * The tool's JSON output. Present when `status` is `succeeded`. Its shape is the tool's output
+     * schema, or the output view bound to the tool in the session.
      */
     val output: Map<String, Any>? = null,
-    /**
-     * Describes why a request or tool call failed and whether retrying can help.
-     */
+    /** Describes why a request or tool call failed and whether retrying can help. */
     val error: ErrorEnvelope? = null,
     /**
-     * Additional result metadata. Keys include: - `status`: `requires_approval`, `requires_authorization`, or `requires_connection_configuration` when the call stopped before running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request to send. Approve the call, then repeat it with the same arguments before `expires_at`. - `retry`: `{"attempt_count": N, "exhausted":…
+     * Additional result metadata. Keys include: - `status`: `requires_approval`,
+     * `requires_authorization`, or `requires_connection_configuration` when the call stopped before
+     * running. - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with
+     * `requires_approval`. `decide` gives the `method`, `path`, and `body` of the approval request
+     * to send. Approve the call, then repeat it with the same arguments before `expires_at`. -
+     * `retry`: `{"attempt_count": N, "exhausted":…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("_meta") val meta: Map<String, Any>? = null,
 )
 
-/**
- * A failed request. The body has the same shape as a failed tool result.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A failed request. The body has the same shape as a failed tool result. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ToolResultError(
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ToolResultErrorStatusEnum,
-    /**
-     * Describes why a request or tool call failed and whether retrying can help.
-     */
+    /** Describes why a request or tool call failed and whether retrying can help. */
     val error: ErrorEnvelope,
-    /**
-     * A unique identifier for this request, when one was assigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String
+    /** A unique identifier for this request, when one was assigned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
 ) : Forbidden, dev.octri.showcase.digitalocean.ErrorBody

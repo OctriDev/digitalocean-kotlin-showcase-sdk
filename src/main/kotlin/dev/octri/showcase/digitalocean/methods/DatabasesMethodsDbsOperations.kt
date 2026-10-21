@@ -13,55 +13,158 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListOperation {
     /**
-     * To list all of the databases in a clusters, send a GET request to `/v2/databases/$DATABASE_ID/dbs`. The result will be a JSON object with a `dbs` key. This will be set to an array of database objects, each of which will contain the standard database attributes. Note: Database management is not supported for Caching or Valkey clusters.
+     * To list all of the databases in a clusters, send a GET request to
+     * `/v2/databases/$DATABASE_ID/dbs`. The result will be a JSON object with a `dbs` key. This
+     * will be set to an array of database objects, each of which will contain the standard database
+     * attributes. Note: Database management is not supported for Caching or Valkey clusters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesList(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Databases {
+    fun databasesList(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): Databases {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Databases>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs", config = clientConfig, operationId = "databasesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Databases>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs",
+                    config = clientConfig,
+                    operationId = "databasesList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesAddOperation {
     /**
-     * To add a new database to an existing cluster, send a POST request to `/v2/databases/$DATABASE_ID/dbs`. Note: Database management is not supported for Caching or Valkey clusters. The response will be a JSON object with a key called `db`. The value of this will be an object that contains the standard attributes associated with a database.
+     * To add a new database to an existing cluster, send a POST request to
+     * `/v2/databases/$DATABASE_ID/dbs`. Note: Database management is not supported for Caching or
+     * Valkey clusters. The response will be a JSON object with a key called `db`. The value of this
+     * will be an object that contains the standard attributes associated with a database.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param name The name of the database.
      */
-    fun databasesAdd(clientConfig: ClientConfig, databaseClusterUuid: String, name: String, options: RequestOptions? = null): DatabaseResponse {
+    fun databasesAdd(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): DatabaseResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseResponse>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "databasesAdd", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("name" to (name)),
+                    operationId = "databasesAdd",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesGetOperation {
     /**
-     * To show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. Note: Database management is not supported for Caching or Valkey clusters. The response will be a JSON object with a `db` key. This will be set to an object containing the standard database attributes.
+     * To show information about an existing database cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. Note: Database management is not supported for
+     * Caching or Valkey clusters. The response will be a JSON object with a `db` key. This will be
+     * set to an object containing the standard database attributes.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param databaseName The name of the database.
      */
-    fun databasesGet(clientConfig: ClientConfig, databaseClusterUuid: String, databaseName: String, options: RequestOptions? = null): DatabaseResponse {
+    fun databasesGet(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        databaseName: String,
+        options: RequestOptions? = null,
+    ): DatabaseResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DatabaseResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs/${SdkClient.encodePathSegment(databaseName)}", config = clientConfig, operationId = "databasesGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DatabaseResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs/${SdkClient.encodePathSegment(databaseName)}",
+                    config = clientConfig,
+                    operationId = "databasesGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteOperation {
     /**
-     * To delete a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed. Note: Database management is not supported for Caching or Valkey clusters.
+     * To delete a specific database, send a DELETE request to
+     * `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`. A status of 204 will be given. This indicates that
+     * the request was processed successfully, but that no response body is needed. Note: Database
+     * management is not supported for Caching or Valkey clusters.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param databaseName The name of the database.
      */
-    fun databasesDelete(clientConfig: ClientConfig, databaseClusterUuid: String, databaseName: String, options: RequestOptions? = null): Unit {
+    fun databasesDelete(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        databaseName: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs/${SdkClient.encodePathSegment(databaseName)}", config = clientConfig, operationId = "databasesDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/dbs/${SdkClient.encodePathSegment(databaseName)}",
+                config = clientConfig,
+                operationId = "databasesDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

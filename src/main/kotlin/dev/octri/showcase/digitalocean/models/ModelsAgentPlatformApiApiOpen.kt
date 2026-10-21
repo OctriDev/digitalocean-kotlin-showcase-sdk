@@ -5,36 +5,23 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * OpenAI API Key Info
- */
+/** OpenAI API Key Info */
 data class ApiOpenAIAPIKeyInfo(
-    /**
-     * Key creation date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Created by user id from DO
-     */
+    /** Key creation date */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Created by user id from DO */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-    /**
-     * Key deleted date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: OffsetDateTime? = null,
-    /**
-     * Models supported by the openAI api key
-     */
+    /** Key deleted date */
+    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at")
+    val deletedAt: OffsetDateTime? = null,
+    /** Models supported by the openAI api key */
     val models: List<ApiModel>? = null,
-    /**
-     * Name
-     */
+    /** Name */
     val name: String? = null,
-    /**
-     * Key last updated date
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * Uuid
-     */
-    val uuid: String? = null
+    /** Key last updated date */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** Uuid */
+    val uuid: String? = null,
 )

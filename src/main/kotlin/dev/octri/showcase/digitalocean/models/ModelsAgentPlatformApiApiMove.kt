@@ -3,26 +3,18 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Parameters for Moving agents to a Workspace
- */
+/** Parameters for Moving agents to a Workspace */
 data class ApiMoveAgentsToWorkspaceInputPublic(
-    /**
-     * Agent uuids
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids") val agentUuids: List<String>? = null,
-    /**
-     * Workspace uuid to move agents to
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid") val workspaceUuid: String? = null
+    /** Agent uuids */
+    @com.fasterxml.jackson.annotation.JsonProperty("agent_uuids")
+    val agentUuids: List<String>? = null,
+    /** Workspace uuid to move agents to */
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_uuid")
+    val workspaceUuid: String? = null,
 )
 
-/**
- * Typed representation of the `ApiMoveAgentsToWorkspaceOutput` API schema.
- */
+/** Typed representation of the `ApiMoveAgentsToWorkspaceOutput` API schema. */
 data class ApiMoveAgentsToWorkspaceOutput(
-    /**
-     * Optional object value serialized in the `workspace` wire field.
-     */
+    /** Optional object value serialized in the `workspace` wire field. */
     val workspace: ApiWorkspace? = null
 )

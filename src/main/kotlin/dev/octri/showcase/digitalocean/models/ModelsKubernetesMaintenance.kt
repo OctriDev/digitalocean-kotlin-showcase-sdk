@@ -3,34 +3,32 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * An object specifying the maintenance window policy for the Kubernetes cluster.
- */
+/** An object specifying the maintenance window policy for the Kubernetes cluster. */
 data class MaintenancePolicy(
     /**
-     * The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
+     * The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM
+     * notation (e.g., `15:00`).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: String? = null,
-    /**
-     * The duration of the maintenance window policy in human-readable format.
-     */
+    /** The duration of the maintenance window policy in human-readable format. */
     val duration: String? = null,
     /**
-     * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+     * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any`
+     * to indicate an arbitrary week day.
      */
-    val day: MaintenancePolicyDayEnum? = null
+    val day: MaintenancePolicyDayEnum? = null,
 )
 
-/**
- * An object specifying the maintenance window policy for the Kubernetes cluster.
- */
+/** An object specifying the maintenance window policy for the Kubernetes cluster. */
 data class MaintenancePolicyRequest(
     /**
-     * The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM notation (e.g., `15:00`).
+     * The start time in UTC of the maintenance window policy in 24-hour clock format / HH:MM
+     * notation (e.g., `15:00`).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: String? = null,
     /**
-     * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+     * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any`
+     * to indicate an arbitrary week day.
      */
-    val day: MaintenancePolicyRequestDayEnum? = null
+    val day: MaintenancePolicyRequestDayEnum? = null,
 )

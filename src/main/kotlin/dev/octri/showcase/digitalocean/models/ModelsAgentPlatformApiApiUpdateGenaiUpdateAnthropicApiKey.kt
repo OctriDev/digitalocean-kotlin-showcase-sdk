@@ -4,29 +4,21 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic API key for a specific agent.
+ * UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic API key for a specific
+ * agent.
  */
 data class ApiUpdateAnthropicAPIKeyInputPublic(
-    /**
-     * Anthropic API key
-     */
+    /** Anthropic API key */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
-    /**
-     * API key ID
-     */
+    /** API key ID */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_uuid") val apiKeyUuid: String? = null,
-    /**
-     * Name of the key
-     */
-    val name: String? = null
+    /** Name of the key */
+    val name: String? = null,
 )
 
-/**
- * UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key.
- */
+/** UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key. */
 data class ApiUpdateAnthropicAPIKeyOutput(
-    /**
-     * Anthropic API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
+    /** Anthropic API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiAnthropicAPIKeyInfo? = null
 )

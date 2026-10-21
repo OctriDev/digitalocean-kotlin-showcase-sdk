@@ -3,50 +3,33 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Information about updating an agent function
- */
+/** Information about updating an agent function */
 data class ApiUpdateAgentFunctionInputPublic(
-    /**
-     * Agent id
-     */
+    /** Agent id */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_uuid") val agentUuid: String? = null,
-    /**
-     * Funciton description
-     */
+    /** Funciton description */
     val description: String? = null,
-    /**
-     * The name of the function in the DigitalOcean functions platform
-     */
+    /** The name of the function in the DigitalOcean functions platform */
     @com.fasterxml.jackson.annotation.JsonProperty("faas_name") val faasName: String? = null,
-    /**
-     * The namespace of the function in the DigitalOcean functions platform
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("faas_namespace") val faasNamespace: String? = null,
-    /**
-     * Function name
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_name") val functionName: String? = null,
-    /**
-     * Function id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_uuid") val functionUuid: String? = null,
-    /**
-     * Describe the input schema for the function so the agent may call it
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_schema") val inputSchema: Map<String, Any>? = null,
-    /**
-     * Describe the output schema for the function so the agent handle its response
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null
+    /** The namespace of the function in the DigitalOcean functions platform */
+    @com.fasterxml.jackson.annotation.JsonProperty("faas_namespace")
+    val faasNamespace: String? = null,
+    /** Function name */
+    @com.fasterxml.jackson.annotation.JsonProperty("function_name")
+    val functionName: String? = null,
+    /** Function id */
+    @com.fasterxml.jackson.annotation.JsonProperty("function_uuid")
+    val functionUuid: String? = null,
+    /** Describe the input schema for the function so the agent may call it */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_schema")
+    val inputSchema: Map<String, Any>? = null,
+    /** Describe the output schema for the function so the agent handle its response */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
 )
 
-/**
- * The updated agent
- */
+/** The updated agent */
 data class ApiUpdateAgentFunctionOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )

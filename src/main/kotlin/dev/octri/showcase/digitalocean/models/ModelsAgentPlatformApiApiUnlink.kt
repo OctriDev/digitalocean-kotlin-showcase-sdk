@@ -3,46 +3,30 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Information about a newly unlinked agent
- */
+/** Information about a newly unlinked agent */
 data class ApiUnlinkAgentFunctionOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )
 
-/**
- * UnlinkAgentGuardrailOutput description
- */
+/** UnlinkAgentGuardrailOutput description */
 data class ApiUnlinkAgentGuardrailOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )
 
-/**
- * Information about a removed linkage
- */
+/** Information about a removed linkage */
 data class ApiUnlinkAgentOutput(
-    /**
-     * Routed agent id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid") val childAgentUuid: String? = null,
-    /**
-     * Pagent agent id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid") val parentAgentUuid: String? = null
+    /** Routed agent id */
+    @com.fasterxml.jackson.annotation.JsonProperty("child_agent_uuid")
+    val childAgentUuid: String? = null,
+    /** Pagent agent id */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_uuid")
+    val parentAgentUuid: String? = null,
 )
 
-/**
- * Informatinon about a unlinked knowledge base
- */
+/** Informatinon about a unlinked knowledge base */
 data class ApiUnlinkKnowledgeBaseOutput(
-    /**
-     * An Agent
-     */
+    /** An Agent */
     val agent: ApiAgent? = null
 )

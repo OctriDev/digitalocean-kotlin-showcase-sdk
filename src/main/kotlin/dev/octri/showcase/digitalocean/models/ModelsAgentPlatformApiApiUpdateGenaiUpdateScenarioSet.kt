@@ -3,30 +3,23 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Public parameters for updating a scenario set.
- */
+/** Public parameters for updating a scenario set. */
 data class ApiUpdateScenarioSetInputPublic(
-    /**
-     * Optional new name. When set, must be non-empty and at most 255 characters.
-     */
+    /** Optional new name. When set, must be non-empty and at most 255 characters. */
     val name: String? = null,
+    /** UUID of the scenario set to update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid")
+    val scenarioSetUuid: String? = null,
     /**
-     * UUID of the scenario set to update.
+     * Optional inline scenarios to replace the set contents. At least one of name or scenarios is
+     * required.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid") val scenarioSetUuid: String? = null,
-    /**
-     * Optional inline scenarios to replace the set contents. At least one of name or scenarios is required.
-     */
-    val scenarios: List<ApiScenario>? = null
+    val scenarios: List<ApiScenario>? = null,
 )
 
-/**
- * Output for updating a scenario set.
- */
+/** Output for updating a scenario set. */
 data class ApiUpdateScenarioSetOutput(
-    /**
-     * A team-owned collection of scenarios.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set") val scenarioSet: ApiScenarioSet? = null
+    /** A team-owned collection of scenarios. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set")
+    val scenarioSet: ApiScenarioSet? = null
 )

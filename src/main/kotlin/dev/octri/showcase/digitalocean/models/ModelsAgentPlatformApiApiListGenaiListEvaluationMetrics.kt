@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiListEvaluationMetricsOutput` API schema.
- */
+/** Typed representation of the `ApiListEvaluationMetricsOutput` API schema. */
 data class ApiListEvaluationMetricsOutput(
-    /**
-     * Optional array value serialized in the `metrics` wire field.
-     */
+    /** Optional array value serialized in the `metrics` wire field. */
     val metrics: List<ApiEvaluationMetric>? = null
 )

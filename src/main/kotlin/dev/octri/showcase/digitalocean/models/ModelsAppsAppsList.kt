@@ -3,36 +3,24 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `AppsListAlertsResponse` API schema.
- */
+/** Typed representation of the `AppsListAlertsResponse` API schema. */
 data class AppsListAlertsResponse(
-    /**
-     * Optional array value serialized in the `alerts` wire field.
-     */
+    /** Optional array value serialized in the `alerts` wire field. */
     val alerts: List<AppAlert>? = null
 )
 
-/**
- * Typed representation of the `AppsListInstanceSizesResponse` API schema.
- */
+/** Typed representation of the `AppsListInstanceSizesResponse` API schema. */
 data class AppsListInstanceSizesResponse(
-    /**
-     * Optional `float`-formatted value serialized in the `discount_percent` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("discount_percent") val discountPercent: Float? = null,
-    /**
-     * Optional array value serialized in the `instance_sizes` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("instance_sizes") val instanceSizes: List<AppsInstanceSize>? = null
+    /** Optional `float`-formatted value serialized in the `discount_percent` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("discount_percent")
+    val discountPercent: Float? = null,
+    /** Optional array value serialized in the `instance_sizes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("instance_sizes")
+    val instanceSizes: List<AppsInstanceSize>? = null,
 )
 
-/**
- * Typed representation of the `AppsListRegionsResponse` API schema.
- */
+/** Typed representation of the `AppsListRegionsResponse` API schema. */
 data class AppsListRegionsResponse(
-    /**
-     * Optional array value serialized in the `regions` wire field.
-     */
+    /** Optional array value serialized in the `regions` wire field. */
     val regions: List<AppsRegion>? = null
 )

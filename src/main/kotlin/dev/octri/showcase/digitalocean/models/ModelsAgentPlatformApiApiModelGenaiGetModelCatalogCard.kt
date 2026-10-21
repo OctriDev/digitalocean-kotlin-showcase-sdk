@@ -5,164 +5,126 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Detail view for GetModelCatalogCard
- */
+/** Detail view for GetModelCatalogCard */
 data class ApiModelCatalogCard(
-    /**
-     * Optional array value serialized in the `availability` wire field.
-     */
+    /** Optional array value serialized in the `availability` wire field. */
     val availability: List<String>? = null,
-    /**
-     * Badges for models
-     */
+    /** Badges for models */
     val badges: List<String>? = null,
-    /**
-     * Benchmark scores for this model, stored as arbitrary JSON
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score") val benchmarkScore: Map<String, Any>? = null,
-    /**
-     * Optional array value serialized in the `capabilities` wire field.
-     */
+    /** Benchmark scores for this model, stored as arbitrary JSON */
+    @com.fasterxml.jackson.annotation.JsonProperty("benchmark_score")
+    val benchmarkScore: Map<String, Any>? = null,
+    /** Optional array value serialized in the `capabilities` wire field. */
     val capabilities: List<String>? = null,
-    /**
-     * Code examples for using the model
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_snippets") val codeSnippets: ApiCodeSnippets? = null,
-    /**
-     * Specs (same as Entry)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_window") val contextWindow: String? = null,
-    /**
-     * Model creator/developer (e.g., "Meta", "Anthropic", "OpenAI")
-     */
+    /** Code examples for using the model */
+    @com.fasterxml.jackson.annotation.JsonProperty("code_snippets")
+    val codeSnippets: ApiCodeSnippets? = null,
+    /** Specs (same as Entry) */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_window")
+    val contextWindow: String? = null,
+    /** Model creator/developer (e.g., "Meta", "Anthropic", "OpenAI") */
     val creator: String? = null,
-    /**
-     * Card-specific
-     */
+    /** Card-specific */
     val description: String? = null,
     /**
-     * The Hugging Face repository ID (e.g. "meta-llama/Llama-3.3-70B-Instruct") the model is based on, when applicable. Omitted for models not sourced from Hugging Face.
+     * The Hugging Face repository ID (e.g. "meta-llama/Llama-3.3-70B-Instruct") the model is based
+     * on, when applicable. Omitted for models not sourced from Hugging Face.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("hugging_face_id") val huggingFaceId: String? = null,
-    /**
-     * Identity (same as Entry)
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("hugging_face_id")
+    val huggingFaceId: String? = null,
+    /** Identity (same as Entry) */
     val id: String? = null,
-    /**
-     * The maximum number of output tokens the model can generate in a single response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: String? = null,
-    /**
-     * Input/output modalities
-     */
+    /** The maximum number of output tokens the model can generate in a single response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
+    val maxOutputTokens: String? = null,
+    /** Input/output modalities */
     val modalities: ApiModelModalities? = null,
-    /**
-     * Model identifier used for API calls (e.g., "llama3.1-70b-instruct")
-     */
+    /** Model identifier used for API calls (e.g., "llama3.1-70b-instruct") */
     @com.fasterxml.jackson.annotation.JsonProperty("model_id") val modelId: String? = null,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `float`-formatted value serialized in the `parameter_count` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count") val parameterCount: Float? = null,
-    /**
-     * Pricing per million tokens (aligns with existing ModelPrice pattern)
-     */
+    /** Optional `float`-formatted value serialized in the `parameter_count` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parameter_count")
+    val parameterCount: Float? = null,
+    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
     val pricing: ApiModelPricing? = null,
-    /**
-     * The complete set of prices for a model, covering every available variant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pricing_detail") val pricingDetail: ApiModelPricingDetail? = null,
-    /**
-     * Optional enumerated value serialized in the `provider` wire field.
-     */
+    /** The complete set of prices for a model, covering every available variant. */
+    @com.fasterxml.jackson.annotation.JsonProperty("pricing_detail")
+    val pricingDetail: ApiModelPricingDetail? = null,
+    /** Optional enumerated value serialized in the `provider` wire field. */
     val provider: ApiModelProvider? = null,
-    /**
-     * Optional `string` value serialized in the `short_description` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("short_description") val shortDescription: String? = null,
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
-    val type: String? = null
+    /** Optional `string` value serialized in the `short_description` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("short_description")
+    val shortDescription: String? = null,
+    /** Optional `string` value serialized in the `type` wire field. */
+    val type: String? = null,
 )
 
-/**
- * The complete set of prices for a model, covering every available variant.
- */
+/** The complete set of prices for a model, covering every available variant. */
 data class ApiModelPricingDetail(
-    /**
-     * Each available pricing variant for the model.
-     */
+    /** Each available pricing variant for the model. */
     val variants: List<ApiModelPricingVariant>? = null
 )
 
 /**
- * A time window during which the model's rates stay the same. Together these intervals show how pricing changes over the course of a day.
+ * A time window during which the model's rates stay the same. Together these intervals show how
+ * pricing changes over the course of a day.
  */
 data class ApiModelPricingInterval(
-    /**
-     * End of the interval, exclusive. Always on the hour.
-     */
+    /** End of the interval, exclusive. Always on the hour. */
     @com.fasterxml.jackson.annotation.JsonProperty("end_time") val endTime: OffsetDateTime? = null,
-    /**
-     * Pricing per million tokens (aligns with existing ModelPrice pattern)
-     */
+    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
     val prices: ApiModelPricing? = null,
-    /**
-     * Start of the interval, inclusive. Always on the hour.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: OffsetDateTime? = null
+    /** Start of the interval, inclusive. Always on the hour. */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_time")
+    val startTime: OffsetDateTime? = null,
 )
 
-/**
- * Pricing for one variant of a model: a specific tier and billing mode.
- */
+/** Pricing for one variant of a model: a specific tier and billing mode. */
 data class ApiModelPricingVariant(
-    /**
-     * Currency code for this variant's rates (e.g. `USD`).
-     */
+    /** Currency code for this variant's rates (e.g. `USD`). */
     val currency: String? = null,
-    /**
-     * Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`).
-     */
+    /** Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M Context`). */
     val label: String? = null,
     /**
-     * Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE: Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous batch requests.
+     * Whether rates apply to real-time or batch requests. - MODEL_BILLING_MODE_INTERACTIVE:
+     * Real-time request pricing. - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous
+     * batch requests.
      */
     val mode: ApiModelBillingMode? = null,
-    /**
-     * Pricing per million tokens (aligns with existing ModelPrice pattern)
-     */
+    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
     val prices: ApiModelPricing? = null,
     /**
-     * Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
+     * Pricing that varies over time. When present, the rates move between the low and high bounds
+     * below across the intervals in the schedule.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scaled_pricing") val scaledPricing: ApiModelScaledPricing? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scaled_pricing")
+    val scaledPricing: ApiModelScaledPricing? = null,
     /**
-     * A pricing variant of a model, such as a faster serving option or a larger context window. - MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster, higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
+     * A pricing variant of a model, such as a faster serving option or a larger context window. -
+     * MODEL_PRICING_TIER_STANDARD: Default pricing. - MODEL_PRICING_TIER_FAST_MODE: Faster,
+     * higher-priority serving at a premium price. - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the
+     * 1M-token context window. - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token
+     * context window. - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
      */
-    val tier: ApiModelPricingTier? = null
+    val tier: ApiModelPricingTier? = null,
 )
 
 /**
- * Pricing that varies over time. When present, the rates move between the low and high bounds below across the intervals in the schedule.
+ * Pricing that varies over time. When present, the rates move between the low and high bounds below
+ * across the intervals in the schedule.
  */
 data class ApiModelScaledPricing(
     /**
-     * The pricing schedule as a series of consecutive time intervals, ordered by start time. Neighboring hours with the same rates are combined, so each interval represents a distinct price.
+     * The pricing schedule as a series of consecutive time intervals, ordered by start time.
+     * Neighboring hours with the same rates are combined, so each interval represents a distinct
+     * price.
      */
     val intervals: List<ApiModelPricingInterval>? = null,
-    /**
-     * Pricing per million tokens (aligns with existing ModelPrice pattern)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_prices") val maxPrices: ApiModelPricing? = null,
-    /**
-     * Pricing per million tokens (aligns with existing ModelPrice pattern)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("min_prices") val minPrices: ApiModelPricing? = null
+    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_prices")
+    val maxPrices: ApiModelPricing? = null,
+    /** Pricing per million tokens (aligns with existing ModelPrice pattern) */
+    @com.fasterxml.jackson.annotation.JsonProperty("min_prices")
+    val minPrices: ApiModelPricing? = null,
 )

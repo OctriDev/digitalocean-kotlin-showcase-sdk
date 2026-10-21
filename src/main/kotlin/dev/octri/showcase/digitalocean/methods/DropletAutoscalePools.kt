@@ -18,174 +18,366 @@ import dev.octri.showcase.digitalocean.Validation
 
 object DropletAutoscalePools {
 
-
     /**
-     * To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`. The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects. These each contain the standard autoscale pool attributes.
+     * To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`. The
+     * response body will be a JSON object with a key of `autoscale_pools` containing an array of
+     * autoscale pool objects. These each contain the standard autoscale pool attributes.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      * @param name The name of the autoscale pool
      */
-    fun autoscalepoolsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, name: String? = null, options: RequestOptions? = null): AllAutoscalePools {
+    fun autoscalepoolsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): AllAutoscalePools {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllAutoscalePools>(SdkClient.RequestSpec("GET", "/v2/droplets/autoscale", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "name" to SdkClient.queryValue(name, "form", true)), operationId = "autoscalepoolsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllAutoscalePools>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/autoscale",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "name" to SdkClient.queryValue(name, "form", true),
+                        ),
+                    operationId = "autoscalepoolsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a new autoscale pool with a scaling configuration and a template for the Droplets it manages. Supply `name`, `config`, and `droplet_template`; the template must specify `region`, `image`, `size`, and `ssh_keys`. A 202 response returns the pool details, including its identifier and status.
+     * Creates a new autoscale pool with a scaling configuration and a template for the Droplets it
+     * manages. Supply `name`, `config`, and `droplet_template`; the template must specify `region`,
+     * `image`, `size`, and `ssh_keys`. A 202 response returns the pool details, including its
+     * identifier and status.
      *
-     * To create a new autoscale pool, send a POST request to `/v2/droplets/autoscale` setting the required attributes. The response body will contain a JSON object with a key called `autoscale_pool` containing the standard attributes for the new autoscale pool.
+     * To create a new autoscale pool, send a POST request to `/v2/droplets/autoscale` setting the
+     * required attributes. The response body will contain a JSON object with a key called
+     * `autoscale_pool` containing the standard attributes for the new autoscale pool.
      *
-     * @param name The human-readable name of the autoscale pool. This field cannot
-     *   be updated
-     * @param config The scaling configuration for an autoscale pool, which is how
-     *   the pool scales up and down (either by resource utilization or static
-     *   configuration).
-     * @param dropletTemplate Required object value serialized in the
-     *   `droplet_template` wire field.
+     * @param name The human-readable name of the autoscale pool. This field cannot be updated
+     * @param config The scaling configuration for an autoscale pool, which is how the pool scales
+     *   up and down (either by resource utilization or static configuration).
+     * @param dropletTemplate Required object value serialized in the `droplet_template` wire field.
      */
-    fun autoscalepoolsCreate(clientConfig: ClientConfig, name: String, config: AutoscalePoolCreateConfig, dropletTemplate: AutoscalePoolDropletTemplate, options: RequestOptions? = null): AutoscalePoolCreateResponse {
-        return SdkClient.request<AutoscalePoolCreateResponse>(SdkClient.RequestSpec("POST", "/v2/droplets/autoscale", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "config" to (config), "droplet_template" to (dropletTemplate)), operationId = "autoscalepoolsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun autoscalepoolsCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        config: AutoscalePoolCreateConfig,
+        dropletTemplate: AutoscalePoolDropletTemplate,
+        options: RequestOptions? = null,
+    ): AutoscalePoolCreateResponse {
+        return SdkClient.request<AutoscalePoolCreateResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/droplets/autoscale",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "config" to (config),
+                            "droplet_template" to (dropletTemplate),
+                        ),
+                    operationId = "autoscalepoolsCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To show information about an individual autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.
+     * To show information about an individual autoscale pool, send a GET request to
+     * `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      */
-    fun autoscalepoolsGet(clientConfig: ClientConfig, autoscalePoolId: String, options: RequestOptions? = null): ExistingAutoscalePool {
-        return SdkClient.request<ExistingAutoscalePool>(SdkClient.RequestSpec("GET", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}", config = clientConfig, operationId = "autoscalepoolsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun autoscalepoolsGet(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        options: RequestOptions? = null,
+    ): ExistingAutoscalePool {
+        return SdkClient.request<ExistingAutoscalePool>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}",
+                    config = clientConfig,
+                    operationId = "autoscalepoolsGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Replaces the configuration of an existing autoscale pool with the full representation supplied in the request. Include `name`, `config`, and `droplet_template`, and provide the required region, image, size, and SSH keys in the Droplet template. A 200 response returns the updated pool details.
+     * Replaces the configuration of an existing autoscale pool with the full representation
+     * supplied in the request. Include `name`, `config`, and `droplet_template`, and provide the
+     * required region, image, size, and SSH keys in the Droplet template. A 200 response returns
+     * the updated pool details.
      *
-     * To update the configuration of an existing autoscale pool, send a PUT request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation of the autoscale pool including existing attributes.
-     *
-     * @param autoscalePoolId A unique identifier for an autoscale pool.
-     * @param name The human-readable name of the autoscale pool. This field cannot
-     *   be updated
-     * @param config The scaling configuration for an autoscale pool, which is how
-     *   the pool scales up and down (either by resource utilization or static
-     *   configuration).
-     * @param dropletTemplate Required object value serialized in the
-     *   `droplet_template` wire field.
-     */
-    fun autoscalepoolsUpdate(clientConfig: ClientConfig, autoscalePoolId: String, name: String, config: AutoscalePoolCreateConfig, dropletTemplate: AutoscalePoolDropletTemplate, options: RequestOptions? = null): AutoscalePoolCreateResponse {
-        return SdkClient.request<AutoscalePoolCreateResponse>(SdkClient.RequestSpec("PUT", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "config" to (config), "droplet_template" to (dropletTemplate)), operationId = "autoscalepoolsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
-    }
-
-
-
-
-
-
-
-    /**
-     * To destroy an autoscale pool, send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID` endpoint. A successful response will include a 202 response code and no content.
-     *
-     * @param autoscalePoolId A unique identifier for an autoscale pool.
-     */
-    fun autoscalepoolsDelete(clientConfig: ClientConfig, autoscalePoolId: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}", config = clientConfig, operationId = "autoscalepoolsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
-    }
-
-
-
-
-
-
-
-    /**
-     * To destroy an autoscale pool and its associated resources (Droplets), send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous` endpoint.
+     * To update the configuration of an existing autoscale pool, send a PUT request to
+     * `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation
+     * of the autoscale pool including existing attributes.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
-     * @param xDangerous Acknowledge this action will destroy the autoscale pool and
-     *   its associated resources and _can not_ be reversed.
+     * @param name The human-readable name of the autoscale pool. This field cannot be updated
+     * @param config The scaling configuration for an autoscale pool, which is how the pool scales
+     *   up and down (either by resource utilization or static configuration).
+     * @param dropletTemplate Required object value serialized in the `droplet_template` wire field.
      */
-    fun autoscalepoolsDeleteDangerous(clientConfig: ClientConfig, autoscalePoolId: String, xDangerous: Boolean, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/dangerous", config = clientConfig, operationId = "autoscalepoolsDeleteDangerous", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("X-Dangerous" to SdkClient.headerValue(xDangerous, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun autoscalepoolsUpdate(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        name: String,
+        config: AutoscalePoolCreateConfig,
+        dropletTemplate: AutoscalePoolDropletTemplate,
+        options: RequestOptions? = null,
+    ): AutoscalePoolCreateResponse {
+        return SdkClient.request<AutoscalePoolCreateResponse>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "config" to (config),
+                            "droplet_template" to (dropletTemplate),
+                        ),
+                    operationId = "autoscalepoolsUpdate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
+    /**
+     * To destroy an autoscale pool, send a DELETE request to the
+     * `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID` endpoint. A successful response will include a
+     * 202 response code and no content.
+     *
+     * @param autoscalePoolId A unique identifier for an autoscale pool.
+     */
+    fun autoscalepoolsDelete(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}",
+                config = clientConfig,
+                operationId = "autoscalepoolsDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
 
     /**
-     * To list the Droplets in an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/members`. The response body will be a JSON object with a key of `droplets`. This will be set to an array containing information about each of the Droplets in the autoscale pool.
+     * To destroy an autoscale pool and its associated resources (Droplets), send a DELETE request
+     * to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous` endpoint.
+     *
+     * @param autoscalePoolId A unique identifier for an autoscale pool.
+     * @param xDangerous Acknowledge this action will destroy the autoscale pool and its associated
+     *   resources and _can not_ be reversed.
+     */
+    fun autoscalepoolsDeleteDangerous(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        xDangerous: Boolean,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/dangerous",
+                config = clientConfig,
+                operationId = "autoscalepoolsDeleteDangerous",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                extraHeaders =
+                    SdkClient.headers("X-Dangerous" to SdkClient.headerValue(xDangerous, false)),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * To list the Droplets in an autoscale pool, send a GET request to
+     * `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/members`. The response body will be a JSON object
+     * with a key of `droplets`. This will be set to an array containing information about each of
+     * the Droplets in the autoscale pool.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun autoscalepoolsListMembers(clientConfig: ClientConfig, autoscalePoolId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllMembers {
+    fun autoscalepoolsListMembers(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllMembers {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllMembers>(SdkClient.RequestSpec("GET", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/members", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "autoscalepoolsListMembers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AllMembers>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/members",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "autoscalepoolsListMembers",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To list all of the scaling history events of an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/history`. The response body will be a JSON object with a key of `history`. This will be set to an array containing objects each representing a history event.
+     * To list all of the scaling history events of an autoscale pool, send a GET request to
+     * `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/history`. The response body will be a JSON object
+     * with a key of `history`. This will be set to an array containing objects each representing a
+     * history event.
      *
      * @param autoscalePoolId A unique identifier for an autoscale pool.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun autoscalepoolsListHistory(clientConfig: ClientConfig, autoscalePoolId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): HistoryEvents {
+    fun autoscalepoolsListHistory(
+        clientConfig: ClientConfig,
+        autoscalePoolId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): HistoryEvents {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<HistoryEvents>(SdkClient.RequestSpec("GET", "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/history", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "autoscalepoolsListHistory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<HistoryEvents>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/droplets/autoscale/${SdkClient.encodePathSegment(autoscalePoolId)}/history",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "autoscalepoolsListHistory",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

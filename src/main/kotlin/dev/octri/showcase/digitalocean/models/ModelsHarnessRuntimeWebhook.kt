@@ -3,70 +3,54 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `WebhookAcceptedResponse` API schema.
- */
+/** Typed representation of the `WebhookAcceptedResponse` API schema. */
 data class WebhookAcceptedResponse(
     /**
-     * The queued (or deduped-existing) execution. Absent when the trigger is paused (202 with empty body).
+     * The queued (or deduped-existing) execution. Absent when the trigger is paused (202 with empty
+     * body).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("execution_id") val executionId: String? = null
 )
 
 /**
- * Present iff kind=webhook. The secret is never in this object (see create_trigger_response / rotate_secret_response).
+ * Present iff kind=webhook. The secret is never in this object (see create_trigger_response /
+ * rotate_secret_response).
  */
 data class WebhookConfig(
     /**
      * Signature-verification scheme applied to a delivery. Omitted on create defaults to custom.
      */
     val provider: WebhookProviderKey? = null,
-    /**
-     * The Payload URL to configure in the external system.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url") val webhookUrl: String? = null
+    /** The Payload URL to configure in the external system. */
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_url") val webhookUrl: String? = null,
 )
 
-/**
- * Typed representation of the `WebhookProvider` API schema.
- */
+/** Typed representation of the `WebhookProvider` API schema. */
 data class WebhookProvider(
     /**
      * Signature-verification scheme applied to a delivery. Omitted on create defaults to custom.
      */
     val key: WebhookProviderKey? = null,
-    /**
-     * Optional `string` value serialized in the `display_name` wire field.
-     */
+    /** Optional `string` value serialized in the `display_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("display_name") val displayName: String? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional `string` value serialized in the `docs_url` wire field.
-     */
+    /** Optional `string` value serialized in the `docs_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("docs_url") val docsUrl: String? = null,
-    /**
-     * Per-provider instruction for where the generated secret goes in the external system.
-     */
+    /** Per-provider instruction for where the generated secret goes in the external system. */
     @com.fasterxml.jackson.annotation.JsonProperty("paste_hint") val pasteHint: String? = null,
-    /**
-     * Optional object value serialized in the `signature` wire field.
-     */
-    val signature: WebhookProviderSignature? = null
+    /** Optional object value serialized in the `signature` wire field. */
+    val signature: WebhookProviderSignature? = null,
 )
 
-/**
- * Typed representation of the `WebhookProviderSignature` API schema.
- */
+/** Typed representation of the `WebhookProviderSignature` API schema. */
 data class WebhookProviderSignature(
-    /**
-     * HTTP header the external system sends the signature/token in.
-     */
+    /** HTTP header the external system sends the signature/token in. */
     val header: String? = null,
     /**
-     * How the external system authenticates a delivery: hmac-sha256 over the raw body (github), a plaintext token replayed verbatim (gitlab), or do-signature-v1 (`t=<unix>,v1=<hex>` over `{unix}.{body}`, custom).
+     * How the external system authenticates a delivery: hmac-sha256 over the raw body (github), a
+     * plaintext token replayed verbatim (gitlab), or do-signature-v1 (`t=<unix>,v1=<hex>` over
+     * `{unix}.{body}`, custom).
      */
-    val scheme: WebhookSignatureScheme? = null
+    val scheme: WebhookSignatureScheme? = null,
 )

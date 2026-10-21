@@ -3,36 +3,21 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Task preset that can be referenced by slug in model router policies.
- */
+/** Task preset that can be referenced by slug in model router policies. */
 data class ApiModelRouterTaskPreset(
-    /**
-     * Higher-level grouping used by the UI
-     */
+    /** Higher-level grouping used by the UI */
     val category: String? = null,
-    /**
-     * Task description
-     */
+    /** Task description */
     val description: String? = null,
-    /**
-     * Default models assigned to this task
-     */
+    /** Default models assigned to this task */
     val models: List<String>? = null,
-    /**
-     * Display name
-     */
+    /** Display name */
     val name: String? = null,
-    /**
-     * Selection policy preference for choosing among assigned models.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy") val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
-    /**
-     * Lightweight labels for filtering
-     */
+    /** Selection policy preference for choosing among assigned models. */
+    @com.fasterxml.jackson.annotation.JsonProperty("selection_policy")
+    val selectionPolicy: ApiModelRouterSelectionPolicy? = null,
+    /** Lightweight labels for filtering */
     val tags: List<String>? = null,
-    /**
-     * Task slug
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null
+    /** Task slug */
+    @com.fasterxml.jackson.annotation.JsonProperty("task_slug") val taskSlug: String? = null,
 )

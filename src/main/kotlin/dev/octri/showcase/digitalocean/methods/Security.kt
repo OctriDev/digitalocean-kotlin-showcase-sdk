@@ -18,43 +18,82 @@ import dev.octri.showcase.digitalocean.Validation
 
 object Security {
 
-
     /**
      * To list all CSPM scans, send a GET request to `/v2/security/scans`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun securityListScans(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Scans {
+    fun securityListScans(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Scans {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<Scans>(SdkClient.RequestSpec("GET", "/v2/security/scans", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "securityListScans", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Scans>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/security/scans",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "securityListScans",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
-    /**
-     * To create a CSPM scan, send a POST request to `/v2/security/scans`.
-     */
-    fun securityCreateScan(clientConfig: ClientConfig, options: RequestOptions? = null): ScanResponse {
-        return SdkClient.request<ScanResponse>(SdkClient.RequestSpec("POST", "/v2/security/scans", config = clientConfig, operationId = "securityCreateScan", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    /** To create a CSPM scan, send a POST request to `/v2/security/scans`. */
+    fun securityCreateScan(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ScanResponse {
+        return SdkClient.request<ScanResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/security/scans",
+                    config = clientConfig,
+                    operationId = "securityCreateScan",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`.
@@ -65,25 +104,56 @@ object Security {
      * @param page Which 'page' of paginated results to return.
      * @param type The finding type to include.
      */
-    fun securityGetScan(clientConfig: ClientConfig, scanId: String, severity: SchemaSchemaEnumc9dfe048? = null, perPage: Long? = null, page: Long? = null, type: String? = null, options: RequestOptions? = null): ScanResponse {
+    fun securityGetScan(
+        clientConfig: ClientConfig,
+        scanId: String,
+        severity: SchemaSchemaEnumc9dfe048? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        type: String? = null,
+        options: RequestOptions? = null,
+    ): ScanResponse {
         Validation.validateUuid("scan_id", scanId)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<ScanResponse>(SdkClient.RequestSpec("GET", "/v2/security/scans/${SdkClient.encodePathSegment(scanId)}", config = clientConfig, query = mapOf("severity" to SdkClient.queryValue(severity, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "type" to SdkClient.queryValue(type, "form", true)), operationId = "securityGetScan", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ScanResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/security/scans/${SdkClient.encodePathSegment(scanId)}",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "severity" to SdkClient.queryValue(severity, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "type" to SdkClient.queryValue(type, "form", true),
+                        ),
+                    operationId = "securityGetScan",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`.
@@ -93,68 +163,145 @@ object Security {
      * @param severity The finding severity level to include.
      * @param type The finding type to include.
      */
-    fun securityGetLatestScan(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, severity: SchemaSchemaEnumc9dfe048? = null, type: String? = null, options: RequestOptions? = null): ScanResponse {
+    fun securityGetLatestScan(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        severity: SchemaSchemaEnumc9dfe048? = null,
+        type: String? = null,
+        options: RequestOptions? = null,
+    ): ScanResponse {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<ScanResponse>(SdkClient.RequestSpec("GET", "/v2/security/scans/latest", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "severity" to SdkClient.queryValue(severity, "form", true), "type" to SdkClient.queryValue(type, "form", true)), operationId = "securityGetLatestScan", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ScanResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/security/scans/latest",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "severity" to SdkClient.queryValue(severity, "form", true),
+                            "type" to SdkClient.queryValue(type, "form", true),
+                        ),
+                    operationId = "securityGetLatestScan",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To mark a scan finding as a false positive, send a POST request to `/v2/security/scans/rules` to create a new scan rule.
+     * To mark a scan finding as a false positive, send a POST request to `/v2/security/scans/rules`
+     * to create a new scan rule.
      *
      * @param resource The URN of a resource to exclude from future scans.
      */
-    fun securityCreateScanRule(clientConfig: ClientConfig, resource: String? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/security/scans/rules", config = clientConfig, body = SdkClient.bodyMap("resource" to (SdkClient.omitIfNull(resource))), operationId = "securityCreateScanRule", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    fun securityCreateScanRule(
+        clientConfig: ClientConfig,
+        resource: String? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/security/scans/rules",
+                config = clientConfig,
+                body = SdkClient.bodyMap("resource" to (SdkClient.omitIfNull(resource))),
+                operationId = "securityCreateScanRule",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * To get affected resources for a scan finding, send a GET request to `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
+     * To get affected resources for a scan finding, send a GET request to
+     * `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
      *
      * @param scanId The scan UUID.
      * @param findingUuid The finding UUID.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun securityListScanFindingAffectedResources(clientConfig: ClientConfig, scanId: String, findingUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AffectedResources {
+    fun securityListScanFindingAffectedResources(
+        clientConfig: ClientConfig,
+        scanId: String,
+        findingUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AffectedResources {
         Validation.validateUuid("scan_id", scanId)
 
         Validation.validateUuid("finding_uuid", findingUuid)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AffectedResources>(SdkClient.RequestSpec("GET", "/v2/security/scans/${SdkClient.encodePathSegment(scanId)}/findings/${SdkClient.encodePathSegment(findingUuid)}/affected_resources", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "securityListScanFindingAffectedResources", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AffectedResources>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/security/scans/${SdkClient.encodePathSegment(scanId)}/findings/${SdkClient.encodePathSegment(findingUuid)}/affected_resources",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "securityListScanFindingAffectedResources",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To list CSPM scan settings, send a GET request to `/v2/security/settings`.
@@ -162,38 +309,83 @@ object Security {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun securityListSettings(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Settings {
+    fun securityListSettings(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Settings {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<Settings>(SdkClient.RequestSpec("GET", "/v2/security/settings", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "securityListSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Settings>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/security/settings",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "securityListSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To update CSPM plan coverage, send a PUT request to `/v2/security/settings/plan`.
      *
      * @param tierCoverage Scan coverage for each available plan tier.
      */
-    fun securityUpdateSettingsPlan(clientConfig: ClientConfig, tierCoverage: Map<String, Map<String, Any>>? = null, options: RequestOptions? = null): TierCoverage {
-        return SdkClient.request<TierCoverage>(SdkClient.RequestSpec("PUT", "/v2/security/settings/plan", config = clientConfig, body = SdkClient.bodyMap("tier_coverage" to (SdkClient.omitIfNull(tierCoverage))), operationId = "securityUpdateSettingsPlan", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun securityUpdateSettingsPlan(
+        clientConfig: ClientConfig,
+        tierCoverage: Map<String, Map<String, Any>>? = null,
+        options: RequestOptions? = null,
+    ): TierCoverage {
+        return SdkClient.request<TierCoverage>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/security/settings/plan",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap("tier_coverage" to (SdkClient.omitIfNull(tierCoverage))),
+                    operationId = "securityUpdateSettingsPlan",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To suppress scan findings, send a POST request to `/v2/security/settings/suppressions`.
@@ -201,31 +393,69 @@ object Security {
      * @param ruleUuid The rule UUID to suppress for the listed resources.
      * @param resources The URNs of resources to suppress for the rule.
      */
-    fun securityCreateSuppression(clientConfig: ClientConfig, ruleUuid: String? = null, resources: List<String>? = null, options: RequestOptions? = null): SuppressedResourceRoot {
-        return SdkClient.request<SuppressedResourceRoot>(SdkClient.RequestSpec("POST", "/v2/security/settings/suppressions", config = clientConfig, body = SdkClient.bodyMap("rule_uuid" to (SdkClient.omitIfNull(ruleUuid)), "resources" to (SdkClient.omitIfNull(resources))), operationId = "securityCreateSuppression", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun securityCreateSuppression(
+        clientConfig: ClientConfig,
+        ruleUuid: String? = null,
+        resources: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SuppressedResourceRoot {
+        return SdkClient.request<SuppressedResourceRoot>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/security/settings/suppressions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "rule_uuid" to (SdkClient.omitIfNull(ruleUuid)),
+                            "resources" to (SdkClient.omitIfNull(resources)),
+                        ),
+                    operationId = "securityCreateSuppression",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To remove a suppression, send a DELETE request to `/v2/security/settings/suppressions/{suppression_uuid}`.
+     * To remove a suppression, send a DELETE request to
+     * `/v2/security/settings/suppressions/{suppression_uuid}`.
      *
      * @param suppressionUuid The suppression UUID to remove.
      */
-    fun securityDeleteSuppression(clientConfig: ClientConfig, suppressionUuid: String, options: RequestOptions? = null): Unit {
+    fun securityDeleteSuppression(
+        clientConfig: ClientConfig,
+        suppressionUuid: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("suppression_uuid", suppressionUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/security/settings/suppressions/${SdkClient.encodePathSegment(suppressionUuid)}", config = clientConfig, operationId = "securityDeleteSuppression", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/security/settings/suppressions/${SdkClient.encodePathSegment(suppressionUuid)}",
+                config = clientConfig,
+                operationId = "securityDeleteSuppression",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

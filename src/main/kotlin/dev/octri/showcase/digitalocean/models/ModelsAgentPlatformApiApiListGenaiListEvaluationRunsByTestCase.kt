@@ -3,12 +3,9 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `ApiListEvaluationRunsByTestCaseOutput` API schema.
- */
+/** Typed representation of the `ApiListEvaluationRunsByTestCaseOutput` API schema. */
 data class ApiListEvaluationRunsByTestCaseOutput(
-    /**
-     * List of evaluation runs.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_runs") val evaluationRuns: List<ApiEvaluationRun>? = null
+    /** List of evaluation runs. */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_runs")
+    val evaluationRuns: List<ApiEvaluationRun>? = null
 )

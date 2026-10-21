@@ -3,27 +3,19 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `AllClusters` API schema.
- */
+/** Typed representation of the `AllClusters` API schema. */
 data class AllClusters(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_clusters") val kubernetesClusters: List<ClusterRead>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("kubernetes_clusters")
+    val kubernetesClusters: List<ClusterRead>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `AllNodePools` API schema.
- */
+/** Typed representation of the `AllNodePools` API schema. */
 data class AllNodePools(
-    /**
-     * Optional array value serialized in the `node_pools` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("node_pools") val nodePools: List<KubernetesNodePool>? = null
+    /** Optional array value serialized in the `node_pools` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("node_pools")
+    val nodePools: List<KubernetesNodePool>? = null
 )

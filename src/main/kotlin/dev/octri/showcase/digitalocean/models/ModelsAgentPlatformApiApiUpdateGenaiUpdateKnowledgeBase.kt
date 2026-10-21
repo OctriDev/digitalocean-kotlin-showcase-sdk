@@ -3,42 +3,26 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Information about updating a knowledge base
- */
+/** Information about updating a knowledge base */
 data class ApiUpdateKnowledgeBaseInputPublic(
-    /**
-     * The id of the DigitalOcean database this knowledge base will use, optional.
-     */
+    /** The id of the DigitalOcean database this knowledge base will use, optional. */
     @com.fasterxml.jackson.annotation.JsonProperty("database_id") val databaseId: String? = null,
-    /**
-     * Knowledge base name
-     */
+    /** Knowledge base name */
     val name: String? = null,
-    /**
-     * The id of the DigitalOcean project this knowledge base will belong to
-     */
+    /** The id of the DigitalOcean project this knowledge base will belong to */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * Configuration for cross-encoder reranking during retrieval.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reranking_config") val rerankingConfig: ApiRerankingConfiguration? = null,
-    /**
-     * Tags to organize your knowledge base.
-     */
+    /** Configuration for cross-encoder reranking during retrieval. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reranking_config")
+    val rerankingConfig: ApiRerankingConfiguration? = null,
+    /** Tags to organize your knowledge base. */
     val tags: List<String>? = null,
-    /**
-     * Knowledge base id
-     */
-    val uuid: String? = null
+    /** Knowledge base id */
+    val uuid: String? = null,
 )
 
-/**
- * Information about an updated knowledge base
- */
+/** Information about an updated knowledge base */
 data class ApiUpdateKnowledgeBaseOutput(
-    /**
-     * Knowledgebase Description
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base") val knowledgeBase: ApiKnowledgeBase? = null
+    /** Knowledgebase Description */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base")
+    val knowledgeBase: ApiKnowledgeBase? = null
 )

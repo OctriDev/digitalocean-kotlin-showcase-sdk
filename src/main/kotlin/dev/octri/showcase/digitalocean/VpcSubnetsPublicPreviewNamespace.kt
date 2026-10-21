@@ -3,48 +3,119 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class VpcSubnetsPublicPreviewNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * To list all subnets within a VPC, send a GET request to `/v2/vpcs/$VPC_UUID/subnets`.
-     */
-    fun vpcSubnetsList(vpcUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllVpcSubnets {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsList(clientConfig, vpcUuid, perPage, page, options)
+    /** To list all subnets within a VPC, send a GET request to `/v2/vpcs/$VPC_UUID/subnets`. */
+    fun vpcSubnetsList(
+        vpcUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllVpcSubnets {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsList(
+            clientConfig,
+            vpcUuid,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To create a subnet within a VPC, send a POST request to `/v2/vpcs/$VPC_UUID/subnets` with a name and, optionally, an IP range.
+     * To create a subnet within a VPC, send a POST request to `/v2/vpcs/$VPC_UUID/subnets` with a
+     * name and, optionally, an IP range.
      */
-    fun vpcSubnetsCreate(vpcUuid: String, name: String, ipRange: String? = null, options: RequestOptions? = null): SingleVpcSubnet {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsCreate(clientConfig, vpcUuid, name, ipRange, options)
+    fun vpcSubnetsCreate(
+        vpcUuid: String,
+        name: String,
+        ipRange: String? = null,
+        options: RequestOptions? = null,
+    ): SingleVpcSubnet {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsCreate(
+            clientConfig,
+            vpcUuid,
+            name,
+            ipRange,
+            options,
+        )
     }
 
     /**
-     * To retrieve a specific subnet within a VPC, send a GET request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`.
+     * To retrieve a specific subnet within a VPC, send a GET request to
+     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`.
      */
-    fun vpcSubnetsGet(vpcUuid: String, subnetUuid: String, options: RequestOptions? = null): SingleVpcSubnet {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsGet(clientConfig, vpcUuid, subnetUuid, options)
+    fun vpcSubnetsGet(
+        vpcUuid: String,
+        subnetUuid: String,
+        options: RequestOptions? = null,
+    ): SingleVpcSubnet {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsGet(
+            clientConfig,
+            vpcUuid,
+            subnetUuid,
+            options,
+        )
     }
 
     /**
-     * To update the name of a specific subnet within a VPC, send a PATCH request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`.
+     * To update the name of a specific subnet within a VPC, send a PATCH request to
+     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`.
      */
-    fun vpcSubnetsUpdate(vpcUuid: String, subnetUuid: String, name: String, options: RequestOptions? = null): SingleVpcSubnet {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsUpdate(clientConfig, vpcUuid, subnetUuid, name, options)
+    fun vpcSubnetsUpdate(
+        vpcUuid: String,
+        subnetUuid: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): SingleVpcSubnet {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsUpdate(
+            clientConfig,
+            vpcUuid,
+            subnetUuid,
+            name,
+            options,
+        )
     }
 
     /**
-     * To delete a specific subnet from a VPC, send a DELETE request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`. A successful request returns a 204 status code with no response body.
+     * To delete a specific subnet from a VPC, send a DELETE request to
+     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`. A successful request returns a 204 status code
+     * with no response body.
      */
-    fun vpcSubnetsDelete(vpcUuid: String, subnetUuid: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsDelete(clientConfig, vpcUuid, subnetUuid, options)
+    fun vpcSubnetsDelete(
+        vpcUuid: String,
+        subnetUuid: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsDelete(
+            clientConfig,
+            vpcUuid,
+            subnetUuid,
+            options,
+        )
     }
 
     /**
-     * To list all resources that are members of a VPC subnet, send a GET request to `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/members`. To list only members of a specific type, include the `resource_type` query parameter. Only resources that you are authorized to view are returned. For example, viewing Droplets requires the `droplet:read` scope.
+     * To list all resources that are members of a VPC subnet, send a GET request to
+     * `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/members`. To list only members of a specific type,
+     * include the `resource_type` query parameter. Only resources that you are authorized to view
+     * are returned. For example, viewing Droplets requires the `droplet:read` scope.
      */
-    fun vpcSubnetsListMembers(vpcUuid: String, subnetUuid: String, resourceType: SchemaSchemaEnumc536e985? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VpcSubnetMembers {
-        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview.vpcSubnetsListMembers(clientConfig, vpcUuid, subnetUuid, resourceType, perPage, page, options)
+    fun vpcSubnetsListMembers(
+        vpcUuid: String,
+        subnetUuid: String,
+        resourceType: SchemaSchemaEnumc536e985? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VpcSubnetMembers {
+        return dev.octri.showcase.digitalocean.methods.VpcSubnetsPublicPreview
+            .vpcSubnetsListMembers(
+                clientConfig,
+                vpcUuid,
+                subnetUuid,
+                resourceType,
+                perPage,
+                page,
+                options,
+            )
     }
-
 }

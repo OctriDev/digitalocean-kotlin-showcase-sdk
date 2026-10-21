@@ -3,13 +3,22 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class RegionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the regions that are available, send a GET request to `/v2/regions`. The response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.
+     * To list all of the regions that are available, send a GET request to `/v2/regions`. The
+     * response will be a JSON object with a key called `regions`. The value of this will be an
+     * array of `region` objects, each of which will contain the standard region attributes.
      */
-    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllRegions {
-        return dev.octri.showcase.digitalocean.methods.Regions.regionsList(clientConfig, perPage, page, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllRegions {
+        return dev.octri.showcase.digitalocean.methods.Regions.regionsList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
-
 }

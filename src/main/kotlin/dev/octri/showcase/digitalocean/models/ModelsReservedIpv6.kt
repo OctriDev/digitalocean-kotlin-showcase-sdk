@@ -5,70 +5,53 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `ReservedIpv6` API schema.
- */
+/** Typed representation of the `ReservedIpv6` API schema. */
 data class ReservedIpv6(
-    /**
-     * The public IP address of the reserved IPv6. It also serves as its identifier.
-     */
+    /** The public IP address of the reserved IPv6. It also serves as its identifier. */
     val ip: String? = null,
+    /** The date and time when the reserved IPv6 was reserved. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at")
+    val reservedAt: OffsetDateTime? = null,
     /**
-     * The date and time when the reserved IPv6 was reserved.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at") val reservedAt: OffsetDateTime? = null,
-    /**
-     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the region_slug will be returned.
+     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the
+     * region_slug will be returned.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null,
-    /**
-     * Optional API value serialized in the `droplet` wire field.
-     */
-    val droplet: ReservedIpv6Droplet? = null
+    /** Optional API value serialized in the `droplet` wire field. */
+    val droplet: ReservedIpv6Droplet? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpv6Create` API schema.
- */
+/** Typed representation of the `ReservedIpv6Create` API schema. */
 data class ReservedIpv6Create(
-    /**
-     * The slug identifier for the region the reserved IPv6 will be reserved to.
-     */
+    /** The slug identifier for the region the reserved IPv6 will be reserved to. */
     @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String
 )
 
-/**
- * Optional object value serialized in the `reserved_ipv6` wire field.
- */
+/** Optional object value serialized in the `reserved_ipv6` wire field. */
 data class ReservedIpv6CreateResponseReservedIpv6(
-    /**
-     * The public IP address of the reserved IPv6. It also serves as its identifier.
-     */
+    /** The public IP address of the reserved IPv6. It also serves as its identifier. */
     val ip: String? = null,
     /**
-     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the region_slug will be returned.
+     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the
+     * region_slug will be returned.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `reserved_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at") val reservedAt: OffsetDateTime? = null
+    /** Optional `date-time`-formatted value serialized in the `reserved_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at")
+    val reservedAt: OffsetDateTime? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpv6CreateResponse` API schema.
- */
+/** Typed representation of the `ReservedIpv6CreateResponse` API schema. */
 data class ReservedIpv6CreateResponse(
-    /**
-     * Optional object value serialized in the `reserved_ipv6` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6") val reservedIpv6: ReservedIpv6CreateResponseReservedIpv6? = null
+    /** Optional object value serialized in the `reserved_ipv6` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6")
+    val reservedIpv6: ReservedIpv6CreateResponseReservedIpv6? = null
 )
 
-/**
- * Optional API value serialized in the `droplet` wire field.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReservedIpv6Droplet.Deserializer::class)
+/** Optional API value serialized in the `droplet` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ReservedIpv6Droplet.Deserializer::class
+)
 sealed interface ReservedIpv6Droplet {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReservedIpv6Droplet>() {
@@ -78,7 +61,9 @@ sealed interface ReservedIpv6Droplet {
         ): ReservedIpv6Droplet {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = ReservedIpv6DropletOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                ReservedIpv6DropletOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -95,67 +80,112 @@ sealed interface ReservedIpv6Droplet {
                 }
             }
             return when {
-                node.isObject -> ObjectMapReservedIpv6Droplet(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ReservedIpv6Droplet::class.java, "no ReservedIpv6Droplet branch accepts this payload")
+                node.isObject ->
+                    ObjectMapReservedIpv6Droplet(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    Map<String, Any>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ReservedIpv6Droplet::class.java,
+                        "no ReservedIpv6Droplet branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val ReservedIpv6DropletOwnedTypes: List<Pair<List<String>, Class<out ReservedIpv6Droplet>>> = listOf(
-    listOf("id", "name", "memory", "vcpus", "disk", "disk_info", "locked", "status", "kernel", "created_at", "features", "backup_ids", "next_backup_window", "snapshot_ids", "image", "volume_ids", "size", "size_slug", "networks", "region", "tags", "vpc_uuid", "subnet_uuid", "gpu_info") to Droplet::class.java,
+internal val ReservedIpv6DropletOwnedTypes:
+    List<Pair<List<String>, Class<out ReservedIpv6Droplet>>> =
+    listOf(
+        listOf(
+            "id",
+            "name",
+            "memory",
+            "vcpus",
+            "disk",
+            "disk_info",
+            "locked",
+            "status",
+            "kernel",
+            "created_at",
+            "features",
+            "backup_ids",
+            "next_backup_window",
+            "snapshot_ids",
+            "image",
+            "volume_ids",
+            "size",
+            "size_slug",
+            "networks",
+            "region",
+            "tags",
+            "vpc_uuid",
+            "subnet_uuid",
+            "gpu_info",
+        ) to Droplet::class.java
+    )
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ObjectMapReservedIpv6Droplet(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>
+) : ReservedIpv6Droplet
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ObjectMapReservedIpv6Droplet(@get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>) : ReservedIpv6Droplet
-
-/**
- * Required object value serialized in the `reserved_ipv6s[]` wire field.
- */
+/** Required object value serialized in the `reserved_ipv6s[]` wire field. */
 data class ReservedIpv6ListReservedIpv6sItem(
-    /**
-     * The public IP address of the reserved IPv6. It also serves as its identifier.
-     */
+    /** The public IP address of the reserved IPv6. It also serves as its identifier. */
     val ip: String? = null,
     /**
-     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the region_slug will be returned.
+     * The region that the reserved IPv6 is reserved to. When you query a reserved IPv6,the
+     * region_slug will be returned.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("region_slug") val regionSlug: String? = null,
-    /**
-     * Optional `date-time`-formatted value serialized in the `reserved_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at") val reservedAt: OffsetDateTime? = null,
-    /**
-     * Requires `droplet:read` scope.
-     */
-    val droplet: ReservedIpv6ListReservedIpv6sItemDroplet? = null
+    /** Optional `date-time`-formatted value serialized in the `reserved_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_at")
+    val reservedAt: OffsetDateTime? = null,
+    /** Requires `droplet:read` scope. */
+    val droplet: ReservedIpv6ListReservedIpv6sItemDroplet? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpv6List` API schema.
- */
+/** Typed representation of the `ReservedIpv6List` API schema. */
 data class ReservedIpv6List(
-    /**
-     * Optional array value serialized in the `reserved_ipv6s` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6s") val reservedIpv6s: List<ReservedIpv6ListReservedIpv6sItem>? = null
+    /** Optional array value serialized in the `reserved_ipv6s` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6s")
+    val reservedIpv6s: List<ReservedIpv6ListReservedIpv6sItem>? = null
 )
 
-/**
- * Requires `droplet:read` scope.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReservedIpv6ListReservedIpv6sItemDroplet.Deserializer::class)
+/** Requires `droplet:read` scope. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ReservedIpv6ListReservedIpv6sItemDroplet.Deserializer::class
+)
 sealed interface ReservedIpv6ListReservedIpv6sItemDroplet {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReservedIpv6ListReservedIpv6sItemDroplet>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<
+            ReservedIpv6ListReservedIpv6sItemDroplet
+        >() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): ReservedIpv6ListReservedIpv6sItemDroplet {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = ReservedIpv6ListReservedIpv6sItemDropletOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                ReservedIpv6ListReservedIpv6sItemDropletOwnedTypes.firstOrNull { (keys, _) ->
+                        keys.any(node::has)
+                    }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -163,7 +193,8 @@ sealed interface ReservedIpv6ListReservedIpv6sItemDroplet {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out ReservedIpv6ListReservedIpv6sItemDroplet>> = listOf(Droplet::class.java)
+            val objectTypes: List<Class<out ReservedIpv6ListReservedIpv6sItemDroplet>> =
+                listOf(Droplet::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -172,45 +203,82 @@ sealed interface ReservedIpv6ListReservedIpv6sItemDroplet {
                 }
             }
             return when {
-                node.isObject -> ObjectMapReservedIpv6ListReservedIpv6sItemDroplet(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ReservedIpv6ListReservedIpv6sItemDroplet::class.java, "no ReservedIpv6ListReservedIpv6sItemDroplet branch accepts this payload")
+                node.isObject ->
+                    ObjectMapReservedIpv6ListReservedIpv6sItemDroplet(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    Map<String, Any>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ReservedIpv6ListReservedIpv6sItemDroplet::class.java,
+                        "no ReservedIpv6ListReservedIpv6sItemDroplet branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val ReservedIpv6ListReservedIpv6sItemDropletOwnedTypes: List<Pair<List<String>, Class<out ReservedIpv6ListReservedIpv6sItemDroplet>>> = listOf(
-    listOf("id", "name", "memory", "vcpus", "disk", "disk_info", "locked", "status", "kernel", "created_at", "features", "backup_ids", "next_backup_window", "snapshot_ids", "image", "volume_ids", "size", "size_slug", "networks", "region", "tags", "vpc_uuid", "subnet_uuid", "gpu_info") to Droplet::class.java,
+internal val ReservedIpv6ListReservedIpv6sItemDropletOwnedTypes:
+    List<Pair<List<String>, Class<out ReservedIpv6ListReservedIpv6sItemDroplet>>> =
+    listOf(
+        listOf(
+            "id",
+            "name",
+            "memory",
+            "vcpus",
+            "disk",
+            "disk_info",
+            "locked",
+            "status",
+            "kernel",
+            "created_at",
+            "features",
+            "backup_ids",
+            "next_backup_window",
+            "snapshot_ids",
+            "image",
+            "volume_ids",
+            "size",
+            "size_slug",
+            "networks",
+            "region",
+            "tags",
+            "vpc_uuid",
+            "subnet_uuid",
+            "gpu_info",
+        ) to Droplet::class.java
+    )
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ObjectMapReservedIpv6ListReservedIpv6sItemDroplet(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>
+) : ReservedIpv6ListReservedIpv6sItemDroplet
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ObjectMapReservedIpv6ListReservedIpv6sItemDroplet(@get:com.fasterxml.jackson.annotation.JsonValue val value: Map<String, Any>) : ReservedIpv6ListReservedIpv6sItemDroplet
-
-/**
- * Typed representation of the `ReservedIPv6ListResponse` API schema.
- */
+/** Typed representation of the `ReservedIPv6ListResponse` API schema. */
 data class ReservedIPv6ListResponse(
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    /**
-     * Optional array value serialized in the `reserved_ipv6s` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6s") val reservedIpv6s: List<ReservedIpv6ListReservedIpv6sItem>? = null,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional array value serialized in the `reserved_ipv6s` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6s")
+    val reservedIpv6s: List<ReservedIpv6ListReservedIpv6sItem>? = null,
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 )
 
-/**
- * Typed representation of the `ReservedIpv6Response` API schema.
- */
+/** Typed representation of the `ReservedIpv6Response` API schema. */
 data class ReservedIpv6Response(
-    /**
-     * Optional object value serialized in the `reserved_ipv6` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6") val reservedIpv6: ReservedIpv6? = null
+    /** Optional object value serialized in the `reserved_ipv6` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_ipv6")
+    val reservedIpv6: ReservedIpv6? = null
 )

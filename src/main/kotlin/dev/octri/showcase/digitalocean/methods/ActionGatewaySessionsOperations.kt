@@ -16,113 +16,214 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object ActionGatewaySessionsCreateOperation {
     /**
-     * Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need approval, or are refused.
+     * Creates a session owned by your team, with a new session URN, and returns the MCP URL an
+     * agent connects to. tools selects the tools and toolbelts the session exposes, and policy
+     * decides which calls run, need approval, or are refused.
      *
      * @param name Required human-readable session name.
-     * @param actorId Optional actor binding: the user whose connections the
-     *   session's tool calls use, matched against connection `user_id`. When set it
-     *   must use the same alphabet as a connection's `user_id`, `[A-Za-z0-9._-]`, at
-     *   most 64 characters; anything else is rejected with 400.
+     * @param actorId Optional actor binding: the user whose connections the session's tool calls
+     *   use, matched against connection `user_id`. When set it must use the same alphabet as a
+     *   connection's `user_id`, `[A-Za-z0-9._-]`, at most 64 characters; anything else is rejected
+     *   with 400.
      * @param policy Optional tool-permission policy. Omitted asks before every call.
-     * @param tools Omitted enables every tool. An explicit empty array enables no
-     *   tools. Direct tools may be `<tool>` or `<tool>@<version>`, using
-     *   provider-qualified tool slugs, and a pinned version must be the released one;
-     *   toolbelt references must be version-pinned as
+     * @param tools Omitted enables every tool. An explicit empty array enables no tools. Direct
+     *   tools may be `<tool>` or `<tool>@<version>`, using provider-qualified tool slugs, and a
+     *   pinned version must be the released one; toolbelt references must be version-pinned as
      *   `toolbelt:<belt-name>@<version>`.
-     * @param config Optional session options. config.preloadTools may contain
-     *   concrete tool names (optionally version-pinned) and version-pinned toolbelt
-     *   references. config.customInstructions is a string of at most 1000 characters.
-     *   config.outputViews maps up to 100 tool slugs to the name of an output view to
-     *   apply to that tool's results.
-     * @param network Product-level session network binding. When set, `vpc_uuid`
-     *   must identify a VPC owned by the session's team.
-     * @param insights Omitted when the request omitted insights or explicitly sent
-     *   null.
+     * @param config Optional session options. config.preloadTools may contain concrete tool names
+     *   (optionally version-pinned) and version-pinned toolbelt references.
+     *   config.customInstructions is a string of at most 1000 characters. config.outputViews maps
+     *   up to 100 tool slugs to the name of an output view to apply to that tool's results.
+     * @param network Product-level session network binding. When set, `vpc_uuid` must identify a
+     *   VPC owned by the session's team.
+     * @param insights Omitted when the request omitted insights or explicitly sent null.
      */
-    fun sessionsCreate(clientConfig: ClientConfig, request: ActionGateway.SessionsCreateRequest, options: RequestOptions? = null): CreateSessionResponse {
+    fun sessionsCreate(
+        clientConfig: ClientConfig,
+        request: ActionGateway.SessionsCreateRequest,
+        options: RequestOptions? = null,
+    ): CreateSessionResponse {
         validateSessionsCreateRequest(request)
 
-        return SdkClient.request<CreateSessionResponse>(SdkClient.RequestSpec("POST", "/v2/action-gateway/sessions", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "actorId" to (SdkClient.omitIfNull(request.actorId)), "policy" to
-    (request.policy ?: SdkClient.SdkOptional.Omitted), "tools" to (SdkClient.omitIfNull(request.tools)), "config" to (SdkClient.omitIfNull(request.config)), "network" to (SdkClient.omitIfNull(request.network)), "insights" to (SdkClient.omitIfNull(request.insights))), operationId = "sessionsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<CreateSessionResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/action-gateway/sessions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name),
+                            "actorId" to (SdkClient.omitIfNull(request.actorId)),
+                            "policy" to (request.policy ?: SdkClient.SdkOptional.Omitted),
+                            "tools" to (SdkClient.omitIfNull(request.tools)),
+                            "config" to (SdkClient.omitIfNull(request.config)),
+                            "network" to (SdkClient.omitIfNull(request.network)),
+                            "insights" to (SdkClient.omitIfNull(request.insights)),
+                        ),
+                    operationId = "sessionsCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateSessionsCreateRequest(request: ActionGateway.SessionsCreateRequest) {
         if (request.actorId != null) {
             Validation.validatePattern("actorId", request.actorId, "^[A-Za-z0-9._-]{1,64}$")
-}
+        }
     }
 }
 
 internal object ActionGatewaySessionsListOperation {
     /**
-     * Returns the sessions you can see, newest first. Offset-paged with page and `per_page`; `end_user_id` filters to one actor.
+     * Returns the sessions you can see, newest first. Offset-paged with page and `per_page`;
+     * `end_user_id` filters to one actor.
      *
      * @param endUserId Optional `actor_id`, matched exactly.
      * @param page 1-based page number. Values below 1 are treated as 1.
      * @param perPage Page size. Defaults to 20; values above 100 are capped at 100.
      */
-    fun sessionsList(clientConfig: ClientConfig, endUserId: String? = null, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ListSessionsResponse {
+    fun sessionsList(
+        clientConfig: ClientConfig,
+        endUserId: String? = null,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ListSessionsResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 100.0),
+            )
+        }
 
-        return SdkClient.request<ListSessionsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/sessions", config = clientConfig, query = mapOf("end_user_id" to
-    SdkClient.queryValue(endUserId, "form", true), "page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "sessionsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ListSessionsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/action-gateway/sessions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "end_user_id" to SdkClient.queryValue(endUserId, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        ),
+                    operationId = "sessionsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ActionGatewaySessionsListSearchOperation {
     /**
-     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName`
+     * contains query, case-insensitively, ranked across the whole result set. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `actor_id`,
-     *   `session_urn`, or `agentName`. Empty matches every session you can see.
-     *   Results are ordered by match quality (an exact name, `session_urn`, or
-     *   `actor_id` match, then a prefix, then a substring), then by name, across the
-     *   whole result set, so a client must not re-sort a page to rank it.
-     * @param endUserId `end_user_id`, when set, is an exact filter on `actor_id`
-     *   (the same filter as on the session list) and combines with query as AND.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
-     *   values are rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with
-     *   the same query and `end_user_id`; otherwise the request is rejected with 400.
+     * @param query Matched case-insensitively as a substring of name, `actor_id`, `session_urn`, or
+     *   `agentName`. Empty matches every session you can see. Results are ordered by match quality
+     *   (an exact name, `session_urn`, or `actor_id` match, then a prefix, then a substring), then
+     *   by name, across the whole result set, so a client must not re-sort a page to rank it.
+     * @param endUserId `end_user_id`, when set, is an exact filter on `actor_id` (the same filter
+     *   as on the session list) and combines with query as AND.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
+     *   rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with the same query
+     *   and `end_user_id`; otherwise the request is rejected with 400.
      */
-    fun sessionsListSearch(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null): SearchSessionsResponse {
+    fun sessionsListSearch(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SearchSessionsResponse {
         if (pageSize != null) {
-            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+            Validation.validateRange(
+                "page_size",
+                pageSize,
+                Validation.RangeOpts(min = 1.0, max = 100.0),
+            )
+        }
 
-        return SdkClient.request<SearchSessionsResponse>(SdkClient.RequestSpec("GET", "/v2/action-gateway/sessions/search", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "end_user_id" to
-    SdkClient.queryValue(endUserId, "form", true), "page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true)), operationId = "sessionsListSearch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<SearchSessionsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/action-gateway/sessions/search",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "query" to SdkClient.queryValue(query, "form", true),
+                            "end_user_id" to SdkClient.queryValue(endUserId, "form", true),
+                            "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                            "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                        ),
+                    operationId = "sessionsListSearch",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query, case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`; no total is reported.
+     * Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName`
+     * contains query, case-insensitively, ranked across the whole result set. Cursor-paged with
+     * `page_size` and `page_token`; no total is reported.
      *
-     * @param query Matched case-insensitively as a substring of name, `actor_id`,
-     *   `session_urn`, or `agentName`. Empty matches every session you can see.
-     *   Results are ordered by match quality (an exact name, `session_urn`, or
-     *   `actor_id` match, then a prefix, then a substring), then by name, across the
-     *   whole result set, so a client must not re-sort a page to rank it.
-     * @param endUserId `end_user_id`, when set, is an exact filter on `actor_id`
-     *   (the same filter as on the session list) and combines with query as AND.
-     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other
-     *   values are rejected with 400.
-     * @param pageToken `next_page_token` from the previous response. Valid only with
-     *   the same query and `end_user_id`; otherwise the request is rejected with 400.
+     * @param query Matched case-insensitively as a substring of name, `actor_id`, `session_urn`, or
+     *   `agentName`. Empty matches every session you can see. Results are ordered by match quality
+     *   (an exact name, `session_urn`, or `actor_id` match, then a prefix, then a substring), then
+     *   by name, across the whole result set, so a client must not re-sort a page to rank it.
+     * @param endUserId `end_user_id`, when set, is an exact filter on `actor_id` (the same filter
+     *   as on the session list) and combines with query as AND.
+     * @param pageSize Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are
+     *   rejected with 400.
+     * @param pageToken `next_page_token` from the previous response. Valid only with the same query
+     *   and `end_user_id`; otherwise the request is rejected with 400.
      */
-    fun sessionsListSearchPaginated(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (Session) -> Boolean) {
+    fun sessionsListSearchPaginated(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Session) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = sessionsListSearch(clientConfig, query, endUserId, pageSize, cursor, options)
@@ -136,9 +237,15 @@ internal object ActionGatewaySessionsListSearchOperation {
         }
     }
 
-
-
-    fun sessionsListSearchPages(clientConfig: ClientConfig, query: String? = null, endUserId: String? = null, pageSize: Long? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (ActionGateway.SessionsListSearchPage) -> Boolean) {
+    fun sessionsListSearchPages(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        endUserId: String? = null,
+        pageSize: Long? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ActionGateway.SessionsListSearchPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = sessionsListSearch(clientConfig, query, endUserId, pageSize, cursor, options)
@@ -155,12 +262,36 @@ internal object ActionGatewaySessionsListSearchOperation {
 
 internal object ActionGatewaySessionsDeleteOperation {
     /**
-     * Deletes the session and its policy. Succeeds without deleting anything when the session does not exist or you cannot delete it, so repeating a delete also succeeds. A malformed `session_urn` is rejected with 400.
+     * Deletes the session and its policy. Succeeds without deleting anything when the session does
+     * not exist or you cannot delete it, so repeating a delete also succeeds. A malformed
+     * `session_urn` is rejected with 400.
      *
-     * @param sessionUrn URN of the session, for example
-     *   `do:managed_agent_session:<uuid>`.
+     * @param sessionUrn URN of the session, for example `do:managed_agent_session:<uuid>`.
      */
-    fun sessionsDelete(clientConfig: ClientConfig, sessionUrn: String, options: RequestOptions? = null): EmptyResponse {
-        return SdkClient.request<EmptyResponse>(SdkClient.RequestSpec("DELETE", "/v2/action-gateway/sessions/${SdkClient.encodePathSegment(sessionUrn)}", config = clientConfig, operationId = "sessionsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun sessionsDelete(
+        clientConfig: ClientConfig,
+        sessionUrn: String,
+        options: RequestOptions? = null,
+    ): EmptyResponse {
+        return SdkClient.request<EmptyResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/v2/action-gateway/sessions/${SdkClient.encodePathSegment(sessionUrn)}",
+                    config = clientConfig,
+                    operationId = "sessionsDelete",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

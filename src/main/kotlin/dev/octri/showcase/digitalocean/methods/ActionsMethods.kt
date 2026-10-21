@@ -13,47 +13,87 @@ import dev.octri.showcase.digitalocean.Validation
 
 object ActionsMethods {
 
-
     /**
-     * This will be the entire list of actions taken on your account, so it will be quite large. As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.
+     * This will be the entire list of actions taken on your account, so it will be quite large. As
+     * with any large collection returned by the API, the results will be paginated with only 20 on
+     * each page by default.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun actionsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Actions {
+    fun actionsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Actions {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<Actions>(SdkClient.RequestSpec("GET", "/v2/actions", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "actionsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<Actions>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/actions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "actionsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * To retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.
      *
-     * @param actionId A unique numeric ID that can be used to identify and reference
-     *   an action.
+     * @param actionId A unique numeric ID that can be used to identify and reference an action.
      */
-    fun actionsGet(clientConfig: ClientConfig, actionId: Long, options: RequestOptions? = null): ActionResponse {
+    fun actionsGet(
+        clientConfig: ClientConfig,
+        actionId: Long,
+        options: RequestOptions? = null,
+    ): ActionResponse {
         Validation.validateRange("action_id", actionId, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<ActionResponse>(SdkClient.RequestSpec("GET", "/v2/actions/${SdkClient.encodePathSegment(actionId)}", config = clientConfig, operationId = "actionsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ActionResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/actions/${SdkClient.encodePathSegment(actionId)}",
+                    config = clientConfig,
+                    operationId = "actionsGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

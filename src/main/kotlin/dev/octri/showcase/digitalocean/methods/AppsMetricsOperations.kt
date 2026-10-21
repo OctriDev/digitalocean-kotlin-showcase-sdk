@@ -16,16 +16,39 @@ internal object AppsGetMetricsBandwidthDailyOperation {
      * Retrieve daily bandwidth usage metrics for a single app.
      *
      * @param appId The app ID
-     * @param date Optional day to query. Only the date component of the timestamp
-     *   will be considered. Default: yesterday.
+     * @param date Optional day to query. Only the date component of the timestamp will be
+     *   considered. Default: yesterday.
      */
-    fun appsGetMetricsBandwidthDaily(clientConfig: ClientConfig, appId: String, date: OffsetDateTime? = null, options: RequestOptions? = null): AppMetricsBandwidthUsage {
+    fun appsGetMetricsBandwidthDaily(
+        clientConfig: ClientConfig,
+        appId: String,
+        date: OffsetDateTime? = null,
+        options: RequestOptions? = null,
+    ): AppMetricsBandwidthUsage {
         if (date != null) {
             Validation.validateDateTime("date", date)
-}
+        }
 
-        return SdkClient.request<AppMetricsBandwidthUsage>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/metrics/bandwidth_daily", config = clientConfig, query = mapOf("date" to
-    SdkClient.queryValue(date, "form", true, "date-time")), operationId = "appsGetMetricsBandwidthDaily", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AppMetricsBandwidthUsage>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/metrics/bandwidth_daily",
+                    config = clientConfig,
+                    query = mapOf("date" to SdkClient.queryValue(date, "form", true, "date-time")),
+                    operationId = "appsGetMetricsBandwidthDaily",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -34,16 +57,44 @@ internal object AppsListMetricsBandwidthDailyOperation {
      * Retrieve daily bandwidth usage metrics for multiple apps.
      *
      * @param appIds A list of app IDs to query bandwidth metrics for.
-     * @param date Optional day to query. Only the date component of the timestamp
-     *   will be considered. Default: yesterday.
+     * @param date Optional day to query. Only the date component of the timestamp will be
+     *   considered. Default: yesterday.
      */
-    fun appsListMetricsBandwidthDaily(clientConfig: ClientConfig, appIds: List<String>, date: OffsetDateTime? = null, options: RequestOptions? = null): AppMetricsBandwidthUsage {
+    fun appsListMetricsBandwidthDaily(
+        clientConfig: ClientConfig,
+        appIds: List<String>,
+        date: OffsetDateTime? = null,
+        options: RequestOptions? = null,
+    ): AppMetricsBandwidthUsage {
         Validation.validateItems("app_ids", appIds, Validation.LengthOpts(max = 100))
 
         if (date != null) {
             Validation.validateDateTime("date", date)
-}
+        }
 
-        return SdkClient.request<AppMetricsBandwidthUsage>(SdkClient.RequestSpec("POST", "/v2/apps/metrics/bandwidth_daily", config = clientConfig, body = SdkClient.bodyMap("app_ids" to (appIds), "date" to (SdkClient.omitIfNull(date))), operationId = "appsListMetricsBandwidthDaily", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AppMetricsBandwidthUsage>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/apps/metrics/bandwidth_daily",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "app_ids" to (appIds),
+                            "date" to (SdkClient.omitIfNull(date)),
+                        ),
+                    operationId = "appsListMetricsBandwidthDaily",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

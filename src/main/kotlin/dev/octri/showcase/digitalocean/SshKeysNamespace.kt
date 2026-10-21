@@ -3,41 +3,80 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class SshKeysNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.
+     * To list all of the keys in your account, send a GET request to `/v2/account/keys`. The
+     * response will be a JSON object with a key set to `ssh_keys`. The value of this will be an
+     * array of ssh_key objects, each of which contains the standard ssh_key attributes.
      */
-    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SshKeysAll {
-        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysList(clientConfig, perPage, page, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SshKeysAll {
+        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`. Set the `name` attribute to the name you wish to use and the `public_key` attribute to the full public key you are adding.
+     * To add a new SSH public key to your DigitalOcean account, send a POST request to
+     * `/v2/account/keys`. Set the `name` attribute to the name you wish to use and the `public_key`
+     * attribute to the full public key you are adding.
      */
     fun create(publicKey: String, name: SshKeyName, options: RequestOptions? = null): SshKeysNew {
-        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysCreate(clientConfig, publicKey, name, options)
+        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysCreate(
+            clientConfig,
+            publicKey,
+            name,
+            options,
+        )
     }
 
     /**
-     * To get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`. The response will be a JSON object with the key `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.
+     * To get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or
+     * `/v2/account/keys/$KEY_FINGERPRINT`. The response will be a JSON object with the key
+     * `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.
      */
     fun get(sshKeyIdentifier: Any, options: RequestOptions? = null): SshKeysExisting {
-        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysGet(clientConfig, sshKeyIdentifier, options)
+        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysGet(
+            clientConfig,
+            sshKeyIdentifier,
+            options,
+        )
     }
 
     /**
-     * To update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID` or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want to use.
+     * To update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID`
+     * or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want
+     * to use.
      */
-    fun update(sshKeyIdentifier: Any, name: SshKeyName? = null, options: RequestOptions? = null): SshKeysExisting {
-        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysUpdate(clientConfig, sshKeyIdentifier, name, options)
+    fun update(
+        sshKeyIdentifier: Any,
+        name: SshKeyName? = null,
+        options: RequestOptions? = null,
+    ): SshKeysExisting {
+        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysUpdate(
+            clientConfig,
+            sshKeyIdentifier,
+            name,
+            options,
+        )
     }
 
     /**
-     * To destroy a public SSH key that you have in your account, send a DELETE request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`. A 204 status will be returned, indicating that the action was successful and that the response body is empty.
+     * To destroy a public SSH key that you have in your account, send a DELETE request to
+     * `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`. A 204 status will be
+     * returned, indicating that the action was successful and that the response body is empty.
      */
     fun delete(sshKeyIdentifier: Any, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysDelete(clientConfig, sshKeyIdentifier, options)
+        return dev.octri.showcase.digitalocean.methods.SshKeysMethods.sshKeysDelete(
+            clientConfig,
+            sshKeyIdentifier,
+            options,
+        )
     }
-
 }

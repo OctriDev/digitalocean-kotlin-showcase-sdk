@@ -3,30 +3,20 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Public parameters for creating a scenario set.
- */
+/** Public parameters for creating a scenario set. */
 data class ApiCreateScenarioSetInputPublic(
-    /**
-     * Uploaded scenario file to ingest. Provide this or `scenarios`, not both.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_upload_scenario_set") val fileUploadScenarioSet: ApiFileUploadDataSource? = null,
-    /**
-     * The name of the scenario set.
-     */
+    /** Uploaded scenario file to ingest. Provide this or `scenarios`, not both. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_upload_scenario_set")
+    val fileUploadScenarioSet: ApiFileUploadDataSource? = null,
+    /** The name of the scenario set. */
     val name: String? = null,
-    /**
-     * Inline scenarios. Provide this or `file_upload_scenario_set`, not both.
-     */
-    val scenarios: List<ApiScenario>? = null
+    /** Inline scenarios. Provide this or `file_upload_scenario_set`, not both. */
+    val scenarios: List<ApiScenario>? = null,
 )
 
-/**
- * Output for creating a scenario set.
- */
+/** Output for creating a scenario set. */
 data class ApiCreateScenarioSetOutput(
-    /**
-     * A team-owned collection of scenarios.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set") val scenarioSet: ApiScenarioSet? = null
+    /** A team-owned collection of scenarios. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set")
+    val scenarioSet: ApiScenarioSet? = null
 )

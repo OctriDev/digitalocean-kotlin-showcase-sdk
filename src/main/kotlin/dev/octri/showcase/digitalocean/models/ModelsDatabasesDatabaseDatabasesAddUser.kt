@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Typed representation of the `DatabaseUserRequest` API schema.
- */
+/** Typed representation of the `DatabaseUserRequest` API schema. */
 data class DatabaseUserRequest(
-    /**
-     * The name of a database user.
-     */
+    /** The name of a database user. */
     val name: String,
-    /**
-     * Optional object value serialized in the `mysql_settings` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("mysql_settings") val mysqlSettings: MysqlSettings? = null,
-    /**
-     * Optional object value serialized in the `settings` wire field.
-     */
-    val settings: UserSettings? = null
+    /** Optional object value serialized in the `mysql_settings` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("mysql_settings")
+    val mysqlSettings: MysqlSettings? = null,
+    /** Optional object value serialized in the `settings` wire field. */
+    val settings: UserSettings? = null,
 )

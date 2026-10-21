@@ -18,220 +18,451 @@ import dev.octri.showcase.digitalocean.Validation
 
 object Firewalls {
 
-
     /**
-     * To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.
+     * To list all of the firewalls available on your account, send a GET request to
+     * `/v2/firewalls`.
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun firewallsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ListFirewallsResponse {
+    fun firewallsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): ListFirewallsResponse {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<ListFirewallsResponse>(SdkClient.RequestSpec("GET", "/v2/firewalls", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "firewallsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ListFirewallsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/firewalls",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "page" to SdkClient.queryValue(page, "form", true),
+                        ),
+                    operationId = "firewallsList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a firewall with access rules for controlling traffic to and from attached resources. Provide `name` and at least one of `inbound_rules` or `outbound_rules` in the request body. A 202 response returns the firewall object and its standard attributes.
+     * Creates a firewall with access rules for controlling traffic to and from attached resources.
+     * Provide `name` and at least one of `inbound_rules` or `outbound_rules` in the request body. A
+     * 202 response returns the firewall object and its standard attributes.
      *
-     * To create a new firewall, send a POST request to `/v2/firewalls`. The request must contain at least one inbound or outbound access rule.
+     * To create a new firewall, send a POST request to `/v2/firewalls`. The request must contain at
+     * least one inbound or outbound access rule.
      */
-    fun firewallsCreate(clientConfig: ClientConfig, body: FirewallRequest? = null, options: RequestOptions? = null): CreateFirewallResponse {
-        return SdkClient.request<CreateFirewallResponse>(SdkClient.RequestSpec("POST", "/v2/firewalls", config = clientConfig, body = body, operationId = "firewallsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun firewallsCreate(
+        clientConfig: ClientConfig,
+        body: FirewallRequest? = null,
+        options: RequestOptions? = null,
+    ): CreateFirewallResponse {
+        return SdkClient.request<CreateFirewallResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/firewalls",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "firewallsCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * To show information about an existing firewall, send a GET request to `/v2/firewalls/$FIREWALL_ID`.
+     * To show information about an existing firewall, send a GET request to
+     * `/v2/firewalls/$FIREWALL_ID`.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsGet(clientConfig: ClientConfig, firewallId: String, options: RequestOptions? = null): GetFirewallResponse {
+    fun firewallsGet(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        options: RequestOptions? = null,
+    ): GetFirewallResponse {
         Validation.validateUuid("firewall_id", firewallId)
 
-        return SdkClient.request<GetFirewallResponse>(SdkClient.RequestSpec("GET", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}", config = clientConfig, operationId = "firewallsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<GetFirewallResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}",
+                    config = clientConfig,
+                    operationId = "firewallsGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Replaces the configuration of an existing firewall with the representation you provide. Include `name` and at least one of `inbound_rules` or `outbound_rules`; attributes you omit are reset to their default values. You also need read access to every resource attached to the firewall, such as the `droplet:read` scope.
+     * Replaces the configuration of an existing firewall with the representation you provide.
+     * Include `name` and at least one of `inbound_rules` or `outbound_rules`; attributes you omit
+     * are reset to their default values. You also need read access to every resource attached to
+     * the firewall, such as the `droplet:read` scope.
      *
-     * To update the configuration of an existing firewall, send a PUT request to `/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation of the firewall including existing attributes. **Note that any attributes that are not provided will be reset to their default values.** You must have read access (e.g. `droplet:read`) to all resources attached to the firewall to successfully update the firewall.
+     * To update the configuration of an existing firewall, send a PUT request to
+     * `/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation of the
+     * firewall including existing attributes. **Note that any attributes that are not provided will
+     * be reset to their default values.** You must have read access (e.g. `droplet:read`) to all
+     * resources attached to the firewall to successfully update the firewall.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsUpdate(clientConfig: ClientConfig, firewallId: String, body: FirewallRequest? = null, options: RequestOptions? = null): PutFirewallResponse {
+    fun firewallsUpdate(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        body: FirewallRequest? = null,
+        options: RequestOptions? = null,
+    ): PutFirewallResponse {
         Validation.validateUuid("firewall_id", firewallId)
 
-        return SdkClient.request<PutFirewallResponse>(SdkClient.RequestSpec("PUT", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}", config = clientConfig, body = body, operationId = "firewallsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<PutFirewallResponse>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}",
+                    config = clientConfig,
+                    body = body,
+                    operationId = "firewallsUpdate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * To delete a firewall send a DELETE request to `/v2/firewalls/$FIREWALL_ID`. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To delete a firewall send a DELETE request to `/v2/firewalls/$FIREWALL_ID`. No response body
+     * will be sent back, but the response code will indicate success. Specifically, the response
+     * code will be a 204, which means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsDelete(clientConfig: ClientConfig, firewallId: String, options: RequestOptions? = null): Unit {
+    fun firewallsDelete(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}", config = clientConfig, operationId = "firewallsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}",
+                config = clientConfig,
+                operationId = "firewallsDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * To assign a Droplet to a firewall, send a POST request to `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should be a `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To assign a Droplet to a firewall, send a POST request to
+     * `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should be a
+     * `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent back,
+     * but the response code will indicate success. Specifically, the response code will be a 204,
+     * which means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
-     * @param dropletIds An array containing the IDs of the Droplets to be assigned
-     *   to the firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
+     * @param dropletIds An array containing the IDs of the Droplets to be assigned to the firewall.
      */
-    fun firewallsAssignDroplets(clientConfig: ClientConfig, firewallId: String, dropletIds: List<Long>, options: RequestOptions? = null): Unit {
+    fun firewallsAssignDroplets(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        dropletIds: List<Long>,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/droplets", config = clientConfig, body = SdkClient.bodyMap("droplet_ids" to (dropletIds)), operationId = "firewallsAssignDroplets", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/droplets",
+                config = clientConfig,
+                body = SdkClient.bodyMap("droplet_ids" to (dropletIds)),
+                operationId = "firewallsAssignDroplets",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * To remove a Droplet from a firewall, send a DELETE request to `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should be a `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To remove a Droplet from a firewall, send a DELETE request to
+     * `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should be a
+     * `droplet_ids` attribute containing a list of Droplet IDs. No response body will be sent back,
+     * but the response code will indicate success. Specifically, the response code will be a 204,
+     * which means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
+     * @param dropletIds An array containing the IDs of the Droplets to be removed from the
      *   firewall.
-     * @param dropletIds An array containing the IDs of the Droplets to be removed
-     *   from the firewall.
      */
-    fun firewallsDeleteDroplets(clientConfig: ClientConfig, firewallId: String, dropletIds: List<Long>, options: RequestOptions? = null): Unit {
+    fun firewallsDeleteDroplets(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        dropletIds: List<Long>,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/droplets", config = clientConfig, body = SdkClient.bodyMap("droplet_ids" to (dropletIds)), operationId = "firewallsDeleteDroplets", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/droplets",
+                config = clientConfig,
+                body = SdkClient.bodyMap("droplet_ids" to (dropletIds)),
+                operationId = "firewallsDeleteDroplets",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * Adds tags representing groups of Droplets to a firewall. Supply `tags` as an array of existing tag names, and ensure the caller has the required tag scopes.
+     * Adds tags representing groups of Droplets to a firewall. Supply `tags` as an array of
+     * existing tag names, and ensure the caller has the required tag scopes.
      *
-     * To assign a tag representing a group of Droplets to a firewall, send a POST request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request, there should be a `tags` attribute containing a list of tag names. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To assign a tag representing a group of Droplets to a firewall, send a POST request to
+     * `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request, there should be a `tags`
+     * attribute containing a list of tag names. No response body will be sent back, but the
+     * response code will indicate success. Specifically, the response code will be a 204, which
+     * means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsAddTags(clientConfig: ClientConfig, firewallId: String, tags: ExistingTagsArray, options: RequestOptions? = null): Unit {
+    fun firewallsAddTags(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        tags: ExistingTagsArray,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/tags", config = clientConfig, body = SdkClient.bodyMap("tags" to (tags)), operationId = "firewallsAddTags", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/tags",
+                config = clientConfig,
+                body = SdkClient.bodyMap("tags" to (tags)),
+                operationId = "firewallsAddTags",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * Removes tags representing groups of Droplets from a firewall. Supply `tags` as an array of existing tag names to remove from the firewall.
+     * Removes tags representing groups of Droplets from a firewall. Supply `tags` as an array of
+     * existing tag names to remove from the firewall.
      *
-     * To remove a tag representing a group of Droplets from a firewall, send a DELETE request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request, there should be a `tags` attribute containing a list of tag names. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To remove a tag representing a group of Droplets from a firewall, send a DELETE request to
+     * `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request, there should be a `tags`
+     * attribute containing a list of tag names. No response body will be sent back, but the
+     * response code will indicate success. Specifically, the response code will be a 204, which
+     * means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsDeleteTags(clientConfig: ClientConfig, firewallId: String, tags: ExistingTagsArray, options: RequestOptions? = null): Unit {
+    fun firewallsDeleteTags(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        tags: ExistingTagsArray,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/tags", config = clientConfig, body = SdkClient.bodyMap("tags" to (tags)), operationId = "firewallsDeleteTags", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/tags",
+                config = clientConfig,
+                body = SdkClient.bodyMap("tags" to (tags)),
+                operationId = "firewallsDeleteTags",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * Adds inbound or outbound access rules to a firewall. Provide at least one of `inbound_rules` or `outbound_rules`; you can include both arrays in the same request.
+     * Adds inbound or outbound access rules to a firewall. Provide at least one of `inbound_rules`
+     * or `outbound_rules`; you can include both arrays in the same request.
      *
-     * To add additional access rules to a firewall, send a POST request to `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an inbound_rules and/or outbound_rules attribute containing an array of rules to be added. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To add additional access rules to a firewall, send a POST request to
+     * `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an inbound_rules
+     * and/or outbound_rules attribute containing an array of rules to be added. No response body
+     * will be sent back, but the response code will indicate success. Specifically, the response
+     * code will be a 204, which means that the action was successful with no returned body data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsAddRules(clientConfig: ClientConfig, firewallId: String, body: FirewallRules? = null, options: RequestOptions? = null): Unit {
+    fun firewallsAddRules(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        body: FirewallRules? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/rules", config = clientConfig, body = body, operationId = "firewallsAddRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/rules",
+                config = clientConfig,
+                body = body,
+                operationId = "firewallsAddRules",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * Removes inbound or outbound access rules from a firewall. Provide at least one of `inbound_rules` or `outbound_rules`; you can include both arrays in the same request.
+     * Removes inbound or outbound access rules from a firewall. Provide at least one of
+     * `inbound_rules` or `outbound_rules`; you can include both arrays in the same request.
      *
-     * To remove access rules from a firewall, send a DELETE request to `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an `inbound_rules` and/or `outbound_rules` attribute containing an array of rules to be removed. No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+     * To remove access rules from a firewall, send a DELETE request to
+     * `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an `inbound_rules`
+     * and/or `outbound_rules` attribute containing an array of rules to be removed. No response
+     * body will be sent back, but the response code will indicate success. Specifically, the
+     * response code will be a 204, which means that the action was successful with no returned body
+     * data.
      *
-     * @param firewallId A unique ID that can be used to identify and reference a
-     *   firewall.
+     * @param firewallId A unique ID that can be used to identify and reference a firewall.
      */
-    fun firewallsDeleteRules(clientConfig: ClientConfig, firewallId: String, body: FirewallRules? = null, options: RequestOptions? = null): Unit {
+    fun firewallsDeleteRules(
+        clientConfig: ClientConfig,
+        firewallId: String,
+        body: FirewallRules? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("firewall_id", firewallId)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/rules", config = clientConfig, body = body, operationId = "firewallsDeleteRules", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/firewalls/${SdkClient.encodePathSegment(firewallId)}/rules",
+                config = clientConfig,
+                body = body,
+                operationId = "firewallsDeleteRules",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

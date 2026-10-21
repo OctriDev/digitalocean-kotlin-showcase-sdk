@@ -17,134 +17,335 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object AppsListDeploymentsOperation {
     /**
-     * Lists deployments for a specific app. Filter by deployment type and use `page` and `per_page` to paginate the results.
+     * Lists deployments for a specific app. Filter by deployment type and use `page` and `per_page`
+     * to paginate the results.
      *
      * List all deployments of an app.
      *
      * @param appId The app ID
      * @param page Which 'page' of paginated results to return.
      * @param perPage Number of items returned per page
-     * @param deploymentTypes Optional. Filter deployments by deployment_type -
-     *   MANUAL: manual deployment - DEPLOY_ON_PUSH: deployment triggered by a push to
-     *   the app's repository - MAINTENANCE: deployment for maintenance purposes -
-     *   MANUAL_ROLLBACK: manual revert to a previous deployment - AUTO_ROLLBACK:
-     *   automatic revert to a previous deployment - UPDATE_DATABASE_TRUSTED_SOURCES:
-     *   update database trusted sources - AUTOSCALED: deployment that has been
-     *   autoscaled
+     * @param deploymentTypes Optional. Filter deployments by deployment_type - MANUAL: manual
+     *   deployment - DEPLOY_ON_PUSH: deployment triggered by a push to the app's repository -
+     *   MAINTENANCE: deployment for maintenance purposes - MANUAL_ROLLBACK: manual revert to a
+     *   previous deployment - AUTO_ROLLBACK: automatic revert to a previous deployment -
+     *   UPDATE_DATABASE_TRUSTED_SOURCES: update database trusted sources - AUTOSCALED: deployment
+     *   that has been autoscaled
      */
-    fun appsListDeployments(clientConfig: ClientConfig, appId: String, page: Long? = null, perPage: Long? = null, deploymentTypes: List<AppsListDeploymentsParameterItemEnum>? = null, options: RequestOptions? = null): AppsDeploymentsResponse {
+    fun appsListDeployments(
+        clientConfig: ClientConfig,
+        appId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        deploymentTypes: List<AppsListDeploymentsParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentsResponse {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
-        return SdkClient.request<AppsDeploymentsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "deployment_types" to
-    SdkClient.queryValue(deploymentTypes, "form", true)), operationId = "appsListDeployments", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<AppsDeploymentsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "deployment_types" to
+                                SdkClient.queryValue(deploymentTypes, "form", true),
+                        ),
+                    operationId = "appsListDeployments",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsCreateDeploymentOperation {
     /**
-     * Creates a deployment for a specific app by pulling the latest changes from its repository and scheduling a new deployment. Set `force_build` to build the app from source even when an existing cached build can be reused. The response includes the deployment record and its current phase.
+     * Creates a deployment for a specific app by pulling the latest changes from its repository and
+     * scheduling a new deployment. Set `force_build` to build the app from source even when an
+     * existing cached build can be reused. The response includes the deployment record and its
+     * current phase.
      *
-     * Creating an app deployment will pull the latest changes from your repository and schedule a new deployment for your app.
+     * Creating an app deployment will pull the latest changes from your repository and schedule a
+     * new deployment for your app.
      *
      * @param appId The app ID
-     * @param forceBuild Optional `boolean` value serialized in the `force_build`
-     *   wire field.
+     * @param forceBuild Optional `boolean` value serialized in the `force_build` wire field.
      */
-    fun appsCreateDeployment(clientConfig: ClientConfig, appId: String, forceBuild: Boolean? = null, options: RequestOptions? = null): AppsDeploymentResponse {
-        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments", config = clientConfig, body = SdkClient.bodyMap("force_build" to (SdkClient.omitIfNull(forceBuild))), operationId = "appsCreateDeployment", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsCreateDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        forceBuild: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse {
+        return SdkClient.request<AppsDeploymentResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("force_build" to (SdkClient.omitIfNull(forceBuild))),
+                    operationId = "appsCreateDeployment",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetDeploymentOperation {
     /**
-     * Retrieves details for a specific deployment of an app. Use both identifiers to select the deployment, and inspect its phase and progress to check its current state.
+     * Retrieves details for a specific deployment of an app. Use both identifiers to select the
+     * deployment, and inspect its phase and progress to check its current state.
      *
      * Retrieve information about an app deployment.
      *
      * @param appId The app ID
      * @param deploymentId The deployment ID
      */
-    fun appsGetDeployment(clientConfig: ClientConfig, appId: String, deploymentId: String, options: RequestOptions? = null): AppsDeploymentResponse {
-        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}", config = clientConfig, operationId = "appsGetDeployment", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse {
+        return SdkClient.request<AppsDeploymentResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}",
+                    config = clientConfig,
+                    operationId = "appsGetDeployment",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsCancelDeploymentOperation {
     /**
-     * Cancels an in-progress deployment for a specific app. Use the app and deployment identifiers to select the deployment to stop. The response contains the deployment after it has been cancelled.
+     * Cancels an in-progress deployment for a specific app. Use the app and deployment identifiers
+     * to select the deployment to stop. The response contains the deployment after it has been
+     * cancelled.
      *
      * Immediately cancel an in-progress deployment.
      *
      * @param appId The app ID
      * @param deploymentId The deployment ID
      */
-    fun appsCancelDeployment(clientConfig: ClientConfig, appId: String, deploymentId: String, options: RequestOptions? = null): AppsDeploymentResponse {
-        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/cancel", config = clientConfig, operationId = "appsCancelDeployment", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsCancelDeployment(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse {
+        return SdkClient.request<AppsDeploymentResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/cancel",
+                    config = clientConfig,
+                    operationId = "appsCancelDeployment",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetLogsOperation {
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. The response will include
+     * links to either real-time logs of an in-progress or active deployment or archived logs of a
+     * past deployment.
      *
      * @param appId The app ID
      * @param deploymentId The deployment ID
-     * @param componentName An optional component name. If set, logs will be limited
-     *   to this component only.
-     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY:
-     *   Deploy-time logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of
-     *   crashed/restarted instances during runtime - AUTOSCALE_EVENT: Logs of an
-     *   autoscaling event (requires event_id)
+     * @param componentName An optional component name. If set, logs will be limited to this
+     *   component only.
+     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY: Deploy-time
+     *   logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of crashed/restarted instances during
+     *   runtime - AUTOSCALE_EVENT: Logs of an autoscaling event (requires event_id)
      * @param follow Whether the logs should follow live updates.
-     * @param podConnectionTimeout An optional time duration to wait if the
-     *   underlying component instance is not immediately available. Default: `3m`.
+     * @param podConnectionTimeout An optional time duration to wait if the underlying component
+     *   instance is not immediately available. Default: `3m`.
      */
-    fun appsGetLogs(clientConfig: ClientConfig, request: Apps.AppsGetLogsRequest, options: RequestOptions? = null): AppsGetLogsResponse {
-        return SdkClient.request<AppsGetLogsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(request.appId)}/deployments/${SdkClient.encodePathSegment(request.deploymentId)}/components/${SdkClient.encodePathSegment(request.componentName)}/logs", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(request.type, "form", true), "follow" to
-    SdkClient.queryValue(request.follow, "form", true), "pod_connection_timeout" to
-    SdkClient.queryValue(request.podConnectionTimeout, "form", true)), operationId = "appsGetLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetLogs(
+        clientConfig: ClientConfig,
+        request: Apps.AppsGetLogsRequest,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse {
+        return SdkClient.request<AppsGetLogsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(request.appId)}/deployments/${SdkClient.encodePathSegment(request.deploymentId)}/components/${SdkClient.encodePathSegment(request.componentName)}/logs",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "type" to SdkClient.queryValue(request.type, "form", true),
+                            "follow" to SdkClient.queryValue(request.follow, "form", true),
+                            "pod_connection_timeout" to
+                                SdkClient.queryValue(request.podConnectionTimeout, "form", true),
+                        ),
+                    operationId = "appsGetLogs",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetLogsAggregateOperation {
     /**
-     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+     * Retrieve the logs of a past, in-progress, or active deployment. If a component name is
+     * specified, the logs will be limited to only that component. The response will include links
+     * to either real-time logs of an in-progress or active deployment or archived logs of a past
+     * deployment.
      *
      * @param appId The app ID
      * @param deploymentId The deployment ID
-     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY:
-     *   Deploy-time logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of
-     *   crashed/restarted instances during runtime - AUTOSCALE_EVENT: Logs of an
-     *   autoscaling event (requires event_id)
+     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY: Deploy-time
+     *   logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of crashed/restarted instances during
+     *   runtime - AUTOSCALE_EVENT: Logs of an autoscaling event (requires event_id)
      * @param follow Whether the logs should follow live updates.
-     * @param podConnectionTimeout An optional time duration to wait if the
-     *   underlying component instance is not immediately available. Default: `3m`.
+     * @param podConnectionTimeout An optional time duration to wait if the underlying component
+     *   instance is not immediately available. Default: `3m`.
      */
-    fun appsGetLogsAggregate(clientConfig: ClientConfig, appId: String, deploymentId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse {
-        return SdkClient.request<AppsGetLogsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/logs", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(type, "form", true), "follow" to SdkClient.queryValue(follow, "form", true), "pod_connection_timeout" to
-    SdkClient.queryValue(podConnectionTimeout, "form", true)), operationId = "appsGetLogsAggregate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetLogsAggregate(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse {
+        return SdkClient.request<AppsGetLogsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/logs",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "type" to SdkClient.queryValue(type, "form", true),
+                            "follow" to SdkClient.queryValue(follow, "form", true),
+                            "pod_connection_timeout" to
+                                SdkClient.queryValue(podConnectionTimeout, "form", true),
+                        ),
+                    operationId = "appsGetLogsAggregate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object AppsGetExecOperation {
     /**
-     * Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.
+     * Returns a websocket URL that allows sending/receiving console input and output to a component
+     * of the specified deployment if one exists. Optionally, the instance_name parameter can be
+     * provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral;
+     * therefore, we recommended to avoid making persistent changes or such scripting around them.
      *
      * @param appId The app ID
      * @param deploymentId The deployment ID
-     * @param componentName An optional component name. If set, logs will be limited
-     *   to this component only.
-     * @param instanceName The name of the actively running ephemeral compute
-     *   instance
+     * @param componentName An optional component name. If set, logs will be limited to this
+     *   component only.
+     * @param instanceName The name of the actively running ephemeral compute instance
      */
-    fun appsGetExec(clientConfig: ClientConfig, appId: String, deploymentId: String, componentName: String, instanceName: String? = null, options: RequestOptions? = null): AppsGetExecResponse {
-        return SdkClient.request<AppsGetExecResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/components/${SdkClient.encodePathSegment(componentName)}/exec", config = clientConfig, query = mapOf("instance_name" to
-    SdkClient.queryValue(instanceName, "form", true)), operationId = "appsGetExec", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+    fun appsGetExec(
+        clientConfig: ClientConfig,
+        appId: String,
+        deploymentId: String,
+        componentName: String,
+        instanceName: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetExecResponse {
+        return SdkClient.request<AppsGetExecResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/apps/${SdkClient.encodePathSegment(appId)}/deployments/${SdkClient.encodePathSegment(deploymentId)}/components/${SdkClient.encodePathSegment(componentName)}/exec",
+                    config = clientConfig,
+                    query =
+                        mapOf("instance_name" to SdkClient.queryValue(instanceName, "form", true)),
+                    operationId = "appsGetExec",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

@@ -3,50 +3,44 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Token pricing breakdown for a single model.
- */
+/** Token pricing breakdown for a single model. */
 data class ApiTokenPricing(
-    /**
-     * Cost of input tokens.
-     */
+    /** Cost of input tokens. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_cost") val inputCost: Double? = null,
-    /**
-     * Cost of output tokens.
-     */
+    /** Cost of output tokens. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_cost") val outputCost: Double? = null,
-    /**
-     * Total cost (input + output).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_cost") val totalCost: Double? = null
+    /** Total cost (input + output). */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_cost") val totalCost: Double? = null,
 )
 
-/**
- * Typed representation of the `ApiTokenUsage` API schema.
- */
+/** Typed representation of the `ApiTokenUsage` API schema. */
 data class ApiTokenUsage(
     /**
-     * Optional `uint64`-formatted value serialized in the `total_candidate_input_tokens` wire field.
+     * Optional `uint64`-formatted value serialized in the `total_candidate_input_tokens` wire
+     * field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_input_tokens") val totalCandidateInputTokens: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_input_tokens")
+    val totalCandidateInputTokens: String? = null,
     /**
-     * Optional `uint64`-formatted value serialized in the `total_candidate_output_tokens` wire field.
+     * Optional `uint64`-formatted value serialized in the `total_candidate_output_tokens` wire
+     * field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_output_tokens") val totalCandidateOutputTokens: String? = null,
-    /**
-     * Optional `uint64`-formatted value serialized in the `total_candidate_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_tokens") val totalCandidateTokens: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_output_tokens")
+    val totalCandidateOutputTokens: String? = null,
+    /** Optional `uint64`-formatted value serialized in the `total_candidate_tokens` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_candidate_tokens")
+    val totalCandidateTokens: String? = null,
     /**
      * Optional `uint64`-formatted value serialized in the `total_judge_input_tokens` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_input_tokens") val totalJudgeInputTokens: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_input_tokens")
+    val totalJudgeInputTokens: String? = null,
     /**
      * Optional `uint64`-formatted value serialized in the `total_judge_output_tokens` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_output_tokens") val totalJudgeOutputTokens: String? = null,
-    /**
-     * Optional `uint64`-formatted value serialized in the `total_judge_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_tokens") val totalJudgeTokens: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_output_tokens")
+    val totalJudgeOutputTokens: String? = null,
+    /** Optional `uint64`-formatted value serialized in the `total_judge_tokens` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_judge_tokens")
+    val totalJudgeTokens: String? = null,
 )

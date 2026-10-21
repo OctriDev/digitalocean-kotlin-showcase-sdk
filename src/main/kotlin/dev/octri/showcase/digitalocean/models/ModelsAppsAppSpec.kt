@@ -3,138 +3,112 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * The desired configuration of an application.
- */
+/** The desired configuration of an application. */
 data class AppSpec(
-    /**
-     * The name of the app. Must be unique across all apps in the same account.
-     */
+    /** The name of the app. Must be unique across all apps in the same account. */
     val name: String,
-    /**
-     * The slug form of the geographical origin of the app. Default: `nearest available`
-     */
+    /** The slug form of the geographical origin of the app. Default: `nearest available` */
     val region: AppSpecRegionEnum? = null,
     /**
-     * If set to `true`, the app will **not** be cached at the edge (CDN). Enable this option if you want to manage CDN configuration yourself—whether by using an external CDN provider or by handling static content and caching within your app. This setting is also recommended for apps that require real-time data or serve dynamic content, such as those using Server-Sent Events (SSE) over GET, or hosting an MCP (Model Context Protocol) Server that utilizes SSE. **Note:** This feature…
+     * If set to `true`, the app will **not** be cached at the edge (CDN). Enable this option if you
+     * want to manage CDN configuration yourself—whether by using an external CDN provider or by
+     * handling static content and caching within your app. This setting is also recommended for
+     * apps that require real-time data or serve dynamic content, such as those using Server-Sent
+     * Events (SSE) over GET, or hosting an MCP (Model Context Protocol) Server that utilizes SSE.
+     * **Note:** This feature…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_edge_cache") val disableEdgeCache: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_edge_cache")
+    val disableEdgeCache: Boolean? = null,
     /**
-     * If set to `true`, email addresses in the app will not be obfuscated. This is useful for apps that require email addresses to be visible (in the HTML markup).
+     * If set to `true`, email addresses in the app will not be obfuscated. This is useful for apps
+     * that require email addresses to be visible (in the HTML markup).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_email_obfuscation") val disableEmailObfuscation: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_email_obfuscation")
+    val disableEmailObfuscation: Boolean? = null,
     /**
-     * If set to `true`, suspicious requests will go through additional security checks to help mitigate layer 7 DDoS attacks.
+     * If set to `true`, suspicious requests will go through additional security checks to help
+     * mitigate layer 7 DDoS attacks.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_threat_control_enabled") val enhancedThreatControlEnabled: Boolean? = null,
-    /**
-     * A set of hostnames where the application will be available.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_threat_control_enabled")
+    val enhancedThreatControlEnabled: Boolean? = null,
+    /** A set of hostnames where the application will be available. */
     val domains: List<AppDomainSpec>? = null,
-    /**
-     * Workloads which expose publicly-accessible HTTP services.
-     */
+    /** Workloads which expose publicly-accessible HTTP services. */
     val services: List<AppServiceSpec>? = null,
-    /**
-     * Content which can be rendered to static web assets.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("static_sites") val staticSites: List<AppStaticSiteSpec>? = null,
-    /**
-     * Pre and post deployment workloads which do not expose publicly-accessible HTTP routes.
-     */
+    /** Content which can be rendered to static web assets. */
+    @com.fasterxml.jackson.annotation.JsonProperty("static_sites")
+    val staticSites: List<AppStaticSiteSpec>? = null,
+    /** Pre and post deployment workloads which do not expose publicly-accessible HTTP routes. */
     val jobs: List<AppJobSpec>? = null,
-    /**
-     * Workloads which do not expose publicly-accessible HTTP services.
-     */
+    /** Workloads which do not expose publicly-accessible HTTP services. */
     val workers: List<AppWorkerSpec>? = null,
-    /**
-     * Workloads which expose publicly-accessible HTTP services via Functions Components.
-     */
+    /** Workloads which expose publicly-accessible HTTP services via Functions Components. */
     val functions: List<AppFunctionsSpec>? = null,
-    /**
-     * Database instances which can provide persistence to workloads within the application.
-     */
+    /** Database instances which can provide persistence to workloads within the application. */
     val databases: List<AppDatabaseSpec>? = null,
-    /**
-     * Specification for app ingress configurations.
-     */
+    /** Specification for app ingress configurations. */
     val ingress: AppIngressSpec? = null,
-    /**
-     * Specification for app egress configurations.
-     */
+    /** Specification for app egress configurations. */
     val egress: AppEgressSpec? = null,
     /**
-     * Specification to configure maintenance settings for the app, such as maintenance mode and archiving the app.
+     * Specification to configure maintenance settings for the app, such as maintenance mode and
+     * archiving the app.
      */
     val maintenance: AppMaintenanceSpec? = null,
-    /**
-     * Optional object value serialized in the `vpc` wire field.
-     */
-    val vpc: AppsVpc? = null
+    /** Optional object value serialized in the `vpc` wire field. */
+    val vpc: AppsVpc? = null,
 )
 
-/**
- * The desired configuration of an application.
- */
+/** The desired configuration of an application. */
 data class AppSpecRequest(
-    /**
-     * The name of the app. Must be unique across all apps in the same account.
-     */
+    /** The name of the app. Must be unique across all apps in the same account. */
     val name: String,
-    /**
-     * The slug form of the geographical origin of the app. Default: `nearest available`
-     */
+    /** The slug form of the geographical origin of the app. Default: `nearest available` */
     val region: AppSpecRequestRegionEnum? = null,
     /**
-     * If set to `true`, the app will **not** be cached at the edge (CDN). Enable this option if you want to manage CDN configuration yourself—whether by using an external CDN provider or by handling static content and caching within your app. This setting is also recommended for apps that require real-time data or serve dynamic content, such as those using Server-Sent Events (SSE) over GET, or hosting an MCP (Model Context Protocol) Server that utilizes SSE. **Note:** This feature…
+     * If set to `true`, the app will **not** be cached at the edge (CDN). Enable this option if you
+     * want to manage CDN configuration yourself—whether by using an external CDN provider or by
+     * handling static content and caching within your app. This setting is also recommended for
+     * apps that require real-time data or serve dynamic content, such as those using Server-Sent
+     * Events (SSE) over GET, or hosting an MCP (Model Context Protocol) Server that utilizes SSE.
+     * **Note:** This feature…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_edge_cache") val disableEdgeCache: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_edge_cache")
+    val disableEdgeCache: Boolean? = null,
     /**
-     * If set to `true`, email addresses in the app will not be obfuscated. This is useful for apps that require email addresses to be visible (in the HTML markup).
+     * If set to `true`, email addresses in the app will not be obfuscated. This is useful for apps
+     * that require email addresses to be visible (in the HTML markup).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_email_obfuscation") val disableEmailObfuscation: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_email_obfuscation")
+    val disableEmailObfuscation: Boolean? = null,
     /**
-     * If set to `true`, suspicious requests will go through additional security checks to help mitigate layer 7 DDoS attacks.
+     * If set to `true`, suspicious requests will go through additional security checks to help
+     * mitigate layer 7 DDoS attacks.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_threat_control_enabled") val enhancedThreatControlEnabled: Boolean? = null,
-    /**
-     * A set of hostnames where the application will be available.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_threat_control_enabled")
+    val enhancedThreatControlEnabled: Boolean? = null,
+    /** A set of hostnames where the application will be available. */
     val domains: List<AppDomainSpec>? = null,
-    /**
-     * Workloads which expose publicly-accessible HTTP services.
-     */
+    /** Workloads which expose publicly-accessible HTTP services. */
     val services: List<AppServiceSpec>? = null,
-    /**
-     * Content which can be rendered to static web assets.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("static_sites") val staticSites: List<AppStaticSiteSpec>? = null,
-    /**
-     * Pre and post deployment workloads which do not expose publicly-accessible HTTP routes.
-     */
+    /** Content which can be rendered to static web assets. */
+    @com.fasterxml.jackson.annotation.JsonProperty("static_sites")
+    val staticSites: List<AppStaticSiteSpec>? = null,
+    /** Pre and post deployment workloads which do not expose publicly-accessible HTTP routes. */
     val jobs: List<AppJobSpec>? = null,
-    /**
-     * Workloads which do not expose publicly-accessible HTTP services.
-     */
+    /** Workloads which do not expose publicly-accessible HTTP services. */
     val workers: List<AppWorkerSpec>? = null,
-    /**
-     * Workloads which expose publicly-accessible HTTP services via Functions Components.
-     */
+    /** Workloads which expose publicly-accessible HTTP services via Functions Components. */
     val functions: List<AppFunctionsSpec>? = null,
-    /**
-     * Database instances which can provide persistence to workloads within the application.
-     */
+    /** Database instances which can provide persistence to workloads within the application. */
     val databases: List<AppDatabaseSpec>? = null,
-    /**
-     * Specification for app ingress configurations.
-     */
+    /** Specification for app ingress configurations. */
     val ingress: AppIngressSpec? = null,
-    /**
-     * Specification for app egress configurations.
-     */
+    /** Specification for app egress configurations. */
     val egress: AppEgressSpec? = null,
     /**
-     * Specification to configure maintenance settings for the app, such as maintenance mode and archiving the app.
+     * Specification to configure maintenance settings for the app, such as maintenance mode and
+     * archiving the app.
      */
-    val maintenance: AppMaintenanceSpec? = null
+    val maintenance: AppMaintenanceSpec? = null,
 )

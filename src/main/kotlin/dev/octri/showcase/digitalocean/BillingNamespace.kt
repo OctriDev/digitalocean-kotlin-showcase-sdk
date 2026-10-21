@@ -7,80 +7,169 @@ import java.time.LocalDate
 
 class BillingNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To retrieve the balances on a customer's account, send a GET request to `/v2/customers/my/balance`.
+     * To retrieve the balances on a customer's account, send a GET request to
+     * `/v2/customers/my/balance`.
      */
     fun balanceGet(options: RequestOptions? = null): Balance {
         return dev.octri.showcase.digitalocean.methods.Billing.balanceGet(clientConfig, options)
     }
 
     /**
-     * To retrieve the prepayment configuration and current prepayment status for a customer's account, send a GET request to `/v2/customers/my/prepayment_config`.
+     * To retrieve the prepayment configuration and current prepayment status for a customer's
+     * account, send a GET request to `/v2/customers/my/prepayment_config`.
      */
     fun prepaymentConfigGet(options: RequestOptions? = null): PrepaymentConfigResponse {
-        return dev.octri.showcase.digitalocean.methods.Billing.prepaymentConfigGet(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.Billing.prepaymentConfigGet(
+            clientConfig,
+            options,
+        )
     }
 
     /**
-     * To retrieve the prepayment gate status and balances for a customer's account, send a GET request to `/v2/customers/my/prepayment_status`.
+     * To retrieve the prepayment gate status and balances for a customer's account, send a GET
+     * request to `/v2/customers/my/prepayment_status`.
      */
     fun prepaymentStatusGet(options: RequestOptions? = null): PrepaymentStatusResponse {
-        return dev.octri.showcase.digitalocean.methods.Billing.prepaymentStatusGet(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.Billing.prepaymentStatusGet(
+            clientConfig,
+            options,
+        )
     }
 
     /**
-     * To retrieve a list of all billing history entries, send a GET request to `/v2/customers/my/billing_history`.
+     * To retrieve a list of all billing history entries, send a GET request to
+     * `/v2/customers/my/billing_history`.
      */
     fun historyList(options: RequestOptions? = null): BillingHistoryResponse {
-        return dev.octri.showcase.digitalocean.methods.Billing.billingHistoryList(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.Billing.billingHistoryList(
+            clientConfig,
+            options,
+        )
+    }
+
+    /** To retrieve a list of all invoices, send a GET request to `/v2/customers/my/invoices`. */
+    fun invoicesList(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Invoices {
+        return dev.octri.showcase.digitalocean.methods.Billing.invoicesList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To retrieve a list of all invoices, send a GET request to `/v2/customers/my/invoices`.
+     * To retrieve the invoice items for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID`.
      */
-    fun invoicesList(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Invoices {
-        return dev.octri.showcase.digitalocean.methods.Billing.invoicesList(clientConfig, perPage, page, options)
+    fun invoicesGetByUuid(
+        invoiceUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Invoice {
+        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetByUuid(
+            clientConfig,
+            invoiceUuid,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To retrieve the invoice items for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID`.
-     */
-    fun invoicesGetByUuid(invoiceUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Invoice {
-        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetByUuid(clientConfig, invoiceUuid, perPage, page, options)
-    }
-
-    /**
-     * To retrieve a CSV for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
+     * To retrieve a CSV for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
      */
     fun invoicesGetCsvByUuid(invoiceUuid: String, options: RequestOptions? = null): String {
-        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetCsvByUuid(clientConfig, invoiceUuid, options)
+        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetCsvByUuid(
+            clientConfig,
+            invoiceUuid,
+            options,
+        )
     }
 
     /**
-     * To retrieve a PDF for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
+     * To retrieve a PDF for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
      */
     fun invoicesGetPdfByUuid(invoiceUuid: String, options: RequestOptions? = null): ByteArray {
-        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetPdfByUuid(clientConfig, invoiceUuid, options)
+        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetPdfByUuid(
+            clientConfig,
+            invoiceUuid,
+            options,
+        )
     }
 
     /**
-     * To retrieve a summary for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
+     * To retrieve a summary for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
      */
-    fun invoicesGetSummaryByUuid(invoiceUuid: String, options: RequestOptions? = null): InvoiceSummary {
-        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetSummaryByUuid(clientConfig, invoiceUuid, options)
+    fun invoicesGetSummaryByUuid(
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): InvoiceSummary {
+        return dev.octri.showcase.digitalocean.methods.Billing.invoicesGetSummaryByUuid(
+            clientConfig,
+            invoiceUuid,
+            options,
+        )
     }
 
     /**
-     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice
+     * items, including total amount, region, SKU, and description for a specified date range. It is
+     * important to note that the daily resource usage may not reflect month-end billing totals when
+     * totaled for a given month as nightly invoice item estimates do not necessarily encompass all
+     * invoicing factors for the entire month.
      */
-    fun insightsList(accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): BillingInsights {
-        return dev.octri.showcase.digitalocean.methods.Billing.billingInsightsList(clientConfig, accountUrn, startDate, endDate, perPage, page, options)
+    fun insightsList(
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): BillingInsights {
+        return dev.octri.showcase.digitalocean.methods.Billing.billingInsightsList(
+            clientConfig,
+            accountUrn,
+            startDate,
+            endDate,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice
+     * items, including total amount, region, SKU, and description for a specified date range. It is
+     * important to note that the daily resource usage may not reflect month-end billing totals when
+     * totaled for a given month as nightly invoice item estimates do not necessarily encompass all
+     * invoicing factors for the entire month.
      */
-    fun insightsListPaginated(accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null, yieldFn: (BillingDataPoint) -> Boolean) {
-        dev.octri.showcase.digitalocean.methods.Billing.billingInsightsListPaginated(clientConfig, accountUrn, startDate, endDate, perPage, page, options, yieldFn)
+    fun insightsListPaginated(
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (BillingDataPoint) -> Boolean,
+    ) {
+        dev.octri.showcase.digitalocean.methods.Billing.billingInsightsListPaginated(
+            clientConfig,
+            accountUrn,
+            startDate,
+            endDate,
+            perPage,
+            page,
+            options,
+            yieldFn,
+        )
     }
-
 }

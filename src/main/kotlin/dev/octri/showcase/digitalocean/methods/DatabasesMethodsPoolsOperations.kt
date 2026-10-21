@@ -13,107 +13,252 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListConnectionPoolsOperation {
     /**
-     * To list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`. The result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.
+     * To list all of the connection pools available to a PostgreSQL database cluster, send a GET
+     * request to `/v2/databases/$DATABASE_ID/pools`. The result will be a JSON object with a
+     * `pools` key. This will be set to an array of connection pool objects.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListConnectionPools(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): ConnectionPools {
+    fun databasesListConnectionPools(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): ConnectionPools {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<ConnectionPools>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools", config = clientConfig, operationId = "databasesListConnectionPools", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ConnectionPools>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools",
+                    config = clientConfig,
+                    operationId = "databasesListConnectionPools",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesAddConnectionPoolOperation {
     /**
-     * Creates a PgBouncer connection pool for a PostgreSQL database cluster. Supply `name`, `mode`, `size`, and `db`; choose a transaction mode supported by PgBouncer and set the pool size according to the primary node's capacity. The response includes the created pool and its connection details.
+     * Creates a PgBouncer connection pool for a PostgreSQL database cluster. Supply `name`, `mode`,
+     * `size`, and `db`; choose a transaction mode supported by PgBouncer and set the pool size
+     * according to the primary node's capacity. The response includes the created pool and its
+     * connection details.
      *
-     * For PostgreSQL database clusters, connection pools can be used to allow a database to share its idle connections. The popular PostgreSQL connection pooling utility PgBouncer is used to provide this service. See here for more information about how and why to use PgBouncer connection pooling including details about the available transaction modes. To add a new connection pool to a PostgreSQL database cluster, send a POST request to `/v2/databases/$DATABASE_ID/pools` specifying…
+     * For PostgreSQL database clusters, connection pools can be used to allow a database to share
+     * its idle connections. The popular PostgreSQL connection pooling utility PgBouncer is used to
+     * provide this service. See here for more information about how and why to use PgBouncer
+     * connection pooling including details about the available transaction modes. To add a new
+     * connection pool to a PostgreSQL database cluster, send a POST request to
+     * `/v2/databases/$DATABASE_ID/pools` specifying…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param name A unique name for the connection pool. Must be between 3 and 60
-     *   characters.
-     * @param mode The PGBouncer transaction mode for the connection pool. The
-     *   allowed values are session, transaction, and statement.
-     * @param size The desired size of the PGBouncer connection pool. The maximum
-     *   allowed size is determined by the size of the cluster's primary node. 25
-     *   backend server connections are allowed for every 1GB of RAM. Three are
-     *   reserved for maintenance. For example, a primary node with 1 GB of RAM allows
-     *   for a maximum of 22 backend server connections while one with 4 GB would allow
-     *   for 97. Note that these are shared across all connection pools in a cluster.
+     * @param name A unique name for the connection pool. Must be between 3 and 60 characters.
+     * @param mode The PGBouncer transaction mode for the connection pool. The allowed values are
+     *   session, transaction, and statement.
+     * @param size The desired size of the PGBouncer connection pool. The maximum allowed size is
+     *   determined by the size of the cluster's primary node. 25 backend server connections are
+     *   allowed for every 1GB of RAM. Three are reserved for maintenance. For example, a primary
+     *   node with 1 GB of RAM allows for a maximum of 22 backend server connections while one with
+     *   4 GB would allow for 97. Note that these are shared across all connection pools in a
+     *   cluster.
      * @param db The database for use with the connection pool.
-     * @param user The name of the user for use with the connection pool. When
-     *   excluded, all sessions connect to the database as the inbound user.
+     * @param user The name of the user for use with the connection pool. When excluded, all
+     *   sessions connect to the database as the inbound user.
      */
-    fun databasesAddConnectionPool(clientConfig: ClientConfig, request: DatabasesMethods.DatabasesAddConnectionPoolRequest, options: RequestOptions? = null): ConnectionPoolResponse {
+    fun databasesAddConnectionPool(
+        clientConfig: ClientConfig,
+        request: DatabasesMethods.DatabasesAddConnectionPoolRequest,
+        options: RequestOptions? = null,
+    ): ConnectionPoolResponse {
         validateDatabasesAddConnectionPoolRequest(request)
 
-        return SdkClient.request<ConnectionPoolResponse>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/pools", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "mode" to (request.mode), "size" to (request.size), "db" to (request.db), "user" to (SdkClient.omitIfNull(request.user)), "connection" to (SdkClient.omitIfNull(request.connection)), "private_connection" to
-    (SdkClient.omitIfNull(request.privateConnection)), "standby_connection" to
-    (SdkClient.omitIfNull(request.standbyConnection)), "standby_private_connection" to
-    (SdkClient.omitIfNull(request.standbyPrivateConnection))), operationId = "databasesAddConnectionPool", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ConnectionPoolResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/pools",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name),
+                            "mode" to (request.mode),
+                            "size" to (request.size),
+                            "db" to (request.db),
+                            "user" to (SdkClient.omitIfNull(request.user)),
+                            "connection" to (SdkClient.omitIfNull(request.connection)),
+                            "private_connection" to
+                                (SdkClient.omitIfNull(request.privateConnection)),
+                            "standby_connection" to
+                                (SdkClient.omitIfNull(request.standbyConnection)),
+                            "standby_private_connection" to
+                                (SdkClient.omitIfNull(request.standbyPrivateConnection)),
+                        ),
+                    operationId = "databasesAddConnectionPool",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateDatabasesAddConnectionPoolRequest(request: DatabasesMethods.DatabasesAddConnectionPoolRequest) {
+    private fun validateDatabasesAddConnectionPoolRequest(
+        request: DatabasesMethods.DatabasesAddConnectionPoolRequest
+    ) {
         Validation.validateUuid("database_cluster_uuid", request.databaseClusterUuid)
     }
 }
 
 internal object DatabasesMethodsDatabasesGetConnectionPoolOperation {
     /**
-     * To show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. The response will be a JSON object with a `pool` key.
+     * To show information about an existing connection pool for a PostgreSQL database cluster, send
+     * a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. The response will be a JSON
+     * object with a `pool` key.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param poolName The name used to identify the connection pool.
      */
-    fun databasesGetConnectionPool(clientConfig: ClientConfig, databaseClusterUuid: String, poolName: String, options: RequestOptions? = null): ConnectionPoolResponse {
+    fun databasesGetConnectionPool(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        poolName: String,
+        options: RequestOptions? = null,
+    ): ConnectionPoolResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<ConnectionPoolResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(poolName)}", config = clientConfig, operationId = "databasesGetConnectionPool", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<ConnectionPoolResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(poolName)}",
+                    config = clientConfig,
+                    operationId = "databasesGetConnectionPool",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateConnectionPoolOperation {
     /**
-     * To update a connection pool for a PostgreSQL database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.
+     * To update a connection pool for a PostgreSQL database cluster, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param poolName The name used to identify the connection pool.
-     * @param mode The PGBouncer transaction mode for the connection pool. The
-     *   allowed values are session, transaction, and statement.
-     * @param size The desired size of the PGBouncer connection pool. The maximum
-     *   allowed size is determined by the size of the cluster's primary node. 25
-     *   backend server connections are allowed for every 1GB of RAM. Three are
-     *   reserved for maintenance. For example, a primary node with 1 GB of RAM allows
-     *   for a maximum of 22 backend server connections while one with 4 GB would allow
-     *   for 97. Note that these are shared across all connection pools in a cluster.
+     * @param mode The PGBouncer transaction mode for the connection pool. The allowed values are
+     *   session, transaction, and statement.
+     * @param size The desired size of the PGBouncer connection pool. The maximum allowed size is
+     *   determined by the size of the cluster's primary node. 25 backend server connections are
+     *   allowed for every 1GB of RAM. Three are reserved for maintenance. For example, a primary
+     *   node with 1 GB of RAM allows for a maximum of 22 backend server connections while one with
+     *   4 GB would allow for 97. Note that these are shared across all connection pools in a
+     *   cluster.
      * @param db The database for use with the connection pool.
-     * @param user The name of the user for use with the connection pool. When
-     *   excluded, all sessions connect to the database as the inbound user.
+     * @param user The name of the user for use with the connection pool. When excluded, all
+     *   sessions connect to the database as the inbound user.
      */
-    fun databasesUpdateConnectionPool(clientConfig: ClientConfig, request: DatabasesMethods.DatabasesUpdateConnectionPoolRequest, options: RequestOptions? = null): Unit {
+    fun databasesUpdateConnectionPool(
+        clientConfig: ClientConfig,
+        request: DatabasesMethods.DatabasesUpdateConnectionPoolRequest,
+        options: RequestOptions? = null,
+    ): Unit {
         validateDatabasesUpdateConnectionPoolRequest(request)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(request.poolName)}", config = clientConfig, body = SdkClient.bodyMap("mode" to (request.mode), "size" to (request.size), "db" to (request.db), "user" to (SdkClient.omitIfNull(request.user))), operationId = "databasesUpdateConnectionPool", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(request.databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(request.poolName)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "mode" to (request.mode),
+                        "size" to (request.size),
+                        "db" to (request.db),
+                        "user" to (SdkClient.omitIfNull(request.user)),
+                    ),
+                operationId = "databasesUpdateConnectionPool",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-    private fun validateDatabasesUpdateConnectionPoolRequest(request: DatabasesMethods.DatabasesUpdateConnectionPoolRequest) {
+    private fun validateDatabasesUpdateConnectionPoolRequest(
+        request: DatabasesMethods.DatabasesUpdateConnectionPoolRequest
+    ) {
         Validation.validateUuid("database_cluster_uuid", request.databaseClusterUuid)
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteConnectionPoolOperation {
     /**
-     * To delete a specific connection pool for a PostgreSQL database cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. A status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.
+     * To delete a specific connection pool for a PostgreSQL database cluster, send a DELETE request
+     * to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`. A status of 204 will be given. This
+     * indicates that the request was processed successfully, but that no response body is needed.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param poolName The name used to identify the connection pool.
      */
-    fun databasesDeleteConnectionPool(clientConfig: ClientConfig, databaseClusterUuid: String, poolName: String, options: RequestOptions? = null): Unit {
+    fun databasesDeleteConnectionPool(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        poolName: String,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(poolName)}", config = clientConfig, operationId = "databasesDeleteConnectionPool", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/pools/${SdkClient.encodePathSegment(poolName)}",
+                config = clientConfig,
+                operationId = "databasesDeleteConnectionPool",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

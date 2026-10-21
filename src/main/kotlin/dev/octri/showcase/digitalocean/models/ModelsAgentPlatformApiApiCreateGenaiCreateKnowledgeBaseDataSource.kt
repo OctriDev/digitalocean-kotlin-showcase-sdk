@@ -3,42 +3,31 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * Data to create a knowledge base data source
- */
+/** Data to create a knowledge base data source */
 data class ApiCreateKnowledgeBaseDataSourceInputPublic(
-    /**
-     * AWS S3 Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("aws_data_source") val awsDataSource: ApiAWSDataSource? = null,
-    /**
-     * Optional enumerated value serialized in the `chunking_algorithm` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_algorithm") val chunkingAlgorithm: ApiChunkingAlgorithm? = null,
-    /**
-     * Optional object value serialized in the `chunking_options` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_options") val chunkingOptions: ApiChunkingOptions? = null,
-    /**
-     * Knowledge base id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid") val knowledgeBaseUuid: String? = null,
-    /**
-     * Spaces Bucket Data Source
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("spaces_data_source") val spacesDataSource: ApiSpacesDataSource? = null,
-    /**
-     * WebCrawlerDataSource
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_crawler_data_source") val webCrawlerDataSource: ApiWebCrawlerDataSource? = null
+    /** AWS S3 Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("aws_data_source")
+    val awsDataSource: ApiAWSDataSource? = null,
+    /** Optional enumerated value serialized in the `chunking_algorithm` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_algorithm")
+    val chunkingAlgorithm: ApiChunkingAlgorithm? = null,
+    /** Optional object value serialized in the `chunking_options` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_options")
+    val chunkingOptions: ApiChunkingOptions? = null,
+    /** Knowledge base id */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid")
+    val knowledgeBaseUuid: String? = null,
+    /** Spaces Bucket Data Source */
+    @com.fasterxml.jackson.annotation.JsonProperty("spaces_data_source")
+    val spacesDataSource: ApiSpacesDataSource? = null,
+    /** WebCrawlerDataSource */
+    @com.fasterxml.jackson.annotation.JsonProperty("web_crawler_data_source")
+    val webCrawlerDataSource: ApiWebCrawlerDataSource? = null,
 )
 
-/**
- * Information about a newly created knowldege base data source
- */
+/** Information about a newly created knowldege base data source */
 data class ApiCreateKnowledgeBaseDataSourceOutput(
-    /**
-     * Data Source configuration for Knowledge Bases
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_data_source") val knowledgeBaseDataSource: ApiKnowledgeBaseDataSource? = null
+    /** Data Source configuration for Knowledge Bases */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_data_source")
+    val knowledgeBaseDataSource: ApiKnowledgeBaseDataSource? = null
 )

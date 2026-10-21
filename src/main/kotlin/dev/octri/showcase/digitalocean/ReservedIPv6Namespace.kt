@@ -3,34 +3,59 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class ReservedIPv6Namespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.
+     * To list all of the reserved IPv6s available on your account, send a GET request to
+     * `/v2/reserved_ipv6`.
      */
-    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ReservedIPv6ListResponse {
-        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6List(clientConfig, perPage, page, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): ReservedIPv6ListResponse {
+        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6List(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * On creation, a reserved IPv6 must be reserved to a region. * To create a new reserved IPv6 reserved to a region, send a POST request to `/v2/reserved_ipv6` with the `region_slug` attribute.
+     * On creation, a reserved IPv6 must be reserved to a region. * To create a new reserved IPv6
+     * reserved to a region, send a POST request to `/v2/reserved_ipv6` with the `region_slug`
+     * attribute.
      */
     fun create(regionSlug: String, options: RequestOptions? = null): ReservedIpv6CreateResponse {
-        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Create(clientConfig, regionSlug, options)
+        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Create(
+            clientConfig,
+            regionSlug,
+            options,
+        )
     }
 
     /**
-     * To show information about a reserved IPv6, send a GET request to `/v2/reserved_ipv6/$RESERVED_IPV6`.
+     * To show information about a reserved IPv6, send a GET request to
+     * `/v2/reserved_ipv6/$RESERVED_IPV6`.
      */
     fun get(reservedIpv6: String, options: RequestOptions? = null): ReservedIpv6Response {
-        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Get(clientConfig, reservedIpv6, options)
+        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Get(
+            clientConfig,
+            reservedIpv6,
+            options,
+        )
     }
 
     /**
-     * To delete a reserved IP and remove it from your account, send a DELETE request to `/v2/reserved_ipv6/$RESERVED_IPV6`. A successful request will receive a 204 status code with no body in response. This indicates that the request was processed successfully.
+     * To delete a reserved IP and remove it from your account, send a DELETE request to
+     * `/v2/reserved_ipv6/$RESERVED_IPV6`. A successful request will receive a 204 status code with
+     * no body in response. This indicates that the request was processed successfully.
      */
     fun delete(reservedIpv6: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Delete(clientConfig, reservedIpv6, options)
+        return dev.octri.showcase.digitalocean.methods.ReservedIPv6Methods.reservedIPv6Delete(
+            clientConfig,
+            reservedIpv6,
+            options,
+        )
     }
-
 }

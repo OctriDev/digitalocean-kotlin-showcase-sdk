@@ -13,19 +13,24 @@ typealias AppsGitSourceSpec = dev.octri.showcase.digitalocean.models.AppsGitSour
 
 typealias AppsImageSourceSpec = dev.octri.showcase.digitalocean.models.AppsImageSourceSpec
 
-typealias AppsImageSourceSpecDeployOnPush = dev.octri.showcase.digitalocean.models.AppsImageSourceSpecDeployOnPush
+typealias AppsImageSourceSpecDeployOnPush =
+    dev.octri.showcase.digitalocean.models.AppsImageSourceSpecDeployOnPush
 
-typealias AppsImageSourceSpecRegistryTypeEnum = dev.octri.showcase.digitalocean.models.AppsImageSourceSpecRegistryTypeEnum
+typealias AppsImageSourceSpecRegistryTypeEnum =
+    dev.octri.showcase.digitalocean.models.AppsImageSourceSpecRegistryTypeEnum
 
 typealias AppsInstanceSize = dev.octri.showcase.digitalocean.models.AppsInstanceSize
 
 typealias AppsListAlertsResponse = dev.octri.showcase.digitalocean.models.AppsListAlertsResponse
 
-typealias AppsListDeploymentsParameterItemEnum = dev.octri.showcase.digitalocean.models.AppsListDeploymentsParameterItemEnum
+typealias AppsListDeploymentsParameterItemEnum =
+    dev.octri.showcase.digitalocean.models.AppsListDeploymentsParameterItemEnum
 
-typealias AppsListEventsParameterItemEnum = dev.octri.showcase.digitalocean.models.AppsListEventsParameterItemEnum
+typealias AppsListEventsParameterItemEnum =
+    dev.octri.showcase.digitalocean.models.AppsListEventsParameterItemEnum
 
-typealias AppsListInstanceSizesResponse = dev.octri.showcase.digitalocean.models.AppsListInstanceSizesResponse
+typealias AppsListInstanceSizesResponse =
+    dev.octri.showcase.digitalocean.models.AppsListInstanceSizesResponse
 
 typealias AppsListRegionsResponse = dev.octri.showcase.digitalocean.models.AppsListRegionsResponse
 
@@ -49,11 +54,13 @@ typealias AppsStringMatch = dev.octri.showcase.digitalocean.models.AppsStringMat
 
 typealias AppStaticSiteSpec = dev.octri.showcase.digitalocean.models.AppStaticSiteSpec
 
-typealias AppStaticSiteSpecVariant1Cors = dev.octri.showcase.digitalocean.models.AppStaticSiteSpecVariant1Cors
+typealias AppStaticSiteSpecVariant1Cors =
+    dev.octri.showcase.digitalocean.models.AppStaticSiteSpecVariant1Cors
 
 typealias AppsUpdateAppRequest = dev.octri.showcase.digitalocean.models.AppsUpdateAppRequest
 
-typealias AppsUpdateAppRequestRequest = dev.octri.showcase.digitalocean.models.AppsUpdateAppRequestRequest
+typealias AppsUpdateAppRequestRequest =
+    dev.octri.showcase.digitalocean.models.AppsUpdateAppRequestRequest
 
 typealias AppsValidateRollback = dev.octri.showcase.digitalocean.models.AppsValidateRollback
 
@@ -63,9 +70,11 @@ typealias AppsVpcEgressIp = dev.octri.showcase.digitalocean.models.AppsVpcEgress
 
 typealias AppVariableDefinition = dev.octri.showcase.digitalocean.models.AppVariableDefinition
 
-typealias AppVariableDefinitionScopeEnum = dev.octri.showcase.digitalocean.models.AppVariableDefinitionScopeEnum
+typealias AppVariableDefinitionScopeEnum =
+    dev.octri.showcase.digitalocean.models.AppVariableDefinitionScopeEnum
 
-typealias AppVariableDefinitionTypeEnum = dev.octri.showcase.digitalocean.models.AppVariableDefinitionTypeEnum
+typealias AppVariableDefinitionTypeEnum =
+    dev.octri.showcase.digitalocean.models.AppVariableDefinitionTypeEnum
 
 typealias AppWorkerSpec = dev.octri.showcase.digitalocean.models.AppWorkerSpec
 
@@ -73,9 +82,11 @@ typealias AppWorkerSpecTermination = dev.octri.showcase.digitalocean.models.AppW
 
 typealias AssignedResourcesList = dev.octri.showcase.digitalocean.models.AssignedResourcesList
 
-typealias AssociatedKubernetesResource = dev.octri.showcase.digitalocean.models.AssociatedKubernetesResource
+typealias AssociatedKubernetesResource =
+    dev.octri.showcase.digitalocean.models.AssociatedKubernetesResource
 
-typealias AssociatedKubernetesResources = dev.octri.showcase.digitalocean.models.AssociatedKubernetesResources
+typealias AssociatedKubernetesResources =
+    dev.octri.showcase.digitalocean.models.AssociatedKubernetesResources
 
 typealias AssociatedResource = dev.octri.showcase.digitalocean.models.AssociatedResource
 
@@ -83,17 +94,20 @@ typealias AssociatedResourcesList = dev.octri.showcase.digitalocean.models.Assoc
 
 typealias AssociatedResourceStatus = dev.octri.showcase.digitalocean.models.AssociatedResourceStatus
 
-typealias AssociatedResourceStatusResources = dev.octri.showcase.digitalocean.models.AssociatedResourceStatusResources
+typealias AssociatedResourceStatusResources =
+    dev.octri.showcase.digitalocean.models.AssociatedResourceStatusResources
 
 typealias AsyncInvokeRequest = dev.octri.showcase.digitalocean.models.AsyncInvokeRequest
 
 typealias AsyncInvokeRequestInput = dev.octri.showcase.digitalocean.models.AsyncInvokeRequestInput
 
-typealias AsyncInvokeRequestTagsItem = dev.octri.showcase.digitalocean.models.AsyncInvokeRequestTagsItem
+typealias AsyncInvokeRequestTagsItem =
+    dev.octri.showcase.digitalocean.models.AsyncInvokeRequestTagsItem
 
 typealias AsyncInvokeResponse = dev.octri.showcase.digitalocean.models.AsyncInvokeResponse
 
-typealias AsyncInvokeResponseStatusEnum = dev.octri.showcase.digitalocean.models.AsyncInvokeResponseStatusEnum
+typealias AsyncInvokeResponseStatusEnum =
+    dev.octri.showcase.digitalocean.models.AsyncInvokeResponseStatusEnum
 
 typealias Autoscale = dev.octri.showcase.digitalocean.models.Autoscale
 
@@ -103,17 +117,23 @@ typealias AutoscalePoolConfig = dev.octri.showcase.digitalocean.models.Autoscale
 
 typealias AutoscalePoolCreate = dev.octri.showcase.digitalocean.models.AutoscalePoolCreate
 
-typealias AutoscalePoolCreateConfig = dev.octri.showcase.digitalocean.models.AutoscalePoolCreateConfig
+typealias AutoscalePoolCreateConfig =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolCreateConfig
 
-typealias AutoscalePoolCreateResponse = dev.octri.showcase.digitalocean.models.AutoscalePoolCreateResponse
+typealias AutoscalePoolCreateResponse =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolCreateResponse
 
-typealias AutoscalePoolDropletTemplate = dev.octri.showcase.digitalocean.models.AutoscalePoolDropletTemplate
+typealias AutoscalePoolDropletTemplate =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolDropletTemplate
 
-typealias AutoscalePoolDropletTemplateRegionEnum = dev.octri.showcase.digitalocean.models.AutoscalePoolDropletTemplateRegionEnum
+typealias AutoscalePoolDropletTemplateRegionEnum =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolDropletTemplateRegionEnum
 
-typealias AutoscalePoolDynamicConfig = dev.octri.showcase.digitalocean.models.AutoscalePoolDynamicConfig
+typealias AutoscalePoolDynamicConfig =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolDynamicConfig
 
-typealias AutoscalePoolStaticConfig = dev.octri.showcase.digitalocean.models.AutoscalePoolStaticConfig
+typealias AutoscalePoolStaticConfig =
+    dev.octri.showcase.digitalocean.models.AutoscalePoolStaticConfig
 
 typealias AutoscalePoolStatusEnum = dev.octri.showcase.digitalocean.models.AutoscalePoolStatusEnum
 
@@ -127,15 +147,19 @@ typealias Balance = dev.octri.showcase.digitalocean.models.Balance
 
 typealias Batch = dev.octri.showcase.digitalocean.models.Batch
 
-typealias BatchCompletionWindowEnum = dev.octri.showcase.digitalocean.models.BatchCompletionWindowEnum
+typealias BatchCompletionWindowEnum =
+    dev.octri.showcase.digitalocean.models.BatchCompletionWindowEnum
 
 typealias BatchCreateRequest = dev.octri.showcase.digitalocean.models.BatchCreateRequest
 
-typealias BatchCreateRequestCompletionWindowEnum = dev.octri.showcase.digitalocean.models.BatchCreateRequestCompletionWindowEnum
+typealias BatchCreateRequestCompletionWindowEnum =
+    dev.octri.showcase.digitalocean.models.BatchCreateRequestCompletionWindowEnum
 
-typealias BatchCreateRequestEndpointEnum = dev.octri.showcase.digitalocean.models.BatchCreateRequestEndpointEnum
+typealias BatchCreateRequestEndpointEnum =
+    dev.octri.showcase.digitalocean.models.BatchCreateRequestEndpointEnum
 
-typealias BatchCreateRequestProviderEnum = dev.octri.showcase.digitalocean.models.BatchCreateRequestProviderEnum
+typealias BatchCreateRequestProviderEnum =
+    dev.octri.showcase.digitalocean.models.BatchCreateRequestProviderEnum
 
 typealias BatchErrorsItem = dev.octri.showcase.digitalocean.models.BatchErrorsItem
 
@@ -145,7 +169,8 @@ typealias BatchFileCreateResponse = dev.octri.showcase.digitalocean.models.Batch
 
 typealias BatchListResponse = dev.octri.showcase.digitalocean.models.BatchListResponse
 
-typealias BatchListResponseObjectEnum = dev.octri.showcase.digitalocean.models.BatchListResponseObjectEnum
+typealias BatchListResponseObjectEnum =
+    dev.octri.showcase.digitalocean.models.BatchListResponseObjectEnum
 
 typealias BatchProviderEnum = dev.octri.showcase.digitalocean.models.BatchProviderEnum
 
@@ -175,7 +200,8 @@ typealias ByoipPrefix = dev.octri.showcase.digitalocean.models.ByoipPrefix
 
 typealias ByoipPrefixCreate = dev.octri.showcase.digitalocean.models.ByoipPrefixCreate
 
-typealias ByoipPrefixCreateResponse = dev.octri.showcase.digitalocean.models.ByoipPrefixCreateResponse
+typealias ByoipPrefixCreateResponse =
+    dev.octri.showcase.digitalocean.models.ByoipPrefixCreateResponse
 
 typealias ByoipPrefixGet = dev.octri.showcase.digitalocean.models.ByoipPrefixGet
 
@@ -187,9 +213,11 @@ typealias ByoipPrefixResource = dev.octri.showcase.digitalocean.models.ByoipPref
 
 typealias ByoipPrefixUpdate = dev.octri.showcase.digitalocean.models.ByoipPrefixUpdate
 
-typealias ByoipPrefixUpdateResponse = dev.octri.showcase.digitalocean.models.ByoipPrefixUpdateResponse
+typealias ByoipPrefixUpdateResponse =
+    dev.octri.showcase.digitalocean.models.ByoipPrefixUpdateResponse
 
-typealias ByoipPrefixValidationsItem = dev.octri.showcase.digitalocean.models.ByoipPrefixValidationsItem
+typealias ByoipPrefixValidationsItem =
+    dev.octri.showcase.digitalocean.models.ByoipPrefixValidationsItem
 
 typealias Ca = dev.octri.showcase.digitalocean.models.Ca
 
@@ -203,7 +231,8 @@ typealias CdnEndpoint = dev.octri.showcase.digitalocean.models.CdnEndpoint
 
 typealias CdnEndpointRequest = dev.octri.showcase.digitalocean.models.CdnEndpointRequest
 
-typealias CdnEndpointRequestTtlEnum = dev.octri.showcase.digitalocean.models.CdnEndpointRequestTtlEnum
+typealias CdnEndpointRequestTtlEnum =
+    dev.octri.showcase.digitalocean.models.CdnEndpointRequestTtlEnum
 
 typealias CdnEndpointTtlEnum = dev.octri.showcase.digitalocean.models.CdnEndpointTtlEnum
 
@@ -211,11 +240,13 @@ typealias Certificate = dev.octri.showcase.digitalocean.models.Certificate
 
 typealias CertificateCreateBase = dev.octri.showcase.digitalocean.models.CertificateCreateBase
 
-typealias CertificateCreateBaseTypeEnum = dev.octri.showcase.digitalocean.models.CertificateCreateBaseTypeEnum
+typealias CertificateCreateBaseTypeEnum =
+    dev.octri.showcase.digitalocean.models.CertificateCreateBaseTypeEnum
 
 typealias CertificateRequestCustom = dev.octri.showcase.digitalocean.models.CertificateRequestCustom
 
-typealias CertificateRequestLetsEncrypt = dev.octri.showcase.digitalocean.models.CertificateRequestLetsEncrypt
+typealias CertificateRequestLetsEncrypt =
+    dev.octri.showcase.digitalocean.models.CertificateRequestLetsEncrypt
 
 typealias CertificateStateEnum = dev.octri.showcase.digitalocean.models.CertificateStateEnum
 
@@ -223,73 +254,103 @@ typealias CertificateTypeEnum = dev.octri.showcase.digitalocean.models.Certifica
 
 typealias ChatCompletionChunk = dev.octri.showcase.digitalocean.models.ChatCompletionChunk
 
-typealias ChatCompletionChunkChoicesItem = dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItem
+typealias ChatCompletionChunkChoicesItem =
+    dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItem
 
-typealias ChatCompletionChunkChoicesItemFinishReasonEnum = dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItemFinishReasonEnum
+typealias ChatCompletionChunkChoicesItemFinishReasonEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItemFinishReasonEnum
 
-typealias ChatCompletionChunkChoicesItemLogprobs = dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItemLogprobs
+typealias ChatCompletionChunkChoicesItemLogprobs =
+    dev.octri.showcase.digitalocean.models.ChatCompletionChunkChoicesItemLogprobs
 
-typealias ChatCompletionChunkObjectEnum = dev.octri.showcase.digitalocean.models.ChatCompletionChunkObjectEnum
+typealias ChatCompletionChunkObjectEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionChunkObjectEnum
 
 typealias ChatCompletionRequest = dev.octri.showcase.digitalocean.models.ChatCompletionRequest
 
-typealias ChatCompletionRequestReasoningEffortEnum = dev.octri.showcase.digitalocean.models.ChatCompletionRequestReasoningEffortEnum
+typealias ChatCompletionRequestReasoningEffortEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestReasoningEffortEnum
 
-typealias ChatCompletionRequestStreamOptions = dev.octri.showcase.digitalocean.models.ChatCompletionRequestStreamOptions
+typealias ChatCompletionRequestStreamOptions =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestStreamOptions
 
-typealias ChatCompletionRequestToolChoice = dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoice
+typealias ChatCompletionRequestToolChoice =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoice
 
-typealias ChatCompletionRequestToolChoiceVariant0Enum = dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant0Enum
+typealias ChatCompletionRequestToolChoiceVariant0Enum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant0Enum
 
-typealias ChatCompletionRequestToolChoiceVariant1 = dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1
+typealias ChatCompletionRequestToolChoiceVariant1 =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1
 
-typealias ChatCompletionRequestToolChoiceVariant1Function = dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1Function
+typealias ChatCompletionRequestToolChoiceVariant1Function =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1Function
 
-typealias ChatCompletionRequestToolChoiceVariant1TypeEnum = dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1TypeEnum
+typealias ChatCompletionRequestToolChoiceVariant1TypeEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionRequestToolChoiceVariant1TypeEnum
 
 typealias ChatCompletionResponse = dev.octri.showcase.digitalocean.models.ChatCompletionResponse
 
-typealias ChatCompletionResponseChoicesItem = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItem
+typealias ChatCompletionResponseChoicesItem =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItem
 
-typealias ChatCompletionResponseChoicesItemFinishReasonEnum = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemFinishReasonEnum
+typealias ChatCompletionResponseChoicesItemFinishReasonEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemFinishReasonEnum
 
-typealias ChatCompletionResponseChoicesItemLogprobs = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemLogprobs
+typealias ChatCompletionResponseChoicesItemLogprobs =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemLogprobs
 
-typealias ChatCompletionResponseChoicesItemMessage = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessage
+typealias ChatCompletionResponseChoicesItemMessage =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessage
 
-typealias ChatCompletionResponseChoicesItemMessageRoleEnum = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageRoleEnum
+typealias ChatCompletionResponseChoicesItemMessageRoleEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageRoleEnum
 
-typealias ChatCompletionResponseChoicesItemMessageToolCallsItem = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItem
+typealias ChatCompletionResponseChoicesItemMessageToolCallsItem =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItem
 
-typealias ChatCompletionResponseChoicesItemMessageToolCallsItemFunction = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItemFunction
+typealias ChatCompletionResponseChoicesItemMessageToolCallsItemFunction =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItemFunction
 
-typealias ChatCompletionResponseChoicesItemMessageToolCallsItemTypeEnum = dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItemTypeEnum
+typealias ChatCompletionResponseChoicesItemMessageToolCallsItemTypeEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseChoicesItemMessageToolCallsItemTypeEnum
 
-typealias ChatCompletionResponseObjectEnum = dev.octri.showcase.digitalocean.models.ChatCompletionResponseObjectEnum
+typealias ChatCompletionResponseObjectEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionResponseObjectEnum
 
-typealias ChatCompletionStreamResponseDelta = dev.octri.showcase.digitalocean.models.ChatCompletionStreamResponseDelta
+typealias ChatCompletionStreamResponseDelta =
+    dev.octri.showcase.digitalocean.models.ChatCompletionStreamResponseDelta
 
-typealias ChatCompletionStreamResponseDeltaRoleEnum = dev.octri.showcase.digitalocean.models.ChatCompletionStreamResponseDeltaRoleEnum
+typealias ChatCompletionStreamResponseDeltaRoleEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionStreamResponseDeltaRoleEnum
 
-typealias ChatCompletionTokenLogprob = dev.octri.showcase.digitalocean.models.ChatCompletionTokenLogprob
+typealias ChatCompletionTokenLogprob =
+    dev.octri.showcase.digitalocean.models.ChatCompletionTokenLogprob
 
 typealias ChatCompletionTool = dev.octri.showcase.digitalocean.models.ChatCompletionTool
 
 typealias ChatCompletionToolCall = dev.octri.showcase.digitalocean.models.ChatCompletionToolCall
 
-typealias ChatCompletionToolCallChunk = dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunk
+typealias ChatCompletionToolCallChunk =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunk
 
-typealias ChatCompletionToolCallChunkFunction = dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunkFunction
+typealias ChatCompletionToolCallChunkFunction =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunkFunction
 
-typealias ChatCompletionToolCallChunkTypeEnum = dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunkTypeEnum
+typealias ChatCompletionToolCallChunkTypeEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolCallChunkTypeEnum
 
-typealias ChatCompletionToolCallFunction = dev.octri.showcase.digitalocean.models.ChatCompletionToolCallFunction
+typealias ChatCompletionToolCallFunction =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolCallFunction
 
-typealias ChatCompletionToolCallTypeEnum = dev.octri.showcase.digitalocean.models.ChatCompletionToolCallTypeEnum
+typealias ChatCompletionToolCallTypeEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolCallTypeEnum
 
-typealias ChatCompletionToolTypeEnum = dev.octri.showcase.digitalocean.models.ChatCompletionToolTypeEnum
+typealias ChatCompletionToolTypeEnum =
+    dev.octri.showcase.digitalocean.models.ChatCompletionToolTypeEnum
 
-typealias ChatCompletionTopLogprobItem = dev.octri.showcase.digitalocean.models.ChatCompletionTopLogprobItem
+typealias ChatCompletionTopLogprobItem =
+    dev.octri.showcase.digitalocean.models.ChatCompletionTopLogprobItem
 
 typealias ChatMessage = dev.octri.showcase.digitalocean.models.ChatMessage
 
@@ -313,7 +374,8 @@ typealias CheckpointStatus = dev.octri.showcase.digitalocean.models.CheckpointSt
 
 typealias CheckUpdatable = dev.octri.showcase.digitalocean.models.CheckUpdatable
 
-typealias CheckUpdatableRegionsItemEnum = dev.octri.showcase.digitalocean.models.CheckUpdatableRegionsItemEnum
+typealias CheckUpdatableRegionsItemEnum =
+    dev.octri.showcase.digitalocean.models.CheckUpdatableRegionsItemEnum
 
 typealias CheckUpdatableTypeEnum = dev.octri.showcase.digitalocean.models.CheckUpdatableTypeEnum
 
@@ -321,9 +383,11 @@ typealias ClearActorLimits = dev.octri.showcase.digitalocean.models.ClearActorLi
 
 typealias Cluster = dev.octri.showcase.digitalocean.models.Cluster
 
-typealias ClusterAutoscalerConfiguration = dev.octri.showcase.digitalocean.models.ClusterAutoscalerConfiguration
+typealias ClusterAutoscalerConfiguration =
+    dev.octri.showcase.digitalocean.models.ClusterAutoscalerConfiguration
 
-typealias ClusterAutoscalerConfigurationExpandersItemEnum = dev.octri.showcase.digitalocean.models.ClusterAutoscalerConfigurationExpandersItemEnum
+typealias ClusterAutoscalerConfigurationExpandersItemEnum =
+    dev.octri.showcase.digitalocean.models.ClusterAutoscalerConfigurationExpandersItemEnum
 
 typealias ClusterCreate = dev.octri.showcase.digitalocean.models.ClusterCreate
 
@@ -331,9 +395,11 @@ typealias ClusterlintRequest = dev.octri.showcase.digitalocean.models.Clusterlin
 
 typealias ClusterlintResults = dev.octri.showcase.digitalocean.models.ClusterlintResults
 
-typealias ClusterlintResultsDiagnosticsItem = dev.octri.showcase.digitalocean.models.ClusterlintResultsDiagnosticsItem
+typealias ClusterlintResultsDiagnosticsItem =
+    dev.octri.showcase.digitalocean.models.ClusterlintResultsDiagnosticsItem
 
-typealias ClusterlintResultsDiagnosticsItemObject = dev.octri.showcase.digitalocean.models.ClusterlintResultsDiagnosticsItemObject
+typealias ClusterlintResultsDiagnosticsItemObject =
+    dev.octri.showcase.digitalocean.models.ClusterlintResultsDiagnosticsItemObject
 
 typealias ClusterlintRun = dev.octri.showcase.digitalocean.models.ClusterlintRun
 
@@ -341,7 +407,8 @@ typealias ClusterRead = dev.octri.showcase.digitalocean.models.ClusterRead
 
 typealias ClusterReadStatus = dev.octri.showcase.digitalocean.models.ClusterReadStatus
 
-typealias ClusterReadStatusStateEnum = dev.octri.showcase.digitalocean.models.ClusterReadStatusStateEnum
+typealias ClusterReadStatusStateEnum =
+    dev.octri.showcase.digitalocean.models.ClusterReadStatusStateEnum
 
 typealias ClusterRegistries = dev.octri.showcase.digitalocean.models.ClusterRegistries
 
@@ -359,63 +426,79 @@ typealias ClusterUpdateRequest = dev.octri.showcase.digitalocean.models.ClusterU
 
 typealias CompletionUsage = dev.octri.showcase.digitalocean.models.CompletionUsage
 
-typealias CompletionUsageCacheCreation = dev.octri.showcase.digitalocean.models.CompletionUsageCacheCreation
+typealias CompletionUsageCacheCreation =
+    dev.octri.showcase.digitalocean.models.CompletionUsageCacheCreation
 
 typealias Connection = dev.octri.showcase.digitalocean.models.Connection
 
 typealias ConnectionAuthorization = dev.octri.showcase.digitalocean.models.ConnectionAuthorization
 
-typealias ConnectionAuthorizationStatusEnum = dev.octri.showcase.digitalocean.models.ConnectionAuthorizationStatusEnum
+typealias ConnectionAuthorizationStatusEnum =
+    dev.octri.showcase.digitalocean.models.ConnectionAuthorizationStatusEnum
 
 typealias ConnectionCreate = dev.octri.showcase.digitalocean.models.ConnectionCreate
 
-typealias ConnectionCreateCredential = dev.octri.showcase.digitalocean.models.ConnectionCreateCredential
+typealias ConnectionCreateCredential =
+    dev.octri.showcase.digitalocean.models.ConnectionCreateCredential
 
-typealias ConnectionCreateCredentialTeamCredential = dev.octri.showcase.digitalocean.models.ConnectionCreateCredentialTeamCredential
+typealias ConnectionCreateCredentialTeamCredential =
+    dev.octri.showcase.digitalocean.models.ConnectionCreateCredentialTeamCredential
 
 typealias ConnectionCreateNetwork = dev.octri.showcase.digitalocean.models.ConnectionCreateNetwork
 
-typealias ConnectionCreateNetworkVpc = dev.octri.showcase.digitalocean.models.ConnectionCreateNetworkVpc
+typealias ConnectionCreateNetworkVpc =
+    dev.octri.showcase.digitalocean.models.ConnectionCreateNetworkVpc
 
-typealias ConnectionCreateNetworkVpcDestinationsItem = dev.octri.showcase.digitalocean.models.ConnectionCreateNetworkVpcDestinationsItem
+typealias ConnectionCreateNetworkVpcDestinationsItem =
+    dev.octri.showcase.digitalocean.models.ConnectionCreateNetworkVpcDestinationsItem
 
-typealias ConnectionCredentialKindEnum = dev.octri.showcase.digitalocean.models.ConnectionCredentialKindEnum
+typealias ConnectionCredentialKindEnum =
+    dev.octri.showcase.digitalocean.models.ConnectionCredentialKindEnum
 
 typealias ConnectionNetwork = dev.octri.showcase.digitalocean.models.ConnectionNetwork
 
 typealias ConnectionNetworkVpc = dev.octri.showcase.digitalocean.models.ConnectionNetworkVpc
 
-typealias ConnectionNetworkVpcDestinationsItem = dev.octri.showcase.digitalocean.models.ConnectionNetworkVpcDestinationsItem
+typealias ConnectionNetworkVpcDestinationsItem =
+    dev.octri.showcase.digitalocean.models.ConnectionNetworkVpcDestinationsItem
 
 typealias ConnectionOauth = dev.octri.showcase.digitalocean.models.ConnectionOauth
 
 typealias ConnectionParameterSpec = dev.octri.showcase.digitalocean.models.ConnectionParameterSpec
 
-typealias ConnectionParameterSpecInputKindEnum = dev.octri.showcase.digitalocean.models.ConnectionParameterSpecInputKindEnum
+typealias ConnectionParameterSpecInputKindEnum =
+    dev.octri.showcase.digitalocean.models.ConnectionParameterSpecInputKindEnum
 
 typealias ConnectionPool = dev.octri.showcase.digitalocean.models.ConnectionPool
 
 typealias ConnectionPoolConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolConnection
 
-typealias ConnectionPoolPrivateConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolPrivateConnection
+typealias ConnectionPoolPrivateConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolPrivateConnection
 
 typealias ConnectionPoolRequest = dev.octri.showcase.digitalocean.models.ConnectionPoolRequest
 
-typealias ConnectionPoolRequestConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolRequestConnection
+typealias ConnectionPoolRequestConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolRequestConnection
 
-typealias ConnectionPoolRequestPrivateConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolRequestPrivateConnection
+typealias ConnectionPoolRequestPrivateConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolRequestPrivateConnection
 
-typealias ConnectionPoolRequestStandbyConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolRequestStandbyConnection
+typealias ConnectionPoolRequestStandbyConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolRequestStandbyConnection
 
-typealias ConnectionPoolRequestStandbyPrivateConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolRequestStandbyPrivateConnection
+typealias ConnectionPoolRequestStandbyPrivateConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolRequestStandbyPrivateConnection
 
 typealias ConnectionPoolResponse = dev.octri.showcase.digitalocean.models.ConnectionPoolResponse
 
 typealias ConnectionPools = dev.octri.showcase.digitalocean.models.ConnectionPools
 
-typealias ConnectionPoolStandbyConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolStandbyConnection
+typealias ConnectionPoolStandbyConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolStandbyConnection
 
-typealias ConnectionPoolStandbyPrivateConnection = dev.octri.showcase.digitalocean.models.ConnectionPoolStandbyPrivateConnection
+typealias ConnectionPoolStandbyPrivateConnection =
+    dev.octri.showcase.digitalocean.models.ConnectionPoolStandbyPrivateConnection
 
 typealias ConnectionPoolUpdate = dev.octri.showcase.digitalocean.models.ConnectionPoolUpdate
 

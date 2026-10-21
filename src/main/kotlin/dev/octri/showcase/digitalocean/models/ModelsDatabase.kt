@@ -5,512 +5,407 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * The connection details for OpenSearch dashboard.
- */
+/** The connection details for OpenSearch dashboard. */
 data class DatabaseClusterUiConnection(
     /**
-     * This is provided as a convenience and should be able to be constructed by the other attributes.
+     * This is provided as a convenience and should be able to be constructed by the other
+     * attributes.
      */
     val uri: String? = null,
-    /**
-     * The FQDN pointing to the opensearch cluster's current primary node.
-     */
+    /** The FQDN pointing to the opensearch cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the opensearch dashboard is listening.
-     */
+    /** The port on which the opensearch dashboard is listening. */
     val port: Long? = null,
     /**
      * The default user for the opensearch dashboard. Requires `database:view_credentials` scope.
      */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * The connection details for Schema Registry.
- */
+/** The connection details for Schema Registry. */
 data class DatabaseClusterSchemaRegistryConnection(
     /**
-     * This is provided as a convenience and should be able to be constructed by the other attributes.
+     * This is provided as a convenience and should be able to be constructed by the other
+     * attributes.
      */
     val uri: String? = null,
-    /**
-     * The FQDN pointing to the schema registry connection uri.
-     */
+    /** The FQDN pointing to the schema registry connection uri. */
     val host: String? = null,
-    /**
-     * The port on which the schema registry is listening.
-     */
+    /** The port on which the schema registry is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the schema registry. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the schema registry. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the schema registry. Requires `database:view_credentials` scope.
+     * The randomly generated password for the schema registry. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `connection` wire field.
- */
+/** Optional API value serialized in the `connection` wire field. */
 data class DatabaseClusterConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `private_connection` wire field.
- */
+/** Optional API value serialized in the `private_connection` wire field. */
 data class DatabaseClusterPrivateConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `standby_connection` wire field.
- */
+/** Optional API value serialized in the `standby_connection` wire field. */
 data class DatabaseClusterStandbyConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `standby_private_connection` wire field.
- */
+/** Optional API value serialized in the `standby_private_connection` wire field. */
 data class DatabaseClusterStandbyPrivateConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `maintenance_window` wire field.
- */
+/** Optional API value serialized in the `maintenance_window` wire field. */
 data class DatabaseClusterMaintenanceWindow(
-    /**
-     * The day of the week on which to apply maintenance updates.
-     */
+    /** The day of the week on which to apply maintenance updates. */
     val day: String,
-    /**
-     * The hour in UTC at which maintenance updates will be applied in 24 hour format.
-     */
+    /** The hour in UTC at which maintenance updates will be applied in 24 hour format. */
     val hour: String,
     /**
-     * A boolean value indicating whether any maintenance is scheduled to be performed in the next window.
+     * A boolean value indicating whether any maintenance is scheduled to be performed in the next
+     * window.
      */
     val pending: Boolean? = null,
-    /**
-     * A list of strings, each containing information about a pending maintenance update.
-     */
-    val description: List<String>? = null
+    /** A list of strings, each containing information about a pending maintenance update. */
+    val description: List<String>? = null,
 )
 
-/**
- * Typed representation of the `DatabaseCluster` API schema.
- */
+/** Typed representation of the `DatabaseCluster` API schema. */
 data class DatabaseCluster(
-    /**
-     * A unique, human-readable name referring to a database cluster.
-     */
+    /** A unique, human-readable name referring to a database cluster. */
     val name: String,
     /**
-     * A slug representing the database engine used for the cluster. The possible values are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for PostgreSQL Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced Edition engines are currently in public preview.
+     * A slug representing the database engine used for the cluster. The possible values are: "pg"
+     * for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB, "kafka" for
+     * Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for PostgreSQL
+     * Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced Edition engines
+     * are currently in public preview.
      */
     val engine: DatabaseClusterEngineEnum,
-    /**
-     * The number of nodes in the database cluster.
-     */
+    /** The number of nodes in the database cluster. */
     @com.fasterxml.jackson.annotation.JsonProperty("num_nodes") val numNodes: Long,
-    /**
-     * The slug identifier representing the size of the nodes in the database cluster.
-     */
+    /** The slug identifier representing the size of the nodes in the database cluster. */
     val size: String,
-    /**
-     * The slug identifier for the region where the database cluster is located.
-     */
+    /** The slug identifier for the region where the database cluster is located. */
     val region: String,
-    /**
-     * A unique ID that can be used to identify and reference a database cluster.
-     */
+    /** A unique ID that can be used to identify and reference a database cluster. */
     val id: String? = null,
-    /**
-     * A string representing the version of the database engine in use for the cluster.
-     */
+    /** A string representing the version of the database engine in use for the cluster. */
     val version: String? = null,
-    /**
-     * A string representing the semantic version of the database engine in use for the cluster.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("semantic_version") val semanticVersion: String? = null,
-    /**
-     * A string representing the current status of the database cluster.
-     */
+    /** A string representing the semantic version of the database engine in use for the cluster. */
+    @com.fasterxml.jackson.annotation.JsonProperty("semantic_version")
+    val semanticVersion: String? = null,
+    /** A string representing the current status of the database cluster. */
     val status: DatabaseClusterStatusEnum? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
+     * A time value given in ISO8601 combined date and time format that represents when the database
+     * cluster was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
-     * A string specifying the UUID of the VPC to which the database cluster will be assigned. If excluded, the cluster when creating a new database cluster, it will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the database cluster will be assigned. If
+     * excluded, the cluster when creating a new database cluster, it will be assigned to your
+     * account's default VPC for the region. Requires `vpc:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid") val privateNetworkUuid: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid")
+    val privateNetworkUuid: String? = null,
     /**
      * An array of tags (as strings) to apply to the database cluster. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
-    /**
-     * An array of strings containing the names of databases created in the database cluster.
-     */
+    /** An array of strings containing the names of databases created in the database cluster. */
     @com.fasterxml.jackson.annotation.JsonProperty("db_names") val dbNames: List<String>? = null,
-    /**
-     * The connection details for OpenSearch dashboard.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ui_connection") val uiConnection: DatabaseClusterUiConnection? = null,
-    /**
-     * The connection details for Schema Registry.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("schema_registry_connection") val schemaRegistryConnection: DatabaseClusterSchemaRegistryConnection? = null,
-    /**
-     * Optional API value serialized in the `connection` wire field.
-     */
+    /** The connection details for OpenSearch dashboard. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ui_connection")
+    val uiConnection: DatabaseClusterUiConnection? = null,
+    /** The connection details for Schema Registry. */
+    @com.fasterxml.jackson.annotation.JsonProperty("schema_registry_connection")
+    val schemaRegistryConnection: DatabaseClusterSchemaRegistryConnection? = null,
+    /** Optional API value serialized in the `connection` wire field. */
     val connection: DatabaseClusterConnection? = null,
-    /**
-     * Optional API value serialized in the `private_connection` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_connection") val privateConnection: DatabaseClusterPrivateConnection? = null,
-    /**
-     * Optional API value serialized in the `standby_connection` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("standby_connection") val standbyConnection: DatabaseClusterStandbyConnection? = null,
-    /**
-     * Optional API value serialized in the `standby_private_connection` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("standby_private_connection") val standbyPrivateConnection: DatabaseClusterStandbyPrivateConnection? = null,
-    /**
-     * Optional array value serialized in the `users` wire field.
-     */
+    /** Optional API value serialized in the `private_connection` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("private_connection")
+    val privateConnection: DatabaseClusterPrivateConnection? = null,
+    /** Optional API value serialized in the `standby_connection` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("standby_connection")
+    val standbyConnection: DatabaseClusterStandbyConnection? = null,
+    /** Optional API value serialized in the `standby_private_connection` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("standby_private_connection")
+    val standbyPrivateConnection: DatabaseClusterStandbyPrivateConnection? = null,
+    /** Optional array value serialized in the `users` wire field. */
     val users: List<DatabaseUser>? = null,
+    /** Optional API value serialized in the `maintenance_window` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_window")
+    val maintenanceWindow: DatabaseClusterMaintenanceWindow? = null,
     /**
-     * Optional API value serialized in the `maintenance_window` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("maintenance_window") val maintenanceWindow: DatabaseClusterMaintenanceWindow? = null,
-    /**
-     * The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project. Requires `project:assign_resource` scope.
+     * The ID of the project that the database cluster is assigned to. If excluded when creating a
+     * new database cluster, it will be assigned to your default project. Requires
+     * `project:assign_resource` scope.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /**
-     * Optional array value serialized in the `rules` wire field.
-     */
+    /** Optional array value serialized in the `rules` wire field. */
     val rules: List<FirewallRule>? = null,
     /**
-     * A timestamp referring to the date when the particular version will no longer be supported. If null, the version does not have an end of life timeline.
+     * A timestamp referring to the date when the particular version will no longer be supported. If
+     * null, the version does not have an end of life timeline.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_end_of_life") val versionEndOfLife: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("version_end_of_life")
+    val versionEndOfLife: String? = null,
     /**
-     * A timestamp referring to the date when the particular version will no longer be available for creating new clusters. If null, the version does not have an end of availability timeline.
+     * A timestamp referring to the date when the particular version will no longer be available for
+     * creating new clusters. If null, the version does not have an end of availability timeline.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("version_end_of_availability") val versionEndOfAvailability: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("version_end_of_availability")
+    val versionEndOfAvailability: String? = null,
     /**
-     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
+     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to
+     * the cluster, beyond what is provided as a base amount from the 'size' and any previously
+     * added additional storage.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib") val storageSizeMib: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib")
+    val storageSizeMib: Long? = null,
     /**
-     * Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and a second entry for the cluster's standby node(s).
+     * Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the
+     * cluster's primary node and a second entry for the cluster's standby node(s).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("metrics_endpoints") val metricsEndpoints: List<DatabaseServiceEndpoint>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("metrics_endpoints")
+    val metricsEndpoints: List<DatabaseServiceEndpoint>? = null,
     /**
-     * Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is not configured for the cluster.
+     * Autoscaling configuration for the database cluster. Currently only supports storage
+     * autoscaling. If null, autoscaling is not configured for the cluster.
      */
     val autoscale: DatabaseAutoscaleParams? = null,
-    /**
-     * DigitalOcean-specific settings for the database cluster, including custom service CNAMEs.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("do_settings") val doSettings: DoSettings? = null
+    /** DigitalOcean-specific settings for the database cluster, including custom service CNAMEs. */
+    @com.fasterxml.jackson.annotation.JsonProperty("do_settings")
+    val doSettings: DoSettings? = null,
 )
 
-/**
- * Typed representation of the `DatabaseKafkaSchemaCreate` API schema.
- */
+/** Typed representation of the `DatabaseKafkaSchemaCreate` API schema. */
 data class DatabaseKafkaSchemaCreate(
-    /**
-     * The name of the schema subject.
-     */
+    /** The name of the schema subject. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject_name") val subjectName: String? = null,
-    /**
-     * The type of the schema.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("schema_type") val schemaType: DatabaseKafkaSchemaCreateSchemaTypeEnum? = null,
-    /**
-     * The schema definition in the specified format.
-     */
-    val schema: String? = null
+    /** The type of the schema. */
+    @com.fasterxml.jackson.annotation.JsonProperty("schema_type")
+    val schemaType: DatabaseKafkaSchemaCreateSchemaTypeEnum? = null,
+    /** The schema definition in the specified format. */
+    val schema: String? = null,
 )
 
-/**
- * Typed representation of the `DatabaseLayoutOptions` API schema.
- */
+/** Typed representation of the `DatabaseLayoutOptions` API schema. */
 data class DatabaseLayoutOptions(
     /**
-     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are available with various numbers of nodes in the database cluster. Each slugs denotes the node's identifier, CPU, and RAM (in that order).
+     * An array of objects, each indicating the node sizes (otherwise referred to as slugs) that are
+     * available with various numbers of nodes in the database cluster. Each slugs denotes the
+     * node's identifier, CPU, and RAM (in that order).
      */
     val layouts: List<DatabaseLayoutOption>? = null
 )
 
-/**
- * Typed representation of the `DatabaseRegionOptions` API schema.
- */
+/** Typed representation of the `DatabaseRegionOptions` API schema. */
 data class DatabaseRegionOptions(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val regions: List<String>? = null
 )
 
-/**
- * Optional API value serialized in the `connection` wire field.
- */
+/** Optional API value serialized in the `connection` wire field. */
 data class DatabaseReplicaConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Optional API value serialized in the `private_connection` wire field.
- */
+/** Optional API value serialized in the `private_connection` wire field. */
 data class DatabaseReplicaPrivateConnection(
     /**
-     * A connection string in the format accepted by the `psql` command. This is provided as a convenience and should be able to be constructed by the other attributes.
+     * A connection string in the format accepted by the `psql` command. This is provided as a
+     * convenience and should be able to be constructed by the other attributes.
      */
     val uri: String? = null,
-    /**
-     * The name of the default database.
-     */
+    /** The name of the default database. */
     val database: String? = null,
-    /**
-     * The FQDN pointing to the database cluster's current primary node.
-     */
+    /** The FQDN pointing to the database cluster's current primary node. */
     val host: String? = null,
-    /**
-     * The port on which the database cluster is listening.
-     */
+    /** The port on which the database cluster is listening. */
     val port: Long? = null,
-    /**
-     * The default user for the database. Requires `database:view_credentials` scope.
-     */
+    /** The default user for the database. Requires `database:view_credentials` scope. */
     val user: String? = null,
     /**
-     * The randomly generated password for the default user. Requires `database:view_credentials` scope.
+     * The randomly generated password for the default user. Requires `database:view_credentials`
+     * scope.
      */
     val password: String? = null,
-    /**
-     * A boolean value indicating if the connection should be made over SSL.
-     */
-    val ssl: Boolean? = null
+    /** A boolean value indicating if the connection should be made over SSL. */
+    val ssl: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DatabaseReplica` API schema.
- */
+/** Typed representation of the `DatabaseReplica` API schema. */
 data class DatabaseReplica(
-    /**
-     * The name to give the read-only replicating
-     */
+    /** The name to give the read-only replicating */
     val name: String,
-    /**
-     * A unique ID that can be used to identify and reference a database replica.
-     */
+    /** A unique ID that can be used to identify and reference a database replica. */
     val id: String? = null,
     /**
-     * A slug identifier for the region where the read-only replica will be located. If excluded, the replica will be placed in the same region as the cluster.
+     * A slug identifier for the region where the read-only replica will be located. If excluded,
+     * the replica will be placed in the same region as the cluster.
      */
     val region: String? = null,
     /**
-     * A slug identifier representing the size of the node for the read-only replica. The size of the replica must be at least as large as the node size for the database cluster from which it is replicating.
+     * A slug identifier representing the size of the node for the read-only replica. The size of
+     * the replica must be at least as large as the node size for the database cluster from which it
+     * is replicating.
      */
     val size: String? = null,
-    /**
-     * A string representing the current status of the database cluster.
-     */
+    /** A string representing the current status of the database cluster. */
     val status: DatabaseReplicaStatusEnum? = null,
     /**
-     * A flat array of tag names as strings to apply to the read-only replica after it is created. Tag names can either be existing or new tags. Requires `tag:create` scope.
+     * A flat array of tag names as strings to apply to the read-only replica after it is created.
+     * Tag names can either be existing or new tags. Requires `tag:create` scope.
      */
     val tags: List<String>? = null,
     /**
-     * A time value given in ISO8601 combined date and time format that represents when the database cluster was created.
+     * A time value given in ISO8601 combined date and time format that represents when the database
+     * cluster was created.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
-     * A string specifying the UUID of the VPC to which the read-only replica will be assigned. If excluded, the replica will be assigned to your account's default VPC for the region. Requires `vpc:read` scope.
+     * A string specifying the UUID of the VPC to which the read-only replica will be assigned. If
+     * excluded, the replica will be assigned to your account's default VPC for the region. Requires
+     * `vpc:read` scope.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid") val privateNetworkUuid: String? = null,
-    /**
-     * Optional API value serialized in the `connection` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("private_network_uuid")
+    val privateNetworkUuid: String? = null,
+    /** Optional API value serialized in the `connection` wire field. */
     val connection: DatabaseReplicaConnection? = null,
+    /** Optional API value serialized in the `private_connection` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("private_connection")
+    val privateConnection: DatabaseReplicaPrivateConnection? = null,
     /**
-     * Optional API value serialized in the `private_connection` wire field.
+     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to
+     * the cluster, beyond what is provided as a base amount from the 'size' and any previously
+     * added additional storage.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_connection") val privateConnection: DatabaseReplicaPrivateConnection? = null,
-    /**
-     * Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond what is provided as a base amount from the 'size' and any previously added additional storage.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib") val storageSizeMib: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("storage_size_mib")
+    val storageSizeMib: Long? = null,
     /**
      * DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("do_settings") val doSettings: DoSettings? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("do_settings")
+    val doSettings: DoSettings? = null,
 )
 
-/**
- * Typed representation of the `DatabaseVersionOptions` API schema.
- */
+/** Typed representation of the `DatabaseVersionOptions` API schema. */
 data class DatabaseVersionOptions(
-    /**
-     * An array of strings containing the names of available regions
-     */
+    /** An array of strings containing the names of available regions */
     val versions: List<String>? = null
 )

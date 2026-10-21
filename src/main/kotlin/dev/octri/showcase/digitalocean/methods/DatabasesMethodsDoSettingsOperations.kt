@@ -13,27 +13,81 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesGetDoSettingsOperation {
     /**
-     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current `service_cnames` configuration.
+     * To retrieve the DigitalOcean-specific settings for a database cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/do_settings`. The response will include the current
+     * `service_cnames` configuration.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetDoSettings(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): DoSettingsResponse {
+    fun databasesGetDoSettings(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): DoSettingsResponse {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<DoSettingsResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings", config = clientConfig, operationId = "databasesGetDoSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java))).data
+        return SdkClient.request<DoSettingsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings",
+                    config = clientConfig,
+                    operationId = "databasesGetDoSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "429" to Error2::class.java,
+                            "500" to Error2::class.java,
+                            "default" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateDoSettingsOperation {
     /**
-     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables TLS verification when connecting via a custom hostname. After updating, the database nodes will be replaced to apply…
+     * To update the DigitalOcean-specific settings for a database cluster, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/do_settings`. Currently, the only supported setting is
+     * `service_cnames`, which allows you to specify custom DNS names (CNAMEs) to be included in the
+     * TLS certificate Subject Alternative Names (SANs) for the database cluster nodes. This enables
+     * TLS verification when connecting via a custom hostname. After updating, the database nodes
+     * will be replaced to apply…
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param doSettings DigitalOcean-specific settings for the database cluster.
      */
-    fun databasesUpdateDoSettings(clientConfig: ClientConfig, databaseClusterUuid: String, doSettings: DoSettings, options: RequestOptions? = null): Unit {
+    fun databasesUpdateDoSettings(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        doSettings: DoSettings,
+        options: RequestOptions? = null,
+    ): Unit {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings", config = clientConfig, body = SdkClient.bodyMap("do_settings" to (doSettings)), operationId = "databasesUpdateDoSettings", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/do_settings",
+                config = clientConfig,
+                body = SdkClient.bodyMap("do_settings" to (doSettings)),
+                operationId = "databasesUpdateDoSettings",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

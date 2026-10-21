@@ -5,36 +5,28 @@ package dev.octri.showcase.digitalocean.models
 
 import java.time.OffsetDateTime
 
-/**
- * Description of deployment
- */
+/** Description of deployment */
 data class ApiDeployment(
-    /**
-     * Creation date / time
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * Name
-     */
+    /** Creation date / time */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** Name */
     val name: String? = null,
-    /**
-     * Optional enumerated value serialized in the `status` wire field.
-     */
+    /** Optional enumerated value serialized in the `status` wire field. */
     val status: ApiDeploymentStatus? = null,
-    /**
-     * Last modified
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * Access your deployed agent here
-     */
+    /** Last modified */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** Access your deployed agent here */
     val url: String? = null,
-    /**
-     * Unique id
-     */
+    /** Unique id */
     val uuid: String? = null,
     /**
-     * - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
+     * - VISIBILITY_UNKNOWN: The status of the deployment is unknown - VISIBILITY_DISABLED: The
+     *   deployment is disabled and will no longer service requests - VISIBILITY_PLAYGROUND:
+     *   Deprecated: No longer a valid state - VISIBILITY_PUBLIC: The deployment is public and will
+     *   service requests from the public internet - VISIBILITY_PRIVATE: The deployment is private
+     *   and will only service requests from other agents, or through API keys
      */
-    val visibility: ApiDeploymentVisibility? = null
+    val visibility: ApiDeploymentVisibility? = null,
 )
