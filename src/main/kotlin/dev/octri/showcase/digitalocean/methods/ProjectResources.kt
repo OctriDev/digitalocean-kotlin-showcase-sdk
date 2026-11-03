@@ -16,99 +16,215 @@ import dev.octri.showcase.digitalocean.Validation
 object ProjectResources {
 
     /**
-     * To list all your resources in a project, send a GET request to `/v2/projects/$PROJECT_ID/resources`. This endpoint will only return resources that you are authorized to see. For example, to see Droplets in a project, include the `droplet:read` scope.
+     * To list all your resources in a project, send a GET request to
+     * `/v2/projects/$PROJECT_ID/resources`. This endpoint will only return resources that you are
+     * authorized to see. For example, to see Droplets in a project, include the `droplet:read`
+     * scope.
      *
      * @param projectId A unique identifier for a project.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun projectsListResources(clientConfig: ClientConfig, projectId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): ResourcesList {
-        return projectsListResourcesWithRawResponse(clientConfig, projectId, perPage, page, options).data
+    fun projectsListResources(
+        clientConfig: ClientConfig,
+        projectId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): ResourcesList {
+        return projectsListResourcesWithRawResponse(clientConfig, projectId, perPage, page, options)
+            .data
     }
 
-
-    /** [projectsListResources], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun projectsListResourcesWithRawResponse(clientConfig: ClientConfig, projectId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<ResourcesList> {
+    /**
+     * [projectsListResources], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun projectsListResourcesWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ResourcesList> {
         Validation.validateUuid("project_id", projectId)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<ResourcesList>(SdkClient.RequestSpec("GET", "/v2/projects/${SdkClient.encodePathSegment(projectId)}/resources", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "projectsListResources", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ResourcesList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/projects/${SdkClient.encodePathSegment(projectId)}/resources",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "projectsListResources",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`. You must have both `project:assign_resource` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:assign_resource` and `droplet:read` scopes. The `project:update` scope also grants `project:assign_resource`.
+     * To assign resources to a project, send a POST request to
+     * `/v2/projects/$PROJECT_ID/resources`. You must have both `project:assign_resource` and
+     * `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a
+     * project, include both the `project:assign_resource` and `droplet:read` scopes. The
+     * `project:update` scope also grants `project:assign_resource`.
      *
      * @param projectId A unique identifier for a project.
-     * @param resources A list of uniform resource names (URNs) to be added to a
-     *   project. Only resources that you are authorized to see will be returned.
+     * @param resources A list of uniform resource names (URNs) to be added to a project. Only
+     *   resources that you are authorized to see will be returned.
      */
-    fun projectsAssignResources(clientConfig: ClientConfig, projectId: String, resources: List<Urn>? = null, options: RequestOptions? = null): AssignedResourcesList {
-        return projectsAssignResourcesWithRawResponse(clientConfig, projectId, resources, options).data
+    fun projectsAssignResources(
+        clientConfig: ClientConfig,
+        projectId: String,
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): AssignedResourcesList {
+        return projectsAssignResourcesWithRawResponse(clientConfig, projectId, resources, options)
+            .data
     }
-
-
-    /** [projectsAssignResources], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun projectsAssignResourcesWithRawResponse(clientConfig: ClientConfig, projectId: String, resources: List<Urn>? = null, options: RequestOptions? = null): SdkResponse<AssignedResourcesList> {
-        Validation.validateUuid("project_id", projectId)
-
-        return SdkClient.request<AssignedResourcesList>(SdkClient.RequestSpec("POST", "/v2/projects/${SdkClient.encodePathSegment(projectId)}/resources", config = clientConfig, body = SdkClient.bodyMap("resources" to (SdkClient.omitIfNull(resources))), operationId = "projectsAssignResources", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * To list all your resources in your default project, send a GET request to `/v2/projects/default/resources`. Only resources that you are authorized to see will be returned. For example, to see Droplets in a project, include the `droplet:read` scope.
+     * [projectsAssignResources], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
      */
-    fun projectsListResourcesDefault(clientConfig: ClientConfig, options: RequestOptions? = null): ResourcesList {
+    fun projectsAssignResourcesWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AssignedResourcesList> {
+        Validation.validateUuid("project_id", projectId)
+
+        return SdkClient.request<AssignedResourcesList>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/projects/${SdkClient.encodePathSegment(projectId)}/resources",
+                config = clientConfig,
+                body = SdkClient.bodyMap("resources" to (SdkClient.omitIfNull(resources))),
+                operationId = "projectsAssignResources",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * To list all your resources in your default project, send a GET request to
+     * `/v2/projects/default/resources`. Only resources that you are authorized to see will be
+     * returned. For example, to see Droplets in a project, include the `droplet:read` scope.
+     */
+    fun projectsListResourcesDefault(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ResourcesList {
         return projectsListResourcesDefaultWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [projectsListResourcesDefault], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun projectsListResourcesDefaultWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<ResourcesList> {
-        return SdkClient.request<ResourcesList>(SdkClient.RequestSpec("GET", "/v2/projects/default/resources", config = clientConfig, operationId = "projectsListResourcesDefault", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [projectsListResourcesDefault], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun projectsListResourcesDefaultWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<ResourcesList> {
+        return SdkClient.request<ResourcesList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/projects/default/resources",
+                config = clientConfig,
+                operationId = "projectsListResourcesDefault",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To assign resources to your default project, send a POST request to `/v2/projects/default/resources`. You must have both `project:assign_resource` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to the default project, include both the `project:assign_resource` and `droplet:read` scopes. The `project:update` scope also grants `project:assign_resource`.
+     * To assign resources to your default project, send a POST request to
+     * `/v2/projects/default/resources`. You must have both `project:assign_resource` and
+     * `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to the
+     * default project, include both the `project:assign_resource` and `droplet:read` scopes. The
+     * `project:update` scope also grants `project:assign_resource`.
      *
-     * @param resources A list of uniform resource names (URNs) to be added to a
-     *   project. Only resources that you are authorized to see will be returned.
+     * @param resources A list of uniform resource names (URNs) to be added to a project. Only
+     *   resources that you are authorized to see will be returned.
      */
-    fun projectsAssignResourcesDefault(clientConfig: ClientConfig, resources: List<Urn>? = null, options: RequestOptions? = null): AssignedResourcesList {
+    fun projectsAssignResourcesDefault(
+        clientConfig: ClientConfig,
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): AssignedResourcesList {
         return projectsAssignResourcesDefaultWithRawResponse(clientConfig, resources, options).data
     }
 
-
-    /** [projectsAssignResourcesDefault], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun projectsAssignResourcesDefaultWithRawResponse(clientConfig: ClientConfig, resources: List<Urn>? = null, options: RequestOptions? = null): SdkResponse<AssignedResourcesList> {
-        return SdkClient.request<AssignedResourcesList>(SdkClient.RequestSpec("POST", "/v2/projects/default/resources", config = clientConfig, body = SdkClient.bodyMap("resources" to (SdkClient.omitIfNull(resources))), operationId = "projectsAssignResourcesDefault", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [projectsAssignResourcesDefault], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun projectsAssignResourcesDefaultWithRawResponse(
+        clientConfig: ClientConfig,
+        resources: List<Urn>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AssignedResourcesList> {
+        return SdkClient.request<AssignedResourcesList>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/projects/default/resources",
+                config = clientConfig,
+                body = SdkClient.bodyMap("resources" to (SdkClient.omitIfNull(resources))),
+                operationId = "projectsAssignResourcesDefault",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

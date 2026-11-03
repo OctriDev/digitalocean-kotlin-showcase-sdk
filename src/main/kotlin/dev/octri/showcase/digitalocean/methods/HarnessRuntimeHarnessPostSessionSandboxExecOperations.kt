@@ -37,235 +37,664 @@ import dev.octri.showcase.digitalocean.WorkspaceUploadResponse
 
 internal object HarnessRuntimeHarnessPostSessionSandboxExecOperation {
     /**
-     * Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB each; truncation is indicated via response headers when present. A non-zero exit code is still HTTP 200.
+     * Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB
+     * each; truncation is indicated via response headers when present. A non-zero exit code is
+     * still HTTP 200.
      *
      * @param sessionId The session UUID.
-     * @param argv Program and arguments. Required and non-empty; run directly, with
-     *   no shell interpretation.
-     * @param workdir Working directory inside the sandbox. Empty uses the sandbox
-     *   default (/workspace); not restricted to the workspace root.
-     * @param stdin Optional base64 stdin payload, delivered in full and then closed
-     *   so the process sees EOF. One-shot only — there is no streaming stdin on this
-     *   endpoint.
-     * @param timeoutSeconds Optional timeout. Clamped server-side (default 60,
-     *   maximum 240) regardless of the value sent.
+     * @param argv Program and arguments. Required and non-empty; run directly, with no shell
+     *   interpretation.
+     * @param workdir Working directory inside the sandbox. Empty uses the sandbox default
+     *   (/workspace); not restricted to the workspace root.
+     * @param stdin Optional base64 stdin payload, delivered in full and then closed so the process
+     *   sees EOF. One-shot only — there is no streaming stdin on this endpoint.
+     * @param timeoutSeconds Optional timeout. Clamped server-side (default 60, maximum 240)
+     *   regardless of the value sent.
      */
-    fun harnessPostSessionSandboxExec(clientConfig: ClientConfig, sessionId: String, argv: List<String>, workdir: String? = null, stdin: ByteArray? = null, timeoutSeconds: Long? = null, options: RequestOptions? = null): ExecInSandboxResponse {
-        return harnessPostSessionSandboxExecWithRawResponse(clientConfig, sessionId, argv, workdir, stdin, timeoutSeconds, options).data
+    fun harnessPostSessionSandboxExec(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        argv: List<String>,
+        workdir: String? = null,
+        stdin: ByteArray? = null,
+        timeoutSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): ExecInSandboxResponse {
+        return harnessPostSessionSandboxExecWithRawResponse(
+                clientConfig,
+                sessionId,
+                argv,
+                workdir,
+                stdin,
+                timeoutSeconds,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessPostSessionSandboxExec], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessPostSessionSandboxExecWithRawResponse(clientConfig: ClientConfig, sessionId: String, argv: List<String>, workdir: String? = null, stdin: ByteArray? = null, timeoutSeconds: Long? = null, options: RequestOptions? = null): SdkResponse<ExecInSandboxResponse> {
-        return SdkClient.request<ExecInSandboxResponse>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/sandbox/exec", config = clientConfig, body = SdkClient.bodyMap("argv" to (argv), "workdir" to (SdkClient.omitIfNull(workdir)), "stdin" to (SdkClient.omitIfNull(stdin)), "timeout_seconds" to (SdkClient.omitIfNull(timeoutSeconds))), operationId = "harnessPostSessionSandboxExec", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessPostSessionSandboxExec], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessPostSessionSandboxExecWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        argv: List<String>,
+        workdir: String? = null,
+        stdin: ByteArray? = null,
+        timeoutSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ExecInSandboxResponse> {
+        return SdkClient.request<ExecInSandboxResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/sandbox/exec",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "argv" to (argv),
+                        "workdir" to (SdkClient.omitIfNull(workdir)),
+                        "stdin" to (SdkClient.omitIfNull(stdin)),
+                        "timeout_seconds" to (SdkClient.omitIfNull(timeoutSeconds)),
+                    ),
+                operationId = "harnessPostSessionSandboxExec",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessGetSessionWorkspaceDownloadOperation {
     /**
-     * Streams the workspace payload back as `application/octet-stream` using chunked transfer encoding, followed by a fixed integrity footer. Response body layout: `<payload>` + `<footer>`, where the footer is exactly 73 bytes: `DOWSSHA1` (8 bytes) + 64-char lowercase SHA-256 hex + `\n`. The client MUST strip the trailing 73 bytes before saving, verify SHA-256(payload) equals the footer digest, and treat a tail that does not match this shape (magic + 64 hex + newline) as a failed…
+     * Streams the workspace payload back as `application/octet-stream` using chunked transfer
+     * encoding, followed by a fixed integrity footer. Response body layout: `<payload>` +
+     * `<footer>`, where the footer is exactly 73 bytes: `DOWSSHA1` (8 bytes) + 64-char lowercase
+     * SHA-256 hex + `\n`. The client MUST strip the trailing 73 bytes before saving, verify
+     * SHA-256(payload) equals the footer digest, and treat a tail that does not match this shape
+     * (magic + 64 hex + newline) as a failed…
      *
      * @param sessionId The session UUID.
-     * @param path Source path inside the sandbox workspace. Relative paths resolve
-     *   under the workspace root; paths that escape the workspace are rejected.
-     *   Required.
-     * @param asArchive If true, the guest returns a tar stream of `path` (e.g. for a
-     *   directory). Defaults to false (single file).
+     * @param path Source path inside the sandbox workspace. Relative paths resolve under the
+     *   workspace root; paths that escape the workspace are rejected. Required.
+     * @param asArchive If true, the guest returns a tar stream of `path` (e.g. for a directory).
+     *   Defaults to false (single file).
      */
-    fun harnessGetSessionWorkspaceDownload(clientConfig: ClientConfig, sessionId: String, path: String, asArchive: Boolean? = null, options: RequestOptions? = null): ByteArray {
-        return harnessGetSessionWorkspaceDownloadWithRawResponse(clientConfig, sessionId, path, asArchive, options).data
+    fun harnessGetSessionWorkspaceDownload(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        path: String,
+        asArchive: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return harnessGetSessionWorkspaceDownloadWithRawResponse(
+                clientConfig,
+                sessionId,
+                path,
+                asArchive,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessGetSessionWorkspaceDownload], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetSessionWorkspaceDownloadWithRawResponse(clientConfig: ClientConfig, sessionId: String, path: String, asArchive: Boolean? = null, options: RequestOptions? = null): SdkResponse<ByteArray> {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/download", config = clientConfig, query = mapOf("path" to SdkClient.queryValue(path, "form", true), "as_archive" to
-    SdkClient.queryValue(asArchive, "form", true)), operationId = "harnessGetSessionWorkspaceDownload", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "502" to Error2::class.java, "503" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetSessionWorkspaceDownload], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessGetSessionWorkspaceDownloadWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        path: String,
+        asArchive: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> {
+        return SdkClient.request<ByteArray>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/download",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "path" to SdkClient.queryValue(path, "form", true),
+                        "as_archive" to SdkClient.queryValue(asArchive, "form", true),
+                    ),
+                operationId = "harnessGetSessionWorkspaceDownload",
+                decoder = SdkClient.ResponseDecoder.BYTES,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "503" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCreateSessionWorkspaceTransferOperation {
     /**
-     * Creates an asynchronous, object-storage-backed transfer for payloads larger than the streaming path supports (> ~50 MiB). Bulk bytes never traverse harness-api: the client PUTs/GETs presigned DO Spaces URLs directly. Set `direction` to `upload` or `download`. - `upload`: responds 201 with `transfer_id` + `part_size`; the client then requests per-part presigned PUT URLs, uploads them to Spaces, and calls `commit`. - `download`: responds 202 with `transfer_id`; the client…
+     * Creates an asynchronous, object-storage-backed transfer for payloads larger than the
+     * streaming path supports (> ~50 MiB). Bulk bytes never traverse harness-api: the client
+     * PUTs/GETs presigned DO Spaces URLs directly. Set `direction` to `upload` or `download`. -
+     * `upload`: responds 201 with `transfer_id` + `part_size`; the client then requests per-part
+     * presigned PUT URLs, uploads them to Spaces, and calls `commit`. - `download`: responds 202
+     * with `transfer_id`; the client…
      *
      * @param sessionId The session UUID.
      * @param direction Transfer direction.
-     * @param path Workspace-relative path. Destination for upload, source for
-     *   download. Paths that escape the workspace root are rejected.
-     * @param isArchive Upload only. When true, the payload is a tar the guest
-     *   extracts at `path`.
+     * @param path Workspace-relative path. Destination for upload, source for download. Paths that
+     *   escape the workspace root are rejected.
+     * @param isArchive Upload only. When true, the payload is a tar the guest extracts at `path`.
      * @param asArchive Download only. When true, `path` is exported as a tar stream.
-     * @param sizeBytes Optional total payload size. Validated against the maximum
-     *   staged object size (50 GiB); a larger value returns 413.
-     * @param sha256 Optional lowercase hex SHA-256 of the full payload. If set on an
-     *   upload, it must match on commit.
+     * @param sizeBytes Optional total payload size. Validated against the maximum staged object
+     *   size (50 GiB); a larger value returns 413.
+     * @param sha256 Optional lowercase hex SHA-256 of the full payload. If set on an upload, it
+     *   must match on commit.
      */
-    fun harnessCreateSessionWorkspaceTransfer(clientConfig: ClientConfig, request: HarnessRuntime.HarnessCreateSessionWorkspaceTransferRequest, options: RequestOptions? = null): WorkspaceTransferCreated {
-        return harnessCreateSessionWorkspaceTransferWithRawResponse(clientConfig, request, options).data
+    fun harnessCreateSessionWorkspaceTransfer(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessCreateSessionWorkspaceTransferRequest,
+        options: RequestOptions? = null,
+    ): WorkspaceTransferCreated {
+        return harnessCreateSessionWorkspaceTransferWithRawResponse(clientConfig, request, options)
+            .data
     }
 
-
-
-
-    /** [harnessCreateSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCreateSessionWorkspaceTransferWithRawResponse(clientConfig: ClientConfig, request: HarnessRuntime.HarnessCreateSessionWorkspaceTransferRequest, options: RequestOptions? = null): SdkResponse<WorkspaceTransferCreated> {
-        return SdkClient.request<WorkspaceTransferCreated>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/workspace/transfers", config = clientConfig, body = SdkClient.bodyMap("direction" to (request.direction), "path" to (request.path), "is_archive" to (SdkClient.omitIfNull(request.isArchive)), "as_archive" to (SdkClient.omitIfNull(request.asArchive)), "size_bytes" to (SdkClient.omitIfNull(request.sizeBytes)), "sha256" to (SdkClient.omitIfNull(request.sha256))), operationId = "harnessCreateSessionWorkspaceTransfer", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "413" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "502" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCreateSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessCreateSessionWorkspaceTransferWithRawResponse(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessCreateSessionWorkspaceTransferRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspaceTransferCreated> {
+        return SdkClient.request<WorkspaceTransferCreated>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/workspace/transfers",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "direction" to (request.direction),
+                        "path" to (request.path),
+                        "is_archive" to (SdkClient.omitIfNull(request.isArchive)),
+                        "as_archive" to (SdkClient.omitIfNull(request.asArchive)),
+                        "size_bytes" to (SdkClient.omitIfNull(request.sizeBytes)),
+                        "sha256" to (SdkClient.omitIfNull(request.sha256)),
+                    ),
+                operationId = "harnessCreateSessionWorkspaceTransfer",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "413" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessGetSessionWorkspaceTransferOperation {
     /**
-     * Returns the current transfer state. For a completed download the response also carries a freshly minted presigned GET `download_url` (its TTL starts at poll time) and the payload `sha256` for client-side verification.
+     * Returns the current transfer state. For a completed download the response also carries a
+     * freshly minted presigned GET `download_url` (its TTL starts at poll time) and the payload
+     * `sha256` for client-side verification.
      *
      * @param sessionId The session UUID.
      * @param transferId The workspace transfer identifier.
      */
-    fun harnessGetSessionWorkspaceTransfer(clientConfig: ClientConfig, sessionId: String, transferId: String, options: RequestOptions? = null): WorkspaceTransferStatus {
-        return harnessGetSessionWorkspaceTransferWithRawResponse(clientConfig, sessionId, transferId, options).data
+    fun harnessGetSessionWorkspaceTransfer(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        options: RequestOptions? = null,
+    ): WorkspaceTransferStatus {
+        return harnessGetSessionWorkspaceTransferWithRawResponse(
+                clientConfig,
+                sessionId,
+                transferId,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessGetSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetSessionWorkspaceTransferWithRawResponse(clientConfig: ClientConfig, sessionId: String, transferId: String, options: RequestOptions? = null): SdkResponse<WorkspaceTransferStatus> {
-        return SdkClient.request<WorkspaceTransferStatus>(SdkClient.RequestSpec("GET", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}", config = clientConfig, operationId = "harnessGetSessionWorkspaceTransfer", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessGetSessionWorkspaceTransferWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspaceTransferStatus> {
+        return SdkClient.request<WorkspaceTransferStatus>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}",
+                config = clientConfig,
+                operationId = "harnessGetSessionWorkspaceTransfer",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCancelSessionWorkspaceTransferOperation {
     /**
-     * Aborts an in-flight transfer. Idempotent: cancelling an already-terminal transfer returns `aborted: false` with the current status. The request body is optional.
+     * Aborts an in-flight transfer. Idempotent: cancelling an already-terminal transfer returns
+     * `aborted: false` with the current status. The request body is optional.
      *
      * @param sessionId The session UUID.
      * @param transferId The workspace transfer identifier.
      * @param reason Optional caller-visible audit/debug context.
      */
-    fun harnessCancelSessionWorkspaceTransfer(clientConfig: ClientConfig, sessionId: String, transferId: String, reason: String? = null, options: RequestOptions? = null): WorkspaceTransferCancelled {
-        return harnessCancelSessionWorkspaceTransferWithRawResponse(clientConfig, sessionId, transferId, reason, options).data
+    fun harnessCancelSessionWorkspaceTransfer(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        reason: String? = null,
+        options: RequestOptions? = null,
+    ): WorkspaceTransferCancelled {
+        return harnessCancelSessionWorkspaceTransferWithRawResponse(
+                clientConfig,
+                sessionId,
+                transferId,
+                reason,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCancelSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCancelSessionWorkspaceTransferWithRawResponse(clientConfig: ClientConfig, sessionId: String, transferId: String, reason: String? = null, options: RequestOptions? = null): SdkResponse<WorkspaceTransferCancelled> {
-        return SdkClient.request<WorkspaceTransferCancelled>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/cancel", config = clientConfig, body = SdkClient.bodyMap("reason" to (SdkClient.omitIfNull(reason))), operationId = "harnessCancelSessionWorkspaceTransfer", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "402" to Error2::class.java, "404" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCancelSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessCancelSessionWorkspaceTransferWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        reason: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspaceTransferCancelled> {
+        return SdkClient.request<WorkspaceTransferCancelled>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/cancel",
+                config = clientConfig,
+                body = SdkClient.bodyMap("reason" to (SdkClient.omitIfNull(reason))),
+                operationId = "harnessCancelSessionWorkspaceTransfer",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCommitSessionWorkspaceTransferOperation {
     /**
-     * Upload only. Call once, after all parts have been uploaded. Completes the multipart upload and starts the asynchronous import into the workspace. Responds 202; poll the transfer until `completed` or `failed`.
+     * Upload only. Call once, after all parts have been uploaded. Completes the multipart upload
+     * and starts the asynchronous import into the workspace. Responds 202; poll the transfer until
+     * `completed` or `failed`.
      *
      * @param sessionId The session UUID.
      * @param transferId The workspace transfer identifier.
-     * @param sha256 Optional lowercase hex SHA-256. Must match the value supplied at
-     *   create when both are set.
+     * @param sha256 Optional lowercase hex SHA-256. Must match the value supplied at create when
+     *   both are set.
      */
-    fun harnessCommitSessionWorkspaceTransfer(clientConfig: ClientConfig, sessionId: String, transferId: String, sha256: String? = null, options: RequestOptions? = null): WorkspaceUploadCommitted {
-        return harnessCommitSessionWorkspaceTransferWithRawResponse(clientConfig, sessionId, transferId, sha256, options).data
+    fun harnessCommitSessionWorkspaceTransfer(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        sha256: String? = null,
+        options: RequestOptions? = null,
+    ): WorkspaceUploadCommitted {
+        return harnessCommitSessionWorkspaceTransferWithRawResponse(
+                clientConfig,
+                sessionId,
+                transferId,
+                sha256,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCommitSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCommitSessionWorkspaceTransferWithRawResponse(clientConfig: ClientConfig, sessionId: String, transferId: String, sha256: String? = null, options: RequestOptions? = null): SdkResponse<WorkspaceUploadCommitted> {
-        return SdkClient.request<WorkspaceUploadCommitted>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/commit", config = clientConfig, body = SdkClient.bodyMap("sha256" to (SdkClient.omitIfNull(sha256))), operationId = "harnessCommitSessionWorkspaceTransfer", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCommitSessionWorkspaceTransfer], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessCommitSessionWorkspaceTransferWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        sha256: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspaceUploadCommitted> {
+        return SdkClient.request<WorkspaceUploadCommitted>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/commit",
+                config = clientConfig,
+                body = SdkClient.bodyMap("sha256" to (SdkClient.omitIfNull(sha256))),
+                operationId = "harnessCommitSessionWorkspaceTransfer",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCreateSessionWorkspacePartUploadUrlsOperation {
     /**
-     * Upload only. Pass one or more 1-based `part_numbers`; the response returns a presigned `upload_url` per part (all sharing one `expires_at`), so a client can drive parallel part uploads without a round trip per part. PUT each part's bytes directly to its URL (bypassing harness-api). If URLs expire before the PUT, request them again.
+     * Upload only. Pass one or more 1-based `part_numbers`; the response returns a presigned
+     * `upload_url` per part (all sharing one `expires_at`), so a client can drive parallel part
+     * uploads without a round trip per part. PUT each part's bytes directly to its URL (bypassing
+     * harness-api). If URLs expire before the PUT, request them again.
      *
      * @param sessionId The session UUID.
      * @param transferId The workspace transfer identifier.
      * @param partNumbers 1-based part indices to presign (single or batched).
      */
-    fun harnessCreateSessionWorkspacePartUploadUrls(clientConfig: ClientConfig, sessionId: String, transferId: String, partNumbers: List<Int>, options: RequestOptions? = null): WorkspacePartUploadUrls {
-        return harnessCreateSessionWorkspacePartUploadUrlsWithRawResponse(clientConfig, sessionId, transferId, partNumbers, options).data
+    fun harnessCreateSessionWorkspacePartUploadUrls(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        partNumbers: List<Int>,
+        options: RequestOptions? = null,
+    ): WorkspacePartUploadUrls {
+        return harnessCreateSessionWorkspacePartUploadUrlsWithRawResponse(
+                clientConfig,
+                sessionId,
+                transferId,
+                partNumbers,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCreateSessionWorkspacePartUploadUrls], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCreateSessionWorkspacePartUploadUrlsWithRawResponse(clientConfig: ClientConfig, sessionId: String, transferId: String, partNumbers: List<Int>, options: RequestOptions? = null): SdkResponse<WorkspacePartUploadUrls> {
-        return SdkClient.request<WorkspacePartUploadUrls>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/part-upload-urls", config = clientConfig, body = SdkClient.bodyMap("part_numbers" to (partNumbers)), operationId = "harnessCreateSessionWorkspacePartUploadUrls", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCreateSessionWorkspacePartUploadUrls], returning the [SdkResponse] envelope: status
+     * code, headers, request ID and latency.
+     */
+    fun harnessCreateSessionWorkspacePartUploadUrlsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        transferId: String,
+        partNumbers: List<Int>,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspacePartUploadUrls> {
+        return SdkClient.request<WorkspacePartUploadUrls>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/transfers/${SdkClient.encodePathSegment(transferId)}/part-upload-urls",
+                config = clientConfig,
+                body = SdkClient.bodyMap("part_numbers" to (partNumbers)),
+                operationId = "harnessCreateSessionWorkspacePartUploadUrls",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCreateSessionWorkspaceUploadOperation {
     /**
-     * Upload a file or tar archive to a path in a session's sandbox workspace. Send the raw bytes in the request body and use `is_archive` to have the guest extract a tar stream under the destination path. Include `X-Content-Sha256` to verify the payload after it is written; uploads are capped at 500 MiB.
+     * Upload a file or tar archive to a path in a session's sandbox workspace. Send the raw bytes
+     * in the request body and use `is_archive` to have the guest extract a tar stream under the
+     * destination path. Include `X-Content-Sha256` to verify the payload after it is written;
+     * uploads are capped at 500 MiB.
      *
-     * Streams the raw request body to a path inside the sandbox workspace. Concurrent transfers (upload + download) are capped server-side; over the cap the request blocks and may return 503. The optional `X-Content-Sha256` request header carries a hex digest the guest verifies after the full payload is written.
+     * Streams the raw request body to a path inside the sandbox workspace. Concurrent transfers
+     * (upload + download) are capped server-side; over the cap the request blocks and may
+     * return 503. The optional `X-Content-Sha256` request header carries a hex digest the guest
+     * verifies after the full payload is written.
      *
      * @param sessionId The session UUID.
-     * @param path Destination path inside the sandbox workspace. Relative paths
-     *   resolve under the workspace root; paths that escape the workspace are
-     *   rejected. Required.
-     * @param isArchive If true, the body is a tar stream that the guest extracts
-     *   under `path`. Defaults to false (single file).
-     * @param xContentSha256 Optional hex SHA-256 of the full payload. The guest
-     *   verifies it after writing; a mismatch returns 400.
+     * @param path Destination path inside the sandbox workspace. Relative paths resolve under the
+     *   workspace root; paths that escape the workspace are rejected. Required.
+     * @param isArchive If true, the body is a tar stream that the guest extracts under `path`.
+     *   Defaults to false (single file).
+     * @param xContentSha256 Optional hex SHA-256 of the full payload. The guest verifies it after
+     *   writing; a mismatch returns 400.
      */
-    fun harnessCreateSessionWorkspaceUpload(clientConfig: ClientConfig, sessionId: String, path: String, body: ByteArray, isArchive: Boolean? = null, xContentSha256: String? = null, options: RequestOptions? = null): WorkspaceUploadResponse {
-        return harnessCreateSessionWorkspaceUploadWithRawResponse(clientConfig, sessionId, path, body, isArchive, xContentSha256, options).data
+    fun harnessCreateSessionWorkspaceUpload(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        path: String,
+        body: ByteArray,
+        isArchive: Boolean? = null,
+        xContentSha256: String? = null,
+        options: RequestOptions? = null,
+    ): WorkspaceUploadResponse {
+        return harnessCreateSessionWorkspaceUploadWithRawResponse(
+                clientConfig,
+                sessionId,
+                path,
+                body,
+                isArchive,
+                xContentSha256,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCreateSessionWorkspaceUpload], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCreateSessionWorkspaceUploadWithRawResponse(clientConfig: ClientConfig, sessionId: String, path: String, body: ByteArray, isArchive: Boolean? = null, xContentSha256: String? = null, options: RequestOptions? = null): SdkResponse<WorkspaceUploadResponse> {
-        return SdkClient.request<WorkspaceUploadResponse>(SdkClient.RequestSpec("POST", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/upload", config = clientConfig, query = mapOf("path" to SdkClient.queryValue(path, "form", true), "is_archive" to
-    SdkClient.queryValue(isArchive, "form", true)), body = body, contentType = "application/octet-stream", operationId = "harnessCreateSessionWorkspaceUpload", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("X-Content-Sha256" to SdkClient.headerValue(xContentSha256, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "413" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "502" to Error2::class.java, "503" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCreateSessionWorkspaceUpload], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun harnessCreateSessionWorkspaceUploadWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        path: String,
+        body: ByteArray,
+        isArchive: Boolean? = null,
+        xContentSha256: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkspaceUploadResponse> {
+        return SdkClient.request<WorkspaceUploadResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/workspace/upload",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "path" to SdkClient.queryValue(path, "form", true),
+                        "is_archive" to SdkClient.queryValue(isArchive, "form", true),
+                    ),
+                body = body,
+                contentType = "application/octet-stream",
+                operationId = "harnessCreateSessionWorkspaceUpload",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "X-Content-Sha256" to SdkClient.headerValue(xContentSha256, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "413" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "503" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessGetSessionEventsOperation {
     /**
-     * Opens a `text/event-stream` of the session's canonical events, served by the MARS data plane (OHP). Each frame is `event: <type>` plus a `data:` line holding a JSON event envelope; comment lines (`: keepalive`) arrive about every 15s and must be ignored. Decode every `data:` with one envelope parser and dispatch on the envelope's `type`. Every stream opens with a `stream.state` control frame (its `data` is a `stream_state`). Delivery is at-least-once: clients MUST…
+     * Opens a `text/event-stream` of the session's canonical events, served by the MARS data plane
+     * (OHP). Each frame is `event: <type>` plus a `data:` line holding a JSON event envelope;
+     * comment lines (`: keepalive`) arrive about every 15s and must be ignored. Decode every
+     * `data:` with one envelope parser and dispatch on the envelope's `type`. Every stream opens
+     * with a `stream.state` control frame (its `data` is a `stream_state`). Delivery is
+     * at-least-once: clients MUST…
      *
      * @param sessionId The session UUID.
-     * @param replayOnly Write the selected history and then close the stream, rather
-     *   than going live. Does not advance the device's delivery cursor, so it never
-     *   supersedes a live attach from the same device.
-     * @param replayFrom Event-id pagination cursor for the `replay_only` lane only;
-     *   return events after this one. There is no last-N floor, so a cursor already at
-     *   the head yields nothing. Ignored on a live attach.
-     * @param cursor Query-param equivalent of `Last-Event-ID`, because a browser
-     *   EventSource cannot set request headers. Takes precedence over the header when
-     *   both are present. Live-attach lane only.
-     * @param deviceId Query-param equivalent of `X-Device-UUID`. Identifies one
-     *   client install so its delivery cursor and live slot are its own; a second
-     *   attach from the same device supersedes the first.
-     * @param lastEventId The last event this client rendered (not merely received).
-     *   Its presence marks the request a reconnect, so OHP serves strictly what
-     *   follows it with no last-N floor. Persist it only after rendering.
+     * @param replayOnly Write the selected history and then close the stream, rather than going
+     *   live. Does not advance the device's delivery cursor, so it never supersedes a live attach
+     *   from the same device.
+     * @param replayFrom Event-id pagination cursor for the `replay_only` lane only; return events
+     *   after this one. There is no last-N floor, so a cursor already at the head yields nothing.
+     *   Ignored on a live attach.
+     * @param cursor Query-param equivalent of `Last-Event-ID`, because a browser EventSource cannot
+     *   set request headers. Takes precedence over the header when both are present. Live-attach
+     *   lane only.
+     * @param deviceId Query-param equivalent of `X-Device-UUID`. Identifies one client install so
+     *   its delivery cursor and live slot are its own; a second attach from the same device
+     *   supersedes the first.
+     * @param lastEventId The last event this client rendered (not merely received). Its presence
+     *   marks the request a reconnect, so OHP serves strictly what follows it with no last-N floor.
+     *   Persist it only after rendering.
      * @param xDeviceUuid A stable per-install device id. See `device_id`.
      */
-    fun harnessGetSessionEvents(clientConfig: ClientConfig, request: HarnessRuntime.HarnessGetSessionEventsRequest, options: RequestOptions? = null): Sequence<StreamEvent> {
+    fun harnessGetSessionEvents(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessGetSessionEventsRequest,
+        options: RequestOptions? = null,
+    ): Sequence<StreamEvent> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "GET",
-                "/v2/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/events",
-                config = clientConfig,
-                query = mapOf(
-            "replay_only" to SdkClient.queryValue(request.replayOnly, "form", true),
-            "replay_from" to SdkClient.queryValue(request.replayFrom, "form", true),
-            "cursor" to SdkClient.queryValue(request.cursor, "form", true),
-            "device_id" to SdkClient.queryValue(request.deviceId, "form", true)
-        ),
-                operationId = "harnessGetSessionEvents",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                extraHeaders = SdkClient.headers("Last-Event-ID" to SdkClient.headerValue(request.lastEventId, false), "X-Device-UUID" to SdkClient.headerValue(request.xDeviceUuid, false)),
-                options = options,
-                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "503" to Error2::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "GET",
+                        "/v2/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/events",
+                        config = clientConfig,
+                        query =
+                            mapOf(
+                                "replay_only" to
+                                    SdkClient.queryValue(request.replayOnly, "form", true),
+                                "replay_from" to
+                                    SdkClient.queryValue(request.replayFrom, "form", true),
+                                "cursor" to SdkClient.queryValue(request.cursor, "form", true),
+                                "device_id" to SdkClient.queryValue(request.deviceId, "form", true),
+                            ),
+                        operationId = "harnessGetSessionEvents",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        extraHeaders =
+                            SdkClient.headers(
+                                "Last-Event-ID" to
+                                    SdkClient.headerValue(request.lastEventId, false),
+                                "X-Device-UUID" to
+                                    SdkClient.headerValue(request.xDeviceUuid, false),
+                            ),
+                        options = options,
+                        errors =
+                            mapOf(
+                                "401" to Error2::class.java,
+                                "404" to Error2::class.java,
+                                "429" to Error2::class.java,
+                                "500" to Error2::class.java,
+                                "503" to Error2::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, StreamEvent::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(_ev.data, StreamEvent::class.java)
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
@@ -273,38 +702,114 @@ internal object HarnessRuntimeHarnessGetSessionEventsOperation {
 
 internal object HarnessRuntimeHarnessGetSessionPortForwardOperation {
     /**
-     * Upgrades the request to a WebSocket and bridges it to one TCP connection on the session sandbox's guest `port`. Binary frames carry the opaque byte stream in both directions; the server closes with a descriptive WebSocket close code when the tunnel ends. This is the raw TCP tunnel; browser clients reaching the in-guest OpenHands Agent Server use the ingress URL (`GET /v2/agents/sessions/{session_id}/ingress`), which has replaced this bridge for them. WebSocket is not…
+     * Upgrades the request to a WebSocket and bridges it to one TCP connection on the session
+     * sandbox's guest `port`. Binary frames carry the opaque byte stream in both directions; the
+     * server closes with a descriptive WebSocket close code when the tunnel ends. This is the raw
+     * TCP tunnel; browser clients reaching the in-guest OpenHands Agent Server use the ingress URL
+     * (`GET /v2/agents/sessions/{session_id}/ingress`), which has replaced this bridge for them.
+     * WebSocket is not…
      *
      * @param sessionId The session UUID.
      * @param port The guest TCP port to connect to. Must be between 1024 and 65535.
      */
-    fun harnessGetSessionPortForward(clientConfig: ClientConfig, sessionId: String, port: Long, options: RequestOptions? = null): Any {
-        return harnessGetSessionPortForwardWithRawResponse(clientConfig, sessionId, port, options).data
+    fun harnessGetSessionPortForward(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        port: Long,
+        options: RequestOptions? = null,
+    ): Any {
+        return harnessGetSessionPortForwardWithRawResponse(clientConfig, sessionId, port, options)
+            .data
     }
 
-
-    /** [harnessGetSessionPortForward], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetSessionPortForwardWithRawResponse(clientConfig: ClientConfig, sessionId: String, port: Long, options: RequestOptions? = null): SdkResponse<Any> {
+    /**
+     * [harnessGetSessionPortForward], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessGetSessionPortForwardWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        port: Long,
+        options: RequestOptions? = null,
+    ): SdkResponse<Any> {
         Validation.validateRange("port", port, Validation.RangeOpts(min = 1024.0, max = 65535.0))
 
-        return SdkClient.request<Any>(SdkClient.RequestSpec("GET", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/port-forward/${SdkClient.encodePathSegment(port)}", config = clientConfig, operationId = "harnessGetSessionPortForward", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "402" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "502" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Any>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/port-forward/${SdkClient.encodePathSegment(port)}",
+                config = clientConfig,
+                operationId = "harnessGetSessionPortForward",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessGetSessionIngressOperation {
     /**
-     * Publishes the URL on first call and returns it. Idempotent while the session runs: the same URL is returned until the session is paused, locked or rolled back, after which the next call returns a new hostname (pause and lock revoke the URL; rollback moves the session to a new sandbox, so re-fetch after resume, unlock or rollback). The URL fronts guest port 8000 (the OpenHands Agent Server, HTTP + WebSocket) and replaces the port-forward bridge for browser clients. Requests…
+     * Publishes the URL on first call and returns it. Idempotent while the session runs: the same
+     * URL is returned until the session is paused, locked or rolled back, after which the next call
+     * returns a new hostname (pause and lock revoke the URL; rollback moves the session to a new
+     * sandbox, so re-fetch after resume, unlock or rollback). The URL fronts guest port 8000 (the
+     * OpenHands Agent Server, HTTP + WebSocket) and replaces the port-forward bridge for browser
+     * clients. Requests…
      *
      * @param sessionId The session UUID.
      */
-    fun harnessGetSessionIngress(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): GetIngressUrlResponse {
+    fun harnessGetSessionIngress(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): GetIngressUrlResponse {
         return harnessGetSessionIngressWithRawResponse(clientConfig, sessionId, options).data
     }
 
-
-    /** [harnessGetSessionIngress], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetSessionIngressWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<GetIngressUrlResponse> {
-        return SdkClient.request<GetIngressUrlResponse>(SdkClient.RequestSpec("GET", "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/ingress", config = clientConfig, operationId = "harnessGetSessionIngress", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "423" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "501" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetSessionIngress], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessGetSessionIngressWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetIngressUrlResponse> {
+        return SdkClient.request<GetIngressUrlResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/ingress",
+                config = clientConfig,
+                operationId = "harnessGetSessionIngress",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "423" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "501" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -313,33 +818,64 @@ internal object HarnessRuntimeHarnessListTemplatesOperation {
      * team_id is stamped from the authenticated principal; never accepted from the client.
      *
      * @param pageSize Page size. Defaults to 50 when omitted or non-positive.
-     * @param pageToken Optional pagination cursor (opaque). Empty starts from the
-     *   beginning.
+     * @param pageToken Optional pagination cursor (opaque). Empty starts from the beginning.
      */
-    fun harnessListTemplates(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): ListTemplatesResponse {
+    fun harnessListTemplates(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): ListTemplatesResponse {
         return harnessListTemplatesWithRawResponse(clientConfig, pageSize, pageToken, options).data
     }
 
-
-    /** [harnessListTemplates], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListTemplatesWithRawResponse(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): SdkResponse<ListTemplatesResponse> {
-        return SdkClient.request<ListTemplatesResponse>(SdkClient.RequestSpec("GET", "/v2/agents/templates", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true)), operationId = "harnessListTemplates", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessListTemplates], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessListTemplatesWithRawResponse(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListTemplatesResponse> {
+        return SdkClient.request<ListTemplatesResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/templates",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                        "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                    ),
+                operationId = "harnessListTemplates",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * team_id is stamped from the authenticated principal; never accepted from the client.
      *
      * @param pageSize Page size. Defaults to 50 when omitted or non-positive.
-     * @param pageToken Optional pagination cursor (opaque). Empty starts from the
-     *   beginning.
+     * @param pageToken Optional pagination cursor (opaque). Empty starts from the beginning.
      */
-    fun harnessListTemplatesPaginated(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (SandboxTemplate) -> Boolean) {
+    fun harnessListTemplatesPaginated(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SandboxTemplate) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListTemplates(clientConfig, pageSize, cursor, options)
@@ -353,9 +889,13 @@ internal object HarnessRuntimeHarnessListTemplatesOperation {
         }
     }
 
-
-
-    fun harnessListTemplatesPages(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (HarnessRuntime.HarnessListTemplatesPage) -> Boolean) {
+    fun harnessListTemplatesPages(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (HarnessRuntime.HarnessListTemplatesPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListTemplates(clientConfig, pageSize, cursor, options)
@@ -372,24 +912,72 @@ internal object HarnessRuntimeHarnessListTemplatesOperation {
 
 internal object HarnessRuntimeHarnessCreateTemplateOperation {
     /**
-     * Creates a team-owned template by rebasing a customer OCI reference onto a base template, then kicks off a build. Supply `name`, `base_template`, and `source_oci_ref`; `base_template` must identify one of the supported base templates. The team ID is taken from the authenticated user.
+     * Creates a team-owned template by rebasing a customer OCI reference onto a base template, then
+     * kicks off a build. Supply `name`, `base_template`, and `source_oci_ref`; `base_template` must
+     * identify one of the supported base templates. The team ID is taken from the authenticated
+     * user.
      *
-     * Creates a team-owned template from a customer OCI ref rebased onto a base template. team_id is stamped from the authenticated principal.
+     * Creates a team-owned template from a customer OCI ref rebased onto a base template. team_id
+     * is stamped from the authenticated principal.
      *
      * @param name Required `string` value serialized in the `name` wire field.
-     * @param baseTemplate Base template key. One of: coding-base,
-     *   coding-claude-code, coding-codex, coding-hermes, coding-opencode, langgraph.
-     * @param sourceOciRef Required `string` value serialized in the `source_oci_ref`
-     *   wire field.
+     * @param baseTemplate Base template key. One of: coding-base, coding-claude-code, coding-codex,
+     *   coding-hermes, coding-opencode, langgraph.
+     * @param sourceOciRef Required `string` value serialized in the `source_oci_ref` wire field.
      */
-    fun harnessCreateTemplate(clientConfig: ClientConfig, name: String, baseTemplate: String, sourceOciRef: String, options: RequestOptions? = null): CreateTemplateResponse {
-        return harnessCreateTemplateWithRawResponse(clientConfig, name, baseTemplate, sourceOciRef, options).data
+    fun harnessCreateTemplate(
+        clientConfig: ClientConfig,
+        name: String,
+        baseTemplate: String,
+        sourceOciRef: String,
+        options: RequestOptions? = null,
+    ): CreateTemplateResponse {
+        return harnessCreateTemplateWithRawResponse(
+                clientConfig,
+                name,
+                baseTemplate,
+                sourceOciRef,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCreateTemplate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCreateTemplateWithRawResponse(clientConfig: ClientConfig, name: String, baseTemplate: String, sourceOciRef: String, options: RequestOptions? = null): SdkResponse<CreateTemplateResponse> {
-        return SdkClient.request<CreateTemplateResponse>(SdkClient.RequestSpec("POST", "/v2/agents/templates", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "base_template" to (baseTemplate), "source_oci_ref" to (sourceOciRef)), operationId = "harnessCreateTemplate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "402" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCreateTemplate], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessCreateTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        name: String,
+        baseTemplate: String,
+        sourceOciRef: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateTemplateResponse> {
+        return SdkClient.request<CreateTemplateResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/templates",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (name),
+                        "base_template" to (baseTemplate),
+                        "source_oci_ref" to (sourceOciRef),
+                    ),
+                operationId = "harnessCreateTemplate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -399,62 +987,161 @@ internal object HarnessRuntimeHarnessGetTemplateOperation {
      *
      * @param templateId The template UUID.
      */
-    fun harnessGetTemplate(clientConfig: ClientConfig, templateId: String, options: RequestOptions? = null): GetTemplateResponse {
+    fun harnessGetTemplate(
+        clientConfig: ClientConfig,
+        templateId: String,
+        options: RequestOptions? = null,
+    ): GetTemplateResponse {
         return harnessGetTemplateWithRawResponse(clientConfig, templateId, options).data
     }
 
-
-    /** [harnessGetTemplate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetTemplateWithRawResponse(clientConfig: ClientConfig, templateId: String, options: RequestOptions? = null): SdkResponse<GetTemplateResponse> {
+    /**
+     * [harnessGetTemplate], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun harnessGetTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        templateId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTemplateResponse> {
         Validation.validateUuid("template_id", templateId)
 
-        return SdkClient.request<GetTemplateResponse>(SdkClient.RequestSpec("GET", "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}", config = clientConfig, operationId = "harnessGetTemplate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<GetTemplateResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}",
+                config = clientConfig,
+                operationId = "harnessGetTemplate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessUpdateTemplateOperation {
     /**
-     * Replaces the source configuration of a team template and kicks off a new build. Supply `source_oci_ref`, `base_template`, or both to update the template; the body fields are optional.
+     * Replaces the source configuration of a team template and kicks off a new build. Supply
+     * `source_oci_ref`, `base_template`, or both to update the template; the body fields are
+     * optional.
      *
      * UpdateTemplate updates a team template's source and kicks a new build.
      *
      * @param templateId The template UUID.
-     * @param sourceOciRef Optional `string` value serialized in the `source_oci_ref`
-     *   wire field.
-     * @param baseTemplate Optional `string` value serialized in the `base_template`
-     *   wire field.
+     * @param sourceOciRef Optional `string` value serialized in the `source_oci_ref` wire field.
+     * @param baseTemplate Optional `string` value serialized in the `base_template` wire field.
      */
-    fun harnessUpdateTemplate(clientConfig: ClientConfig, templateId: String, sourceOciRef: String? = null, baseTemplate: String? = null, options: RequestOptions? = null): CreateTemplateResponse {
-        return harnessUpdateTemplateWithRawResponse(clientConfig, templateId, sourceOciRef, baseTemplate, options).data
+    fun harnessUpdateTemplate(
+        clientConfig: ClientConfig,
+        templateId: String,
+        sourceOciRef: String? = null,
+        baseTemplate: String? = null,
+        options: RequestOptions? = null,
+    ): CreateTemplateResponse {
+        return harnessUpdateTemplateWithRawResponse(
+                clientConfig,
+                templateId,
+                sourceOciRef,
+                baseTemplate,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessUpdateTemplate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessUpdateTemplateWithRawResponse(clientConfig: ClientConfig, templateId: String, sourceOciRef: String? = null, baseTemplate: String? = null, options: RequestOptions? = null): SdkResponse<CreateTemplateResponse> {
+    /**
+     * [harnessUpdateTemplate], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessUpdateTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        templateId: String,
+        sourceOciRef: String? = null,
+        baseTemplate: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateTemplateResponse> {
         Validation.validateUuid("template_id", templateId)
 
-        return SdkClient.request<CreateTemplateResponse>(SdkClient.RequestSpec("PUT", "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}", config = clientConfig, body = SdkClient.bodyMap("source_oci_ref" to (SdkClient.omitIfNull(sourceOciRef)), "base_template" to (SdkClient.omitIfNull(baseTemplate))), operationId = "harnessUpdateTemplate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "402" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<CreateTemplateResponse>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "source_oci_ref" to (SdkClient.omitIfNull(sourceOciRef)),
+                        "base_template" to (SdkClient.omitIfNull(baseTemplate)),
+                    ),
+                operationId = "harnessUpdateTemplate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "402" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessDeleteTemplateOperation {
     /**
-     * Deletes a team-owned custom template. Use the template ID to identify the template to remove; global templates cannot be deleted through this operation.
+     * Deletes a team-owned custom template. Use the template ID to identify the template to remove;
+     * global templates cannot be deleted through this operation.
      *
      * Global templates cannot be deleted via this API.
      *
      * @param templateId The template UUID.
      */
-    fun harnessDeleteTemplate(clientConfig: ClientConfig, templateId: String, options: RequestOptions? = null): DeleteTemplateResponse {
+    fun harnessDeleteTemplate(
+        clientConfig: ClientConfig,
+        templateId: String,
+        options: RequestOptions? = null,
+    ): DeleteTemplateResponse {
         return harnessDeleteTemplateWithRawResponse(clientConfig, templateId, options).data
     }
 
-
-    /** [harnessDeleteTemplate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessDeleteTemplateWithRawResponse(clientConfig: ClientConfig, templateId: String, options: RequestOptions? = null): SdkResponse<DeleteTemplateResponse> {
+    /**
+     * [harnessDeleteTemplate], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessDeleteTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        templateId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeleteTemplateResponse> {
         Validation.validateUuid("template_id", templateId)
 
-        return SdkClient.request<DeleteTemplateResponse>(SdkClient.RequestSpec("DELETE", "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}", config = clientConfig, operationId = "harnessDeleteTemplate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<DeleteTemplateResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}",
+                config = clientConfig,
+                operationId = "harnessDeleteTemplate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -464,39 +1151,82 @@ internal object HarnessRuntimeHarnessListTemplateBuildsOperation {
      *
      * @param templateId The template UUID.
      * @param pageSize Page size. Defaults to 50 when omitted or non-positive.
-     * @param pageToken Optional pagination cursor (opaque). Empty starts from the
-     *   beginning.
+     * @param pageToken Optional pagination cursor (opaque). Empty starts from the beginning.
      */
-    fun harnessListTemplateBuilds(clientConfig: ClientConfig, templateId: String, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): ListTemplateBuildsResponse {
-        return harnessListTemplateBuildsWithRawResponse(clientConfig, templateId, pageSize, pageToken, options).data
+    fun harnessListTemplateBuilds(
+        clientConfig: ClientConfig,
+        templateId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): ListTemplateBuildsResponse {
+        return harnessListTemplateBuildsWithRawResponse(
+                clientConfig,
+                templateId,
+                pageSize,
+                pageToken,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessListTemplateBuilds], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListTemplateBuildsWithRawResponse(clientConfig: ClientConfig, templateId: String, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): SdkResponse<ListTemplateBuildsResponse> {
+    /**
+     * [harnessListTemplateBuilds], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessListTemplateBuildsWithRawResponse(
+        clientConfig: ClientConfig,
+        templateId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListTemplateBuildsResponse> {
         Validation.validateUuid("template_id", templateId)
 
-        return SdkClient.request<ListTemplateBuildsResponse>(SdkClient.RequestSpec("GET", "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}/builds", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true)), operationId = "harnessListTemplateBuilds", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ListTemplateBuildsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}/builds",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                        "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                    ),
+                operationId = "harnessListTemplateBuilds",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * ListTemplateBuilds returns build history for a template.
      *
      * @param templateId The template UUID.
      * @param pageSize Page size. Defaults to 50 when omitted or non-positive.
-     * @param pageToken Optional pagination cursor (opaque). Empty starts from the
-     *   beginning.
+     * @param pageToken Optional pagination cursor (opaque). Empty starts from the beginning.
      */
-    fun harnessListTemplateBuildsPaginated(clientConfig: ClientConfig, templateId: String, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (SandboxTemplateBuild) -> Boolean) {
+    fun harnessListTemplateBuildsPaginated(
+        clientConfig: ClientConfig,
+        templateId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SandboxTemplateBuild) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
-            val page = harnessListTemplateBuilds(clientConfig, templateId, pageSize, cursor, options)
+            val page =
+                harnessListTemplateBuilds(clientConfig, templateId, pageSize, cursor, options)
             val items = page.builds.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -507,17 +1237,24 @@ internal object HarnessRuntimeHarnessListTemplateBuildsOperation {
         }
     }
 
-
-
-    fun harnessListTemplateBuildsPages(clientConfig: ClientConfig, templateId: String, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (HarnessRuntime.HarnessListTemplateBuildsPage) -> Boolean) {
+    fun harnessListTemplateBuildsPages(
+        clientConfig: ClientConfig,
+        templateId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (HarnessRuntime.HarnessListTemplateBuildsPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
-            val page = harnessListTemplateBuilds(clientConfig, templateId, pageSize, cursor, options)
+            val page =
+                harnessListTemplateBuilds(clientConfig, templateId, pageSize, cursor, options)
             val items = page.builds.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextPageToken
             val hasMore = nextCursor != null
-            if (!yieldPage(HarnessRuntime.HarnessListTemplateBuildsPage(page, items, hasMore))) return
+            if (!yieldPage(HarnessRuntime.HarnessListTemplateBuildsPage(page, items, hasMore)))
+                return
             if (!hasMore) return
             cursor = nextCursor
         }
@@ -526,70 +1263,151 @@ internal object HarnessRuntimeHarnessListTemplateBuildsOperation {
 
 internal object HarnessRuntimeHarnessGetTemplateBuildOperation {
     /**
-     * Retrieves a single build for a template. Use the template and build UUIDs to identify the build and inspect its status, timestamps, and any reported error.
+     * Retrieves a single build for a template. Use the template and build UUIDs to identify the
+     * build and inspect its status, timestamps, and any reported error.
      *
      * GetTemplateBuild returns a single template build.
      *
      * @param templateId The template UUID.
      * @param buildId The build UUID.
      */
-    fun harnessGetTemplateBuild(clientConfig: ClientConfig, templateId: String, buildId: String, options: RequestOptions? = null): GetTemplateBuildResponse {
-        return harnessGetTemplateBuildWithRawResponse(clientConfig, templateId, buildId, options).data
+    fun harnessGetTemplateBuild(
+        clientConfig: ClientConfig,
+        templateId: String,
+        buildId: String,
+        options: RequestOptions? = null,
+    ): GetTemplateBuildResponse {
+        return harnessGetTemplateBuildWithRawResponse(clientConfig, templateId, buildId, options)
+            .data
     }
 
-
-    /** [harnessGetTemplateBuild], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetTemplateBuildWithRawResponse(clientConfig: ClientConfig, templateId: String, buildId: String, options: RequestOptions? = null): SdkResponse<GetTemplateBuildResponse> {
+    /**
+     * [harnessGetTemplateBuild], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessGetTemplateBuildWithRawResponse(
+        clientConfig: ClientConfig,
+        templateId: String,
+        buildId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTemplateBuildResponse> {
         Validation.validateUuid("template_id", templateId)
 
         Validation.validateUuid("build_id", buildId)
 
-        return SdkClient.request<GetTemplateBuildResponse>(SdkClient.RequestSpec("GET", "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}/builds/${SdkClient.encodePathSegment(buildId)}", config = clientConfig, operationId = "harnessGetTemplateBuild", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<GetTemplateBuildResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/templates/${SdkClient.encodePathSegment(templateId)}/builds/${SdkClient.encodePathSegment(buildId)}",
+                config = clientConfig,
+                operationId = "harnessGetTemplateBuild",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessListTriggersOperation {
     /**
-     * Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the authenticated team.
+     * Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the
+     * authenticated team.
      *
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
      * @param kind Optional filter by trigger kind.
      * @param status Optional filter by trigger status.
      */
-    fun harnessListTriggers(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, kind: TriggerKind? = null, status: TriggerStatus? = null, options: RequestOptions? = null): ListTriggersResponse {
-        return harnessListTriggersWithRawResponse(clientConfig, pageSize, pageToken, kind, status, options).data
+    fun harnessListTriggers(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        kind: TriggerKind? = null,
+        status: TriggerStatus? = null,
+        options: RequestOptions? = null,
+    ): ListTriggersResponse {
+        return harnessListTriggersWithRawResponse(
+                clientConfig,
+                pageSize,
+                pageToken,
+                kind,
+                status,
+                options,
+            )
+            .data
     }
-
-
-    /** [harnessListTriggers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListTriggersWithRawResponse(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, kind: TriggerKind? = null, status: TriggerStatus? = null, options: RequestOptions? = null): SdkResponse<ListTriggersResponse> {
-        if (pageSize != null) {
-            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
-}
-
-        return SdkClient.request<ListTriggersResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true), "kind" to SdkClient.queryValue(kind, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "harnessListTriggers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the authenticated team.
+     * [harnessListTriggers], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun harnessListTriggersWithRawResponse(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        kind: TriggerKind? = null,
+        status: TriggerStatus? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListTriggersResponse> {
+        if (pageSize != null) {
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
+        }
+
+        return SdkClient.request<ListTriggersResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                        "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                        "kind" to SdkClient.queryValue(kind, "form", true),
+                        "status" to SdkClient.queryValue(status, "form", true),
+                    ),
+                operationId = "harnessListTriggers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the
+     * authenticated team.
      *
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
      * @param kind Optional filter by trigger kind.
      * @param status Optional filter by trigger status.
      */
-    fun harnessListTriggersPaginated(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, kind: TriggerKind? = null, status: TriggerStatus? = null, options: RequestOptions? = null, yieldFn: (Trigger) -> Boolean) {
+    fun harnessListTriggersPaginated(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        kind: TriggerKind? = null,
+        status: TriggerStatus? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Trigger) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListTriggers(clientConfig, pageSize, cursor, kind, status, options)
@@ -603,9 +1421,15 @@ internal object HarnessRuntimeHarnessListTriggersOperation {
         }
     }
 
-
-
-    fun harnessListTriggersPages(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, kind: TriggerKind? = null, status: TriggerStatus? = null, options: RequestOptions? = null, yieldPage: (HarnessRuntime.HarnessListTriggersPage) -> Boolean) {
+    fun harnessListTriggersPages(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        kind: TriggerKind? = null,
+        status: TriggerStatus? = null,
+        options: RequestOptions? = null,
+        yieldPage: (HarnessRuntime.HarnessListTriggersPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListTriggers(clientConfig, pageSize, cursor, kind, status, options)
@@ -622,110 +1446,227 @@ internal object HarnessRuntimeHarnessListTriggersOperation {
 
 internal object HarnessRuntimeHarnessCreateTriggerOperation {
     /**
-     * Validation is synchronous, so a mistake is a 400/409 at creation, not a silent miss at the first fire. Exactly one of `webhook` / `cron` must be present and match `kind`. kind=cron forbids a `webhook` block and requires a parseable `cron.cron_expr` and a valid IANA `cron.timezone`. session_mode=fresh requires `session_template` (a well-formed agents.yaml Agent manifest) and forbids `bound_session_id`; session_mode=reuse requires `bound_session_id` (an existing team-owned…
+     * Validation is synchronous, so a mistake is a 400/409 at creation, not a silent miss at the
+     * first fire. Exactly one of `webhook` / `cron` must be present and match `kind`. kind=cron
+     * forbids a `webhook` block and requires a parseable `cron.cron_expr` and a valid IANA
+     * `cron.timezone`. session_mode=fresh requires `session_template` (a well-formed agents.yaml
+     * Agent manifest) and forbids `bound_session_id`; session_mode=reuse requires
+     * `bound_session_id` (an existing team-owned…
      *
-     * @param kind How the trigger fires - on an event (webhook) or on a schedule
-     *   (cron). Immutable after create.
-     * @param name Team-unique (among non-deleted triggers) trigger name. Same rules
-     *   as session names; not UUID-form.
-     * @param sessionMode fresh = a new session is created from the trigger's spec on
-     *   every firing and destroyed after. reuse = the trigger binds an existing PAUSED
-     *   session, resumed on each firing and paused after; multiple triggers may bind
-     *   one session.
-     * @param promptTemplate The prompt sent on each fire. For cron it must not
-     *   contain payload-interpolation placeholders.
-     * @param output Output-delivery configuration on create/update. Exactly one of
-     *   email / slack is required for the matching mode and forbidden otherwise;
-     *   destinations are stored encrypted and never returned.
-     * @param sessionTemplate fresh only. Full agents.yaml Agent manifest (YAML or
-     *   JSON). Any embedded env values are split out and encrypted server-side.
-     * @param boundSessionId reuse only. UUID of an existing session owned by the
-     *   team.
+     * @param kind How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable
+     *   after create.
+     * @param name Team-unique (among non-deleted triggers) trigger name. Same rules as session
+     *   names; not UUID-form.
+     * @param sessionMode fresh = a new session is created from the trigger's spec on every firing
+     *   and destroyed after. reuse = the trigger binds an existing PAUSED session, resumed on each
+     *   firing and paused after; multiple triggers may bind one session.
+     * @param promptTemplate The prompt sent on each fire. For cron it must not contain
+     *   payload-interpolation placeholders.
+     * @param output Output-delivery configuration on create/update. Exactly one of email / slack is
+     *   required for the matching mode and forbidden otherwise; destinations are stored encrypted
+     *   and never returned.
+     * @param sessionTemplate fresh only. Full agents.yaml Agent manifest (YAML or JSON). Any
+     *   embedded env values are split out and encrypted server-side.
+     * @param boundSessionId reuse only. UUID of an existing session owned by the team.
      * @param webhook webhook block on create. Omitting provider defaults to custom.
      * @param cron cron block on create.
      */
-    fun harnessCreateTrigger(clientConfig: ClientConfig, request: HarnessRuntime.HarnessCreateTriggerRequest, options: RequestOptions? = null): CreateTriggerResponse {
+    fun harnessCreateTrigger(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessCreateTriggerRequest,
+        options: RequestOptions? = null,
+    ): CreateTriggerResponse {
         return harnessCreateTriggerWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [harnessCreateTrigger], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCreateTriggerWithRawResponse(clientConfig: ClientConfig, request: HarnessRuntime.HarnessCreateTriggerRequest, options: RequestOptions? = null): SdkResponse<CreateTriggerResponse> {
+    /**
+     * [harnessCreateTrigger], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessCreateTriggerWithRawResponse(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessCreateTriggerRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateTriggerResponse> {
         validateHarnessCreateTriggerRequest(request)
 
-        return SdkClient.request<CreateTriggerResponse>(SdkClient.RequestSpec("POST", "/v2/agents/triggers", config = clientConfig, body = SdkClient.bodyMap("kind" to (request.kind), "name" to (request.name), "session_mode" to (request.sessionMode), "prompt_template" to (request.promptTemplate), "output" to (request.output), "session_template" to
-    (SdkClient.omitIfNull(request.sessionTemplate)), "bound_session_id" to
-    (SdkClient.omitIfNull(request.boundSessionId)), "webhook" to (SdkClient.omitIfNull(request.webhook)), "cron" to (SdkClient.omitIfNull(request.cron))), operationId = "harnessCreateTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "409" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "502" to Error2::class.java, "503" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<CreateTriggerResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/triggers",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "kind" to (request.kind),
+                        "name" to (request.name),
+                        "session_mode" to (request.sessionMode),
+                        "prompt_template" to (request.promptTemplate),
+                        "output" to (request.output),
+                        "session_template" to (SdkClient.omitIfNull(request.sessionTemplate)),
+                        "bound_session_id" to (SdkClient.omitIfNull(request.boundSessionId)),
+                        "webhook" to (SdkClient.omitIfNull(request.webhook)),
+                        "cron" to (SdkClient.omitIfNull(request.cron)),
+                    ),
+                operationId = "harnessCreateTrigger",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "422" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "503" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-    private fun validateHarnessCreateTriggerRequest(request: HarnessRuntime.HarnessCreateTriggerRequest) {
+    private fun validateHarnessCreateTriggerRequest(
+        request: HarnessRuntime.HarnessCreateTriggerRequest
+    ) {
         Validation.validateLength("name", request.name, Validation.LengthOpts(min = 1, max = 64))
-        Validation.validatePattern("name", request.name, "^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$")
+        Validation.validatePattern(
+            "name",
+            request.name,
+            "^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$",
+        )
 
         if (request.boundSessionId != null) {
             Validation.validateUuid("bound_session_id", request.boundSessionId)
-}
+        }
     }
 }
 
 internal object HarnessRuntimeHarnessGetTriggerBySessionOperation {
     /**
-     * Returns the trigger that produced (fresh) or binds (reuse) the given session. Resolves to the row even after the trigger is soft-deleted.
+     * Returns the trigger that produced (fresh) or binds (reuse) the given session. Resolves to the
+     * row even after the trigger is soft-deleted.
      *
      * @param sessionId The session UUID.
      */
-    fun harnessGetTriggerBySession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): GetTriggerResponse {
+    fun harnessGetTriggerBySession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): GetTriggerResponse {
         return harnessGetTriggerBySessionWithRawResponse(clientConfig, sessionId, options).data
     }
 
-
-    /** [harnessGetTriggerBySession], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetTriggerBySessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<GetTriggerResponse> {
-        return SdkClient.request<GetTriggerResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers/by-session/${SdkClient.encodePathSegment(sessionId)}", config = clientConfig, operationId = "harnessGetTriggerBySession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetTriggerBySession], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessGetTriggerBySessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTriggerResponse> {
+        return SdkClient.request<GetTriggerResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers/by-session/${SdkClient.encodePathSegment(sessionId)}",
+                config = clientConfig,
+                operationId = "harnessGetTriggerBySession",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessListReusableSessionsOperation {
     /**
-     * Returns the team's sessions in status PAUSED, for binding a session_mode=reuse trigger. The item shape is the hosted-agents Session, so `agent_kind` and `status` use the AGENT_KIND_* / SESSION_STATUS_* spelling; `status` is always SESSION_STATUS_PAUSED here.
+     * Returns the team's sessions in status PAUSED, for binding a session_mode=reuse trigger. The
+     * item shape is the hosted-agents Session, so `agent_kind` and `status` use the AGENT_KIND_* /
+     * SESSION_STATUS_* spelling; `status` is always SESSION_STATUS_PAUSED here.
      *
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
      */
-    fun harnessListReusableSessions(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): ListReusableSessionsResponse {
-        return harnessListReusableSessionsWithRawResponse(clientConfig, pageSize, pageToken, options).data
+    fun harnessListReusableSessions(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): ListReusableSessionsResponse {
+        return harnessListReusableSessionsWithRawResponse(
+                clientConfig,
+                pageSize,
+                pageToken,
+                options,
+            )
+            .data
     }
-
-
-    /** [harnessListReusableSessions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListReusableSessionsWithRawResponse(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null): SdkResponse<ListReusableSessionsResponse> {
-        if (pageSize != null) {
-            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
-}
-
-        return SdkClient.request<ListReusableSessionsResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers/reusable-sessions", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true)), operationId = "harnessListReusableSessions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Returns the team's sessions in status PAUSED, for binding a session_mode=reuse trigger. The item shape is the hosted-agents Session, so `agent_kind` and `status` use the AGENT_KIND_* / SESSION_STATUS_* spelling; `status` is always SESSION_STATUS_PAUSED here.
-     *
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * [harnessListReusableSessions], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
      */
-    fun harnessListReusableSessionsPaginated(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldFn: (ReusableSession) -> Boolean) {
+    fun harnessListReusableSessionsWithRawResponse(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListReusableSessionsResponse> {
+        if (pageSize != null) {
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
+        }
+
+        return SdkClient.request<ListReusableSessionsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers/reusable-sessions",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                        "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                    ),
+                operationId = "harnessListReusableSessions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Returns the team's sessions in status PAUSED, for binding a session_mode=reuse trigger. The
+     * item shape is the hosted-agents Session, so `agent_kind` and `status` use the AGENT_KIND_* /
+     * SESSION_STATUS_* spelling; `status` is always SESSION_STATUS_PAUSED here.
+     *
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
+     */
+    fun harnessListReusableSessionsPaginated(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ReusableSession) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListReusableSessions(clientConfig, pageSize, cursor, options)
@@ -739,9 +1680,13 @@ internal object HarnessRuntimeHarnessListReusableSessionsOperation {
         }
     }
 
-
-
-    fun harnessListReusableSessionsPages(clientConfig: ClientConfig, pageSize: Int? = null, pageToken: String? = null, options: RequestOptions? = null, yieldPage: (HarnessRuntime.HarnessListReusableSessionsPage) -> Boolean) {
+    fun harnessListReusableSessionsPages(
+        clientConfig: ClientConfig,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (HarnessRuntime.HarnessListReusableSessionsPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
             val page = harnessListReusableSessions(clientConfig, pageSize, cursor, options)
@@ -749,7 +1694,8 @@ internal object HarnessRuntimeHarnessListReusableSessionsOperation {
             if (items.isEmpty()) return
             val nextCursor = page.nextPageToken
             val hasMore = nextCursor != null
-            if (!yieldPage(HarnessRuntime.HarnessListReusableSessionsPage(page, items, hasMore))) return
+            if (!yieldPage(HarnessRuntime.HarnessListReusableSessionsPage(page, items, hasMore)))
+                return
             if (!hasMore) return
             cursor = nextCursor
         }
@@ -758,17 +1704,45 @@ internal object HarnessRuntimeHarnessListReusableSessionsOperation {
 
 internal object HarnessRuntimeHarnessGetTriggerOperation {
     /**
-     * GetTrigger returns a single trigger by id. Write-only fields (webhook secret, output destination, session_template env values) are never included.
+     * GetTrigger returns a single trigger by id. Write-only fields (webhook secret, output
+     * destination, session_template env values) are never included.
      *
      * @param triggerId The trigger UUID.
      */
-    fun harnessGetTrigger(clientConfig: ClientConfig, triggerId: String, options: RequestOptions? = null): GetTriggerResponse {
+    fun harnessGetTrigger(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        options: RequestOptions? = null,
+    ): GetTriggerResponse {
         return harnessGetTriggerWithRawResponse(clientConfig, triggerId, options).data
     }
 
-
-    /** [harnessGetTrigger], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetTriggerWithRawResponse(clientConfig: ClientConfig, triggerId: String, options: RequestOptions? = null): SdkResponse<GetTriggerResponse> {
-        return SdkClient.request<GetTriggerResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}", config = clientConfig, operationId = "harnessGetTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetTrigger], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun harnessGetTriggerWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTriggerResponse> {
+        return SdkClient.request<GetTriggerResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}",
+                config = clientConfig,
+                operationId = "harnessGetTrigger",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

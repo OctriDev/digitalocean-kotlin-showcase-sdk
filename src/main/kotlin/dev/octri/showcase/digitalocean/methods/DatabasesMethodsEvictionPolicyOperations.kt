@@ -14,45 +14,113 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesGetEvictionPolicyOperation {
     /**
-     * To retrieve the configured eviction policy for an existing Caching or Valkey cluster, send a GET request to `/v2/databases/$DATABASE_ID/eviction_policy`. The response will be a JSON object with an `eviction_policy` key. This will be set to a string representing the eviction policy.
+     * To retrieve the configured eviction policy for an existing Caching or Valkey cluster, send a
+     * GET request to `/v2/databases/$DATABASE_ID/eviction_policy`. The response will be a JSON
+     * object with an `eviction_policy` key. This will be set to a string representing the eviction
+     * policy.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesGetEvictionPolicy(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): EvictionPolicyResponse {
-        return databasesGetEvictionPolicyWithRawResponse(clientConfig, databaseClusterUuid, options).data
+    fun databasesGetEvictionPolicy(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): EvictionPolicyResponse {
+        return databasesGetEvictionPolicyWithRawResponse(clientConfig, databaseClusterUuid, options)
+            .data
     }
 
-
-    /** [databasesGetEvictionPolicy], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesGetEvictionPolicyWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): SdkResponse<EvictionPolicyResponse> {
+    /**
+     * [databasesGetEvictionPolicy], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun databasesGetEvictionPolicyWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<EvictionPolicyResponse> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<EvictionPolicyResponse>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/eviction_policy", config = clientConfig, operationId = "databasesGetEvictionPolicy", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<EvictionPolicyResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/eviction_policy",
+                config = clientConfig,
+                operationId = "databasesGetEvictionPolicy",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateEvictionPolicyOperation {
     /**
-     * To configure an eviction policy for an existing Caching or Valkey cluster, send a PUT request to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the desired policy.
+     * To configure an eviction policy for an existing Caching or Valkey cluster, send a PUT request
+     * to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the desired policy.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
-     * @param evictionPolicy A string specifying the desired eviction policy for a
-     *   Caching or Valkey cluster. - `noeviction`: Don't evict any data, returns error
-     *   when memory limit is reached. - `allkeys_lru:` Evict any key, least recently
-     *   used (LRU) first. - `allkeys_random`: Evict keys in a random order. -
-     *   `volatile_lru`: Evict keys with expiration only, least recently used (LRU)
-     *   first. - `volatile_random`: Evict keys with expiration only in a random order.
-     *   - `volatile_ttl`: Evict keys with expiration…
+     * @param evictionPolicy A string specifying the desired eviction policy for a Caching or Valkey
+     *   cluster. - `noeviction`: Don't evict any data, returns error when memory limit is
+     *   reached. - `allkeys_lru:` Evict any key, least recently used (LRU) first. -
+     *   `allkeys_random`: Evict keys in a random order. - `volatile_lru`: Evict keys with
+     *   expiration only, least recently used (LRU) first. - `volatile_random`: Evict keys with
+     *   expiration only in a random order.
+     *     - `volatile_ttl`: Evict keys with expiration…
      */
-    fun databasesUpdateEvictionPolicy(clientConfig: ClientConfig, databaseClusterUuid: String, evictionPolicy: EvictionPolicyModel, options: RequestOptions? = null): Unit {
-        return databasesUpdateEvictionPolicyWithRawResponse(clientConfig, databaseClusterUuid, evictionPolicy, options).data
+    fun databasesUpdateEvictionPolicy(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        evictionPolicy: EvictionPolicyModel,
+        options: RequestOptions? = null,
+    ): Unit {
+        return databasesUpdateEvictionPolicyWithRawResponse(
+                clientConfig,
+                databaseClusterUuid,
+                evictionPolicy,
+                options,
+            )
+            .data
     }
 
-
-    /** [databasesUpdateEvictionPolicy], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesUpdateEvictionPolicyWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, evictionPolicy: EvictionPolicyModel, options: RequestOptions? = null): SdkResponse<Unit> {
+    /**
+     * [databasesUpdateEvictionPolicy], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun databasesUpdateEvictionPolicyWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        evictionPolicy: EvictionPolicyModel,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/eviction_policy", config = clientConfig, body = SdkClient.bodyMap("eviction_policy" to (evictionPolicy)), operationId = "databasesUpdateEvictionPolicy", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/eviction_policy",
+                config = clientConfig,
+                body = SdkClient.bodyMap("eviction_policy" to (evictionPolicy)),
+                operationId = "databasesUpdateEvictionPolicy",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

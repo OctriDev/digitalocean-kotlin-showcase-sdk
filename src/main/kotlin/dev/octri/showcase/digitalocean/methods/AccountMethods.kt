@@ -12,23 +12,35 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 object AccountMethods {
 
-    /**
-     * To show information about the current user account, send a GET request to `/v2/account`.
-     */
+    /** To show information about the current user account, send a GET request to `/v2/account`. */
     fun accountGet(clientConfig: ClientConfig, options: RequestOptions? = null): AccountResponse {
         return accountGetWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [accountGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun accountGetWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<AccountResponse> {
-        return SdkClient.request<AccountResponse>(SdkClient.RequestSpec("GET", "/v2/account", config = clientConfig, operationId = "accountGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [accountGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun accountGetWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<AccountResponse> {
+        return SdkClient.request<AccountResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/account",
+                config = clientConfig,
+                operationId = "accountGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

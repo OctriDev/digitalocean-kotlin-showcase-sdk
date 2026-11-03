@@ -20,118 +20,258 @@ import dev.octri.showcase.digitalocean.WebhookAcceptedResponse
 
 internal object HarnessRuntimeHarnessUpdateTriggerOperation {
     /**
-     * Updates a trigger's mutable settings, including its name, status, prompt template, output configuration, session configuration, and schedule. Supply only the fields you want to change; `kind` and `webhook.provider` cannot be changed, and updating `session_template` replaces the stored template. Re-enabling a trigger does not produce a catch-up run, and schedule changes recompute `next_run_at`.
+     * Updates a trigger's mutable settings, including its name, status, prompt template, output
+     * configuration, session configuration, and schedule. Supply only the fields you want to
+     * change; `kind` and `webhook.provider` cannot be changed, and updating `session_template`
+     * replaces the stored template. Re-enabling a trigger does not produce a catch-up run, and
+     * schedule changes recompute `next_run_at`.
      *
-     * Partial update: only the supplied fields change. `kind` and `webhook.provider` are immutable (409 on change). Mutable: `name` (409 on duplicate), `status` (active<->paused), `prompt_template`, `output`, `session_template` (fresh), `bound_session_id` (reuse), `cron.cron_expr` / `cron.timezone` (recomputes next_run_at). Re-enabling never produces a catch-up run. PATCHing session_template is a full replacement, so every spec.secrets slot value the new manifest declares must be…
+     * Partial update: only the supplied fields change. `kind` and `webhook.provider` are immutable
+     * (409 on change). Mutable: `name` (409 on duplicate), `status` (active<->paused),
+     * `prompt_template`, `output`, `session_template` (fresh), `bound_session_id` (reuse),
+     * `cron.cron_expr` / `cron.timezone` (recomputes next_run_at). Re-enabling never produces a
+     * catch-up run. PATCHing session_template is a full replacement, so every spec.secrets slot
+     * value the new manifest declares must be…
      *
      * @param triggerId The trigger UUID.
      * @param name New team-unique trigger name. Same charset/length rules as create.
-     * @param status Trigger lifecycle state. Soft-deleted triggers are never
-     *   returned (404).
-     * @param promptTemplate Optional `string` value serialized in the
-     *   `prompt_template` wire field.
-     * @param output Output-delivery configuration on create/update. Exactly one of
-     *   email / slack is required for the matching mode and forbidden otherwise;
-     *   destinations are stored encrypted and never returned.
-     * @param sessionTemplate fresh triggers only. A session_template PATCH is a full
-     *   replacement of the stored template; you must resupply every spec.secrets slot
-     *   value the new manifest declares, or the request is a 400.
-     * @param boundSessionId reuse triggers only. UUID of an existing session owned
-     *   by the team.
+     * @param status Trigger lifecycle state. Soft-deleted triggers are never returned (404).
+     * @param promptTemplate Optional `string` value serialized in the `prompt_template` wire field.
+     * @param output Output-delivery configuration on create/update. Exactly one of email / slack is
+     *   required for the matching mode and forbidden otherwise; destinations are stored encrypted
+     *   and never returned.
+     * @param sessionTemplate fresh triggers only. A session_template PATCH is a full replacement of
+     *   the stored template; you must resupply every spec.secrets slot value the new manifest
+     *   declares, or the request is a 400.
+     * @param boundSessionId reuse triggers only. UUID of an existing session owned by the team.
      * @param cron cron block on create.
      */
-    fun harnessUpdateTrigger(clientConfig: ClientConfig, request: HarnessRuntime.HarnessUpdateTriggerRequest, options: RequestOptions? = null): GetTriggerResponse {
+    fun harnessUpdateTrigger(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessUpdateTriggerRequest,
+        options: RequestOptions? = null,
+    ): GetTriggerResponse {
         return harnessUpdateTriggerWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [harnessUpdateTrigger], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessUpdateTriggerWithRawResponse(clientConfig: ClientConfig, request: HarnessRuntime.HarnessUpdateTriggerRequest, options: RequestOptions? = null): SdkResponse<GetTriggerResponse> {
+    /**
+     * [harnessUpdateTrigger], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessUpdateTriggerWithRawResponse(
+        clientConfig: ClientConfig,
+        request: HarnessRuntime.HarnessUpdateTriggerRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTriggerResponse> {
         validateHarnessUpdateTriggerRequest(request)
 
-        return SdkClient.request<GetTriggerResponse>(SdkClient.RequestSpec("PATCH", "/v2/agents/triggers/${SdkClient.encodePathSegment(request.triggerId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "status" to (SdkClient.omitIfNull(request.status)), "prompt_template" to
-    (SdkClient.omitIfNull(request.promptTemplate)), "output" to (SdkClient.omitIfNull(request.output)), "session_template" to
-    (SdkClient.omitIfNull(request.sessionTemplate)), "bound_session_id" to
-    (SdkClient.omitIfNull(request.boundSessionId)), "cron" to (SdkClient.omitIfNull(request.cron))), operationId = "harnessUpdateTrigger", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "422" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "502" to Error2::class.java, "503" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<GetTriggerResponse>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(request.triggerId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (SdkClient.omitIfNull(request.name)),
+                        "status" to (SdkClient.omitIfNull(request.status)),
+                        "prompt_template" to (SdkClient.omitIfNull(request.promptTemplate)),
+                        "output" to (SdkClient.omitIfNull(request.output)),
+                        "session_template" to (SdkClient.omitIfNull(request.sessionTemplate)),
+                        "bound_session_id" to (SdkClient.omitIfNull(request.boundSessionId)),
+                        "cron" to (SdkClient.omitIfNull(request.cron)),
+                    ),
+                operationId = "harnessUpdateTrigger",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "422" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "502" to Error2::class.java,
+                        "503" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-    private fun validateHarnessUpdateTriggerRequest(request: HarnessRuntime.HarnessUpdateTriggerRequest) {
+    private fun validateHarnessUpdateTriggerRequest(
+        request: HarnessRuntime.HarnessUpdateTriggerRequest
+    ) {
         if (request.name != null) {
-            Validation.validateLength("name", request.name, Validation.LengthOpts(min = 1, max = 64))
-            Validation.validatePattern("name", request.name, "^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$")
-}
+            Validation.validateLength(
+                "name",
+                request.name,
+                Validation.LengthOpts(min = 1, max = 64),
+            )
+            Validation.validatePattern(
+                "name",
+                request.name,
+                "^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$",
+            )
+        }
 
         if (request.boundSessionId != null) {
             Validation.validateUuid("bound_session_id", request.boundSessionId)
-}
+        }
     }
 }
 
 internal object HarnessRuntimeHarnessDeleteTriggerOperation {
     /**
-     * Marks the trigger deleted, fails any pending executions, and purges the webhook secret / cron schedule. A fresh trigger owns no session; a reuse trigger only UNBINDS - it never destroys the customer's session. Execution history and by-session lookups continue to resolve to the deleted row. Returns 204 No Content on success.
+     * Marks the trigger deleted, fails any pending executions, and purges the webhook secret / cron
+     * schedule. A fresh trigger owns no session; a reuse trigger only UNBINDS - it never destroys
+     * the customer's session. Execution history and by-session lookups continue to resolve to the
+     * deleted row. Returns 204 No Content on success.
      *
      * @param triggerId The trigger UUID.
      */
-    fun harnessDeleteTrigger(clientConfig: ClientConfig, triggerId: String, options: RequestOptions? = null): Unit {
+    fun harnessDeleteTrigger(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         return harnessDeleteTriggerWithRawResponse(clientConfig, triggerId, options).data
     }
 
-
-    /** [harnessDeleteTrigger], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessDeleteTriggerWithRawResponse(clientConfig: ClientConfig, triggerId: String, options: RequestOptions? = null): SdkResponse<Unit> {
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}", config = clientConfig, operationId = "harnessDeleteTrigger", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessDeleteTrigger], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun harnessDeleteTriggerWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}",
+                config = clientConfig,
+                operationId = "harnessDeleteTrigger",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessListTriggerExecutionsOperation {
     /**
-     * Keyset-paginated. The large `payload` field is omitted from list items; fetch a single execution to read it.
+     * Keyset-paginated. The large `payload` field is omitted from list items; fetch a single
+     * execution to read it.
      *
      * @param triggerId The trigger UUID.
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
      * @param status Optional filter by execution status.
      */
-    fun harnessListTriggerExecutions(clientConfig: ClientConfig, triggerId: String, pageSize: Int? = null, pageToken: String? = null, status: TriggerExecutionStatus? = null, options: RequestOptions? = null): ListTriggerExecutionsResponse {
-        return harnessListTriggerExecutionsWithRawResponse(clientConfig, triggerId, pageSize, pageToken, status, options).data
+    fun harnessListTriggerExecutions(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        status: TriggerExecutionStatus? = null,
+        options: RequestOptions? = null,
+    ): ListTriggerExecutionsResponse {
+        return harnessListTriggerExecutionsWithRawResponse(
+                clientConfig,
+                triggerId,
+                pageSize,
+                pageToken,
+                status,
+                options,
+            )
+            .data
     }
-
-
-    /** [harnessListTriggerExecutions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListTriggerExecutionsWithRawResponse(clientConfig: ClientConfig, triggerId: String, pageSize: Int? = null, pageToken: String? = null, status: TriggerExecutionStatus? = null, options: RequestOptions? = null): SdkResponse<ListTriggerExecutionsResponse> {
-        if (pageSize != null) {
-            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
-}
-
-        return SdkClient.request<ListTriggerExecutionsResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions", config = clientConfig, query = mapOf("page_size" to SdkClient.queryValue(pageSize, "form", true), "page_token" to
-    SdkClient.queryValue(pageToken, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "harnessListTriggerExecutions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Keyset-paginated. The large `payload` field is omitted from list items; fetch a single execution to read it.
+     * [harnessListTriggerExecutions], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessListTriggerExecutionsWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        status: TriggerExecutionStatus? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListTriggerExecutionsResponse> {
+        if (pageSize != null) {
+            Validation.validateRange("page_size", pageSize, Validation.RangeOpts(min = 1.0))
+        }
+
+        return SdkClient.request<ListTriggerExecutionsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page_size" to SdkClient.queryValue(pageSize, "form", true),
+                        "page_token" to SdkClient.queryValue(pageToken, "form", true),
+                        "status" to SdkClient.queryValue(status, "form", true),
+                    ),
+                operationId = "harnessListTriggerExecutions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Keyset-paginated. The large `payload` field is omitted from list items; fetch a single
+     * execution to read it.
      *
      * @param triggerId The trigger UUID.
-     * @param pageSize Page size. Defaults to 50 when omitted or non-positive;
-     *   server-clamped.
-     * @param pageToken Opaque keyset cursor returned by the previous page. Empty
-     *   starts from the beginning.
+     * @param pageSize Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+     * @param pageToken Opaque keyset cursor returned by the previous page. Empty starts from the
+     *   beginning.
      * @param status Optional filter by execution status.
      */
-    fun harnessListTriggerExecutionsPaginated(clientConfig: ClientConfig, triggerId: String, pageSize: Int? = null, pageToken: String? = null, status: TriggerExecutionStatus? = null, options: RequestOptions? = null, yieldFn: (TriggerExecution) -> Boolean) {
+    fun harnessListTriggerExecutionsPaginated(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        status: TriggerExecutionStatus? = null,
+        options: RequestOptions? = null,
+        yieldFn: (TriggerExecution) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
-            val page = harnessListTriggerExecutions(clientConfig, triggerId, pageSize, cursor, status, options)
+            val page =
+                harnessListTriggerExecutions(
+                    clientConfig,
+                    triggerId,
+                    pageSize,
+                    cursor,
+                    status,
+                    options,
+                )
             val items = page.executions.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -142,17 +282,32 @@ internal object HarnessRuntimeHarnessListTriggerExecutionsOperation {
         }
     }
 
-
-
-    fun harnessListTriggerExecutionsPages(clientConfig: ClientConfig, triggerId: String, pageSize: Int? = null, pageToken: String? = null, status: TriggerExecutionStatus? = null, options: RequestOptions? = null, yieldPage: (HarnessRuntime.HarnessListTriggerExecutionsPage) -> Boolean) {
+    fun harnessListTriggerExecutionsPages(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        pageSize: Int? = null,
+        pageToken: String? = null,
+        status: TriggerExecutionStatus? = null,
+        options: RequestOptions? = null,
+        yieldPage: (HarnessRuntime.HarnessListTriggerExecutionsPage) -> Boolean,
+    ) {
         var cursor = pageToken
         while (true) {
-            val page = harnessListTriggerExecutions(clientConfig, triggerId, pageSize, cursor, status, options)
+            val page =
+                harnessListTriggerExecutions(
+                    clientConfig,
+                    triggerId,
+                    pageSize,
+                    cursor,
+                    status,
+                    options,
+                )
             val items = page.executions.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextPageToken
             val hasMore = nextCursor != null
-            if (!yieldPage(HarnessRuntime.HarnessListTriggerExecutionsPage(page, items, hasMore))) return
+            if (!yieldPage(HarnessRuntime.HarnessListTriggerExecutionsPage(page, items, hasMore)))
+                return
             if (!hasMore) return
             cursor = nextCursor
         }
@@ -161,101 +316,295 @@ internal object HarnessRuntimeHarnessListTriggerExecutionsOperation {
 
 internal object HarnessRuntimeHarnessGetTriggerExecutionOperation {
     /**
-     * Returns the full execution row, including the `payload`, `output_text`, and `output_truncated` fields omitted from list items.
+     * Returns the full execution row, including the `payload`, `output_text`, and
+     * `output_truncated` fields omitted from list items.
      *
      * @param triggerId The trigger UUID.
      * @param executionId The execution UUID.
      */
-    fun harnessGetTriggerExecution(clientConfig: ClientConfig, triggerId: String, executionId: String, options: RequestOptions? = null): GetTriggerExecutionResponse {
-        return harnessGetTriggerExecutionWithRawResponse(clientConfig, triggerId, executionId, options).data
+    fun harnessGetTriggerExecution(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        executionId: String,
+        options: RequestOptions? = null,
+    ): GetTriggerExecutionResponse {
+        return harnessGetTriggerExecutionWithRawResponse(
+                clientConfig,
+                triggerId,
+                executionId,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessGetTriggerExecution], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessGetTriggerExecutionWithRawResponse(clientConfig: ClientConfig, triggerId: String, executionId: String, options: RequestOptions? = null): SdkResponse<GetTriggerExecutionResponse> {
-        return SdkClient.request<GetTriggerExecutionResponse>(SdkClient.RequestSpec("GET", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions/${SdkClient.encodePathSegment(executionId)}", config = clientConfig, operationId = "harnessGetTriggerExecution", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessGetTriggerExecution], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessGetTriggerExecutionWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        executionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTriggerExecutionResponse> {
+        return SdkClient.request<GetTriggerExecutionResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions/${SdkClient.encodePathSegment(executionId)}",
+                config = clientConfig,
+                operationId = "harnessGetTriggerExecution",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessCancelTriggerExecutionOperation {
     /**
-     * Fails the execution and frees the trigger's in-flight slot. A fresh-mode session is destroyed outright. A reuse-mode session is only paused, not stopped - harness has no run-interrupt call, so the agent's turn may still be in flight server-side; this frees the queue, not necessarily the agent's work. A non-running execution is a no-op that still returns 200.
+     * Fails the execution and frees the trigger's in-flight slot. A fresh-mode session is destroyed
+     * outright. A reuse-mode session is only paused, not stopped - harness has no run-interrupt
+     * call, so the agent's turn may still be in flight server-side; this frees the queue, not
+     * necessarily the agent's work. A non-running execution is a no-op that still returns 200.
      *
      * @param triggerId The trigger UUID.
      * @param executionId The execution UUID.
-     * @param force Cancel even if the execution has not started a run yet (the
-     *   worker's own dispatch may still be in flight). Without this, that case returns
-     *   409; reclaim clears it automatically within 15m regardless.
+     * @param force Cancel even if the execution has not started a run yet (the worker's own
+     *   dispatch may still be in flight). Without this, that case returns 409; reclaim clears it
+     *   automatically within 15m regardless.
      */
-    fun harnessCancelTriggerExecution(clientConfig: ClientConfig, triggerId: String, executionId: String, force: Boolean? = null, options: RequestOptions? = null): GetTriggerExecutionResponse {
-        return harnessCancelTriggerExecutionWithRawResponse(clientConfig, triggerId, executionId, force, options).data
+    fun harnessCancelTriggerExecution(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        executionId: String,
+        force: Boolean? = null,
+        options: RequestOptions? = null,
+    ): GetTriggerExecutionResponse {
+        return harnessCancelTriggerExecutionWithRawResponse(
+                clientConfig,
+                triggerId,
+                executionId,
+                force,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessCancelTriggerExecution], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessCancelTriggerExecutionWithRawResponse(clientConfig: ClientConfig, triggerId: String, executionId: String, force: Boolean? = null, options: RequestOptions? = null): SdkResponse<GetTriggerExecutionResponse> {
-        return SdkClient.request<GetTriggerExecutionResponse>(SdkClient.RequestSpec("POST", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions/${SdkClient.encodePathSegment(executionId)}/cancel", config = clientConfig, query = mapOf("force" to SdkClient.queryValue(force, "form", true)), operationId = "harnessCancelTriggerExecution", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessCancelTriggerExecution], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessCancelTriggerExecutionWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        executionId: String,
+        force: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetTriggerExecutionResponse> {
+        return SdkClient.request<GetTriggerExecutionResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/executions/${SdkClient.encodePathSegment(executionId)}/cancel",
+                config = clientConfig,
+                query = mapOf("force" to SdkClient.queryValue(force, "form", true)),
+                operationId = "harnessCancelTriggerExecution",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessPostTriggerRotateSecretOperation {
     /**
-     * Webhook triggers only (409 for cron). Issues a new secret (shown once) and moves the old value to the previous slot, where it keeps verifying deliveries until previous_secret_expires_at. Default grace is 5 minutes when grace_period_seconds is omitted, so deliveries already in flight (signed with the old value) still succeed while the customer updates their external system. After that instant the old value is refused with 401. Pass grace_period_seconds=0 to retire the old…
+     * Webhook triggers only (409 for cron). Issues a new secret (shown once) and moves the old
+     * value to the previous slot, where it keeps verifying deliveries until
+     * previous_secret_expires_at. Default grace is 5 minutes when grace_period_seconds is omitted,
+     * so deliveries already in flight (signed with the old value) still succeed while the customer
+     * updates their external system. After that instant the old value is refused with 401. Pass
+     * grace_period_seconds=0 to retire the old…
      *
      * @param triggerId The trigger UUID.
-     * @param gracePeriodSeconds How long the outgoing secret keeps verifying
-     *   deliveries. Omit for the default (5 minutes). 0 retires the old secret
-     *   immediately (compromised-secret path). Positive values set a custom window up
-     *   to the server max (default 1 hour); above the max is 400. Send at most once
-     *   with an explicit non-negative integer - bare keys, empty values, non-integers,
-     *   negatives, and duplicates are 400.
+     * @param gracePeriodSeconds How long the outgoing secret keeps verifying deliveries. Omit for
+     *   the default (5 minutes). 0 retires the old secret immediately (compromised-secret path).
+     *   Positive values set a custom window up to the server max (default 1 hour); above the max
+     *   is 400. Send at most once with an explicit non-negative integer - bare keys, empty values,
+     *   non-integers, negatives, and duplicates are 400.
      */
-    fun harnessPostTriggerRotateSecret(clientConfig: ClientConfig, triggerId: String, gracePeriodSeconds: Long? = null, options: RequestOptions? = null): RotateSecretResponse {
-        return harnessPostTriggerRotateSecretWithRawResponse(clientConfig, triggerId, gracePeriodSeconds, options).data
+    fun harnessPostTriggerRotateSecret(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        gracePeriodSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): RotateSecretResponse {
+        return harnessPostTriggerRotateSecretWithRawResponse(
+                clientConfig,
+                triggerId,
+                gracePeriodSeconds,
+                options,
+            )
+            .data
     }
 
-
-    /** [harnessPostTriggerRotateSecret], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessPostTriggerRotateSecretWithRawResponse(clientConfig: ClientConfig, triggerId: String, gracePeriodSeconds: Long? = null, options: RequestOptions? = null): SdkResponse<RotateSecretResponse> {
+    /**
+     * [harnessPostTriggerRotateSecret], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessPostTriggerRotateSecretWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        gracePeriodSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<RotateSecretResponse> {
         if (gracePeriodSeconds != null) {
-            Validation.validateRange("grace_period_seconds", gracePeriodSeconds, Validation.RangeOpts(min = 0.0))
-}
+            Validation.validateRange(
+                "grace_period_seconds",
+                gracePeriodSeconds,
+                Validation.RangeOpts(min = 0.0),
+            )
+        }
 
-        return SdkClient.request<RotateSecretResponse>(SdkClient.RequestSpec("POST", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/rotate-secret", config = clientConfig, query = mapOf("grace_period_seconds" to
-    SdkClient.queryValue(gracePeriodSeconds, "form", true)), operationId = "harnessPostTriggerRotateSecret", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<RotateSecretResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/rotate-secret",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "grace_period_seconds" to
+                            SdkClient.queryValue(gracePeriodSeconds, "form", true)
+                    ),
+                operationId = "harnessPostTriggerRotateSecret",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "409" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessPostTriggerWebhookOperation {
     /**
-     * Receives a signed webhook delivery from an external system for a trigger. The caller is the external system, and each delivery is authenticated with the trigger's provider-specific signature or token. Successful deliveries are accepted for asynchronous processing; paused triggers and deduplicated retries also receive an accepted response.
+     * Receives a signed webhook delivery from an external system for a trigger. The caller is the
+     * external system, and each delivery is authenticated with the trigger's provider-specific
+     * signature or token. Successful deliveries are accepted for asynchronous processing; paused
+     * triggers and deduplicated retries also receive an accepted response.
      *
-     * The one public, un-team-authenticated endpoint. There is NO DO bearer token: the caller is the customer's external system. Authentication is the per-trigger HMAC secret, verified on every delivery; edge rate-limiting is mandatory. The request body is the provider's RAW body, forwarded verbatim (the HMAC is computed over the exact bytes received); Content-Type is provider-defined and passed through. The signature header depends on the trigger's provider: - github:…
+     * The one public, un-team-authenticated endpoint. There is NO DO bearer token: the caller is
+     * the customer's external system. Authentication is the per-trigger HMAC secret, verified on
+     * every delivery; edge rate-limiting is mandatory. The request body is the provider's RAW body,
+     * forwarded verbatim (the HMAC is computed over the exact bytes received); Content-Type is
+     * provider-defined and passed through. The signature header depends on the trigger's
+     * provider: - github:…
      *
      * @param triggerId The trigger UUID.
      */
-    fun harnessPostTriggerWebhook(clientConfig: ClientConfig, triggerId: String, body: ByteArray, options: RequestOptions? = null): WebhookAcceptedResponse {
+    fun harnessPostTriggerWebhook(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        body: ByteArray,
+        options: RequestOptions? = null,
+    ): WebhookAcceptedResponse {
         return harnessPostTriggerWebhookWithRawResponse(clientConfig, triggerId, body, options).data
     }
 
-
-    /** [harnessPostTriggerWebhook], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessPostTriggerWebhookWithRawResponse(clientConfig: ClientConfig, triggerId: String, body: ByteArray, options: RequestOptions? = null): SdkResponse<WebhookAcceptedResponse> {
-        return SdkClient.request<WebhookAcceptedResponse>(SdkClient.RequestSpec("POST", "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/webhook", config = clientConfig, body = body, contentType = "application/octet-stream", operationId = "harnessPostTriggerWebhook", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessPostTriggerWebhook], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessPostTriggerWebhookWithRawResponse(
+        clientConfig: ClientConfig,
+        triggerId: String,
+        body: ByteArray,
+        options: RequestOptions? = null,
+    ): SdkResponse<WebhookAcceptedResponse> {
+        return SdkClient.request<WebhookAcceptedResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/agents/triggers/${SdkClient.encodePathSegment(triggerId)}/webhook",
+                config = clientConfig,
+                body = body,
+                contentType = "application/octet-stream",
+                operationId = "harnessPostTriggerWebhook",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object HarnessRuntimeHarnessListWebhookProvidersOperation {
     /**
-     * A static, code-defined registry (not a database table), webhook-only. Cron triggers have no provider and never call this. Used to populate the provider dropdown with display name, docs link, paste hint, and the signature scheme.
+     * A static, code-defined registry (not a database table), webhook-only. Cron triggers have no
+     * provider and never call this. Used to populate the provider dropdown with display name, docs
+     * link, paste hint, and the signature scheme.
      */
-    fun harnessListWebhookProviders(clientConfig: ClientConfig, options: RequestOptions? = null): ListWebhookProvidersResponse {
+    fun harnessListWebhookProviders(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListWebhookProvidersResponse {
         return harnessListWebhookProvidersWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [harnessListWebhookProviders], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun harnessListWebhookProvidersWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<ListWebhookProvidersResponse> {
-        return SdkClient.request<ListWebhookProvidersResponse>(SdkClient.RequestSpec("GET", "/v2/agents/webhook-providers", config = clientConfig, operationId = "harnessListWebhookProviders", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [harnessListWebhookProviders], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun harnessListWebhookProvidersWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListWebhookProvidersResponse> {
+        return SdkClient.request<ListWebhookProvidersResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/agents/webhook-providers",
+                config = clientConfig,
+                operationId = "harnessListWebhookProviders",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

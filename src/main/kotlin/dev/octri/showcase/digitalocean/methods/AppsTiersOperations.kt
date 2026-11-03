@@ -12,33 +12,83 @@ import dev.octri.showcase.digitalocean.SdkClient
 import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object AppsListInstanceSizesOperation {
-    /**
-     * List all instance sizes for `service`, `worker`, and `job` components.
-     */
-    fun appsListInstanceSizes(clientConfig: ClientConfig, options: RequestOptions? = null): AppsListInstanceSizesResponse {
+    /** List all instance sizes for `service`, `worker`, and `job` components. */
+    fun appsListInstanceSizes(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): AppsListInstanceSizesResponse {
         return appsListInstanceSizesWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [appsListInstanceSizes], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsListInstanceSizesWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<AppsListInstanceSizesResponse> {
-        return SdkClient.request<AppsListInstanceSizesResponse>(SdkClient.RequestSpec("GET", "/v2/apps/tiers/instance_sizes", config = clientConfig, operationId = "appsListInstanceSizes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsListInstanceSizes], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun appsListInstanceSizesWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<AppsListInstanceSizesResponse> {
+        return SdkClient.request<AppsListInstanceSizesResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/apps/tiers/instance_sizes",
+                config = clientConfig,
+                operationId = "appsListInstanceSizes",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AppsGetInstanceSizeOperation {
     /**
-     * Retrieve information about a specific instance size for `service`, `worker`, and `job` components.
+     * Retrieve information about a specific instance size for `service`, `worker`, and `job`
+     * components.
      *
      * @param slug The slug of the instance size
      */
-    fun appsGetInstanceSize(clientConfig: ClientConfig, slug: String, options: RequestOptions? = null): AppsGetInstanceSizeResponse {
+    fun appsGetInstanceSize(
+        clientConfig: ClientConfig,
+        slug: String,
+        options: RequestOptions? = null,
+    ): AppsGetInstanceSizeResponse {
         return appsGetInstanceSizeWithRawResponse(clientConfig, slug, options).data
     }
 
-
-    /** [appsGetInstanceSize], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsGetInstanceSizeWithRawResponse(clientConfig: ClientConfig, slug: String, options: RequestOptions? = null): SdkResponse<AppsGetInstanceSizeResponse> {
-        return SdkClient.request<AppsGetInstanceSizeResponse>(SdkClient.RequestSpec("GET", "/v2/apps/tiers/instance_sizes/${SdkClient.encodePathSegment(slug)}", config = clientConfig, operationId = "appsGetInstanceSize", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsGetInstanceSize], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun appsGetInstanceSizeWithRawResponse(
+        clientConfig: ClientConfig,
+        slug: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<AppsGetInstanceSizeResponse> {
+        return SdkClient.request<AppsGetInstanceSizeResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/apps/tiers/instance_sizes/${SdkClient.encodePathSegment(slug)}",
+                config = clientConfig,
+                operationId = "appsGetInstanceSize",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

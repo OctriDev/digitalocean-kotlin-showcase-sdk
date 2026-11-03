@@ -13,44 +13,114 @@ import dev.octri.showcase.digitalocean.VideoGeneration
 
 internal object ServerlessInferenceInferenceCreateVideoOperation {
     /**
-     * Start an asynchronous video generation job from a text prompt. Poll `GET /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with `GET /v1/videos/{video_id}/content` or from `output.url` when present.
+     * Start an asynchronous video generation job from a text prompt. Poll `GET
+     * /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with
+     * `GET /v1/videos/{video_id}/content` or from `output.url` when present.
      *
      * @param model The video generation model to use.
      * @param prompt A text description of the desired video.
      * @param size The output resolution, for example `1280x720`.
      * @param fps Frames per second for the generated video.
      */
-    fun inferenceCreateVideo(clientConfig: ClientConfig, model: String, prompt: String, size: String? = null, fps: Long? = null, options: RequestOptions? = null): VideoGeneration {
-        return inferenceCreateVideoWithRawResponse(clientConfig, model, prompt, size, fps, options).data
+    fun inferenceCreateVideo(
+        clientConfig: ClientConfig,
+        model: String,
+        prompt: String,
+        size: String? = null,
+        fps: Long? = null,
+        options: RequestOptions? = null,
+    ): VideoGeneration {
+        return inferenceCreateVideoWithRawResponse(clientConfig, model, prompt, size, fps, options)
+            .data
     }
 
-
-    /** [inferenceCreateVideo], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun inferenceCreateVideoWithRawResponse(clientConfig: ClientConfig, model: String, prompt: String, size: String? = null, fps: Long? = null, options: RequestOptions? = null): SdkResponse<VideoGeneration> {
+    /**
+     * [inferenceCreateVideo], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun inferenceCreateVideoWithRawResponse(
+        clientConfig: ClientConfig,
+        model: String,
+        prompt: String,
+        size: String? = null,
+        fps: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<VideoGeneration> {
         Validation.validateLength("prompt", prompt, Validation.LengthOpts(min = 1))
 
         if (fps != null) {
             Validation.validateRange("fps", fps, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<VideoGeneration>(SdkClient.RequestSpec("POST", "/v1/videos", config = clientConfig, body = SdkClient.bodyMap("model" to (model), "prompt" to (prompt), "size" to (SdkClient.omitIfNull(size)), "fps" to (SdkClient.omitIfNull(fps))), operationId = "inferenceCreateVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<VideoGeneration>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v1/videos",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "model" to (model),
+                        "prompt" to (prompt),
+                        "size" to (SdkClient.omitIfNull(size)),
+                        "fps" to (SdkClient.omitIfNull(fps)),
+                    ),
+                operationId = "inferenceCreateVideo",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ServerlessInferenceInferenceGetVideoOperation {
     /**
-     * Returns the current state of a video generation job. Poll until `status` reaches a terminal value such as `completed` or `failed`.
+     * Returns the current state of a video generation job. Poll until `status` reaches a terminal
+     * value such as `completed` or `failed`.
      *
      * @param videoId The video generation job identifier.
      */
-    fun inferenceGetVideo(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): VideoGeneration {
+    fun inferenceGetVideo(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): VideoGeneration {
         return inferenceGetVideoWithRawResponse(clientConfig, videoId, options).data
     }
 
-
-    /** [inferenceGetVideo], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun inferenceGetVideoWithRawResponse(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): SdkResponse<VideoGeneration> {
-        return SdkClient.request<VideoGeneration>(SdkClient.RequestSpec("GET", "/v1/videos/${SdkClient.encodePathSegment(videoId)}", config = clientConfig, operationId = "inferenceGetVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [inferenceGetVideo], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun inferenceGetVideoWithRawResponse(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<VideoGeneration> {
+        return SdkClient.request<VideoGeneration>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v1/videos/${SdkClient.encodePathSegment(videoId)}",
+                config = clientConfig,
+                operationId = "inferenceGetVideo",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -60,13 +130,40 @@ internal object ServerlessInferenceInferenceGetVideoContentOperation {
      *
      * @param videoId The video generation job identifier.
      */
-    fun inferenceGetVideoContent(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): ByteArray {
+    fun inferenceGetVideoContent(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
         return inferenceGetVideoContentWithRawResponse(clientConfig, videoId, options).data
     }
 
-
-    /** [inferenceGetVideoContent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun inferenceGetVideoContentWithRawResponse(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): SdkResponse<ByteArray> {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/v1/videos/${SdkClient.encodePathSegment(videoId)}/content", config = clientConfig, operationId = "inferenceGetVideoContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [inferenceGetVideoContent], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun inferenceGetVideoContentWithRawResponse(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> {
+        return SdkClient.request<ByteArray>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v1/videos/${SdkClient.encodePathSegment(videoId)}/content",
+                config = clientConfig,
+                operationId = "inferenceGetVideoContent",
+                decoder = SdkClient.ResponseDecoder.BYTES,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

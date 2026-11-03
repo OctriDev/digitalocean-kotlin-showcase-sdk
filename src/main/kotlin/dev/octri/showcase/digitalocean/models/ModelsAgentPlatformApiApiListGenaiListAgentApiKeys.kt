@@ -5,20 +5,13 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiListAgentAPIKeysOutput` API schema.
- */
+/** Typed representation of the `ApiListAgentAPIKeysOutput` API schema. */
 data class ApiListAgentAPIKeysOutput(
-    /**
-     * Api key infos
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos") val apiKeyInfos: List<ApiAgentAPIKeyInfo>? = null,
-    /**
-     * Links to other pages
-     */
+    /** Api key infos */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_infos")
+    val apiKeyInfos: List<ApiAgentAPIKeyInfo>? = null,
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
-    val meta: ApiMeta? = null
+    /** Meta information about the data set */
+    val meta: ApiMeta? = null,
 ) : SdkResource()

@@ -3,152 +3,299 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class SecurityNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * To list all CSPM scans, send a GET request to `/v2/security/scans`.
-     */
-    fun listScans(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Scans {
-        return dev.octri.showcase.digitalocean.methods.Security.securityListScans(clientConfig, perPage, page, options)
+    /** To list all CSPM scans, send a GET request to `/v2/security/scans`. */
+    fun listScans(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Scans {
+        return dev.octri.showcase.digitalocean.methods.Security.securityListScans(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
-    /**
-     * To create a CSPM scan, send a POST request to `/v2/security/scans`.
-     */
+    /** To create a CSPM scan, send a POST request to `/v2/security/scans`. */
     fun createScan(options: RequestOptions? = null): ScanResponse {
-        return dev.octri.showcase.digitalocean.methods.Security.securityCreateScan(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.Security.securityCreateScan(
+            clientConfig,
+            options,
+        )
+    }
+
+    /** To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`. */
+    fun getScan(
+        scanId: String,
+        severity: SchemaSchemaEnumc9dfe048? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        type: String? = null,
+        options: RequestOptions? = null,
+    ): ScanResponse {
+        return dev.octri.showcase.digitalocean.methods.Security.securityGetScan(
+            clientConfig,
+            scanId,
+            severity,
+            perPage,
+            page,
+            type,
+            options,
+        )
+    }
+
+    /** To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`. */
+    fun getLatestScan(
+        perPage: Long? = null,
+        page: Long? = null,
+        severity: SchemaSchemaEnumc9dfe048? = null,
+        type: String? = null,
+        options: RequestOptions? = null,
+    ): ScanResponse {
+        return dev.octri.showcase.digitalocean.methods.Security.securityGetLatestScan(
+            clientConfig,
+            perPage,
+            page,
+            severity,
+            type,
+            options,
+        )
     }
 
     /**
-     * To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`.
-     */
-    fun getScan(scanId: String, severity: SchemaSchemaEnumc9dfe048? = null, perPage: Long? = null, page: Long? = null, type: String? = null, options: RequestOptions? = null): ScanResponse {
-        return dev.octri.showcase.digitalocean.methods.Security.securityGetScan(clientConfig, scanId, severity, perPage, page, type, options)
-    }
-
-    /**
-     * To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`.
-     */
-    fun getLatestScan(perPage: Long? = null, page: Long? = null, severity: SchemaSchemaEnumc9dfe048? = null, type: String? = null, options: RequestOptions? = null): ScanResponse {
-        return dev.octri.showcase.digitalocean.methods.Security.securityGetLatestScan(clientConfig, perPage, page, severity, type, options)
-    }
-
-    /**
-     * To mark a scan finding as a false positive, send a POST request to `/v2/security/scans/rules` to create a new scan rule.
+     * To mark a scan finding as a false positive, send a POST request to `/v2/security/scans/rules`
+     * to create a new scan rule.
      */
     fun createScanRule(resource: String? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.Security.securityCreateScanRule(clientConfig, resource, options)
+        return dev.octri.showcase.digitalocean.methods.Security.securityCreateScanRule(
+            clientConfig,
+            resource,
+            options,
+        )
     }
 
     /**
-     * To get affected resources for a scan finding, send a GET request to `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
+     * To get affected resources for a scan finding, send a GET request to
+     * `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
      */
-    fun listScanFindingAffectedResources(scanId: String, findingUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AffectedResources {
-        return dev.octri.showcase.digitalocean.methods.Security.securityListScanFindingAffectedResources(clientConfig, scanId, findingUuid, perPage, page, options)
+    fun listScanFindingAffectedResources(
+        scanId: String,
+        findingUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AffectedResources {
+        return dev.octri.showcase.digitalocean.methods.Security
+            .securityListScanFindingAffectedResources(
+                clientConfig,
+                scanId,
+                findingUuid,
+                perPage,
+                page,
+                options,
+            )
+    }
+
+    /** To list CSPM scan settings, send a GET request to `/v2/security/settings`. */
+    fun listSettings(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Settings {
+        return dev.octri.showcase.digitalocean.methods.Security.securityListSettings(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
+    }
+
+    /** To update CSPM plan coverage, send a PUT request to `/v2/security/settings/plan`. */
+    fun updateSettingsPlan(
+        tierCoverage: Map<String, Map<String, Any>>? = null,
+        options: RequestOptions? = null,
+    ): TierCoverage {
+        return dev.octri.showcase.digitalocean.methods.Security.securityUpdateSettingsPlan(
+            clientConfig,
+            tierCoverage,
+            options,
+        )
+    }
+
+    /** To suppress scan findings, send a POST request to `/v2/security/settings/suppressions`. */
+    fun createSuppression(
+        ruleUuid: String? = null,
+        resources: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SuppressedResourceRoot {
+        return dev.octri.showcase.digitalocean.methods.Security.securityCreateSuppression(
+            clientConfig,
+            ruleUuid,
+            resources,
+            options,
+        )
     }
 
     /**
-     * To list CSPM scan settings, send a GET request to `/v2/security/settings`.
-     */
-    fun listSettings(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Settings {
-        return dev.octri.showcase.digitalocean.methods.Security.securityListSettings(clientConfig, perPage, page, options)
-    }
-
-    /**
-     * To update CSPM plan coverage, send a PUT request to `/v2/security/settings/plan`.
-     */
-    fun updateSettingsPlan(tierCoverage: Map<String, Map<String, Any>>? = null, options: RequestOptions? = null): TierCoverage {
-        return dev.octri.showcase.digitalocean.methods.Security.securityUpdateSettingsPlan(clientConfig, tierCoverage, options)
-    }
-
-    /**
-     * To suppress scan findings, send a POST request to `/v2/security/settings/suppressions`.
-     */
-    fun createSuppression(ruleUuid: String? = null, resources: List<String>? = null, options: RequestOptions? = null): SuppressedResourceRoot {
-        return dev.octri.showcase.digitalocean.methods.Security.securityCreateSuppression(clientConfig, ruleUuid, resources, options)
-    }
-
-    /**
-     * To remove a suppression, send a DELETE request to `/v2/security/settings/suppressions/{suppression_uuid}`.
+     * To remove a suppression, send a DELETE request to
+     * `/v2/security/settings/suppressions/{suppression_uuid}`.
      */
     fun deleteSuppression(suppressionUuid: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.Security.securityDeleteSuppression(clientConfig, suppressionUuid, options)
+        return dev.octri.showcase.digitalocean.methods.Security.securityDeleteSuppression(
+            clientConfig,
+            suppressionUuid,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [SecurityNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [SecurityNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
-        /**
-         * To list all CSPM scans, send a GET request to `/v2/security/scans`.
-         */
-        fun listScans(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<Scans> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityListScansWithRawResponse(clientConfig, perPage, page, options)
+        /** To list all CSPM scans, send a GET request to `/v2/security/scans`. */
+        fun listScans(
+            perPage: Long? = null,
+            page: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Scans> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityListScansWithRawResponse(clientConfig, perPage, page, options)
         }
 
-        /**
-         * To create a CSPM scan, send a POST request to `/v2/security/scans`.
-         */
+        /** To create a CSPM scan, send a POST request to `/v2/security/scans`. */
         fun createScan(options: RequestOptions? = null): SdkResponse<ScanResponse> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityCreateScanWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityCreateScanWithRawResponse(clientConfig, options)
+        }
+
+        /** To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`. */
+        fun getScan(
+            scanId: String,
+            severity: SchemaSchemaEnumc9dfe048? = null,
+            perPage: Long? = null,
+            page: Long? = null,
+            type: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ScanResponse> {
+            return dev.octri.showcase.digitalocean.methods.Security.securityGetScanWithRawResponse(
+                clientConfig,
+                scanId,
+                severity,
+                perPage,
+                page,
+                type,
+                options,
+            )
+        }
+
+        /** To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`. */
+        fun getLatestScan(
+            perPage: Long? = null,
+            page: Long? = null,
+            severity: SchemaSchemaEnumc9dfe048? = null,
+            type: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ScanResponse> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityGetLatestScanWithRawResponse(
+                    clientConfig,
+                    perPage,
+                    page,
+                    severity,
+                    type,
+                    options,
+                )
         }
 
         /**
-         * To get a CSPM scan by ID, send a GET request to `/v2/security/scans/{scan_id}`.
+         * To mark a scan finding as a false positive, send a POST request to
+         * `/v2/security/scans/rules` to create a new scan rule.
          */
-        fun getScan(scanId: String, severity: SchemaSchemaEnumc9dfe048? = null, perPage: Long? = null, page: Long? = null, type: String? = null, options: RequestOptions? = null): SdkResponse<ScanResponse> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityGetScanWithRawResponse(clientConfig, scanId, severity, perPage, page, type, options)
+        fun createScanRule(
+            resource: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Unit> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityCreateScanRuleWithRawResponse(clientConfig, resource, options)
         }
 
         /**
-         * To get the latest CSPM scan, send a GET request to `/v2/security/scans/latest`.
+         * To get affected resources for a scan finding, send a GET request to
+         * `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
          */
-        fun getLatestScan(perPage: Long? = null, page: Long? = null, severity: SchemaSchemaEnumc9dfe048? = null, type: String? = null, options: RequestOptions? = null): SdkResponse<ScanResponse> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityGetLatestScanWithRawResponse(clientConfig, perPage, page, severity, type, options)
+        fun listScanFindingAffectedResources(
+            scanId: String,
+            findingUuid: String,
+            perPage: Long? = null,
+            page: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<AffectedResources> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityListScanFindingAffectedResourcesWithRawResponse(
+                    clientConfig,
+                    scanId,
+                    findingUuid,
+                    perPage,
+                    page,
+                    options,
+                )
         }
 
-        /**
-         * To mark a scan finding as a false positive, send a POST request to `/v2/security/scans/rules` to create a new scan rule.
-         */
-        fun createScanRule(resource: String? = null, options: RequestOptions? = null): SdkResponse<Unit> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityCreateScanRuleWithRawResponse(clientConfig, resource, options)
+        /** To list CSPM scan settings, send a GET request to `/v2/security/settings`. */
+        fun listSettings(
+            perPage: Long? = null,
+            page: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Settings> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityListSettingsWithRawResponse(clientConfig, perPage, page, options)
         }
 
-        /**
-         * To get affected resources for a scan finding, send a GET request to `/v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources`.
-         */
-        fun listScanFindingAffectedResources(scanId: String, findingUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<AffectedResources> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityListScanFindingAffectedResourcesWithRawResponse(clientConfig, scanId, findingUuid, perPage, page, options)
-        }
-
-        /**
-         * To list CSPM scan settings, send a GET request to `/v2/security/settings`.
-         */
-        fun listSettings(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<Settings> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityListSettingsWithRawResponse(clientConfig, perPage, page, options)
-        }
-
-        /**
-         * To update CSPM plan coverage, send a PUT request to `/v2/security/settings/plan`.
-         */
-        fun updateSettingsPlan(tierCoverage: Map<String, Map<String, Any>>? = null, options: RequestOptions? = null): SdkResponse<TierCoverage> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityUpdateSettingsPlanWithRawResponse(clientConfig, tierCoverage, options)
+        /** To update CSPM plan coverage, send a PUT request to `/v2/security/settings/plan`. */
+        fun updateSettingsPlan(
+            tierCoverage: Map<String, Map<String, Any>>? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<TierCoverage> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityUpdateSettingsPlanWithRawResponse(clientConfig, tierCoverage, options)
         }
 
         /**
          * To suppress scan findings, send a POST request to `/v2/security/settings/suppressions`.
          */
-        fun createSuppression(ruleUuid: String? = null, resources: List<String>? = null, options: RequestOptions? = null): SdkResponse<SuppressedResourceRoot> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityCreateSuppressionWithRawResponse(clientConfig, ruleUuid, resources, options)
+        fun createSuppression(
+            ruleUuid: String? = null,
+            resources: List<String>? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<SuppressedResourceRoot> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityCreateSuppressionWithRawResponse(
+                    clientConfig,
+                    ruleUuid,
+                    resources,
+                    options,
+                )
         }
 
         /**
-         * To remove a suppression, send a DELETE request to `/v2/security/settings/suppressions/{suppression_uuid}`.
+         * To remove a suppression, send a DELETE request to
+         * `/v2/security/settings/suppressions/{suppression_uuid}`.
          */
-        fun deleteSuppression(suppressionUuid: String, options: RequestOptions? = null): SdkResponse<Unit> {
-            return dev.octri.showcase.digitalocean.methods.Security.securityDeleteSuppressionWithRawResponse(clientConfig, suppressionUuid, options)
+        fun deleteSuppression(
+            suppressionUuid: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<Unit> {
+            return dev.octri.showcase.digitalocean.methods.Security
+                .securityDeleteSuppressionWithRawResponse(clientConfig, suppressionUuid, options)
         }
-
     }
 }

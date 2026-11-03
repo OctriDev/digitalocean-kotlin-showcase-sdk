@@ -6,6 +6,7 @@ package dev.octri.showcase.digitalocean.models
 import dev.octri.showcase.digitalocean.SdkResource
 
 /**
- * Bearer token authentication for a webhook create or update request. `token` is write-only: send the full value to set or rotate. Omit `token` on update to keep the existing token.
+ * Bearer token authentication for a webhook create or update request. `token` is write-only: send
+ * the full value to set or rotate. Omit `token` on update to keep the existing token.
  */
 class WebhookBearerToken : SdkResource()

@@ -5,22 +5,16 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Public parameters for duplicating a scenario set.
- */
+/** Public parameters for duplicating a scenario set. */
 data class ApiDuplicateScenarioSetInputPublic(
-    /**
-     * UUID of the scenario set to duplicate.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid") val scenarioSetUuid: String? = null
+    /** UUID of the scenario set to duplicate. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set_uuid")
+    val scenarioSetUuid: String? = null
 ) : SdkResource()
 
-/**
- * Output for duplicating a scenario set.
- */
+/** Output for duplicating a scenario set. */
 data class ApiDuplicateScenarioSetOutput(
-    /**
-     * A team-owned collection of scenarios.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set") val scenarioSet: ApiScenarioSet? = null
+    /** A team-owned collection of scenarios. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scenario_set")
+    val scenarioSet: ApiScenarioSet? = null
 ) : SdkResource()

@@ -3,14 +3,14 @@
 
 package dev.octri.showcase.digitalocean.models
 
-/**
- * The comparison operator used against the alert's threshold.
- */
-class UptimeCreateAlertComparisonEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeCreateAlertComparisonEnum && value == other.value
+/** The comparison operator used against the alert's threshold. */
+class UptimeCreateAlertComparisonEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeCreateAlertComparisonEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -18,19 +18,22 @@ class UptimeCreateAlertComparisonEnum private constructor(
         @JvmField val GREATER_THAN = UptimeCreateAlertComparisonEnum("greater_than")
         @JvmField val LESS_THAN = UptimeCreateAlertComparisonEnum("less_than")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeCreateAlertComparisonEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeCreateAlertComparisonEnum(value)
     }
 }
 
-/**
- * Period of time the threshold must be exceeded to trigger the alert.
- */
-class UptimeCreateAlertPeriodEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeCreateAlertPeriodEnum && value == other.value
+/** Period of time the threshold must be exceeded to trigger the alert. */
+class UptimeCreateAlertPeriodEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeCreateAlertPeriodEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -43,19 +46,22 @@ class UptimeCreateAlertPeriodEnum private constructor(
         @JvmField val V30M = UptimeCreateAlertPeriodEnum("30m")
         @JvmField val V1H = UptimeCreateAlertPeriodEnum("1h")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeCreateAlertPeriodEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeCreateAlertPeriodEnum(value)
     }
 }
 
-/**
- * The type of alert.
- */
-class UptimeCreateAlertTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeCreateAlertTypeEnum && value == other.value
+/** The type of alert. */
+class UptimeCreateAlertTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeCreateAlertTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -65,19 +71,22 @@ class UptimeCreateAlertTypeEnum private constructor(
         @JvmField val DOWN_GLOBAL = UptimeCreateAlertTypeEnum("down_global")
         @JvmField val SSL_EXPIRY = UptimeCreateAlertTypeEnum("ssl_expiry")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeCreateAlertTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeCreateAlertTypeEnum(value)
     }
 }
 
-/**
- * The comparison operator used against the alert's threshold.
- */
-class UptimeUpdateAlertComparisonEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeUpdateAlertComparisonEnum && value == other.value
+/** The comparison operator used against the alert's threshold. */
+class UptimeUpdateAlertComparisonEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeUpdateAlertComparisonEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -85,19 +94,22 @@ class UptimeUpdateAlertComparisonEnum private constructor(
         @JvmField val GREATER_THAN = UptimeUpdateAlertComparisonEnum("greater_than")
         @JvmField val LESS_THAN = UptimeUpdateAlertComparisonEnum("less_than")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeUpdateAlertComparisonEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeUpdateAlertComparisonEnum(value)
     }
 }
 
-/**
- * Period of time the threshold must be exceeded to trigger the alert.
- */
-class UptimeUpdateAlertPeriodEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeUpdateAlertPeriodEnum && value == other.value
+/** Period of time the threshold must be exceeded to trigger the alert. */
+class UptimeUpdateAlertPeriodEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeUpdateAlertPeriodEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -110,19 +122,22 @@ class UptimeUpdateAlertPeriodEnum private constructor(
         @JvmField val V30M = UptimeUpdateAlertPeriodEnum("30m")
         @JvmField val V1H = UptimeUpdateAlertPeriodEnum("1h")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeUpdateAlertPeriodEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeUpdateAlertPeriodEnum(value)
     }
 }
 
-/**
- * The type of alert.
- */
-class UptimeUpdateAlertTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UptimeUpdateAlertTypeEnum && value == other.value
+/** The type of alert. */
+class UptimeUpdateAlertTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UptimeUpdateAlertTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -132,7 +147,10 @@ class UptimeUpdateAlertTypeEnum private constructor(
         @JvmField val DOWN_GLOBAL = UptimeUpdateAlertTypeEnum("down_global")
         @JvmField val SSL_EXPIRY = UptimeUpdateAlertTypeEnum("ssl_expiry")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UptimeUpdateAlertTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UptimeUpdateAlertTypeEnum(value)
     }
 }

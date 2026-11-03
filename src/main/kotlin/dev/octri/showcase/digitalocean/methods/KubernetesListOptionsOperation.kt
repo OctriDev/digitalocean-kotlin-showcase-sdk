@@ -12,15 +12,41 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object KubernetesListOptionsOperation {
     /**
-     * To list the versions of Kubernetes available for use, the regions that support Kubernetes, and the available node sizes, send a GET request to `/v2/kubernetes/options`.
+     * To list the versions of Kubernetes available for use, the regions that support Kubernetes,
+     * and the available node sizes, send a GET request to `/v2/kubernetes/options`.
      */
-    fun kubernetesListOptions(clientConfig: ClientConfig, options: RequestOptions? = null): KubernetesOptions {
+    fun kubernetesListOptions(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): KubernetesOptions {
         return kubernetesListOptionsWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [kubernetesListOptions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun kubernetesListOptionsWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<KubernetesOptions> {
-        return SdkClient.request<KubernetesOptions>(SdkClient.RequestSpec("GET", "/v2/kubernetes/options", config = clientConfig, operationId = "kubernetesListOptions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [kubernetesListOptions], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun kubernetesListOptionsWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<KubernetesOptions> {
+        return SdkClient.request<KubernetesOptions>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/kubernetes/options",
+                config = clientConfig,
+                operationId = "kubernetesListOptions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

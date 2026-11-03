@@ -3,33 +3,55 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class AgentInferenceNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      */
-    fun createChatCompletion(request: dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest, options: RequestOptions? = null): ChatCompletionResponse {
-        return dev.octri.showcase.digitalocean.methods.AgentInference.agentInferenceCreateChatCompletion(clientConfig, request, options)
+    fun createChatCompletion(
+        request:
+            dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest,
+        options: RequestOptions? = null,
+    ): ChatCompletionResponse {
+        return dev.octri.showcase.digitalocean.methods.AgentInference
+            .agentInferenceCreateChatCompletion(clientConfig, request, options)
     }
 
     /**
-     * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+     * Creates a model response for the given chat conversation via a customer-provisioned agent
+     * endpoint.
      */
-    fun createChatCompletionStream(request: dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionStreamRequest, options: RequestOptions? = null): Sequence<ChatCompletionChunk> {
-        return dev.octri.showcase.digitalocean.methods.AgentInference.agentInferenceCreateChatCompletionStream(clientConfig, request, options)
+    fun createChatCompletionStream(
+        request:
+            dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ChatCompletionChunk> {
+        return dev.octri.showcase.digitalocean.methods.AgentInference
+            .agentInferenceCreateChatCompletionStream(clientConfig, request, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [AgentInferenceNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [AgentInferenceNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates a model response for the given chat conversation via a customer-provisioned agent endpoint.
+         * Creates a model response for the given chat conversation via a customer-provisioned agent
+         * endpoint.
          */
-        fun createChatCompletion(request: dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest, options: RequestOptions? = null): SdkResponse<ChatCompletionResponse> {
-            return dev.octri.showcase.digitalocean.methods.AgentInference.agentInferenceCreateChatCompletionWithRawResponse(clientConfig, request, options)
+        fun createChatCompletion(
+            request:
+                dev.octri.showcase.digitalocean.methods.AgentInference.AgentInferenceCreateChatCompletionRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<ChatCompletionResponse> {
+            return dev.octri.showcase.digitalocean.methods.AgentInference
+                .agentInferenceCreateChatCompletionWithRawResponse(clientConfig, request, options)
         }
-
     }
 }

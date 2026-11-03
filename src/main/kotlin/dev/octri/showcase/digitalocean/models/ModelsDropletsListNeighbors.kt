@@ -5,9 +5,5 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `NeighborDroplets` API schema.
- */
-data class NeighborDroplets(
-    val droplets: List<Droplet>? = null
-) : SdkResource()
+/** Typed representation of the `NeighborDroplets` API schema. */
+data class NeighborDroplets(val droplets: List<Droplet>? = null) : SdkResource()

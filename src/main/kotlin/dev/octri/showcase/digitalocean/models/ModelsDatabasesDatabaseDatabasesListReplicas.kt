@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `DatabaseReplicas` API schema.
- */
+/** Typed representation of the `DatabaseReplicas` API schema. */
 data class DatabaseReplicas(
-    /**
-     * Optional array value serialized in the `replicas` wire field.
-     */
+    /** Optional array value serialized in the `replicas` wire field. */
     val replicas: List<DatabaseReplicaRead>? = null
 ) : SdkResource()

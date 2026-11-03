@@ -5,26 +5,19 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * A single audio payload in a JSON speech response envelope.
- */
+/** A single audio payload in a JSON speech response envelope. */
 data class SpeechAudioItem(
-    /**
-     * Base64-encoded audio bytes.
-     */
+    /** Base64-encoded audio bytes. */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String
 ) : SdkResource()
 
 /**
- * JSON envelope for text-to-speech when the endpoint returns `application/json`. The live endpoint may instead return raw audio bytes with an `audio/ *` Content-Type.
+ * JSON envelope for text-to-speech when the endpoint returns `application/json`. The live endpoint
+ * may instead return raw audio bytes with an `audio/ *` Content-Type.
  */
 data class SpeechResponse(
-    /**
-     * Generated audio items.
-     */
+    /** Generated audio items. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SpeechAudioItem>,
-    /**
-     * Unix timestamp (in seconds) of when the audio was created.
-     */
-    val created: Long? = null
+    /** Unix timestamp (in seconds) of when the audio was created. */
+    val created: Long? = null,
 ) : SdkResource()

@@ -4,13 +4,16 @@
 package dev.octri.showcase.digitalocean.models
 
 /**
- * Echoes the `source` filter when the request was filtered by source. Omitted when the list was not filtered.
+ * Echoes the `source` filter when the request was filtered by source. Omitted when the list was not
+ * filtered.
  */
-class ListConsentsSourceEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListConsentsSourceEnum && value == other.value
+class ListConsentsSourceEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListConsentsSourceEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -18,38 +21,44 @@ class ListConsentsSourceEnum private constructor(
         @JvmField val AGENT = ListConsentsSourceEnum("agent")
         @JvmField val INFERENCE = ListConsentsSourceEnum("inference")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListConsentsSourceEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ListConsentsSourceEnum(value)
     }
 }
 
-/**
- * The object type, which is always "list".
- */
-class ListModelsResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListModelsResponseObjectEnum && value == other.value
+/** The object type, which is always "list". */
+class ListModelsResponseObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListModelsResponseObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = ListModelsResponseObjectEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListModelsResponseObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ListModelsResponseObjectEnum(value)
     }
 }
 
-/**
- * This field has been deprecated. You can no longer specify an algorithm for load balancers.
- */
-class LoadBalancerBaseAlgorithmEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseAlgorithmEnum && value == other.value
+/** This field has been deprecated. You can no longer specify an algorithm for load balancers. */
+class LoadBalancerBaseAlgorithmEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseAlgorithmEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -57,19 +66,26 @@ class LoadBalancerBaseAlgorithmEnum private constructor(
         @JvmField val ROUND_ROBIN = LoadBalancerBaseAlgorithmEnum("round_robin")
         @JvmField val LEAST_CONNECTIONS = LoadBalancerBaseAlgorithmEnum("least_connections")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseAlgorithmEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseAlgorithmEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+ * A string indicating whether the load balancer should be external or internal. Internal load
+ * balancers have no public IPs and are only accessible to resources on the same VPC network. This
+ * property cannot be updated after creating the load balancer.
  */
-class LoadBalancerBaseNetworkEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseNetworkEnum && value == other.value
+class LoadBalancerBaseNetworkEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseNetworkEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -77,19 +93,25 @@ class LoadBalancerBaseNetworkEnum private constructor(
         @JvmField val EXTERNAL = LoadBalancerBaseNetworkEnum("EXTERNAL")
         @JvmField val INTERNAL = LoadBalancerBaseNetworkEnum("INTERNAL")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseNetworkEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseNetworkEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+ * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking.
+ * This property cannot be updated after creating the load balancer.
  */
-class LoadBalancerBaseNetworkStackEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseNetworkStackEnum && value == other.value
+class LoadBalancerBaseNetworkStackEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseNetworkStackEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -97,19 +119,28 @@ class LoadBalancerBaseNetworkStackEnum private constructor(
         @JvmField val IPV4 = LoadBalancerBaseNetworkStackEnum("IPV4")
         @JvmField val DUALSTACK = LoadBalancerBaseNetworkStackEnum("DUALSTACK")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseNetworkStackEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseNetworkStackEnum(value)
     }
 }
 
 /**
- * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+ * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and
+ * SFO1. Each available load balancer size now equates to the load balancer having a set number of
+ * nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load
+ * balancers after creation up to once per hour. You cannot resize a load balancer within the first
+ * hour of its creation.
  */
-class LoadBalancerBaseSizeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseSizeEnum && value == other.value
+class LoadBalancerBaseSizeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseSizeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -118,19 +149,25 @@ class LoadBalancerBaseSizeEnum private constructor(
         @JvmField val LB_MEDIUM = LoadBalancerBaseSizeEnum("lb-medium")
         @JvmField val LB_LARGE = LoadBalancerBaseSizeEnum("lb-large")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseSizeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseSizeEnum(value)
     }
 }
 
 /**
- * A status string indicating the current state of the load balancer. This can be `new`, `active`, or `errored`.
+ * A status string indicating the current state of the load balancer. This can be `new`, `active`,
+ * or `errored`.
  */
-class LoadBalancerBaseStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseStatusEnum && value == other.value
+class LoadBalancerBaseStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -139,19 +176,25 @@ class LoadBalancerBaseStatusEnum private constructor(
         @JvmField val ACTIVE = LoadBalancerBaseStatusEnum("active")
         @JvmField val ERRORED = LoadBalancerBaseStatusEnum("errored")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseStatusEnum(value)
     }
 }
 
 /**
- * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+ * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible
+ * values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
  */
-class LoadBalancerBaseTlsCipherPolicyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseTlsCipherPolicyEnum && value == other.value
+class LoadBalancerBaseTlsCipherPolicyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseTlsCipherPolicyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -159,19 +202,26 @@ class LoadBalancerBaseTlsCipherPolicyEnum private constructor(
         @JvmField val DEFAULT = LoadBalancerBaseTlsCipherPolicyEnum("DEFAULT")
         @JvmField val STRONG = LoadBalancerBaseTlsCipherPolicyEnum("STRONG")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseTlsCipherPolicyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseTlsCipherPolicyEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+ * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a
+ * regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global
+ * load balancer.
  */
-class LoadBalancerBaseTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseTypeEnum && value == other.value
+class LoadBalancerBaseTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -180,19 +230,22 @@ class LoadBalancerBaseTypeEnum private constructor(
         @JvmField val REGIONAL_NETWORK = LoadBalancerBaseTypeEnum("REGIONAL_NETWORK")
         @JvmField val GLOBAL = LoadBalancerBaseTypeEnum("GLOBAL")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseTypeEnum(value)
     }
 }
 
-/**
- * This field has been deprecated. You can no longer specify an algorithm for load balancers.
- */
-class LoadBalancerBaseRequestAlgorithmEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestAlgorithmEnum && value == other.value
+/** This field has been deprecated. You can no longer specify an algorithm for load balancers. */
+class LoadBalancerBaseRequestAlgorithmEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestAlgorithmEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -200,19 +253,26 @@ class LoadBalancerBaseRequestAlgorithmEnum private constructor(
         @JvmField val ROUND_ROBIN = LoadBalancerBaseRequestAlgorithmEnum("round_robin")
         @JvmField val LEAST_CONNECTIONS = LoadBalancerBaseRequestAlgorithmEnum("least_connections")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestAlgorithmEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestAlgorithmEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer should be external or internal. Internal load balancers have no public IPs and are only accessible to resources on the same VPC network. This property cannot be updated after creating the load balancer.
+ * A string indicating whether the load balancer should be external or internal. Internal load
+ * balancers have no public IPs and are only accessible to resources on the same VPC network. This
+ * property cannot be updated after creating the load balancer.
  */
-class LoadBalancerBaseRequestNetworkEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestNetworkEnum && value == other.value
+class LoadBalancerBaseRequestNetworkEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestNetworkEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -220,19 +280,25 @@ class LoadBalancerBaseRequestNetworkEnum private constructor(
         @JvmField val EXTERNAL = LoadBalancerBaseRequestNetworkEnum("EXTERNAL")
         @JvmField val INTERNAL = LoadBalancerBaseRequestNetworkEnum("INTERNAL")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestNetworkEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestNetworkEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking. This property cannot be updated after creating the load balancer.
+ * A string indicating whether the load balancer will support IPv4 or both IPv4 and IPv6 networking.
+ * This property cannot be updated after creating the load balancer.
  */
-class LoadBalancerBaseRequestNetworkStackEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestNetworkStackEnum && value == other.value
+class LoadBalancerBaseRequestNetworkStackEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestNetworkStackEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -240,19 +306,28 @@ class LoadBalancerBaseRequestNetworkStackEnum private constructor(
         @JvmField val IPV4 = LoadBalancerBaseRequestNetworkStackEnum("IPV4")
         @JvmField val DUALSTACK = LoadBalancerBaseRequestNetworkStackEnum("DUALSTACK")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestNetworkStackEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestNetworkStackEnum(value)
     }
 }
 
 /**
- * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and SFO1. Each available load balancer size now equates to the load balancer having a set number of nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load balancers after creation up to once per hour. You cannot resize a load balancer within the first hour of its creation.
+ * This field has been replaced by the `size_unit` field for all regions except in AMS2, NYC2, and
+ * SFO1. Each available load balancer size now equates to the load balancer having a set number of
+ * nodes. * `lb-small` = 1 node * `lb-medium` = 3 nodes * `lb-large` = 6 nodes You can resize load
+ * balancers after creation up to once per hour. You cannot resize a load balancer within the first
+ * hour of its creation.
  */
-class LoadBalancerBaseRequestSizeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestSizeEnum && value == other.value
+class LoadBalancerBaseRequestSizeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestSizeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -261,19 +336,25 @@ class LoadBalancerBaseRequestSizeEnum private constructor(
         @JvmField val LB_MEDIUM = LoadBalancerBaseRequestSizeEnum("lb-medium")
         @JvmField val LB_LARGE = LoadBalancerBaseRequestSizeEnum("lb-large")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestSizeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestSizeEnum(value)
     }
 }
 
 /**
- * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
+ * A string indicating the policy for the TLS cipher suites used by the load balancer. The possible
+ * values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
  */
-class LoadBalancerBaseRequestTlsCipherPolicyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestTlsCipherPolicyEnum && value == other.value
+class LoadBalancerBaseRequestTlsCipherPolicyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestTlsCipherPolicyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -281,19 +362,26 @@ class LoadBalancerBaseRequestTlsCipherPolicyEnum private constructor(
         @JvmField val DEFAULT = LoadBalancerBaseRequestTlsCipherPolicyEnum("DEFAULT")
         @JvmField val STRONG = LoadBalancerBaseRequestTlsCipherPolicyEnum("STRONG")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestTlsCipherPolicyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestTlsCipherPolicyEnum(value)
     }
 }
 
 /**
- * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global load balancer.
+ * A string indicating whether the load balancer should be a standard regional HTTP load balancer, a
+ * regional network load balancer that routes traffic at the TCP/UDP transport layer, or a global
+ * load balancer.
  */
-class LoadBalancerBaseRequestTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LoadBalancerBaseRequestTypeEnum && value == other.value
+class LoadBalancerBaseRequestTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LoadBalancerBaseRequestTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -302,19 +390,25 @@ class LoadBalancerBaseRequestTypeEnum private constructor(
         @JvmField val REGIONAL_NETWORK = LoadBalancerBaseRequestTypeEnum("REGIONAL_NETWORK")
         @JvmField val GLOBAL = LoadBalancerBaseRequestTypeEnum("GLOBAL")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LoadBalancerBaseRequestTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LoadBalancerBaseRequestTypeEnum(value)
     }
 }
 
 /**
- * The attribute scope to resolve the field against. Omit to let the server apply its default mapping for the field name.
+ * The attribute scope to resolve the field against. Omit to let the server apply its default
+ * mapping for the field name.
  */
-class LogsFieldRefScopeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsFieldRefScopeEnum && value == other.value
+class LogsFieldRefScopeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsFieldRefScopeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -322,19 +416,22 @@ class LogsFieldRefScopeEnum private constructor(
         @JvmField val FIELD_SCOPE_RESOURCE = LogsFieldRefScopeEnum("FIELD_SCOPE_RESOURCE")
         @JvmField val FIELD_SCOPE_ATTRIBUTES = LogsFieldRefScopeEnum("FIELD_SCOPE_ATTRIBUTES")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsFieldRefScopeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsFieldRefScopeEnum(value)
     }
 }
 
-/**
- * The comparison operator.
- */
-class LogsFilterConditionOperatorEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsFilterConditionOperatorEnum && value == other.value
+/** The comparison operator. */
+class LogsFilterConditionOperatorEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsFilterConditionOperatorEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -342,23 +439,32 @@ class LogsFilterConditionOperatorEnum private constructor(
         @JvmField val FILTER_OPERATOR_EQ = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_EQ")
         @JvmField val FILTER_OPERATOR_NEQ = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_NEQ")
         @JvmField val FILTER_OPERATOR_IN = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_IN")
-        @JvmField val FILTER_OPERATOR_EXISTS = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_EXISTS")
+        @JvmField
+        val FILTER_OPERATOR_EXISTS = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_EXISTS")
         @JvmField val FILTER_OPERATOR_GTE = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_GTE")
         @JvmField val FILTER_OPERATOR_LTE = LogsFilterConditionOperatorEnum("FILTER_OPERATOR_LTE")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsFilterConditionOperatorEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsFilterConditionOperatorEnum(value)
     }
 }
 
 /**
- * Type of logsink integration. - Use `datadog` for Datadog integration **only with MongoDB clusters**. - For non-MongoDB clusters, use `rsyslog` for general syslog forwarding. - Other supported types include `elasticsearch` and `opensearch`. More details about the configuration can be found in the `config` property.
+ * Type of logsink integration. - Use `datadog` for Datadog integration **only with MongoDB
+ * clusters**. - For non-MongoDB clusters, use `rsyslog` for general syslog forwarding. - Other
+ * supported types include `elasticsearch` and `opensearch`. More details about the configuration
+ * can be found in the `config` property.
  */
-class LogsinkBaseSinkTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsinkBaseSinkTypeEnum && value == other.value
+class LogsinkBaseSinkTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsinkBaseSinkTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -368,19 +474,22 @@ class LogsinkBaseSinkTypeEnum private constructor(
         @JvmField val OPENSEARCH = LogsinkBaseSinkTypeEnum("opensearch")
         @JvmField val DATADOG = LogsinkBaseSinkTypeEnum("datadog")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsinkBaseSinkTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsinkBaseSinkTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `sink_type` wire field.
- */
-class LogsinkBaseVerboseSinkTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsinkBaseVerboseSinkTypeEnum && value == other.value
+/** Optional enumerated value serialized in the `sink_type` wire field. */
+class LogsinkBaseVerboseSinkTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsinkBaseVerboseSinkTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -389,19 +498,22 @@ class LogsinkBaseVerboseSinkTypeEnum private constructor(
         @JvmField val ELASTICSEARCH = LogsinkBaseVerboseSinkTypeEnum("elasticsearch")
         @JvmField val OPENSEARCH = LogsinkBaseVerboseSinkTypeEnum("opensearch")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsinkBaseVerboseSinkTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsinkBaseVerboseSinkTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `sink_type` wire field.
- */
-class LogsinkSchemaSinkTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsinkSchemaSinkTypeEnum && value == other.value
+/** Optional enumerated value serialized in the `sink_type` wire field. */
+class LogsinkSchemaSinkTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsinkSchemaSinkTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -410,19 +522,22 @@ class LogsinkSchemaSinkTypeEnum private constructor(
         @JvmField val ELASTICSEARCH = LogsinkSchemaSinkTypeEnum("elasticsearch")
         @JvmField val OPENSEARCH = LogsinkSchemaSinkTypeEnum("opensearch")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsinkSchemaSinkTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsinkSchemaSinkTypeEnum(value)
     }
 }
 
-/**
- * The sort direction. Omit to use the server default.
- */
-class LogsOrderByDirectionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LogsOrderByDirectionEnum && value == other.value
+/** The sort direction. Omit to use the server default. */
+class LogsOrderByDirectionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LogsOrderByDirectionEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -430,19 +545,25 @@ class LogsOrderByDirectionEnum private constructor(
         @JvmField val SORT_DIRECTION_ASC = LogsOrderByDirectionEnum("SORT_DIRECTION_ASC")
         @JvmField val SORT_DIRECTION_DESC = LogsOrderByDirectionEnum("SORT_DIRECTION_DESC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LogsOrderByDirectionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LogsOrderByDirectionEnum(value)
     }
 }
 
 /**
- * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+ * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to
+ * indicate an arbitrary week day.
  */
-class MaintenancePolicyDayEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MaintenancePolicyDayEnum && value == other.value
+class MaintenancePolicyDayEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MaintenancePolicyDayEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -456,19 +577,25 @@ class MaintenancePolicyDayEnum private constructor(
         @JvmField val SATURDAY = MaintenancePolicyDayEnum("saturday")
         @JvmField val SUNDAY = MaintenancePolicyDayEnum("sunday")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MaintenancePolicyDayEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MaintenancePolicyDayEnum(value)
     }
 }
 
 /**
- * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to indicate an arbitrary week day.
+ * The day of the maintenance window policy. May be one of `monday` through `sunday`, or `any` to
+ * indicate an arbitrary week day.
  */
-class MaintenancePolicyRequestDayEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MaintenancePolicyRequestDayEnum && value == other.value
+class MaintenancePolicyRequestDayEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MaintenancePolicyRequestDayEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -482,19 +609,25 @@ class MaintenancePolicyRequestDayEnum private constructor(
         @JvmField val SATURDAY = MaintenancePolicyRequestDayEnum("saturday")
         @JvmField val SUNDAY = MaintenancePolicyRequestDayEnum("sunday")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MaintenancePolicyRequestDayEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MaintenancePolicyRequestDayEnum(value)
     }
 }
 
 /**
- * How requests to the server authenticate: none, secret (a key or token sent in the Authorization header), or connection (each user's own OAuth authorization).
+ * How requests to the server authenticate: none, secret (a key or token sent in the Authorization
+ * header), or connection (each user's own OAuth authorization).
  */
-class McpServerCredentialRefSourceEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpServerCredentialRefSourceEnum && value == other.value
+class McpServerCredentialRefSourceEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpServerCredentialRefSourceEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -503,19 +636,25 @@ class McpServerCredentialRefSourceEnum private constructor(
         @JvmField val SECRET = McpServerCredentialRefSourceEnum("secret")
         @JvmField val CONNECTION = McpServerCredentialRefSourceEnum("connection")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpServerCredentialRefSourceEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpServerCredentialRefSourceEnum(value)
     }
 }
 
 /**
- * Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or `unsupported_protocol`. It is not reset while a resync runs.
+ * Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or
+ * `unsupported_protocol`. It is not reset while a resync runs.
  */
-class McpServerSyncStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpServerSyncStatusEnum && value == other.value
+class McpServerSyncStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpServerSyncStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -525,38 +664,48 @@ class McpServerSyncStatusEnum private constructor(
         @JvmField val FAILED = McpServerSyncStatusEnum("failed")
         @JvmField val UNSUPPORTED_PROTOCOL = McpServerSyncStatusEnum("unsupported_protocol")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpServerSyncStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpServerSyncStatusEnum(value)
     }
 }
 
-/**
- * Always `streamable_http`.
- */
-class McpServerTransportEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpServerTransportEnum && value == other.value
+/** Always `streamable_http`. */
+class McpServerTransportEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpServerTransportEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val STREAMABLE_HTTP = McpServerTransportEnum("streamable_http")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpServerTransportEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpServerTransportEnum(value)
     }
 }
 
 /**
- * How requests to the server authenticate: none (the default), secret, or connection. With secret, the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer " unless it already contains a space.
+ * How requests to the server authenticate: none (the default), secret, or connection. With secret,
+ * the value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with
+ * "Bearer " unless it already contains a space.
  */
-class McpServerCreateCredentialRefSourceEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpServerCreateCredentialRefSourceEnum && value == other.value
+class McpServerCreateCredentialRefSourceEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpServerCreateCredentialRefSourceEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -565,26 +714,32 @@ class McpServerCreateCredentialRefSourceEnum private constructor(
         @JvmField val SECRET = McpServerCreateCredentialRefSourceEnum("secret")
         @JvmField val CONNECTION = McpServerCreateCredentialRefSourceEnum("connection")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpServerCreateCredentialRefSourceEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpServerCreateCredentialRefSourceEnum(value)
     }
 }
 
-/**
- * Optional. `streamable_http`, the default and only accepted value.
- */
-class McpServerCreateTransportEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpServerCreateTransportEnum && value == other.value
+/** Optional. `streamable_http`, the default and only accepted value. */
+class McpServerCreateTransportEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpServerCreateTransportEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val STREAMABLE_HTTP = McpServerCreateTransportEnum("streamable_http")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpServerCreateTransportEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpServerCreateTransportEnum(value)
     }
 }

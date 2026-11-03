@@ -3,26 +3,47 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class SizesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To list all of available Droplet sizes, send a GET request to `/v2/sizes`. The response will be a JSON object with a key called `sizes`. The value of this will be an array of `size` objects each of which contain the standard size attributes.
+     * To list all of available Droplet sizes, send a GET request to `/v2/sizes`. The response will
+     * be a JSON object with a key called `sizes`. The value of this will be an array of `size`
+     * objects each of which contain the standard size attributes.
      */
     fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllSizes {
-        return dev.octri.showcase.digitalocean.methods.Sizes.sizesList(clientConfig, perPage, page, options)
+        return dev.octri.showcase.digitalocean.methods.Sizes.sizesList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [SizesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [SizesNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * To list all of available Droplet sizes, send a GET request to `/v2/sizes`. The response will be a JSON object with a key called `sizes`. The value of this will be an array of `size` objects each of which contain the standard size attributes.
+         * To list all of available Droplet sizes, send a GET request to `/v2/sizes`. The response
+         * will be a JSON object with a key called `sizes`. The value of this will be an array of
+         * `size` objects each of which contain the standard size attributes.
          */
-        fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<AllSizes> {
-            return dev.octri.showcase.digitalocean.methods.Sizes.sizesListWithRawResponse(clientConfig, perPage, page, options)
+        fun list(
+            perPage: Long? = null,
+            page: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<AllSizes> {
+            return dev.octri.showcase.digitalocean.methods.Sizes.sizesListWithRawResponse(
+                clientConfig,
+                perPage,
+                page,
+                options,
+            )
         }
-
     }
 }

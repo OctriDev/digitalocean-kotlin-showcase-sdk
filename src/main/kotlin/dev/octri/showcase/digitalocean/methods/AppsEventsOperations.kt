@@ -25,63 +25,174 @@ internal object AppsListEventsOperation {
      * @param perPage Number of items returned per page
      * @param eventTypes Filter events by event type.
      */
-    fun appsListEvents(clientConfig: ClientConfig, appId: String, page: Long? = null, perPage: Long? = null, eventTypes: List<AppsListEventsParameterItemEnum>? = null, options: RequestOptions? = null): AppEvents {
-        return appsListEventsWithRawResponse(clientConfig, appId, page, perPage, eventTypes, options).data
+    fun appsListEvents(
+        clientConfig: ClientConfig,
+        appId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        eventTypes: List<AppsListEventsParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): AppEvents {
+        return appsListEventsWithRawResponse(
+                clientConfig,
+                appId,
+                page,
+                perPage,
+                eventTypes,
+                options,
+            )
+            .data
     }
 
-
-    /** [appsListEvents], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsListEventsWithRawResponse(clientConfig: ClientConfig, appId: String, page: Long? = null, perPage: Long? = null, eventTypes: List<AppsListEventsParameterItemEnum>? = null, options: RequestOptions? = null): SdkResponse<AppEvents> {
+    /**
+     * [appsListEvents], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun appsListEventsWithRawResponse(
+        clientConfig: ClientConfig,
+        appId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        eventTypes: List<AppsListEventsParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AppEvents> {
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
-        return SdkClient.request<AppEvents>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/events", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "event_types" to
-    SdkClient.queryValue(eventTypes, "form", true)), operationId = "appsListEvents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<AppEvents>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/apps/${SdkClient.encodePathSegment(appId)}/events",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "event_types" to SdkClient.queryValue(eventTypes, "form", true),
+                    ),
+                operationId = "appsListEvents",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AppsGetEventOperation {
     /**
-     * Retrieves a single event for a specified app. Use `app_id` and `event_id` to identify the event whose details you need.
+     * Retrieves a single event for a specified app. Use `app_id` and `event_id` to identify the
+     * event whose details you need.
      *
      * Get a single event for an app.
      *
      * @param appId The app ID
      * @param eventId The event ID
      */
-    fun appsGetEvent(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): GetEvent {
+    fun appsGetEvent(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): GetEvent {
         return appsGetEventWithRawResponse(clientConfig, appId, eventId, options).data
     }
 
-
-    /** [appsGetEvent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsGetEventWithRawResponse(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): SdkResponse<GetEvent> {
-        return SdkClient.request<GetEvent>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}", config = clientConfig, operationId = "appsGetEvent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsGetEvent], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun appsGetEventWithRawResponse(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetEvent> {
+        return SdkClient.request<GetEvent>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}",
+                config = clientConfig,
+                operationId = "appsGetEvent",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AppsCancelEventOperation {
     /**
-     * Cancels an in-progress autoscaling event for a specified app. Use `app_id` and `event_id` to identify the event to cancel. The response includes the event details after the cancellation request.
+     * Cancels an in-progress autoscaling event for a specified app. Use `app_id` and `event_id` to
+     * identify the event to cancel. The response includes the event details after the cancellation
+     * request.
      *
      * Cancel an in-progress autoscaling event.
      *
      * @param appId The app ID
      * @param eventId The event ID
      */
-    fun appsCancelEvent(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): CancelEvent {
+    fun appsCancelEvent(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): CancelEvent {
         return appsCancelEventWithRawResponse(clientConfig, appId, eventId, options).data
     }
 
-
-    /** [appsCancelEvent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsCancelEventWithRawResponse(clientConfig: ClientConfig, appId: String, eventId: String, options: RequestOptions? = null): SdkResponse<CancelEvent> {
-        return SdkClient.request<CancelEvent>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}/cancel", config = clientConfig, operationId = "appsCancelEvent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsCancelEvent], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun appsCancelEventWithRawResponse(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<CancelEvent> {
+        return SdkClient.request<CancelEvent>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}/cancel",
+                config = clientConfig,
+                operationId = "appsCancelEvent",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -91,22 +202,71 @@ internal object AppsGetEventLogsOperation {
      *
      * @param appId The app ID
      * @param eventId The event ID
-     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY:
-     *   Deploy-time logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of
-     *   crashed/restarted instances during runtime - AUTOSCALE_EVENT: Logs of an
-     *   autoscaling event (requires event_id)
+     * @param type The type of logs to retrieve - BUILD: Build-time logs - DEPLOY: Deploy-time
+     *   logs - RUN: Live run-time logs - RUN_RESTARTED: Logs of crashed/restarted instances during
+     *   runtime - AUTOSCALE_EVENT: Logs of an autoscaling event (requires event_id)
      * @param follow Whether the logs should follow live updates.
-     * @param podConnectionTimeout An optional time duration to wait if the
-     *   underlying component instance is not immediately available. Default: `3m`.
+     * @param podConnectionTimeout An optional time duration to wait if the underlying component
+     *   instance is not immediately available. Default: `3m`.
      */
-    fun appsGetEventLogs(clientConfig: ClientConfig, appId: String, eventId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): AppsGetLogsResponse {
-        return appsGetEventLogsWithRawResponse(clientConfig, appId, eventId, type, follow, podConnectionTimeout, options).data
+    fun appsGetEventLogs(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): AppsGetLogsResponse {
+        return appsGetEventLogsWithRawResponse(
+                clientConfig,
+                appId,
+                eventId,
+                type,
+                follow,
+                podConnectionTimeout,
+                options,
+            )
+            .data
     }
 
-
-    /** [appsGetEventLogs], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsGetEventLogsWithRawResponse(clientConfig: ClientConfig, appId: String, eventId: String, type: SchemaSchemaEnum2ebc6d5a, follow: Boolean? = null, podConnectionTimeout: String? = null, options: RequestOptions? = null): SdkResponse<AppsGetLogsResponse> {
-        return SdkClient.request<AppsGetLogsResponse>(SdkClient.RequestSpec("GET", "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}/logs", config = clientConfig, query = mapOf("type" to SdkClient.queryValue(type, "form", true), "follow" to SdkClient.queryValue(follow, "form", true), "pod_connection_timeout" to
-    SdkClient.queryValue(podConnectionTimeout, "form", true)), operationId = "appsGetEventLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsGetEventLogs], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun appsGetEventLogsWithRawResponse(
+        clientConfig: ClientConfig,
+        appId: String,
+        eventId: String,
+        type: SchemaSchemaEnum2ebc6d5a,
+        follow: Boolean? = null,
+        podConnectionTimeout: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AppsGetLogsResponse> {
+        return SdkClient.request<AppsGetLogsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/apps/${SdkClient.encodePathSegment(appId)}/events/${SdkClient.encodePathSegment(eventId)}/logs",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "type" to SdkClient.queryValue(type, "form", true),
+                        "follow" to SdkClient.queryValue(follow, "form", true),
+                        "pod_connection_timeout" to
+                            SdkClient.queryValue(podConnectionTimeout, "form", true),
+                    ),
+                operationId = "appsGetEventLogs",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

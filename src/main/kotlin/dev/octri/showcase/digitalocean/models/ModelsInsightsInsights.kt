@@ -5,38 +5,23 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `InsightsListAlertRulesResponse` API schema.
- */
+/** Typed representation of the `InsightsListAlertRulesResponse` API schema. */
 data class InsightsListAlertRulesResponse(
-    /**
-     * Required array value serialized in the `alert_rules` wire field.
-     */
+    /** Required array value serialized in the `alert_rules` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("alert_rules") val alertRules: List<AlertRule>,
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 ) : SdkResource()
 
-/**
- * Typed representation of the `InsightsListNotificationChannelsResponse` API schema.
- */
+/** Typed representation of the `InsightsListNotificationChannelsResponse` API schema. */
 data class InsightsListNotificationChannelsResponse(
-    /**
-     * Required array value serialized in the `notification_channels` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channels") val notificationChannels: List<NotificationChannel>,
-    /**
-     * Required API value serialized in the `meta` wire field.
-     */
+    /** Required array value serialized in the `notification_channels` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channels")
+    val notificationChannels: List<NotificationChannel>,
+    /** Required API value serialized in the `meta` wire field. */
     val meta: MetaMeta,
-    /**
-     * Optional object value serialized in the `links` wire field.
-     */
-    val links: PageLinks? = null
+    /** Optional object value serialized in the `links` wire field. */
+    val links: PageLinks? = null,
 ) : SdkResource()

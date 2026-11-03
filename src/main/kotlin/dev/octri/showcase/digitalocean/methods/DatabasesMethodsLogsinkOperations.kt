@@ -7,9 +7,9 @@ import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.DatabasesCreateLogsinkSinkTypeEnum
 import dev.octri.showcase.digitalocean.Error2
 import dev.octri.showcase.digitalocean.Logsink
-import dev.octri.showcase.digitalocean.Logsinks
 import dev.octri.showcase.digitalocean.LogsinkSchema
 import dev.octri.showcase.digitalocean.LogsinkUpdateConfig
+import dev.octri.showcase.digitalocean.Logsinks
 import dev.octri.showcase.digitalocean.RequestOptions
 import dev.octri.showcase.digitalocean.SdkClient
 import dev.octri.showcase.digitalocean.SdkResponse
@@ -17,109 +17,300 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesListLogsinkOperation {
     /**
-     * To list logsinks for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/logsink`.
+     * To list logsinks for a database cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/logsink`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesListLogsink(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Logsinks {
+    fun databasesListLogsink(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): Logsinks {
         return databasesListLogsinkWithRawResponse(clientConfig, databaseClusterUuid, options).data
     }
 
-
-    /** [databasesListLogsink], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesListLogsinkWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): SdkResponse<Logsinks> {
+    /**
+     * [databasesListLogsink], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun databasesListLogsinkWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Logsinks> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Logsinks>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink", config = clientConfig, operationId = "databasesListLogsink", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Logsinks>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink",
+                config = clientConfig,
+                operationId = "databasesListLogsink",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesCreateLogsinkOperation {
     /**
-     * Creates a logsink for a database cluster to configure log delivery to an external destination. Provide `sink_name`, `sink_type`, and `config` to specify the logsink and its destination settings. A 201 response returns the created logsink.
+     * Creates a logsink for a database cluster to configure log delivery to an external
+     * destination. Provide `sink_name`, `sink_type`, and `config` to specify the logsink and its
+     * destination settings. A 201 response returns the created logsink.
      *
-     * To create logsink for a database cluster, send a POST request to `/v2/databases/$DATABASE_ID/logsink`.
+     * To create logsink for a database cluster, send a POST request to
+     * `/v2/databases/$DATABASE_ID/logsink`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param sinkName The name of the Logsink
-     * @param sinkType Type of logsink integration. - Use `datadog` for Datadog
-     *   integration **only with MongoDB clusters**. - For non-MongoDB clusters, use
-     *   `rsyslog` for general syslog forwarding. - Other supported types include
-     *   `elasticsearch` and `opensearch`. More details about the configuration can be
-     *   found in the `config` property.
+     * @param sinkType Type of logsink integration. - Use `datadog` for Datadog integration **only
+     *   with MongoDB clusters**. - For non-MongoDB clusters, use `rsyslog` for general syslog
+     *   forwarding. - Other supported types include `elasticsearch` and `opensearch`. More details
+     *   about the configuration can be found in the `config` property.
      */
-    fun databasesCreateLogsink(clientConfig: ClientConfig, databaseClusterUuid: String, sinkName: String, sinkType: DatabasesCreateLogsinkSinkTypeEnum, config: Any, options: RequestOptions? = null): Logsink {
-        return databasesCreateLogsinkWithRawResponse(clientConfig, databaseClusterUuid, sinkName, sinkType, config, options).data
+    fun databasesCreateLogsink(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        sinkName: String,
+        sinkType: DatabasesCreateLogsinkSinkTypeEnum,
+        config: Any,
+        options: RequestOptions? = null,
+    ): Logsink {
+        return databasesCreateLogsinkWithRawResponse(
+                clientConfig,
+                databaseClusterUuid,
+                sinkName,
+                sinkType,
+                config,
+                options,
+            )
+            .data
     }
 
-
-    /** [databasesCreateLogsink], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesCreateLogsinkWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, sinkName: String, sinkType: DatabasesCreateLogsinkSinkTypeEnum, config: Any, options: RequestOptions? = null): SdkResponse<Logsink> {
+    /**
+     * [databasesCreateLogsink], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun databasesCreateLogsinkWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        sinkName: String,
+        sinkType: DatabasesCreateLogsinkSinkTypeEnum,
+        config: Any,
+        options: RequestOptions? = null,
+    ): SdkResponse<Logsink> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Logsink>(SdkClient.RequestSpec("POST", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink", config = clientConfig, body = SdkClient.bodyMap("sink_name" to (sinkName), "sink_type" to (sinkType), "config" to (config)), operationId = "databasesCreateLogsink", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Logsink>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "sink_name" to (sinkName),
+                        "sink_type" to (sinkType),
+                        "config" to (config),
+                    ),
+                operationId = "databasesCreateLogsink",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesGetLogsinkOperation {
     /**
-     * To get a logsink for a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To get a logsink for a database cluster, send a GET request to
+     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param logsinkId A unique identifier for a logsink of a database cluster
      */
-    fun databasesGetLogsink(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): LogsinkSchema {
-        return databasesGetLogsinkWithRawResponse(clientConfig, databaseClusterUuid, logsinkId, options).data
+    fun databasesGetLogsink(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        options: RequestOptions? = null,
+    ): LogsinkSchema {
+        return databasesGetLogsinkWithRawResponse(
+                clientConfig,
+                databaseClusterUuid,
+                logsinkId,
+                options,
+            )
+            .data
     }
 
-
-    /** [databasesGetLogsink], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesGetLogsinkWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): SdkResponse<LogsinkSchema> {
+    /**
+     * [databasesGetLogsink], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun databasesGetLogsinkWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<LogsinkSchema> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<LogsinkSchema>(SdkClient.RequestSpec("GET", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}", config = clientConfig, operationId = "databasesGetLogsink", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<LogsinkSchema>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}",
+                config = clientConfig,
+                operationId = "databasesGetLogsink",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesUpdateLogsinkOperation {
     /**
-     * Replaces the configuration for a logsink attached to a database cluster. Provide the cluster UUID and logsink ID in the path, and submit a `config` object matching the selected sink type. A 200 response confirms the update and has an empty body.
+     * Replaces the configuration for a logsink attached to a database cluster. Provide the cluster
+     * UUID and logsink ID in the path, and submit a `config` object matching the selected sink
+     * type. A 200 response confirms the update and has an empty body.
      *
-     * To update a logsink for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To update a logsink for a database cluster, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param logsinkId A unique identifier for a logsink of a database cluster
      * @param config Required API value serialized in the `config` wire field.
      */
-    fun databasesUpdateLogsink(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, config: LogsinkUpdateConfig, options: RequestOptions? = null): Unit {
-        return databasesUpdateLogsinkWithRawResponse(clientConfig, databaseClusterUuid, logsinkId, config, options).data
+    fun databasesUpdateLogsink(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        config: LogsinkUpdateConfig,
+        options: RequestOptions? = null,
+    ): Unit {
+        return databasesUpdateLogsinkWithRawResponse(
+                clientConfig,
+                databaseClusterUuid,
+                logsinkId,
+                config,
+                options,
+            )
+            .data
     }
 
-
-    /** [databasesUpdateLogsink], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesUpdateLogsinkWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, config: LogsinkUpdateConfig, options: RequestOptions? = null): SdkResponse<Unit> {
+    /**
+     * [databasesUpdateLogsink], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun databasesUpdateLogsinkWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        config: LogsinkUpdateConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}", config = clientConfig, body = SdkClient.bodyMap("config" to (config)), operationId = "databasesUpdateLogsink", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("config" to (config)),
+                operationId = "databasesUpdateLogsink",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object DatabasesMethodsDatabasesDeleteLogsinkOperation {
     /**
-     * To delete a logsink for a database cluster, send a DELETE request to `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
+     * To delete a logsink for a database cluster, send a DELETE request to
+     * `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      * @param logsinkId A unique identifier for a logsink of a database cluster
      */
-    fun databasesDeleteLogsink(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): Unit {
-        return databasesDeleteLogsinkWithRawResponse(clientConfig, databaseClusterUuid, logsinkId, options).data
+    fun databasesDeleteLogsink(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        return databasesDeleteLogsinkWithRawResponse(
+                clientConfig,
+                databaseClusterUuid,
+                logsinkId,
+                options,
+            )
+            .data
     }
 
-
-    /** [databasesDeleteLogsink], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesDeleteLogsinkWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, logsinkId: String, options: RequestOptions? = null): SdkResponse<Unit> {
+    /**
+     * [databasesDeleteLogsink], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun databasesDeleteLogsinkWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        logsinkId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}", config = clientConfig, operationId = "databasesDeleteLogsink", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/logsink/${SdkClient.encodePathSegment(logsinkId)}",
+                config = clientConfig,
+                operationId = "databasesDeleteLogsink",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

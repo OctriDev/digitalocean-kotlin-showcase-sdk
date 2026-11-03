@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Region Codes
- */
+/** Region Codes */
 data class ApiListRegionsOutput(
-    /**
-     * Region code
-     */
+    /** Region code */
     val regions: List<GenaiapiRegion>? = null
 ) : SdkResource()

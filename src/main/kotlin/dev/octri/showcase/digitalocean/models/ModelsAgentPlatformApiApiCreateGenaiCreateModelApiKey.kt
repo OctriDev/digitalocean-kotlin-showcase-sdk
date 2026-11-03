@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiCreateModelAPIKeyInputPublic` API schema.
- */
+/** Typed representation of the `ApiCreateModelAPIKeyInputPublic` API schema. */
 data class ApiCreateModelAPIKeyInputPublic(
-    /**
-     * A human friendly name to identify the key
-     */
+    /** A human friendly name to identify the key */
     val name: String? = null
 ) : SdkResource()

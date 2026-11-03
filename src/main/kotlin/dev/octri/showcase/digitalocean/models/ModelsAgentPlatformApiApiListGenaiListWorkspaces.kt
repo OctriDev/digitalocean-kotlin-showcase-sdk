@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiListWorkspacesOutput` API schema.
- */
+/** Typed representation of the `ApiListWorkspacesOutput` API schema. */
 data class ApiListWorkspacesOutput(
-    /**
-     * Workspaces
-     */
+    /** Workspaces */
     val workspaces: List<ApiWorkspace>? = null
 ) : SdkResource()

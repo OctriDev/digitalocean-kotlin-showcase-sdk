@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Public parameters for requesting scenario set upload presigned URLs.
- */
+/** Public parameters for requesting scenario set upload presigned URLs. */
 data class ApiCreateScenarioSetUploadPresignedUrlsInputPublic(
-    /**
-     * A list of files to generate presigned URLs for.
-     */
+    /** A list of files to generate presigned URLs for. */
     val files: List<ApiPresignedUrlFile>? = null
 ) : SdkResource()

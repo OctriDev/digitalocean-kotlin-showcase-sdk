@@ -12,15 +12,40 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object ServerlessInferenceInferenceListModelsOperation {
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+     * Lists the currently available models, and provides basic information about each one such as
+     * the owner and availability.
      */
-    fun inferenceListModels(clientConfig: ClientConfig, options: RequestOptions? = null): ListModelsResponse {
+    fun inferenceListModels(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListModelsResponse {
         return inferenceListModelsWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [inferenceListModels], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun inferenceListModelsWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<ListModelsResponse> {
-        return SdkClient.request<ListModelsResponse>(SdkClient.RequestSpec("GET", "/v1/models", config = clientConfig, operationId = "inferenceListModels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [inferenceListModels], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun inferenceListModelsWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListModelsResponse> {
+        return SdkClient.request<ListModelsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v1/models",
+                config = clientConfig,
+                operationId = "inferenceListModels",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

@@ -3,68 +3,113 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class DomainsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.
+     * To retrieve a list of all of the domains in your account, send a GET request to
+     * `/v2/domains`.
      */
-    fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllDomainsResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsList(clientConfig, perPage, page, options)
+    fun list(
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllDomainsResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsList(
+            clientConfig,
+            perPage,
+            page,
+            options,
+        )
     }
 
     /**
-     * To create a new domain, send a POST request to `/v2/domains`. Set the "name" attribute to the domain name you are adding. Optionally, you may set the "ip_address" attribute, and an A record will be automatically created pointing to the apex domain.
+     * To create a new domain, send a POST request to `/v2/domains`. Set the "name" attribute to the
+     * domain name you are adding. Optionally, you may set the "ip_address" attribute, and an A
+     * record will be automatically created pointing to the apex domain.
      */
-    fun create(name: String? = null, ipAddress: String? = null, options: RequestOptions? = null): CreateDomainResponse {
-        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsCreate(clientConfig, name, ipAddress, options)
+    fun create(
+        name: String? = null,
+        ipAddress: String? = null,
+        options: RequestOptions? = null,
+    ): CreateDomainResponse {
+        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsCreate(
+            clientConfig,
+            name,
+            ipAddress,
+            options,
+        )
     }
 
-    /**
-     * To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.
-     */
+    /** To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`. */
     fun get(domainName: String, options: RequestOptions? = null): ExistingDomain {
-        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsGet(clientConfig, domainName, options)
+        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsGet(
+            clientConfig,
+            domainName,
+            options,
+        )
+    }
+
+    /** To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`. */
+    fun delete(domainName: String, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsDelete(
+            clientConfig,
+            domainName,
+            options,
+        )
     }
 
     /**
-     * To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun delete(domainName: String, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsDelete(clientConfig, domainName, options)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [DomainsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [DomainsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.
+         * To retrieve a list of all of the domains in your account, send a GET request to
+         * `/v2/domains`.
          */
-        fun list(perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<AllDomainsResponse> {
-            return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsListWithRawResponse(clientConfig, perPage, page, options)
+        fun list(
+            perPage: Long? = null,
+            page: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<AllDomainsResponse> {
+            return dev.octri.showcase.digitalocean.methods.DomainsMethods
+                .domainsListWithRawResponse(clientConfig, perPage, page, options)
         }
 
         /**
-         * To create a new domain, send a POST request to `/v2/domains`. Set the "name" attribute to the domain name you are adding. Optionally, you may set the "ip_address" attribute, and an A record will be automatically created pointing to the apex domain.
+         * To create a new domain, send a POST request to `/v2/domains`. Set the "name" attribute to
+         * the domain name you are adding. Optionally, you may set the "ip_address" attribute, and
+         * an A record will be automatically created pointing to the apex domain.
          */
-        fun create(name: String? = null, ipAddress: String? = null, options: RequestOptions? = null): SdkResponse<CreateDomainResponse> {
-            return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsCreateWithRawResponse(clientConfig, name, ipAddress, options)
+        fun create(
+            name: String? = null,
+            ipAddress: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CreateDomainResponse> {
+            return dev.octri.showcase.digitalocean.methods.DomainsMethods
+                .domainsCreateWithRawResponse(clientConfig, name, ipAddress, options)
         }
 
         /**
          * To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.
          */
         fun get(domainName: String, options: RequestOptions? = null): SdkResponse<ExistingDomain> {
-            return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsGetWithRawResponse(clientConfig, domainName, options)
+            return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsGetWithRawResponse(
+                clientConfig,
+                domainName,
+                options,
+            )
         }
 
-        /**
-         * To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.
-         */
+        /** To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`. */
         fun delete(domainName: String, options: RequestOptions? = null): SdkResponse<Unit> {
-            return dev.octri.showcase.digitalocean.methods.DomainsMethods.domainsDeleteWithRawResponse(clientConfig, domainName, options)
+            return dev.octri.showcase.digitalocean.methods.DomainsMethods
+                .domainsDeleteWithRawResponse(clientConfig, domainName, options)
         }
-
     }
 }

@@ -5,20 +5,12 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiListAgentsByWorkspaceOutput` API schema.
- */
+/** Typed representation of the `ApiListAgentsByWorkspaceOutput` API schema. */
 data class ApiListAgentsByWorkspaceOutput(
-    /**
-     * Optional array value serialized in the `agents` wire field.
-     */
+    /** Optional array value serialized in the `agents` wire field. */
     val agents: List<ApiAgent>? = null,
-    /**
-     * Links to other pages
-     */
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
-    val meta: ApiMeta? = null
+    /** Meta information about the data set */
+    val meta: ApiMeta? = null,
 ) : SdkResource()

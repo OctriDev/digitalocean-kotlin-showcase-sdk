@@ -3,26 +3,34 @@
 
 package dev.octri.showcase.digitalocean
 
-
 class AccountNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * To show information about the current user account, send a GET request to `/v2/account`.
-     */
+    /** To show information about the current user account, send a GET request to `/v2/account`. */
     fun get(options: RequestOptions? = null): AccountResponse {
-        return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGet(clientConfig, options)
+        return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGet(
+            clientConfig,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [AccountNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [AccountNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
          * To show information about the current user account, send a GET request to `/v2/account`.
          */
         fun get(options: RequestOptions? = null): SdkResponse<AccountResponse> {
-            return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGetWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.digitalocean.methods.AccountMethods.accountGetWithRawResponse(
+                clientConfig,
+                options,
+            )
         }
-
     }
 }

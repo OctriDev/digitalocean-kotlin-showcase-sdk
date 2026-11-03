@@ -11,36 +11,116 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object KubernetesAddRegistriesOperation {
     /**
-     * To integrate the container registries with Kubernetes clusters, send a POST request to `/v2/kubernetes/registries`.
+     * To integrate the container registries with Kubernetes clusters, send a POST request to
+     * `/v2/kubernetes/registries`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      * @param registries An array containing the registry names.
      */
-    fun kubernetesAddRegistries(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): Unit {
-        return kubernetesAddRegistriesWithRawResponse(clientConfig, clusterUuids, registries, options).data
+    fun kubernetesAddRegistries(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return kubernetesAddRegistriesWithRawResponse(
+                clientConfig,
+                clusterUuids,
+                registries,
+                options,
+            )
+            .data
     }
 
-
-    /** [kubernetesAddRegistries], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun kubernetesAddRegistriesWithRawResponse(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): SdkResponse<Unit> {
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/v2/kubernetes/registries", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids)), "registries" to (SdkClient.omitIfNull(registries))), operationId = "kubernetesAddRegistries", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [kubernetesAddRegistries], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun kubernetesAddRegistriesWithRawResponse(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/kubernetes/registries",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "cluster_uuids" to (SdkClient.omitIfNull(clusterUuids)),
+                        "registries" to (SdkClient.omitIfNull(registries)),
+                    ),
+                operationId = "kubernetesAddRegistries",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object KubernetesRemoveRegistriesOperation {
     /**
-     * To remove the container registries from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registries`.
+     * To remove the container registries from Kubernetes clusters, send a DELETE request to
+     * `/v2/kubernetes/registries`.
      *
      * @param clusterUuids An array containing the UUIDs of Kubernetes clusters.
      * @param registries An array containing the registry names.
      */
-    fun kubernetesRemoveRegistries(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): Unit {
-        return kubernetesRemoveRegistriesWithRawResponse(clientConfig, clusterUuids, registries, options).data
+    fun kubernetesRemoveRegistries(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return kubernetesRemoveRegistriesWithRawResponse(
+                clientConfig,
+                clusterUuids,
+                registries,
+                options,
+            )
+            .data
     }
 
-
-    /** [kubernetesRemoveRegistries], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun kubernetesRemoveRegistriesWithRawResponse(clientConfig: ClientConfig, clusterUuids: List<String>? = null, registries: List<String>? = null, options: RequestOptions? = null): SdkResponse<Unit> {
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/kubernetes/registries", config = clientConfig, body = SdkClient.bodyMap("cluster_uuids" to (SdkClient.omitIfNull(clusterUuids)), "registries" to (SdkClient.omitIfNull(registries))), operationId = "kubernetesRemoveRegistries", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [kubernetesRemoveRegistries], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun kubernetesRemoveRegistriesWithRawResponse(
+        clientConfig: ClientConfig,
+        clusterUuids: List<String>? = null,
+        registries: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/kubernetes/registries",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "cluster_uuids" to (SdkClient.omitIfNull(clusterUuids)),
+                        "registries" to (SdkClient.omitIfNull(registries)),
+                    ),
+                operationId = "kubernetesRemoveRegistries",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

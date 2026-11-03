@@ -39,113 +39,97 @@ import dev.octri.showcase.digitalocean.SystemoneResponse
 import dev.octri.showcase.digitalocean.VideoGeneration
 
 object ServerlessInference {
-/**
- * Options for streaming response. Only set this when you set stream to true.
- */
-data class ChatCompletionRequestStreamOptions(
-    /**
-     * If set, an additional chunk will be streamed before the data [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_usage") val includeUsage: Boolean? = null
-) : SdkResource()
+    /** Options for streaming response. Only set this when you set stream to true. */
+    data class ChatCompletionRequestStreamOptions(
+        /**
+         * If set, an additional chunk will be streamed before the data [DONE] message. The usage
+         * field on this chunk shows the token usage statistics for the entire request, and the
+         * choices field will always be an empty array.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("include_usage")
+        val includeUsage: Boolean? = null
+    ) : SdkResource()
 
-/**
- * Optional request metadata.
- */
-data class MessagesCreateRequestMetadata(
-    /**
-     * Opaque identifier for the end user (for example a UUID or hash). Do not include PII.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
-) : SdkResource()
+    /** Optional request metadata. */
+    data class MessagesCreateRequestMetadata(
+        /** Opaque identifier for the end user (for example a UUID or hash). Do not include PII. */
+        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
+    ) : SdkResource()
 
-/**
- * Options for streaming response. Only set this when you set stream to true.
- */
-data class CreateResponseRequestStreamOptions(
-    /**
-     * If set, an additional chunk will be streamed before the data: [DONE] message with token usage statistics for the entire request.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_usage") val includeUsage: Boolean? = null
-) : SdkResource()
+    /** Options for streaming response. Only set this when you set stream to true. */
+    data class CreateResponseRequestStreamOptions(
+        /**
+         * If set, an additional chunk will be streamed before the data: [DONE] message with token
+         * usage statistics for the entire request.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("include_usage")
+        val includeUsage: Boolean? = null
+    ) : SdkResource()
 
-/**
- * Required object value serialized in the `tools[]` wire field.
- */
-data class CreateResponseRequestToolsItem(
-    /**
-     * The type of the tool.
-     */
-    val type: CreateResponseRequestToolsItemTypeEnum,
-    /**
-     * The name of the function to be called.
-     */
-    val name: String? = null,
-    /**
-     * A description of what the function does.
-     */
-    val description: String? = null,
-    /**
-     * The parameters the function accepts, described as a JSON Schema object.
-     */
-    val parameters: Map<String, Any>? = null
-) : SdkResource()
+    /** Required object value serialized in the `tools[]` wire field. */
+    data class CreateResponseRequestToolsItem(
+        /** The type of the tool. */
+        val type: CreateResponseRequestToolsItemTypeEnum,
+        /** The name of the function to be called. */
+        val name: String? = null,
+        /** A description of what the function does. */
+        val description: String? = null,
+        /** The parameters the function accepts, described as a JSON Schema object. */
+        val parameters: Map<String, Any>? = null,
+    ) : SdkResource()
 
-/**
- * The input parameters for the model invocation. Fields vary by model type. For **image generation** models (e.g., `fal-ai/flux/schnell`, `fal-ai/fast-sdxl`), use `prompt` along with optional image parameters like `output_format`, `num_inference_steps`, `guidance_scale`, `num_images`, and `enable_safety_checker`. For **audio generation** models (e.g., `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with `seconds_total` to control the duration. For…
- */
-data class AsyncInvokeRequestInput(
     /**
-     * The text prompt describing the desired output. Used for image generation and audio generation models.
+     * The input parameters for the model invocation. Fields vary by model type. For **image
+     * generation** models (e.g., `fal-ai/flux/schnell`, `fal-ai/fast-sdxl`), use `prompt` along
+     * with optional image parameters like `output_format`, `num_inference_steps`, `guidance_scale`,
+     * `num_images`, and `enable_safety_checker`. For **audio generation** models (e.g.,
+     * `fal-ai/stable-audio-25/text-to-audio`), use `prompt` along with `seconds_total` to control
+     * the duration. For…
      */
-    val prompt: String? = null,
-    /**
-     * The text content to convert to speech. Used for text-to-speech models.
-     */
-    val text: String? = null,
-    /**
-     * The desired output format or aspect ratio for image generation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: String? = null,
-    /**
-     * The number of inference steps to use during image generation. More steps generally produce higher quality output but take longer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_inference_steps") val numInferenceSteps: Long? = null,
-    /**
-     * Controls how closely the image generation model follows the prompt. Higher values produce output more closely matching the prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("guidance_scale") val guidanceScale: Double? = null,
-    /**
-     * The number of images to generate.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_images") val numImages: Long? = null,
-    /**
-     * Whether to enable the safety checker for generated content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enable_safety_checker") val enableSafetyChecker: Boolean? = null,
-    /**
-     * The total duration in seconds for generated audio. Used for audio generation models.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("seconds_total") val secondsTotal: Long? = null
-) : SdkResource() {
-    @field:com.fasterxml.jackson.annotation.JsonAnySetter
-    @get:com.fasterxml.jackson.annotation.JsonAnyGetter
-    val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
-}
+    data class AsyncInvokeRequestInput(
+        /**
+         * The text prompt describing the desired output. Used for image generation and audio
+         * generation models.
+         */
+        val prompt: String? = null,
+        /** The text content to convert to speech. Used for text-to-speech models. */
+        val text: String? = null,
+        /** The desired output format or aspect ratio for image generation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+        val outputFormat: String? = null,
+        /**
+         * The number of inference steps to use during image generation. More steps generally
+         * produce higher quality output but take longer.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("num_inference_steps")
+        val numInferenceSteps: Long? = null,
+        /**
+         * Controls how closely the image generation model follows the prompt. Higher values produce
+         * output more closely matching the prompt.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("guidance_scale")
+        val guidanceScale: Double? = null,
+        /** The number of images to generate. */
+        @com.fasterxml.jackson.annotation.JsonProperty("num_images") val numImages: Long? = null,
+        /** Whether to enable the safety checker for generated content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("enable_safety_checker")
+        val enableSafetyChecker: Boolean? = null,
+        /** The total duration in seconds for generated audio. Used for audio generation models. */
+        @com.fasterxml.jackson.annotation.JsonProperty("seconds_total")
+        val secondsTotal: Long? = null,
+    ) : SdkResource() {
+        @field:com.fasterxml.jackson.annotation.JsonAnySetter
+        @get:com.fasterxml.jackson.annotation.JsonAnyGetter
+        val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
+    }
 
-/**
- * Required object value serialized in the `tags[]` wire field.
- */
-data class AsyncInvokeRequestTagsItem(
-    /**
-     * The tag key.
-     */
-    val key: String,
-    /**
-     * The tag value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String
-) : SdkResource()
+    /** Required object value serialized in the `tags[]` wire field. */
+    data class AsyncInvokeRequestTagsItem(
+        /** The tag key. */
+        val key: String,
+        /** The tag value. */
+        @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    ) : SdkResource()
 
     /** Parameters for [inferenceCreateChatCompletion]. */
     data class InferenceCreateChatCompletionRequest(
@@ -164,12 +148,13 @@ data class AsyncInvokeRequestTagsItem(
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
         val streamOptions: SdkClient.SdkOptional<ChatCompletionRequestStreamOptions?>? = null,
-        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? =
+            null,
         val seed: SdkClient.SdkOptional<Long?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val user: String? = null
+        val user: String? = null,
     )
 
     data class InferenceCreateChatCompletionStreamRequest(
@@ -187,12 +172,13 @@ data class AsyncInvokeRequestTagsItem(
         val logprobs: SdkClient.SdkOptional<Boolean?>? = null,
         val n: SdkClient.SdkOptional<Long?>? = null,
         val streamOptions: SdkClient.SdkOptional<ChatCompletionRequestStreamOptions?>? = null,
-        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<ChatCompletionRequestReasoningEffortEnum?>? =
+            null,
         val seed: SdkClient.SdkOptional<Long?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val user: String? = null
+        val user: String? = null,
     )
 
     /** Parameters for [inferenceCreateMessages]. */
@@ -209,9 +195,10 @@ data class AsyncInvokeRequestTagsItem(
         val tools: List<MessagesToolDefinitionParam>? = null,
         val toolChoice: MessagesToolChoiceParam? = null,
         val metadata: MessagesCreateRequestMetadata? = null,
-        val reasoningEffort: SdkClient.SdkOptional<MessagesCreateRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<MessagesCreateRequestReasoningEffortEnum?>? =
+            null,
         val speed: SdkClient.SdkOptional<MessagesCreateRequestSpeedEnum?>? = null,
-        val thinking: SdkClient.SdkOptional<MessagesThinkingConfigParam?>? = null
+        val thinking: SdkClient.SdkOptional<MessagesThinkingConfigParam?>? = null,
     )
 
     data class InferenceCreateMessagesStreamRequest(
@@ -226,9 +213,10 @@ data class AsyncInvokeRequestTagsItem(
         val tools: List<MessagesToolDefinitionParam>? = null,
         val toolChoice: MessagesToolChoiceParam? = null,
         val metadata: MessagesCreateRequestMetadata? = null,
-        val reasoningEffort: SdkClient.SdkOptional<MessagesCreateRequestReasoningEffortEnum?>? = null,
+        val reasoningEffort: SdkClient.SdkOptional<MessagesCreateRequestReasoningEffortEnum?>? =
+            null,
         val speed: SdkClient.SdkOptional<MessagesCreateRequestSpeedEnum?>? = null,
-        val thinking: SdkClient.SdkOptional<MessagesThinkingConfigParam?>? = null
+        val thinking: SdkClient.SdkOptional<MessagesThinkingConfigParam?>? = null,
     )
 
     /** Parameters for [inferenceCreateImage]. */
@@ -244,7 +232,7 @@ data class AsyncInvokeRequestTagsItem(
         val size: CreateImageRequestSizeEnum? = null,
         val stream: SdkClient.SdkOptional<Boolean?>? = null,
         val partialImages: SdkClient.SdkOptional<Long?>? = null,
-        val user: SdkClient.SdkOptional<String?>? = null
+        val user: SdkClient.SdkOptional<String?>? = null,
     )
 
     data class InferenceCreateImageStreamRequest(
@@ -258,7 +246,7 @@ data class AsyncInvokeRequestTagsItem(
         val quality: SdkClient.SdkOptional<String?>? = null,
         val size: CreateImageRequestSizeEnum? = null,
         val partialImages: SdkClient.SdkOptional<Long?>? = null,
-        val user: SdkClient.SdkOptional<String?>? = null
+        val user: SdkClient.SdkOptional<String?>? = null,
     )
 
     /** Parameters for [inferenceCreateResponse]. */
@@ -275,7 +263,7 @@ data class AsyncInvokeRequestTagsItem(
         val toolChoice: CreateResponseRequestToolChoice? = null,
         val stop: SdkClient.SdkOptional<List<String>?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
-        val user: SdkClient.SdkOptional<String?>? = null
+        val user: SdkClient.SdkOptional<String?>? = null,
     )
 
     data class InferenceCreateResponseStreamRequest(
@@ -290,312 +278,509 @@ data class AsyncInvokeRequestTagsItem(
         val toolChoice: CreateResponseRequestToolChoice? = null,
         val stop: SdkClient.SdkOptional<List<String>?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
-        val user: SdkClient.SdkOptional<String?>? = null
+        val user: SdkClient.SdkOptional<String?>? = null,
     )
 
-    /**
-     * Creates a model response for the given chat conversation.
-     */
-    fun inferenceCreateChatCompletion(clientConfig: ClientConfig, request: InferenceCreateChatCompletionRequest, options: RequestOptions? = null): ChatCompletionResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateChatCompletionOperation.inferenceCreateChatCompletion(
-            clientConfig,
-            request,
-            options,
-        )
+    /** Creates a model response for the given chat conversation. */
+    fun inferenceCreateChatCompletion(
+        clientConfig: ClientConfig,
+        request: InferenceCreateChatCompletionRequest,
+        options: RequestOptions? = null,
+    ): ChatCompletionResponse =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateChatCompletionOperation
+            .inferenceCreateChatCompletion(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** Creates a model response for the given chat conversation. */
+    fun inferenceCreateChatCompletionWithRawResponse(
+        clientConfig: ClientConfig,
+        request: InferenceCreateChatCompletionRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<ChatCompletionResponse> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateChatCompletionOperation
+            .inferenceCreateChatCompletionWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** Creates a model response for the given chat conversation. */
+    fun inferenceCreateChatCompletionStream(
+        clientConfig: ClientConfig,
+        request: InferenceCreateChatCompletionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ChatCompletionChunk> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateChatCompletionStreamOperation
+            .inferenceCreateChatCompletionStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a model response for the given chat conversation.
+     * Send a structured list of input messages with text and/or image content, and the model will
+     * generate the next message in the conversation.
      */
-    fun inferenceCreateChatCompletionWithRawResponse(clientConfig: ClientConfig, request: InferenceCreateChatCompletionRequest, options: RequestOptions? = null): SdkResponse<ChatCompletionResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateChatCompletionOperation.inferenceCreateChatCompletionWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateMessages(
+        clientConfig: ClientConfig,
+        request: InferenceCreateMessagesRequest,
+        options: RequestOptions? = null,
+    ): MessagesCreateResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateMessagesOperation
+            .inferenceCreateMessages(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a model response for the given chat conversation.
+     * Send a structured list of input messages with text and/or image content, and the model will
+     * generate the next message in the conversation.
      */
-    fun inferenceCreateChatCompletionStream(clientConfig: ClientConfig, request: InferenceCreateChatCompletionStreamRequest, options: RequestOptions? = null): Sequence<ChatCompletionChunk> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateChatCompletionStreamOperation.inferenceCreateChatCompletionStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateMessagesWithRawResponse(
+        clientConfig: ClientConfig,
+        request: InferenceCreateMessagesRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<MessagesCreateResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateMessagesOperation
+            .inferenceCreateMessagesWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
+     * Send a structured list of input messages with text and/or image content, and the model will
+     * generate the next message in the conversation.
      */
-    fun inferenceCreateMessages(clientConfig: ClientConfig, request: InferenceCreateMessagesRequest, options: RequestOptions? = null): MessagesCreateResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateMessagesOperation.inferenceCreateMessages(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateMessagesStream(
+        clientConfig: ClientConfig,
+        request: InferenceCreateMessagesStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<MessagesStreamEvent> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateMessagesStreamOperation
+            .inferenceCreateMessagesStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
+     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response.
+     * Unknown fields in the request body are rejected. There is no streaming response for this
+     * endpoint.
      */
-    fun inferenceCreateMessagesWithRawResponse(clientConfig: ClientConfig, request: InferenceCreateMessagesRequest, options: RequestOptions? = null): SdkResponse<MessagesCreateResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateMessagesOperation.inferenceCreateMessagesWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateEmbedding(
+        clientConfig: ClientConfig,
+        model: String,
+        input: List<String>,
+        user: String? = null,
+        encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null,
+        options: RequestOptions? = null,
+    ): EmbeddingsResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateEmbeddingOperation
+            .inferenceCreateEmbedding(
+                clientConfig,
+                model,
+                input,
+                user,
+                encodingFormat,
+                options,
+            )
 
     /**
-     * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
+     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response.
+     * Unknown fields in the request body are rejected. There is no streaming response for this
+     * endpoint.
      */
-    fun inferenceCreateMessagesStream(clientConfig: ClientConfig, request: InferenceCreateMessagesStreamRequest, options: RequestOptions? = null): Sequence<MessagesStreamEvent> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateMessagesStreamOperation.inferenceCreateMessagesStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateEmbeddingWithRawResponse(
+        clientConfig: ClientConfig,
+        model: String,
+        input: List<String>,
+        user: String? = null,
+        encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EmbeddingsResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateEmbeddingOperation
+            .inferenceCreateEmbeddingWithRawResponse(
+                clientConfig,
+                model,
+                input,
+                user,
+                encodingFormat,
+                options,
+            )
 
     /**
-     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response. Unknown fields in the request body are rejected. There is no streaming response for this endpoint.
+     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image
+     * generation model with automatic prompt optimization and enhanced visual capabilities.
      */
-    fun inferenceCreateEmbedding(clientConfig: ClientConfig, model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): EmbeddingsResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateEmbeddingOperation.inferenceCreateEmbedding(
-            clientConfig,
-            model,
-            input,
-            user,
-            encodingFormat,
-            options,
-        )
+    fun inferenceCreateImage(
+        clientConfig: ClientConfig,
+        request: InferenceCreateImageRequest,
+        options: RequestOptions? = null,
+    ): ImagesResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateImageOperation
+            .inferenceCreateImage(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Create vector embeddings for one or more text inputs. OpenAI-compatible request and response. Unknown fields in the request body are rejected. There is no streaming response for this endpoint.
+     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image
+     * generation model with automatic prompt optimization and enhanced visual capabilities.
      */
-    fun inferenceCreateEmbeddingWithRawResponse(clientConfig: ClientConfig, model: String, input: List<String>, user: String? = null, encodingFormat: EmbeddingsRequestEncodingFormatEnum? = null, options: RequestOptions? = null): SdkResponse<EmbeddingsResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateEmbeddingOperation.inferenceCreateEmbeddingWithRawResponse(
-            clientConfig,
-            model,
-            input,
-            user,
-            encodingFormat,
-            options,
-        )
+    fun inferenceCreateImageWithRawResponse(
+        clientConfig: ClientConfig,
+        request: InferenceCreateImageRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<ImagesResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateImageOperation
+            .inferenceCreateImageWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
+     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image
+     * generation model with automatic prompt optimization and enhanced visual capabilities.
      */
-    fun inferenceCreateImage(clientConfig: ClientConfig, request: InferenceCreateImageRequest, options: RequestOptions? = null): ImagesResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateImageOperation.inferenceCreateImage(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateImageStream(
+        clientConfig: ClientConfig,
+        request: InferenceCreateImageStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ImageGenPartialImageEvent> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateImageStreamOperation
+            .inferenceCreateImageStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
+     * Lists the currently available models, and provides basic information about each one such as
+     * the owner and availability.
      */
-    fun inferenceCreateImageWithRawResponse(clientConfig: ClientConfig, request: InferenceCreateImageRequest, options: RequestOptions? = null): SdkResponse<ImagesResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateImageOperation.inferenceCreateImageWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceListModels(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListModelsResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceListModelsOperation
+            .inferenceListModels(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
+     * Lists the currently available models, and provides basic information about each one such as
+     * the owner and availability.
      */
-    fun inferenceCreateImageStream(clientConfig: ClientConfig, request: InferenceCreateImageStreamRequest, options: RequestOptions? = null): Sequence<ImageGenPartialImageEvent> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateImageStreamOperation.inferenceCreateImageStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceListModelsWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListModelsResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceListModelsOperation
+            .inferenceListModelsWithRawResponse(
+                clientConfig,
+                options,
+            )
 
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model.
+     * Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score,
+     * a choice from a fixed set, or a numeric score, each paired with a calibrated probability,
+     * instead of free-form text.
      */
-    fun inferenceListModels(clientConfig: ClientConfig, options: RequestOptions? = null): ListModelsResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceListModelsOperation.inferenceListModels(
-            clientConfig,
-            options,
-        )
+    fun inferenceCreateSystemone(
+        clientConfig: ClientConfig,
+        state: String,
+        model: String,
+        questions: Map<String, SystemoneQuestion>,
+        options: RequestOptions? = null,
+    ): SystemoneResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSystemoneOperation
+            .inferenceCreateSystemone(
+                clientConfig,
+                state,
+                model,
+                questions,
+                options,
+            )
 
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model.
+     * Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score,
+     * a choice from a fixed set, or a numeric score, each paired with a calibrated probability,
+     * instead of free-form text.
      */
-    fun inferenceListModelsWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<ListModelsResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceListModelsOperation.inferenceListModelsWithRawResponse(
-            clientConfig,
-            options,
-        )
+    fun inferenceCreateSystemoneWithRawResponse(
+        clientConfig: ClientConfig,
+        state: String,
+        model: String,
+        questions: Map<String, SystemoneQuestion>,
+        options: RequestOptions? = null,
+    ): SdkResponse<SystemoneResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSystemoneOperation
+            .inferenceCreateSystemoneWithRawResponse(
+                clientConfig,
+                state,
+                model,
+                questions,
+                options,
+            )
 
     /**
-     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model. Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score, a choice from a fixed set, or a numeric score, each paired with a calibrated probability, instead of free-form text.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      */
-    fun inferenceCreateSystemone(clientConfig: ClientConfig, state: String, model: String, questions: Map<String, SystemoneQuestion>, options: RequestOptions? = null): SystemoneResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSystemoneOperation.inferenceCreateSystemone(
-            clientConfig,
-            state,
-            model,
-            questions,
-            options,
-        )
+    fun inferenceCreateResponse(
+        clientConfig: ClientConfig,
+        request: InferenceCreateResponseRequest,
+        options: RequestOptions? = null,
+    ): CreateResponseResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateResponseOperation
+            .inferenceCreateResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Evaluates a provided state against one or more typed questions using TypeSafe AI's Jev model. Unlike chat completion endpoints, System One returns typed answers, a truth-likelihood score, a choice from a fixed set, or a numeric score, each paired with a calibrated probability, instead of free-form text.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      */
-    fun inferenceCreateSystemoneWithRawResponse(clientConfig: ClientConfig, state: String, model: String, questions: Map<String, SystemoneQuestion>, options: RequestOptions? = null): SdkResponse<SystemoneResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSystemoneOperation.inferenceCreateSystemoneWithRawResponse(
-            clientConfig,
-            state,
-            model,
-            questions,
-            options,
-        )
+    fun inferenceCreateResponseWithRawResponse(
+        clientConfig: ClientConfig,
+        request: InferenceCreateResponseRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateResponseResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateResponseOperation
+            .inferenceCreateResponseWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate text responses from text prompts. This endpoint supports both streaming and
+     * non-streaming responses for supported text models.
      */
-    fun inferenceCreateResponse(clientConfig: ClientConfig, request: InferenceCreateResponseRequest, options: RequestOptions? = null): CreateResponseResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateResponseOperation.inferenceCreateResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateResponseStream(
+        clientConfig: ClientConfig,
+        request: InferenceCreateResponseStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateResponseStreamResponse> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateResponseStreamOperation
+            .inferenceCreateResponseStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an
+     * asynchronous job and returns a request_id. The job status is QUEUED initially. Use the
+     * request_id to poll for the result.
      */
-    fun inferenceCreateResponseWithRawResponse(clientConfig: ClientConfig, request: InferenceCreateResponseRequest, options: RequestOptions? = null): SdkResponse<CreateResponseResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateResponseOperation.inferenceCreateResponseWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateAsyncInvoke(
+        clientConfig: ClientConfig,
+        modelId: String,
+        input: AsyncInvokeRequestInput,
+        tags: SdkClient.SdkOptional<List<AsyncInvokeRequestTagsItem>?>? = null,
+        options: RequestOptions? = null,
+    ): AsyncInvokeResponse =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateAsyncInvokeOperation
+            .inferenceCreateAsyncInvoke(
+                clientConfig,
+                modelId,
+                input,
+                tags,
+                options,
+            )
 
     /**
-     * Generate text responses from text prompts. This endpoint supports both streaming and non-streaming responses for supported text models.
+     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an
+     * asynchronous job and returns a request_id. The job status is QUEUED initially. Use the
+     * request_id to poll for the result.
      */
-    fun inferenceCreateResponseStream(clientConfig: ClientConfig, request: InferenceCreateResponseStreamRequest, options: RequestOptions? = null): Sequence<CreateResponseStreamResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateResponseStreamOperation.inferenceCreateResponseStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun inferenceCreateAsyncInvokeWithRawResponse(
+        clientConfig: ClientConfig,
+        modelId: String,
+        input: AsyncInvokeRequestInput,
+        tags: SdkClient.SdkOptional<List<AsyncInvokeRequestTagsItem>?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AsyncInvokeResponse> =
+        dev.octri.showcase.digitalocean.methods
+            .ServerlessInferenceInferenceCreateAsyncInvokeOperation
+            .inferenceCreateAsyncInvokeWithRawResponse(
+                clientConfig,
+                modelId,
+                input,
+                tags,
+                options,
+            )
 
     /**
-     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an asynchronous job and returns a request_id. The job status is QUEUED initially. Use the request_id to poll for the result.
+     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`,
+     * `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
      */
-    fun inferenceCreateAsyncInvoke(clientConfig: ClientConfig, modelId: String, input: AsyncInvokeRequestInput, tags: SdkClient.SdkOptional<List<AsyncInvokeRequestTagsItem>?>? = null, options: RequestOptions? = null): AsyncInvokeResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateAsyncInvokeOperation.inferenceCreateAsyncInvoke(
-            clientConfig,
-            modelId,
-            input,
-            tags,
-            options,
-        )
+    fun inferenceCreateSpeech(
+        clientConfig: ClientConfig,
+        model: String,
+        input: String,
+        voice: String? = null,
+        responseFormat: String? = null,
+        instructions: String? = null,
+        options: RequestOptions? = null,
+    ): SpeechResponse =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSpeechOperation
+            .inferenceCreateSpeech(
+                clientConfig,
+                model,
+                input,
+                voice,
+                responseFormat,
+                instructions,
+                options,
+            )
 
     /**
-     * Generate Image, Audio, or Text-to-Speech Using fal Models. This endpoint starts an asynchronous job and returns a request_id. The job status is QUEUED initially. Use the request_id to poll for the result.
+     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`,
+     * `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
      */
-    fun inferenceCreateAsyncInvokeWithRawResponse(clientConfig: ClientConfig, modelId: String, input: AsyncInvokeRequestInput, tags: SdkClient.SdkOptional<List<AsyncInvokeRequestTagsItem>?>? = null, options: RequestOptions? = null): SdkResponse<AsyncInvokeResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateAsyncInvokeOperation.inferenceCreateAsyncInvokeWithRawResponse(
-            clientConfig,
-            modelId,
-            input,
-            tags,
-            options,
-        )
+    fun inferenceCreateSpeechWithRawResponse(
+        clientConfig: ClientConfig,
+        model: String,
+        input: String,
+        voice: String? = null,
+        responseFormat: String? = null,
+        instructions: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SpeechResponse> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSpeechOperation
+            .inferenceCreateSpeechWithRawResponse(
+                clientConfig,
+                model,
+                input,
+                voice,
+                responseFormat,
+                instructions,
+                options,
+            )
 
     /**
-     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`, `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
+     * Start an asynchronous video generation job from a text prompt. Poll `GET
+     * /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with
+     * `GET /v1/videos/{video_id}/content` or from `output.url` when present.
      */
-    fun inferenceCreateSpeech(clientConfig: ClientConfig, model: String, input: String, voice: String? = null, responseFormat: String? = null, instructions: String? = null, options: RequestOptions? = null): SpeechResponse =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSpeechOperation.inferenceCreateSpeech(
-            clientConfig,
-            model,
-            input,
-            voice,
-            responseFormat,
-            instructions,
-            options,
-        )
+    fun inferenceCreateVideo(
+        clientConfig: ClientConfig,
+        model: String,
+        prompt: String,
+        size: String? = null,
+        fps: Long? = null,
+        options: RequestOptions? = null,
+    ): VideoGeneration =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateVideoOperation
+            .inferenceCreateVideo(
+                clientConfig,
+                model,
+                prompt,
+                size,
+                fps,
+                options,
+            )
 
     /**
-     * Convert text input to speech audio. The response may be raw audio bytes (`audio/mpeg`, `audio/wav`, and similar) or a JSON envelope with base64-encoded audio in `data[].b64_json`.
+     * Start an asynchronous video generation job from a text prompt. Poll `GET
+     * /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with
+     * `GET /v1/videos/{video_id}/content` or from `output.url` when present.
      */
-    fun inferenceCreateSpeechWithRawResponse(clientConfig: ClientConfig, model: String, input: String, voice: String? = null, responseFormat: String? = null, instructions: String? = null, options: RequestOptions? = null): SdkResponse<SpeechResponse> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateSpeechOperation.inferenceCreateSpeechWithRawResponse(
-            clientConfig,
-            model,
-            input,
-            voice,
-            responseFormat,
-            instructions,
-            options,
-        )
+    fun inferenceCreateVideoWithRawResponse(
+        clientConfig: ClientConfig,
+        model: String,
+        prompt: String,
+        size: String? = null,
+        fps: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<VideoGeneration> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateVideoOperation
+            .inferenceCreateVideoWithRawResponse(
+                clientConfig,
+                model,
+                prompt,
+                size,
+                fps,
+                options,
+            )
 
     /**
-     * Start an asynchronous video generation job from a text prompt. Poll `GET /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with `GET /v1/videos/{video_id}/content` or from `output.url` when present.
+     * Returns the current state of a video generation job. Poll until `status` reaches a terminal
+     * value such as `completed` or `failed`.
      */
-    fun inferenceCreateVideo(clientConfig: ClientConfig, model: String, prompt: String, size: String? = null, fps: Long? = null, options: RequestOptions? = null): VideoGeneration =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateVideoOperation.inferenceCreateVideo(
-            clientConfig,
-            model,
-            prompt,
-            size,
-            fps,
-            options,
-        )
+    fun inferenceGetVideo(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): VideoGeneration =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoOperation
+            .inferenceGetVideo(
+                clientConfig,
+                videoId,
+                options,
+            )
 
     /**
-     * Start an asynchronous video generation job from a text prompt. Poll `GET /v1/videos/{video_id}` until the job reaches a terminal status, then download the MP4 with `GET /v1/videos/{video_id}/content` or from `output.url` when present.
+     * Returns the current state of a video generation job. Poll until `status` reaches a terminal
+     * value such as `completed` or `failed`.
      */
-    fun inferenceCreateVideoWithRawResponse(clientConfig: ClientConfig, model: String, prompt: String, size: String? = null, fps: Long? = null, options: RequestOptions? = null): SdkResponse<VideoGeneration> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceCreateVideoOperation.inferenceCreateVideoWithRawResponse(
-            clientConfig,
-            model,
-            prompt,
-            size,
-            fps,
-            options,
-        )
+    fun inferenceGetVideoWithRawResponse(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<VideoGeneration> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoOperation
+            .inferenceGetVideoWithRawResponse(
+                clientConfig,
+                videoId,
+                options,
+            )
 
-    /**
-     * Returns the current state of a video generation job. Poll until `status` reaches a terminal value such as `completed` or `failed`.
-     */
-    fun inferenceGetVideo(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): VideoGeneration =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoOperation.inferenceGetVideo(
-            clientConfig,
-            videoId,
-            options,
-        )
+    /** Downloads the generated MP4 for a completed video generation job. */
+    fun inferenceGetVideoContent(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): ByteArray =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoContentOperation
+            .inferenceGetVideoContent(
+                clientConfig,
+                videoId,
+                options,
+            )
 
-    /**
-     * Returns the current state of a video generation job. Poll until `status` reaches a terminal value such as `completed` or `failed`.
-     */
-    fun inferenceGetVideoWithRawResponse(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): SdkResponse<VideoGeneration> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoOperation.inferenceGetVideoWithRawResponse(
-            clientConfig,
-            videoId,
-            options,
-        )
-
-    /**
-     * Downloads the generated MP4 for a completed video generation job.
-     */
-    fun inferenceGetVideoContent(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): ByteArray =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoContentOperation.inferenceGetVideoContent(
-            clientConfig,
-            videoId,
-            options,
-        )
-
-    /**
-     * Downloads the generated MP4 for a completed video generation job.
-     */
-    fun inferenceGetVideoContentWithRawResponse(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): SdkResponse<ByteArray> =
-        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoContentOperation.inferenceGetVideoContentWithRawResponse(
-            clientConfig,
-            videoId,
-            options,
-        )
+    /** Downloads the generated MP4 for a completed video generation job. */
+    fun inferenceGetVideoContentWithRawResponse(
+        clientConfig: ClientConfig,
+        videoId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> =
+        dev.octri.showcase.digitalocean.methods.ServerlessInferenceInferenceGetVideoContentOperation
+            .inferenceGetVideoContentWithRawResponse(
+                clientConfig,
+                videoId,
+                options,
+            )
 }

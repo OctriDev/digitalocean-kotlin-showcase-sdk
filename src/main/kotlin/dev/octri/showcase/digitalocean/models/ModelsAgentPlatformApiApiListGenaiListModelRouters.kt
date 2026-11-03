@@ -5,20 +5,13 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * List of model routers
- */
+/** List of model routers */
 data class ApiListModelRoutersOutput(
-    /**
-     * Links to other pages
-     */
+    /** Links to other pages */
     val links: ApiLinks? = null,
-    /**
-     * Meta information about the data set
-     */
+    /** Meta information about the data set */
     val meta: ApiMeta? = null,
-    /**
-     * The model routers
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_routers") val modelRouters: List<ApiModelRouter>? = null
+    /** The model routers */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_routers")
+    val modelRouters: List<ApiModelRouter>? = null,
 ) : SdkResource()

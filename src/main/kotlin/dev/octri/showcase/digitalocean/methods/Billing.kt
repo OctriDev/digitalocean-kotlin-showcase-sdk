@@ -10,8 +10,8 @@ import dev.octri.showcase.digitalocean.BillingInsights
 import dev.octri.showcase.digitalocean.ClientConfig
 import dev.octri.showcase.digitalocean.Error2
 import dev.octri.showcase.digitalocean.Invoice
-import dev.octri.showcase.digitalocean.Invoices
 import dev.octri.showcase.digitalocean.InvoiceSummary
+import dev.octri.showcase.digitalocean.Invoices
 import dev.octri.showcase.digitalocean.PrepaymentConfigResponse
 import dev.octri.showcase.digitalocean.PrepaymentStatusResponse
 import dev.octri.showcase.digitalocean.RequestOptions
@@ -23,76 +23,157 @@ import java.time.LocalDate
 object Billing {
 
     /**
-     * To retrieve the balances on a customer's account, send a GET request to `/v2/customers/my/balance`.
+     * To retrieve the balances on a customer's account, send a GET request to
+     * `/v2/customers/my/balance`.
      */
     fun balanceGet(clientConfig: ClientConfig, options: RequestOptions? = null): Balance {
         return balanceGetWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [balanceGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun balanceGetWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<Balance> {
-        return SdkClient.request<Balance>(SdkClient.RequestSpec("GET", "/v2/customers/my/balance", config = clientConfig, operationId = "balanceGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [balanceGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun balanceGetWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<Balance> {
+        return SdkClient.request<Balance>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/balance",
+                config = clientConfig,
+                operationId = "balanceGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve the prepayment configuration and current prepayment status for a customer's account, send a GET request to `/v2/customers/my/prepayment_config`.
+     * To retrieve the prepayment configuration and current prepayment status for a customer's
+     * account, send a GET request to `/v2/customers/my/prepayment_config`.
      */
-    fun prepaymentConfigGet(clientConfig: ClientConfig, options: RequestOptions? = null): PrepaymentConfigResponse {
+    fun prepaymentConfigGet(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): PrepaymentConfigResponse {
         return prepaymentConfigGetWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [prepaymentConfigGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun prepaymentConfigGetWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<PrepaymentConfigResponse> {
-        return SdkClient.request<PrepaymentConfigResponse>(SdkClient.RequestSpec("GET", "/v2/customers/my/prepayment_config", config = clientConfig, operationId = "prepaymentConfigGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [prepaymentConfigGet], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun prepaymentConfigGetWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<PrepaymentConfigResponse> {
+        return SdkClient.request<PrepaymentConfigResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/prepayment_config",
+                config = clientConfig,
+                operationId = "prepaymentConfigGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve the prepayment gate status and balances for a customer's account, send a GET request to `/v2/customers/my/prepayment_status`.
+     * To retrieve the prepayment gate status and balances for a customer's account, send a GET
+     * request to `/v2/customers/my/prepayment_status`.
      */
-    fun prepaymentStatusGet(clientConfig: ClientConfig, options: RequestOptions? = null): PrepaymentStatusResponse {
+    fun prepaymentStatusGet(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): PrepaymentStatusResponse {
         return prepaymentStatusGetWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [prepaymentStatusGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun prepaymentStatusGetWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<PrepaymentStatusResponse> {
-        return SdkClient.request<PrepaymentStatusResponse>(SdkClient.RequestSpec("GET", "/v2/customers/my/prepayment_status", config = clientConfig, operationId = "prepaymentStatusGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [prepaymentStatusGet], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun prepaymentStatusGetWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<PrepaymentStatusResponse> {
+        return SdkClient.request<PrepaymentStatusResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/prepayment_status",
+                config = clientConfig,
+                operationId = "prepaymentStatusGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve a list of all billing history entries, send a GET request to `/v2/customers/my/billing_history`.
+     * To retrieve a list of all billing history entries, send a GET request to
+     * `/v2/customers/my/billing_history`.
      */
-    fun billingHistoryList(clientConfig: ClientConfig, options: RequestOptions? = null): BillingHistoryResponse {
+    fun billingHistoryList(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): BillingHistoryResponse {
         return billingHistoryListWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [billingHistoryList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun billingHistoryListWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<BillingHistoryResponse> {
-        return SdkClient.request<BillingHistoryResponse>(SdkClient.RequestSpec("GET", "/v2/customers/my/billing_history", config = clientConfig, operationId = "billingHistoryList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [billingHistoryList], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun billingHistoryListWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<BillingHistoryResponse> {
+        return SdkClient.request<BillingHistoryResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/billing_history",
+                config = clientConfig,
+                operationId = "billingHistoryList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To retrieve a list of all invoices, send a GET request to `/v2/customers/my/invoices`.
@@ -100,172 +181,384 @@ object Billing {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun invoicesList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Invoices {
+    fun invoicesList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Invoices {
         return invoicesListWithRawResponse(clientConfig, perPage, page, options).data
     }
 
-
-    /** [invoicesList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun invoicesListWithRawResponse(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<Invoices> {
+    /**
+     * [invoicesList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun invoicesListWithRawResponse(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Invoices> {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<Invoices>(SdkClient.RequestSpec("GET", "/v2/customers/my/invoices", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "invoicesList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Invoices>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/invoices",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "invoicesList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve the invoice items for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID`.
+     * To retrieve the invoice items for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID`.
      *
      * @param invoiceUuid UUID of the invoice
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun invoicesGetByUuid(clientConfig: ClientConfig, invoiceUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): Invoice {
-        return invoicesGetByUuidWithRawResponse(clientConfig, invoiceUuid, perPage, page, options).data
+    fun invoicesGetByUuid(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): Invoice {
+        return invoicesGetByUuidWithRawResponse(clientConfig, invoiceUuid, perPage, page, options)
+            .data
     }
 
-
-    /** [invoicesGetByUuid], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun invoicesGetByUuidWithRawResponse(clientConfig: ClientConfig, invoiceUuid: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<Invoice> {
+    /**
+     * [invoicesGetByUuid], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun invoicesGetByUuidWithRawResponse(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Invoice> {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<Invoice>(SdkClient.RequestSpec("GET", "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "invoicesGetByUuid", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Invoice>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "invoicesGetByUuid",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve a CSV for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
+     * To retrieve a CSV for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
      *
      * @param invoiceUuid UUID of the invoice
      */
-    fun invoicesGetCsvByUuid(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): String {
+    fun invoicesGetCsvByUuid(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): String {
         return invoicesGetCsvByUuidWithRawResponse(clientConfig, invoiceUuid, options).data
     }
 
-
-    /** [invoicesGetCsvByUuid], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun invoicesGetCsvByUuidWithRawResponse(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): SdkResponse<String> {
-        return SdkClient.request<String>(SdkClient.RequestSpec("GET", "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/csv", config = clientConfig, operationId = "invoicesGetCsvByUuid", decoder = SdkClient.ResponseDecoder.TEXT, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [invoicesGetCsvByUuid], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun invoicesGetCsvByUuidWithRawResponse(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<String> {
+        return SdkClient.request<String>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/csv",
+                config = clientConfig,
+                operationId = "invoicesGetCsvByUuid",
+                decoder = SdkClient.ResponseDecoder.TEXT,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve a PDF for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
+     * To retrieve a PDF for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
      *
      * @param invoiceUuid UUID of the invoice
      */
-    fun invoicesGetPdfByUuid(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): ByteArray {
+    fun invoicesGetPdfByUuid(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
         return invoicesGetPdfByUuidWithRawResponse(clientConfig, invoiceUuid, options).data
     }
 
-
-    /** [invoicesGetPdfByUuid], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun invoicesGetPdfByUuidWithRawResponse(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): SdkResponse<ByteArray> {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/pdf", config = clientConfig, operationId = "invoicesGetPdfByUuid", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [invoicesGetPdfByUuid], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun invoicesGetPdfByUuidWithRawResponse(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> {
+        return SdkClient.request<ByteArray>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/pdf",
+                config = clientConfig,
+                operationId = "invoicesGetPdfByUuid",
+                decoder = SdkClient.ResponseDecoder.BYTES,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To retrieve a summary for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
+     * To retrieve a summary for an invoice, send a GET request to
+     * `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
      *
      * @param invoiceUuid UUID of the invoice
      */
-    fun invoicesGetSummaryByUuid(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): InvoiceSummary {
+    fun invoicesGetSummaryByUuid(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): InvoiceSummary {
         return invoicesGetSummaryByUuidWithRawResponse(clientConfig, invoiceUuid, options).data
     }
 
-
-    /** [invoicesGetSummaryByUuid], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun invoicesGetSummaryByUuidWithRawResponse(clientConfig: ClientConfig, invoiceUuid: String, options: RequestOptions? = null): SdkResponse<InvoiceSummary> {
-        return SdkClient.request<InvoiceSummary>(SdkClient.RequestSpec("GET", "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/summary", config = clientConfig, operationId = "invoicesGetSummaryByUuid", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [invoicesGetSummaryByUuid], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun invoicesGetSummaryByUuidWithRawResponse(
+        clientConfig: ClientConfig,
+        invoiceUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<InvoiceSummary> {
+        return SdkClient.request<InvoiceSummary>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/customers/my/invoices/${SdkClient.encodePathSegment(invoiceUuid)}/summary",
+                config = clientConfig,
+                operationId = "invoicesGetSummaryByUuid",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice
+     * items, including total amount, region, SKU, and description for a specified date range. It is
+     * important to note that the daily resource usage may not reflect month-end billing totals when
+     * totaled for a given month as nightly invoice item estimates do not necessarily encompass all
+     * invoicing factors for the entire month.
      *
-     * @param accountUrn URN of the customer account, can be a team (do:team:uuid) or
-     *   an organization (do:teamgroup:uuid)
+     * @param accountUrn URN of the customer account, can be a team (do:team:uuid) or an
+     *   organization (do:teamgroup:uuid)
      * @param startDate Start date for billing insights in YYYY-MM-DD format
-     * @param endDate End date for billing insights in YYYY-MM-DD format. Must be
-     *   within 31 days of start_date
+     * @param endDate End date for billing insights in YYYY-MM-DD format. Must be within 31 days of
+     *   start_date
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun billingInsightsList(clientConfig: ClientConfig, accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): BillingInsights {
-        return billingInsightsListWithRawResponse(clientConfig, accountUrn, startDate, endDate, perPage, page, options).data
+    fun billingInsightsList(
+        clientConfig: ClientConfig,
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): BillingInsights {
+        return billingInsightsListWithRawResponse(
+                clientConfig,
+                accountUrn,
+                startDate,
+                endDate,
+                perPage,
+                page,
+                options,
+            )
+            .data
     }
 
-
-    /** [billingInsightsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun billingInsightsListWithRawResponse(clientConfig: ClientConfig, accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<BillingInsights> {
+    /**
+     * [billingInsightsList], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun billingInsightsListWithRawResponse(
+        clientConfig: ClientConfig,
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<BillingInsights> {
         Validation.validateDate("start_date", startDate)
 
         Validation.validateDate("end_date", endDate)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<BillingInsights>(SdkClient.RequestSpec("GET", "/v2/billing/${SdkClient.encodePathSegment(accountUrn)}/insights/${SdkClient.encodePathSegment(startDate, "date")}/${SdkClient.encodePathSegment(endDate, "date")}", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "billingInsightsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<BillingInsights>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/billing/${SdkClient.encodePathSegment(accountUrn)}/insights/${SdkClient.encodePathSegment(startDate, "date")}/${SdkClient.encodePathSegment(endDate, "date")}",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "billingInsightsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+     * This endpoint returns day-over-day changes in billing resource usage based on nightly invoice
+     * items, including total amount, region, SKU, and description for a specified date range. It is
+     * important to note that the daily resource usage may not reflect month-end billing totals when
+     * totaled for a given month as nightly invoice item estimates do not necessarily encompass all
+     * invoicing factors for the entire month.
      *
-     * @param accountUrn URN of the customer account, can be a team (do:team:uuid) or
-     *   an organization (do:teamgroup:uuid)
+     * @param accountUrn URN of the customer account, can be a team (do:team:uuid) or an
+     *   organization (do:teamgroup:uuid)
      * @param startDate Start date for billing insights in YYYY-MM-DD format
-     * @param endDate End date for billing insights in YYYY-MM-DD format. Must be
-     *   within 31 days of start_date
+     * @param endDate End date for billing insights in YYYY-MM-DD format. Must be within 31 days of
+     *   start_date
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun billingInsightsListPaginated(clientConfig: ClientConfig, accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null, yieldFn: (BillingDataPoint) -> Boolean) {
+    fun billingInsightsListPaginated(
+        clientConfig: ClientConfig,
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (BillingDataPoint) -> Boolean,
+    ) {
         var pageNumber: Long = page ?: 1
         while (true) {
-            val page = billingInsightsList(clientConfig, accountUrn, startDate, endDate, perPage, pageNumber, options)
+            val page =
+                billingInsightsList(
+                    clientConfig,
+                    accountUrn,
+                    startDate,
+                    endDate,
+                    perPage,
+                    pageNumber,
+                    options,
+                )
             val items = page.dataPoints.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -282,10 +575,28 @@ object Billing {
         val hasMore: Boolean,
     )
 
-    fun billingInsightsListPages(clientConfig: ClientConfig, accountUrn: String, startDate: LocalDate, endDate: LocalDate, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null, yieldPage: (BillingInsightsListPage) -> Boolean) {
+    fun billingInsightsListPages(
+        clientConfig: ClientConfig,
+        accountUrn: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+        yieldPage: (BillingInsightsListPage) -> Boolean,
+    ) {
         var pageNumber: Long = page ?: 1
         while (true) {
-            val page = billingInsightsList(clientConfig, accountUrn, startDate, endDate, perPage, pageNumber, options)
+            val page =
+                billingInsightsList(
+                    clientConfig,
+                    accountUrn,
+                    startDate,
+                    endDate,
+                    perPage,
+                    pageNumber,
+                    options,
+                )
             val items = page.dataPoints.orEmpty()
             if (items.isEmpty()) return
             val nextPage = pageNumber + 1
@@ -295,7 +606,4 @@ object Billing {
             pageNumber = nextPage
         }
     }
-
-
-
 }

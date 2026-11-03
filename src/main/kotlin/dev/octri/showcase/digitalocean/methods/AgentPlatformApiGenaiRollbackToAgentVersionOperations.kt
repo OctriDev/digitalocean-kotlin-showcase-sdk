@@ -43,20 +43,64 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object AgentPlatformApiGenaiRollbackToAgentVersionOperation {
     /**
-     * To update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.
+     * To update to a specific agent version, send a PUT request to
+     * `/v2/gen-ai/agents/{uuid}/versions`.
      *
      * @param uuid Agent unique identifier
      * @param uuid2 Agent unique identifier
      * @param versionHash Unique identifier
      */
-    fun genaiRollbackToAgentVersion(clientConfig: ClientConfig, uuid: String, uuid2: String? = null, versionHash: String? = null, options: RequestOptions? = null): ApiRollbackToAgentVersionOutput {
-        return genaiRollbackToAgentVersionWithRawResponse(clientConfig, uuid, uuid2, versionHash, options).data
+    fun genaiRollbackToAgentVersion(
+        clientConfig: ClientConfig,
+        uuid: String,
+        uuid2: String? = null,
+        versionHash: String? = null,
+        options: RequestOptions? = null,
+    ): ApiRollbackToAgentVersionOutput {
+        return genaiRollbackToAgentVersionWithRawResponse(
+                clientConfig,
+                uuid,
+                uuid2,
+                versionHash,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiRollbackToAgentVersion], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiRollbackToAgentVersionWithRawResponse(clientConfig: ClientConfig, uuid: String, uuid2: String? = null, versionHash: String? = null, options: RequestOptions? = null): SdkResponse<ApiRollbackToAgentVersionOutput> {
-        return SdkClient.request<ApiRollbackToAgentVersionOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/agents/${SdkClient.encodePathSegment(uuid)}/versions", config = clientConfig, body = SdkClient.bodyMap("uuid" to (SdkClient.omitIfNull(uuid2)), "version_hash" to (SdkClient.omitIfNull(versionHash))), operationId = "genaiRollbackToAgentVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiRollbackToAgentVersion], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiRollbackToAgentVersionWithRawResponse(
+        clientConfig: ClientConfig,
+        uuid: String,
+        uuid2: String? = null,
+        versionHash: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiRollbackToAgentVersionOutput> {
+        return SdkClient.request<ApiRollbackToAgentVersionOutput>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/gen-ai/agents/${SdkClient.encodePathSegment(uuid)}/versions",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "uuid" to (SdkClient.omitIfNull(uuid2)),
+                        "version_hash" to (SdkClient.omitIfNull(versionHash)),
+                    ),
+                operationId = "genaiRollbackToAgentVersion",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -67,14 +111,48 @@ internal object AgentPlatformApiGenaiListAnthropicApiKeysOperation {
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiListAnthropicApiKeys(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAnthropicAPIKeysOutput {
+    fun genaiListAnthropicApiKeys(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAnthropicAPIKeysOutput {
         return genaiListAnthropicApiKeysWithRawResponse(clientConfig, page, perPage, options).data
     }
 
-
-    /** [genaiListAnthropicApiKeys], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiListAnthropicApiKeysWithRawResponse(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): SdkResponse<ApiListAnthropicAPIKeysOutput> {
-        return SdkClient.request<ApiListAnthropicAPIKeysOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/anthropic/keys", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiListAnthropicApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiListAnthropicApiKeys], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiListAnthropicApiKeysWithRawResponse(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiListAnthropicAPIKeysOutput> {
+        return SdkClient.request<ApiListAnthropicAPIKeysOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/anthropic/keys",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                    ),
+                operationId = "genaiListAnthropicApiKeys",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -85,74 +163,213 @@ internal object AgentPlatformApiGenaiCreateAnthropicApiKeyOperation {
      * @param apiKey Anthropic API key
      * @param name Name of the key
      */
-    fun genaiCreateAnthropicApiKey(clientConfig: ClientConfig, apiKey: String? = null, name: String? = null, options: RequestOptions? = null): ApiCreateAnthropicAPIKeyOutput {
+    fun genaiCreateAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKey: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateAnthropicAPIKeyOutput {
         return genaiCreateAnthropicApiKeyWithRawResponse(clientConfig, apiKey, name, options).data
     }
 
-
-    /** [genaiCreateAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiCreateAnthropicApiKeyWithRawResponse(clientConfig: ClientConfig, apiKey: String? = null, name: String? = null, options: RequestOptions? = null): SdkResponse<ApiCreateAnthropicAPIKeyOutput> {
-        return SdkClient.request<ApiCreateAnthropicAPIKeyOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/anthropic/keys", config = clientConfig, body = SdkClient.bodyMap("api_key" to (SdkClient.omitIfNull(apiKey)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiCreateAnthropicApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiCreateAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiCreateAnthropicApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKey: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiCreateAnthropicAPIKeyOutput> {
+        return SdkClient.request<ApiCreateAnthropicAPIKeyOutput>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/anthropic/keys",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "api_key" to (SdkClient.omitIfNull(apiKey)),
+                        "name" to (SdkClient.omitIfNull(name)),
+                    ),
+                operationId = "genaiCreateAnthropicApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetAnthropicApiKeyOperation {
     /**
-     * To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * To retrieve details of an Anthropic API key, send a GET request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      *
      * @param apiKeyUuid API key ID
      */
-    fun genaiGetAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiGetAnthropicAPIKeyOutput {
+    fun genaiGetAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetAnthropicAPIKeyOutput {
         return genaiGetAnthropicApiKeyWithRawResponse(clientConfig, apiKeyUuid, options).data
     }
 
-
-    /** [genaiGetAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetAnthropicApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): SdkResponse<ApiGetAnthropicAPIKeyOutput> {
-        return SdkClient.request<ApiGetAnthropicAPIKeyOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, operationId = "genaiGetAnthropicApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiGetAnthropicApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetAnthropicAPIKeyOutput> {
+        return SdkClient.request<ApiGetAnthropicAPIKeyOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
+                config = clientConfig,
+                operationId = "genaiGetAnthropicApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateAnthropicApiKeyOperation {
     /**
-     * To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * To update an Anthropic API key, send a PUT request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      *
      * @param apiKeyUuid API key ID
      * @param apiKey Anthropic API key
      * @param apiKeyUuid2 API key ID
      * @param name Name of the key
      */
-    fun genaiUpdateAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, apiKey: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): ApiUpdateAnthropicAPIKeyOutput {
-        return genaiUpdateAnthropicApiKeyWithRawResponse(clientConfig, apiKeyUuid, apiKey, apiKeyUuid2, name, options).data
+    fun genaiUpdateAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        apiKey: String? = null,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateAnthropicAPIKeyOutput {
+        return genaiUpdateAnthropicApiKeyWithRawResponse(
+                clientConfig,
+                apiKeyUuid,
+                apiKey,
+                apiKeyUuid2,
+                name,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiUpdateAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiUpdateAnthropicApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyUuid: String, apiKey: String? = null, apiKeyUuid2: String? = null, name: String? = null, options: RequestOptions? = null): SdkResponse<ApiUpdateAnthropicAPIKeyOutput> {
-        return SdkClient.request<ApiUpdateAnthropicAPIKeyOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, body = SdkClient.bodyMap("api_key" to (SdkClient.omitIfNull(apiKey)), "api_key_uuid" to (SdkClient.omitIfNull(apiKeyUuid2)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiUpdateAnthropicApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiUpdateAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiUpdateAnthropicApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        apiKey: String? = null,
+        apiKeyUuid2: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiUpdateAnthropicAPIKeyOutput> {
+        return SdkClient.request<ApiUpdateAnthropicAPIKeyOutput>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "api_key" to (SdkClient.omitIfNull(apiKey)),
+                        "api_key_uuid" to (SdkClient.omitIfNull(apiKeyUuid2)),
+                        "name" to (SdkClient.omitIfNull(name)),
+                    ),
+                operationId = "genaiUpdateAnthropicApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteAnthropicApiKeyOperation {
     /**
-     * To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+     * To delete an Anthropic API key, send a DELETE request to
+     * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
      *
      * @param apiKeyUuid API key ID
      */
-    fun genaiDeleteAnthropicApiKey(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): ApiDeleteAnthropicAPIKeyOutput {
+    fun genaiDeleteAnthropicApiKey(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteAnthropicAPIKeyOutput {
         return genaiDeleteAnthropicApiKeyWithRawResponse(clientConfig, apiKeyUuid, options).data
     }
 
-
-    /** [genaiDeleteAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiDeleteAnthropicApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyUuid: String, options: RequestOptions? = null): SdkResponse<ApiDeleteAnthropicAPIKeyOutput> {
-        return SdkClient.request<ApiDeleteAnthropicAPIKeyOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}", config = clientConfig, operationId = "genaiDeleteAnthropicApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiDeleteAnthropicApiKey], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiDeleteAnthropicApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiDeleteAnthropicAPIKeyOutput> {
+        return SdkClient.request<ApiDeleteAnthropicAPIKeyOutput>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(apiKeyUuid)}",
+                config = clientConfig,
+                operationId = "genaiDeleteAnthropicApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiListAgentsByAnthropicKeyOperation {
     /**
-     * Lists agents linked to a specific Anthropic key. Use `page` and `per_page` to paginate the results.
+     * Lists agents linked to a specific Anthropic key. Use `page` and `per_page` to paginate the
+     * results.
      *
      * List Agents by Anthropic Key.
      *
@@ -160,14 +377,57 @@ internal object AgentPlatformApiGenaiListAgentsByAnthropicKeyOperation {
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiListAgentsByAnthropicKey(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiListAgentsByAnthropicKeyOutput {
-        return genaiListAgentsByAnthropicKeyWithRawResponse(clientConfig, uuid, page, perPage, options).data
+    fun genaiListAgentsByAnthropicKey(
+        clientConfig: ClientConfig,
+        uuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiListAgentsByAnthropicKeyOutput {
+        return genaiListAgentsByAnthropicKeyWithRawResponse(
+                clientConfig,
+                uuid,
+                page,
+                perPage,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiListAgentsByAnthropicKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiListAgentsByAnthropicKeyWithRawResponse(clientConfig: ClientConfig, uuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): SdkResponse<ApiListAgentsByAnthropicKeyOutput> {
-        return SdkClient.request<ApiListAgentsByAnthropicKeyOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(uuid)}/agents", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiListAgentsByAnthropicKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiListAgentsByAnthropicKey], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiListAgentsByAnthropicKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        uuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiListAgentsByAnthropicKeyOutput> {
+        return SdkClient.request<ApiListAgentsByAnthropicKeyOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/anthropic/keys/${SdkClient.encodePathSegment(uuid)}/agents",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                    ),
+                operationId = "genaiListAgentsByAnthropicKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -179,14 +439,52 @@ internal object AgentPlatformApiGenaiListCustomModelsOperation {
      * @param perPage Number of items per page.
      * @param status Filter by model status.
      */
-    fun genaiListCustomModels(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, status: GenaiListCustomModelsParameterEnum? = null, options: RequestOptions? = null): ApiListCustomModelsOutputPublic {
-        return genaiListCustomModelsWithRawResponse(clientConfig, page, perPage, status, options).data
+    fun genaiListCustomModels(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        status: GenaiListCustomModelsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): ApiListCustomModelsOutputPublic {
+        return genaiListCustomModelsWithRawResponse(clientConfig, page, perPage, status, options)
+            .data
     }
 
-
-    /** [genaiListCustomModels], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiListCustomModelsWithRawResponse(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, status: GenaiListCustomModelsParameterEnum? = null, options: RequestOptions? = null): SdkResponse<ApiListCustomModelsOutputPublic> {
-        return SdkClient.request<ApiListCustomModelsOutputPublic>(SdkClient.RequestSpec("GET", "/v2/gen-ai/custom_models", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "genaiListCustomModels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiListCustomModels], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun genaiListCustomModelsWithRawResponse(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        status: GenaiListCustomModelsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiListCustomModelsOutputPublic> {
+        return SdkClient.request<ApiListCustomModelsOutputPublic>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/custom_models",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "status" to SdkClient.queryValue(status, "form", true),
+                    ),
+                operationId = "genaiListCustomModels",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -194,10 +492,10 @@ internal object AgentPlatformApiGenaiImportCustomModelOperation {
     /**
      * To import a custom model, send a POST request to `/v2/gen-ai/custom_models/import`.
      *
-     * @param acceptHfTokenStorage Whether the caller accepts storage of their
-     *   HuggingFace token for gated model access
-     * @param acceptTermsAndConditions Whether the caller accepts the terms and
-     *   conditions for importing this model
+     * @param acceptHfTokenStorage Whether the caller accepts storage of their HuggingFace token for
+     *   gated model access
+     * @param acceptTermsAndConditions Whether the caller accepts the terms and conditions for
+     *   importing this model
      * @param description Description of the model
      * @param name Name for the imported model
      * @param preferredGpuRegion Preferred GPU region for deployment
@@ -205,36 +503,100 @@ internal object AgentPlatformApiGenaiImportCustomModelOperation {
      * @param sourceType Source from which the model was imported
      * @param tags User-defined tags for organizing models
      */
-    fun genaiImportCustomModel(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiImportCustomModelRequest, options: RequestOptions? = null): ApiImportCustomModelOutputPublic {
+    fun genaiImportCustomModel(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiImportCustomModelRequest,
+        options: RequestOptions? = null,
+    ): ApiImportCustomModelOutputPublic {
         return genaiImportCustomModelWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [genaiImportCustomModel], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiImportCustomModelWithRawResponse(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiImportCustomModelRequest, options: RequestOptions? = null): SdkResponse<ApiImportCustomModelOutputPublic> {
-        return SdkClient.request<ApiImportCustomModelOutputPublic>(SdkClient.RequestSpec("POST", "/v2/gen-ai/custom_models/import", config = clientConfig, body = SdkClient.bodyMap("accept_hf_token_storage" to
-    (SdkClient.omitIfNull(request.acceptHfTokenStorage)), "accept_terms_and_conditions" to
-    (SdkClient.omitIfNull(request.acceptTermsAndConditions)), "description" to (SdkClient.omitIfNull(request.description)), "name" to (SdkClient.omitIfNull(request.name)), "preferred_gpu_region" to
-    (SdkClient.omitIfNull(request.preferredGpuRegion)), "source_ref" to (SdkClient.omitIfNull(request.sourceRef)), "source_type" to (SdkClient.omitIfNull(request.sourceType)), "tags" to (SdkClient.omitIfNull(request.tags))), operationId = "genaiImportCustomModel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiImportCustomModel], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun genaiImportCustomModelWithRawResponse(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiImportCustomModelRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiImportCustomModelOutputPublic> {
+        return SdkClient.request<ApiImportCustomModelOutputPublic>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/custom_models/import",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "accept_hf_token_storage" to
+                            (SdkClient.omitIfNull(request.acceptHfTokenStorage)),
+                        "accept_terms_and_conditions" to
+                            (SdkClient.omitIfNull(request.acceptTermsAndConditions)),
+                        "description" to (SdkClient.omitIfNull(request.description)),
+                        "name" to (SdkClient.omitIfNull(request.name)),
+                        "preferred_gpu_region" to
+                            (SdkClient.omitIfNull(request.preferredGpuRegion)),
+                        "source_ref" to (SdkClient.omitIfNull(request.sourceRef)),
+                        "source_type" to (SdkClient.omitIfNull(request.sourceType)),
+                        "tags" to (SdkClient.omitIfNull(request.tags)),
+                    ),
+                operationId = "genaiImportCustomModel",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetCustomModelOperation {
     /**
-     * To retrieve details of a custom model, send a GET request to `/v2/gen-ai/custom_models/{uuid}`.
+     * To retrieve details of a custom model, send a GET request to
+     * `/v2/gen-ai/custom_models/{uuid}`.
      *
      * @param uuid UUID of the custom model to retrieve
      */
-    fun genaiGetCustomModel(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiGetCustomModelOutputPublic {
+    fun genaiGetCustomModel(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetCustomModelOutputPublic {
         return genaiGetCustomModelWithRawResponse(clientConfig, uuid, options).data
     }
 
-
-    /** [genaiGetCustomModel], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetCustomModelWithRawResponse(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): SdkResponse<ApiGetCustomModelOutputPublic> {
-        return SdkClient.request<ApiGetCustomModelOutputPublic>(SdkClient.RequestSpec("GET", "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(uuid)}", config = clientConfig, operationId = "genaiGetCustomModel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetCustomModel], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun genaiGetCustomModelWithRawResponse(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetCustomModelOutputPublic> {
+        return SdkClient.request<ApiGetCustomModelOutputPublic>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(uuid)}",
+                config = clientConfig,
+                operationId = "genaiGetCustomModel",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -244,49 +606,113 @@ internal object AgentPlatformApiGenaiDeleteCustomModelOperation {
      *
      * @param uuid UUID of the custom model to delete
      */
-    fun genaiDeleteCustomModel(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): ApiDeleteCustomModelOutputPublic {
+    fun genaiDeleteCustomModel(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteCustomModelOutputPublic {
         return genaiDeleteCustomModelWithRawResponse(clientConfig, uuid, options).data
     }
 
-
-    /** [genaiDeleteCustomModel], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiDeleteCustomModelWithRawResponse(clientConfig: ClientConfig, uuid: String, options: RequestOptions? = null): SdkResponse<ApiDeleteCustomModelOutputPublic> {
-        return SdkClient.request<ApiDeleteCustomModelOutputPublic>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(uuid)}", config = clientConfig, operationId = "genaiDeleteCustomModel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiDeleteCustomModel], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun genaiDeleteCustomModelWithRawResponse(
+        clientConfig: ClientConfig,
+        uuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiDeleteCustomModelOutputPublic> {
+        return SdkClient.request<ApiDeleteCustomModelOutputPublic>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(uuid)}",
+                config = clientConfig,
+                operationId = "genaiDeleteCustomModel",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateCustomModelMetadataOperation {
     /**
-     * Updates metadata for a custom model identified by its UUID. Supply any metadata fields you want to change; non-empty `input_modalities` and `output_modalities` lists replace the existing lists and are supported only for Spaces-imported models. A 200 response returns the updated custom model.
+     * Updates metadata for a custom model identified by its UUID. Supply any metadata fields you
+     * want to change; non-empty `input_modalities` and `output_modalities` lists replace the
+     * existing lists and are supported only for Spaces-imported models. A 200 response returns the
+     * updated custom model.
      *
-     * To update custom model metadata, send a PATCH request to `/v2/gen-ai/custom_models/{uuid}/metadata`.
+     * To update custom model metadata, send a PATCH request to
+     * `/v2/gen-ai/custom_models/{uuid}/metadata`.
      *
      * @param uuid UUID of the custom model to update
-     * @param description Optional `string` value serialized in the `description`
-     *   wire field.
-     * @param inputModalities Optional new input modalities for the model (replaces
-     *   existing list when non-empty). Spaces-imported models only.
+     * @param description Optional `string` value serialized in the `description` wire field.
+     * @param inputModalities Optional new input modalities for the model (replaces existing list
+     *   when non-empty). Spaces-imported models only.
      * @param license Optional `string` value serialized in the `license` wire field.
      * @param name Optional `string` value serialized in the `name` wire field.
-     * @param outputModalities Optional new output modalities for the model (replaces
-     *   existing list when non-empty). Spaces-imported models only.
-     * @param parameters Optional `uint64`-formatted value serialized in the
-     *   `parameters` wire field.
+     * @param outputModalities Optional new output modalities for the model (replaces existing list
+     *   when non-empty). Spaces-imported models only.
+     * @param parameters Optional `uint64`-formatted value serialized in the `parameters` wire
+     *   field.
      * @param tags User-defined tags for organizing models
      * @param uuid2 UUID of the custom model to update
      */
-    fun genaiUpdateCustomModelMetadata(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiUpdateCustomModelMetadataRequest, options: RequestOptions? = null): ApiUpdateCustomModelMetadataOutputPublic {
+    fun genaiUpdateCustomModelMetadata(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiUpdateCustomModelMetadataRequest,
+        options: RequestOptions? = null,
+    ): ApiUpdateCustomModelMetadataOutputPublic {
         return genaiUpdateCustomModelMetadataWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [genaiUpdateCustomModelMetadata], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiUpdateCustomModelMetadataWithRawResponse(clientConfig: ClientConfig, request: AgentPlatformApi.GenaiUpdateCustomModelMetadataRequest, options: RequestOptions? = null): SdkResponse<ApiUpdateCustomModelMetadataOutputPublic> {
-        return SdkClient.request<ApiUpdateCustomModelMetadataOutputPublic>(SdkClient.RequestSpec("PATCH", "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(request.uuid)}/metadata", config = clientConfig, body = SdkClient.bodyMap("description" to (SdkClient.omitIfNull(request.description)), "input_modalities" to
-    (SdkClient.omitIfNull(request.inputModalities)), "license" to (SdkClient.omitIfNull(request.license)), "name" to (SdkClient.omitIfNull(request.name)), "output_modalities" to
-    (SdkClient.omitIfNull(request.outputModalities)), "parameters" to (SdkClient.omitIfNull(request.parameters)), "tags" to (SdkClient.omitIfNull(request.tags)), "uuid" to (SdkClient.omitIfNull(request.uuid2))), operationId = "genaiUpdateCustomModelMetadata", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiUpdateCustomModelMetadata], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiUpdateCustomModelMetadataWithRawResponse(
+        clientConfig: ClientConfig,
+        request: AgentPlatformApi.GenaiUpdateCustomModelMetadataRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiUpdateCustomModelMetadataOutputPublic> {
+        return SdkClient.request<ApiUpdateCustomModelMetadataOutputPublic>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/v2/gen-ai/custom_models/${SdkClient.encodePathSegment(request.uuid)}/metadata",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "description" to (SdkClient.omitIfNull(request.description)),
+                        "input_modalities" to (SdkClient.omitIfNull(request.inputModalities)),
+                        "license" to (SdkClient.omitIfNull(request.license)),
+                        "name" to (SdkClient.omitIfNull(request.name)),
+                        "output_modalities" to (SdkClient.omitIfNull(request.outputModalities)),
+                        "parameters" to (SdkClient.omitIfNull(request.parameters)),
+                        "tags" to (SdkClient.omitIfNull(request.tags)),
+                        "uuid" to (SdkClient.omitIfNull(request.uuid2)),
+                    ),
+                operationId = "genaiUpdateCustomModelMetadata",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -295,183 +721,514 @@ internal object AgentPlatformApiGenaiListEvaluationDatasetsOperation {
      * To list evaluation datasets, send a GET request to `/v2/gen-ai/evaluation_datasets`.
      *
      * @param datasetType Filter by evaluation dataset type.
-     * @param datasetParadigm Filter by evaluation dataset paradigm (row/content
-     *   shape).
-     * @param hasGroundTruth Filter by whether the dataset includes ground-truth
-     *   values.
+     * @param datasetParadigm Filter by evaluation dataset paradigm (row/content shape).
+     * @param hasGroundTruth Filter by whether the dataset includes ground-truth values.
      */
-    fun genaiListEvaluationDatasets(clientConfig: ClientConfig, datasetType: GenaiListEvaluationDatasetsParameterEnum? = null, datasetParadigm: ApiEvaluationDatasetParadigm? = null, hasGroundTruth: Boolean? = null, options: RequestOptions? = null): ApiListEvaluationDatasetsOutput {
-        return genaiListEvaluationDatasetsWithRawResponse(clientConfig, datasetType, datasetParadigm, hasGroundTruth, options).data
+    fun genaiListEvaluationDatasets(
+        clientConfig: ClientConfig,
+        datasetType: GenaiListEvaluationDatasetsParameterEnum? = null,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        hasGroundTruth: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationDatasetsOutput {
+        return genaiListEvaluationDatasetsWithRawResponse(
+                clientConfig,
+                datasetType,
+                datasetParadigm,
+                hasGroundTruth,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiListEvaluationDatasets], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiListEvaluationDatasetsWithRawResponse(clientConfig: ClientConfig, datasetType: GenaiListEvaluationDatasetsParameterEnum? = null, datasetParadigm: ApiEvaluationDatasetParadigm? = null, hasGroundTruth: Boolean? = null, options: RequestOptions? = null): SdkResponse<ApiListEvaluationDatasetsOutput> {
-        return SdkClient.request<ApiListEvaluationDatasetsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_datasets", config = clientConfig, query = mapOf("dataset_type" to
-    SdkClient.queryValue(datasetType, "form", true), "dataset_paradigm" to
-    SdkClient.queryValue(datasetParadigm, "form", true), "has_ground_truth" to
-    SdkClient.queryValue(hasGroundTruth, "form", true)), operationId = "genaiListEvaluationDatasets", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiListEvaluationDatasets], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiListEvaluationDatasetsWithRawResponse(
+        clientConfig: ClientConfig,
+        datasetType: GenaiListEvaluationDatasetsParameterEnum? = null,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        hasGroundTruth: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiListEvaluationDatasetsOutput> {
+        return SdkClient.request<ApiListEvaluationDatasetsOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_datasets",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "dataset_type" to SdkClient.queryValue(datasetType, "form", true),
+                        "dataset_paradigm" to SdkClient.queryValue(datasetParadigm, "form", true),
+                        "has_ground_truth" to SdkClient.queryValue(hasGroundTruth, "form", true),
+                    ),
+                operationId = "genaiListEvaluationDatasets",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiCreateEvaluationDatasetOperation {
     /**
-     * Creates an evaluation dataset for agent evaluation. Set `dataset_paradigm` to describe the dataset row format and `dataset_type` to identify its type; both fields have defaults when omitted. Include `file_upload_dataset` to associate an uploaded file with the dataset.
+     * Creates an evaluation dataset for agent evaluation. Set `dataset_paradigm` to describe the
+     * dataset row format and `dataset_type` to identify its type; both fields have defaults when
+     * omitted. Include `file_upload_dataset` to associate an uploaded file with the dataset.
      *
      * To create an evaluation dataset, send a POST request to `/v2/gen-ai/evaluation_datasets`.
      *
-     * @param datasetParadigm EvaluationDatasetParadigm is the row/content shape of a
-     *   dataset, orthogonal to the surface in EvaluationDatasetType (e.g. a model
-     *   dataset can be single- or multi-turn).
-     * @param datasetType Optional enumerated value serialized in the `dataset_type`
-     *   wire field.
+     * @param datasetParadigm EvaluationDatasetParadigm is the row/content shape of a dataset,
+     *   orthogonal to the surface in EvaluationDatasetType (e.g. a model dataset can be single- or
+     *   multi-turn).
+     * @param datasetType Optional enumerated value serialized in the `dataset_type` wire field.
      * @param fileUploadDataset File to upload as data source for knowledge base.
      * @param name The name of the agent evaluation dataset.
      */
-    fun genaiCreateEvaluationDataset(clientConfig: ClientConfig, datasetParadigm: ApiEvaluationDatasetParadigm? = null, datasetType: ApiEvaluationDatasetType? = null, fileUploadDataset: ApiFileUploadDataSource? = null, name: String? = null, options: RequestOptions? = null): ApiCreateEvaluationDatasetOutput {
-        return genaiCreateEvaluationDatasetWithRawResponse(clientConfig, datasetParadigm, datasetType, fileUploadDataset, name, options).data
+    fun genaiCreateEvaluationDataset(
+        clientConfig: ClientConfig,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        datasetType: ApiEvaluationDatasetType? = null,
+        fileUploadDataset: ApiFileUploadDataSource? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateEvaluationDatasetOutput {
+        return genaiCreateEvaluationDatasetWithRawResponse(
+                clientConfig,
+                datasetParadigm,
+                datasetType,
+                fileUploadDataset,
+                name,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiCreateEvaluationDataset], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiCreateEvaluationDatasetWithRawResponse(clientConfig: ClientConfig, datasetParadigm: ApiEvaluationDatasetParadigm? = null, datasetType: ApiEvaluationDatasetType? = null, fileUploadDataset: ApiFileUploadDataSource? = null, name: String? = null, options: RequestOptions? = null): SdkResponse<ApiCreateEvaluationDatasetOutput> {
-        return SdkClient.request<ApiCreateEvaluationDatasetOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/evaluation_datasets", config = clientConfig, body = SdkClient.bodyMap("dataset_paradigm" to
-    (SdkClient.omitIfNull(datasetParadigm)), "dataset_type" to (SdkClient.omitIfNull(datasetType)), "file_upload_dataset" to
-    (SdkClient.omitIfNull(fileUploadDataset)), "name" to (SdkClient.omitIfNull(name))), operationId = "genaiCreateEvaluationDataset", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiCreateEvaluationDataset], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiCreateEvaluationDatasetWithRawResponse(
+        clientConfig: ClientConfig,
+        datasetParadigm: ApiEvaluationDatasetParadigm? = null,
+        datasetType: ApiEvaluationDatasetType? = null,
+        fileUploadDataset: ApiFileUploadDataSource? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiCreateEvaluationDatasetOutput> {
+        return SdkClient.request<ApiCreateEvaluationDatasetOutput>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/evaluation_datasets",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "dataset_paradigm" to (SdkClient.omitIfNull(datasetParadigm)),
+                        "dataset_type" to (SdkClient.omitIfNull(datasetType)),
+                        "file_upload_dataset" to (SdkClient.omitIfNull(fileUploadDataset)),
+                        "name" to (SdkClient.omitIfNull(name)),
+                    ),
+                operationId = "genaiCreateEvaluationDataset",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiCreateEvaluationDatasetFileUploadPresignXc0652e1fdd {
     /**
-     * To create presigned URLs for evaluation dataset file upload, send a POST request to `/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls`.
+     * To create presigned URLs for evaluation dataset file upload, send a POST request to
+     * `/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls`.
      *
      * @param files A list of files to generate presigned URLs for.
      */
-    fun genaiCreateEvaluationDatasetFileUploadPresignedUrls(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): ApiCreateDataSourceFileUploadPresignedUrlsOutput {
-        return genaiCreateEvaluationDatasetFileUploadPresignedUrlsWithRawResponse(clientConfig, files, options).data
+    fun genaiCreateEvaluationDatasetFileUploadPresignedUrls(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateDataSourceFileUploadPresignedUrlsOutput {
+        return genaiCreateEvaluationDatasetFileUploadPresignedUrlsWithRawResponse(
+                clientConfig,
+                files,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiCreateEvaluationDatasetFileUploadPresignedUrls], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiCreateEvaluationDatasetFileUploadPresignedUrlsWithRawResponse(clientConfig: ClientConfig, files: List<ApiPresignedUrlFile>? = null, options: RequestOptions? = null): SdkResponse<ApiCreateDataSourceFileUploadPresignedUrlsOutput> {
-        return SdkClient.request<ApiCreateDataSourceFileUploadPresignedUrlsOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls", config = clientConfig, body = SdkClient.bodyMap("files" to (SdkClient.omitIfNull(files))), operationId = "genaiCreateEvaluationDatasetFileUploadPresignedUrls", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiCreateEvaluationDatasetFileUploadPresignedUrls], returning the [SdkResponse] envelope:
+     * status code, headers, request ID and latency.
+     */
+    fun genaiCreateEvaluationDatasetFileUploadPresignedUrlsWithRawResponse(
+        clientConfig: ClientConfig,
+        files: List<ApiPresignedUrlFile>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiCreateDataSourceFileUploadPresignedUrlsOutput> {
+        return SdkClient.request<ApiCreateDataSourceFileUploadPresignedUrlsOutput>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls",
+                config = clientConfig,
+                body = SdkClient.bodyMap("files" to (SdkClient.omitIfNull(files))),
+                operationId = "genaiCreateEvaluationDatasetFileUploadPresignedUrls",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteEvaluationDatasetOperation {
     /**
-     * To delete an evaluation dataset, send a DELETE request to `/v2/genai/evaluation_datasets/{dataset_uuid}`. This works for both model and agent evaluation datasets.
+     * To delete an evaluation dataset, send a DELETE request to
+     * `/v2/genai/evaluation_datasets/{dataset_uuid}`. This works for both model and agent
+     * evaluation datasets.
      *
      * @param datasetUuid UUID of the evaluation dataset to delete.
      */
-    fun genaiDeleteEvaluationDataset(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): ApiDeleteEvaluationDatasetOutput {
+    fun genaiDeleteEvaluationDataset(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteEvaluationDatasetOutput {
         return genaiDeleteEvaluationDatasetWithRawResponse(clientConfig, datasetUuid, options).data
     }
 
-
-    /** [genaiDeleteEvaluationDataset], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiDeleteEvaluationDatasetWithRawResponse(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): SdkResponse<ApiDeleteEvaluationDatasetOutput> {
-        return SdkClient.request<ApiDeleteEvaluationDatasetOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/evaluation_datasets/${SdkClient.encodePathSegment(datasetUuid)}", config = clientConfig, operationId = "genaiDeleteEvaluationDataset", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiDeleteEvaluationDataset], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiDeleteEvaluationDatasetWithRawResponse(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiDeleteEvaluationDatasetOutput> {
+        return SdkClient.request<ApiDeleteEvaluationDatasetOutput>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/gen-ai/evaluation_datasets/${SdkClient.encodePathSegment(datasetUuid)}",
+                config = clientConfig,
+                operationId = "genaiDeleteEvaluationDataset",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetEvaluationDatasetDownloadUrlOperation {
     /**
-     * To get a presigned download URL for an evaluation dataset, send a GET request to `/v2/genai/evaluation_datasets/{dataset_uuid}/download_url`.
+     * To get a presigned download URL for an evaluation dataset, send a GET request to
+     * `/v2/genai/evaluation_datasets/{dataset_uuid}/download_url`.
      *
      * @param datasetUuid UUID of the evaluation dataset.
      */
-    fun genaiGetEvaluationDatasetDownloadUrl(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): ApiGetEvaluationDatasetDownloadURLOutput {
-        return genaiGetEvaluationDatasetDownloadUrlWithRawResponse(clientConfig, datasetUuid, options).data
+    fun genaiGetEvaluationDatasetDownloadUrl(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationDatasetDownloadURLOutput {
+        return genaiGetEvaluationDatasetDownloadUrlWithRawResponse(
+                clientConfig,
+                datasetUuid,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiGetEvaluationDatasetDownloadUrl], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetEvaluationDatasetDownloadUrlWithRawResponse(clientConfig: ClientConfig, datasetUuid: String, options: RequestOptions? = null): SdkResponse<ApiGetEvaluationDatasetDownloadURLOutput> {
-        return SdkClient.request<ApiGetEvaluationDatasetDownloadURLOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_datasets/${SdkClient.encodePathSegment(datasetUuid)}/download_url", config = clientConfig, operationId = "genaiGetEvaluationDatasetDownloadUrl", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetEvaluationDatasetDownloadUrl], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun genaiGetEvaluationDatasetDownloadUrlWithRawResponse(
+        clientConfig: ClientConfig,
+        datasetUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetEvaluationDatasetDownloadURLOutput> {
+        return SdkClient.request<ApiGetEvaluationDatasetDownloadURLOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_datasets/${SdkClient.encodePathSegment(datasetUuid)}/download_url",
+                config = clientConfig,
+                operationId = "genaiGetEvaluationDatasetDownloadUrl",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiListEvaluationMetricsOperation {
-    /**
-     * To list all evaluation metrics, send a GET request to `/v2/gen-ai/evaluation_metrics`.
-     */
-    fun genaiListEvaluationMetrics(clientConfig: ClientConfig, options: RequestOptions? = null): ApiListEvaluationMetricsOutput {
+    /** To list all evaluation metrics, send a GET request to `/v2/gen-ai/evaluation_metrics`. */
+    fun genaiListEvaluationMetrics(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ApiListEvaluationMetricsOutput {
         return genaiListEvaluationMetricsWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [genaiListEvaluationMetrics], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiListEvaluationMetricsWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<ApiListEvaluationMetricsOutput> {
-        return SdkClient.request<ApiListEvaluationMetricsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_metrics", config = clientConfig, operationId = "genaiListEvaluationMetrics", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiListEvaluationMetrics], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiListEvaluationMetricsWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiListEvaluationMetricsOutput> {
+        return SdkClient.request<ApiListEvaluationMetricsOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_metrics",
+                config = clientConfig,
+                operationId = "genaiListEvaluationMetrics",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiCreateCustomEvaluationMetricOperation {
     /**
-     * Creates a custom LLM-as-judge metric for model evaluation. Use `metric_name`, `description`, and `config` to define the metric and the judge instructions; prompt and model response are included in the judge context. Set `requires_ground_truth` in `config` when each evaluation row must provide ground truth.
+     * Creates a custom LLM-as-judge metric for model evaluation. Use `metric_name`, `description`,
+     * and `config` to define the metric and the judge instructions; prompt and model response are
+     * included in the judge context. Set `requires_ground_truth` in `config` when each evaluation
+     * row must provide ground truth.
      *
-     * To create a custom LLM-as-judge metric for model evaluation, send a POST request to `/v2/gen-ai/custom_evaluation_metrics`.
+     * To create a custom LLM-as-judge metric for model evaluation, send a POST request to
+     * `/v2/gen-ai/custom_evaluation_metrics`.
      *
-     * @param config Configuration for a custom model-evaluation metric scored by an
-     *   LLM judge. Prompt and model response are always included in the judge context.
-     * @param description Optional `string` value serialized in the `description`
-     *   wire field.
-     * @param metricName Optional `string` value serialized in the `metric_name` wire
-     *   field.
+     * @param config Configuration for a custom model-evaluation metric scored by an LLM judge.
+     *   Prompt and model response are always included in the judge context.
+     * @param description Optional `string` value serialized in the `description` wire field.
+     * @param metricName Optional `string` value serialized in the `metric_name` wire field.
      */
-    fun genaiCreateCustomEvaluationMetric(clientConfig: ClientConfig, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, options: RequestOptions? = null): ApiCreateCustomEvaluationMetricOutput {
-        return genaiCreateCustomEvaluationMetricWithRawResponse(clientConfig, config, description, metricName, options).data
+    fun genaiCreateCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        options: RequestOptions? = null,
+    ): ApiCreateCustomEvaluationMetricOutput {
+        return genaiCreateCustomEvaluationMetricWithRawResponse(
+                clientConfig,
+                config,
+                description,
+                metricName,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiCreateCustomEvaluationMetric], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiCreateCustomEvaluationMetricWithRawResponse(clientConfig: ClientConfig, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, options: RequestOptions? = null): SdkResponse<ApiCreateCustomEvaluationMetricOutput> {
-        return SdkClient.request<ApiCreateCustomEvaluationMetricOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/custom_evaluation_metrics", config = clientConfig, body = SdkClient.bodyMap("config" to (SdkClient.omitIfNull(config)), "description" to (SdkClient.omitIfNull(description)), "metric_name" to (SdkClient.omitIfNull(metricName))), operationId = "genaiCreateCustomEvaluationMetric", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiCreateCustomEvaluationMetric], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun genaiCreateCustomEvaluationMetricWithRawResponse(
+        clientConfig: ClientConfig,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiCreateCustomEvaluationMetricOutput> {
+        return SdkClient.request<ApiCreateCustomEvaluationMetricOutput>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/custom_evaluation_metrics",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "config" to (SdkClient.omitIfNull(config)),
+                        "description" to (SdkClient.omitIfNull(description)),
+                        "metric_name" to (SdkClient.omitIfNull(metricName)),
+                    ),
+                operationId = "genaiCreateCustomEvaluationMetric",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiUpdateCustomEvaluationMetricOperation {
     /**
-     * Replaces a custom evaluation metric with an updated metric configuration. Use `metric_uuid` to identify the metric and provide the metric fields you want to update. The update issues a new metric UUID.
+     * Replaces a custom evaluation metric with an updated metric configuration. Use `metric_uuid`
+     * to identify the metric and provide the metric fields you want to update. The update issues a
+     * new metric UUID.
      *
-     * To update a custom metric (issuing a new metric UUID), send a PUT request to `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
+     * To update a custom metric (issuing a new metric UUID), send a PUT request to
+     * `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
      *
      * @param metricUuid UUID of the custom metric to update.
-     * @param config Configuration for a custom model-evaluation metric scored by an
-     *   LLM judge. Prompt and model response are always included in the judge context.
-     * @param description Optional `string` value serialized in the `description`
-     *   wire field.
-     * @param metricName Optional `string` value serialized in the `metric_name` wire
-     *   field.
-     * @param metricUuid2 Optional `string` value serialized in the `metric_uuid`
-     *   wire field.
+     * @param config Configuration for a custom model-evaluation metric scored by an LLM judge.
+     *   Prompt and model response are always included in the judge context.
+     * @param description Optional `string` value serialized in the `description` wire field.
+     * @param metricName Optional `string` value serialized in the `metric_name` wire field.
+     * @param metricUuid2 Optional `string` value serialized in the `metric_uuid` wire field.
      */
-    fun genaiUpdateCustomEvaluationMetric(clientConfig: ClientConfig, metricUuid: String, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, metricUuid2: String? = null, options: RequestOptions? = null): ApiUpdateCustomEvaluationMetricOutput {
-        return genaiUpdateCustomEvaluationMetricWithRawResponse(clientConfig, metricUuid, config, description, metricName, metricUuid2, options).data
+    fun genaiUpdateCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        metricUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): ApiUpdateCustomEvaluationMetricOutput {
+        return genaiUpdateCustomEvaluationMetricWithRawResponse(
+                clientConfig,
+                metricUuid,
+                config,
+                description,
+                metricName,
+                metricUuid2,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiUpdateCustomEvaluationMetric], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiUpdateCustomEvaluationMetricWithRawResponse(clientConfig: ClientConfig, metricUuid: String, config: ApiCustomEvaluationMetricConfig? = null, description: String? = null, metricName: String? = null, metricUuid2: String? = null, options: RequestOptions? = null): SdkResponse<ApiUpdateCustomEvaluationMetricOutput> {
-        return SdkClient.request<ApiUpdateCustomEvaluationMetricOutput>(SdkClient.RequestSpec("PUT", "/v2/gen-ai/custom_evaluation_metrics/${SdkClient.encodePathSegment(metricUuid)}", config = clientConfig, body = SdkClient.bodyMap("config" to (SdkClient.omitIfNull(config)), "description" to (SdkClient.omitIfNull(description)), "metric_name" to (SdkClient.omitIfNull(metricName)), "metric_uuid" to (SdkClient.omitIfNull(metricUuid2))), operationId = "genaiUpdateCustomEvaluationMetric", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiUpdateCustomEvaluationMetric], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun genaiUpdateCustomEvaluationMetricWithRawResponse(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        config: ApiCustomEvaluationMetricConfig? = null,
+        description: String? = null,
+        metricName: String? = null,
+        metricUuid2: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiUpdateCustomEvaluationMetricOutput> {
+        return SdkClient.request<ApiUpdateCustomEvaluationMetricOutput>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/gen-ai/custom_evaluation_metrics/${SdkClient.encodePathSegment(metricUuid)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "config" to (SdkClient.omitIfNull(config)),
+                        "description" to (SdkClient.omitIfNull(description)),
+                        "metric_name" to (SdkClient.omitIfNull(metricName)),
+                        "metric_uuid" to (SdkClient.omitIfNull(metricUuid2)),
+                    ),
+                operationId = "genaiUpdateCustomEvaluationMetric",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiDeleteCustomEvaluationMetricOperation {
     /**
-     * To soft-delete a custom model evaluation metric, send a DELETE request to `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
+     * To soft-delete a custom model evaluation metric, send a DELETE request to
+     * `/v2/gen-ai/custom_evaluation_metrics/{metric_uuid}`.
      *
      * @param metricUuid UUID of the custom metric to delete.
      */
-    fun genaiDeleteCustomEvaluationMetric(clientConfig: ClientConfig, metricUuid: String, options: RequestOptions? = null): ApiDeleteCustomEvaluationMetricOutput {
-        return genaiDeleteCustomEvaluationMetricWithRawResponse(clientConfig, metricUuid, options).data
+    fun genaiDeleteCustomEvaluationMetric(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        options: RequestOptions? = null,
+    ): ApiDeleteCustomEvaluationMetricOutput {
+        return genaiDeleteCustomEvaluationMetricWithRawResponse(clientConfig, metricUuid, options)
+            .data
     }
 
-
-    /** [genaiDeleteCustomEvaluationMetric], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiDeleteCustomEvaluationMetricWithRawResponse(clientConfig: ClientConfig, metricUuid: String, options: RequestOptions? = null): SdkResponse<ApiDeleteCustomEvaluationMetricOutput> {
-        return SdkClient.request<ApiDeleteCustomEvaluationMetricOutput>(SdkClient.RequestSpec("DELETE", "/v2/gen-ai/custom_evaluation_metrics/${SdkClient.encodePathSegment(metricUuid)}", config = clientConfig, operationId = "genaiDeleteCustomEvaluationMetric", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiDeleteCustomEvaluationMetric], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun genaiDeleteCustomEvaluationMetricWithRawResponse(
+        clientConfig: ClientConfig,
+        metricUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiDeleteCustomEvaluationMetricOutput> {
+        return SdkClient.request<ApiDeleteCustomEvaluationMetricOutput>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/gen-ai/custom_evaluation_metrics/${SdkClient.encodePathSegment(metricUuid)}",
+                config = clientConfig,
+                operationId = "genaiDeleteCustomEvaluationMetric",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -479,74 +1236,228 @@ internal object AgentPlatformApiGenaiRunEvaluationTestCaseOperation {
     /**
      * To run an evaluation test case, send a POST request to `/v2/gen-ai/evaluation_runs`.
      *
-     * @param agentDeploymentNames Agent deployment names to run the test case
-     *   against.
+     * @param agentDeploymentNames Agent deployment names to run the test case against.
      * @param agentUuids Agent UUIDs to run the test case against (legacy agents).
      * @param runName The name of the run.
      * @param testCaseUuid Test-case UUID to run
      */
-    fun genaiRunEvaluationTestCase(clientConfig: ClientConfig, agentDeploymentNames: List<String>? = null, agentUuids: List<String>? = null, runName: String? = null, testCaseUuid: String? = null, options: RequestOptions? = null): ApiRunEvaluationTestCaseOutput {
-        return genaiRunEvaluationTestCaseWithRawResponse(clientConfig, agentDeploymentNames, agentUuids, runName, testCaseUuid, options).data
+    fun genaiRunEvaluationTestCase(
+        clientConfig: ClientConfig,
+        agentDeploymentNames: List<String>? = null,
+        agentUuids: List<String>? = null,
+        runName: String? = null,
+        testCaseUuid: String? = null,
+        options: RequestOptions? = null,
+    ): ApiRunEvaluationTestCaseOutput {
+        return genaiRunEvaluationTestCaseWithRawResponse(
+                clientConfig,
+                agentDeploymentNames,
+                agentUuids,
+                runName,
+                testCaseUuid,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiRunEvaluationTestCase], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiRunEvaluationTestCaseWithRawResponse(clientConfig: ClientConfig, agentDeploymentNames: List<String>? = null, agentUuids: List<String>? = null, runName: String? = null, testCaseUuid: String? = null, options: RequestOptions? = null): SdkResponse<ApiRunEvaluationTestCaseOutput> {
-        return SdkClient.request<ApiRunEvaluationTestCaseOutput>(SdkClient.RequestSpec("POST", "/v2/gen-ai/evaluation_runs", config = clientConfig, body = SdkClient.bodyMap("agent_deployment_names" to
-    (SdkClient.omitIfNull(agentDeploymentNames)), "agent_uuids" to (SdkClient.omitIfNull(agentUuids)), "run_name" to (SdkClient.omitIfNull(runName)), "test_case_uuid" to (SdkClient.omitIfNull(testCaseUuid))), operationId = "genaiRunEvaluationTestCase", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiRunEvaluationTestCase], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiRunEvaluationTestCaseWithRawResponse(
+        clientConfig: ClientConfig,
+        agentDeploymentNames: List<String>? = null,
+        agentUuids: List<String>? = null,
+        runName: String? = null,
+        testCaseUuid: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiRunEvaluationTestCaseOutput> {
+        return SdkClient.request<ApiRunEvaluationTestCaseOutput>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/gen-ai/evaluation_runs",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "agent_deployment_names" to (SdkClient.omitIfNull(agentDeploymentNames)),
+                        "agent_uuids" to (SdkClient.omitIfNull(agentUuids)),
+                        "run_name" to (SdkClient.omitIfNull(runName)),
+                        "test_case_uuid" to (SdkClient.omitIfNull(testCaseUuid)),
+                    ),
+                operationId = "genaiRunEvaluationTestCase",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetEvaluationRunOperation {
     /**
-     * To retrive information about an existing evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}`.
+     * To retrive information about an existing evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}`.
      *
      * @param evaluationRunUuid Evaluation run UUID.
      */
-    fun genaiGetEvaluationRun(clientConfig: ClientConfig, evaluationRunUuid: String, options: RequestOptions? = null): ApiGetEvaluationRunOutput {
+    fun genaiGetEvaluationRun(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunOutput {
         return genaiGetEvaluationRunWithRawResponse(clientConfig, evaluationRunUuid, options).data
     }
 
-
-    /** [genaiGetEvaluationRun], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetEvaluationRunWithRawResponse(clientConfig: ClientConfig, evaluationRunUuid: String, options: RequestOptions? = null): SdkResponse<ApiGetEvaluationRunOutput> {
-        return SdkClient.request<ApiGetEvaluationRunOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}", config = clientConfig, operationId = "genaiGetEvaluationRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetEvaluationRun], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun genaiGetEvaluationRunWithRawResponse(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetEvaluationRunOutput> {
+        return SdkClient.request<ApiGetEvaluationRunOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}",
+                config = clientConfig,
+                operationId = "genaiGetEvaluationRun",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetEvaluationRunResultsOperation {
     /**
-     * To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
+     * To retrieve results of an evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
      *
      * @param evaluationRunUuid Evaluation run UUID.
      * @param page Page number.
      * @param perPage Items per page.
      */
-    fun genaiGetEvaluationRunResults(clientConfig: ClientConfig, evaluationRunUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): ApiGetEvaluationRunResultsOutput {
-        return genaiGetEvaluationRunResultsWithRawResponse(clientConfig, evaluationRunUuid, page, perPage, options).data
+    fun genaiGetEvaluationRunResults(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunResultsOutput {
+        return genaiGetEvaluationRunResultsWithRawResponse(
+                clientConfig,
+                evaluationRunUuid,
+                page,
+                perPage,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiGetEvaluationRunResults], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetEvaluationRunResultsWithRawResponse(clientConfig: ClientConfig, evaluationRunUuid: String, page: Long? = null, perPage: Long? = null, options: RequestOptions? = null): SdkResponse<ApiGetEvaluationRunResultsOutput> {
-        return SdkClient.request<ApiGetEvaluationRunResultsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}/results", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "genaiGetEvaluationRunResults", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetEvaluationRunResults], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun genaiGetEvaluationRunResultsWithRawResponse(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetEvaluationRunResultsOutput> {
+        return SdkClient.request<ApiGetEvaluationRunResultsOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}/results",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                    ),
+                operationId = "genaiGetEvaluationRunResults",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentPlatformApiGenaiGetEvaluationRunPromptResultsOperation {
     /**
-     * To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
+     * To retrieve results of an evaluation run, send a GET request to
+     * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
      *
      * @param evaluationRunUuid Evaluation run UUID.
      * @param promptId Prompt ID to get results for.
      */
-    fun genaiGetEvaluationRunPromptResults(clientConfig: ClientConfig, evaluationRunUuid: String, promptId: Long, options: RequestOptions? = null): ApiGetEvaluationRunPromptResultsOutput {
-        return genaiGetEvaluationRunPromptResultsWithRawResponse(clientConfig, evaluationRunUuid, promptId, options).data
+    fun genaiGetEvaluationRunPromptResults(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        promptId: Long,
+        options: RequestOptions? = null,
+    ): ApiGetEvaluationRunPromptResultsOutput {
+        return genaiGetEvaluationRunPromptResultsWithRawResponse(
+                clientConfig,
+                evaluationRunUuid,
+                promptId,
+                options,
+            )
+            .data
     }
 
-
-    /** [genaiGetEvaluationRunPromptResults], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun genaiGetEvaluationRunPromptResultsWithRawResponse(clientConfig: ClientConfig, evaluationRunUuid: String, promptId: Long, options: RequestOptions? = null): SdkResponse<ApiGetEvaluationRunPromptResultsOutput> {
-        return SdkClient.request<ApiGetEvaluationRunPromptResultsOutput>(SdkClient.RequestSpec("GET", "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}/results/${SdkClient.encodePathSegment(promptId)}", config = clientConfig, operationId = "genaiGetEvaluationRunPromptResults", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [genaiGetEvaluationRunPromptResults], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun genaiGetEvaluationRunPromptResultsWithRawResponse(
+        clientConfig: ClientConfig,
+        evaluationRunUuid: String,
+        promptId: Long,
+        options: RequestOptions? = null,
+    ): SdkResponse<ApiGetEvaluationRunPromptResultsOutput> {
+        return SdkClient.request<ApiGetEvaluationRunPromptResultsOutput>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/gen-ai/evaluation_runs/${SdkClient.encodePathSegment(evaluationRunUuid)}/results/${SdkClient.encodePathSegment(promptId)}",
+                config = clientConfig,
+                operationId = "genaiGetEvaluationRunPromptResults",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

@@ -16,23 +16,72 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object MonitoringGetDatabaseMysqlDiskUsageOperation {
     /**
-     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over the time range.
+     * Retrieve disk usage (percent) for a MySQL cluster. Use **aggregate** (avg, max, or min) over
+     * the time range.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param aggregate Aggregation over the time range (avg, max, or min).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlDiskUsage(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlDiskUsageWithRawResponse(clientConfig, dbId, aggregate, start, end, options).data
+    fun monitoringGetDatabaseMysqlDiskUsage(
+        clientConfig: ClientConfig,
+        dbId: String,
+        aggregate: SchemaSchemaEnum0dce2982,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlDiskUsageWithRawResponse(
+                clientConfig,
+                dbId,
+                aggregate,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlDiskUsage], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlDiskUsageWithRawResponse(clientConfig: ClientConfig, dbId: String, aggregate: SchemaSchemaEnum0dce2982, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlDiskUsage], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlDiskUsageWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        aggregate: SchemaSchemaEnum0dce2982,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/disk_usage", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "aggregate" to SdkClient.queryValue(aggregate, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlDiskUsage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/disk_usage",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "aggregate" to SdkClient.queryValue(aggregate, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlDiskUsage",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -44,16 +93,60 @@ internal object MonitoringGetDatabaseMysqlThreadsConnectedOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsConnected(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlThreadsConnectedWithRawResponse(clientConfig, dbId, start, end, options).data
+    fun monitoringGetDatabaseMysqlThreadsConnected(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlThreadsConnectedWithRawResponse(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlThreadsConnected], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlThreadsConnectedWithRawResponse(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlThreadsConnected], returning the [SdkResponse] envelope: status
+     * code, headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlThreadsConnectedWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_connected", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsConnected", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/threads_connected",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlThreadsConnected",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -65,16 +158,60 @@ internal object MonitoringGetDatabaseMysqlThreadsCreatedRateOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsCreatedRate(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlThreadsCreatedRateWithRawResponse(clientConfig, dbId, start, end, options).data
+    fun monitoringGetDatabaseMysqlThreadsCreatedRate(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlThreadsCreatedRateWithRawResponse(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlThreadsCreatedRate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlThreadsCreatedRateWithRawResponse(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlThreadsCreatedRate], returning the [SdkResponse] envelope: status
+     * code, headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlThreadsCreatedRateWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_created_rate", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsCreatedRate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/threads_created_rate",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlThreadsCreatedRate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -86,65 +223,204 @@ internal object MonitoringGetDatabaseMysqlThreadsActiveOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlThreadsActive(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlThreadsActiveWithRawResponse(clientConfig, dbId, start, end, options).data
+    fun monitoringGetDatabaseMysqlThreadsActive(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlThreadsActiveWithRawResponse(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlThreadsActive], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlThreadsActiveWithRawResponse(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlThreadsActive], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlThreadsActiveWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/threads_active", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlThreadsActive", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/threads_active",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlThreadsActive",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object MonitoringGetDatabaseMysqlIndexVsSequentialReadsOperation {
     /**
-     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of reads using an index.
+     * Retrieve index vs sequential reads ratio (percent) for a MySQL service — i.e. percentage of
+     * reads using an index.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlIndexVsSequentialReadsWithRawResponse(clientConfig, dbId, start, end, options).data
+    fun monitoringGetDatabaseMysqlIndexVsSequentialReads(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlIndexVsSequentialReadsWithRawResponse(
+                clientConfig,
+                dbId,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlIndexVsSequentialReads], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlIndexVsSequentialReadsWithRawResponse(clientConfig: ClientConfig, dbId: String, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlIndexVsSequentialReads], returning the [SdkResponse] envelope:
+     * status code, headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlIndexVsSequentialReadsWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlIndexVsSequentialReads", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/index_vs_sequential_reads",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlIndexVsSequentialReads",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object MonitoringGetDatabaseMysqlOpRatesOperation {
     /**
-     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select, insert, update, or delete.
+     * Retrieve operations rate (per second) for a MySQL service. Use **metric** to choose select,
+     * insert, update, or delete.
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param metric Operation type (select, insert, update, or delete).
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlOpRates(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum92787d5e, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlOpRatesWithRawResponse(clientConfig, dbId, metric, start, end, options).data
+    fun monitoringGetDatabaseMysqlOpRates(
+        clientConfig: ClientConfig,
+        dbId: String,
+        metric: SchemaSchemaEnum92787d5e,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlOpRatesWithRawResponse(
+                clientConfig,
+                dbId,
+                metric,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlOpRates], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlOpRatesWithRawResponse(clientConfig: ClientConfig, dbId: String, metric: SchemaSchemaEnum92787d5e, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlOpRates], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlOpRatesWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        metric: SchemaSchemaEnum92787d5e,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/op_rates", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlOpRates", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/op_rates",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "metric" to SdkClient.queryValue(metric, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlOpRates",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object MonitoringGetDatabaseMysqlSchemaThroughputOperation {
     /**
-     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
+     * Retrieve table I/O throughput (rows per second) for a schema. Requires **schema** and
+     * **metric** (insert, fetch, update, delete).
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param schema The schema (database) name.
@@ -152,22 +428,75 @@ internal object MonitoringGetDatabaseMysqlSchemaThroughputOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlSchemaThroughput(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlSchemaThroughputWithRawResponse(clientConfig, dbId, schema, metric, start, end, options).data
+    fun monitoringGetDatabaseMysqlSchemaThroughput(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlSchemaThroughputWithRawResponse(
+                clientConfig,
+                dbId,
+                schema,
+                metric,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlSchemaThroughput], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlSchemaThroughputWithRawResponse(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlSchemaThroughput], returning the [SdkResponse] envelope: status
+     * code, headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlSchemaThroughputWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/schema_throughput", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "schema" to SdkClient.queryValue(schema, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlSchemaThroughput", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/schema_throughput",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "schema" to SdkClient.queryValue(schema, "form", true),
+                        "metric" to SdkClient.queryValue(metric, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlSchemaThroughput",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object MonitoringGetDatabaseMysqlSchemaLatencyOperation {
     /**
-     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric** (insert, fetch, update, delete).
+     * Retrieve table I/O latency (seconds) for a schema. Requires **schema** and **metric**
+     * (insert, fetch, update, delete).
      *
      * @param dbId The DBaaS cluster UUID (database ID).
      * @param schema The schema (database) name.
@@ -175,15 +504,67 @@ internal object MonitoringGetDatabaseMysqlSchemaLatencyOperation {
      * @param start UNIX timestamp to start metric window.
      * @param end UNIX timestamp to end metric window.
      */
-    fun monitoringGetDatabaseMysqlSchemaLatency(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): Metrics {
-        return monitoringGetDatabaseMysqlSchemaLatencyWithRawResponse(clientConfig, dbId, schema, metric, start, end, options).data
+    fun monitoringGetDatabaseMysqlSchemaLatency(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): Metrics {
+        return monitoringGetDatabaseMysqlSchemaLatencyWithRawResponse(
+                clientConfig,
+                dbId,
+                schema,
+                metric,
+                start,
+                end,
+                options,
+            )
+            .data
     }
 
-
-    /** [monitoringGetDatabaseMysqlSchemaLatency], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun monitoringGetDatabaseMysqlSchemaLatencyWithRawResponse(clientConfig: ClientConfig, dbId: String, schema: String, metric: SchemaSchemaEnumc619b583, start: String, end: String, options: RequestOptions? = null): SdkResponse<Metrics> {
+    /**
+     * [monitoringGetDatabaseMysqlSchemaLatency], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun monitoringGetDatabaseMysqlSchemaLatencyWithRawResponse(
+        clientConfig: ClientConfig,
+        dbId: String,
+        schema: String,
+        metric: SchemaSchemaEnumc619b583,
+        start: String,
+        end: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Metrics> {
         Validation.validateUuid("db_id", dbId)
 
-        return SdkClient.request<Metrics>(SdkClient.RequestSpec("GET", "/v2/monitoring/metrics/database/mysql/schema_latency", config = clientConfig, query = mapOf("db_id" to SdkClient.queryValue(dbId, "form", true), "schema" to SdkClient.queryValue(schema, "form", true), "metric" to SdkClient.queryValue(metric, "form", true), "start" to SdkClient.queryValue(start, "form", true), "end" to SdkClient.queryValue(end, "form", true)), operationId = "monitoringGetDatabaseMysqlSchemaLatency", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Metrics>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/monitoring/metrics/database/mysql/schema_latency",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "db_id" to SdkClient.queryValue(dbId, "form", true),
+                        "schema" to SdkClient.queryValue(schema, "form", true),
+                        "metric" to SdkClient.queryValue(metric, "form", true),
+                        "start" to SdkClient.queryValue(start, "form", true),
+                        "end" to SdkClient.queryValue(end, "form", true),
+                    ),
+                operationId = "monitoringGetDatabaseMysqlSchemaLatency",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

@@ -25,168 +25,374 @@ object Vpcs {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun vpcsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): AllVpcs {
+    fun vpcsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): AllVpcs {
         return vpcsListWithRawResponse(clientConfig, perPage, page, options).data
     }
 
-
-    /** [vpcsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsListWithRawResponse(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<AllVpcs> {
+    /**
+     * [vpcsList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsListWithRawResponse(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AllVpcs> {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllVpcs>(SdkClient.RequestSpec("GET", "/v2/vpcs", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "vpcsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<AllVpcs>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpcs",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "vpcsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes in the table below in the JSON body. **Note:** If you do not currently have a VPC network in a specific datacenter region, the first one that you create will be set as the default for that region. The default VPC for a region cannot be changed or deleted.
+     * To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes in the table
+     * below in the JSON body. **Note:** If you do not currently have a VPC network in a specific
+     * datacenter region, the first one that you create will be set as the default for that region.
+     * The default VPC for a region cannot be changed or deleted.
      */
-    fun vpcsCreate(clientConfig: ClientConfig, body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
+    fun vpcsCreate(
+        clientConfig: ClientConfig,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): ExistingVpc {
         return vpcsCreateWithRawResponse(clientConfig, body, options).data
     }
 
-
-    /** [vpcsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsCreateWithRawResponse(clientConfig: ClientConfig, body: VpcUpdatable, options: RequestOptions? = null): SdkResponse<ExistingVpc> {
-        return SdkClient.request<ExistingVpc>(SdkClient.RequestSpec("POST", "/v2/vpcs", config = clientConfig, body = body, operationId = "vpcsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [vpcsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsCreateWithRawResponse(
+        clientConfig: ClientConfig,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): SdkResponse<ExistingVpc> {
+        return SdkClient.request<ExistingVpc>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/vpcs",
+                config = clientConfig,
+                body = body,
+                operationId = "vpcsCreate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To show information about an existing VPC, send a GET request to `/v2/vpcs/$VPC_ID`.
      *
      * @param vpcId A unique identifier for a VPC.
      */
-    fun vpcsGet(clientConfig: ClientConfig, vpcId: String, options: RequestOptions? = null): ExistingVpc {
+    fun vpcsGet(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        options: RequestOptions? = null,
+    ): ExistingVpc {
         return vpcsGetWithRawResponse(clientConfig, vpcId, options).data
     }
 
-
-    /** [vpcsGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsGetWithRawResponse(clientConfig: ClientConfig, vpcId: String, options: RequestOptions? = null): SdkResponse<ExistingVpc> {
+    /**
+     * [vpcsGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsGetWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ExistingVpc> {
         Validation.validateUuid("vpc_id", vpcId)
 
-        return SdkClient.request<ExistingVpc>(SdkClient.RequestSpec("GET", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}", config = clientConfig, operationId = "vpcsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ExistingVpc>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}",
+                config = clientConfig,
+                operationId = "vpcsGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
      *
      * @param vpcId A unique identifier for a VPC.
      */
-    fun vpcsUpdate(clientConfig: ClientConfig, vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
+    fun vpcsUpdate(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): ExistingVpc {
         return vpcsUpdateWithRawResponse(clientConfig, vpcId, body, options).data
     }
 
-
-    /** [vpcsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsUpdateWithRawResponse(clientConfig: ClientConfig, vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): SdkResponse<ExistingVpc> {
+    /**
+     * [vpcsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsUpdateWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): SdkResponse<ExistingVpc> {
         Validation.validateUuid("vpc_id", vpcId)
 
-        return SdkClient.request<ExistingVpc>(SdkClient.RequestSpec("PUT", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}", config = clientConfig, body = body, operationId = "vpcsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ExistingVpc>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}",
+                config = clientConfig,
+                body = body,
+                operationId = "vpcsUpdate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To update a subset of information about a VPC, send a PATCH request to `/v2/vpcs/$VPC_ID`.
      *
      * @param vpcId A unique identifier for a VPC.
      */
-    fun vpcsPatch(clientConfig: ClientConfig, vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): ExistingVpc {
+    fun vpcsPatch(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): ExistingVpc {
         return vpcsPatchWithRawResponse(clientConfig, vpcId, body, options).data
     }
 
-
-    /** [vpcsPatch], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsPatchWithRawResponse(clientConfig: ClientConfig, vpcId: String, body: VpcUpdatable, options: RequestOptions? = null): SdkResponse<ExistingVpc> {
+    /**
+     * [vpcsPatch], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsPatchWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        body: VpcUpdatable,
+        options: RequestOptions? = null,
+    ): SdkResponse<ExistingVpc> {
         Validation.validateUuid("vpc_id", vpcId)
 
-        return SdkClient.request<ExistingVpc>(SdkClient.RequestSpec("PATCH", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}", config = clientConfig, body = body, operationId = "vpcsPatch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ExistingVpc>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}",
+                config = clientConfig,
+                body = body,
+                operationId = "vpcsPatch",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status code with no body will be returned in response to a successful request. The default VPC for a region can not be deleted. Additionally, a VPC can only be deleted if it does not contain any member resources. Attempting to delete a region's default VPC or a VPC that still has members will result in a 403 Forbidden error response.
+     * To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status code with no body
+     * will be returned in response to a successful request. The default VPC for a region can not be
+     * deleted. Additionally, a VPC can only be deleted if it does not contain any member resources.
+     * Attempting to delete a region's default VPC or a VPC that still has members will result in a
+     * 403 Forbidden error response.
      *
      * @param vpcId A unique identifier for a VPC.
      */
-    fun vpcsDelete(clientConfig: ClientConfig, vpcId: String, options: RequestOptions? = null): Unit {
+    fun vpcsDelete(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        options: RequestOptions? = null,
+    ): Unit {
         return vpcsDeleteWithRawResponse(clientConfig, vpcId, options).data
     }
 
-
-    /** [vpcsDelete], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsDeleteWithRawResponse(clientConfig: ClientConfig, vpcId: String, options: RequestOptions? = null): SdkResponse<Unit> {
+    /**
+     * [vpcsDelete], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsDeleteWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
         Validation.validateUuid("vpc_id", vpcId)
 
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}", config = clientConfig, operationId = "vpcsDelete", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}",
+                config = clientConfig,
+                operationId = "vpcsDelete",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To list all of the resources that are members of a VPC, send a GET request to `/v2/vpcs/$VPC_ID/members`. To only list resources of a specific type that are members of the VPC, included a `resource_type` query parameter. For example, to only list Droplets in the VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`. Only resources that you are authorized to see will be returned (e.g. to see Droplets, you must have `droplet:read`).
+     * To list all of the resources that are members of a VPC, send a GET request to
+     * `/v2/vpcs/$VPC_ID/members`. To only list resources of a specific type that are members of the
+     * VPC, included a `resource_type` query parameter. For example, to only list Droplets in the
+     * VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`. Only resources
+     * that you are authorized to see will be returned (e.g. to see Droplets, you must have
+     * `droplet:read`).
      *
      * @param vpcId A unique identifier for a VPC.
      * @param resourceType Used to filter VPC members by a resource type.
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun vpcsListMembers(clientConfig: ClientConfig, vpcId: String, resourceType: SchemaSchemaEnumdc8bc0f2? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VpcMembers {
-        return vpcsListMembersWithRawResponse(clientConfig, vpcId, resourceType, perPage, page, options).data
+    fun vpcsListMembers(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        resourceType: SchemaSchemaEnumdc8bc0f2? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VpcMembers {
+        return vpcsListMembersWithRawResponse(
+                clientConfig,
+                vpcId,
+                resourceType,
+                perPage,
+                page,
+                options,
+            )
+            .data
     }
 
-
-    /** [vpcsListMembers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsListMembersWithRawResponse(clientConfig: ClientConfig, vpcId: String, resourceType: SchemaSchemaEnumdc8bc0f2? = null, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<VpcMembers> {
+    /**
+     * [vpcsListMembers], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcsListMembersWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        resourceType: SchemaSchemaEnumdc8bc0f2? = null,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<VpcMembers> {
         Validation.validateUuid("vpc_id", vpcId)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<VpcMembers>(SdkClient.RequestSpec("GET", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/members", config = clientConfig, query = mapOf("resource_type" to
-    SdkClient.queryValue(resourceType, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "vpcsListMembers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<VpcMembers>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/members",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "resource_type" to SdkClient.queryValue(resourceType, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "vpcsListMembers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To list all of a VPC's peerings, send a GET request to `/v2/vpcs/$VPC_ID/peerings`.
@@ -195,88 +401,178 @@ object Vpcs {
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
      */
-    fun vpcsListPeerings(clientConfig: ClientConfig, vpcId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): VpcPeerings {
+    fun vpcsListPeerings(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): VpcPeerings {
         return vpcsListPeeringsWithRawResponse(clientConfig, vpcId, perPage, page, options).data
     }
 
-
-    /** [vpcsListPeerings], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsListPeeringsWithRawResponse(clientConfig: ClientConfig, vpcId: String, perPage: Long? = null, page: Long? = null, options: RequestOptions? = null): SdkResponse<VpcPeerings> {
+    /**
+     * [vpcsListPeerings], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcsListPeeringsWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        perPage: Long? = null,
+        page: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<VpcPeerings> {
         Validation.validateUuid("vpc_id", vpcId)
 
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<VpcPeerings>(SdkClient.RequestSpec("GET", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "vpcsListPeerings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<VpcPeerings>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                    ),
+                operationId = "vpcsListPeerings",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To create a new VPC peering for a given VPC, send a POST request to `/v2/vpcs/$VPC_ID/peerings`.
+     * To create a new VPC peering for a given VPC, send a POST request to
+     * `/v2/vpcs/$VPC_ID/peerings`.
      *
      * @param vpcId A unique identifier for a VPC.
-     * @param name The name of the VPC peering. Must be unique and may only contain
-     *   alphanumeric characters, dashes, and periods.
+     * @param name The name of the VPC peering. Must be unique and may only contain alphanumeric
+     *   characters, dashes, and periods.
      * @param vpcId2 The ID of the VPC to peer with.
      */
-    fun vpcsCreatePeerings(clientConfig: ClientConfig, vpcId: String, name: String, vpcId2: String, options: RequestOptions? = null): VpcPeeringResponse {
+    fun vpcsCreatePeerings(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        name: String,
+        vpcId2: String,
+        options: RequestOptions? = null,
+    ): VpcPeeringResponse {
         return vpcsCreatePeeringsWithRawResponse(clientConfig, vpcId, name, vpcId2, options).data
     }
 
-
-    /** [vpcsCreatePeerings], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsCreatePeeringsWithRawResponse(clientConfig: ClientConfig, vpcId: String, name: String, vpcId2: String, options: RequestOptions? = null): SdkResponse<VpcPeeringResponse> {
+    /**
+     * [vpcsCreatePeerings], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcsCreatePeeringsWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        name: String,
+        vpcId2: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<VpcPeeringResponse> {
         Validation.validateUuid("vpc_id", vpcId)
 
         Validation.validatePattern("name", name, "^[a-zA-Z0-9\\-\\.]+$")
 
         Validation.validateUuid("vpc_id", vpcId2)
 
-        return SdkClient.request<VpcPeeringResponse>(SdkClient.RequestSpec("POST", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "vpc_id" to (vpcId2)), operationId = "vpcsCreatePeerings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<VpcPeeringResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings",
+                config = clientConfig,
+                body = SdkClient.bodyMap("name" to (name), "vpc_id" to (vpcId2)),
+                operationId = "vpcsCreatePeerings",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To update the name of a VPC peering in a particular VPC, send a PATCH request to `/v2/vpcs/$VPC_ID/peerings/$VPC_PEERING_ID` with the new `name` in the request body.
+     * To update the name of a VPC peering in a particular VPC, send a PATCH request to
+     * `/v2/vpcs/$VPC_ID/peerings/$VPC_PEERING_ID` with the new `name` in the request body.
      *
      * @param vpcId A unique identifier for a VPC.
      * @param vpcPeeringId A unique identifier for a VPC peering.
-     * @param name The name of the VPC peering. Must be unique within the team and
-     *   may only contain alphanumeric characters and dashes.
+     * @param name The name of the VPC peering. Must be unique within the team and may only contain
+     *   alphanumeric characters and dashes.
      */
-    fun vpcsPatchPeerings(clientConfig: ClientConfig, vpcId: String, vpcPeeringId: String, name: String, options: RequestOptions? = null): VpcPeeringResponse {
-        return vpcsPatchPeeringsWithRawResponse(clientConfig, vpcId, vpcPeeringId, name, options).data
+    fun vpcsPatchPeerings(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        vpcPeeringId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): VpcPeeringResponse {
+        return vpcsPatchPeeringsWithRawResponse(clientConfig, vpcId, vpcPeeringId, name, options)
+            .data
     }
 
-
-    /** [vpcsPatchPeerings], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcsPatchPeeringsWithRawResponse(clientConfig: ClientConfig, vpcId: String, vpcPeeringId: String, name: String, options: RequestOptions? = null): SdkResponse<VpcPeeringResponse> {
+    /**
+     * [vpcsPatchPeerings], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcsPatchPeeringsWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcId: String,
+        vpcPeeringId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<VpcPeeringResponse> {
         Validation.validateUuid("vpc_id", vpcId)
 
         Validation.validateUuid("vpc_peering_id", vpcPeeringId)
 
         Validation.validatePattern("name", name, "^[a-zA-Z0-9\\-]+$")
 
-        return SdkClient.request<VpcPeeringResponse>(SdkClient.RequestSpec("PATCH", "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings/${SdkClient.encodePathSegment(vpcPeeringId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "vpcsPatchPeerings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<VpcPeeringResponse>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/v2/vpcs/${SdkClient.encodePathSegment(vpcId)}/peerings/${SdkClient.encodePathSegment(vpcPeeringId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("name" to (name)),
+                operationId = "vpcsPatchPeerings",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

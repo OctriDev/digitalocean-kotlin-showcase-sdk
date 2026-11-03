@@ -5,26 +5,17 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiUpdateModelAPIKeyInputPublic` API schema.
- */
+/** Typed representation of the `ApiUpdateModelAPIKeyInputPublic` API schema. */
 data class ApiUpdateModelAPIKeyInputPublic(
-    /**
-     * API key ID
-     */
+    /** API key ID */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_uuid") val apiKeyUuid: String? = null,
-    /**
-     * Name
-     */
-    val name: String? = null
+    /** Name */
+    val name: String? = null,
 ) : SdkResource()
 
-/**
- * Typed representation of the `ApiUpdateModelAPIKeyOutput` API schema.
- */
+/** Typed representation of the `ApiUpdateModelAPIKeyOutput` API schema. */
 data class ApiUpdateModelAPIKeyOutput(
-    /**
-     * Model API Key Info
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info") val apiKeyInfo: ApiModelAPIKeyInfo? = null
+    /** Model API Key Info */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_info")
+    val apiKeyInfo: ApiModelAPIKeyInfo? = null
 ) : SdkResource()

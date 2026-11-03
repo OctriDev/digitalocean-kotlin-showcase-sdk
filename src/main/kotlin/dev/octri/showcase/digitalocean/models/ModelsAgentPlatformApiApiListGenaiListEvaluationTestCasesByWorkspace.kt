@@ -5,12 +5,9 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ApiListEvaluationTestCasesByWorkspaceOutput` API schema.
- */
+/** Typed representation of the `ApiListEvaluationTestCasesByWorkspaceOutput` API schema. */
 data class ApiListEvaluationTestCasesByWorkspaceOutput(
-    /**
-     * Optional array value serialized in the `evaluation_test_cases` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases") val evaluationTestCases: List<ApiEvaluationTestCase>? = null
+    /** Optional array value serialized in the `evaluation_test_cases` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_test_cases")
+    val evaluationTestCases: List<ApiEvaluationTestCase>? = null
 ) : SdkResource()

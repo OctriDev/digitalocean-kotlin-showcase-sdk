@@ -12,19 +12,49 @@ import dev.octri.showcase.digitalocean.Validation
 
 internal object DatabasesMethodsDatabasesInstallUpdateOperation {
     /**
-     * To start the installation of updates for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No Content status code with no body in response.
+     * To start the installation of updates for a database cluster, send a PUT request to
+     * `/v2/databases/$DATABASE_ID/install_update`. A successful request will receive a 204 No
+     * Content status code with no body in response.
      *
      * @param databaseClusterUuid A unique identifier for a database cluster.
      */
-    fun databasesInstallUpdate(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): Unit {
-        return databasesInstallUpdateWithRawResponse(clientConfig, databaseClusterUuid, options).data
+    fun databasesInstallUpdate(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        return databasesInstallUpdateWithRawResponse(clientConfig, databaseClusterUuid, options)
+            .data
     }
 
-
-    /** [databasesInstallUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun databasesInstallUpdateWithRawResponse(clientConfig: ClientConfig, databaseClusterUuid: String, options: RequestOptions? = null): SdkResponse<Unit> {
+    /**
+     * [databasesInstallUpdate], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun databasesInstallUpdateWithRawResponse(
+        clientConfig: ClientConfig,
+        databaseClusterUuid: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
         Validation.validateUuid("database_cluster_uuid", databaseClusterUuid)
 
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/install_update", config = clientConfig, operationId = "databasesInstallUpdate", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/v2/databases/${SdkClient.encodePathSegment(databaseClusterUuid)}/install_update",
+                config = clientConfig,
+                operationId = "databasesInstallUpdate",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

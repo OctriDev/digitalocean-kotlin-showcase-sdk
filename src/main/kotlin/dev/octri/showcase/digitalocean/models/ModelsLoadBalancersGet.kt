@@ -5,12 +5,9 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `ExistingLoadBalancer` API schema.
- */
+/** Typed representation of the `ExistingLoadBalancer` API schema. */
 data class ExistingLoadBalancer(
-    /**
-     * Optional API value serialized in the `load_balancer` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("load_balancer") val loadBalancer: LoadBalancer? = null
+    /** Optional API value serialized in the `load_balancer` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("load_balancer")
+    val loadBalancer: LoadBalancer? = null
 ) : SdkResource()

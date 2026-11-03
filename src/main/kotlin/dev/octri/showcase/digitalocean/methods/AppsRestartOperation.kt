@@ -12,21 +12,52 @@ import dev.octri.showcase.digitalocean.SdkResponse
 
 internal object AppsRestartOperation {
     /**
-     * Triggers a rolling restart of an app, either across all components or only the components you specify. Pass `components` to limit the restart; omit it to restart all components. A successful response includes the resulting deployment object.
+     * Triggers a rolling restart of an app, either across all components or only the components you
+     * specify. Pass `components` to limit the restart; omit it to restart all components. A
+     * successful response includes the resulting deployment object.
      *
      * Perform a rolling restart of all or specific components in an app.
      *
      * @param appId The app ID
-     * @param components Optional array value serialized in the `components` wire
-     *   field.
+     * @param components Optional array value serialized in the `components` wire field.
      */
-    fun appsRestart(clientConfig: ClientConfig, appId: String, components: List<String>? = null, options: RequestOptions? = null): AppsDeploymentResponse {
+    fun appsRestart(
+        clientConfig: ClientConfig,
+        appId: String,
+        components: List<String>? = null,
+        options: RequestOptions? = null,
+    ): AppsDeploymentResponse {
         return appsRestartWithRawResponse(clientConfig, appId, components, options).data
     }
 
-
-    /** [appsRestart], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun appsRestartWithRawResponse(clientConfig: ClientConfig, appId: String, components: List<String>? = null, options: RequestOptions? = null): SdkResponse<AppsDeploymentResponse> {
-        return SdkClient.request<AppsDeploymentResponse>(SdkClient.RequestSpec("POST", "/v2/apps/${SdkClient.encodePathSegment(appId)}/restart", config = clientConfig, body = SdkClient.bodyMap("components" to (SdkClient.omitIfNull(components))), operationId = "appsRestart", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [appsRestart], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun appsRestartWithRawResponse(
+        clientConfig: ClientConfig,
+        appId: String,
+        components: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AppsDeploymentResponse> {
+        return SdkClient.request<AppsDeploymentResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/apps/${SdkClient.encodePathSegment(appId)}/restart",
+                config = clientConfig,
+                body = SdkClient.bodyMap("components" to (SdkClient.omitIfNull(components))),
+                operationId = "appsRestart",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }

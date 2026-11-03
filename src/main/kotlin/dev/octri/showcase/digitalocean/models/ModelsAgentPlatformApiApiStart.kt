@@ -5,26 +5,18 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * StartKnowledgeBaseIndexingJobInputPublic description
- */
+/** StartKnowledgeBaseIndexingJobInputPublic description */
 data class ApiStartKnowledgeBaseIndexingJobInputPublic(
-    /**
-     * List of data source ids to index, if none are provided, all data sources will be indexed
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_source_uuids") val dataSourceUuids: List<String>? = null,
-    /**
-     * Knowledge base id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid") val knowledgeBaseUuid: String? = null
+    /** List of data source ids to index, if none are provided, all data sources will be indexed */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_source_uuids")
+    val dataSourceUuids: List<String>? = null,
+    /** Knowledge base id */
+    @com.fasterxml.jackson.annotation.JsonProperty("knowledge_base_uuid")
+    val knowledgeBaseUuid: String? = null,
 ) : SdkResource()
 
-/**
- * StartKnowledgeBaseIndexingJobOutput description
- */
+/** StartKnowledgeBaseIndexingJobOutput description */
 data class ApiStartKnowledgeBaseIndexingJobOutput(
-    /**
-     * IndexingJob description
-     */
+    /** IndexingJob description */
     val job: ApiIndexingJob? = null
 ) : SdkResource()

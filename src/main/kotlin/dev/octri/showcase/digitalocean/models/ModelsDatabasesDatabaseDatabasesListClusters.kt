@@ -5,12 +5,8 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `DatabaseClusters` API schema.
- */
+/** Typed representation of the `DatabaseClusters` API schema. */
 data class DatabaseClusters(
-    /**
-     * Optional array value serialized in the `databases` wire field.
-     */
+    /** Optional array value serialized in the `databases` wire field. */
     val databases: List<DatabaseClusterRead>? = null
 ) : SdkResource()

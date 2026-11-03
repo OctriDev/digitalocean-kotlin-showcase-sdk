@@ -5,42 +5,26 @@ package dev.octri.showcase.digitalocean.models
 
 import dev.octri.showcase.digitalocean.SdkResource
 
-/**
- * Typed representation of the `LinkToFirstPage` API schema.
- */
+/** Typed representation of the `LinkToFirstPage` API schema. */
 data class LinkToFirstPage(
-    /**
-     * URI of the first page of the results.
-     */
+    /** URI of the first page of the results. */
     val first: String? = null
 ) : SdkResource()
 
-/**
- * Typed representation of the `LinkToLastPage` API schema.
- */
+/** Typed representation of the `LinkToLastPage` API schema. */
 data class LinkToLastPage(
-    /**
-     * URI of the last page of the results.
-     */
+    /** URI of the last page of the results. */
     val last: String? = null
 ) : SdkResource()
 
-/**
- * Typed representation of the `LinkToNextPage` API schema.
- */
+/** Typed representation of the `LinkToNextPage` API schema. */
 data class LinkToNextPage(
-    /**
-     * URI of the next page of the results.
-     */
+    /** URI of the next page of the results. */
     val next: String? = null
 ) : SdkResource()
 
-/**
- * Typed representation of the `LinkToPrevPage` API schema.
- */
+/** Typed representation of the `LinkToPrevPage` API schema. */
 data class LinkToPrevPage(
-    /**
-     * URI of the previous page of the results.
-     */
+    /** URI of the previous page of the results. */
     val prev: String? = null
 ) : SdkResource()

@@ -23,119 +23,247 @@ object VpcPeeringsMethods {
      *
      * @param perPage Number of items returned per page
      * @param page Which 'page' of paginated results to return.
-     * @param region The slug identifier for the region where the resource is
-     *   available.
+     * @param region The slug identifier for the region where the resource is available.
      */
-    fun vpcPeeringsList(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, region: RegionSlug? = null, options: RequestOptions? = null): AllVpcPeerings {
+    fun vpcPeeringsList(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        region: RegionSlug? = null,
+        options: RequestOptions? = null,
+    ): AllVpcPeerings {
         return vpcPeeringsListWithRawResponse(clientConfig, perPage, page, region, options).data
     }
 
-
-    /** [vpcPeeringsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcPeeringsListWithRawResponse(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, region: RegionSlug? = null, options: RequestOptions? = null): SdkResponse<AllVpcPeerings> {
+    /**
+     * [vpcPeeringsList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcPeeringsListWithRawResponse(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        page: Long? = null,
+        region: RegionSlug? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AllVpcPeerings> {
         if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 200.0))
-}
+            Validation.validateRange(
+                "per_page",
+                perPage,
+                Validation.RangeOpts(min = 1.0, max = 200.0),
+            )
+        }
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<AllVpcPeerings>(SdkClient.RequestSpec("GET", "/v2/vpc_peerings", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true), "region" to SdkClient.queryValue(region, "form", true)), operationId = "vpcPeeringsList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<AllVpcPeerings>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpc_peerings",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "region" to SdkClient.queryValue(region, "form", true),
+                    ),
+                operationId = "vpcPeeringsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To create a new VPC Peering, send a POST request to `/v2/vpc_peerings` specifying a name and a list of two VPC IDs to peer. The response code, 202 Accepted, does not indicate the success or failure of the operation, just that the request has been accepted for processing.
+     * To create a new VPC Peering, send a POST request to `/v2/vpc_peerings` specifying a name and
+     * a list of two VPC IDs to peer. The response code, 202 Accepted, does not indicate the success
+     * or failure of the operation, just that the request has been accepted for processing.
      */
-    fun vpcPeeringsCreate(clientConfig: ClientConfig, body: VpcPeeringUpdatable, options: RequestOptions? = null): ProvisioningVpcPeering {
+    fun vpcPeeringsCreate(
+        clientConfig: ClientConfig,
+        body: VpcPeeringUpdatable,
+        options: RequestOptions? = null,
+    ): ProvisioningVpcPeering {
         return vpcPeeringsCreateWithRawResponse(clientConfig, body, options).data
     }
 
-
-    /** [vpcPeeringsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcPeeringsCreateWithRawResponse(clientConfig: ClientConfig, body: VpcPeeringUpdatable, options: RequestOptions? = null): SdkResponse<ProvisioningVpcPeering> {
-        return SdkClient.request<ProvisioningVpcPeering>(SdkClient.RequestSpec("POST", "/v2/vpc_peerings", config = clientConfig, body = body, operationId = "vpcPeeringsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+    /**
+     * [vpcPeeringsCreate], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcPeeringsCreateWithRawResponse(
+        clientConfig: ClientConfig,
+        body: VpcPeeringUpdatable,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProvisioningVpcPeering> {
+        return SdkClient.request<ProvisioningVpcPeering>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/v2/vpc_peerings",
+                config = clientConfig,
+                body = body,
+                operationId = "vpcPeeringsCreate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To show information about an existing VPC Peering, send a GET request to `/v2/vpc_peerings/$VPC_PEERING_ID`.
+     * To show information about an existing VPC Peering, send a GET request to
+     * `/v2/vpc_peerings/$VPC_PEERING_ID`.
      *
      * @param vpcPeeringId A unique identifier for a VPC peering.
      */
-    fun vpcPeeringsGet(clientConfig: ClientConfig, vpcPeeringId: String, options: RequestOptions? = null): ActiveVpcPeering {
+    fun vpcPeeringsGet(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        options: RequestOptions? = null,
+    ): ActiveVpcPeering {
         return vpcPeeringsGetWithRawResponse(clientConfig, vpcPeeringId, options).data
     }
 
-
-    /** [vpcPeeringsGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcPeeringsGetWithRawResponse(clientConfig: ClientConfig, vpcPeeringId: String, options: RequestOptions? = null): SdkResponse<ActiveVpcPeering> {
+    /**
+     * [vpcPeeringsGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun vpcPeeringsGetWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ActiveVpcPeering> {
         Validation.validateUuid("vpc_peering_id", vpcPeeringId)
 
-        return SdkClient.request<ActiveVpcPeering>(SdkClient.RequestSpec("GET", "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}", config = clientConfig, operationId = "vpcPeeringsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ActiveVpcPeering>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}",
+                config = clientConfig,
+                operationId = "vpcPeeringsGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * To update the name of a VPC peering, send a PATCH request to `/v2/vpc_peerings/$VPC_PEERING_ID` with the new `name` in the request body.
+     * To update the name of a VPC peering, send a PATCH request to
+     * `/v2/vpc_peerings/$VPC_PEERING_ID` with the new `name` in the request body.
      *
      * @param vpcPeeringId A unique identifier for a VPC peering.
-     * @param name The name of the VPC peering. Must be unique within the team and
-     *   may only contain alphanumeric characters and dashes.
+     * @param name The name of the VPC peering. Must be unique within the team and may only contain
+     *   alphanumeric characters and dashes.
      */
-    fun vpcPeeringsPatch(clientConfig: ClientConfig, vpcPeeringId: String, name: String, options: RequestOptions? = null): ActiveVpcPeering {
+    fun vpcPeeringsPatch(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): ActiveVpcPeering {
         return vpcPeeringsPatchWithRawResponse(clientConfig, vpcPeeringId, name, options).data
     }
 
-
-    /** [vpcPeeringsPatch], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcPeeringsPatchWithRawResponse(clientConfig: ClientConfig, vpcPeeringId: String, name: String, options: RequestOptions? = null): SdkResponse<ActiveVpcPeering> {
+    /**
+     * [vpcPeeringsPatch], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcPeeringsPatchWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ActiveVpcPeering> {
         Validation.validateUuid("vpc_peering_id", vpcPeeringId)
 
         Validation.validatePattern("name", name, "^[a-zA-Z0-9\\-]+$")
 
-        return SdkClient.request<ActiveVpcPeering>(SdkClient.RequestSpec("PATCH", "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "vpcPeeringsPatch", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<ActiveVpcPeering>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("name" to (name)),
+                operationId = "vpcPeeringsPatch",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * To delete a VPC peering, send a DELETE request to `/v2/vpc_peerings/$VPC_PEERING_ID`.
      *
      * @param vpcPeeringId A unique identifier for a VPC peering.
      */
-    fun vpcPeeringsDelete(clientConfig: ClientConfig, vpcPeeringId: String, options: RequestOptions? = null): DeletingVpcPeering {
+    fun vpcPeeringsDelete(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        options: RequestOptions? = null,
+    ): DeletingVpcPeering {
         return vpcPeeringsDeleteWithRawResponse(clientConfig, vpcPeeringId, options).data
     }
 
-
-    /** [vpcPeeringsDelete], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun vpcPeeringsDeleteWithRawResponse(clientConfig: ClientConfig, vpcPeeringId: String, options: RequestOptions? = null): SdkResponse<DeletingVpcPeering> {
+    /**
+     * [vpcPeeringsDelete], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun vpcPeeringsDeleteWithRawResponse(
+        clientConfig: ClientConfig,
+        vpcPeeringId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletingVpcPeering> {
         Validation.validateUuid("vpc_peering_id", vpcPeeringId)
 
-        return SdkClient.request<DeletingVpcPeering>(SdkClient.RequestSpec("DELETE", "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}", config = clientConfig, operationId = "vpcPeeringsDelete", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "429" to Error2::class.java, "500" to Error2::class.java, "default" to Error2::class.java)))
+        return SdkClient.request<DeletingVpcPeering>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/v2/vpc_peerings/${SdkClient.encodePathSegment(vpcPeeringId)}",
+                config = clientConfig,
+                operationId = "vpcPeeringsDelete",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "429" to Error2::class.java,
+                        "500" to Error2::class.java,
+                        "default" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }
